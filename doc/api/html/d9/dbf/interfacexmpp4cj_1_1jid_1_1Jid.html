@@ -1,0 +1,984 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Xmpp4cj: Jid接口 参考</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Xmpp4cj
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="../../d5/dc4/interfacexmpp4cj_1_1jid_1_1Jid-members.html">所有成员列表</a>  </div>
+  <div class="headertitle"><div class="title">Jid接口 参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+类 Jid 继承关系图:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.png" usemap="#Jid_map" alt=""/>
+  <map id="Jid_map" name="Jid_map">
+<area href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html" alt="AbstractJid" shape="rect" coords="216,112,314,136"/>
+<area href="../../db/de8/interfacexmpp4cj_1_1jid_1_1BareJid.html" alt="BareJid" shape="rect" coords="216,168,314,192"/>
+<area href="../../db/d45/interfacexmpp4cj_1_1jid_1_1DomainBareJid.html" alt="DomainBareJid" shape="rect" coords="216,224,314,248"/>
+<area href="../../db/d32/interfacexmpp4cj_1_1jid_1_1DomainFullJid.html" alt="DomainFullJid" shape="rect" coords="216,280,314,304"/>
+<area href="../../dd/df6/interfacexmpp4cj_1_1jid_1_1DomainJid.html" alt="DomainJid" shape="rect" coords="216,336,314,360"/>
+<area href="../../d6/d52/interfacexmpp4cj_1_1jid_1_1EntityBareJid.html" alt="EntityBareJid" shape="rect" coords="216,392,314,416"/>
+<area href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html" alt="EntityFullJid" shape="rect" coords="216,448,314,472"/>
+<area href="../../d9/d02/interfacexmpp4cj_1_1jid_1_1EntityJid.html" alt="EntityJid" shape="rect" coords="216,504,314,528"/>
+<area href="../../de/ded/interfacexmpp4cj_1_1jid_1_1FullJid.html" alt="FullJid" shape="rect" coords="216,560,314,584"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a3e5cfe28c77e10b3f8b36222f24c7d47"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a3e5cfe28c77e10b3f8b36222f24c7d47">getDomain</a> (): <a class="el" href="../../d1/d68/classxmpp4cj_1_1jid_1_1Domainpart.html">Domainpart</a></td></tr>
+<tr class="separator:a3e5cfe28c77e10b3f8b36222f24c7d47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33ff7aef57697fa6d2b3122223b0efee"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a33ff7aef57697fa6d2b3122223b0efee">asUnescapedString</a> (): String</td></tr>
+<tr class="separator:a33ff7aef57697fa6d2b3122223b0efee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae628a01612c7cea76dcb787b582b335"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#aae628a01612c7cea76dcb787b582b335">asUrlEncodedString</a> (): String</td></tr>
+<tr class="separator:aae628a01612c7cea76dcb787b582b335"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af03155ad97a927578cf2f2dd1be7a0de"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#af03155ad97a927578cf2f2dd1be7a0de">isEntityJid</a> (): Bool</td></tr>
+<tr class="separator:af03155ad97a927578cf2f2dd1be7a0de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8e259232439dcd7fa0d29fb63ebf32b"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#aa8e259232439dcd7fa0d29fb63ebf32b">isEntityBareJid</a> (): Bool</td></tr>
+<tr class="separator:aa8e259232439dcd7fa0d29fb63ebf32b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8c1104b12e4d652c0c3ba1381d0d60e"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#ac8c1104b12e4d652c0c3ba1381d0d60e">isEntityFullJid</a> (): Bool</td></tr>
+<tr class="separator:ac8c1104b12e4d652c0c3ba1381d0d60e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fc343bcfffe4442a04b5ea9c1baa3e5"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a0fc343bcfffe4442a04b5ea9c1baa3e5">isDomainBareJid</a> (): Bool</td></tr>
+<tr class="separator:a0fc343bcfffe4442a04b5ea9c1baa3e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96b9d22778efb8fad5862852a5f54490"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a96b9d22778efb8fad5862852a5f54490">isDomainFullJid</a> (): Bool</td></tr>
+<tr class="separator:a96b9d22778efb8fad5862852a5f54490"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad63be47e2be64bcb1eadd25d5685045b"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#ad63be47e2be64bcb1eadd25d5685045b">hasNoResource</a> (): Bool</td></tr>
+<tr class="separator:ad63be47e2be64bcb1eadd25d5685045b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2419bb254cdbd4437080085b7422c3ee"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a2419bb254cdbd4437080085b7422c3ee">hasResource</a> (): Bool</td></tr>
+<tr class="separator:a2419bb254cdbd4437080085b7422c3ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39544a0c2d9323c0b2d4c62dee73eb6e"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a39544a0c2d9323c0b2d4c62dee73eb6e">hasLocalpart</a> (): Bool</td></tr>
+<tr class="separator:a39544a0c2d9323c0b2d4c62dee73eb6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c018c1f38a0b6fce9b7d13afaebf0fb"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a6c018c1f38a0b6fce9b7d13afaebf0fb">asBareJid</a> (): <a class="el" href="../../db/de8/interfacexmpp4cj_1_1jid_1_1BareJid.html">BareJid</a></td></tr>
+<tr class="separator:a6c018c1f38a0b6fce9b7d13afaebf0fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adafa0a2c93c7353fc91e9b45b14751bb"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#adafa0a2c93c7353fc91e9b45b14751bb">asEntityBareJidIfPossible</a> (): ?<a class="el" href="../../d6/d52/interfacexmpp4cj_1_1jid_1_1EntityBareJid.html">EntityBareJid</a></td></tr>
+<tr class="separator:adafa0a2c93c7353fc91e9b45b14751bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38bedb25fe8cc39153044a704c868c73"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a38bedb25fe8cc39153044a704c868c73">asEntityBareJidOrThrow</a> (): <a class="el" href="../../d6/d52/interfacexmpp4cj_1_1jid_1_1EntityBareJid.html">EntityBareJid</a></td></tr>
+<tr class="separator:a38bedb25fe8cc39153044a704c868c73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bb49fc10d93cf739122c2a4356ec11f"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a2bb49fc10d93cf739122c2a4356ec11f">asEntityFullJidIfPossible</a> (): ?<a class="el" href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html">EntityFullJid</a></td></tr>
+<tr class="separator:a2bb49fc10d93cf739122c2a4356ec11f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33a3d5caba8b93e5524bbf3d15e8a642"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a33a3d5caba8b93e5524bbf3d15e8a642">asEntityFullJidOrThrow</a> (): <a class="el" href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html">EntityFullJid</a></td></tr>
+<tr class="separator:a33a3d5caba8b93e5524bbf3d15e8a642"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8dc21ca806cc537a537fa2e7845dae1"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#ac8dc21ca806cc537a537fa2e7845dae1">asEntityJidIfPossible</a> (): ?<a class="el" href="../../d9/d02/interfacexmpp4cj_1_1jid_1_1EntityJid.html">EntityJid</a></td></tr>
+<tr class="separator:ac8dc21ca806cc537a537fa2e7845dae1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72c048021f9de487c029610199601042"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a72c048021f9de487c029610199601042">asEntityJidOrThrow</a> (): <a class="el" href="../../d9/d02/interfacexmpp4cj_1_1jid_1_1EntityJid.html">EntityJid</a></td></tr>
+<tr class="separator:a72c048021f9de487c029610199601042"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbc202bde0289f67f20d71571b516a25"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#abbc202bde0289f67f20d71571b516a25">asFullJidIfPossible</a> (): ?<a class="el" href="../../de/ded/interfacexmpp4cj_1_1jid_1_1FullJid.html">FullJid</a></td></tr>
+<tr class="separator:abbc202bde0289f67f20d71571b516a25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8d5263075621bcb5a484339b042436e"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#ab8d5263075621bcb5a484339b042436e">asFullJidOrThrow</a> (): <a class="el" href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html">EntityFullJid</a></td></tr>
+<tr class="separator:ab8d5263075621bcb5a484339b042436e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5560094f0ffb62e02ac7edffcce74bd"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#ac5560094f0ffb62e02ac7edffcce74bd">asDomainBareJid</a> (): <a class="el" href="../../db/d45/interfacexmpp4cj_1_1jid_1_1DomainBareJid.html">DomainBareJid</a></td></tr>
+<tr class="separator:ac5560094f0ffb62e02ac7edffcce74bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b9c1f33feb76b738853c724edc862be"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a3b9c1f33feb76b738853c724edc862be">asDomainFullJidIfPossible</a> (): ?<a class="el" href="../../db/d32/interfacexmpp4cj_1_1jid_1_1DomainFullJid.html">DomainFullJid</a></td></tr>
+<tr class="separator:a3b9c1f33feb76b738853c724edc862be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a943e271ea5b9718ebd3a2cf935e138d0"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a943e271ea5b9718ebd3a2cf935e138d0">asDomainFullJidOrThrow</a> (): <a class="el" href="../../db/d32/interfacexmpp4cj_1_1jid_1_1DomainFullJid.html">DomainFullJid</a></td></tr>
+<tr class="separator:a943e271ea5b9718ebd3a2cf935e138d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0ced597e27c3404e24b4a936e5699d3"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#ac0ced597e27c3404e24b4a936e5699d3">getResourceOrNull</a> (): ?<a class="el" href="../../d8/d41/classxmpp4cj_1_1jid_1_1Resourcepart.html">Resourcepart</a></td></tr>
+<tr class="separator:ac0ced597e27c3404e24b4a936e5699d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a972babebb2d6463064955189b6267ebd"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a972babebb2d6463064955189b6267ebd">getResourceOrEmpty</a> (): <a class="el" href="../../d8/d41/classxmpp4cj_1_1jid_1_1Resourcepart.html">Resourcepart</a></td></tr>
+<tr class="separator:a972babebb2d6463064955189b6267ebd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ff8248e276e05effe700deb4c824f64"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a1ff8248e276e05effe700deb4c824f64">getResourceOrThrow</a> (): <a class="el" href="../../d8/d41/classxmpp4cj_1_1jid_1_1Resourcepart.html">Resourcepart</a></td></tr>
+<tr class="separator:a1ff8248e276e05effe700deb4c824f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aada638fda606a4c5acd88509be5ab85c"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#aada638fda606a4c5acd88509be5ab85c">getLocalpartOrNull</a> (): ?<a class="el" href="../../d8/dea/classxmpp4cj_1_1jid_1_1Localpart.html">Localpart</a></td></tr>
+<tr class="separator:aada638fda606a4c5acd88509be5ab85c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c52b4c9a7e7a335d16950efba5fe90f"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a4c52b4c9a7e7a335d16950efba5fe90f">getLocalpartOrThrow</a> (): <a class="el" href="../../d8/dea/classxmpp4cj_1_1jid_1_1Localpart.html">Localpart</a></td></tr>
+<tr class="separator:a4c52b4c9a7e7a335d16950efba5fe90f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34f25a0674961d96149de5b8d3d6cc22"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a34f25a0674961d96149de5b8d3d6cc22">isParentOf</a> (jid: <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html">Jid</a>): Bool</td></tr>
+<tr class="separator:a34f25a0674961d96149de5b8d3d6cc22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ee593d6dc71b0aebe95f3f1434d9252"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a3ee593d6dc71b0aebe95f3f1434d9252">isParentOf</a> (bareJid: <a class="el" href="../../d6/d52/interfacexmpp4cj_1_1jid_1_1EntityBareJid.html">EntityBareJid</a>): Bool</td></tr>
+<tr class="separator:a3ee593d6dc71b0aebe95f3f1434d9252"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e3c989dc667123e971fe0447b06f24d"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a8e3c989dc667123e971fe0447b06f24d">isParentOf</a> (fullJid: <a class="el" href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html">EntityFullJid</a>): Bool</td></tr>
+<tr class="separator:a8e3c989dc667123e971fe0447b06f24d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64958f4de518076e1297dd00d410221e"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a64958f4de518076e1297dd00d410221e">isParentOf</a> (domainBareJid: <a class="el" href="../../db/d45/interfacexmpp4cj_1_1jid_1_1DomainBareJid.html">DomainBareJid</a>): Bool</td></tr>
+<tr class="separator:a64958f4de518076e1297dd00d410221e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d8d51ccd9668f6f7d70c34b6caeab33"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a4d8d51ccd9668f6f7d70c34b6caeab33">isParentOf</a> (domainFullJid: <a class="el" href="../../db/d32/interfacexmpp4cj_1_1jid_1_1DomainFullJid.html">DomainFullJid</a>): Bool</td></tr>
+<tr class="separator:a4d8d51ccd9668f6f7d70c34b6caeab33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>XMPP 地址，也称为 JID（以前是 “Jabber Identifier” 的缩写），它在 XMPP 网络中作为全局唯一的地址。 </p>
+<p>JIDs 可以通过<code><a class="el" href="../../d0/d28/classxmpp4cj_1_1jid_1_1JidCreate.html">xmpp4cj.jid.JidCreate</a></code>工具类从String创建。 </p>
+<pre>
+ let jid:Jid = JidCreate.froms("juliet@capulet.org/balcony")
+ let bareJid:EntityBareJid = JidCreate.entityBareFrom("romeo@montague.net")
+ </pre> <p>这是所有 JID 类型的超接口，JID 由两个维度构建：裸（Bare）/ 全（Full）和 域（Domain）/ 实体（Entity）。</p><ol type="1">
+<li>每个 JID 至少由一个域部分（<code><a class="el" href="../../d1/d68/classxmpp4cj_1_1jid_1_1Domainpart.html">xmpp4cj.jid.Domainpart</a></code>）组成。</li>
+<li>裸 JID 类型没有资源部分（<code><a class="el" href="../../d8/d41/classxmpp4cj_1_1jid_1_1Resourcepart.html">xmpp4cj.jid.Resourcepart</a></code>），全 JID 类型总是有资源部分。</li>
+<li>域 JID 类型没有本地部分（<code><a class="el" href="../../d8/dea/classxmpp4cj_1_1jid_1_1Localpart.html">xmpp4cj.jid.Localpart</a></code>），而实体 JID 类型总是有本地部分。 </li>
+</ol>
+<p>一些 JID 类型的示例： </p>
+<table class="doxtable">
+<caption>XMPP Address Types</caption>
+<tr>
+<td>Example </td><td>Type  </td></tr>
+<tr>
+<td><code>example.org</code> </td><td><code><a class="el" href="../../db/d45/interfacexmpp4cj_1_1jid_1_1DomainBareJid.html">xmpp4cj.jid.DomainBareJid</a></code>  </td></tr>
+<tr>
+<td><code>example.org/resource</code> </td><td><code><a class="el" href="../../db/d32/interfacexmpp4cj_1_1jid_1_1DomainFullJid.html">xmpp4cj.jid.DomainFullJid</a></code>  </td></tr>
+<tr>
+<td><code><a href="#" onclick="location.href='mai'+'lto:'+'use'+'r@'+'exa'+'mp'+'le.'+'or'+'g'; return false;">user@<span class="obfuscator">.nosp@m.</span>exam<span class="obfuscator">.nosp@m.</span>ple.o<span class="obfuscator">.nosp@m.</span>rg</a></code> </td><td><code><a class="el" href="../../d6/d52/interfacexmpp4cj_1_1jid_1_1EntityBareJid.html">xmpp4cj.jid.EntityBareJid</a></code>  </td></tr>
+<tr>
+<td><code><a href="#" onclick="location.href='mai'+'lto:'+'use'+'r@'+'exa'+'mp'+'le.'+'or'+'g'; return false;">user@<span class="obfuscator">.nosp@m.</span>exam<span class="obfuscator">.nosp@m.</span>ple.o<span class="obfuscator">.nosp@m.</span>rg</a>/resource</code> </td><td><code><a class="el" href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html">xmpp4cj.jid.EntityFullJid</a></code>  </td></tr>
+</table>
+<p>可以使用 <code><a class="el" href="../../">toString()</a></code> 方法获取表示 JID 的转义字符串，或者使用 <code><a class="el" href="../../">asUnescapedString()</a></code> 方法获取 JID 的未转义字符串。 </p>
+<h2>URL Encoded JIDs</h2>
+<p>如果 JID 应该作为路径名的一部分存储，例如作为文件名，那么 JID 的 URL 编码表示是理想的。 可以使用 <code><a class="el" href="../../">asUrlEncodedString()</a></code> 方法获取此信息。 JidCreate API 提供了从 URL 编码的字符串创建 JIDs 的方法，如 <code><a class="el" href="../../">xmpp4cj.jid.JidCreate#fromUrlEncoded(String)</a></code> 。 </p>
+<dl class="section see"><dt>参见</dt><dd><a href="../../xmpp/org/rfcs/rfc6120.html#arch-addresses">RFC 6120 (XMPP: Core) § 2.1 Global Addresses</a> </dd>
+<dd>
+<a href="../../xmpp/org/rfcs/rfc6122.html#addressing-fundamentals">RFC 6122 (XMPP: Address Format) § 2.1 Fundamentals</a> </dd></dl>
+</div><h2 class="groupheader">成员函数说明</h2>
+<a id="a6c018c1f38a0b6fce9b7d13afaebf0fb" name="a6c018c1f38a0b6fce9b7d13afaebf0fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c018c1f38a0b6fce9b7d13afaebf0fb">&#9670;&#160;</a></span>asBareJid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func asBareJid </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../db/de8/interfacexmpp4cj_1_1jid_1_1BareJid.html">BareJid</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>返回一个通过从这个 JID 中移除资源部分创建的 JID。</p>
+<dl class="section return"><dt>返回</dt><dd>没有资源部分的这个 Jid。 </dd></dl>
+
+<p>在 <a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a3cd27f56ee95873f6194d20622a7f29f">DomainAndResourcepartJid</a>, <a class="el" href="../../dc/d78/classxmpp4cj_1_1jid_1_1DomainpartJid.html#a3cd27f56ee95873f6194d20622a7f29f">DomainpartJid</a>, <a class="el" href="../../d2/d15/classxmpp4cj_1_1jid_1_1LocalAndDomainpartJid.html#a3cd27f56ee95873f6194d20622a7f29f">LocalAndDomainpartJid</a> , 以及 <a class="el" href="../../dd/d44/classxmpp4cj_1_1jid_1_1LocalDomainAndResourcepartJid.html#a3cd27f56ee95873f6194d20622a7f29f">LocalDomainAndResourcepartJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="ac5560094f0ffb62e02ac7edffcce74bd" name="ac5560094f0ffb62e02ac7edffcce74bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5560094f0ffb62e02ac7edffcce74bd">&#9670;&#160;</a></span>asDomainBareJid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func asDomainBareJid </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../db/d45/interfacexmpp4cj_1_1jid_1_1DomainBareJid.html">DomainBareJid</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>将这个 Jid 转换为一个域裸 JID（DomainBareJid）。 </p>
+<p>注意，总是可以将一个 Jid 转换为域裸 JID，因为每个 Jid 都有一个域部分。 </p>
+<dl class="section return"><dt>返回</dt><dd>对应的域裸 JID。 </dd></dl>
+
+<p>在 <a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#ab12b3b947e271422220791195c60f9cc">DomainAndResourcepartJid</a>, <a class="el" href="../../dc/d78/classxmpp4cj_1_1jid_1_1DomainpartJid.html#ab12b3b947e271422220791195c60f9cc">DomainpartJid</a>, <a class="el" href="../../d2/d15/classxmpp4cj_1_1jid_1_1LocalAndDomainpartJid.html#ab12b3b947e271422220791195c60f9cc">LocalAndDomainpartJid</a> , 以及 <a class="el" href="../../dd/d44/classxmpp4cj_1_1jid_1_1LocalDomainAndResourcepartJid.html#ab12b3b947e271422220791195c60f9cc">LocalDomainAndResourcepartJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a3b9c1f33feb76b738853c724edc862be" name="a3b9c1f33feb76b738853c724edc862be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b9c1f33feb76b738853c724edc862be">&#9670;&#160;</a></span>asDomainFullJidIfPossible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func asDomainFullJidIfPossible </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?<a class="el" href="../../db/d32/interfacexmpp4cj_1_1jid_1_1DomainFullJid.html">DomainFullJid</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>如果可能，将这个 Jid 转换为一个域完整 JID（DomainFullJid）。</p>
+<dl class="section return"><dt>返回</dt><dd>对应的域完整 JID 或 None。 </dd></dl>
+
+<p>在 <a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#afd2c1d89f0017c1b8ba98661f128fd82">DomainAndResourcepartJid</a>, <a class="el" href="../../dc/d78/classxmpp4cj_1_1jid_1_1DomainpartJid.html#afd2c1d89f0017c1b8ba98661f128fd82">DomainpartJid</a>, <a class="el" href="../../d2/d15/classxmpp4cj_1_1jid_1_1LocalAndDomainpartJid.html#afd2c1d89f0017c1b8ba98661f128fd82">LocalAndDomainpartJid</a> , 以及 <a class="el" href="../../dd/d44/classxmpp4cj_1_1jid_1_1LocalDomainAndResourcepartJid.html#afd2c1d89f0017c1b8ba98661f128fd82">LocalDomainAndResourcepartJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a943e271ea5b9718ebd3a2cf935e138d0" name="a943e271ea5b9718ebd3a2cf935e138d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a943e271ea5b9718ebd3a2cf935e138d0">&#9670;&#160;</a></span>asDomainFullJidOrThrow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func asDomainFullJidOrThrow </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../db/d32/interfacexmpp4cj_1_1jid_1_1DomainFullJid.html">DomainFullJid</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>如果不可能将这个 Jid 转换为域完整 JID（DomainFullJid），则抛出 IllegalStateException。</p>
+<dl class="section return"><dt>返回</dt><dd>对应的域完整 JID。 </dd></dl>
+
+<p>在 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a2e83f2e3ffe108f1355ec7a94bdc3dc6">AbstractJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="adafa0a2c93c7353fc91e9b45b14751bb" name="adafa0a2c93c7353fc91e9b45b14751bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adafa0a2c93c7353fc91e9b45b14751bb">&#9670;&#160;</a></span>asEntityBareJidIfPossible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func asEntityBareJidIfPossible </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?<a class="el" href="../../d6/d52/interfacexmpp4cj_1_1jid_1_1EntityBareJid.html">EntityBareJid</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>如果可能，将这个 Jid 转换为一个实体裸 JID（EntityBareJid）。</p>
+<dl class="section return"><dt>返回</dt><dd>对应的实体裸 JID 或 None。 </dd></dl>
+
+<p>在 <a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#af5fd3a6a7da3bea959cba8059da9900c">DomainAndResourcepartJid</a>, <a class="el" href="../../dc/d78/classxmpp4cj_1_1jid_1_1DomainpartJid.html#af5fd3a6a7da3bea959cba8059da9900c">DomainpartJid</a>, <a class="el" href="../../d2/d15/classxmpp4cj_1_1jid_1_1LocalAndDomainpartJid.html#af5fd3a6a7da3bea959cba8059da9900c">LocalAndDomainpartJid</a> , 以及 <a class="el" href="../../dd/d44/classxmpp4cj_1_1jid_1_1LocalDomainAndResourcepartJid.html#af5fd3a6a7da3bea959cba8059da9900c">LocalDomainAndResourcepartJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a38bedb25fe8cc39153044a704c868c73" name="a38bedb25fe8cc39153044a704c868c73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38bedb25fe8cc39153044a704c868c73">&#9670;&#160;</a></span>asEntityBareJidOrThrow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func asEntityBareJidOrThrow </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d6/d52/interfacexmpp4cj_1_1jid_1_1EntityBareJid.html">EntityBareJid</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>如果不可能将这个 Jid 转换为实体裸 JID（EntityBareJid），则抛出 IllegalStateException。</p>
+<dl class="section return"><dt>返回</dt><dd>对应的实体裸 JID。 </dd></dl>
+
+<p>在 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#acdec58fffc8c18794dba3e003891b6b6">AbstractJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a2bb49fc10d93cf739122c2a4356ec11f" name="a2bb49fc10d93cf739122c2a4356ec11f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bb49fc10d93cf739122c2a4356ec11f">&#9670;&#160;</a></span>asEntityFullJidIfPossible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func asEntityFullJidIfPossible </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?<a class="el" href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html">EntityFullJid</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>如果可能，将这个 Jid 转换为一个实体完整 JID（EntityFullJid）。</p>
+<dl class="section return"><dt>返回</dt><dd>对应的实体完整 JID 或 None。 </dd></dl>
+
+<p>在 <a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a3043fe55657c119b264b1045ae4fcfa5">DomainAndResourcepartJid</a>, <a class="el" href="../../dc/d78/classxmpp4cj_1_1jid_1_1DomainpartJid.html#a3043fe55657c119b264b1045ae4fcfa5">DomainpartJid</a>, <a class="el" href="../../d2/d15/classxmpp4cj_1_1jid_1_1LocalAndDomainpartJid.html#a3043fe55657c119b264b1045ae4fcfa5">LocalAndDomainpartJid</a> , 以及 <a class="el" href="../../dd/d44/classxmpp4cj_1_1jid_1_1LocalDomainAndResourcepartJid.html#a3043fe55657c119b264b1045ae4fcfa5">LocalDomainAndResourcepartJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a33a3d5caba8b93e5524bbf3d15e8a642" name="a33a3d5caba8b93e5524bbf3d15e8a642"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33a3d5caba8b93e5524bbf3d15e8a642">&#9670;&#160;</a></span>asEntityFullJidOrThrow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func asEntityFullJidOrThrow </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html">EntityFullJid</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>如果不可能将这个 Jid 转换为实体完整 JID（EntityFullJid），则抛出 IllegalStateException。</p>
+<dl class="section return"><dt>返回</dt><dd>对应的实体完整 JID。 </dd></dl>
+
+<p>在 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#aacfb888b6ad8c5447b0b736eb648e1ad">AbstractJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="ac8dc21ca806cc537a537fa2e7845dae1" name="ac8dc21ca806cc537a537fa2e7845dae1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8dc21ca806cc537a537fa2e7845dae1">&#9670;&#160;</a></span>asEntityJidIfPossible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func asEntityJidIfPossible </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?<a class="el" href="../../d9/d02/interfacexmpp4cj_1_1jid_1_1EntityJid.html">EntityJid</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>如果可能，将这个 Jid 转换为一个实体 JID（EntityJid）。</p>
+<dl class="section return"><dt>返回</dt><dd>对应的实体 JID 或 None。 </dd></dl>
+
+<p>在 <a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a1ea98798b00fb3725103a6e8b12cf2d8">DomainAndResourcepartJid</a>, <a class="el" href="../../dc/d78/classxmpp4cj_1_1jid_1_1DomainpartJid.html#a1ea98798b00fb3725103a6e8b12cf2d8">DomainpartJid</a>, <a class="el" href="../../d2/d15/classxmpp4cj_1_1jid_1_1LocalAndDomainpartJid.html#a1ea98798b00fb3725103a6e8b12cf2d8">LocalAndDomainpartJid</a> , 以及 <a class="el" href="../../dd/d44/classxmpp4cj_1_1jid_1_1LocalDomainAndResourcepartJid.html#a1ea98798b00fb3725103a6e8b12cf2d8">LocalDomainAndResourcepartJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a72c048021f9de487c029610199601042" name="a72c048021f9de487c029610199601042"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72c048021f9de487c029610199601042">&#9670;&#160;</a></span>asEntityJidOrThrow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func asEntityJidOrThrow </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d9/d02/interfacexmpp4cj_1_1jid_1_1EntityJid.html">EntityJid</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>如果不可能将这个 Jid 转换为实体 JID（EntityJid），则抛出 IllegalStateException。</p>
+<dl class="section return"><dt>返回</dt><dd>对应的实体 JID。 </dd></dl>
+
+<p>在 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a824f9ce574c8031d9082d88607e4c71e">AbstractJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="abbc202bde0289f67f20d71571b516a25" name="abbc202bde0289f67f20d71571b516a25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbc202bde0289f67f20d71571b516a25">&#9670;&#160;</a></span>asFullJidIfPossible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func asFullJidIfPossible </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?<a class="el" href="../../de/ded/interfacexmpp4cj_1_1jid_1_1FullJid.html">FullJid</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>如果可能，将这个 Jid 转换为一个完整 JID（FullJid）。</p>
+<dl class="section return"><dt>返回</dt><dd>对应的完整 JID 或 None。 </dd></dl>
+
+<p>在 <a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#afcda1ec9e551da5cc5901ca4b24d3b8d">DomainAndResourcepartJid</a>, <a class="el" href="../../dc/d78/classxmpp4cj_1_1jid_1_1DomainpartJid.html#afcda1ec9e551da5cc5901ca4b24d3b8d">DomainpartJid</a>, <a class="el" href="../../d2/d15/classxmpp4cj_1_1jid_1_1LocalAndDomainpartJid.html#afcda1ec9e551da5cc5901ca4b24d3b8d">LocalAndDomainpartJid</a> , 以及 <a class="el" href="../../dd/d44/classxmpp4cj_1_1jid_1_1LocalDomainAndResourcepartJid.html#afcda1ec9e551da5cc5901ca4b24d3b8d">LocalDomainAndResourcepartJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="ab8d5263075621bcb5a484339b042436e" name="ab8d5263075621bcb5a484339b042436e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8d5263075621bcb5a484339b042436e">&#9670;&#160;</a></span>asFullJidOrThrow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func asFullJidOrThrow </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html">EntityFullJid</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>如果不可能将这个 Jid 转换为完整 JID（FullJid），则抛出 IllegalStateException。</p>
+<dl class="section return"><dt>返回</dt><dd>对应的完整 JID。 </dd></dl>
+
+<p>在 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#aafb316e82c7fd2cc3cd1df90b40e77cb">AbstractJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a33ff7aef57697fa6d2b3122223b0efee" name="a33ff7aef57697fa6d2b3122223b0efee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33ff7aef57697fa6d2b3122223b0efee">&#9670;&#160;</a></span>asUnescapedString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func asUnescapedString </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: String</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>此方法用于返回这个 JID 的未转义字符串表示形式。 </p>
+<p>由于某些 Unicode 码点在 JID 的本地部分（localpart）中是不被允许的，按照所需的 stringprep 规范，这些码点在实际的 JID 中需要被转义。未转义的 JID 表示形式仅用于向人类用户展示或用于与非 XMPP 系统进行交互。 </p>
+<p>例如，如果用户输入 <code class="JavaDocCode">'at&amp;t guy@example.com'</code>，使用<code><a class="el" href="../../d0/d28/classxmpp4cj_1_1jid_1_1JidCreate.html">xmpp4cj.jid.JidCreate</a></code>创建的转义后的实际 JID 将是<code class="JavaDocCode">'at\26t\20guy@example.com'</code>，这是 <code><a class="el" href="../../">Jid#toString()</a></code> 方法将返回的结果。而 <code><a class="el" href="../../">Jid#asUnescapedString()</a></code> 方法将再次返回<code class="JavaDocCode">'at&amp;t guy@example.com'</code>。</p>
+<dl class="section return"><dt>返回</dt><dd>这个 JID 的未转义字符串表示。 </dd></dl>
+
+<p>在 <a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a0ef7591a7b625002c816f815d3a88fe7">DomainAndResourcepartJid</a>, <a class="el" href="../../dc/d78/classxmpp4cj_1_1jid_1_1DomainpartJid.html#a0ef7591a7b625002c816f815d3a88fe7">DomainpartJid</a>, <a class="el" href="../../d2/d15/classxmpp4cj_1_1jid_1_1LocalAndDomainpartJid.html#a0ef7591a7b625002c816f815d3a88fe7">LocalAndDomainpartJid</a> , 以及 <a class="el" href="../../dd/d44/classxmpp4cj_1_1jid_1_1LocalDomainAndResourcepartJid.html#a0ef7591a7b625002c816f815d3a88fe7">LocalDomainAndResourcepartJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="aae628a01612c7cea76dcb787b582b335" name="aae628a01612c7cea76dcb787b582b335"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae628a01612c7cea76dcb787b582b335">&#9670;&#160;</a></span>asUrlEncodedString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func asUrlEncodedString </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: String</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>用于获取此 JID 的 URL 编码版本。</p>
+<dl class="section return"><dt>返回</dt><dd>这个 JID 的 URL 编码形式。 </dd></dl>
+
+<p>在 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a1fdcdca6ded63eeb18fe8cb8e5e9b485">AbstractJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a3e5cfe28c77e10b3f8b36222f24c7d47" name="a3e5cfe28c77e10b3f8b36222f24c7d47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e5cfe28c77e10b3f8b36222f24c7d47">&#9670;&#160;</a></span>getDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func getDomain </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d1/d68/classxmpp4cj_1_1jid_1_1Domainpart.html">Domainpart</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>用于获取这个 Jid 的Domainpart（域部分）</p>
+<dl class="section return"><dt>返回</dt><dd>这个 Jid 的域部分对象 </dd></dl>
+
+<p>在 <a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a8da4e6215aa44118a1cfb9ca9fbf5cad">DomainAndResourcepartJid</a>, <a class="el" href="../../dc/d78/classxmpp4cj_1_1jid_1_1DomainpartJid.html#a8da4e6215aa44118a1cfb9ca9fbf5cad">DomainpartJid</a>, <a class="el" href="../../d2/d15/classxmpp4cj_1_1jid_1_1LocalAndDomainpartJid.html#a8da4e6215aa44118a1cfb9ca9fbf5cad">LocalAndDomainpartJid</a> , 以及 <a class="el" href="../../dd/d44/classxmpp4cj_1_1jid_1_1LocalDomainAndResourcepartJid.html#a8da4e6215aa44118a1cfb9ca9fbf5cad">LocalDomainAndResourcepartJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="aada638fda606a4c5acd88509be5ab85c" name="aada638fda606a4c5acd88509be5ab85c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aada638fda606a4c5acd88509be5ab85c">&#9670;&#160;</a></span>getLocalpartOrNull()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func getLocalpartOrNull </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?<a class="el" href="../../d8/dea/classxmpp4cj_1_1jid_1_1Localpart.html">Localpart</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取这个 JID 的本地部分或 None。 </p>
+<p>如果 JID 是 <code class="JavaDocCode">&lt;localpart@domain.example&gt;</code> 的形式，那么这个方法返回 'localpart'。如果 JID 没有本地部分，那么返回 None。 </p>
+<dl class="section return"><dt>返回</dt><dd>这个 JID 的本地部分或 None。 </dd></dl>
+
+<p>在 <a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#abbdc9767c68b65b185b016236368a256">DomainAndResourcepartJid</a>, <a class="el" href="../../dc/d78/classxmpp4cj_1_1jid_1_1DomainpartJid.html#abbdc9767c68b65b185b016236368a256">DomainpartJid</a>, <a class="el" href="../../d2/d15/classxmpp4cj_1_1jid_1_1LocalAndDomainpartJid.html#abbdc9767c68b65b185b016236368a256">LocalAndDomainpartJid</a> , 以及 <a class="el" href="../../dd/d44/classxmpp4cj_1_1jid_1_1LocalDomainAndResourcepartJid.html#abbdc9767c68b65b185b016236368a256">LocalDomainAndResourcepartJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a4c52b4c9a7e7a335d16950efba5fe90f" name="a4c52b4c9a7e7a335d16950efba5fe90f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c52b4c9a7e7a335d16950efba5fe90f">&#9670;&#160;</a></span>getLocalpartOrThrow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func getLocalpartOrThrow </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d8/dea/classxmpp4cj_1_1jid_1_1Localpart.html">Localpart</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取这个 JID 的本地部分或抛出 IllegalStateException。 </p>
+<p>如果 JID 是 <code class="JavaDocCode">&lt;localpart@domain.example&gt;</code> 的形式，那么这个方法返回 'localpart'。如果 JID 没有本地部分，那么返回 None。 </p>
+<dl class="section return"><dt>返回</dt><dd>这个 JID 的本地部分。 </dd></dl>
+
+<p>在 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#aa9f65be48757232ad9b8907bbd06ef03">AbstractJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a972babebb2d6463064955189b6267ebd" name="a972babebb2d6463064955189b6267ebd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a972babebb2d6463064955189b6267ebd">&#9670;&#160;</a></span>getResourceOrEmpty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func getResourceOrEmpty </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d8/d41/classxmpp4cj_1_1jid_1_1Resourcepart.html">Resourcepart</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取这个 JID 的资源部分或返回空资源部分。 </p>
+<p>如果 JID 是 <code class="JavaDocCode">&lt;localpart@domain.example/resource&gt;</code> 的形式，那么这个方法返回 'resource'。如果 JID 没有资源部分，那么返回 <code><a class="el" href="../../">xmpp.jid.parts.Resourcepart#EMPTY</a></code>。 </p>
+<dl class="section return"><dt>返回</dt><dd>这个 JID 的资源部分或空资源部分。 </dd></dl>
+
+<p>在 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a1a0ad9d3b2946f18b943b6928db97930">AbstractJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="ac0ced597e27c3404e24b4a936e5699d3" name="ac0ced597e27c3404e24b4a936e5699d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0ced597e27c3404e24b4a936e5699d3">&#9670;&#160;</a></span>getResourceOrNull()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func getResourceOrNull </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?<a class="el" href="../../d8/d41/classxmpp4cj_1_1jid_1_1Resourcepart.html">Resourcepart</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取这个 JID 的资源部分或 None。 </p>
+<p>如果 JID 是 <code class="JavaDocCode">&lt;localpart@domain.example/resource&gt;</code> 的形式，那么这个方法返回 'resource'。如果 JID 没有资源部分，那么返回 None。 </p>
+<dl class="section return"><dt>返回</dt><dd>这个 JID 的资源部分或 None。 </dd></dl>
+
+<p>在 <a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a0be26d3bef579c3298cf5eb10c097639">DomainAndResourcepartJid</a>, <a class="el" href="../../dc/d78/classxmpp4cj_1_1jid_1_1DomainpartJid.html#a0be26d3bef579c3298cf5eb10c097639">DomainpartJid</a>, <a class="el" href="../../d2/d15/classxmpp4cj_1_1jid_1_1LocalAndDomainpartJid.html#a0be26d3bef579c3298cf5eb10c097639">LocalAndDomainpartJid</a> , 以及 <a class="el" href="../../dd/d44/classxmpp4cj_1_1jid_1_1LocalDomainAndResourcepartJid.html#a0be26d3bef579c3298cf5eb10c097639">LocalDomainAndResourcepartJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a1ff8248e276e05effe700deb4c824f64" name="a1ff8248e276e05effe700deb4c824f64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ff8248e276e05effe700deb4c824f64">&#9670;&#160;</a></span>getResourceOrThrow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func getResourceOrThrow </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d8/d41/classxmpp4cj_1_1jid_1_1Resourcepart.html">Resourcepart</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取这个 JID 的资源部分或抛出 IllegalStateException。 </p>
+<p>如果 JID 是 <code class="JavaDocCode">&lt;localpart@domain.example/resource&gt;</code> 的形式，那么这个方法返回 'resource'。如果 JID 没有资源部分，那么抛出 IllegalStateException。 </p>
+<dl class="section return"><dt>返回</dt><dd>这个 JID 的资源部分。 </dd></dl>
+
+<p>在 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#ae2d1242345ca6b0ccf3ba08b0d4f4cda">AbstractJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a39544a0c2d9323c0b2d4c62dee73eb6e" name="a39544a0c2d9323c0b2d4c62dee73eb6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39544a0c2d9323c0b2d4c62dee73eb6e">&#9670;&#160;</a></span>hasLocalpart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func hasLocalpart </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Bool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>检查是否为 Jid with a <code><a class="el" href="../../">Localpart</a></code>.</p>
+<dl class="section return"><dt>返回</dt><dd>true 若此 Jid 有 localpart. </dd></dl>
+
+<p>在 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a57069668b3abf70f611b45b5e19a8665">AbstractJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="ad63be47e2be64bcb1eadd25d5685045b" name="ad63be47e2be64bcb1eadd25d5685045b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad63be47e2be64bcb1eadd25d5685045b">&#9670;&#160;</a></span>hasNoResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func hasNoResource </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Bool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>检查是否为 <code><a class="el" href="../../">EntityBareJid</a></code> or <code><a class="el" href="../../">DomainBareJid</a></code>.</p>
+<dl class="section return"><dt>返回</dt><dd>true 若当前对象为 BareJid or DomainBareJid </dd></dl>
+
+<p>在 <a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a845de7f4d0a3188c3ee29d366089a089">DomainAndResourcepartJid</a>, <a class="el" href="../../dc/d78/classxmpp4cj_1_1jid_1_1DomainpartJid.html#a845de7f4d0a3188c3ee29d366089a089">DomainpartJid</a>, <a class="el" href="../../d2/d15/classxmpp4cj_1_1jid_1_1LocalAndDomainpartJid.html#a845de7f4d0a3188c3ee29d366089a089">LocalAndDomainpartJid</a> , 以及 <a class="el" href="../../dd/d44/classxmpp4cj_1_1jid_1_1LocalDomainAndResourcepartJid.html#a845de7f4d0a3188c3ee29d366089a089">LocalDomainAndResourcepartJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a2419bb254cdbd4437080085b7422c3ee" name="a2419bb254cdbd4437080085b7422c3ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2419bb254cdbd4437080085b7422c3ee">&#9670;&#160;</a></span>hasResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func hasResource </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Bool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>检查是否为 Jid with a <code><a class="el" href="../../">Resourcepart</a></code>.</p>
+<dl class="section return"><dt>返回</dt><dd>true 若此 Jid 有 resourcepart. </dd></dl>
+
+<p>在 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#ac5d3d9f9bfdcacfb46aa88fd6dee6d40">AbstractJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a0fc343bcfffe4442a04b5ea9c1baa3e5" name="a0fc343bcfffe4442a04b5ea9c1baa3e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fc343bcfffe4442a04b5ea9c1baa3e5">&#9670;&#160;</a></span>isDomainBareJid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func isDomainBareJid </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Bool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>检查是否为 <code><a class="el" href="../../">DomainBareJid</a></code>.</p>
+<dl class="section return"><dt>返回</dt><dd>true 若当前对象为 DomainBareJid </dd></dl>
+
+<p>在 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a50bb5ce6e47a5de6627a2078d33defa2">AbstractJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a96b9d22778efb8fad5862852a5f54490" name="a96b9d22778efb8fad5862852a5f54490"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96b9d22778efb8fad5862852a5f54490">&#9670;&#160;</a></span>isDomainFullJid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func isDomainFullJid </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Bool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>检查是否为 <code><a class="el" href="../../">DomainFullJid</a></code>.</p>
+<dl class="section return"><dt>返回</dt><dd>true 若当前对象为 DomainFullJid </dd></dl>
+
+<p>在 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a3795b0fae05fbdeff2ab7c529c2a1fdd">AbstractJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="aa8e259232439dcd7fa0d29fb63ebf32b" name="aa8e259232439dcd7fa0d29fb63ebf32b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8e259232439dcd7fa0d29fb63ebf32b">&#9670;&#160;</a></span>isEntityBareJid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func isEntityBareJid </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Bool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>检查是否为 <code><a class="el" href="../../">EntityBareJid</a></code>.</p>
+<dl class="section return"><dt>返回</dt><dd>true 若当前对象为 EntityBareJid </dd></dl>
+
+<p>在 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a0023710460e7c5d5c9edd2004f301890">AbstractJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="ac8c1104b12e4d652c0c3ba1381d0d60e" name="ac8c1104b12e4d652c0c3ba1381d0d60e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8c1104b12e4d652c0c3ba1381d0d60e">&#9670;&#160;</a></span>isEntityFullJid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func isEntityFullJid </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Bool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>检查是否为 <code><a class="el" href="../../">EntityFullJid</a></code>.</p>
+<dl class="section return"><dt>返回</dt><dd>true 若当前对象为 EntityFullJid </dd></dl>
+
+<p>在 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a3a2f29585916e94093cb6bd414c6bb5b">AbstractJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="af03155ad97a927578cf2f2dd1be7a0de" name="af03155ad97a927578cf2f2dd1be7a0de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af03155ad97a927578cf2f2dd1be7a0de">&#9670;&#160;</a></span>isEntityJid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func isEntityJid </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Bool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Check if this is a <code><a class="el" href="../../">EntityBareJid</a></code> or <code><a class="el" href="../../">EntityFullJid</a></code>.</p>
+<dl class="section return"><dt>返回</dt><dd>true 若当前对象为 BareJid or FullJid. </dd></dl>
+
+<p>在 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a0f991f1fa5c6037c014042e06d61aa77">AbstractJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a3ee593d6dc71b0aebe95f3f1434d9252" name="a3ee593d6dc71b0aebe95f3f1434d9252"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ee593d6dc71b0aebe95f3f1434d9252">&#9670;&#160;</a></span>isParentOf() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func isParentOf </td>
+          <td>(</td>
+          <td class="paramname"><em>bareJid</em>:&#160;</td>
+          <td class="paramtype">EntityBareJid</td><td>)</td>
+          <td>: Bool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>参见 <code><a class="el" href="../../">isParentOf(Jid)</a></code>。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bareJid</td><td>裸 JID。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果这个 JID 是给定 JID 的父级，则返回 true。 </dd></dl>
+
+<p>在 <a class="el" href="../../dc/d78/classxmpp4cj_1_1jid_1_1DomainpartJid.html#a983f6ab108d9a91c6299ca76d88c701e">DomainpartJid</a>, <a class="el" href="../../d2/d15/classxmpp4cj_1_1jid_1_1LocalAndDomainpartJid.html#a983f6ab108d9a91c6299ca76d88c701e">LocalAndDomainpartJid</a>, <a class="el" href="../../dd/d44/classxmpp4cj_1_1jid_1_1LocalDomainAndResourcepartJid.html#a983f6ab108d9a91c6299ca76d88c701e">LocalDomainAndResourcepartJid</a> , 以及 <a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a9c9ce65028917bba646332bef1299322">DomainAndResourcepartJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a64958f4de518076e1297dd00d410221e" name="a64958f4de518076e1297dd00d410221e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64958f4de518076e1297dd00d410221e">&#9670;&#160;</a></span>isParentOf() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func isParentOf </td>
+          <td>(</td>
+          <td class="paramname"><em>domainBareJid</em>:&#160;</td>
+          <td class="paramtype">DomainBareJid</td><td>)</td>
+          <td>: Bool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>参见 <code><a class="el" href="../../">isParentOf(Jid)</a></code>。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">domainBareJid</td><td>域裸 JID。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果这个 JID 是给定 JID 的父级，则返回 true。 </dd></dl>
+
+<p>在 <a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a879e0e830a5d75e523d285d97ec297c7">DomainAndResourcepartJid</a>, <a class="el" href="../../dc/d78/classxmpp4cj_1_1jid_1_1DomainpartJid.html#a879e0e830a5d75e523d285d97ec297c7">DomainpartJid</a>, <a class="el" href="../../d2/d15/classxmpp4cj_1_1jid_1_1LocalAndDomainpartJid.html#a879e0e830a5d75e523d285d97ec297c7">LocalAndDomainpartJid</a> , 以及 <a class="el" href="../../dd/d44/classxmpp4cj_1_1jid_1_1LocalDomainAndResourcepartJid.html#a879e0e830a5d75e523d285d97ec297c7">LocalDomainAndResourcepartJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a4d8d51ccd9668f6f7d70c34b6caeab33" name="a4d8d51ccd9668f6f7d70c34b6caeab33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d8d51ccd9668f6f7d70c34b6caeab33">&#9670;&#160;</a></span>isParentOf() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func isParentOf </td>
+          <td>(</td>
+          <td class="paramname"><em>domainFullJid</em>:&#160;</td>
+          <td class="paramtype">DomainFullJid</td><td>)</td>
+          <td>: Bool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>参见 <code><a class="el" href="../../">isParentOf(Jid)</a></code>。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">domainFullJid</td><td>域完整 JID。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果这个 JID 是给定 JID 的父级，则返回 true。 </dd></dl>
+
+<p>在 <a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a31277ceaf5b4f1c95b9f8d8d75b025d4">DomainAndResourcepartJid</a>, <a class="el" href="../../dc/d78/classxmpp4cj_1_1jid_1_1DomainpartJid.html#a31277ceaf5b4f1c95b9f8d8d75b025d4">DomainpartJid</a>, <a class="el" href="../../d2/d15/classxmpp4cj_1_1jid_1_1LocalAndDomainpartJid.html#a31277ceaf5b4f1c95b9f8d8d75b025d4">LocalAndDomainpartJid</a> , 以及 <a class="el" href="../../dd/d44/classxmpp4cj_1_1jid_1_1LocalDomainAndResourcepartJid.html#a31277ceaf5b4f1c95b9f8d8d75b025d4">LocalDomainAndResourcepartJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a8e3c989dc667123e971fe0447b06f24d" name="a8e3c989dc667123e971fe0447b06f24d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e3c989dc667123e971fe0447b06f24d">&#9670;&#160;</a></span>isParentOf() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func isParentOf </td>
+          <td>(</td>
+          <td class="paramname"><em>fullJid</em>:&#160;</td>
+          <td class="paramtype">EntityFullJid</td><td>)</td>
+          <td>: Bool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>参见 <code><a class="el" href="../../">isParentOf(Jid)</a></code>。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fullJid</td><td>完整 JID。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果这个 JID 是给定 JID 的父级，则返回 true。 </dd></dl>
+
+<p>在 <a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a9434bbbd774e0305872bf43e5ee5e8d7">DomainAndResourcepartJid</a>, <a class="el" href="../../dc/d78/classxmpp4cj_1_1jid_1_1DomainpartJid.html#a125116c105739c4eba6899c4f8eddeb2">DomainpartJid</a>, <a class="el" href="../../d2/d15/classxmpp4cj_1_1jid_1_1LocalAndDomainpartJid.html#a125116c105739c4eba6899c4f8eddeb2">LocalAndDomainpartJid</a> , 以及 <a class="el" href="../../dd/d44/classxmpp4cj_1_1jid_1_1LocalDomainAndResourcepartJid.html#a125116c105739c4eba6899c4f8eddeb2">LocalDomainAndResourcepartJid</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a34f25a0674961d96149de5b8d3d6cc22" name="a34f25a0674961d96149de5b8d3d6cc22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34f25a0674961d96149de5b8d3d6cc22">&#9670;&#160;</a></span>isParentOf() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func isParentOf </td>
+          <td>(</td>
+          <td class="paramname"><em>jid</em>:&#160;</td>
+          <td class="paramtype">Jid</td><td>)</td>
+          <td>: Bool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>用于检查当前的 JID 是否是另一个给定 JID 的 “父级”。“父级” 关系的定义如下：在 JID 的各个部分（本地部分、域部分和资源部分）相等的前提下，如果满足特定条件，则认为当前 JID 是另一个 JID 的父级。通过一个表格展示不同情况下的判断结果： </p><pre>
+ | this JID (parentOf) | other JID           | result |
+ |---------------------+---------------------+--------|
+ | dom.example         | dom.example         | true   |
+ | dom.example         | dom.example/res     | true   |
+ | dom.example         | <a href="#" onclick="location.href='mai'+'lto:'+'loc'+'@d'+'om.'+'ex'+'amp'+'le'; return false;">loc@d<span class="obfuscator">.nosp@m.</span>om.e<span class="obfuscator">.nosp@m.</span>xampl<span class="obfuscator">.nosp@m.</span>e</a>     | true   |
+ | dom.example         | <a href="#" onclick="location.href='mai'+'lto:'+'loc'+'@d'+'om.'+'ex'+'amp'+'le'; return false;">loc@d<span class="obfuscator">.nosp@m.</span>om.e<span class="obfuscator">.nosp@m.</span>xampl<span class="obfuscator">.nosp@m.</span>e</a>/res | true   |
+ | dom.example/res     | dom.exmple          | false  |
+ | dom.example/res     | dom.example/res     | true   |
+ | dom.example/res     | <a href="#" onclick="location.href='mai'+'lto:'+'loc'+'@d'+'om.'+'ex'+'amp'+'le'; return false;">loc@d<span class="obfuscator">.nosp@m.</span>om.e<span class="obfuscator">.nosp@m.</span>xampl<span class="obfuscator">.nosp@m.</span>e</a>     | false  |
+ | dom.example/res     | <a href="#" onclick="location.href='mai'+'lto:'+'loc'+'@d'+'om.'+'ex'+'amp'+'le'; return false;">loc@d<span class="obfuscator">.nosp@m.</span>om.e<span class="obfuscator">.nosp@m.</span>xampl<span class="obfuscator">.nosp@m.</span>e</a>/res | false  |
+ | <a href="#" onclick="location.href='mai'+'lto:'+'loc'+'@d'+'om.'+'ex'+'amp'+'le'; return false;">loc@d<span class="obfuscator">.nosp@m.</span>om.e<span class="obfuscator">.nosp@m.</span>xampl<span class="obfuscator">.nosp@m.</span>e</a>     | dom.example         | false  |
+ | <a href="#" onclick="location.href='mai'+'lto:'+'loc'+'@d'+'om.'+'ex'+'amp'+'le'; return false;">loc@d<span class="obfuscator">.nosp@m.</span>om.e<span class="obfuscator">.nosp@m.</span>xampl<span class="obfuscator">.nosp@m.</span>e</a>     | dom.example/res     | false  |
+ | <a href="#" onclick="location.href='mai'+'lto:'+'loc'+'@d'+'om.'+'ex'+'amp'+'le'; return false;">loc@d<span class="obfuscator">.nosp@m.</span>om.e<span class="obfuscator">.nosp@m.</span>xampl<span class="obfuscator">.nosp@m.</span>e</a>     | <a href="#" onclick="location.href='mai'+'lto:'+'loc'+'@d'+'om.'+'ex'+'amp'+'le'; return false;">loc@d<span class="obfuscator">.nosp@m.</span>om.e<span class="obfuscator">.nosp@m.</span>xampl<span class="obfuscator">.nosp@m.</span>e</a>     | true   |
+ | <a href="#" onclick="location.href='mai'+'lto:'+'loc'+'@d'+'om.'+'ex'+'amp'+'le'; return false;">loc@d<span class="obfuscator">.nosp@m.</span>om.e<span class="obfuscator">.nosp@m.</span>xampl<span class="obfuscator">.nosp@m.</span>e</a>     | <a href="#" onclick="location.href='mai'+'lto:'+'loc'+'@d'+'om.'+'ex'+'amp'+'le'; return false;">loc@d<span class="obfuscator">.nosp@m.</span>om.e<span class="obfuscator">.nosp@m.</span>xampl<span class="obfuscator">.nosp@m.</span>e</a>/res | true   |
+ | <a href="#" onclick="location.href='mai'+'lto:'+'loc'+'@d'+'om.'+'ex'+'amp'+'le'; return false;">loc@d<span class="obfuscator">.nosp@m.</span>om.e<span class="obfuscator">.nosp@m.</span>xampl<span class="obfuscator">.nosp@m.</span>e</a>/res | dom.example         | false  |
+ | <a href="#" onclick="location.href='mai'+'lto:'+'loc'+'@d'+'om.'+'ex'+'amp'+'le'; return false;">loc@d<span class="obfuscator">.nosp@m.</span>om.e<span class="obfuscator">.nosp@m.</span>xampl<span class="obfuscator">.nosp@m.</span>e</a>/res | dom.example/res     | false  |
+ | <a href="#" onclick="location.href='mai'+'lto:'+'loc'+'@d'+'om.'+'ex'+'amp'+'le'; return false;">loc@d<span class="obfuscator">.nosp@m.</span>om.e<span class="obfuscator">.nosp@m.</span>xampl<span class="obfuscator">.nosp@m.</span>e</a>/res | <a href="#" onclick="location.href='mai'+'lto:'+'loc'+'@d'+'om.'+'ex'+'amp'+'le'; return false;">loc@d<span class="obfuscator">.nosp@m.</span>om.e<span class="obfuscator">.nosp@m.</span>xampl<span class="obfuscator">.nosp@m.</span>e</a>     | false  |
+ | <a href="#" onclick="location.href='mai'+'lto:'+'loc'+'@d'+'om.'+'ex'+'amp'+'le'; return false;">loc@d<span class="obfuscator">.nosp@m.</span>om.e<span class="obfuscator">.nosp@m.</span>xampl<span class="obfuscator">.nosp@m.</span>e</a>/res | <a href="#" onclick="location.href='mai'+'lto:'+'loc'+'@d'+'om.'+'ex'+'amp'+'le'; return false;">loc@d<span class="obfuscator">.nosp@m.</span>om.e<span class="obfuscator">.nosp@m.</span>xampl<span class="obfuscator">.nosp@m.</span>e</a>/res | true   |
+ </pre><dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">jid</td><td>要与之比较的另一个 JID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果这个 JID 是给定 JID 的父级，则返回 true。 </dd></dl>
+
+<p>在 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a1ee1c933c6e1bd9304b243b6ca6b0e54">AbstractJid</a> 内被实现.</p>
+
+</div>
+</div>
+<hr/>该接口的文档由以下文件生成:<ul>
+<li>src/jid/jid.cj</li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../d0/d12/namespacexmpp4cj.html">xmpp4cj</a></li><li class="navelem"><a class="el" href="../../df/d76/namespacexmpp4cj_1_1jid.html">jid</a></li><li class="navelem"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html">Jid</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

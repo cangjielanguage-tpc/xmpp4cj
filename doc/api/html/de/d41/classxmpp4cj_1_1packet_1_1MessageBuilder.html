@@ -1,0 +1,606 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Xmpp4cj: MessageBuilder类 参考</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Xmpp4cj
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('de/d41/classxmpp4cj_1_1packet_1_1MessageBuilder.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pro-methods">Protected 成员函数</a> &#124;
+<a href="../../d0/d6a/classxmpp4cj_1_1packet_1_1MessageBuilder-members.html">所有成员列表</a>  </div>
+  <div class="headertitle"><div class="title">MessageBuilder类 参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+类 MessageBuilder 继承关系图:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="../../de/d41/classxmpp4cj_1_1packet_1_1MessageBuilder.png" usemap="#MessageBuilder_map" alt=""/>
+  <map id="MessageBuilder_map" name="MessageBuilder_map">
+<area href="../../d0/d90/classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder.html" alt="MessageOrPresenceBuilder" shape="rect" coords="91,168,263,192"/>
+<area href="../../d5/dba/interfacexmpp4cj_1_1packet_1_1MessageView.html" alt="MessageView" shape="rect" coords="364,168,536,192"/>
+<area href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html" alt="StanzaBuilder" shape="rect" coords="91,112,263,136"/>
+<area href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html" alt="StanzaView" shape="rect" coords="364,112,536,136"/>
+<area href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html" alt="StanzaView" shape="rect" coords="0,56,172,80"/>
+<area href="../../d7/d66/interfacexmpp4cj_1_1packet_1_1XmlLangElement.html" alt="XmlLangElement" shape="rect" coords="364,56,536,80"/>
+<area href="../../d7/d66/interfacexmpp4cj_1_1packet_1_1XmlLangElement.html" alt="XmlLangElement" shape="rect" coords="0,0,172,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:ae4ff0b6fe60a0dbbf49d4fc80e9cb96f"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d41/classxmpp4cj_1_1packet_1_1MessageBuilder.html#ae4ff0b6fe60a0dbbf49d4fc80e9cb96f">ofType</a> (typ: <a class="el" href="../../de/dec/enumxmpp4cj_1_1packet_1_1MessageType.html">MessageType</a>): This</td></tr>
+<tr class="separator:ae4ff0b6fe60a0dbbf49d4fc80e9cb96f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac28f8decfc2c283fe3993cca7beaf136"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d41/classxmpp4cj_1_1packet_1_1MessageBuilder.html#ac28f8decfc2c283fe3993cca7beaf136">setThread</a> (thread: String): This</td></tr>
+<tr class="separator:ac28f8decfc2c283fe3993cca7beaf136"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8116225b147cc3849ca2680f0050ba93"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d41/classxmpp4cj_1_1packet_1_1MessageBuilder.html#a8116225b147cc3849ca2680f0050ba93">setThread</a> (thread: String, parent: ?String): This</td></tr>
+<tr class="separator:a8116225b147cc3849ca2680f0050ba93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbb329fedbbd6d99e35e9475ce5002f2"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d41/classxmpp4cj_1_1packet_1_1MessageBuilder.html#adbb329fedbbd6d99e35e9475ce5002f2">setSubject</a> (subject: String): This</td></tr>
+<tr class="separator:adbb329fedbbd6d99e35e9475ce5002f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecd94b484245432ea39ddbaae69ff3e3"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d41/classxmpp4cj_1_1packet_1_1MessageBuilder.html#aecd94b484245432ea39ddbaae69ff3e3">addSubject</a> (languageStr: ?String, subject: String): This</td></tr>
+<tr class="separator:aecd94b484245432ea39ddbaae69ff3e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a882d3b877a62a6dd676e915c528c9c4f"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d41/classxmpp4cj_1_1packet_1_1MessageBuilder.html#a882d3b877a62a6dd676e915c528c9c4f">setBody</a> (body: String): This</td></tr>
+<tr class="separator:a882d3b877a62a6dd676e915c528c9c4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96ed10a0192a539abcbe84a53b779bfc"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d41/classxmpp4cj_1_1packet_1_1MessageBuilder.html#a96ed10a0192a539abcbe84a53b779bfc">addBody</a> (languageStr: ?String, body: String): This</td></tr>
+<tr class="separator:a96ed10a0192a539abcbe84a53b779bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2451f4783429197c6847deca1d9dd3d5"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d41/classxmpp4cj_1_1packet_1_1MessageBuilder.html#a2451f4783429197c6847deca1d9dd3d5">build</a> (): <a class="el" href="../../d8/d20/classxmpp4cj_1_1packet_1_1Message.html">Message</a></td></tr>
+<tr class="separator:a2451f4783429197c6847deca1d9dd3d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a498a9fbb3788fcbb387a2354684b3ff6"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d41/classxmpp4cj_1_1packet_1_1MessageBuilder.html#a498a9fbb3788fcbb387a2354684b3ff6">getType</a> (): ?<a class="el" href="../../de/dec/enumxmpp4cj_1_1packet_1_1MessageType.html">MessageType</a></td></tr>
+<tr class="separator:a498a9fbb3788fcbb387a2354684b3ff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder')"><img src="../../closed.png" alt="-"/>&#160;Public 成员函数 继承自 <a class="el" href="../../d0/d90/classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder.html">MessageOrPresenceBuilder</a></td></tr>
+<tr class="memitem:a8414d03f901ef90db8639de1d570b3d8 inherit pub_methods_classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder"><td class="memItemLeft" align="right" valign="top">public open override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d90/classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder.html#a8414d03f901ef90db8639de1d570b3d8">build</a> (): <a class="el" href="../../db/d10/classxmpp4cj_1_1packet_1_1MessageOrPresence.html">MessageOrPresence</a></td></tr>
+<tr class="separator:a8414d03f901ef90db8639de1d570b3d8 inherit pub_methods_classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder')"><img src="../../closed.png" alt="-"/>&#160;Public 成员函数 继承自 <a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html">StanzaBuilder</a></td></tr>
+<tr class="memitem:a58e60b2ba0de0718fb8e35ee74e5b83e inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a58e60b2ba0de0718fb8e35ee74e5b83e">to</a> (to: String): This</td></tr>
+<tr class="separator:a58e60b2ba0de0718fb8e35ee74e5b83e inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80d808929c1639acc68942b686cf9825 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a80d808929c1639acc68942b686cf9825">to</a> (to: ?Jid): This</td></tr>
+<tr class="separator:a80d808929c1639acc68942b686cf9825 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd61db50a375219436c86377af9e51ce inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#afd61db50a375219436c86377af9e51ce">froms</a> (froms: String): This</td></tr>
+<tr class="separator:afd61db50a375219436c86377af9e51ce inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15b5b4e6fe8b2c670715565e389c6fa7 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a15b5b4e6fe8b2c670715565e389c6fa7">froms</a> (froms: ?Jid): This</td></tr>
+<tr class="separator:a15b5b4e6fe8b2c670715565e389c6fa7 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06b78fba9e88f340067bb1d13a2ae21e inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a06b78fba9e88f340067bb1d13a2ae21e">setError</a> (stanzaError: ?<a class="el" href="../../d7/d98/classxmpp4cj_1_1packet_1_1StanzaError.html">StanzaError</a>): This</td></tr>
+<tr class="separator:a06b78fba9e88f340067bb1d13a2ae21e inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f95f24b96d98cca0c368c1ee5b4d18b inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a5f95f24b96d98cca0c368c1ee5b4d18b">setLanguage</a> (language: ?String): This</td></tr>
+<tr class="separator:a5f95f24b96d98cca0c368c1ee5b4d18b inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3447cea22fb4f2ac0e411441b8b05490 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a3447cea22fb4f2ac0e411441b8b05490">addExtension</a> (extensionElement: <a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>): This</td></tr>
+<tr class="separator:a3447cea22fb4f2ac0e411441b8b05490 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f3a3501b43bc60ad293c06e56626a22 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a0f3a3501b43bc60ad293c06e56626a22">addOptExtensions</a> (extensionElements: ?Collection&lt;<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>&gt;): This</td></tr>
+<tr class="separator:a0f3a3501b43bc60ad293c06e56626a22 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bd76c8bf8a2f310735dc496ef7fe074 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a7bd76c8bf8a2f310735dc496ef7fe074">addExtensions</a> (extensionElements: Collection&lt;<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>&gt;): This</td></tr>
+<tr class="separator:a7bd76c8bf8a2f310735dc496ef7fe074 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7783760eeaca855e420d988d4dbfbf39 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a7783760eeaca855e420d988d4dbfbf39">overrideExtension</a> (extensionElement: <a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>): This</td></tr>
+<tr class="separator:a7783760eeaca855e420d988d4dbfbf39 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c5138bbd96fe8925035364933dc6f56 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a1c5138bbd96fe8925035364933dc6f56">removeExtension</a> (elementName: String, namespace: String): This</td></tr>
+<tr class="separator:a1c5138bbd96fe8925035364933dc6f56 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31bf25d3b569fbaae642bb12ba740d72 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a31bf25d3b569fbaae642bb12ba740d72">removeExtension</a> (extension: <a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>): This</td></tr>
+<tr class="separator:a31bf25d3b569fbaae642bb12ba740d72 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd56e83ef6bbe800da058c214c0ac2f0 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#abd56e83ef6bbe800da058c214c0ac2f0">build</a> (): <a class="el" href="../../db/dba/classxmpp4cj_1_1packet_1_1Stanza.html">Stanza</a></td></tr>
+<tr class="separator:abd56e83ef6bbe800da058c214c0ac2f0 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cc9af387c05bae6d7d532c5115ecda3 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a2cc9af387c05bae6d7d532c5115ecda3">getStanzaId</a> (): ?String</td></tr>
+<tr class="separator:a2cc9af387c05bae6d7d532c5115ecda3 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31f53b2824154f79be7d9e3c302eee4e inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a31f53b2824154f79be7d9e3c302eee4e">getTo</a> (): ?Jid</td></tr>
+<tr class="separator:a31f53b2824154f79be7d9e3c302eee4e inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9072ebcaeb4b9cdc59aad50025b0da03 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a9072ebcaeb4b9cdc59aad50025b0da03">getFrom</a> (): ?Jid</td></tr>
+<tr class="separator:a9072ebcaeb4b9cdc59aad50025b0da03 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac2f385350f1b014427fc341c553eaab inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#aac2f385350f1b014427fc341c553eaab">getLanguage</a> (): ?String</td></tr>
+<tr class="separator:aac2f385350f1b014427fc341c553eaab inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d2922190690c4480fba68be7924722c inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a2d2922190690c4480fba68be7924722c">getError</a> (): ?<a class="el" href="../../d7/d98/classxmpp4cj_1_1packet_1_1StanzaError.html">StanzaError</a></td></tr>
+<tr class="separator:a2d2922190690c4480fba68be7924722c inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a786f1d563d8a7271de6a5c185e4c487c inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a786f1d563d8a7271de6a5c185e4c487c">getExtension</a> (qname: QName): ?<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a></td></tr>
+<tr class="separator:a786f1d563d8a7271de6a5c185e4c487c inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e6464f416bd6c9767c2955067e55387 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a3e6464f416bd6c9767c2955067e55387">getExtensions</a> (): ArrayList&lt;<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>&gt;</td></tr>
+<tr class="separator:a3e6464f416bd6c9767c2955067e55387 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75063029ec13f4ad7de9da5d5770c777 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a75063029ec13f4ad7de9da5d5770c777">getExtensions</a> (qname: QName): ArrayList&lt;<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>&gt;</td></tr>
+<tr class="separator:a75063029ec13f4ad7de9da5d5770c777 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc10c77928f5e784de7a8b5834596c7a inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#adc10c77928f5e784de7a8b5834596c7a">getExtensionsByType</a> (extensionElementClass: ClassId): ArrayList&lt;<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>&gt;</td></tr>
+<tr class="separator:adc10c77928f5e784de7a8b5834596c7a inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a597968b29fc4dbf1cef3bcbd40c7e12c inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a597968b29fc4dbf1cef3bcbd40c7e12c">willBuildStanzaWithId</a> (): Bool</td></tr>
+<tr class="separator:a597968b29fc4dbf1cef3bcbd40c7e12c inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af053d6b469685f97d017641e96bfec70 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#af053d6b469685f97d017641e96bfec70">throwIfNoStanzaId</a> (): Unit</td></tr>
+<tr class="separator:af053d6b469685f97d017641e96bfec70 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f77c8f97d30af177fcfb42e5306616f inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top"><a id="a1f77c8f97d30af177fcfb42e5306616f" name="a1f77c8f97d30af177fcfb42e5306616f"></a>
+public override func&#160;</td><td class="memItemRight" valign="bottom"><b>toString</b> (): String</td></tr>
+<tr class="separator:a1f77c8f97d30af177fcfb42e5306616f inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d4c3208358a518a93d528494ac5ad94 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public static func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a1d4c3208358a518a93d528494ac5ad94">buildMessage</a> (): <a class="el" href="../../de/d41/classxmpp4cj_1_1packet_1_1MessageBuilder.html">MessageBuilder</a></td></tr>
+<tr class="separator:a1d4c3208358a518a93d528494ac5ad94 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a995cbe9a8dd8bb4562f700c94b6adeca inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public static func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a995cbe9a8dd8bb4562f700c94b6adeca">buildMessage</a> (stanzaId: ?String): <a class="el" href="../../de/d41/classxmpp4cj_1_1packet_1_1MessageBuilder.html">MessageBuilder</a></td></tr>
+<tr class="separator:a995cbe9a8dd8bb4562f700c94b6adeca inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e5057ae13e2762c8dc47671ef72120d inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public static func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a3e5057ae13e2762c8dc47671ef72120d">buildMessageFrom</a> (message: <a class="el" href="../../d8/d20/classxmpp4cj_1_1packet_1_1Message.html">Message</a>, stanzaId: ?String): <a class="el" href="../../de/d41/classxmpp4cj_1_1packet_1_1MessageBuilder.html">MessageBuilder</a></td></tr>
+<tr class="separator:a3e5057ae13e2762c8dc47671ef72120d inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f6365898ba5bb19bd0cb11bb730d392 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public static func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a9f6365898ba5bb19bd0cb11bb730d392">buildMessageFrom</a> (message: <a class="el" href="../../d8/d20/classxmpp4cj_1_1packet_1_1Message.html">Message</a>, stanzaIdSource: <a class="el" href="../../d4/d0c/interfacexmpp4cj_1_1packet_1_1StanzaIdSource.html">StanzaIdSource</a>): <a class="el" href="../../de/d41/classxmpp4cj_1_1packet_1_1MessageBuilder.html">MessageBuilder</a></td></tr>
+<tr class="separator:a9f6365898ba5bb19bd0cb11bb730d392 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af773021073fb03a995a4a58aebc9b52c inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public static func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#af773021073fb03a995a4a58aebc9b52c">buildPresence</a> (): <a class="el" href="../../de/d7d/classxmpp4cj_1_1packet_1_1PresenceBuilder.html">PresenceBuilder</a></td></tr>
+<tr class="separator:af773021073fb03a995a4a58aebc9b52c inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09d638fb8687cefb0f97e1245cc4591c inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public static func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a09d638fb8687cefb0f97e1245cc4591c">buildPresence</a> (stanzaId: ?String): <a class="el" href="../../de/d7d/classxmpp4cj_1_1packet_1_1PresenceBuilder.html">PresenceBuilder</a></td></tr>
+<tr class="separator:a09d638fb8687cefb0f97e1245cc4591c inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a714bb8a76926487b4e688d4bc4482011 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public static func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a714bb8a76926487b4e688d4bc4482011">buildPresenceFrom</a> (presence: <a class="el" href="../../dd/d54/classxmpp4cj_1_1packet_1_1Presence.html">Presence</a>, stanzaId: ?String): <a class="el" href="../../de/d7d/classxmpp4cj_1_1packet_1_1PresenceBuilder.html">PresenceBuilder</a></td></tr>
+<tr class="separator:a714bb8a76926487b4e688d4bc4482011 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03587eb9b37aeb94e24832bf534e1308 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public static func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a03587eb9b37aeb94e24832bf534e1308">buildPresenceFrom</a> (presence: <a class="el" href="../../dd/d54/classxmpp4cj_1_1packet_1_1Presence.html">Presence</a>, stanzaIdSource: <a class="el" href="../../d4/d0c/interfacexmpp4cj_1_1packet_1_1StanzaIdSource.html">StanzaIdSource</a>): <a class="el" href="../../de/d7d/classxmpp4cj_1_1packet_1_1PresenceBuilder.html">PresenceBuilder</a></td></tr>
+<tr class="separator:a03587eb9b37aeb94e24832bf534e1308 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab03384329fcd3615343778ba4b551a76 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public static func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#ab03384329fcd3615343778ba4b551a76">buildIqData</a> (stanzaId: ?String): <a class="el" href="../../d0/d3a/classxmpp4cj_1_1packet_1_1IqData.html">IqData</a></td></tr>
+<tr class="separator:ab03384329fcd3615343778ba4b551a76 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5830d974222d4318a1d90efd40e5ee0 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">public static func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#ab5830d974222d4318a1d90efd40e5ee0">buildResponse&lt;SB&gt;</a> (request: <a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html">StanzaView</a>, builderFromStanzaId: (?String) -&gt; SB): SB where SB &lt;: <a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html">StanzaBuilder</a></td></tr>
+<tr class="separator:ab5830d974222d4318a1d90efd40e5ee0 inherit pub_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView')"><img src="../../closed.png" alt="-"/>&#160;Public 成员函数 继承自 <a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html">StanzaView</a></td></tr>
+<tr class="memitem:ad4eb6b7e204bb127db789991de291963 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#ad4eb6b7e204bb127db789991de291963">getStanzaId</a> (): ?String</td></tr>
+<tr class="separator:ad4eb6b7e204bb127db789991de291963 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a05d710a228c6ba8d72da0cc685f6c0 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#a4a05d710a228c6ba8d72da0cc685f6c0">getTo</a> (): ?Jid</td></tr>
+<tr class="separator:a4a05d710a228c6ba8d72da0cc685f6c0 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a0a490c3df38d286866c56aef914cca inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#a2a0a490c3df38d286866c56aef914cca">getFrom</a> (): ?Jid</td></tr>
+<tr class="separator:a2a0a490c3df38d286866c56aef914cca inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4db3f39ac5a7394d482dc2efb1c7ab35 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#a4db3f39ac5a7394d482dc2efb1c7ab35">getError</a> (): ?<a class="el" href="../../d7/d98/classxmpp4cj_1_1packet_1_1StanzaError.html">StanzaError</a></td></tr>
+<tr class="separator:a4db3f39ac5a7394d482dc2efb1c7ab35 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b8f52f6400717a048a18c46689095e2 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#a1b8f52f6400717a048a18c46689095e2">getExtension</a> (qname: QName): ?<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a></td></tr>
+<tr class="separator:a1b8f52f6400717a048a18c46689095e2 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafe3c58454088c6323d65c49a24dd6df inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#aafe3c58454088c6323d65c49a24dd6df">hasExtension</a> (qname: QName): Bool</td></tr>
+<tr class="separator:aafe3c58454088c6323d65c49a24dd6df inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa0a25167bdbd1cce8392bd7b89ad194 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#aaa0a25167bdbd1cce8392bd7b89ad194">hasExtensionByType</a> (qnameFrom: ClassId): Bool</td></tr>
+<tr class="separator:aaa0a25167bdbd1cce8392bd7b89ad194 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2adfdad952c7edda1272acbed38e70b8 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#a2adfdad952c7edda1272acbed38e70b8">hasExtension</a> (namespace: String): Bool</td></tr>
+<tr class="separator:a2adfdad952c7edda1272acbed38e70b8 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a564e2575e4f2f8f90975db8c32d56793 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#a564e2575e4f2f8f90975db8c32d56793">getExtensionByType</a> (extensionElementClass: ClassId): ?<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a></td></tr>
+<tr class="separator:a564e2575e4f2f8f90975db8c32d56793 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7852dae49e2fd6d6cdf86d06f70cea1 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#aa7852dae49e2fd6d6cdf86d06f70cea1">getExtensions</a> (): ArrayList&lt;<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>&gt;</td></tr>
+<tr class="separator:aa7852dae49e2fd6d6cdf86d06f70cea1 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c66ff6c7262e9152514802441e7b69f inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#a1c66ff6c7262e9152514802441e7b69f">getExtensions</a> (qname: QName): ArrayList&lt;<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>&gt;</td></tr>
+<tr class="separator:a1c66ff6c7262e9152514802441e7b69f inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4f6bf577020af54da1c937770c8d2f3 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#ac4f6bf577020af54da1c937770c8d2f3">getExtensionsByType</a> (extensionElementClass: ClassId): ArrayList&lt;<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>&gt;</td></tr>
+<tr class="separator:ac4f6bf577020af54da1c937770c8d2f3 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c028cab3991c20e2f0c547cca98ecda inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memItemLeft" align="right" valign="top">static func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#a0c028cab3991c20e2f0c547cca98ecda">castExt&lt;E&gt;</a> (iter: ArrayList&lt;<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>&gt;): ArrayList&lt;E&gt; where E &lt;: <a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a> &amp; ClassIdentify</td></tr>
+<tr class="separator:a0c028cab3991c20e2f0c547cca98ecda inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb05a9b320937741ede9a92430d51b06 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memItemLeft" align="right" valign="top">static func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#afb05a9b320937741ede9a92430d51b06">castExt&lt;E&gt;</a> (extensionElement: ?<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>): ?E where E &lt;: <a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a> &amp; ClassIdentify</td></tr>
+<tr class="separator:afb05a9b320937741ede9a92430d51b06 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1StanzaView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32d616a1d347a967f7b1598790fcb7b8"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d66/interfacexmpp4cj_1_1packet_1_1XmlLangElement.html#a32d616a1d347a967f7b1598790fcb7b8">getLanguage</a> (): ?String</td></tr>
+<tr class="separator:a32d616a1d347a967f7b1598790fcb7b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView')"><img src="../../closed.png" alt="-"/>&#160;Public 成员函数 继承自 <a class="el" href="../../d5/dba/interfacexmpp4cj_1_1packet_1_1MessageView.html">MessageView</a></td></tr>
+<tr class="memitem:aaea0900c6263628623526420bd3781bc inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dba/interfacexmpp4cj_1_1packet_1_1MessageView.html#aaea0900c6263628623526420bd3781bc">getType</a> (): ?<a class="el" href="../../de/dec/enumxmpp4cj_1_1packet_1_1MessageType.html">MessageType</a></td></tr>
+<tr class="separator:aaea0900c6263628623526420bd3781bc inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa727fb512416dafc1113187ea6391047 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dba/interfacexmpp4cj_1_1packet_1_1MessageView.html#aa727fb512416dafc1113187ea6391047">getSubject</a> (): ?String</td></tr>
+<tr class="separator:aa727fb512416dafc1113187ea6391047 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a854ad39db47b8a2625ddce746dc3f10f inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dba/interfacexmpp4cj_1_1packet_1_1MessageView.html#a854ad39db47b8a2625ddce746dc3f10f">getSubject</a> (language: ?String): ?String</td></tr>
+<tr class="separator:a854ad39db47b8a2625ddce746dc3f10f inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd3559ac60028e4143e0d402ba091211 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dba/interfacexmpp4cj_1_1packet_1_1MessageView.html#afd3559ac60028e4143e0d402ba091211">getMessageSubject</a> (language: ?String): ?<a class="el" href="../../d7/d42/classxmpp4cj_1_1packet_1_1MessageSubject.html">MessageSubject</a></td></tr>
+<tr class="separator:afd3559ac60028e4143e0d402ba091211 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08ce8a838d0de6556113b51912692cc6 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dba/interfacexmpp4cj_1_1packet_1_1MessageView.html#a08ce8a838d0de6556113b51912692cc6">getSubjects</a> (): Set&lt;<a class="el" href="../../d7/d42/classxmpp4cj_1_1packet_1_1MessageSubject.html">MessageSubject</a>&gt;</td></tr>
+<tr class="separator:a08ce8a838d0de6556113b51912692cc6 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f864e89ae0f9ee744d87453b177ce31 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dba/interfacexmpp4cj_1_1packet_1_1MessageView.html#a0f864e89ae0f9ee744d87453b177ce31">getSubjectLanguages</a> (): Collection&lt;String&gt;</td></tr>
+<tr class="separator:a0f864e89ae0f9ee744d87453b177ce31 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dcf15fbd673ab1157ce3e673502f0b8 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dba/interfacexmpp4cj_1_1packet_1_1MessageView.html#a4dcf15fbd673ab1157ce3e673502f0b8">getBody</a> (): ?String</td></tr>
+<tr class="separator:a4dcf15fbd673ab1157ce3e673502f0b8 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5c0d8583a7372498f0666164fe44272 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dba/interfacexmpp4cj_1_1packet_1_1MessageView.html#af5c0d8583a7372498f0666164fe44272">getBody</a> (language: ?String): ?String</td></tr>
+<tr class="separator:af5c0d8583a7372498f0666164fe44272 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5949b594a39e8e3c2bcf12e2d2ea3a76 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dba/interfacexmpp4cj_1_1packet_1_1MessageView.html#a5949b594a39e8e3c2bcf12e2d2ea3a76">getMessageBody</a> (language: ?String): ?<a class="el" href="../../df/d88/classxmpp4cj_1_1packet_1_1MessageBody.html">MessageBody</a></td></tr>
+<tr class="separator:a5949b594a39e8e3c2bcf12e2d2ea3a76 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a069058d16538886562efcaf65046a831 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dba/interfacexmpp4cj_1_1packet_1_1MessageView.html#a069058d16538886562efcaf65046a831">getBodies</a> (): Set&lt;<a class="el" href="../../df/d88/classxmpp4cj_1_1packet_1_1MessageBody.html">MessageBody</a>&gt;</td></tr>
+<tr class="separator:a069058d16538886562efcaf65046a831 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f14e78318ea2fa041575c24c2ce76c5 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dba/interfacexmpp4cj_1_1packet_1_1MessageView.html#a9f14e78318ea2fa041575c24c2ce76c5">getBodyLanguages</a> (): ArrayList&lt;?String&gt;</td></tr>
+<tr class="separator:a9f14e78318ea2fa041575c24c2ce76c5 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa042600553fcce2cc4a19a9e2d1a010c inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/dba/interfacexmpp4cj_1_1packet_1_1MessageView.html#aa042600553fcce2cc4a19a9e2d1a010c">getThread</a> (): ?String</td></tr>
+<tr class="separator:aa042600553fcce2cc4a19a9e2d1a010c inherit pub_methods_interfacexmpp4cj_1_1packet_1_1MessageView"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected 成员函数</h2></td></tr>
+<tr class="memitem:aa0317c18c69eb1727dbec4ffae9cd858"><td class="memItemLeft" align="right" valign="top">protected override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d41/classxmpp4cj_1_1packet_1_1MessageBuilder.html#aa0317c18c69eb1727dbec4ffae9cd858">addStanzaSpecificAttributes</a> (builder: ToStringUtilBuilder): Unit</td></tr>
+<tr class="separator:aa0317c18c69eb1727dbec4ffae9cd858"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder')"><img src="../../closed.png" alt="-"/>&#160;Protected 成员函数 继承自 <a class="el" href="../../d0/d90/classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder.html">MessageOrPresenceBuilder</a></td></tr>
+<tr class="memitem:a7131d0c40396202c24d78cd229ed9084 inherit pro_methods_classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder"><td class="memItemLeft" align="right" valign="top">protected&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d90/classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder.html#a7131d0c40396202c24d78cd229ed9084">init</a> (stanza: <a class="el" href="../../db/dba/classxmpp4cj_1_1packet_1_1Stanza.html">Stanza</a>, stanzaIdSource: <a class="el" href="../../d4/d0c/interfacexmpp4cj_1_1packet_1_1StanzaIdSource.html">StanzaIdSource</a>)</td></tr>
+<tr class="separator:a7131d0c40396202c24d78cd229ed9084 inherit pro_methods_classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59ccd58815fe583c451803b360d9dbc2 inherit pro_methods_classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder"><td class="memItemLeft" align="right" valign="top">protected&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d90/classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder.html#a59ccd58815fe583c451803b360d9dbc2">init</a> (stanza: <a class="el" href="../../db/dba/classxmpp4cj_1_1packet_1_1Stanza.html">Stanza</a>, stanzaId: ?String)</td></tr>
+<tr class="separator:a59ccd58815fe583c451803b360d9dbc2 inherit pro_methods_classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1efd077ab6481f9dd21a29d37133b8af inherit pro_methods_classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder"><td class="memItemLeft" align="right" valign="top">protected&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d90/classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder.html#a1efd077ab6481f9dd21a29d37133b8af">init</a> (stanzaIdSource: <a class="el" href="../../d4/d0c/interfacexmpp4cj_1_1packet_1_1StanzaIdSource.html">StanzaIdSource</a>)</td></tr>
+<tr class="separator:a1efd077ab6481f9dd21a29d37133b8af inherit pro_methods_classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7bca61898ae1734ea4656e85e9a7963 inherit pro_methods_classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder"><td class="memItemLeft" align="right" valign="top">protected&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d90/classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder.html#ab7bca61898ae1734ea4656e85e9a7963">init</a> (stanzaId: ?String)</td></tr>
+<tr class="separator:ab7bca61898ae1734ea4656e85e9a7963 inherit pro_methods_classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder')"><img src="../../closed.png" alt="-"/>&#160;Protected 成员函数 继承自 <a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html">StanzaBuilder</a></td></tr>
+<tr class="memitem:a0f090c4ec93eb4d849a0c4a3d330a410 inherit pro_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">protected&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a0f090c4ec93eb4d849a0c4a3d330a410">init</a> (other: <a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html">StanzaBuilder</a>)</td></tr>
+<tr class="separator:a0f090c4ec93eb4d849a0c4a3d330a410 inherit pro_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1efd077ab6481f9dd21a29d37133b8af inherit pro_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">protected&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a1efd077ab6481f9dd21a29d37133b8af">init</a> (stanzaIdSource: <a class="el" href="../../d4/d0c/interfacexmpp4cj_1_1packet_1_1StanzaIdSource.html">StanzaIdSource</a>)</td></tr>
+<tr class="separator:a1efd077ab6481f9dd21a29d37133b8af inherit pro_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7bca61898ae1734ea4656e85e9a7963 inherit pro_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">protected&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#ab7bca61898ae1734ea4656e85e9a7963">init</a> (stanzaId: ?String)</td></tr>
+<tr class="separator:ab7bca61898ae1734ea4656e85e9a7963 inherit pro_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5a83155c176537b73a4f635849f851b inherit pro_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">protected&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#ac5a83155c176537b73a4f635849f851b">init</a> (message: <a class="el" href="../../db/dba/classxmpp4cj_1_1packet_1_1Stanza.html">Stanza</a>, stanzaId: ?String)</td></tr>
+<tr class="separator:ac5a83155c176537b73a4f635849f851b inherit pro_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25337227801ff01d930ef4de41714ee5 inherit pro_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">protected&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a25337227801ff01d930ef4de41714ee5">init</a> (message: <a class="el" href="../../db/dba/classxmpp4cj_1_1packet_1_1Stanza.html">Stanza</a>, stanzaIdSource: <a class="el" href="../../d4/d0c/interfacexmpp4cj_1_1packet_1_1StanzaIdSource.html">StanzaIdSource</a>)</td></tr>
+<tr class="separator:a25337227801ff01d930ef4de41714ee5 inherit pro_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3072dbe9e1cca5299fac32407918a5ae inherit pro_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memItemLeft" align="right" valign="top">protected open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a3072dbe9e1cca5299fac32407918a5ae">addStanzaSpecificAttributes</a> (builder: ToStringUtilBuilder): Unit</td></tr>
+<tr class="separator:a3072dbe9e1cca5299fac32407918a5ae inherit pro_methods_classxmpp4cj_1_1packet_1_1StanzaBuilder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p><code class="JavaDocCode">MessageBuilder</code> 类用于构建 XMPP 消息（Message）对象的方便构建器。 </p>
+<p>该类为 <code><a class="el" href="../../">Message</a></code> 对象提供了灵活的构建选项，包括设置消息类型、主体和主题等属性。 它支持从现有的 <code class="JavaDocCode">Message</code> 实例中复制设置，并提供了一系列方法用于设置消息的不同部分。 </p>
+</div><h2 class="groupheader">成员函数说明</h2>
+<a id="a96ed10a0192a539abcbe84a53b779bfc" name="a96ed10a0192a539abcbe84a53b779bfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96ed10a0192a539abcbe84a53b779bfc">&#9670;&#160;</a></span>addBody()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public func addBody </td>
+          <td>(</td>
+          <td class="paramname"><em>languageStr</em>:&#160;</td>
+          <td class="paramtype">?String, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>body</em>:&#160;</td>
+          <td class="paramtype">String&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>: This </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>添加带有对应语言的消息正文。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">language</td><td>正文的语言。 </td></tr>
+    <tr><td class="paramname">body</td><td>要添加的消息正文。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>当前 <code class="JavaDocCode">MessageBuilder</code> 的引用。 </dd></dl>
+
+</div>
+</div>
+<a id="aa0317c18c69eb1727dbec4ffae9cd858" name="aa0317c18c69eb1727dbec4ffae9cd858"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0317c18c69eb1727dbec4ffae9cd858">&#9670;&#160;</a></span>addStanzaSpecificAttributes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">protected override func addStanzaSpecificAttributes </td>
+          <td>(</td>
+          <td class="paramname"><em>builder</em>:&#160;</td>
+          <td class="paramtype">ToStringUtilBuilder</td><td>)</td>
+          <td>: Unit </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>添加特定于 Stanza 的属性。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">builder</td><td>用于构建字符串的构建器。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aecd94b484245432ea39ddbaae69ff3e3" name="aecd94b484245432ea39ddbaae69ff3e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecd94b484245432ea39ddbaae69ff3e3">&#9670;&#160;</a></span>addSubject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public func addSubject </td>
+          <td>(</td>
+          <td class="paramname"><em>languageStr</em>:&#160;</td>
+          <td class="paramtype">?String, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>subject</em>:&#160;</td>
+          <td class="paramtype">String&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>: This </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>添加带有对应语言的主题。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">language</td><td>主题的语言。 </td></tr>
+    <tr><td class="paramname">subject</td><td>要添加到消息的主题。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>当前 <code class="JavaDocCode">MessageBuilder</code> 的引用。 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">NullPointerException</td><td>如果主题为 <code class="JavaDocCode">null</code>。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2451f4783429197c6847deca1d9dd3d5" name="a2451f4783429197c6847deca1d9dd3d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2451f4783429197c6847deca1d9dd3d5">&#9670;&#160;</a></span>build()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func build </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d8/d20/classxmpp4cj_1_1packet_1_1Message.html">Message</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>构建并返回一个新的 <code class="JavaDocCode">Message</code> 实例。</p>
+<dl class="section return"><dt>返回</dt><dd>构建的 <code class="JavaDocCode">Message</code> 对象。 </dd></dl>
+
+</div>
+</div>
+<a id="a498a9fbb3788fcbb387a2354684b3ff6" name="a498a9fbb3788fcbb387a2354684b3ff6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a498a9fbb3788fcbb387a2354684b3ff6">&#9670;&#160;</a></span>getType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getType </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?<a class="el" href="../../de/dec/enumxmpp4cj_1_1packet_1_1MessageType.html">MessageType</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>返回消息的类型。如果没有设置类型，此方法将返回 <code><a class="el" href="../../">MessageType#normal</a></code>。</p>
+<dl class="section return"><dt>返回</dt><dd>消息的类型。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d5/dba/interfacexmpp4cj_1_1packet_1_1MessageView.html#aaea0900c6263628623526420bd3781bc">MessageView</a>.</p>
+
+</div>
+</div>
+<a id="ae4ff0b6fe60a0dbbf49d4fc80e9cb96f" name="ae4ff0b6fe60a0dbbf49d4fc80e9cb96f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4ff0b6fe60a0dbbf49d4fc80e9cb96f">&#9670;&#160;</a></span>ofType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public func ofType </td>
+          <td>(</td>
+          <td class="paramname"><em>typ</em>:&#160;</td>
+          <td class="paramtype">MessageType</td><td>)</td>
+          <td>: This </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>设置消息类型。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>要设置的 <code class="JavaDocCode">Message.Type</code> 类型。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>当前 <code class="JavaDocCode">MessageBuilder</code> 的引用。 </dd></dl>
+
+</div>
+</div>
+<a id="a882d3b877a62a6dd676e915c528c9c4f" name="a882d3b877a62a6dd676e915c528c9c4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a882d3b877a62a6dd676e915c528c9c4f">&#9670;&#160;</a></span>setBody()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public func setBody </td>
+          <td>(</td>
+          <td class="paramname"><em>body</em>:&#160;</td>
+          <td class="paramtype">String</td><td>)</td>
+          <td>: This </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>设置消息正文。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">body</td><td>消息正文。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>当前 <code class="JavaDocCode">MessageBuilder</code> 的引用。 </dd></dl>
+<dl class="section see"><dt>参见</dt><dd>#setBody(String) </dd></dl>
+
+</div>
+</div>
+<a id="adbb329fedbbd6d99e35e9475ce5002f2" name="adbb329fedbbd6d99e35e9475ce5002f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbb329fedbbd6d99e35e9475ce5002f2">&#9670;&#160;</a></span>setSubject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public func setSubject </td>
+          <td>(</td>
+          <td class="paramname"><em>subject</em>:&#160;</td>
+          <td class="paramtype">String</td><td>)</td>
+          <td>: This </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>设置消息的主题。主题是消息内容的简短描述。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">subject</td><td>消息的主题。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>当前 <code class="JavaDocCode">MessageBuilder</code> 的引用。 </dd></dl>
+
+</div>
+</div>
+<a id="ac28f8decfc2c283fe3993cca7beaf136" name="ac28f8decfc2c283fe3993cca7beaf136"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac28f8decfc2c283fe3993cca7beaf136">&#9670;&#160;</a></span>setThread() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public func setThread </td>
+          <td>(</td>
+          <td class="paramname"><em>thread</em>:&#160;</td>
+          <td class="paramtype">String</td><td>)</td>
+          <td>: This </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>设置消息线程 ID。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">thread</td><td>消息线程 ID。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>当前 <code class="JavaDocCode">MessageBuilder</code> 的引用。 </dd></dl>
+
+</div>
+</div>
+<a id="a8116225b147cc3849ca2680f0050ba93" name="a8116225b147cc3849ca2680f0050ba93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8116225b147cc3849ca2680f0050ba93">&#9670;&#160;</a></span>setThread() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public func setThread </td>
+          <td>(</td>
+          <td class="paramname"><em>thread</em>:&#160;</td>
+          <td class="paramtype">String, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>parent</em>:&#160;</td>
+          <td class="paramtype">?String&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>: This </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>设置消息线程和父线程 ID。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">thread</td><td>消息线程 ID。 </td></tr>
+    <tr><td class="paramname">parent</td><td>父线程 ID。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>当前 <code class="JavaDocCode">MessageBuilder</code> 的引用。 </dd></dl>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/packet/message_builder.cj</li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../d0/d12/namespacexmpp4cj.html">xmpp4cj</a></li><li class="navelem"><a class="el" href="../../d7/de7/namespacexmpp4cj_1_1packet.html">packet</a></li><li class="navelem"><a class="el" href="../../de/d41/classxmpp4cj_1_1packet_1_1MessageBuilder.html">MessageBuilder</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

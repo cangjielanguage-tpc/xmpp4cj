@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['random_5fincreasing_5fdelay_0',['RANDOM_INCREASING_DELAY',['../dc/d5e/enumxmpp4cj_1_1connection_1_1ReconnectionPolicy.html#aec329d113f676180eb792cc73ac8fa48',1,'xmpp4cj::connection::ReconnectionPolicy']]],
+  ['recipient_5funavailable_1',['recipient_unavailable',['../d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#ab7b8181e7edc55478a40228ade85f3bd',1,'xmpp4cj::packet::StanzaErrorCondition']]],
+  ['redirect_2',['redirect',['../d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#a870871305b53395d8975ba1895480df5',1,'xmpp4cj::packet::StanzaErrorCondition']]],
+  ['registration_5frequired_3',['registration_required',['../d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#a01e4e91495c79f6f87331986a9e84730',1,'xmpp4cj::packet::StanzaErrorCondition']]],
+  ['remote_5fconnection_5ffailed_4',['remote_connection_failed',['../d9/d65/enumxmpp4cj_1_1packet_1_1StreamErrorCondition.html#a49dead2286c69c1efd6d3f6834f838db',1,'xmpp4cj::packet::StreamErrorCondition']]],
+  ['remote_5fserver_5fnot_5ffound_5',['remote_server_not_found',['../d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#ac428f739702b80795b40aea18c01b519',1,'xmpp4cj::packet::StanzaErrorCondition']]],
+  ['remote_5fserver_5ftimeout_6',['remote_server_timeout',['../d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#a44ac3b856a9cafd5bd3cc06601582980',1,'xmpp4cj::packet::StanzaErrorCondition']]],
+  ['replyfeaturenotimplemented_7',['replyFeatureNotImplemented',['../d8/d2a/enumxmpp4cj_1_1connection_1_1XmppConfigurationUnknownIqRequestReplyMode.html#aaacf43baa6245154ce17d7a896179c4d',1,'xmpp4cj::connection::XmppConfigurationUnknownIqRequestReplyMode']]],
+  ['replyserviceunavailable_8',['replyServiceUnavailable',['../d8/d2a/enumxmpp4cj_1_1connection_1_1XmppConfigurationUnknownIqRequestReplyMode.html#a32321ab04ea386c5686e85dd6b592868',1,'xmpp4cj::connection::XmppConfigurationUnknownIqRequestReplyMode']]],
+  ['request_5fsent_9',['request_sent',['../d4/d7b/enumxmpp4cj_1_1connection_1_1SyncPointState.html#a888d96dd6608f14b6de712cb42aa73bc',1,'xmpp4cj::connection::SyncPointState']]],
+  ['required_10',['required',['../de/dfa/enumxmpp4cj_1_1connection_1_1ConnectionConfigurationSecurityMode.html#ae81948490ddf54e80a22593640178350',1,'xmpp4cj::connection::ConnectionConfigurationSecurityMode']]],
+  ['reset_11',['reset',['../d9/d65/enumxmpp4cj_1_1packet_1_1StreamErrorCondition.html#a48bcfbb87c0af0d5390626d1ab65ab64',1,'xmpp4cj::packet::StreamErrorCondition']]],
+  ['resource_5fconstraint_12',['resource_constraint',['../d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#aad895ac01187f81135eb8bc9cd3a79b8',1,'xmpp4cj.packet.StanzaErrorCondition.resource_constraint()'],['../d9/d65/enumxmpp4cj_1_1packet_1_1StreamErrorCondition.html#aad895ac01187f81135eb8bc9cd3a79b8',1,'xmpp4cj.packet.StreamErrorCondition.resource_constraint()']]],
+  ['resourcepart_13',['resourcepart',['../de/d8e/enumxmpp4cj_1_1jid_1_1XmppAddressParttype.html#aac9ba4f1e4260884e2428c31fe9897e0',1,'xmpp4cj::jid::XmppAddressParttype']]],
+  ['restricted_5fxml_14',['restricted_xml',['../d9/d65/enumxmpp4cj_1_1packet_1_1StreamErrorCondition.html#a5784cc642f7f4b042a27e6691919f9b4',1,'xmpp4cj::packet::StreamErrorCondition']]],
+  ['result_15',['result',['../d3/d7f/enumxmpp4cj_1_1packet_1_1IQType.html#a937d4dd628a8858b443a399410d2600b',1,'xmpp4cj.packet.IQType.result()'],['../d9/d38/enumxmpp4cj_1_1packet_1_1IQResponseType.html#a937d4dd628a8858b443a399410d2600b',1,'xmpp4cj.packet.IQResponseType.result()']]]
+];

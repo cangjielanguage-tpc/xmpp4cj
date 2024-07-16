@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Xmpp4cj: src/compression/inflate.cj 文件参考</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Xmpp4cj
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('d5/dfe/inflate_8cj.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">类</a> &#124;
+<a href="#namespaces">包</a> &#124;
+<a href="#var-members">变量</a>  </div>
+  <div class="headertitle"><div class="title">inflate.cj 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+包</h2></td></tr>
+<tr class="memitem:dd/d96/namespacexmpp4cj_1_1compression"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d96/namespacexmpp4cj_1_1compression.html">xmpp4cj.compression</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:a19fe6bdf6357ef9d7dcaf7aae5053383"><td class="memItemLeft" align="right" valign="top"><a id="a19fe6bdf6357ef9d7dcaf7aae5053383" name="a19fe6bdf6357ef9d7dcaf7aae5053383"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let ENOUGH_LENS</b> : UInt32 = 852</td></tr>
+<tr class="separator:a19fe6bdf6357ef9d7dcaf7aae5053383"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a884c357ef41403904e140931c8dd747b"><td class="memItemLeft" align="right" valign="top"><a id="a884c357ef41403904e140931c8dd747b" name="a884c357ef41403904e140931c8dd747b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let ENOUGH_DISTS</b> : UInt32 = 592</td></tr>
+<tr class="separator:a884c357ef41403904e140931c8dd747b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af396e0042f749555802be628dd52cfd0"><td class="memItemLeft" align="right" valign="top"><a id="af396e0042f749555802be628dd52cfd0" name="af396e0042f749555802be628dd52cfd0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let MAXBITS</b> : Int64 = 15</td></tr>
+<tr class="separator:af396e0042f749555802be628dd52cfd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5753b5256dc33587acbdc6c3d8324802"><td class="memItemLeft" align="right" valign="top"><a id="a5753b5256dc33587acbdc6c3d8324802" name="a5753b5256dc33587acbdc6c3d8324802"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let TYPE_CODES</b> : UInt32 = 1</td></tr>
+<tr class="separator:a5753b5256dc33587acbdc6c3d8324802"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8f3be55a160209b13646ba119d8c94e"><td class="memItemLeft" align="right" valign="top"><a id="aa8f3be55a160209b13646ba119d8c94e" name="aa8f3be55a160209b13646ba119d8c94e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let TYPE_LENS</b> : UInt32 = 2</td></tr>
+<tr class="separator:aa8f3be55a160209b13646ba119d8c94e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66488c642ccb8f139ea07b5e1351320a"><td class="memItemLeft" align="right" valign="top"><a id="a66488c642ccb8f139ea07b5e1351320a" name="a66488c642ccb8f139ea07b5e1351320a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let TYPE_DISTS</b> : UInt32 = 3</td></tr>
+<tr class="separator:a66488c642ccb8f139ea07b5e1351320a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7156ab342e44bbd7b7711b9d68a5de62"><td class="memItemLeft" align="right" valign="top"><a id="a7156ab342e44bbd7b7711b9d68a5de62" name="a7156ab342e44bbd7b7711b9d68a5de62"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let HEAD</b> : UInt32 = 0</td></tr>
+<tr class="separator:a7156ab342e44bbd7b7711b9d68a5de62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3783e7046cbdb23e76c850aceab2c0c3"><td class="memItemLeft" align="right" valign="top"><a id="a3783e7046cbdb23e76c850aceab2c0c3" name="a3783e7046cbdb23e76c850aceab2c0c3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let FLAGS</b> : UInt32 = 1</td></tr>
+<tr class="separator:a3783e7046cbdb23e76c850aceab2c0c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b7d7c56971c3a823be5754773671e2d"><td class="memItemLeft" align="right" valign="top"><a id="a3b7d7c56971c3a823be5754773671e2d" name="a3b7d7c56971c3a823be5754773671e2d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let TIME</b> : UInt32 = 2</td></tr>
+<tr class="separator:a3b7d7c56971c3a823be5754773671e2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab95c0c6802b6f266fe4cbea1cfc5347e"><td class="memItemLeft" align="right" valign="top"><a id="ab95c0c6802b6f266fe4cbea1cfc5347e" name="ab95c0c6802b6f266fe4cbea1cfc5347e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let OS</b> : UInt32 = 3</td></tr>
+<tr class="separator:ab95c0c6802b6f266fe4cbea1cfc5347e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a5bf49d8c37e4eb525f530c97d81e7a"><td class="memItemLeft" align="right" valign="top"><a id="a2a5bf49d8c37e4eb525f530c97d81e7a" name="a2a5bf49d8c37e4eb525f530c97d81e7a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let EXLEN</b> : UInt32 = 4</td></tr>
+<tr class="separator:a2a5bf49d8c37e4eb525f530c97d81e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a673b3c446e3ce038a3d1debb2659ba5e"><td class="memItemLeft" align="right" valign="top"><a id="a673b3c446e3ce038a3d1debb2659ba5e" name="a673b3c446e3ce038a3d1debb2659ba5e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let EXTRA</b> : UInt32 = 5</td></tr>
+<tr class="separator:a673b3c446e3ce038a3d1debb2659ba5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcf9698f92cbed3941f2306578a00fdd"><td class="memItemLeft" align="right" valign="top"><a id="adcf9698f92cbed3941f2306578a00fdd" name="adcf9698f92cbed3941f2306578a00fdd"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let NAME</b> : UInt32 = 6</td></tr>
+<tr class="separator:adcf9698f92cbed3941f2306578a00fdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab71dd383d3d8d440883e649711c7bd15"><td class="memItemLeft" align="right" valign="top"><a id="ab71dd383d3d8d440883e649711c7bd15" name="ab71dd383d3d8d440883e649711c7bd15"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let COMMENT</b> : UInt32 = 7</td></tr>
+<tr class="separator:ab71dd383d3d8d440883e649711c7bd15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60fad1ce70c07bdde7c7b5835a29907d"><td class="memItemLeft" align="right" valign="top"><a id="a60fad1ce70c07bdde7c7b5835a29907d" name="a60fad1ce70c07bdde7c7b5835a29907d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let HCRC</b> : UInt32 = 8</td></tr>
+<tr class="separator:a60fad1ce70c07bdde7c7b5835a29907d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56c5a891473c01188557f06232f8cc58"><td class="memItemLeft" align="right" valign="top"><a id="a56c5a891473c01188557f06232f8cc58" name="a56c5a891473c01188557f06232f8cc58"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let DICTID</b> : UInt32 = 9</td></tr>
+<tr class="separator:a56c5a891473c01188557f06232f8cc58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd97c3d9ffcc23e95400a73255afa3d4"><td class="memItemLeft" align="right" valign="top"><a id="abd97c3d9ffcc23e95400a73255afa3d4" name="abd97c3d9ffcc23e95400a73255afa3d4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let DICT</b> : UInt32 = 10</td></tr>
+<tr class="separator:abd97c3d9ffcc23e95400a73255afa3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ef070ec0b3c5c51af93fb442ab329ef"><td class="memItemLeft" align="right" valign="top"><a id="a0ef070ec0b3c5c51af93fb442ab329ef" name="a0ef070ec0b3c5c51af93fb442ab329ef"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let TYPE</b> : UInt32 = 11</td></tr>
+<tr class="separator:a0ef070ec0b3c5c51af93fb442ab329ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d843ca9d1de6679f9b458c8ee4686f1"><td class="memItemLeft" align="right" valign="top"><a id="a9d843ca9d1de6679f9b458c8ee4686f1" name="a9d843ca9d1de6679f9b458c8ee4686f1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let TYPEDO</b> : UInt32 = 12</td></tr>
+<tr class="separator:a9d843ca9d1de6679f9b458c8ee4686f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae456a6d6fdff766558d0031da3df9d62"><td class="memItemLeft" align="right" valign="top"><a id="ae456a6d6fdff766558d0031da3df9d62" name="ae456a6d6fdff766558d0031da3df9d62"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let STORED</b> : UInt32 = 13</td></tr>
+<tr class="separator:ae456a6d6fdff766558d0031da3df9d62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63d3d9049b1f7ef21b2d26d19492ace3"><td class="memItemLeft" align="right" valign="top"><a id="a63d3d9049b1f7ef21b2d26d19492ace3" name="a63d3d9049b1f7ef21b2d26d19492ace3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let COPY_</b> : UInt32 = 14</td></tr>
+<tr class="separator:a63d3d9049b1f7ef21b2d26d19492ace3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5036dd03db297de7c410dd7770dce09d"><td class="memItemLeft" align="right" valign="top"><a id="a5036dd03db297de7c410dd7770dce09d" name="a5036dd03db297de7c410dd7770dce09d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let COPY</b> : UInt32 = 15</td></tr>
+<tr class="separator:a5036dd03db297de7c410dd7770dce09d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa930a389e377accc601e3292afa6c1cc"><td class="memItemLeft" align="right" valign="top"><a id="aa930a389e377accc601e3292afa6c1cc" name="aa930a389e377accc601e3292afa6c1cc"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let TABLE</b> : UInt32 = 16</td></tr>
+<tr class="separator:aa930a389e377accc601e3292afa6c1cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ef66eaa673985732f415dc2d84188a2"><td class="memItemLeft" align="right" valign="top"><a id="a9ef66eaa673985732f415dc2d84188a2" name="a9ef66eaa673985732f415dc2d84188a2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let LENLENS</b> : UInt32 = 17</td></tr>
+<tr class="separator:a9ef66eaa673985732f415dc2d84188a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e153f7ebcb694965bda048c52dc69ec"><td class="memItemLeft" align="right" valign="top"><a id="a4e153f7ebcb694965bda048c52dc69ec" name="a4e153f7ebcb694965bda048c52dc69ec"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let CODELENS</b> : UInt32 = 18</td></tr>
+<tr class="separator:a4e153f7ebcb694965bda048c52dc69ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52c7a027dffe5e3b87a603508db53200"><td class="memItemLeft" align="right" valign="top"><a id="a52c7a027dffe5e3b87a603508db53200" name="a52c7a027dffe5e3b87a603508db53200"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let LEN_</b> : UInt32 = 19</td></tr>
+<tr class="separator:a52c7a027dffe5e3b87a603508db53200"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a512c17d76a7e7e46ebddf31d8a4feaa4"><td class="memItemLeft" align="right" valign="top"><a id="a512c17d76a7e7e46ebddf31d8a4feaa4" name="a512c17d76a7e7e46ebddf31d8a4feaa4"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let LEN</b> : UInt32 = 20</td></tr>
+<tr class="separator:a512c17d76a7e7e46ebddf31d8a4feaa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ba1eb2737f7281cddb58c70dc1cede8"><td class="memItemLeft" align="right" valign="top"><a id="a6ba1eb2737f7281cddb58c70dc1cede8" name="a6ba1eb2737f7281cddb58c70dc1cede8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let LENEXT</b> : UInt32 = 21</td></tr>
+<tr class="separator:a6ba1eb2737f7281cddb58c70dc1cede8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1237a721c8f59741dfaad1b1e3f24b50"><td class="memItemLeft" align="right" valign="top"><a id="a1237a721c8f59741dfaad1b1e3f24b50" name="a1237a721c8f59741dfaad1b1e3f24b50"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let DIST</b> : UInt32 = 22</td></tr>
+<tr class="separator:a1237a721c8f59741dfaad1b1e3f24b50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34290d83dbe95113e18d3f2380fb2b79"><td class="memItemLeft" align="right" valign="top"><a id="a34290d83dbe95113e18d3f2380fb2b79" name="a34290d83dbe95113e18d3f2380fb2b79"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let DISTEXT</b> : UInt32 = 23</td></tr>
+<tr class="separator:a34290d83dbe95113e18d3f2380fb2b79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a881276f14392229fcc0587c7cde1ac"><td class="memItemLeft" align="right" valign="top"><a id="a9a881276f14392229fcc0587c7cde1ac" name="a9a881276f14392229fcc0587c7cde1ac"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let MATCH</b> : UInt32 = 24</td></tr>
+<tr class="separator:a9a881276f14392229fcc0587c7cde1ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f535059f02f81e644b574d835709e0f"><td class="memItemLeft" align="right" valign="top"><a id="a9f535059f02f81e644b574d835709e0f" name="a9f535059f02f81e644b574d835709e0f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let LIT</b> : UInt32 = 25</td></tr>
+<tr class="separator:a9f535059f02f81e644b574d835709e0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74c9bff55b5625f427df7eb5259ac389"><td class="memItemLeft" align="right" valign="top"><a id="a74c9bff55b5625f427df7eb5259ac389" name="a74c9bff55b5625f427df7eb5259ac389"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let CHECK</b> : UInt32 = 26</td></tr>
+<tr class="separator:a74c9bff55b5625f427df7eb5259ac389"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fe3ab394a7ba4e547601ea4cbd09989"><td class="memItemLeft" align="right" valign="top"><a id="a6fe3ab394a7ba4e547601ea4cbd09989" name="a6fe3ab394a7ba4e547601ea4cbd09989"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let LENGTH</b> : UInt32 = 27</td></tr>
+<tr class="separator:a6fe3ab394a7ba4e547601ea4cbd09989"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55e32e8d61765645a017527002f15ca9"><td class="memItemLeft" align="right" valign="top"><a id="a55e32e8d61765645a017527002f15ca9" name="a55e32e8d61765645a017527002f15ca9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let DONE</b> : UInt32 = 28</td></tr>
+<tr class="separator:a55e32e8d61765645a017527002f15ca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22d048fc0038525675ea8e265e2cfd03"><td class="memItemLeft" align="right" valign="top"><a id="a22d048fc0038525675ea8e265e2cfd03" name="a22d048fc0038525675ea8e265e2cfd03"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let BAD</b> : UInt32 = 29</td></tr>
+<tr class="separator:a22d048fc0038525675ea8e265e2cfd03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa59cd8a9bbe6bdc81e098a316dc25e83"><td class="memItemLeft" align="right" valign="top"><a id="aa59cd8a9bbe6bdc81e098a316dc25e83" name="aa59cd8a9bbe6bdc81e098a316dc25e83"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let MEM</b> : UInt32 = 30</td></tr>
+<tr class="separator:aa59cd8a9bbe6bdc81e098a316dc25e83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d1dcee33a19c2bd39c41882ffc29b05"><td class="memItemLeft" align="right" valign="top"><a id="a3d1dcee33a19c2bd39c41882ffc29b05" name="a3d1dcee33a19c2bd39c41882ffc29b05"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let SYNC</b> : UInt32 = 31</td></tr>
+<tr class="separator:a3d1dcee33a19c2bd39c41882ffc29b05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaf46b3600a81d05bbd3281b7ab2902d"><td class="memItemLeft" align="right" valign="top"><a id="afaf46b3600a81d05bbd3281b7ab2902d" name="afaf46b3600a81d05bbd3281b7ab2902d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let lenfix</b> : Array&lt;Code&gt; = [Code(96, 7, 0), Code(0, 8, 80), Code(0, 8, 16), Code(20, 8, 115), Code(18, 7, 31),</td></tr>
+<tr class="separator:afaf46b3600a81d05bbd3281b7ab2902d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65e10a2c746e56eed0085515efe51992"><td class="memItemLeft" align="right" valign="top"><a id="a65e10a2c746e56eed0085515efe51992" name="a65e10a2c746e56eed0085515efe51992"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let distfix</b> : Array&lt;Code&gt; = [Code(16, 5, 1), Code(23, 5, 257), Code(19, 5, 17), Code(27, 5, 4097), Code(17, 5, 5),</td></tr>
+<tr class="separator:a65e10a2c746e56eed0085515efe51992"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6272503b3b41528c2d100d1e9faff9e6"><td class="memItemLeft" align="right" valign="top"><a id="a6272503b3b41528c2d100d1e9faff9e6" name="a6272503b3b41528c2d100d1e9faff9e6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let lbase</b> : Array&lt;UInt16&gt; = [3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 23, 27, 31, 35, 43, 51, 59, 67, 83, 99, 115,</td></tr>
+<tr class="separator:a6272503b3b41528c2d100d1e9faff9e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb8b834c10709f324ebf6c9954d1a5df"><td class="memItemLeft" align="right" valign="top"><a id="adb8b834c10709f324ebf6c9954d1a5df" name="adb8b834c10709f324ebf6c9954d1a5df"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let lext</b> : Array&lt;UInt16&gt; = [16, 16, 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 18, 18, 18, 18, 19, 19, 19, 19, 20, 20, 20,</td></tr>
+<tr class="separator:adb8b834c10709f324ebf6c9954d1a5df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86e237908fa9ca565778d788ee2649dd"><td class="memItemLeft" align="right" valign="top"><a id="a86e237908fa9ca565778d788ee2649dd" name="a86e237908fa9ca565778d788ee2649dd"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let dbase</b> : Array&lt;UInt16&gt; = [1, 2, 3, 4, 5, 7, 9, 13, 17, 25, 33, 49, 65, 97, 129, 193, 257, 385, 513, 769, 1025, 1537,</td></tr>
+<tr class="separator:a86e237908fa9ca565778d788ee2649dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcf709fbed7975c5931d25c6567ed55a"><td class="memItemLeft" align="right" valign="top"><a id="abcf709fbed7975c5931d25c6567ed55a" name="abcf709fbed7975c5931d25c6567ed55a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let dext</b> : Array&lt;UInt16&gt; = [16, 16, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25, 26,</td></tr>
+<tr class="separator:abcf709fbed7975c5931d25c6567ed55a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>Copyright (c) Huawei Technologies Co., Ltd. 2022-2024. All rights reserved.</p>
+<p>This is a class library that implements the function of decompressing data. Provides stream decompression interfaces such as inflateInit, inflate, inflateEnd, and setDictionary. </p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_40ed6a89610fc2370cf3ffcd6469b940.html">compression</a></li><li class="navelem"><a class="el" href="../../d5/dfe/inflate_8cj.html">inflate.cj</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

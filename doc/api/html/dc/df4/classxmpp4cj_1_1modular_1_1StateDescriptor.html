@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Xmpp4cj: StateDescriptor抽象类 参考</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Xmpp4cj
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('dc/df4/classxmpp4cj_1_1modular_1_1StateDescriptor.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pro-methods">Protected 成员函数</a> &#124;
+<a href="../../d7/de7/classxmpp4cj_1_1modular_1_1StateDescriptor-members.html">所有成员列表</a>  </div>
+  <div class="headertitle"><div class="title">StateDescriptor抽象类 参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+类 StateDescriptor 继承关系图:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="../../dc/df4/classxmpp4cj_1_1modular_1_1StateDescriptor.png" usemap="#StateDescriptor_map" alt=""/>
+  <map id="StateDescriptor_map" name="StateDescriptor_map">
+<area href="../../d8/dc6/classxmpp4cj_1_1modular_1_1AuthenticatedAndResourceBoundStateDescriptor.html" alt="AuthenticatedAndResourceBoundStateDescriptor" shape="rect" coords="775,112,1075,136"/>
+<area href="../../d1/d2e/classxmpp4cj_1_1modular_1_1AuthenticatedButUnboundStateDescriptor.html" alt="AuthenticatedButUnboundStateDescriptor" shape="rect" coords="775,168,1075,192"/>
+<area href="../../d1/d6e/classxmpp4cj_1_1modular_1_1Bind2StateDescriptor.html" alt="Bind2StateDescriptor" shape="rect" coords="775,224,1075,248"/>
+<area href="../../df/ddf/classxmpp4cj_1_1modular_1_1CompressionStateDescriptor.html" alt="CompressionStateDescriptor" shape="rect" coords="775,280,1075,304"/>
+<area href="../../de/d0f/classxmpp4cj_1_1modular_1_1ConnectedButUnauthenticatedStateDescriptor.html" alt="ConnectedButUnauthenticatedStateDescriptor" shape="rect" coords="775,336,1075,360"/>
+<area href="../../dc/dd1/classxmpp4cj_1_1modular_1_1DisconnectedStateDescriptor.html" alt="DisconnectedStateDescriptor" shape="rect" coords="775,392,1075,416"/>
+<area href="../../dd/d5d/classxmpp4cj_1_1modular_1_1InstantStreamResumptionStateDescriptor.html" alt="InstantStreamResumptionStateDescriptor" shape="rect" coords="775,448,1075,472"/>
+<area href="../../d1/d63/classxmpp4cj_1_1modular_1_1LookupRemoteConnectionEndpointsStateDescriptor.html" alt="LookupRemoteConnectionEndpointsStateDescriptor" shape="rect" coords="775,504,1075,528"/>
+<area href="../../d4/d70/classxmpp4cj_1_1modular_1_1ResourceBindingStateDescriptor.html" alt="ResourceBindingStateDescriptor" shape="rect" coords="775,560,1075,584"/>
+<area href="../../d5/d11/classxmpp4cj_1_1modular_1_1SaslAuthenticationStateDescriptor.html" alt="SaslAuthenticationStateDescriptor" shape="rect" coords="775,616,1075,640"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:ad403e5832c587d899f94bbcd9f2ba846"><td class="memItemLeft" align="right" valign="top"><a id="ad403e5832c587d899f94bbcd9f2ba846" name="ad403e5832c587d899f94bbcd9f2ba846"></a>
+public func&#160;</td><td class="memItemRight" valign="bottom"><b>addPredeccessor</b> (predeccessor: <a class="el" href="../../dc/df4/classxmpp4cj_1_1modular_1_1StateDescriptor.html">StateDescriptor</a>): Unit</td></tr>
+<tr class="separator:ad403e5832c587d899f94bbcd9f2ba846"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93022e4f6982dea26ccd542d43f264bb"><td class="memItemLeft" align="right" valign="top"><a id="a93022e4f6982dea26ccd542d43f264bb" name="a93022e4f6982dea26ccd542d43f264bb"></a>
+public func&#160;</td><td class="memItemRight" valign="bottom"><b>getSuccessors</b> (): Set&lt;<a class="el" href="../../dc/df4/classxmpp4cj_1_1modular_1_1StateDescriptor.html">StateDescriptor</a>&gt;</td></tr>
+<tr class="separator:a93022e4f6982dea26ccd542d43f264bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a036916d6ff710b9cdaa85e35f24b39"><td class="memItemLeft" align="right" valign="top"><a id="a6a036916d6ff710b9cdaa85e35f24b39" name="a6a036916d6ff710b9cdaa85e35f24b39"></a>
+public func&#160;</td><td class="memItemRight" valign="bottom"><b>getPredeccessors</b> (): Set&lt;<a class="el" href="../../dc/df4/classxmpp4cj_1_1modular_1_1StateDescriptor.html">StateDescriptor</a>&gt;</td></tr>
+<tr class="separator:a6a036916d6ff710b9cdaa85e35f24b39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7283990b54542ff8e4d96713f23f0ee2"><td class="memItemLeft" align="right" valign="top"><a id="a7283990b54542ff8e4d96713f23f0ee2" name="a7283990b54542ff8e4d96713f23f0ee2"></a>
+public func&#160;</td><td class="memItemRight" valign="bottom"><b>getSubordinates</b> (): Set&lt;<a class="el" href="../../dc/df4/classxmpp4cj_1_1modular_1_1StateDescriptor.html">StateDescriptor</a>&gt;</td></tr>
+<tr class="separator:a7283990b54542ff8e4d96713f23f0ee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc0431e5e5e3dff4c1b5cfdc62ac0235"><td class="memItemLeft" align="right" valign="top"><a id="acc0431e5e5e3dff4c1b5cfdc62ac0235" name="acc0431e5e5e3dff4c1b5cfdc62ac0235"></a>
+public func&#160;</td><td class="memItemRight" valign="bottom"><b>getSuperiors</b> (): Set&lt;<a class="el" href="../../dc/df4/classxmpp4cj_1_1modular_1_1StateDescriptor.html">StateDescriptor</a>&gt;</td></tr>
+<tr class="separator:acc0431e5e5e3dff4c1b5cfdc62ac0235"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab04994c4641ef833e58c294ea3ff5e8e"><td class="memItemLeft" align="right" valign="top"><a id="ab04994c4641ef833e58c294ea3ff5e8e" name="ab04994c4641ef833e58c294ea3ff5e8e"></a>
+public func&#160;</td><td class="memItemRight" valign="bottom"><b>getStateName</b> (): String</td></tr>
+<tr class="separator:ab04994c4641ef833e58c294ea3ff5e8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99d4627e7aaf4b73975fa64785036258"><td class="memItemLeft" align="right" valign="top"><a id="a99d4627e7aaf4b73975fa64785036258" name="a99d4627e7aaf4b73975fa64785036258"></a>
+public func&#160;</td><td class="memItemRight" valign="bottom"><b>getFullStateName</b> (breakStateName: Bool): String</td></tr>
+<tr class="separator:a99d4627e7aaf4b73975fa64785036258"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afacc6a33b0972753666782baf7ad0b40"><td class="memItemLeft" align="right" valign="top"><a id="afacc6a33b0972753666782baf7ad0b40" name="afacc6a33b0972753666782baf7ad0b40"></a>
+public func&#160;</td><td class="memItemRight" valign="bottom"><b>getReference</b> (): ?String</td></tr>
+<tr class="separator:afacc6a33b0972753666782baf7ad0b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb05d02d36b315342b66cbcb0d22f6b5"><td class="memItemLeft" align="right" valign="top"><a id="afb05d02d36b315342b66cbcb0d22f6b5" name="afb05d02d36b315342b66cbcb0d22f6b5"></a>
+public func&#160;</td><td class="memItemRight" valign="bottom"><b>getStateClass</b> (): String</td></tr>
+<tr class="separator:afb05d02d36b315342b66cbcb0d22f6b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad49f71d63d8c8b02a060568ace168c7"><td class="memItemLeft" align="right" valign="top"><a id="aad49f71d63d8c8b02a060568ace168c7" name="aad49f71d63d8c8b02a060568ace168c7"></a>
+public func&#160;</td><td class="memItemRight" valign="bottom"><b>isMultiVisitState</b> (): Bool</td></tr>
+<tr class="separator:aad49f71d63d8c8b02a060568ace168c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12db3498f2a1e2dfec79700dc491b806"><td class="memItemLeft" align="right" valign="top"><a id="a12db3498f2a1e2dfec79700dc491b806" name="a12db3498f2a1e2dfec79700dc491b806"></a>
+public func&#160;</td><td class="memItemRight" valign="bottom"><b>isNotImplemented</b> (): Bool</td></tr>
+<tr class="separator:a12db3498f2a1e2dfec79700dc491b806"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec3283c096595820f2c945914e54eec5"><td class="memItemLeft" align="right" valign="top"><a id="aec3283c096595820f2c945914e54eec5" name="aec3283c096595820f2c945914e54eec5"></a>
+public func&#160;</td><td class="memItemRight" valign="bottom"><b>isFinalState</b> (): Bool</td></tr>
+<tr class="separator:aec3283c096595820f2c945914e54eec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f77c8f97d30af177fcfb42e5306616f"><td class="memItemLeft" align="right" valign="top"><a id="a1f77c8f97d30af177fcfb42e5306616f" name="a1f77c8f97d30af177fcfb42e5306616f"></a>
+public override func&#160;</td><td class="memItemRight" valign="bottom"><b>toString</b> (): String</td></tr>
+<tr class="separator:a1f77c8f97d30af177fcfb42e5306616f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bcde8ed532eda92555d6c2e3cadc3f2"><td class="memItemLeft" align="right" valign="top"><a id="a5bcde8ed532eda92555d6c2e3cadc3f2" name="a5bcde8ed532eda92555d6c2e3cadc3f2"></a>
+public override func&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> (): Int64</td></tr>
+<tr class="separator:a5bcde8ed532eda92555d6c2e3cadc3f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a49763558a76a7ac7d16b4a1d9b5c91"><td class="memItemLeft" align="right" valign="top"><a id="a5a49763558a76a7ac7d16b4a1d9b5c91" name="a5a49763558a76a7ac7d16b4a1d9b5c91"></a>
+public operator&#160;</td><td class="memItemRight" valign="bottom"><b>==</b> (that: <a class="el" href="../../dc/df4/classxmpp4cj_1_1modular_1_1StateDescriptor.html">StateDescriptor</a>): Bool</td></tr>
+<tr class="separator:a5a49763558a76a7ac7d16b4a1d9b5c91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7df4d8558caae1c029345a20a0b20a2f"><td class="memItemLeft" align="right" valign="top"><a id="a7df4d8558caae1c029345a20a0b20a2f" name="a7df4d8558caae1c029345a20a0b20a2f"></a>
+public static func&#160;</td><td class="memItemRight" valign="bottom"><b>getClassId</b> (): ClassId</td></tr>
+<tr class="separator:a7df4d8558caae1c029345a20a0b20a2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected 成员函数</h2></td></tr>
+<tr class="memitem:a8e4598c64728631e9c77771a17960898"><td class="memItemLeft" align="right" valign="top"><a id="a8e4598c64728631e9c77771a17960898" name="a8e4598c64728631e9c77771a17960898"></a>
+protected&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (properties: Array&lt;<a class="el" href="../../dd/d0a/enumxmpp4cj_1_1modular_1_1StateDescriptorProperty.html">StateDescriptorProperty</a>&gt;)</td></tr>
+<tr class="separator:a8e4598c64728631e9c77771a17960898"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cfa49c5422f8a100d892e556cb96c43"><td class="memItemLeft" align="right" valign="top"><a id="a5cfa49c5422f8a100d892e556cb96c43" name="a5cfa49c5422f8a100d892e556cb96c43"></a>
+protected&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (stateClass: <a class="el" href="../../dd/d39/classxmpp4cj_1_1modular_1_1ClassInfo.html">ClassInfo</a>&lt;<a class="el" href="../../d9/dbb/classxmpp4cj_1_1modular_1_1State.html">State</a>&gt;)</td></tr>
+<tr class="separator:a5cfa49c5422f8a100d892e556cb96c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb67cdb51a2f20bbd90df17c98286aea"><td class="memItemLeft" align="right" valign="top"><a id="abb67cdb51a2f20bbd90df17c98286aea" name="abb67cdb51a2f20bbd90df17c98286aea"></a>
+protected&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (stateClass: <a class="el" href="../../dd/d39/classxmpp4cj_1_1modular_1_1ClassInfo.html">ClassInfo</a>&lt;<a class="el" href="../../d9/dbb/classxmpp4cj_1_1modular_1_1State.html">State</a>&gt;, properties: Array&lt;<a class="el" href="../../dd/d0a/enumxmpp4cj_1_1modular_1_1StateDescriptorProperty.html">StateDescriptorProperty</a>&gt;)</td></tr>
+<tr class="separator:abb67cdb51a2f20bbd90df17c98286aea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42bb136e4909f09b3897a419dad75606"><td class="memItemLeft" align="right" valign="top"><a id="a42bb136e4909f09b3897a419dad75606" name="a42bb136e4909f09b3897a419dad75606"></a>
+protected&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (stateClass: <a class="el" href="../../dd/d39/classxmpp4cj_1_1modular_1_1ClassInfo.html">ClassInfo</a>&lt;<a class="el" href="../../d9/dbb/classxmpp4cj_1_1modular_1_1State.html">State</a>&gt;, xepNum: Int64)</td></tr>
+<tr class="separator:a42bb136e4909f09b3897a419dad75606"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abac32ebf8a9ceb3b00ceaff49f44e153"><td class="memItemLeft" align="right" valign="top"><a id="abac32ebf8a9ceb3b00ceaff49f44e153" name="abac32ebf8a9ceb3b00ceaff49f44e153"></a>
+protected&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (stateClass: <a class="el" href="../../dd/d39/classxmpp4cj_1_1modular_1_1ClassInfo.html">ClassInfo</a>&lt;<a class="el" href="../../d9/dbb/classxmpp4cj_1_1modular_1_1State.html">State</a>&gt;, xepNum: Int64, properties: Array&lt;<a class="el" href="../../dd/d0a/enumxmpp4cj_1_1modular_1_1StateDescriptorProperty.html">StateDescriptorProperty</a>&gt;)</td></tr>
+<tr class="separator:abac32ebf8a9ceb3b00ceaff49f44e153"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec9403b00df824082c6621587d7f5229"><td class="memItemLeft" align="right" valign="top"><a id="aec9403b00df824082c6621587d7f5229" name="aec9403b00df824082c6621587d7f5229"></a>
+protected&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (stateClass: <a class="el" href="../../dd/d39/classxmpp4cj_1_1modular_1_1ClassInfo.html">ClassInfo</a>&lt;<a class="el" href="../../d9/dbb/classxmpp4cj_1_1modular_1_1State.html">State</a>&gt;, rfcSection: ?String)</td></tr>
+<tr class="separator:aec9403b00df824082c6621587d7f5229"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac767e0f7198a28418bd494a04313ec86"><td class="memItemLeft" align="right" valign="top"><a id="ac767e0f7198a28418bd494a04313ec86" name="ac767e0f7198a28418bd494a04313ec86"></a>
+protected func&#160;</td><td class="memItemRight" valign="bottom"><b>addSuccessor</b> (successor: <a class="el" href="../../dc/df4/classxmpp4cj_1_1modular_1_1StateDescriptor.html">StateDescriptor</a>): Unit</td></tr>
+<tr class="separator:ac767e0f7198a28418bd494a04313ec86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e20d2ae3787baf6b63f371a7e3ddb41"><td class="memItemLeft" align="right" valign="top"><a id="a7e20d2ae3787baf6b63f371a7e3ddb41" name="a7e20d2ae3787baf6b63f371a7e3ddb41"></a>
+protected func&#160;</td><td class="memItemRight" valign="bottom"><b>declarePrecedenceOver</b> (subordinate: <a class="el" href="../../dc/df4/classxmpp4cj_1_1modular_1_1StateDescriptor.html">StateDescriptor</a>): Unit</td></tr>
+<tr class="separator:a7e20d2ae3787baf6b63f371a7e3ddb41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9531c31f0e8e7de390af2b842dfd1d9c"><td class="memItemLeft" align="right" valign="top"><a id="a9531c31f0e8e7de390af2b842dfd1d9c" name="a9531c31f0e8e7de390af2b842dfd1d9c"></a>
+protected func&#160;</td><td class="memItemRight" valign="bottom"><b>declareInferiorityTo</b> (superior: <a class="el" href="../../dc/df4/classxmpp4cj_1_1modular_1_1StateDescriptor.html">StateDescriptor</a>): Unit</td></tr>
+<tr class="separator:a9531c31f0e8e7de390af2b842dfd1d9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a2bb44de675311e0517341c4205628f"><td class="memItemLeft" align="right" valign="top"><a id="a5a2bb44de675311e0517341c4205628f" name="a5a2bb44de675311e0517341c4205628f"></a>
+protected open func&#160;</td><td class="memItemRight" valign="bottom"><b>constructState</b> (connectionInternal: <a class="el" href="../../d7/d9b/classxmpp4cj_1_1modular_1_1C2sConnectionInternal.html">C2sConnectionInternal</a>): <a class="el" href="../../d9/dbb/classxmpp4cj_1_1modular_1_1State.html">State</a></td></tr>
+<tr class="separator:a5a2bb44de675311e0517341c4205628f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>public abstract class StateDescriptor &lt;: ToString &amp; Hashable &amp; Equatable&lt;StateDescriptor&gt; &amp; ClassIdentify </p>
+</div><hr/>该类的文档由以下文件生成:<ul>
+<li>src/modular/state_descriptor.cj</li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../d0/d12/namespacexmpp4cj.html">xmpp4cj</a></li><li class="navelem"><a class="el" href="../../dc/d4c/namespacexmpp4cj_1_1modular.html">modular</a></li><li class="navelem"><a class="el" href="../../dc/df4/classxmpp4cj_1_1modular_1_1StateDescriptor.html">StateDescriptor</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['ifpossible_0',['ifpossible',['../de/dfa/enumxmpp4cj_1_1connection_1_1ConnectionConfigurationSecurityMode.html#a0d6daad8e78b90143c3b1cc8a4e8ffd9',1,'xmpp4cj::connection::ConnectionConfigurationSecurityMode']]],
+  ['ignorable_5fwhitespace_1',['IGNORABLE_WHITESPACE',['../d3/da5/enumxmpp4cj_1_1xml_1_1XmlPullParserEvent.html#aa1bb393371de593c25c465dc2c15e0f6',1,'xmpp4cj::xml::XmlPullParserEvent']]],
+  ['improper_5faddressing_2',['improper_addressing',['../d9/d65/enumxmpp4cj_1_1packet_1_1StreamErrorCondition.html#a03ce4cac4924d456b0e4c9f163855a11',1,'xmpp4cj::packet::StreamErrorCondition']]],
+  ['in_5fattribute_5fname_3',['IN_ATTRIBUTE_NAME',['../de/dcd/enumxmpp4cj_1_1jid_1_1XmlSplitterState.html#a8d4681b38877786abc21f515a0265d14',1,'xmpp4cj::jid::XmlSplitterState']]],
+  ['in_5fattribute_5fvalue_4',['IN_ATTRIBUTE_VALUE',['../de/dcd/enumxmpp4cj_1_1jid_1_1XmlSplitterState.html#a447aa194b3894aefbcdd5c78e7ceaaae',1,'xmpp4cj::jid::XmlSplitterState']]],
+  ['in_5fempty_5ftag_5',['IN_EMPTY_TAG',['../de/dcd/enumxmpp4cj_1_1jid_1_1XmlSplitterState.html#a6ec851d3566b1e0456d38da1522eb84c',1,'xmpp4cj::jid::XmlSplitterState']]],
+  ['in_5fend_5ftag_6',['IN_END_TAG',['../de/dcd/enumxmpp4cj_1_1jid_1_1XmlSplitterState.html#ae6edbc0422adb9efdea984672f6afe83',1,'xmpp4cj::jid::XmlSplitterState']]],
+  ['in_5fprocessing_5finstruction_5for_5fdeclaration_7',['IN_PROCESSING_INSTRUCTION_OR_DECLARATION',['../de/dcd/enumxmpp4cj_1_1jid_1_1XmlSplitterState.html#ac01d8c3b337f01b8bdca6c1badb06616',1,'xmpp4cj::jid::XmlSplitterState']]],
+  ['in_5fprocessing_5finstruction_5for_5fdeclaration_5fpseudo_5fattribute_5fvalue_8',['IN_PROCESSING_INSTRUCTION_OR_DECLARATION_PSEUDO_ATTRIBUTE_VALUE',['../de/dcd/enumxmpp4cj_1_1jid_1_1XmlSplitterState.html#aa6db7f5d9a3474b810f5f0b85853abac',1,'xmpp4cj::jid::XmlSplitterState']]],
+  ['in_5fprocessing_5finstruction_5for_5fdeclaration_5fquestion_5fmark_9',['IN_PROCESSING_INSTRUCTION_OR_DECLARATION_QUESTION_MARK',['../de/dcd/enumxmpp4cj_1_1jid_1_1XmlSplitterState.html#a57298ea2fcaa60b255d5aa1e2b9f35aa',1,'xmpp4cj::jid::XmlSplitterState']]],
+  ['in_5ftag_5fname_10',['IN_TAG_NAME',['../de/dcd/enumxmpp4cj_1_1jid_1_1XmlSplitterState.html#a6feda5bb7a3ef516b06fc292360f504e',1,'xmpp4cj::jid::XmlSplitterState']]],
+  ['incorrect_5fencoding_11',['incorrect_encoding',['../d2/d48/enumxmpp4cj_1_1sasl_1_1SASLError.html#a45feea8b8a66b8d02ff52532bc7d1a15',1,'xmpp4cj::sasl::SASLError']]],
+  ['initial_12',['initial',['../d4/d7b/enumxmpp4cj_1_1connection_1_1SyncPointState.html#a8d0dd69a20182cd1647f229af000cfa5',1,'xmpp4cj::connection::SyncPointState']]],
+  ['internal_5fserver_5ferror_13',['internal_server_error',['../d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#abf88bc753fddae25ff8bcc5558d93d51',1,'xmpp4cj.packet.StanzaErrorCondition.internal_server_error()'],['../d9/d65/enumxmpp4cj_1_1packet_1_1StreamErrorCondition.html#abf88bc753fddae25ff8bcc5558d93d51',1,'xmpp4cj.packet.StreamErrorCondition.internal_server_error()']]],
+  ['invalid_5fauthzid_14',['invalid_authzid',['../d2/d48/enumxmpp4cj_1_1sasl_1_1SASLError.html#a6e41d548cd8972e474289ab5419308b9',1,'xmpp4cj::sasl::SASLError']]],
+  ['invalid_5ffrom_15',['invalid_from',['../d9/d65/enumxmpp4cj_1_1packet_1_1StreamErrorCondition.html#ad29bc6d278869540177ea601c940773d',1,'xmpp4cj::packet::StreamErrorCondition']]],
+  ['invalid_5fmechanism_16',['invalid_mechanism',['../d2/d48/enumxmpp4cj_1_1sasl_1_1SASLError.html#ae4bad3246e071be7fc0fe0692281dd05',1,'xmpp4cj::sasl::SASLError']]],
+  ['invalid_5fnamespace_17',['invalid_namespace',['../d9/d65/enumxmpp4cj_1_1packet_1_1StreamErrorCondition.html#a0831fef1dabc79bfefb5e37c8854151d',1,'xmpp4cj::packet::StreamErrorCondition']]],
+  ['invalid_5fxml_18',['invalid_xml',['../d9/d65/enumxmpp4cj_1_1packet_1_1StreamErrorCondition.html#a44f26f0a37254624d9aef425232d344a',1,'xmpp4cj::packet::StreamErrorCondition']]],
+  ['item_5fnot_5ffound_19',['item_not_found',['../d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#abcfa48a556441a3df9c4960b3ede2115',1,'xmpp4cj::packet::StanzaErrorCondition']]]
+];

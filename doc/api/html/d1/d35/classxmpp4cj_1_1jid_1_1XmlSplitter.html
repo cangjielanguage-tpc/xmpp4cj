@@ -1,0 +1,617 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Xmpp4cj: XmlSplitter类 参考</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Xmpp4cj
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('d1/d35/classxmpp4cj_1_1jid_1_1XmlSplitter.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pro-methods">Protected 成员函数</a> &#124;
+<a href="#pro-attribs">Protected 属性</a> &#124;
+<a href="../../d8/dae/classxmpp4cj_1_1jid_1_1XmlSplitter-members.html">所有成员列表</a>  </div>
+  <div class="headertitle"><div class="title">XmlSplitter类 参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+类 XmlSplitter 继承关系图:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="../../d1/d35/classxmpp4cj_1_1jid_1_1XmlSplitter.png" usemap="#XmlSplitter_map" alt=""/>
+  <map id="XmlSplitter_map" name="XmlSplitter_map">
+<area href="../../df/d1a/classxmpp4cj_1_1jid_1_1XmppXmlSplitter.html" alt="XmppXmlSplitter" shape="rect" coords="0,112,104,136"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:ac6771464e36de9860de7b8ed538ef5d7"><td class="memItemLeft" align="right" valign="top">public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d35/classxmpp4cj_1_1jid_1_1XmlSplitter.html#ac6771464e36de9860de7b8ed538ef5d7">init</a> (bufferSize: Int64, completeElementCallback: ?<a class="el" href="../../d5/d66/interfacexmpp4cj_1_1jid_1_1CompleteElementCallback.html">CompleteElementCallback</a>, declarationCallback: ?<a class="el" href="../../d7/dca/interfacexmpp4cj_1_1jid_1_1DeclarationCallback.html">DeclarationCallback</a>, processingInstructionCallback: ?<a class="el" href="../../de/d48/interfacexmpp4cj_1_1jid_1_1ProcessingInstructionCallback.html">ProcessingInstructionCallback</a>)</td></tr>
+<tr class="separator:ac6771464e36de9860de7b8ed538ef5d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf87ef6f35815707d50ed46ecda03d68"><td class="memItemLeft" align="right" valign="top">public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d35/classxmpp4cj_1_1jid_1_1XmlSplitter.html#adf87ef6f35815707d50ed46ecda03d68">init</a> (bufferSize: Int64, completeElementCallback: ?<a class="el" href="../../d5/d66/interfacexmpp4cj_1_1jid_1_1CompleteElementCallback.html">CompleteElementCallback</a>, xmlPrinter: ?<a class="el" href="../../d6/d5c/classxmpp4cj_1_1jid_1_1XmlPrinter.html">XmlPrinter</a>)</td></tr>
+<tr class="separator:adf87ef6f35815707d50ed46ecda03d68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36bba9f53377deacb9ee4ad9e1ce803e"><td class="memItemLeft" align="right" valign="top">public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d35/classxmpp4cj_1_1jid_1_1XmlSplitter.html#a36bba9f53377deacb9ee4ad9e1ce803e">init</a> (bufferSize: Int64, completeElementCallback: ?<a class="el" href="../../d5/d66/interfacexmpp4cj_1_1jid_1_1CompleteElementCallback.html">CompleteElementCallback</a>)</td></tr>
+<tr class="separator:a36bba9f53377deacb9ee4ad9e1ce803e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38dce00b351d86762a1ef4ea3014cd9a"><td class="memItemLeft" align="right" valign="top">public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d35/classxmpp4cj_1_1jid_1_1XmlSplitter.html#a38dce00b351d86762a1ef4ea3014cd9a">init</a> (bufferSize: Int64, completeElementCallback: ?<a class="el" href="../../d5/d66/interfacexmpp4cj_1_1jid_1_1CompleteElementCallback.html">CompleteElementCallback</a>, declarationCallback: ?<a class="el" href="../../d7/dca/interfacexmpp4cj_1_1jid_1_1DeclarationCallback.html">DeclarationCallback</a>, processingInstructionCallback: ?<a class="el" href="../../de/d48/interfacexmpp4cj_1_1jid_1_1ProcessingInstructionCallback.html">ProcessingInstructionCallback</a>, xmlPrinter: ?<a class="el" href="../../d6/d5c/classxmpp4cj_1_1jid_1_1XmlPrinter.html">XmlPrinter</a>)</td></tr>
+<tr class="separator:a38dce00b351d86762a1ef4ea3014cd9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1ae5f4adeb0bb21337f015032a6a5b5"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d35/classxmpp4cj_1_1jid_1_1XmlSplitter.html#aa1ae5f4adeb0bb21337f015032a6a5b5">write</a> (cbuf: Array&lt;Rune&gt;): Unit</td></tr>
+<tr class="separator:aa1ae5f4adeb0bb21337f015032a6a5b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac39d960095bc691884b9e22e74938c70"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d35/classxmpp4cj_1_1jid_1_1XmlSplitter.html#ac39d960095bc691884b9e22e74938c70">append</a> (str: ToString): Unit</td></tr>
+<tr class="separator:ac39d960095bc691884b9e22e74938c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dca5cdf863ea436d67f7625ba0342ca"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d35/classxmpp4cj_1_1jid_1_1XmlSplitter.html#a6dca5cdf863ea436d67f7625ba0342ca">getCurrentSplittedPartSize</a> (): Int64</td></tr>
+<tr class="separator:a6dca5cdf863ea436d67f7625ba0342ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dae5d12cbf38d2be429ab3c51751fd2"><td class="memItemLeft" align="right" valign="top">public open override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d35/classxmpp4cj_1_1jid_1_1XmlSplitter.html#a3dae5d12cbf38d2be429ab3c51751fd2">isClosed</a> (): Bool</td></tr>
+<tr class="separator:a3dae5d12cbf38d2be429ab3c51751fd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa8d072db878613d1c84fa4eafbf96af"><td class="memItemLeft" align="right" valign="top">public open override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d35/classxmpp4cj_1_1jid_1_1XmlSplitter.html#aaa8d072db878613d1c84fa4eafbf96af">close</a> (): Unit</td></tr>
+<tr class="separator:aaa8d072db878613d1c84fa4eafbf96af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected 成员函数</h2></td></tr>
+<tr class="memitem:a4eea4af9dd02e1ae55c46bc6971abf8c"><td class="memItemLeft" align="right" valign="top">protected open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d35/classxmpp4cj_1_1jid_1_1XmlSplitter.html#a4eea4af9dd02e1ae55c46bc6971abf8c">onNextChar</a> (): Unit</td></tr>
+<tr class="separator:a4eea4af9dd02e1ae55c46bc6971abf8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8af61092a1dff8f0f82d6f451c22ca0"><td class="memItemLeft" align="right" valign="top">protected open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d35/classxmpp4cj_1_1jid_1_1XmlSplitter.html#aa8af61092a1dff8f0f82d6f451c22ca0">onStartTag</a> (_: String, _: String): Unit</td></tr>
+<tr class="separator:aa8af61092a1dff8f0f82d6f451c22ca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07af2237e5f9043d3ff4b40deb6436eb"><td class="memItemLeft" align="right" valign="top">protected open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d35/classxmpp4cj_1_1jid_1_1XmlSplitter.html#a07af2237e5f9043d3ff4b40deb6436eb">onEndTag</a> (): Unit</td></tr>
+<tr class="separator:a07af2237e5f9043d3ff4b40deb6436eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91d67e74bbaa5037d2be227478b29e3d"><td class="memItemLeft" align="right" valign="top">protected func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d35/classxmpp4cj_1_1jid_1_1XmlSplitter.html#a91d67e74bbaa5037d2be227478b29e3d">newSplittedPart</a> (): Unit</td></tr>
+<tr class="separator:a91d67e74bbaa5037d2be227478b29e3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected 属性</h2></td></tr>
+<tr class="memitem:ad18c7f6d002c069d26ada06daf84a16f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d35/classxmpp4cj_1_1jid_1_1XmlSplitter.html#ad18c7f6d002c069d26ada06daf84a16f">let completeElementCallback</a> : ?<a class="el" href="../../d5/d66/interfacexmpp4cj_1_1jid_1_1CompleteElementCallback.html">CompleteElementCallback</a></td></tr>
+<tr class="separator:ad18c7f6d002c069d26ada06daf84a16f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>一个能够将 XML 拆分为顶级元素的 XML 拆分器。 </p>
+<p>请注意，这个类尚未支持完整的 XML 特性集。仅支持 XMPP 所需的特性。不支持 XML 注释和处理指令。 </p>
+<p>StringWriter &amp; Resource </p>
+</div><h2 class="groupheader">构造及析构函数说明</h2>
+<a id="ac6771464e36de9860de7b8ed538ef5d7" name="ac6771464e36de9860de7b8ed538ef5d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6771464e36de9860de7b8ed538ef5d7">&#9670;&#160;</a></span>init() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public init </td>
+          <td>(</td>
+          <td class="paramname"><em>bufferSize</em>:&#160;</td>
+          <td class="paramtype">Int64, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>completeElementCallback</em>:&#160;</td>
+          <td class="paramtype">?CompleteElementCallback, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>declarationCallback</em>:&#160;</td>
+          <td class="paramtype">?DeclarationCallback, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>processingInstructionCallback</em>:&#160;</td>
+          <td class="paramtype">?ProcessingInstructionCallback&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>构造一个新的XML拆分器。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maxElementSize</td><td>缓冲区的初始大小。 </td></tr>
+    <tr><td class="paramname">xmppElementCallback</td><td>处理完一个完整的元素后调用的回调。 </td></tr>
+    <tr><td class="paramname">declarationCallback</td><td>XML声明的可选回调。 </td></tr>
+    <tr><td class="paramname">processingInstructionCallback</td><td>处理指令的可选回调。 </td></tr>
+    <tr><td class="paramname">xmlPrinter</td><td>可选的<code><a class="el" href="../../">XmlPrinter</a></code>。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="adf87ef6f35815707d50ed46ecda03d68" name="adf87ef6f35815707d50ed46ecda03d68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf87ef6f35815707d50ed46ecda03d68">&#9670;&#160;</a></span>init() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public init </td>
+          <td>(</td>
+          <td class="paramname"><em>bufferSize</em>:&#160;</td>
+          <td class="paramtype">Int64, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>completeElementCallback</em>:&#160;</td>
+          <td class="paramtype">?CompleteElementCallback, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>xmlPrinter</em>:&#160;</td>
+          <td class="paramtype">?XmlPrinter&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>构造一个新的XML拆分器。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maxElementSize</td><td>缓冲区的初始大小。 </td></tr>
+    <tr><td class="paramname">xmppElementCallback</td><td>处理完一个完整的元素后调用的回调。 </td></tr>
+    <tr><td class="paramname">declarationCallback</td><td>XML声明的可选回调。 </td></tr>
+    <tr><td class="paramname">processingInstructionCallback</td><td>处理指令的可选回调。 </td></tr>
+    <tr><td class="paramname">xmlPrinter</td><td>可选的<code><a class="el" href="../../">XmlPrinter</a></code>。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a36bba9f53377deacb9ee4ad9e1ce803e" name="a36bba9f53377deacb9ee4ad9e1ce803e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36bba9f53377deacb9ee4ad9e1ce803e">&#9670;&#160;</a></span>init() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public init </td>
+          <td>(</td>
+          <td class="paramname"><em>bufferSize</em>:&#160;</td>
+          <td class="paramtype">Int64, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>completeElementCallback</em>:&#160;</td>
+          <td class="paramtype">?CompleteElementCallback&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>构造一个新的XML拆分器。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maxElementSize</td><td>缓冲区的初始大小。 </td></tr>
+    <tr><td class="paramname">xmppElementCallback</td><td>处理完一个完整的元素后调用的回调。 </td></tr>
+    <tr><td class="paramname">declarationCallback</td><td>XML声明的可选回调。 </td></tr>
+    <tr><td class="paramname">processingInstructionCallback</td><td>处理指令的可选回调。 </td></tr>
+    <tr><td class="paramname">xmlPrinter</td><td>可选的<code><a class="el" href="../../">XmlPrinter</a></code>。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a38dce00b351d86762a1ef4ea3014cd9a" name="a38dce00b351d86762a1ef4ea3014cd9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38dce00b351d86762a1ef4ea3014cd9a">&#9670;&#160;</a></span>init() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public init </td>
+          <td>(</td>
+          <td class="paramname"><em>bufferSize</em>:&#160;</td>
+          <td class="paramtype">Int64, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>completeElementCallback</em>:&#160;</td>
+          <td class="paramtype">?CompleteElementCallback, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>declarationCallback</em>:&#160;</td>
+          <td class="paramtype">?DeclarationCallback, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>processingInstructionCallback</em>:&#160;</td>
+          <td class="paramtype">?ProcessingInstructionCallback, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>xmlPrinter</em>:&#160;</td>
+          <td class="paramtype">?XmlPrinter&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>构造一个新的XML拆分器。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">maxElementSize</td><td>缓冲区的初始大小。 </td></tr>
+    <tr><td class="paramname">xmppElementCallback</td><td>处理完一个完整的元素后调用的回调。 </td></tr>
+    <tr><td class="paramname">declarationCallback</td><td>XML声明的可选回调。 </td></tr>
+    <tr><td class="paramname">processingInstructionCallback</td><td>处理指令的可选回调。 </td></tr>
+    <tr><td class="paramname">xmlPrinter</td><td>可选的<code><a class="el" href="../../">XmlPrinter</a></code>。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="ac39d960095bc691884b9e22e74938c70" name="ac39d960095bc691884b9e22e74938c70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac39d960095bc691884b9e22e74938c70">&#9670;&#160;</a></span>append()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public func append </td>
+          <td>(</td>
+          <td class="paramname"><em>str</em>:&#160;</td>
+          <td class="paramtype">ToString</td><td>)</td>
+          <td>: Unit </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>写入数据。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>数据。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aaa8d072db878613d1c84fa4eafbf96af" name="aaa8d072db878613d1c84fa4eafbf96af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa8d072db878613d1c84fa4eafbf96af">&#9670;&#160;</a></span>close()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public open override func close </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Unit </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>关闭资源。 </p>
+
+</div>
+</div>
+<a id="a6dca5cdf863ea436d67f7625ba0342ca" name="a6dca5cdf863ea436d67f7625ba0342ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dca5cdf863ea436d67f7625ba0342ca">&#9670;&#160;</a></span>getCurrentSplittedPartSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public func getCurrentSplittedPartSize </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Int64 </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取长度。</p>
+<dl class="section return"><dt>返回</dt><dd>长度。 </dd></dl>
+
+</div>
+</div>
+<a id="a3dae5d12cbf38d2be429ab3c51751fd2" name="a3dae5d12cbf38d2be429ab3c51751fd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dae5d12cbf38d2be429ab3c51751fd2">&#9670;&#160;</a></span>isClosed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public open override func isClosed </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Bool </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>是否关闭资源。</p>
+<dl class="section return"><dt>返回</dt><dd>true表示资源已经关闭，false表示资源未关闭。 </dd></dl>
+
+</div>
+</div>
+<a id="a91d67e74bbaa5037d2be227478b29e3d" name="a91d67e74bbaa5037d2be227478b29e3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91d67e74bbaa5037d2be227478b29e3d">&#9670;&#160;</a></span>newSplittedPart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">protected func newSplittedPart </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Unit </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>新的拆分部件。 </p>
+
+</div>
+</div>
+<a id="a07af2237e5f9043d3ff4b40deb6436eb" name="a07af2237e5f9043d3ff4b40deb6436eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07af2237e5f9043d3ff4b40deb6436eb">&#9670;&#160;</a></span>onEndTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">protected open func onEndTag </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Unit </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>结束标签。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_</td><td>数据。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4eea4af9dd02e1ae55c46bc6971abf8c" name="a4eea4af9dd02e1ae55c46bc6971abf8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4eea4af9dd02e1ae55c46bc6971abf8c">&#9670;&#160;</a></span>onNextChar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">protected open func onNextChar </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Unit </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>下一条数据。 </p>
+
+</div>
+</div>
+<a id="aa8af61092a1dff8f0f82d6f451c22ca0" name="aa8af61092a1dff8f0f82d6f451c22ca0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8af61092a1dff8f0f82d6f451c22ca0">&#9670;&#160;</a></span>onStartTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">protected open func onStartTag </td>
+          <td>(</td>
+          <td class="paramname"><em></em>:&#160;</td>
+          <td class="paramtype">_: String, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em></em>:&#160;</td>
+          <td class="paramtype">_: String&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>: Unit </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>开始标签。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_</td><td>String。 </td></tr>
+    <tr><td class="paramname">_</td><td>String。 </td></tr>
+    <tr><td class="paramname">_</td><td>Map。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa1ae5f4adeb0bb21337f015032a6a5b5" name="aa1ae5f4adeb0bb21337f015032a6a5b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1ae5f4adeb0bb21337f015032a6a5b5">&#9670;&#160;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public func write </td>
+          <td>(</td>
+          <td class="paramname"><em>cbuf</em>:&#160;</td>
+          <td class="paramtype">Array&lt;Rune&gt;</td><td>)</td>
+          <td>: Unit </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>写入数组数据。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cbuf</td><td>数组数据。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">类成员变量说明</h2>
+<a id="ad18c7f6d002c069d26ada06daf84a16f" name="ad18c7f6d002c069d26ada06daf84a16f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad18c7f6d002c069d26ada06daf84a16f">&#9670;&#160;</a></span>let completeElementCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">let completeElementCallback : ?<a class="el" href="../../d5/d66/interfacexmpp4cj_1_1jid_1_1CompleteElementCallback.html">CompleteElementCallback</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>CompleteElementCallback接口。 </p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/jid/xml_splitter.cj</li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../d0/d12/namespacexmpp4cj.html">xmpp4cj</a></li><li class="navelem"><a class="el" href="../../df/d76/namespacexmpp4cj_1_1jid.html">jid</a></li><li class="navelem"><a class="el" href="../../d1/d35/classxmpp4cj_1_1jid_1_1XmlSplitter.html">XmlSplitter</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

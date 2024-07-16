@@ -1,0 +1,704 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Xmpp4cj: SASLMechanism抽象类 参考</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Xmpp4cj
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pub-attribs">Public 属性</a> &#124;
+<a href="#pro-methods">Protected 成员函数</a> &#124;
+<a href="#pro-attribs">Protected 属性</a> &#124;
+<a href="../../da/d61/classxmpp4cj_1_1connection_1_1SASLMechanism-members.html">所有成员列表</a>  </div>
+  <div class="headertitle"><div class="title">SASLMechanism抽象类 参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+类 SASLMechanism 继承关系图:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.png" usemap="#SASLMechanism_map" alt=""/>
+  <map id="SASLMechanism_map" name="SASLMechanism_map">
+<area href="../../d4/d60/classxmpp4cj_1_1connection_1_1SASLAnonymous.html" alt="SASLAnonymous" shape="rect" coords="0,112,190,136"/>
+<area href="../../da/dfd/classxmpp4cj_1_1connection_1_1SASLXOauth2Mechanism.html" alt="SASLXOauth2Mechanism" shape="rect" coords="200,112,390,136"/>
+<area href="../../dd/d3c/classxmpp4cj_1_1connection_1_1ScramMechanism.html" alt="ScramMechanism" shape="rect" coords="400,112,590,136"/>
+<area href="../../d6/df2/classxmpp4cj_1_1connection_1_1SCRAMSHA1Mechanism.html" alt="SCRAMSHA1Mechanism" shape="rect" coords="300,168,490,192"/>
+<area href="../../dd/d78/classxmpp4cj_1_1connection_1_1ScramPlusMechanism.html" alt="ScramPlusMechanism" shape="rect" coords="500,168,690,192"/>
+<area href="../../d7/dfc/classxmpp4cj_1_1connection_1_1ScramSha1PlusMechanism.html" alt="ScramSha1PlusMechanism" shape="rect" coords="500,224,690,248"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a9e4b0977bc3ca68ca27a94737dc449a6"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html#a9e4b0977bc3ca68ca27a94737dc449a6">authenticate</a> (username: ?String, host: ?String, serviceName: DomainBareJid, password: ?String, authzid: ?EntityBareJid, sslSession: ?TlsSession): Unit</td></tr>
+<tr class="separator:a9e4b0977bc3ca68ca27a94737dc449a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12c3f8cc5849b7b7e46d0b49e33e06a3"><td class="memItemLeft" align="right" valign="top">public open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html#a12c3f8cc5849b7b7e46d0b49e33e06a3">authenticate</a> (host: ?String, serviceName: DomainBareJid, cbh: ?CallbackHandler, authzid: ?EntityBareJid, sslSession: ?TlsSession): Unit</td></tr>
+<tr class="separator:a12c3f8cc5849b7b7e46d0b49e33e06a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedf6a6d83cf73429bb20666403f0177e"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html#aedf6a6d83cf73429bb20666403f0177e">challengeReceived</a> (challengeString: ?String, finalChallenge: Bool): Unit</td></tr>
+<tr class="separator:aedf6a6d83cf73429bb20666403f0177e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dce62d8d0494b800f79c96881d2b4ce"><td class="memItemLeft" align="right" valign="top"><a id="a9dce62d8d0494b800f79c96881d2b4ce" name="a9dce62d8d0494b800f79c96881d2b4ce"></a>
+public override func&#160;</td><td class="memItemRight" valign="bottom"><b>compare</b> (other: <a class="el" href="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html">SASLMechanism</a>): Ordering</td></tr>
+<tr class="separator:a9dce62d8d0494b800f79c96881d2b4ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48d99d558fa3b23834c84b5d33d6d8a7"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html#a48d99d558fa3b23834c84b5d33d6d8a7">getName</a> (): String</td></tr>
+<tr class="separator:a48d99d558fa3b23834c84b5d33d6d8a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdcbb3ea8d479c69aee61cc07a9122c2"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html#acdcbb3ea8d479c69aee61cc07a9122c2">getPriority</a> (): Int</td></tr>
+<tr class="separator:acdcbb3ea8d479c69aee61cc07a9122c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28af29260456d7647746f025306004f2"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html#a28af29260456d7647746f025306004f2">afterFinalSaslChallenge</a> (): Unit</td></tr>
+<tr class="separator:a28af29260456d7647746f025306004f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0389368c732886e6837020312176482e"><td class="memItemLeft" align="right" valign="top"><a id="a0389368c732886e6837020312176482e" name="a0389368c732886e6837020312176482e"></a>
+public func&#160;</td><td class="memItemRight" valign="bottom"><b>instanceForAuthentication</b> (connection: <a class="el" href="../../dc/d9e/interfacexmpp4cj_1_1connection_1_1XMPPConnection.html">XMPPConnection</a>, connectionConfiguration: <a class="el" href="../../d5/de6/classxmpp4cj_1_1connection_1_1ConnectionConfiguration.html">ConnectionConfiguration</a>): <a class="el" href="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html">SASLMechanism</a></td></tr>
+<tr class="separator:a0389368c732886e6837020312176482e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47642403852e4334cf6ae91d6b14aed3"><td class="memItemLeft" align="right" valign="top"><a id="a47642403852e4334cf6ae91d6b14aed3" name="a47642403852e4334cf6ae91d6b14aed3"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>authzidSupported</b> (): Bool</td></tr>
+<tr class="separator:a47642403852e4334cf6ae91d6b14aed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf20a658c723ea98d540c1ea42f1d33a"><td class="memItemLeft" align="right" valign="top"><a id="abf20a658c723ea98d540c1ea42f1d33a" name="abf20a658c723ea98d540c1ea42f1d33a"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>requiresPassword</b> (): Bool</td></tr>
+<tr class="separator:abf20a658c723ea98d540c1ea42f1d33a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ec39d505b721235b11e74dbd898d900"><td class="memItemLeft" align="right" valign="top"><a id="a2ec39d505b721235b11e74dbd898d900" name="a2ec39d505b721235b11e74dbd898d900"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>isAuthenticationSuccessful</b> (): Bool</td></tr>
+<tr class="separator:a2ec39d505b721235b11e74dbd898d900"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55b8486efac3609d03ebe093d8695adc"><td class="memItemLeft" align="right" valign="top"><a id="a55b8486efac3609d03ebe093d8695adc" name="a55b8486efac3609d03ebe093d8695adc"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>isFinished</b> (): Bool</td></tr>
+<tr class="separator:a55b8486efac3609d03ebe093d8695adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5df7ffbf6a595322eece2de49e63393e"><td class="memItemLeft" align="right" valign="top"><a id="a5df7ffbf6a595322eece2de49e63393e" name="a5df7ffbf6a595322eece2de49e63393e"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>throwExceptionIfRequired</b> (): Unit</td></tr>
+<tr class="separator:a5df7ffbf6a595322eece2de49e63393e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad48b9174a2b83fe9954588703260bf59"><td class="memItemLeft" align="right" valign="top"><a id="ad48b9174a2b83fe9954588703260bf59" name="ad48b9174a2b83fe9954588703260bf59"></a>
+public func&#160;</td><td class="memItemRight" valign="bottom"><b>setException</b> (exception: Exception): Unit</td></tr>
+<tr class="separator:ad48b9174a2b83fe9954588703260bf59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f77c8f97d30af177fcfb42e5306616f"><td class="memItemLeft" align="right" valign="top"><a id="a1f77c8f97d30af177fcfb42e5306616f" name="a1f77c8f97d30af177fcfb42e5306616f"></a>
+public override func&#160;</td><td class="memItemRight" valign="bottom"><b>toString</b> (): String</td></tr>
+<tr class="separator:a1f77c8f97d30af177fcfb42e5306616f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public 属性</h2></td></tr>
+<tr class="memitem:a61be7fbf7c451e549fc8693397becf86"><td class="memItemLeft" align="right" valign="top"><a id="a61be7fbf7c451e549fc8693397becf86" name="a61be7fbf7c451e549fc8693397becf86"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>static let CRAMMD5</b> = &quot;CRAM-MD5&quot;</td></tr>
+<tr class="separator:a61be7fbf7c451e549fc8693397becf86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68e839921b3969d509d37611100a9923"><td class="memItemLeft" align="right" valign="top"><a id="a68e839921b3969d509d37611100a9923" name="a68e839921b3969d509d37611100a9923"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>static let DIGESTMD5</b> = &quot;DIGEST-MD5&quot;</td></tr>
+<tr class="separator:a68e839921b3969d509d37611100a9923"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addddf1ea2adc295f3c348f48e15f2277"><td class="memItemLeft" align="right" valign="top"><a id="addddf1ea2adc295f3c348f48e15f2277" name="addddf1ea2adc295f3c348f48e15f2277"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>static let EXTERNAL</b> = &quot;EXTERNAL&quot;</td></tr>
+<tr class="separator:addddf1ea2adc295f3c348f48e15f2277"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5e1e06d24a2728cafca7c09a3769edf"><td class="memItemLeft" align="right" valign="top"><a id="aa5e1e06d24a2728cafca7c09a3769edf" name="aa5e1e06d24a2728cafca7c09a3769edf"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>static let GSSAPI</b> = &quot;GSSAPI&quot;</td></tr>
+<tr class="separator:aa5e1e06d24a2728cafca7c09a3769edf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d4fe2c76d9d795f516c9c65399766c2"><td class="memItemLeft" align="right" valign="top"><a id="a1d4fe2c76d9d795f516c9c65399766c2" name="a1d4fe2c76d9d795f516c9c65399766c2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>static let PLAIN</b> = &quot;PLAIN&quot;</td></tr>
+<tr class="separator:a1d4fe2c76d9d795f516c9c65399766c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafeb965e3f418bb086c49443aff6fe99"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html#aafeb965e3f418bb086c49443aff6fe99">var authenticationId</a> : ?String = None</td></tr>
+<tr class="separator:aafeb965e3f418bb086c49443aff6fe99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9be932065f0fb5e2b9919420300e0c0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html#ac9be932065f0fb5e2b9919420300e0c0">var password</a> : ?String = None</td></tr>
+<tr class="separator:ac9be932065f0fb5e2b9919420300e0c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected 成员函数</h2></td></tr>
+<tr class="memitem:a7620f924f4ca8a56a6f7fa01d6f0abde"><td class="memItemLeft" align="right" valign="top"><a id="a7620f924f4ca8a56a6f7fa01d6f0abde" name="a7620f924f4ca8a56a6f7fa01d6f0abde"></a>
+protected open func&#160;</td><td class="memItemRight" valign="bottom"><b>authenticateInternal</b> (): Unit</td></tr>
+<tr class="separator:a7620f924f4ca8a56a6f7fa01d6f0abde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23da877beddfbc0d76666e31e770169c"><td class="memItemLeft" align="right" valign="top"><a id="a23da877beddfbc0d76666e31e770169c" name="a23da877beddfbc0d76666e31e770169c"></a>
+protected func&#160;</td><td class="memItemRight" valign="bottom"><b>authenticateInternal</b> (cbh: ?CallbackHandler): Unit</td></tr>
+<tr class="separator:a23da877beddfbc0d76666e31e770169c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72ed3b6f3b35723f07c62ebce67cc276"><td class="memItemLeft" align="right" valign="top">protected func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html#a72ed3b6f3b35723f07c62ebce67cc276">getAuthenticationText</a> (): ?Array&lt;UInt8&gt;</td></tr>
+<tr class="separator:a72ed3b6f3b35723f07c62ebce67cc276"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a15721dae717cb23df0725141aaa29e"><td class="memItemLeft" align="right" valign="top">protected open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html#a8a15721dae717cb23df0725141aaa29e">evaluateChallenge</a> (challenge: Array&lt;UInt8&gt;): ?Array&lt;UInt8&gt;</td></tr>
+<tr class="separator:a8a15721dae717cb23df0725141aaa29e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77f593dfc670098798ac50e1fd78bcb7"><td class="memItemLeft" align="right" valign="top"><a id="a77f593dfc670098798ac50e1fd78bcb7" name="a77f593dfc670098798ac50e1fd78bcb7"></a>
+protected func&#160;</td><td class="memItemRight" valign="bottom"><b>checkIfSuccessfulOrThrow</b> (): Unit</td></tr>
+<tr class="separator:a77f593dfc670098798ac50e1fd78bcb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a913ae8c7638bcb3c395e094eacf08200"><td class="memItemLeft" align="right" valign="top"><a id="a913ae8c7638bcb3c395e094eacf08200" name="a913ae8c7638bcb3c395e094eacf08200"></a>
+protected func&#160;</td><td class="memItemRight" valign="bottom"><b>newInstance</b> (): <a class="el" href="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html">SASLMechanism</a></td></tr>
+<tr class="separator:a913ae8c7638bcb3c395e094eacf08200"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa24063ec4b3e0f22046c34e381a24124"><td class="memItemLeft" align="right" valign="top"><a id="aa24063ec4b3e0f22046c34e381a24124" name="aa24063ec4b3e0f22046c34e381a24124"></a>
+protected static func&#160;</td><td class="memItemRight" valign="bottom"><b>toBytes</b> (string: String): Array&lt;UInt8&gt;</td></tr>
+<tr class="separator:aa24063ec4b3e0f22046c34e381a24124"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8533282a15c6c4d97b33fbdb69ea64ab"><td class="memItemLeft" align="right" valign="top">protected static func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html#a8533282a15c6c4d97b33fbdb69ea64ab">saslPrep</a> (string: String): String</td></tr>
+<tr class="separator:a8533282a15c6c4d97b33fbdb69ea64ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected 属性</h2></td></tr>
+<tr class="memitem:a2475e0172d8ff2c16f85433f4f0cef37"><td class="memItemLeft" align="right" valign="top"><a id="a2475e0172d8ff2c16f85433f4f0cef37" name="a2475e0172d8ff2c16f85433f4f0cef37"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>var connection</b> : ?<a class="el" href="../../dc/d9e/interfacexmpp4cj_1_1connection_1_1XMPPConnection.html">XMPPConnection</a> = None</td></tr>
+<tr class="separator:a2475e0172d8ff2c16f85433f4f0cef37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f04d3fc27bf1c14527d4a59ad2a936b"><td class="memItemLeft" align="right" valign="top"><a id="a3f04d3fc27bf1c14527d4a59ad2a936b" name="a3f04d3fc27bf1c14527d4a59ad2a936b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>var connectionConfiguration</b> : ?<a class="el" href="../../d5/de6/classxmpp4cj_1_1connection_1_1ConnectionConfiguration.html">ConnectionConfiguration</a> = None</td></tr>
+<tr class="separator:a3f04d3fc27bf1c14527d4a59ad2a936b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa154c00d05bb3e18a4e23535cdaf84ad"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html#aa154c00d05bb3e18a4e23535cdaf84ad">var authorizationId</a> : ?EntityBareJid = None</td></tr>
+<tr class="separator:aa154c00d05bb3e18a4e23535cdaf84ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a435ff132601134e54195d9bdb6c4bcf6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html#a435ff132601134e54195d9bdb6c4bcf6">var serviceName</a> : ?DomainBareJid = None</td></tr>
+<tr class="separator:a435ff132601134e54195d9bdb6c4bcf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8027de23085b52b8838925e32a8f233"><td class="memItemLeft" align="right" valign="top"><a id="ab8027de23085b52b8838925e32a8f233" name="ab8027de23085b52b8838925e32a8f233"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>var host</b> : ?String = None</td></tr>
+<tr class="separator:ab8027de23085b52b8838925e32a8f233"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae437453bcd4a981bfb51ced244284249"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html#ae437453bcd4a981bfb51ced244284249">var sslSession</a> : ?TlsSession = None</td></tr>
+<tr class="separator:ae437453bcd4a981bfb51ced244284249"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>public abstract class SASLMechanism &lt;: Comparable&lt;SASLMechanism&gt; &amp; ToString</p>
+<p>Base class for SASL mechanisms. Subclasses will likely want to implement their own versions of these methods: </p><ul>
+<li>
+<code><a class="el" href="../../">authenticate(String, String, DomainBareJid, String, EntityBareJid, SSLSession)</a></code> &ndash; Initiate authentication stanza using the deprecated method. </li>
+<li>
+<code><a class="el" href="../../">authenticate(String, DomainBareJid, CallbackHandler, EntityBareJid, SSLSession)</a></code> &ndash; Initiate authentication stanza using the CallbackHandler method. </li>
+<li>
+<code><a class="el" href="../../">challengeReceived(String, boolean)</a></code> &ndash; Handle a challenge from the server. </li>
+</ul>
+</div><h2 class="groupheader">成员函数说明</h2>
+<a id="a28af29260456d7647746f025306004f2" name="a28af29260456d7647746f025306004f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28af29260456d7647746f025306004f2">&#9670;&#160;</a></span>afterFinalSaslChallenge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public func afterFinalSaslChallenge </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Unit </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Check if the SASL mechanism was successful and if it was, then mark it so.</p>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">XmppSaslException</td><td>in case of an SASL error. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a12c3f8cc5849b7b7e46d0b49e33e06a3" name="a12c3f8cc5849b7b7e46d0b49e33e06a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12c3f8cc5849b7b7e46d0b49e33e06a3">&#9670;&#160;</a></span>authenticate() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public open func authenticate </td>
+          <td>(</td>
+          <td class="paramname"><em>host</em>:&#160;</td>
+          <td class="paramtype">?String, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>serviceName</em>:&#160;</td>
+          <td class="paramtype">DomainBareJid, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>cbh</em>:&#160;</td>
+          <td class="paramtype">?CallbackHandler, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>authzid</em>:&#160;</td>
+          <td class="paramtype">?EntityBareJid, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>sslSession</em>:&#160;</td>
+          <td class="paramtype">?TlsSession&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>: Unit </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Builds and sends the <code>auth</code> stanza to the server. The callback handler will handle any additional information, such as the authentication ID or realm, if it is needed.</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">host</td><td>the hostname where the user account resides. </td></tr>
+    <tr><td class="paramname">serviceName</td><td>the xmpp service location </td></tr>
+    <tr><td class="paramname">cbh</td><td>the CallbackHandler to obtain user information. </td></tr>
+    <tr><td class="paramname">authzid</td><td>the optional authorization identity. </td></tr>
+    <tr><td class="paramname">sslSession</td><td>the optional SSL/TLS session (if one was established) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">XmppSaslException</td><td>if a SASL related error occurs. </td></tr>
+    <tr><td class="paramname">NotConnectedException</td><td>if the XMPP connection is not connected. </td></tr>
+    <tr><td class="paramname">InterruptedException</td><td>if the calling thread was interrupted. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9e4b0977bc3ca68ca27a94737dc449a6" name="a9e4b0977bc3ca68ca27a94737dc449a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e4b0977bc3ca68ca27a94737dc449a6">&#9670;&#160;</a></span>authenticate() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public func authenticate </td>
+          <td>(</td>
+          <td class="paramname"><em>username</em>:&#160;</td>
+          <td class="paramtype">?String, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>host</em>:&#160;</td>
+          <td class="paramtype">?String, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>serviceName</em>:&#160;</td>
+          <td class="paramtype">DomainBareJid, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>password</em>:&#160;</td>
+          <td class="paramtype">?String, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>authzid</em>:&#160;</td>
+          <td class="paramtype">?EntityBareJid, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>sslSession</em>:&#160;</td>
+          <td class="paramtype">?TlsSession&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>: Unit </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Builds and sends the <code>auth</code> stanza to the server. Note that this method of authentication is not recommended, since it is very inflexible. Use <code><a class="el" href="../../">authenticate(String, DomainBareJid, CallbackHandler, EntityBareJid, SSLSession)</a></code> whenever possible.</p>
+<p>Explanation of auth stanza:</p>
+<p>The client authentication stanza needs to include the digest-uri of the form: xmpp/serviceName From RFC-2831: digest-uri = "digest-uri" "=" digest-uri-value digest-uri-value = serv-type "/" host [ "/" serv-name ]</p>
+<p>digest-uri: Indicates the principal name of the service with which the client wishes to connect, formed from the serv-type, host, and serv-name. For example, the FTP service on "ftp.example.com" would have a "digest-uri" value of "ftp/ftp.example.com"; the SMTP server from the example above would have a "digest-uri" value of "smtp/mail3.example.com/example.com".</p>
+<p>host: The DNS host name or IP address for the service requested. The DNS host name must be the fully-qualified canonical name of the host. The DNS host name is the preferred form; see notes on server processing of the digest-uri.</p>
+<p>serv-name: Indicates the name of the service if it is replicated. The service is considered to be replicated if the client's service-location process involves resolution using standard DNS lookup operations, and if these operations involve DNS records (such as SRV, or MX) which resolve one DNS name into a set of other DNS names. In this case, the initial name used by the client is the "serv-name", and the final name is the "host" component. For example, the incoming mail service for "example.com" may be replicated through the use of MX records stored in the DNS, one of which points at an SMTP server called "mail3.example.com"; it's "serv-name" would be "example.com", it's "host" would be "mail3.example.com". If the service is not replicated, or the serv-name is identical to the host, then the serv-name component MUST be omitted</p>
+<p>digest-uri verification is needed for ejabberd 2.0.3 and higher</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">username</td><td>the username of the user being authenticated. </td></tr>
+    <tr><td class="paramname">host</td><td>the hostname where the user account resides. </td></tr>
+    <tr><td class="paramname">serviceName</td><td>the xmpp service location - used by the SASL client in digest-uri creation serviceName format is: host [ "/" serv-name ] as per RFC-2831 </td></tr>
+    <tr><td class="paramname">password</td><td>the password for this account. </td></tr>
+    <tr><td class="paramname">authzid</td><td>the optional authorization identity. </td></tr>
+    <tr><td class="paramname">sslSession</td><td>the optional SSL/TLS session (if one was established) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">XmppSaslException</td><td>if a SASL related error occurs. </td></tr>
+    <tr><td class="paramname">NotConnectedException</td><td>if the XMPP connection is not connected. </td></tr>
+    <tr><td class="paramname">InterruptedException</td><td>if the calling thread was interrupted. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aedf6a6d83cf73429bb20666403f0177e" name="aedf6a6d83cf73429bb20666403f0177e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedf6a6d83cf73429bb20666403f0177e">&#9670;&#160;</a></span>challengeReceived()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public func challengeReceived </td>
+          <td>(</td>
+          <td class="paramname"><em>challengeString</em>:&#160;</td>
+          <td class="paramtype">?String, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>finalChallenge</em>:&#160;</td>
+          <td class="paramtype">Bool&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>: Unit </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The server is challenging the SASL mechanism for the stanza he just sent. Send a response to the server's challenge.</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">challengeString</td><td>a base64 encoded string representing the challenge. </td></tr>
+    <tr><td class="paramname">finalChallenge</td><td>true if this is the last challenge send by the server within the success stanza </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">XmppSaslException</td><td>if a SASL related error occurs. </td></tr>
+    <tr><td class="paramname">InterruptedException</td><td>if the connection is interrupted </td></tr>
+    <tr><td class="paramname">NotConnectedException</td><td>if the XMPP connection is not connected. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8a15721dae717cb23df0725141aaa29e" name="a8a15721dae717cb23df0725141aaa29e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a15721dae717cb23df0725141aaa29e">&#9670;&#160;</a></span>evaluateChallenge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">protected open func evaluateChallenge </td>
+          <td>(</td>
+          <td class="paramname"><em>challenge</em>:&#160;</td>
+          <td class="paramtype">Array&lt;UInt8&gt;</td><td>)</td>
+          <td>: ?Array&lt;UInt8&gt; </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Evaluate the SASL challenge.</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">challenge</td><td>challenge to evaluate.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>null. </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">XmppSaslException</td><td>If a SASL related error occurs. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a72ed3b6f3b35723f07c62ebce67cc276" name="a72ed3b6f3b35723f07c62ebce67cc276"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72ed3b6f3b35723f07c62ebce67cc276">&#9670;&#160;</a></span>getAuthenticationText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">protected func getAuthenticationText </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?Array&lt;UInt8&gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Should return the initial response of the SASL mechanism. The returned byte array will be send base64 encoded to the server. SASL mechanism are free to return <code>null</code> or an empty array here.</p>
+<dl class="section return"><dt>返回</dt><dd>the initial response or null </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">XmppSaslException</td><td>if a SASL specific error occurred. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a48d99d558fa3b23834c84b5d33d6d8a7" name="a48d99d558fa3b23834c84b5d33d6d8a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48d99d558fa3b23834c84b5d33d6d8a7">&#9670;&#160;</a></span>getName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public func getName </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: String</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns the common name of the SASL mechanism. E.g.: PLAIN, DIGEST-MD5 or GSSAPI.</p>
+<dl class="section return"><dt>返回</dt><dd>the common name of the SASL mechanism. </dd></dl>
+
+</div>
+</div>
+<a id="acdcbb3ea8d479c69aee61cc07a9122c2" name="acdcbb3ea8d479c69aee61cc07a9122c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdcbb3ea8d479c69aee61cc07a9122c2">&#9670;&#160;</a></span>getPriority()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public func getPriority </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Int</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get the priority of this SASL mechanism. Lower values mean higher priority.</p>
+<dl class="section return"><dt>返回</dt><dd>the priority of this SASL mechanism. </dd></dl>
+
+</div>
+</div>
+<a id="a8533282a15c6c4d97b33fbdb69ea64ab" name="a8533282a15c6c4d97b33fbdb69ea64ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8533282a15c6c4d97b33fbdb69ea64ab">&#9670;&#160;</a></span>saslPrep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">protected static func saslPrep </td>
+          <td>(</td>
+          <td class="paramname"><em>string</em>:&#160;</td>
+          <td class="paramtype">String</td><td>)</td>
+          <td>: String </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>SASLprep the given String. The resulting String is in UTF-8.</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td>the String to sasl prep. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>the given String SASL preped </dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="../../http/tools/ietf/org/html/rfc4013">RFC 4013 - SASLprep: Stringprep Profile for User Names and Passwords</a> </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">类成员变量说明</h2>
+<a id="aafeb965e3f418bb086c49443aff6fe99" name="aafeb965e3f418bb086c49443aff6fe99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafeb965e3f418bb086c49443aff6fe99">&#9670;&#160;</a></span>var authenticationId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">var authenticationId : ?String = None</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Then authentication identity (authcid). RFC 6120 § 6.3.7 informs us that some SASL mechanisms use this as a "simple user name". But the exact form is a matter of the mechanism and that it does not necessarily map to an localpart. But it usually is the localpart of the client JID, although sometimes other formats are used (e.g. the full JID). </p>
+<p>Not to be confused with the authzid (see RFC 6120 § 6.3.8). </p>
+
+</div>
+</div>
+<a id="aa154c00d05bb3e18a4e23535cdaf84ad" name="aa154c00d05bb3e18a4e23535cdaf84ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa154c00d05bb3e18a4e23535cdaf84ad">&#9670;&#160;</a></span>var authorizationId</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">var authorizationId : ?EntityBareJid = None</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The authorization identifier (authzid). This is always a bare Jid, but can be null. </p>
+
+</div>
+</div>
+<a id="ac9be932065f0fb5e2b9919420300e0c0" name="ac9be932065f0fb5e2b9919420300e0c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9be932065f0fb5e2b9919420300e0c0">&#9670;&#160;</a></span>var password</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">var password : ?String = None</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The users password </p>
+
+</div>
+</div>
+<a id="a435ff132601134e54195d9bdb6c4bcf6" name="a435ff132601134e54195d9bdb6c4bcf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a435ff132601134e54195d9bdb6c4bcf6">&#9670;&#160;</a></span>var serviceName</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">var serviceName : ?DomainBareJid = None</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The name of the XMPP service </p>
+
+</div>
+</div>
+<a id="ae437453bcd4a981bfb51ced244284249" name="ae437453bcd4a981bfb51ced244284249"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae437453bcd4a981bfb51ced244284249">&#9670;&#160;</a></span>var sslSession</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">var sslSession : ?TlsSession = None</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>The used SSL/TLS session (if any). </p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/connection/sasl_mechanism.cj</li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../d0/d12/namespacexmpp4cj.html">xmpp4cj</a></li><li class="navelem"><a class="el" href="../../dc/db3/namespacexmpp4cj_1_1connection.html">connection</a></li><li class="navelem"><a class="el" href="../../d2/d5f/classxmpp4cj_1_1connection_1_1SASLMechanism.html">SASLMechanism</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

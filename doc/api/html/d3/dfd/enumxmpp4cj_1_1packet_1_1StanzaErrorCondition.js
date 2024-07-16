@@ -1,0 +1,26 @@
+var enumxmpp4cj_1_1packet_1_1StanzaErrorCondition =
+[
+    [ "fromString", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#a20d5a0a71319cfd05fccaf037588cfdd", null ],
+    [ "bad_request", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#a25519e1d1438bfebefeb50a4646b7168", null ],
+    [ "conflict", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#aadad769d845aaad147667b093b2732cc", null ],
+    [ "feature_not_implemented", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#a326aee453ba06d7e7b57e9953000cbfe", null ],
+    [ "forbidden", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#abfe5d594b7f6b1c9b037758a2dbae86a", null ],
+    [ "gone", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#acf7d6ec1bcdd6c171755caf9ab0f9ce2", null ],
+    [ "internal_server_error", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#abf88bc753fddae25ff8bcc5558d93d51", null ],
+    [ "item_not_found", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#abcfa48a556441a3df9c4960b3ede2115", null ],
+    [ "jid_malformed", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#a5133e614d9ffe263293e11179d2ba30a", null ],
+    [ "not_acceptable", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#a48780d5eb46a475aac31fbf8023990bb", null ],
+    [ "not_allowed", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#ad2627b727466fb61a14ecb911f1c53d7", null ],
+    [ "not_authorized", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#a2d34cff962fc1f69a95b982f967f6df1", null ],
+    [ "policy_violation", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#a9ce741b6518fcd0e86d898030f54f5b3", null ],
+    [ "recipient_unavailable", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#ab7b8181e7edc55478a40228ade85f3bd", null ],
+    [ "redirect", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#a870871305b53395d8975ba1895480df5", null ],
+    [ "registration_required", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#a01e4e91495c79f6f87331986a9e84730", null ],
+    [ "remote_server_not_found", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#ac428f739702b80795b40aea18c01b519", null ],
+    [ "remote_server_timeout", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#a44ac3b856a9cafd5bd3cc06601582980", null ],
+    [ "resource_constraint", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#aad895ac01187f81135eb8bc9cd3a79b8", null ],
+    [ "service_unavailable", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#a1f8b7ad30b42bf6c79344ab5d8c18c30", null ],
+    [ "subscription_required", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#a567742f5f9af545efe8b7777c19a8647", null ],
+    [ "undefined_condition", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#aa9326a7a5c67095b6142eb9ccc72cb35", null ],
+    [ "unexpected_request", "d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#ace4c1f2ed9c05ee493362f8e9abc8f15", null ]
+];

@@ -1,0 +1,690 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Xmpp4cj: DomainAndResourcepartJid类 参考</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Xmpp4cj
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="../../d5/d34/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid-members.html">所有成员列表</a>  </div>
+  <div class="headertitle"><div class="title">DomainAndResourcepartJid类 参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+类 DomainAndResourcepartJid 继承关系图:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.png" usemap="#DomainAndResourcepartJid_map" alt=""/>
+  <map id="DomainAndResourcepartJid_map" name="DomainAndResourcepartJid_map">
+<area href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html" alt="AbstractJid" shape="rect" coords="0,224,170,248"/>
+<area href="../../db/d32/interfacexmpp4cj_1_1jid_1_1DomainFullJid.html" alt="DomainFullJid" shape="rect" coords="810,224,980,248"/>
+<area href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html" alt="Jid" shape="rect" coords="0,168,170,192"/>
+<area href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html" alt="Jid" shape="rect" coords="360,168,530,192"/>
+<area href="../../de/ded/interfacexmpp4cj_1_1jid_1_1FullJid.html" alt="FullJid" shape="rect" coords="720,168,890,192"/>
+<area href="../../dd/df6/interfacexmpp4cj_1_1jid_1_1DomainJid.html" alt="DomainJid" shape="rect" coords="900,168,1070,192"/>
+<area href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html" alt="Jid" shape="rect" coords="900,112,1070,136"/>
+<area href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html" alt="Jid" shape="rect" coords="720,112,890,136"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a1f77c8f97d30af177fcfb42e5306616f"><td class="memItemLeft" align="right" valign="top"><a id="a1f77c8f97d30af177fcfb42e5306616f" name="a1f77c8f97d30af177fcfb42e5306616f"></a>
+public override func&#160;</td><td class="memItemRight" valign="bottom"><b>toString</b> (): String</td></tr>
+<tr class="separator:a1f77c8f97d30af177fcfb42e5306616f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab12b3b947e271422220791195c60f9cc"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#ab12b3b947e271422220791195c60f9cc">asDomainBareJid</a> (): <a class="el" href="../../db/d45/interfacexmpp4cj_1_1jid_1_1DomainBareJid.html">DomainBareJid</a></td></tr>
+<tr class="separator:ab12b3b947e271422220791195c60f9cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a845de7f4d0a3188c3ee29d366089a089"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a845de7f4d0a3188c3ee29d366089a089">hasNoResource</a> (): Bool</td></tr>
+<tr class="separator:a845de7f4d0a3188c3ee29d366089a089"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5fd3a6a7da3bea959cba8059da9900c"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#af5fd3a6a7da3bea959cba8059da9900c">asEntityBareJidIfPossible</a> (): ?<a class="el" href="../../d6/d52/interfacexmpp4cj_1_1jid_1_1EntityBareJid.html">EntityBareJid</a></td></tr>
+<tr class="separator:af5fd3a6a7da3bea959cba8059da9900c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3043fe55657c119b264b1045ae4fcfa5"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a3043fe55657c119b264b1045ae4fcfa5">asEntityFullJidIfPossible</a> (): ?<a class="el" href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html">EntityFullJid</a></td></tr>
+<tr class="separator:a3043fe55657c119b264b1045ae4fcfa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd2c1d89f0017c1b8ba98661f128fd82"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#afd2c1d89f0017c1b8ba98661f128fd82">asDomainFullJidIfPossible</a> (): ?<a class="el" href="../../db/d32/interfacexmpp4cj_1_1jid_1_1DomainFullJid.html">DomainFullJid</a></td></tr>
+<tr class="separator:afd2c1d89f0017c1b8ba98661f128fd82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0be26d3bef579c3298cf5eb10c097639"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a0be26d3bef579c3298cf5eb10c097639">getResourceOrNull</a> (): ?<a class="el" href="../../d8/d41/classxmpp4cj_1_1jid_1_1Resourcepart.html">Resourcepart</a></td></tr>
+<tr class="separator:a0be26d3bef579c3298cf5eb10c097639"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c9ce65028917bba646332bef1299322"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a9c9ce65028917bba646332bef1299322">isParentOf</a> (entityBareJid: <a class="el" href="../../d6/d52/interfacexmpp4cj_1_1jid_1_1EntityBareJid.html">EntityBareJid</a>): Bool</td></tr>
+<tr class="separator:a9c9ce65028917bba646332bef1299322"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9434bbbd774e0305872bf43e5ee5e8d7"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a9434bbbd774e0305872bf43e5ee5e8d7">isParentOf</a> (entityFullJid: <a class="el" href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html">EntityFullJid</a>): Bool</td></tr>
+<tr class="separator:a9434bbbd774e0305872bf43e5ee5e8d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a879e0e830a5d75e523d285d97ec297c7"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a879e0e830a5d75e523d285d97ec297c7">isParentOf</a> (domainBareJid: <a class="el" href="../../db/d45/interfacexmpp4cj_1_1jid_1_1DomainBareJid.html">DomainBareJid</a>): Bool</td></tr>
+<tr class="separator:a879e0e830a5d75e523d285d97ec297c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31277ceaf5b4f1c95b9f8d8d75b025d4"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a31277ceaf5b4f1c95b9f8d8d75b025d4">isParentOf</a> (domainFullJid: <a class="el" href="../../db/d32/interfacexmpp4cj_1_1jid_1_1DomainFullJid.html">DomainFullJid</a>): Bool</td></tr>
+<tr class="separator:a31277ceaf5b4f1c95b9f8d8d75b025d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a485838c306012b555c48c12489aec878"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a485838c306012b555c48c12489aec878">getResourcepart</a> (): <a class="el" href="../../d8/d41/classxmpp4cj_1_1jid_1_1Resourcepart.html">Resourcepart</a></td></tr>
+<tr class="separator:a485838c306012b555c48c12489aec878"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cd27f56ee95873f6194d20622a7f29f"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a3cd27f56ee95873f6194d20622a7f29f">asBareJid</a> (): <a class="el" href="../../db/de8/interfacexmpp4cj_1_1jid_1_1BareJid.html">BareJid</a></td></tr>
+<tr class="separator:a3cd27f56ee95873f6194d20622a7f29f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8da4e6215aa44118a1cfb9ca9fbf5cad"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a8da4e6215aa44118a1cfb9ca9fbf5cad">getDomain</a> (): <a class="el" href="../../d1/d68/classxmpp4cj_1_1jid_1_1Domainpart.html">Domainpart</a></td></tr>
+<tr class="separator:a8da4e6215aa44118a1cfb9ca9fbf5cad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ef7591a7b625002c816f815d3a88fe7"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a0ef7591a7b625002c816f815d3a88fe7">asUnescapedString</a> (): String</td></tr>
+<tr class="separator:a0ef7591a7b625002c816f815d3a88fe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ea98798b00fb3725103a6e8b12cf2d8"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#a1ea98798b00fb3725103a6e8b12cf2d8">asEntityJidIfPossible</a> (): ?<a class="el" href="../../d9/d02/interfacexmpp4cj_1_1jid_1_1EntityJid.html">EntityJid</a></td></tr>
+<tr class="separator:a1ea98798b00fb3725103a6e8b12cf2d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcda1ec9e551da5cc5901ca4b24d3b8d"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#afcda1ec9e551da5cc5901ca4b24d3b8d">asFullJidIfPossible</a> (): ?<a class="el" href="../../de/ded/interfacexmpp4cj_1_1jid_1_1FullJid.html">FullJid</a></td></tr>
+<tr class="separator:afcda1ec9e551da5cc5901ca4b24d3b8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbdc9767c68b65b185b016236368a256"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html#abbdc9767c68b65b185b016236368a256">getLocalpartOrNull</a> (): ?<a class="el" href="../../d8/dea/classxmpp4cj_1_1jid_1_1Localpart.html">Localpart</a></td></tr>
+<tr class="separator:abbdc9767c68b65b185b016236368a256"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid')"><img src="../../closed.png" alt="-"/>&#160;Public 成员函数 继承自 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html">AbstractJid</a></td></tr>
+<tr class="memitem:a0f991f1fa5c6037c014042e06d61aa77 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a0f991f1fa5c6037c014042e06d61aa77">isEntityJid</a> (): Bool</td></tr>
+<tr class="separator:a0f991f1fa5c6037c014042e06d61aa77 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0023710460e7c5d5c9edd2004f301890 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a0023710460e7c5d5c9edd2004f301890">isEntityBareJid</a> (): Bool</td></tr>
+<tr class="separator:a0023710460e7c5d5c9edd2004f301890 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a2f29585916e94093cb6bd414c6bb5b inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a3a2f29585916e94093cb6bd414c6bb5b">isEntityFullJid</a> (): Bool</td></tr>
+<tr class="separator:a3a2f29585916e94093cb6bd414c6bb5b inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50bb5ce6e47a5de6627a2078d33defa2 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a50bb5ce6e47a5de6627a2078d33defa2">isDomainBareJid</a> (): Bool</td></tr>
+<tr class="separator:a50bb5ce6e47a5de6627a2078d33defa2 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3795b0fae05fbdeff2ab7c529c2a1fdd inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a3795b0fae05fbdeff2ab7c529c2a1fdd">isDomainFullJid</a> (): Bool</td></tr>
+<tr class="separator:a3795b0fae05fbdeff2ab7c529c2a1fdd inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5d3d9f9bfdcacfb46aa88fd6dee6d40 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#ac5d3d9f9bfdcacfb46aa88fd6dee6d40">hasResource</a> (): Bool</td></tr>
+<tr class="separator:ac5d3d9f9bfdcacfb46aa88fd6dee6d40 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57069668b3abf70f611b45b5e19a8665 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a57069668b3abf70f611b45b5e19a8665">hasLocalpart</a> (): Bool</td></tr>
+<tr class="separator:a57069668b3abf70f611b45b5e19a8665 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdec58fffc8c18794dba3e003891b6b6 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#acdec58fffc8c18794dba3e003891b6b6">asEntityBareJidOrThrow</a> (): <a class="el" href="../../d6/d52/interfacexmpp4cj_1_1jid_1_1EntityBareJid.html">EntityBareJid</a></td></tr>
+<tr class="separator:acdec58fffc8c18794dba3e003891b6b6 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacfb888b6ad8c5447b0b736eb648e1ad inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#aacfb888b6ad8c5447b0b736eb648e1ad">asEntityFullJidOrThrow</a> (): <a class="el" href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html">EntityFullJid</a></td></tr>
+<tr class="separator:aacfb888b6ad8c5447b0b736eb648e1ad inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a824f9ce574c8031d9082d88607e4c71e inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a824f9ce574c8031d9082d88607e4c71e">asEntityJidOrThrow</a> (): <a class="el" href="../../d9/d02/interfacexmpp4cj_1_1jid_1_1EntityJid.html">EntityJid</a></td></tr>
+<tr class="separator:a824f9ce574c8031d9082d88607e4c71e inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafb316e82c7fd2cc3cd1df90b40e77cb inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#aafb316e82c7fd2cc3cd1df90b40e77cb">asFullJidOrThrow</a> (): <a class="el" href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html">EntityFullJid</a></td></tr>
+<tr class="separator:aafb316e82c7fd2cc3cd1df90b40e77cb inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e83f2e3ffe108f1355ec7a94bdc3dc6 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a2e83f2e3ffe108f1355ec7a94bdc3dc6">asDomainFullJidOrThrow</a> (): <a class="el" href="../../db/d32/interfacexmpp4cj_1_1jid_1_1DomainFullJid.html">DomainFullJid</a></td></tr>
+<tr class="separator:a2e83f2e3ffe108f1355ec7a94bdc3dc6 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a0ad9d3b2946f18b943b6928db97930 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a1a0ad9d3b2946f18b943b6928db97930">getResourceOrEmpty</a> (): <a class="el" href="../../d8/d41/classxmpp4cj_1_1jid_1_1Resourcepart.html">Resourcepart</a></td></tr>
+<tr class="separator:a1a0ad9d3b2946f18b943b6928db97930 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2d1242345ca6b0ccf3ba08b0d4f4cda inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#ae2d1242345ca6b0ccf3ba08b0d4f4cda">getResourceOrThrow</a> (): <a class="el" href="../../d8/d41/classxmpp4cj_1_1jid_1_1Resourcepart.html">Resourcepart</a></td></tr>
+<tr class="separator:ae2d1242345ca6b0ccf3ba08b0d4f4cda inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9f65be48757232ad9b8907bbd06ef03 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#aa9f65be48757232ad9b8907bbd06ef03">getLocalpartOrThrow</a> (): <a class="el" href="../../d8/dea/classxmpp4cj_1_1jid_1_1Localpart.html">Localpart</a></td></tr>
+<tr class="separator:aa9f65be48757232ad9b8907bbd06ef03 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ee1c933c6e1bd9304b243b6ca6b0e54 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a1ee1c933c6e1bd9304b243b6ca6b0e54">isParentOf</a> (jid: <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html">Jid</a>): Bool</td></tr>
+<tr class="separator:a1ee1c933c6e1bd9304b243b6ca6b0e54 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7f004d391965208df14e283f56412b5 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top"><a id="ad7f004d391965208df14e283f56412b5" name="ad7f004d391965208df14e283f56412b5"></a>
+public override func&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> (): Int</td></tr>
+<tr class="separator:ad7f004d391965208df14e283f56412b5 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fdcdca6ded63eeb18fe8cb8e5e9b485 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a1fdcdca6ded63eeb18fe8cb8e5e9b485">asUrlEncodedString</a> (): String</td></tr>
+<tr class="separator:a1fdcdca6ded63eeb18fe8cb8e5e9b485 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd3e3302687a73a1ac6c16b26a470d07 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top"><a id="abd3e3302687a73a1ac6c16b26a470d07" name="abd3e3302687a73a1ac6c16b26a470d07"></a>
+public operator override&#160;</td><td class="memItemRight" valign="bottom"><b>==</b> (other: <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html">Jid</a>): Bool</td></tr>
+<tr class="separator:abd3e3302687a73a1ac6c16b26a470d07 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04b96570e6d7a3777fed83a20b5b5005 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top"><a id="a04b96570e6d7a3777fed83a20b5b5005" name="a04b96570e6d7a3777fed83a20b5b5005"></a>
+public operator&#160;</td><td class="memItemRight" valign="bottom"><b>==</b> (other: <a class="el" href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html">EntityFullJid</a>): Bool</td></tr>
+<tr class="separator:a04b96570e6d7a3777fed83a20b5b5005 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac905d84ced14a67b0792cf373d842d16 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top"><a id="ac905d84ced14a67b0792cf373d842d16" name="ac905d84ced14a67b0792cf373d842d16"></a>
+public operator&#160;</td><td class="memItemRight" valign="bottom"><b>==</b> (other: <a class="el" href="../../d6/d52/interfacexmpp4cj_1_1jid_1_1EntityBareJid.html">EntityBareJid</a>): Bool</td></tr>
+<tr class="separator:ac905d84ced14a67b0792cf373d842d16 inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba8069ceee0ffb90e20de1c96bf4cf7f inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top"><a id="aba8069ceee0ffb90e20de1c96bf4cf7f" name="aba8069ceee0ffb90e20de1c96bf4cf7f"></a>
+public operator&#160;</td><td class="memItemRight" valign="bottom"><b>==</b> (other: <a class="el" href="../../db/d32/interfacexmpp4cj_1_1jid_1_1DomainFullJid.html">DomainFullJid</a>): Bool</td></tr>
+<tr class="separator:aba8069ceee0ffb90e20de1c96bf4cf7f inherit pub_methods_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e5cfe28c77e10b3f8b36222f24c7d47"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a3e5cfe28c77e10b3f8b36222f24c7d47">getDomain</a> (): <a class="el" href="../../d1/d68/classxmpp4cj_1_1jid_1_1Domainpart.html">Domainpart</a></td></tr>
+<tr class="separator:a3e5cfe28c77e10b3f8b36222f24c7d47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33ff7aef57697fa6d2b3122223b0efee"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a33ff7aef57697fa6d2b3122223b0efee">asUnescapedString</a> (): String</td></tr>
+<tr class="separator:a33ff7aef57697fa6d2b3122223b0efee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae628a01612c7cea76dcb787b582b335"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#aae628a01612c7cea76dcb787b582b335">asUrlEncodedString</a> (): String</td></tr>
+<tr class="separator:aae628a01612c7cea76dcb787b582b335"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af03155ad97a927578cf2f2dd1be7a0de"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#af03155ad97a927578cf2f2dd1be7a0de">isEntityJid</a> (): Bool</td></tr>
+<tr class="separator:af03155ad97a927578cf2f2dd1be7a0de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8e259232439dcd7fa0d29fb63ebf32b"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#aa8e259232439dcd7fa0d29fb63ebf32b">isEntityBareJid</a> (): Bool</td></tr>
+<tr class="separator:aa8e259232439dcd7fa0d29fb63ebf32b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8c1104b12e4d652c0c3ba1381d0d60e"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#ac8c1104b12e4d652c0c3ba1381d0d60e">isEntityFullJid</a> (): Bool</td></tr>
+<tr class="separator:ac8c1104b12e4d652c0c3ba1381d0d60e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fc343bcfffe4442a04b5ea9c1baa3e5"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a0fc343bcfffe4442a04b5ea9c1baa3e5">isDomainBareJid</a> (): Bool</td></tr>
+<tr class="separator:a0fc343bcfffe4442a04b5ea9c1baa3e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96b9d22778efb8fad5862852a5f54490"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a96b9d22778efb8fad5862852a5f54490">isDomainFullJid</a> (): Bool</td></tr>
+<tr class="separator:a96b9d22778efb8fad5862852a5f54490"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad63be47e2be64bcb1eadd25d5685045b"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#ad63be47e2be64bcb1eadd25d5685045b">hasNoResource</a> (): Bool</td></tr>
+<tr class="separator:ad63be47e2be64bcb1eadd25d5685045b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2419bb254cdbd4437080085b7422c3ee"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a2419bb254cdbd4437080085b7422c3ee">hasResource</a> (): Bool</td></tr>
+<tr class="separator:a2419bb254cdbd4437080085b7422c3ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39544a0c2d9323c0b2d4c62dee73eb6e"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a39544a0c2d9323c0b2d4c62dee73eb6e">hasLocalpart</a> (): Bool</td></tr>
+<tr class="separator:a39544a0c2d9323c0b2d4c62dee73eb6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c018c1f38a0b6fce9b7d13afaebf0fb"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a6c018c1f38a0b6fce9b7d13afaebf0fb">asBareJid</a> (): <a class="el" href="../../db/de8/interfacexmpp4cj_1_1jid_1_1BareJid.html">BareJid</a></td></tr>
+<tr class="separator:a6c018c1f38a0b6fce9b7d13afaebf0fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adafa0a2c93c7353fc91e9b45b14751bb"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#adafa0a2c93c7353fc91e9b45b14751bb">asEntityBareJidIfPossible</a> (): ?<a class="el" href="../../d6/d52/interfacexmpp4cj_1_1jid_1_1EntityBareJid.html">EntityBareJid</a></td></tr>
+<tr class="separator:adafa0a2c93c7353fc91e9b45b14751bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38bedb25fe8cc39153044a704c868c73"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a38bedb25fe8cc39153044a704c868c73">asEntityBareJidOrThrow</a> (): <a class="el" href="../../d6/d52/interfacexmpp4cj_1_1jid_1_1EntityBareJid.html">EntityBareJid</a></td></tr>
+<tr class="separator:a38bedb25fe8cc39153044a704c868c73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bb49fc10d93cf739122c2a4356ec11f"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a2bb49fc10d93cf739122c2a4356ec11f">asEntityFullJidIfPossible</a> (): ?<a class="el" href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html">EntityFullJid</a></td></tr>
+<tr class="separator:a2bb49fc10d93cf739122c2a4356ec11f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33a3d5caba8b93e5524bbf3d15e8a642"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a33a3d5caba8b93e5524bbf3d15e8a642">asEntityFullJidOrThrow</a> (): <a class="el" href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html">EntityFullJid</a></td></tr>
+<tr class="separator:a33a3d5caba8b93e5524bbf3d15e8a642"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8dc21ca806cc537a537fa2e7845dae1"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#ac8dc21ca806cc537a537fa2e7845dae1">asEntityJidIfPossible</a> (): ?<a class="el" href="../../d9/d02/interfacexmpp4cj_1_1jid_1_1EntityJid.html">EntityJid</a></td></tr>
+<tr class="separator:ac8dc21ca806cc537a537fa2e7845dae1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72c048021f9de487c029610199601042"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a72c048021f9de487c029610199601042">asEntityJidOrThrow</a> (): <a class="el" href="../../d9/d02/interfacexmpp4cj_1_1jid_1_1EntityJid.html">EntityJid</a></td></tr>
+<tr class="separator:a72c048021f9de487c029610199601042"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbc202bde0289f67f20d71571b516a25"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#abbc202bde0289f67f20d71571b516a25">asFullJidIfPossible</a> (): ?<a class="el" href="../../de/ded/interfacexmpp4cj_1_1jid_1_1FullJid.html">FullJid</a></td></tr>
+<tr class="separator:abbc202bde0289f67f20d71571b516a25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8d5263075621bcb5a484339b042436e"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#ab8d5263075621bcb5a484339b042436e">asFullJidOrThrow</a> (): <a class="el" href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html">EntityFullJid</a></td></tr>
+<tr class="separator:ab8d5263075621bcb5a484339b042436e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5560094f0ffb62e02ac7edffcce74bd"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#ac5560094f0ffb62e02ac7edffcce74bd">asDomainBareJid</a> (): <a class="el" href="../../db/d45/interfacexmpp4cj_1_1jid_1_1DomainBareJid.html">DomainBareJid</a></td></tr>
+<tr class="separator:ac5560094f0ffb62e02ac7edffcce74bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b9c1f33feb76b738853c724edc862be"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a3b9c1f33feb76b738853c724edc862be">asDomainFullJidIfPossible</a> (): ?<a class="el" href="../../db/d32/interfacexmpp4cj_1_1jid_1_1DomainFullJid.html">DomainFullJid</a></td></tr>
+<tr class="separator:a3b9c1f33feb76b738853c724edc862be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a943e271ea5b9718ebd3a2cf935e138d0"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a943e271ea5b9718ebd3a2cf935e138d0">asDomainFullJidOrThrow</a> (): <a class="el" href="../../db/d32/interfacexmpp4cj_1_1jid_1_1DomainFullJid.html">DomainFullJid</a></td></tr>
+<tr class="separator:a943e271ea5b9718ebd3a2cf935e138d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0ced597e27c3404e24b4a936e5699d3"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#ac0ced597e27c3404e24b4a936e5699d3">getResourceOrNull</a> (): ?<a class="el" href="../../d8/d41/classxmpp4cj_1_1jid_1_1Resourcepart.html">Resourcepart</a></td></tr>
+<tr class="separator:ac0ced597e27c3404e24b4a936e5699d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a972babebb2d6463064955189b6267ebd"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a972babebb2d6463064955189b6267ebd">getResourceOrEmpty</a> (): <a class="el" href="../../d8/d41/classxmpp4cj_1_1jid_1_1Resourcepart.html">Resourcepart</a></td></tr>
+<tr class="separator:a972babebb2d6463064955189b6267ebd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ff8248e276e05effe700deb4c824f64"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a1ff8248e276e05effe700deb4c824f64">getResourceOrThrow</a> (): <a class="el" href="../../d8/d41/classxmpp4cj_1_1jid_1_1Resourcepart.html">Resourcepart</a></td></tr>
+<tr class="separator:a1ff8248e276e05effe700deb4c824f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aada638fda606a4c5acd88509be5ab85c"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#aada638fda606a4c5acd88509be5ab85c">getLocalpartOrNull</a> (): ?<a class="el" href="../../d8/dea/classxmpp4cj_1_1jid_1_1Localpart.html">Localpart</a></td></tr>
+<tr class="separator:aada638fda606a4c5acd88509be5ab85c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c52b4c9a7e7a335d16950efba5fe90f"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a4c52b4c9a7e7a335d16950efba5fe90f">getLocalpartOrThrow</a> (): <a class="el" href="../../d8/dea/classxmpp4cj_1_1jid_1_1Localpart.html">Localpart</a></td></tr>
+<tr class="separator:a4c52b4c9a7e7a335d16950efba5fe90f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34f25a0674961d96149de5b8d3d6cc22"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a34f25a0674961d96149de5b8d3d6cc22">isParentOf</a> (jid: <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html">Jid</a>): Bool</td></tr>
+<tr class="separator:a34f25a0674961d96149de5b8d3d6cc22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ee593d6dc71b0aebe95f3f1434d9252"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a3ee593d6dc71b0aebe95f3f1434d9252">isParentOf</a> (bareJid: <a class="el" href="../../d6/d52/interfacexmpp4cj_1_1jid_1_1EntityBareJid.html">EntityBareJid</a>): Bool</td></tr>
+<tr class="separator:a3ee593d6dc71b0aebe95f3f1434d9252"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e3c989dc667123e971fe0447b06f24d"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a8e3c989dc667123e971fe0447b06f24d">isParentOf</a> (fullJid: <a class="el" href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html">EntityFullJid</a>): Bool</td></tr>
+<tr class="separator:a8e3c989dc667123e971fe0447b06f24d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64958f4de518076e1297dd00d410221e"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a64958f4de518076e1297dd00d410221e">isParentOf</a> (domainBareJid: <a class="el" href="../../db/d45/interfacexmpp4cj_1_1jid_1_1DomainBareJid.html">DomainBareJid</a>): Bool</td></tr>
+<tr class="separator:a64958f4de518076e1297dd00d410221e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d8d51ccd9668f6f7d70c34b6caeab33"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a4d8d51ccd9668f6f7d70c34b6caeab33">isParentOf</a> (domainFullJid: <a class="el" href="../../db/d32/interfacexmpp4cj_1_1jid_1_1DomainFullJid.html">DomainFullJid</a>): Bool</td></tr>
+<tr class="separator:a4d8d51ccd9668f6f7d70c34b6caeab33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_interfacexmpp4cj_1_1jid_1_1DomainFullJid"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_interfacexmpp4cj_1_1jid_1_1DomainFullJid')"><img src="../../closed.png" alt="-"/>&#160;Public 成员函数 继承自 <a class="el" href="../../db/d32/interfacexmpp4cj_1_1jid_1_1DomainFullJid.html">DomainFullJid</a></td></tr>
+<tr class="memitem:ac72c6c4e70f5706e5ca06586510aeec2 inherit pub_methods_interfacexmpp4cj_1_1jid_1_1DomainFullJid"><td class="memItemLeft" align="right" valign="top"><a id="ac72c6c4e70f5706e5ca06586510aeec2" name="ac72c6c4e70f5706e5ca06586510aeec2"></a>
+operator override&#160;</td><td class="memItemRight" valign="bottom"><b>!=</b> (that: <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html">Jid</a>): Bool</td></tr>
+<tr class="separator:ac72c6c4e70f5706e5ca06586510aeec2 inherit pub_methods_interfacexmpp4cj_1_1jid_1_1DomainFullJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38b5259aaa293cb8fa0f698a5a44325e"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/ded/interfacexmpp4cj_1_1jid_1_1FullJid.html#a38b5259aaa293cb8fa0f698a5a44325e">getResourcepart</a> (): <a class="el" href="../../d8/d41/classxmpp4cj_1_1jid_1_1Resourcepart.html">Resourcepart</a></td></tr>
+<tr class="separator:a38b5259aaa293cb8fa0f698a5a44325e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+额外继承的成员函数</h2></td></tr>
+<tr class="inherit_header pro_attribs_classxmpp4cj_1_1jid_1_1AbstractJid"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classxmpp4cj_1_1jid_1_1AbstractJid')"><img src="../../closed.png" alt="-"/>&#160;Protected 属性 继承自 <a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html">AbstractJid</a></td></tr>
+<tr class="memitem:a666483a6ac687f501c8e2523d6032f3a inherit pro_attribs_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d30/classxmpp4cj_1_1jid_1_1AbstractJid.html#a666483a6ac687f501c8e2523d6032f3a">var cache</a> : ?String = None</td></tr>
+<tr class="separator:a666483a6ac687f501c8e2523d6032f3a inherit pro_attribs_classxmpp4cj_1_1jid_1_1AbstractJid"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>代表一种特定类型的 XMPP 地址（JID），根据 RFC6122 2.4 标准，允许 JID 仅由域部分和资源部分组成。 </p>
+<p>与LocalDomainAndResourcepartJid相比，这个实现不需要为未转义的字符串设置缓存。 </p>
+</div><h2 class="groupheader">成员函数说明</h2>
+<a id="a3cd27f56ee95873f6194d20622a7f29f" name="a3cd27f56ee95873f6194d20622a7f29f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cd27f56ee95873f6194d20622a7f29f">&#9670;&#160;</a></span>asBareJid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func asBareJid </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../db/de8/interfacexmpp4cj_1_1jid_1_1BareJid.html">BareJid</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>返回一个通过从这个 JID 中移除资源部分创建的 JID。</p>
+<dl class="section return"><dt>返回</dt><dd>没有资源部分的这个 Jid。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a6c018c1f38a0b6fce9b7d13afaebf0fb">Jid</a>.</p>
+
+</div>
+</div>
+<a id="ab12b3b947e271422220791195c60f9cc" name="ab12b3b947e271422220791195c60f9cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab12b3b947e271422220791195c60f9cc">&#9670;&#160;</a></span>asDomainBareJid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func asDomainBareJid </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../db/d45/interfacexmpp4cj_1_1jid_1_1DomainBareJid.html">DomainBareJid</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>将这个 Jid 转换为一个域裸 JID（DomainBareJid）。 </p>
+<p>注意，总是可以将一个 Jid 转换为域裸 JID，因为每个 Jid 都有一个域部分。 </p>
+<dl class="section return"><dt>返回</dt><dd>对应的域裸 JID。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#ac5560094f0ffb62e02ac7edffcce74bd">Jid</a>.</p>
+
+</div>
+</div>
+<a id="afd2c1d89f0017c1b8ba98661f128fd82" name="afd2c1d89f0017c1b8ba98661f128fd82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd2c1d89f0017c1b8ba98661f128fd82">&#9670;&#160;</a></span>asDomainFullJidIfPossible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func asDomainFullJidIfPossible </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?<a class="el" href="../../db/d32/interfacexmpp4cj_1_1jid_1_1DomainFullJid.html">DomainFullJid</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>如果可能，将这个 Jid 转换为一个域完整 JID（DomainFullJid）。</p>
+<dl class="section return"><dt>返回</dt><dd>对应的域完整 JID 或 None。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a3b9c1f33feb76b738853c724edc862be">Jid</a>.</p>
+
+</div>
+</div>
+<a id="af5fd3a6a7da3bea959cba8059da9900c" name="af5fd3a6a7da3bea959cba8059da9900c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5fd3a6a7da3bea959cba8059da9900c">&#9670;&#160;</a></span>asEntityBareJidIfPossible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func asEntityBareJidIfPossible </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?<a class="el" href="../../d6/d52/interfacexmpp4cj_1_1jid_1_1EntityBareJid.html">EntityBareJid</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>如果可能，将这个 Jid 转换为一个实体裸 JID（EntityBareJid）。</p>
+<dl class="section return"><dt>返回</dt><dd>对应的实体裸 JID 或 None。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#adafa0a2c93c7353fc91e9b45b14751bb">Jid</a>.</p>
+
+</div>
+</div>
+<a id="a3043fe55657c119b264b1045ae4fcfa5" name="a3043fe55657c119b264b1045ae4fcfa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3043fe55657c119b264b1045ae4fcfa5">&#9670;&#160;</a></span>asEntityFullJidIfPossible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func asEntityFullJidIfPossible </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?<a class="el" href="../../d9/dc9/interfacexmpp4cj_1_1jid_1_1EntityFullJid.html">EntityFullJid</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>如果可能，将这个 Jid 转换为一个实体完整 JID（EntityFullJid）。</p>
+<dl class="section return"><dt>返回</dt><dd>对应的实体完整 JID 或 None。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a2bb49fc10d93cf739122c2a4356ec11f">Jid</a>.</p>
+
+</div>
+</div>
+<a id="a1ea98798b00fb3725103a6e8b12cf2d8" name="a1ea98798b00fb3725103a6e8b12cf2d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ea98798b00fb3725103a6e8b12cf2d8">&#9670;&#160;</a></span>asEntityJidIfPossible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func asEntityJidIfPossible </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?<a class="el" href="../../d9/d02/interfacexmpp4cj_1_1jid_1_1EntityJid.html">EntityJid</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>如果可能，将这个 Jid 转换为一个实体 JID（EntityJid）。</p>
+<dl class="section return"><dt>返回</dt><dd>对应的实体 JID 或 None。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#ac8dc21ca806cc537a537fa2e7845dae1">Jid</a>.</p>
+
+</div>
+</div>
+<a id="afcda1ec9e551da5cc5901ca4b24d3b8d" name="afcda1ec9e551da5cc5901ca4b24d3b8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcda1ec9e551da5cc5901ca4b24d3b8d">&#9670;&#160;</a></span>asFullJidIfPossible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func asFullJidIfPossible </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?<a class="el" href="../../de/ded/interfacexmpp4cj_1_1jid_1_1FullJid.html">FullJid</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>如果可能，将这个 Jid 转换为一个完整 JID（FullJid）。</p>
+<dl class="section return"><dt>返回</dt><dd>对应的完整 JID 或 None。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#abbc202bde0289f67f20d71571b516a25">Jid</a>.</p>
+
+</div>
+</div>
+<a id="a0ef7591a7b625002c816f815d3a88fe7" name="a0ef7591a7b625002c816f815d3a88fe7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ef7591a7b625002c816f815d3a88fe7">&#9670;&#160;</a></span>asUnescapedString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func asUnescapedString </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: String </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>此方法用于返回这个 JID 的未转义字符串表示形式。 </p>
+<p>由于某些 Unicode 码点在 JID 的本地部分（localpart）中是不被允许的，按照所需的 stringprep 规范，这些码点在实际的 JID 中需要被转义。未转义的 JID 表示形式仅用于向人类用户展示或用于与非 XMPP 系统进行交互。 </p>
+<p>例如，如果用户输入 <code class="JavaDocCode">'at&amp;t guy@example.com'</code>，使用<code><a class="el" href="../../d0/d28/classxmpp4cj_1_1jid_1_1JidCreate.html">xmpp4cj.jid.JidCreate</a></code>创建的转义后的实际 JID 将是<code class="JavaDocCode">'at\26t\20guy@example.com'</code>，这是 <code><a class="el" href="../../">Jid#toString()</a></code> 方法将返回的结果。而 <code><a class="el" href="../../">Jid#asUnescapedString()</a></code> 方法将再次返回<code class="JavaDocCode">'at&amp;t guy@example.com'</code>。</p>
+<dl class="section return"><dt>返回</dt><dd>这个 JID 的未转义字符串表示。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a33ff7aef57697fa6d2b3122223b0efee">Jid</a>.</p>
+
+</div>
+</div>
+<a id="a8da4e6215aa44118a1cfb9ca9fbf5cad" name="a8da4e6215aa44118a1cfb9ca9fbf5cad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8da4e6215aa44118a1cfb9ca9fbf5cad">&#9670;&#160;</a></span>getDomain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getDomain </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d1/d68/classxmpp4cj_1_1jid_1_1Domainpart.html">Domainpart</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>用于获取这个 Jid 的Domainpart（域部分）</p>
+<dl class="section return"><dt>返回</dt><dd>这个 Jid 的域部分对象 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a3e5cfe28c77e10b3f8b36222f24c7d47">Jid</a>.</p>
+
+</div>
+</div>
+<a id="abbdc9767c68b65b185b016236368a256" name="abbdc9767c68b65b185b016236368a256"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbdc9767c68b65b185b016236368a256">&#9670;&#160;</a></span>getLocalpartOrNull()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getLocalpartOrNull </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?<a class="el" href="../../d8/dea/classxmpp4cj_1_1jid_1_1Localpart.html">Localpart</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取这个 JID 的本地部分或 None。 </p>
+<p>如果 JID 是 <code class="JavaDocCode">&lt;localpart@domain.example&gt;</code> 的形式，那么这个方法返回 'localpart'。如果 JID 没有本地部分，那么返回 None。 </p>
+<dl class="section return"><dt>返回</dt><dd>这个 JID 的本地部分或 None。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#aada638fda606a4c5acd88509be5ab85c">Jid</a>.</p>
+
+</div>
+</div>
+<a id="a0be26d3bef579c3298cf5eb10c097639" name="a0be26d3bef579c3298cf5eb10c097639"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0be26d3bef579c3298cf5eb10c097639">&#9670;&#160;</a></span>getResourceOrNull()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getResourceOrNull </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?<a class="el" href="../../d8/d41/classxmpp4cj_1_1jid_1_1Resourcepart.html">Resourcepart</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取这个 JID 的资源部分或 None。 </p>
+<p>如果 JID 是 <code class="JavaDocCode">&lt;localpart@domain.example/resource&gt;</code> 的形式，那么这个方法返回 'resource'。如果 JID 没有资源部分，那么返回 None。 </p>
+<dl class="section return"><dt>返回</dt><dd>这个 JID 的资源部分或 None。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#ac0ced597e27c3404e24b4a936e5699d3">Jid</a>.</p>
+
+</div>
+</div>
+<a id="a485838c306012b555c48c12489aec878" name="a485838c306012b555c48c12489aec878"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a485838c306012b555c48c12489aec878">&#9670;&#160;</a></span>getResourcepart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getResourcepart </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d8/d41/classxmpp4cj_1_1jid_1_1Resourcepart.html">Resourcepart</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>返回 JID 的资源部分 <code><a class="el" href="../../">Resourcepart</a></code></p>
+<dl class="section return"><dt>返回</dt><dd>资源部分 </dd></dl>
+
+<p>实现了 <a class="el" href="../../de/ded/interfacexmpp4cj_1_1jid_1_1FullJid.html#a38b5259aaa293cb8fa0f698a5a44325e">FullJid</a>.</p>
+
+</div>
+</div>
+<a id="a845de7f4d0a3188c3ee29d366089a089" name="a845de7f4d0a3188c3ee29d366089a089"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a845de7f4d0a3188c3ee29d366089a089">&#9670;&#160;</a></span>hasNoResource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func hasNoResource </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Bool </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>检查是否为 <code><a class="el" href="../../">EntityBareJid</a></code> or <code><a class="el" href="../../">DomainBareJid</a></code>.</p>
+<dl class="section return"><dt>返回</dt><dd>true 若当前对象为 BareJid or DomainBareJid </dd></dl>
+
+<p>实现了 <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#ad63be47e2be64bcb1eadd25d5685045b">Jid</a>.</p>
+
+</div>
+</div>
+<a id="a879e0e830a5d75e523d285d97ec297c7" name="a879e0e830a5d75e523d285d97ec297c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a879e0e830a5d75e523d285d97ec297c7">&#9670;&#160;</a></span>isParentOf() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func isParentOf </td>
+          <td>(</td>
+          <td class="paramname"><em>domainBareJid</em>:&#160;</td>
+          <td class="paramtype">DomainBareJid</td><td>)</td>
+          <td>: Bool </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>参见 <code><a class="el" href="../../">isParentOf(Jid)</a></code>。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">domainBareJid</td><td>域完整 JID。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果这个 JID 是给定 JID 的父级，则返回 true。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a64958f4de518076e1297dd00d410221e">Jid</a>.</p>
+
+</div>
+</div>
+<a id="a31277ceaf5b4f1c95b9f8d8d75b025d4" name="a31277ceaf5b4f1c95b9f8d8d75b025d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31277ceaf5b4f1c95b9f8d8d75b025d4">&#9670;&#160;</a></span>isParentOf() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func isParentOf </td>
+          <td>(</td>
+          <td class="paramname"><em>domainFullJid</em>:&#160;</td>
+          <td class="paramtype">DomainFullJid</td><td>)</td>
+          <td>: Bool </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>参见 <code><a class="el" href="../../">isParentOf(Jid)</a></code>。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">domainFullJid</td><td>域完整 JID。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果这个 JID 是给定 JID 的父级，则返回 true。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a4d8d51ccd9668f6f7d70c34b6caeab33">Jid</a>.</p>
+
+</div>
+</div>
+<a id="a9c9ce65028917bba646332bef1299322" name="a9c9ce65028917bba646332bef1299322"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c9ce65028917bba646332bef1299322">&#9670;&#160;</a></span>isParentOf() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func isParentOf </td>
+          <td>(</td>
+          <td class="paramname"><em>entityBareJid</em>:&#160;</td>
+          <td class="paramtype">EntityBareJid</td><td>)</td>
+          <td>: Bool </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>参见 <code><a class="el" href="../../">isParentOf(Jid)</a></code>。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entityBareJid</td><td>完整 JID。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果这个 JID 是给定 JID 的父级，则返回 true。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a3ee593d6dc71b0aebe95f3f1434d9252">Jid</a>.</p>
+
+</div>
+</div>
+<a id="a9434bbbd774e0305872bf43e5ee5e8d7" name="a9434bbbd774e0305872bf43e5ee5e8d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9434bbbd774e0305872bf43e5ee5e8d7">&#9670;&#160;</a></span>isParentOf() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func isParentOf </td>
+          <td>(</td>
+          <td class="paramname"><em>entityFullJid</em>:&#160;</td>
+          <td class="paramtype">EntityFullJid</td><td>)</td>
+          <td>: Bool </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>参见 <code><a class="el" href="../../">isParentOf(Jid)</a></code>。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entityFullJid</td><td>域裸 JID。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果这个 JID 是给定 JID 的父级，则返回 true。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d9/dbf/interfacexmpp4cj_1_1jid_1_1Jid.html#a8e3c989dc667123e971fe0447b06f24d">Jid</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/jid/jid.cj</li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../d0/d12/namespacexmpp4cj.html">xmpp4cj</a></li><li class="navelem"><a class="el" href="../../df/d76/namespacexmpp4cj_1_1jid.html">jid</a></li><li class="navelem"><a class="el" href="../../d2/dc9/classxmpp4cj_1_1jid_1_1DomainAndResourcepartJid.html">DomainAndResourcepartJid</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

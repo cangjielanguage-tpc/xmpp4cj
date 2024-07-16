@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Xmpp4cj: IntrospectionProvider抽象类 参考</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Xmpp4cj
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('dd/ddf/classxmpp4cj_1_1provider_1_1IntrospectionProvider.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="../../dc/d15/classxmpp4cj_1_1provider_1_1IntrospectionProvider-members.html">所有成员列表</a>  </div>
+  <div class="headertitle"><div class="title">IntrospectionProvider抽象类 参考</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a69a046bce718ef20fc7e12613bab7262"><td class="memItemLeft" align="right" valign="top">public static func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/ddf/classxmpp4cj_1_1provider_1_1IntrospectionProvider.html#a69a046bce718ef20fc7e12613bab7262">parseWithIntrospection&lt;E&gt;</a> (parser: XmlPullParser, initialDepth: Int, eInit: () -&gt; E, ePropertySetter: (E, String, String) -&gt; Unit): E where E &lt;: Element</td></tr>
+<tr class="separator:a69a046bce718ef20fc7e12613bab7262"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>IntrospectionProvider 类用于提供 XML 的解析功能。 它包含了用于解析 IQ 和 ExtensionElement 的两个抽象类。 </p>
+</div><h2 class="groupheader">成员函数说明</h2>
+<a id="a69a046bce718ef20fc7e12613bab7262" name="a69a046bce718ef20fc7e12613bab7262"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69a046bce718ef20fc7e12613bab7262">&#9670;&#160;</a></span>parseWithIntrospection&lt;E&gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public static func parseWithIntrospection&lt;E&gt; </td>
+          <td>(</td>
+          <td class="paramname"><em>parser</em>:&#160;</td>
+          <td class="paramtype">XmlPullParser, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>initialDepth</em>:&#160;</td>
+          <td class="paramtype">Int, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>eInit</em>:&#160;</td>
+          <td class="paramtype">() -&gt; E, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>ePropertySetter</em>:&#160;</td>
+          <td class="paramtype">(E, String, String) -&gt; Unit&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>: E where E &lt;: Element </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>解析 XML 元素并返回相应的对象。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parser</td><td>XmlPullParser 实例 </td></tr>
+    <tr><td class="paramname">initialDepth</td><td>解析时的初始深度 </td></tr>
+    <tr><td class="paramname">eInit</td><td>泛型的构造函数 </td></tr>
+    <tr><td class="paramname">ePropertySetter</td><td>泛型实例的setter方法 (E实例, 属性名, 属性值) -&gt; Unit</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>解析得到的对象</dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">XmlPullParserException</td><td>XML 解析异常 </td></tr>
+    <tr><td class="paramname">IOException</td><td>I/O 过程中的异常 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/provider/introspection_provider.cj</li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../d0/d12/namespacexmpp4cj.html">xmpp4cj</a></li><li class="navelem"><a class="el" href="../../da/dd9/namespacexmpp4cj_1_1provider.html">provider</a></li><li class="navelem"><a class="el" href="../../dd/ddf/classxmpp4cj_1_1provider_1_1IntrospectionProvider.html">IntrospectionProvider</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,999 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Xmpp4cj: StaxXmlPullParser类 参考</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Xmpp4cj
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="../../d6/dc8/classxmpp4cj_1_1xml_1_1StaxXmlPullParser-members.html">所有成员列表</a>  </div>
+  <div class="headertitle"><div class="title">StaxXmlPullParser类 参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+类 StaxXmlPullParser 继承关系图:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.png" usemap="#StaxXmlPullParser_map" alt=""/>
+  <map id="StaxXmlPullParser_map" name="StaxXmlPullParser_map">
+<area href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html" alt="XmlPullParser" shape="rect" coords="0,0,116,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a7abf629d5f811c2b57c13bf8fdfc1687"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a7abf629d5f811c2b57c13bf8fdfc1687">getProperty</a> (name: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a>): Object</td></tr>
+<tr class="separator:a7abf629d5f811c2b57c13bf8fdfc1687"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c6079c1e2c84011d4f77b64abdc21ff"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a8c6079c1e2c84011d4f77b64abdc21ff">getInputEncoding</a> (): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a8c6079c1e2c84011d4f77b64abdc21ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdd6755c7600d941c8e1c0685f00b43a"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#abdd6755c7600d941c8e1c0685f00b43a">getNamespaceCount</a> (): Int64</td></tr>
+<tr class="separator:abdd6755c7600d941c8e1c0685f00b43a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42a60335e67387d5680e4620d537c3e5"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a42a60335e67387d5680e4620d537c3e5">getNamespacePrefix</a> (pos: Int64): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a42a60335e67387d5680e4620d537c3e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c0c9e887365b0f50e9386375ff429d3"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a1c0c9e887365b0f50e9386375ff429d3">getNamespaceUri</a> (pos: Int64): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a1c0c9e887365b0f50e9386375ff429d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ad78b250b7fce1d5a5b35cf6f633c95"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a4ad78b250b7fce1d5a5b35cf6f633c95">getNamespace</a> (prefix: ?<a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a>): ?<a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a4ad78b250b7fce1d5a5b35cf6f633c95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad793a329fb42fa348bda6f6f663a5295"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#ad793a329fb42fa348bda6f6f663a5295">getDepth</a> (): Int64</td></tr>
+<tr class="separator:ad793a329fb42fa348bda6f6f663a5295"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91fc3f4f8b3cd583c8963e8ae2c0e956"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a91fc3f4f8b3cd583c8963e8ae2c0e956">getPositionDescription</a> (): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a91fc3f4f8b3cd583c8963e8ae2c0e956"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a615ef322aedde4aebb6b4ed0eac41537"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a615ef322aedde4aebb6b4ed0eac41537">getLineNumber</a> (): Int64</td></tr>
+<tr class="separator:a615ef322aedde4aebb6b4ed0eac41537"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f3206838582c79a9ca12c1924335822"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a4f3206838582c79a9ca12c1924335822">getColumnNumber</a> (): Int64</td></tr>
+<tr class="separator:a4f3206838582c79a9ca12c1924335822"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeb3a770c515ad3ece98365e566547d9"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#abeb3a770c515ad3ece98365e566547d9">isWhiteSpace</a> (): Bool</td></tr>
+<tr class="separator:abeb3a770c515ad3ece98365e566547d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a250efe4e54a64d8878d8ec1a57e85f"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a4a250efe4e54a64d8878d8ec1a57e85f">getText</a> (): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a4a250efe4e54a64d8878d8ec1a57e85f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88cddc10c3c51e6cd5d6b7ea140153fa"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a88cddc10c3c51e6cd5d6b7ea140153fa">getNamespace</a> (): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a88cddc10c3c51e6cd5d6b7ea140153fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a137a13f482b4c5542ce3e71c32ab3be1"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a137a13f482b4c5542ce3e71c32ab3be1">getName</a> (): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a137a13f482b4c5542ce3e71c32ab3be1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38b8eade6be2f24d0ae36927910d2e91"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a38b8eade6be2f24d0ae36927910d2e91">getQName</a> (): <a class="el" href="../../d2/d47/classxmpp4cj_1_1xml_1_1QName.html">QName</a></td></tr>
+<tr class="separator:a38b8eade6be2f24d0ae36927910d2e91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a183643ea175b2f491afdbe3f3e2ea63d"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a183643ea175b2f491afdbe3f3e2ea63d">getPrefix</a> (): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a183643ea175b2f491afdbe3f3e2ea63d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab60c83e5afd2608be301fb0387a2118f"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#ab60c83e5afd2608be301fb0387a2118f">getAttributeCount</a> (): Int64</td></tr>
+<tr class="separator:ab60c83e5afd2608be301fb0387a2118f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1f5926d62ae762ac5b02c772854d252"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#ac1f5926d62ae762ac5b02c772854d252">getAttributeNamespace</a> (index: Int64): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:ac1f5926d62ae762ac5b02c772854d252"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63b694812546a434e473faa62d1e2d6f"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a63b694812546a434e473faa62d1e2d6f">getAttributeName</a> (index: Int64): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a63b694812546a434e473faa62d1e2d6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37e5ed50b076d8e9ce69e2bdd4f10ff9"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a37e5ed50b076d8e9ce69e2bdd4f10ff9">getAttributeQName</a> (index: Int64): <a class="el" href="../../d2/d47/classxmpp4cj_1_1xml_1_1QName.html">QName</a></td></tr>
+<tr class="separator:a37e5ed50b076d8e9ce69e2bdd4f10ff9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fbdbd37ed1fcc3b8097f3a90ba622cf"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a1fbdbd37ed1fcc3b8097f3a90ba622cf">getAttributePrefix</a> (index: Int64): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a1fbdbd37ed1fcc3b8097f3a90ba622cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f3c065e58aeff46cbe00271e7d9746a"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a9f3c065e58aeff46cbe00271e7d9746a">getAttributeType</a> (index: Int64): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a9f3c065e58aeff46cbe00271e7d9746a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affceff268f17cc350cab3a799f0a3cfc"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#affceff268f17cc350cab3a799f0a3cfc">getAttributeValue</a> (index: Int64): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:affceff268f17cc350cab3a799f0a3cfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a639ad8df01214d116f5900f3561ee5e1"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a639ad8df01214d116f5900f3561ee5e1">getAttributeValue</a> (namespace: ?<a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a>, name: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a>): ?<a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a639ad8df01214d116f5900f3561ee5e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd2aa1f9ccfe29e44b99cd3542e1217c"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#acd2aa1f9ccfe29e44b99cd3542e1217c">getEventType</a> (): <a class="el" href="../../d3/da5/enumxmpp4cj_1_1xml_1_1XmlPullParserEvent.html">XmlPullParserEvent</a></td></tr>
+<tr class="separator:acd2aa1f9ccfe29e44b99cd3542e1217c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92b9acc426315c3453d164d76c6bb0db"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a92b9acc426315c3453d164d76c6bb0db">next</a> (): <a class="el" href="../../d3/da5/enumxmpp4cj_1_1xml_1_1XmlPullParserEvent.html">XmlPullParserEvent</a></td></tr>
+<tr class="separator:a92b9acc426315c3453d164d76c6bb0db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af75568398bd14fcd61ecf759925b6399"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#af75568398bd14fcd61ecf759925b6399">nextText</a> (): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:af75568398bd14fcd61ecf759925b6399"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad89d25312dcc2d2b10e1243cd85831d3"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#ad89d25312dcc2d2b10e1243cd85831d3">nextTag</a> (): <a class="el" href="../../d8/d76/enumxmpp4cj_1_1xml_1_1XmlPullParserTagEvent.html">XmlPullParserTagEvent</a></td></tr>
+<tr class="separator:ad89d25312dcc2d2b10e1243cd85831d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a698ae0627441d489653ba87a9da8ab54"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html#a698ae0627441d489653ba87a9da8ab54">supportsRoundtrip</a> (): Bool</td></tr>
+<tr class="separator:a698ae0627441d489653ba87a9da8ab54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser')"><img src="../../closed.png" alt="-"/>&#160;Public 成员函数 继承自 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html">XmlPullParser</a></td></tr>
+<tr class="memitem:a8c47385420f4150742e9699f33674c6d inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a8c47385420f4150742e9699f33674c6d">getProperty</a> (name: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a>): Object</td></tr>
+<tr class="separator:a8c47385420f4150742e9699f33674c6d inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8c5b42687b2dcaf9ff231d8aaa7e9ae inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#ac8c5b42687b2dcaf9ff231d8aaa7e9ae">getInputEncoding</a> (): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:ac8c5b42687b2dcaf9ff231d8aaa7e9ae inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68a6740149c4b62be0c66f45663a830b inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a68a6740149c4b62be0c66f45663a830b">getNamespaceCount</a> (): Int64</td></tr>
+<tr class="separator:a68a6740149c4b62be0c66f45663a830b inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41733e32ffbe05f9ce988fd87148572f inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a41733e32ffbe05f9ce988fd87148572f">getNamespacePrefix</a> (pos: Int64): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a41733e32ffbe05f9ce988fd87148572f inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e42c6e50fbea698d694e6b04f1ea552 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a4e42c6e50fbea698d694e6b04f1ea552">getNamespaceUri</a> (pos: Int64): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a4e42c6e50fbea698d694e6b04f1ea552 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e29d629b502512a09a197621f35e7b1 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a3e29d629b502512a09a197621f35e7b1">getNamespace</a> (prefix: ?<a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a>): ?<a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a3e29d629b502512a09a197621f35e7b1 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3596789f4d11e26953448676d5531288 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a3596789f4d11e26953448676d5531288">getDefaultNamespace</a> (): ?<a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a3596789f4d11e26953448676d5531288 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a873122a82141cdc325f12da5b3417be6 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a873122a82141cdc325f12da5b3417be6">getDepth</a> (): Int64</td></tr>
+<tr class="separator:a873122a82141cdc325f12da5b3417be6 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14aab52aed469a8ed60aaef51804c09b inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a14aab52aed469a8ed60aaef51804c09b">getPositionDescription</a> (): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a14aab52aed469a8ed60aaef51804c09b inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9d3967c3e52c3f8580a31bd2f00c896 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#ae9d3967c3e52c3f8580a31bd2f00c896">getLineNumber</a> (): Int64</td></tr>
+<tr class="separator:ae9d3967c3e52c3f8580a31bd2f00c896 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a567155acbf2334cdad5bdf45987af30d inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a567155acbf2334cdad5bdf45987af30d">getColumnNumber</a> (): Int64</td></tr>
+<tr class="separator:a567155acbf2334cdad5bdf45987af30d inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66514e0863e808aca8cc12c8630a269a inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a66514e0863e808aca8cc12c8630a269a">isWhiteSpace</a> (): Bool</td></tr>
+<tr class="separator:a66514e0863e808aca8cc12c8630a269a inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac63b0fe914cbf73c879087177916ecb4 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#ac63b0fe914cbf73c879087177916ecb4">getText</a> (): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:ac63b0fe914cbf73c879087177916ecb4 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77c2a0e25f081e8a8a4c972f8f426ad4 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a77c2a0e25f081e8a8a4c972f8f426ad4">getNamespace</a> (): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a77c2a0e25f081e8a8a4c972f8f426ad4 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90fb99fc3e1255a20637aec3f1c9831a inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a90fb99fc3e1255a20637aec3f1c9831a">getName</a> (): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a90fb99fc3e1255a20637aec3f1c9831a inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad977c9e1b88f4c2b740c0510ed57847f inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#ad977c9e1b88f4c2b740c0510ed57847f">getQName</a> (): <a class="el" href="../../d2/d47/classxmpp4cj_1_1xml_1_1QName.html">QName</a></td></tr>
+<tr class="separator:ad977c9e1b88f4c2b740c0510ed57847f inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44498990089819bb8290ddcecdfbf2b3 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a44498990089819bb8290ddcecdfbf2b3">getPrefix</a> (): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a44498990089819bb8290ddcecdfbf2b3 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a431bc376bf40bdc684387d68b0eb4d6a inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a431bc376bf40bdc684387d68b0eb4d6a">getAttributeCount</a> (): Int64</td></tr>
+<tr class="separator:a431bc376bf40bdc684387d68b0eb4d6a inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44a31450dc0525ee0e15abd61fb466c8 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a44a31450dc0525ee0e15abd61fb466c8">getAttributeNamespace</a> (index: Int64): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a44a31450dc0525ee0e15abd61fb466c8 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54cba5da52af630a0aaafbc293451d50 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a54cba5da52af630a0aaafbc293451d50">getAttributeName</a> (index: Int64): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a54cba5da52af630a0aaafbc293451d50 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd358ed2c7df73f552e9df83beecc589 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#acd358ed2c7df73f552e9df83beecc589">getAttributeQName</a> (index: Int64): <a class="el" href="../../d2/d47/classxmpp4cj_1_1xml_1_1QName.html">QName</a></td></tr>
+<tr class="separator:acd358ed2c7df73f552e9df83beecc589 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ef376def80c76274568ed9072701d08 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a5ef376def80c76274568ed9072701d08">getAttributePrefix</a> (index: Int64): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a5ef376def80c76274568ed9072701d08 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af03157f338834cb2a7ff30830f38cb80 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#af03157f338834cb2a7ff30830f38cb80">getAttributeType</a> (index: Int64): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:af03157f338834cb2a7ff30830f38cb80 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a542f2b7c2cd181110104e0db14546f1a inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a542f2b7c2cd181110104e0db14546f1a">getAttributeValue</a> (index: Int64): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a542f2b7c2cd181110104e0db14546f1a inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d3988031198e966edcef1f9fba46d42 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a0d3988031198e966edcef1f9fba46d42">getAttributeValue</a> (namespace: ?<a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a>, name: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a>): ?<a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a0d3988031198e966edcef1f9fba46d42 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21c890f82526fcdbf812da91fa8aa2ec inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a21c890f82526fcdbf812da91fa8aa2ec">getAttributeValue</a> (name: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a>): ?<a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:a21c890f82526fcdbf812da91fa8aa2ec inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70a4bed939c93d6f5fc0f3f00b9eac3e inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a70a4bed939c93d6f5fc0f3f00b9eac3e">getEventType</a> (): <a class="el" href="../../d3/da5/enumxmpp4cj_1_1xml_1_1XmlPullParserEvent.html">XmlPullParserEvent</a></td></tr>
+<tr class="separator:a70a4bed939c93d6f5fc0f3f00b9eac3e inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee64e137b09bd3cda5a778e3c6380564 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#aee64e137b09bd3cda5a778e3c6380564">next</a> (): <a class="el" href="../../d3/da5/enumxmpp4cj_1_1xml_1_1XmlPullParserEvent.html">XmlPullParserEvent</a></td></tr>
+<tr class="separator:aee64e137b09bd3cda5a778e3c6380564 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac63bf8f3eee6f216ee6c97a58a48c59 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#aac63bf8f3eee6f216ee6c97a58a48c59">nextText</a> (): <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a></td></tr>
+<tr class="separator:aac63bf8f3eee6f216ee6c97a58a48c59 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d681c3d426714e64caf129e3c2951f8 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a5d681c3d426714e64caf129e3c2951f8">nextTag</a> (): <a class="el" href="../../d8/d76/enumxmpp4cj_1_1xml_1_1XmlPullParserTagEvent.html">XmlPullParserTagEvent</a></td></tr>
+<tr class="separator:a5d681c3d426714e64caf129e3c2951f8 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5237a086ac99785c7a2698df6e082588 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a5237a086ac99785c7a2698df6e082588">supportsRoundtrip</a> (): Bool</td></tr>
+<tr class="separator:a5237a086ac99785c7a2698df6e082588 inherit pub_methods_interfacexmpp4cj_1_1xml_1_1XmlPullParser"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>使用Stax接口的XML拉取解析器。 </p>
+</div><h2 class="groupheader">成员函数说明</h2>
+<a id="ab60c83e5afd2608be301fb0387a2118f" name="ab60c83e5afd2608be301fb0387a2118f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab60c83e5afd2608be301fb0387a2118f">&#9670;&#160;</a></span>getAttributeCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getAttributeCount </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Int64 </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取属性数量。</p>
+<dl class="section return"><dt>返回</dt><dd>属性数量。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a431bc376bf40bdc684387d68b0eb4d6a">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a63b694812546a434e473faa62d1e2d6f" name="a63b694812546a434e473faa62d1e2d6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63b694812546a434e473faa62d1e2d6f">&#9670;&#160;</a></span>getAttributeName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getAttributeName </td>
+          <td>(</td>
+          <td class="paramname"><em>index</em>:&#160;</td>
+          <td class="paramtype">Int64</td><td>)</td>
+          <td>: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>返回属性名称的本地部分，或者如果索引不指向属性则返回 <code>None</code>。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>属性索引。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>属性名称的本地部分或 <code>None</code>。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a54cba5da52af630a0aaafbc293451d50">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="ac1f5926d62ae762ac5b02c772854d252" name="ac1f5926d62ae762ac5b02c772854d252"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1f5926d62ae762ac5b02c772854d252">&#9670;&#160;</a></span>getAttributeNamespace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getAttributeNamespace </td>
+          <td>(</td>
+          <td class="paramname"><em>index</em>:&#160;</td>
+          <td class="paramtype">Int64</td><td>)</td>
+          <td>: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取指定索引的属性的命名空间。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>属性索引。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>属性命名空间字符串。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a44a31450dc0525ee0e15abd61fb466c8">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a1fbdbd37ed1fcc3b8097f3a90ba622cf" name="a1fbdbd37ed1fcc3b8097f3a90ba622cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fbdbd37ed1fcc3b8097f3a90ba622cf">&#9670;&#160;</a></span>getAttributePrefix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getAttributePrefix </td>
+          <td>(</td>
+          <td class="paramname"><em>index</em>:&#160;</td>
+          <td class="paramtype">Int64</td><td>)</td>
+          <td>: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取指定索引的属性的前缀。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>属性索引。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>属性前缀字符串。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a5ef376def80c76274568ed9072701d08">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a37e5ed50b076d8e9ce69e2bdd4f10ff9" name="a37e5ed50b076d8e9ce69e2bdd4f10ff9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37e5ed50b076d8e9ce69e2bdd4f10ff9">&#9670;&#160;</a></span>getAttributeQName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getAttributeQName </td>
+          <td>(</td>
+          <td class="paramname"><em>index</em>:&#160;</td>
+          <td class="paramtype">Int64</td><td>)</td>
+          <td>: <a class="el" href="../../d2/d47/classxmpp4cj_1_1xml_1_1QName.html">QName</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取指定索引的属性的限定名称。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>属性索引。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>限定名称对象。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#acd358ed2c7df73f552e9df83beecc589">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a9f3c065e58aeff46cbe00271e7d9746a" name="a9f3c065e58aeff46cbe00271e7d9746a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f3c065e58aeff46cbe00271e7d9746a">&#9670;&#160;</a></span>getAttributeType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getAttributeType </td>
+          <td>(</td>
+          <td class="paramname"><em>index</em>:&#160;</td>
+          <td class="paramtype">Int64</td><td>)</td>
+          <td>: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取指定索引的属性的类型。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>属性索引。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>属性类型字符串。 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">XmlPullParserException</td><td>index越界的时候抛XmlPullParserException异常。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#af03157f338834cb2a7ff30830f38cb80">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="affceff268f17cc350cab3a799f0a3cfc" name="affceff268f17cc350cab3a799f0a3cfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affceff268f17cc350cab3a799f0a3cfc">&#9670;&#160;</a></span>getAttributeValue() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getAttributeValue </td>
+          <td>(</td>
+          <td class="paramname"><em>index</em>:&#160;</td>
+          <td class="paramtype">Int64</td><td>)</td>
+          <td>: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取指定索引的属性的值。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>属性索引。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>属性值字符串。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a542f2b7c2cd181110104e0db14546f1a">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a639ad8df01214d116f5900f3561ee5e1" name="a639ad8df01214d116f5900f3561ee5e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a639ad8df01214d116f5900f3561ee5e1">&#9670;&#160;</a></span>getAttributeValue() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getAttributeValue </td>
+          <td>(</td>
+          <td class="paramname"><em>namespace</em>:&#160;</td>
+          <td class="paramtype">?String, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramname"><em>name</em>:&#160;</td>
+          <td class="paramtype">String&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>: ?<a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>根据命名空间和名称获取属性值。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">namespace</td><td>命名空间字符串或 None。 </td></tr>
+    <tr><td class="paramname">name</td><td>属性名称。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>属性值字符串或 None。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a0d3988031198e966edcef1f9fba46d42">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a4f3206838582c79a9ca12c1924335822" name="a4f3206838582c79a9ca12c1924335822"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f3206838582c79a9ca12c1924335822">&#9670;&#160;</a></span>getColumnNumber()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getColumnNumber </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Int64 </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取当前列号。（不支持）</p>
+<dl class="section return"><dt>返回</dt><dd>列号。 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">UnsupportedException</td><td>不支持的接口抛UnsupportedException异常。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a567155acbf2334cdad5bdf45987af30d">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="ad793a329fb42fa348bda6f6f663a5295" name="ad793a329fb42fa348bda6f6f663a5295"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad793a329fb42fa348bda6f6f663a5295">&#9670;&#160;</a></span>getDepth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getDepth </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Int64 </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取当前深度。</p>
+<dl class="section return"><dt>返回</dt><dd>当前深度值。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a873122a82141cdc325f12da5b3417be6">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="acd2aa1f9ccfe29e44b99cd3542e1217c" name="acd2aa1f9ccfe29e44b99cd3542e1217c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd2aa1f9ccfe29e44b99cd3542e1217c">&#9670;&#160;</a></span>getEventType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getEventType </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d3/da5/enumxmpp4cj_1_1xml_1_1XmlPullParserEvent.html">XmlPullParserEvent</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取当前事件类型。</p>
+<dl class="section return"><dt>返回</dt><dd>当前事件类型对象。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a70a4bed939c93d6f5fc0f3f00b9eac3e">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a8c6079c1e2c84011d4f77b64abdc21ff" name="a8c6079c1e2c84011d4f77b64abdc21ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c6079c1e2c84011d4f77b64abdc21ff">&#9670;&#160;</a></span>getInputEncoding()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getInputEncoding </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取输入编码。</p>
+<dl class="section return"><dt>返回</dt><dd>输入编码字符串。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#ac8c5b42687b2dcaf9ff231d8aaa7e9ae">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a615ef322aedde4aebb6b4ed0eac41537" name="a615ef322aedde4aebb6b4ed0eac41537"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a615ef322aedde4aebb6b4ed0eac41537">&#9670;&#160;</a></span>getLineNumber()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getLineNumber </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Int64 </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取当前行号。（不支持）</p>
+<dl class="section return"><dt>返回</dt><dd>行号。 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">UnsupportedException</td><td>不支持的接口抛UnsupportedException异常。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#ae9d3967c3e52c3f8580a31bd2f00c896">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a137a13f482b4c5542ce3e71c32ab3be1" name="a137a13f482b4c5542ce3e71c32ab3be1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a137a13f482b4c5542ce3e71c32ab3be1">&#9670;&#160;</a></span>getName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getName </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>返回当前 START_ELEMENT 或 END_ELEMENT 事件的名称。 只有在当前事件是 START_ELEMENT 或 END_ELEMENT 时才能调用此方法。</p>
+<dl class="section return"><dt>返回</dt><dd>当前 START_ELEMETN 或 END_ELEMENT 事件的名称。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a90fb99fc3e1255a20637aec3f1c9831a">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a88cddc10c3c51e6cd5d6b7ea140153fa" name="a88cddc10c3c51e6cd5d6b7ea140153fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88cddc10c3c51e6cd5d6b7ea140153fa">&#9670;&#160;</a></span>getNamespace() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getNamespace </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取命名空间。</p>
+<dl class="section return"><dt>返回</dt><dd>命名空间字符串。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a77c2a0e25f081e8a8a4c972f8f426ad4">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a4ad78b250b7fce1d5a5b35cf6f633c95" name="a4ad78b250b7fce1d5a5b35cf6f633c95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ad78b250b7fce1d5a5b35cf6f633c95">&#9670;&#160;</a></span>getNamespace() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getNamespace </td>
+          <td>(</td>
+          <td class="paramname"><em>prefix</em>:&#160;</td>
+          <td class="paramtype">?String</td><td>)</td>
+          <td>: ?<a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>根据前缀获取命名空间。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">prefix</td><td>命名空间前缀。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>命名空间字符串或 None。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a3e29d629b502512a09a197621f35e7b1">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="abdd6755c7600d941c8e1c0685f00b43a" name="abdd6755c7600d941c8e1c0685f00b43a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdd6755c7600d941c8e1c0685f00b43a">&#9670;&#160;</a></span>getNamespaceCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getNamespaceCount </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Int64 </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取命名空间数量。</p>
+<dl class="section return"><dt>返回</dt><dd>命名空间数量。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a68a6740149c4b62be0c66f45663a830b">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a42a60335e67387d5680e4620d537c3e5" name="a42a60335e67387d5680e4620d537c3e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42a60335e67387d5680e4620d537c3e5">&#9670;&#160;</a></span>getNamespacePrefix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getNamespacePrefix </td>
+          <td>(</td>
+          <td class="paramname"><em>pos</em>:&#160;</td>
+          <td class="paramtype">Int64</td><td>)</td>
+          <td>: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取指定位置的命名空间前缀。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>位置索引。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>命名空间前缀字符串。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a41733e32ffbe05f9ce988fd87148572f">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a1c0c9e887365b0f50e9386375ff429d3" name="a1c0c9e887365b0f50e9386375ff429d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c0c9e887365b0f50e9386375ff429d3">&#9670;&#160;</a></span>getNamespaceUri()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getNamespaceUri </td>
+          <td>(</td>
+          <td class="paramname"><em>pos</em>:&#160;</td>
+          <td class="paramtype">Int64</td><td>)</td>
+          <td>: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取指定位置的命名空间 URI。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pos</td><td>位置索引。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>命名空间 URI 字符串。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a4e42c6e50fbea698d694e6b04f1ea552">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a91fc3f4f8b3cd583c8963e8ae2c0e956" name="a91fc3f4f8b3cd583c8963e8ae2c0e956"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91fc3f4f8b3cd583c8963e8ae2c0e956">&#9670;&#160;</a></span>getPositionDescription()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getPositionDescription </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取位置描述。（不支持）</p>
+<dl class="section return"><dt>返回</dt><dd>位置描述字符串。 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">UnsupportedException</td><td>不支持的接口抛UnsupportedException异常。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a14aab52aed469a8ed60aaef51804c09b">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a183643ea175b2f491afdbe3f3e2ea63d" name="a183643ea175b2f491afdbe3f3e2ea63d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a183643ea175b2f491afdbe3f3e2ea63d">&#9670;&#160;</a></span>getPrefix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getPrefix </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取前缀。</p>
+<dl class="section return"><dt>返回</dt><dd>前缀字符串。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a44498990089819bb8290ddcecdfbf2b3">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a7abf629d5f811c2b57c13bf8fdfc1687" name="a7abf629d5f811c2b57c13bf8fdfc1687"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7abf629d5f811c2b57c13bf8fdfc1687">&#9670;&#160;</a></span>getProperty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getProperty </td>
+          <td>(</td>
+          <td class="paramname"><em>name</em>:&#160;</td>
+          <td class="paramtype">String</td><td>)</td>
+          <td>: Object </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取指定名称的属性。(不支持)</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>属性名称。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>属性值对象。 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">UnsupportedException</td><td>不支持的接口抛UnsupportedException异常。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a8c47385420f4150742e9699f33674c6d">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a38b8eade6be2f24d0ae36927910d2e91" name="a38b8eade6be2f24d0ae36927910d2e91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38b8eade6be2f24d0ae36927910d2e91">&#9670;&#160;</a></span>getQName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getQName </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d2/d47/classxmpp4cj_1_1xml_1_1QName.html">QName</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取限定名称。</p>
+<dl class="section return"><dt>返回</dt><dd>限定名称对象。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#ad977c9e1b88f4c2b740c0510ed57847f">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a4a250efe4e54a64d8878d8ec1a57e85f" name="a4a250efe4e54a64d8878d8ec1a57e85f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a250efe4e54a64d8878d8ec1a57e85f">&#9670;&#160;</a></span>getText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func getText </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>获取文本内容。</p>
+<dl class="section return"><dt>返回</dt><dd>文本内容字符串。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#ac63b0fe914cbf73c879087177916ecb4">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="abeb3a770c515ad3ece98365e566547d9" name="abeb3a770c515ad3ece98365e566547d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abeb3a770c515ad3ece98365e566547d9">&#9670;&#160;</a></span>isWhiteSpace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func isWhiteSpace </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Bool </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>判断是否为空白字符。（不支持）</p>
+<dl class="section return"><dt>返回</dt><dd>如果是空白字符则为 true，否则为 false。 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">UnsupportedException</td><td>不支持的接口抛UnsupportedException异常。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a66514e0863e808aca8cc12c8630a269a">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a92b9acc426315c3453d164d76c6bb0db" name="a92b9acc426315c3453d164d76c6bb0db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92b9acc426315c3453d164d76c6bb0db">&#9670;&#160;</a></span>next()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func next </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d3/da5/enumxmpp4cj_1_1xml_1_1XmlPullParserEvent.html">XmlPullParserEvent</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>移动到下一个事件。</p>
+<dl class="section return"><dt>返回</dt><dd>下一个事件类型对象。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#aee64e137b09bd3cda5a778e3c6380564">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="ad89d25312dcc2d2b10e1243cd85831d3" name="ad89d25312dcc2d2b10e1243cd85831d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad89d25312dcc2d2b10e1243cd85831d3">&#9670;&#160;</a></span>nextTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func nextTag </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d8/d76/enumxmpp4cj_1_1xml_1_1XmlPullParserTagEvent.html">XmlPullParserTagEvent</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>移动到下一个标签事件。</p>
+<dl class="section return"><dt>返回</dt><dd>下一个标签事件类型对象。 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">XmlPullParserException</td><td>当下个标签对象没有开始结束标签的时候抛XmlPullParserException异常。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a5d681c3d426714e64caf129e3c2951f8">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="af75568398bd14fcd61ecf759925b6399" name="af75568398bd14fcd61ecf759925b6399"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af75568398bd14fcd61ecf759925b6399">&#9670;&#160;</a></span>nextText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func nextText </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: <a class="el" href="../../d2/d17/classxmpp4cj_1_1xml_1_1String.html">String</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>读取仅包含文本的元素的内容，如果这不是仅包含文本的元素，则抛出异常。 </p><ul>
+<li>
+前置条件：当前事件是 START_ELEMENT。 </li>
+<li>
+后置条件：当前事件是对应的 END_ELEMENT。 </li>
+</ul>
+<dl class="section return"><dt>返回</dt><dd>当前元素的文本内容。 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">IOException</td><td>如果发生 IO 错误。 </td></tr>
+    <tr><td class="paramname">XmlPullParserException</td><td>如果发生 XML 拉式解析器错误。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#aac63bf8f3eee6f216ee6c97a58a48c59">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<a id="a698ae0627441d489653ba87a9da8ab54" name="a698ae0627441d489653ba87a9da8ab54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a698ae0627441d489653ba87a9da8ab54">&#9670;&#160;</a></span>supportsRoundtrip()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func supportsRoundtrip </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Bool </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>判断是否支持往返操作。</p>
+<dl class="section return"><dt>返回</dt><dd>如果支持往返操作则为 true，否则为 false。 </dd></dl>
+
+<p>实现了 <a class="el" href="../../d3/d31/interfacexmpp4cj_1_1xml_1_1XmlPullParser.html#a5237a086ac99785c7a2698df6e082588">XmlPullParser</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/xml/stax_xml_pull_parser.cj</li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../d0/d12/namespacexmpp4cj.html">xmpp4cj</a></li><li class="navelem"><a class="el" href="../../d9/d97/namespacexmpp4cj_1_1xml.html">xml</a></li><li class="navelem"><a class="el" href="../../db/d29/classxmpp4cj_1_1xml_1_1StaxXmlPullParser.html">StaxXmlPullParser</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

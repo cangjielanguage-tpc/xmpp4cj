@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['unavailable_0',['unavailable',['../d1/d58/enumxmpp4cj_1_1packet_1_1PresenceType.html#a35631edb7c91e601d132500659511b18',1,'xmpp4cj::packet::PresenceType']]],
+  ['unblacklistsaslmechanism_1',['unBlacklistSASLMechanism',['../d9/dd8/classxmpp4cj_1_1connection_1_1SASLAuthentication.html#a0fe659a777bf3ec6c2074d0577712672',1,'xmpp4cj::connection::SASLAuthentication']]],
+  ['unchanged_2',['UNCHANGED',['../d1/dba/enumxmpp4cj_1_1connection_1_1XMPPConnectionFromMode.html#a74880859933b04f607cd56eaa896094f',1,'xmpp4cj::connection::XMPPConnectionFromMode']]],
+  ['undefined_5fcondition_3',['undefined_condition',['../d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#aa9326a7a5c67095b6142eb9ccc72cb35',1,'xmpp4cj.packet.StanzaErrorCondition.undefined_condition()'],['../d9/d65/enumxmpp4cj_1_1packet_1_1StreamErrorCondition.html#aa9326a7a5c67095b6142eb9ccc72cb35',1,'xmpp4cj.packet.StreamErrorCondition.undefined_condition()']]],
+  ['unescapelocalpart_4',['unescapeLocalpart',['../de/df0/classxmpp4cj_1_1jid_1_1XmppStringUtils.html#a5358e761226ad8728fcf7447438011c3',1,'xmpp4cj::jid::XmppStringUtils']]],
+  ['unexpected_5frequest_5',['unexpected_request',['../d3/dfd/enumxmpp4cj_1_1packet_1_1StanzaErrorCondition.html#ace4c1f2ed9c05ee493362f8e9abc8f15',1,'xmpp4cj::packet::StanzaErrorCondition']]],
+  ['unmodifiablelist_3ct_3e_6',['unmodifiableList&lt;T&gt;',['../d8/d37/classxmpp4cj_1_1util_1_1Collections.html#aec155f32d2914074a27aa0ad868b55cf',1,'xmpp4cj::util::Collections']]],
+  ['unmodifiablemap_3ck_2c_20v_3e_7',['unmodifiableMap&lt;K, V&gt;',['../d8/d37/classxmpp4cj_1_1util_1_1Collections.html#acab39ee0b81a87ab42fce50b2e892995',1,'xmpp4cj::util::Collections']]],
+  ['unparseablestanza_8',['UnparseableStanza',['../d5/d35/classxmpp4cj_1_1packet_1_1UnparseableStanza.html',1,'xmpp4cj::packet']]],
+  ['unparsediq_9',['UnparsedIQ',['../dd/d64/classxmpp4cj_1_1packet_1_1UnparsedIQ.html',1,'xmpp4cj::packet']]],
+  ['unregisteriqrequesthandler_10',['unregisterIQRequestHandler',['../d1/d40/classxmpp4cj_1_1connection_1_1AbstractXMPPConnection.html#a53239990886467a8f2d93acc9a0693b2',1,'xmpp4cj.connection.AbstractXMPPConnection.unregisterIQRequestHandler()'],['../dc/d9e/interfacexmpp4cj_1_1connection_1_1XMPPConnection.html#af86ba9cddacfba2a8e82ec353395019b',1,'xmpp4cj.connection.XMPPConnection.unregisterIQRequestHandler(element: String, namespace: String, Type: IQType): ?IQRequestHandler'],['../dc/d9e/interfacexmpp4cj_1_1connection_1_1XMPPConnection.html#a8a2e397f420955970ebaa2dba72eb9fc',1,'xmpp4cj.connection.XMPPConnection.unregisterIQRequestHandler(iqRequestHandler: IQRequestHandler): ?IQRequestHandler'],['../d1/d40/classxmpp4cj_1_1connection_1_1AbstractXMPPConnection.html#a7d6fe0d9bbb3a7c0643ba8cdcaad4986',1,'xmpp4cj.connection.AbstractXMPPConnection.unregisterIQRequestHandler()']]],
+  ['unregistersaslmechanism_11',['unregisterSASLMechanism',['../d9/dd8/classxmpp4cj_1_1connection_1_1SASLAuthentication.html#ac26e6a50e3e77535a4a5ca2e5481d55f',1,'xmpp4cj::connection::SASLAuthentication']]],
+  ['unsubscribe_12',['unsubscribe',['../d1/d58/enumxmpp4cj_1_1packet_1_1PresenceType.html#a02a7c0a6b9856b434249719bfd44758a',1,'xmpp4cj::packet::PresenceType']]],
+  ['unsubscribed_13',['unsubscribed',['../d1/d58/enumxmpp4cj_1_1packet_1_1PresenceType.html#a9d596dda5b620bc591b8852025bbf687',1,'xmpp4cj::packet::PresenceType']]],
+  ['unsupported_5fencoding_14',['unsupported_encoding',['../d9/d65/enumxmpp4cj_1_1packet_1_1StreamErrorCondition.html#a093c415d5c1762f925486cdf304c94ea',1,'xmpp4cj::packet::StreamErrorCondition']]],
+  ['unsupported_5ffeature_15',['unsupported_feature',['../d9/d65/enumxmpp4cj_1_1packet_1_1StreamErrorCondition.html#a341ecb732b896ceda18b0a5ccfaa4fd3',1,'xmpp4cj::packet::StreamErrorCondition']]],
+  ['unsupported_5fmethod_16',['unsupported_method',['../d6/d97/enumxmpp4cj_1_1compress_1_1FailureCompressFailureError.html#a4c3ac2fdfb3eb7a290d629d82cd07539',1,'xmpp4cj::compress::FailureCompressFailureError']]],
+  ['unsupported_5fstanza_5ftype_17',['unsupported_stanza_type',['../d9/d65/enumxmpp4cj_1_1packet_1_1StreamErrorCondition.html#ad59755c4b9096260885de1bf17f042dc',1,'xmpp4cj::packet::StreamErrorCondition']]],
+  ['unsupported_5fversion_18',['unsupported_version',['../d9/d65/enumxmpp4cj_1_1packet_1_1StreamErrorCondition.html#a724468d82a0cd76755b51ce786893110',1,'xmpp4cj::packet::StreamErrorCondition']]],
+  ['user_19',['USER',['../d1/dba/enumxmpp4cj_1_1connection_1_1XMPPConnectionFromMode.html#ae355ff3a4a5960b855abdbe2666e5e1d',1,'xmpp4cj::connection::XMPPConnectionFromMode']]],
+  ['userhaslogged_20',['userHasLogged',['../dd/d45/classxmpp4cj_1_1connection_1_1AbstractDebugger.html#a30c89b41acbfff53971b9cb3f74c9bdc',1,'xmpp4cj.connection.AbstractDebugger.userHasLogged()'],['../d8/df1/classxmpp4cj_1_1connection_1_1XmppDebugger.html#a031c0e5dc8ac9b7b53bedfe696e01582',1,'xmpp4cj.connection.XmppDebugger.userHasLogged()']]],
+  ['utf8bytexmppxmlsplitter_21',['Utf8ByteXmppXmlSplitter',['../dd/d22/classxmpp4cj_1_1jid_1_1Utf8ByteXmppXmlSplitter.html',1,'xmpp4cj::jid']]],
+  ['uuidstanzaidsource_22',['UuidStanzaIdSource',['../de/d19/classxmpp4cj_1_1packet_1_1UuidStanzaIdSource.html',1,'xmpp4cj::packet']]],
+  ['uuidstanzaidsourcefactory_23',['UuidStanzaIdSourceFactory',['../dc/d01/classxmpp4cj_1_1packet_1_1UuidStanzaIdSourceFactory.html',1,'xmpp4cj::packet']]]
+];

@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Xmpp4cj: StanzaFilter抽象类 参考</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Xmpp4cj
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('d8/d7c/classxmpp4cj_1_1filter_1_1StanzaFilter.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="../../da/d52/classxmpp4cj_1_1filter_1_1StanzaFilter-members.html">所有成员列表</a>  </div>
+  <div class="headertitle"><div class="title">StanzaFilter抽象类 参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+类 StanzaFilter 继承关系图:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="../../d8/d7c/classxmpp4cj_1_1filter_1_1StanzaFilter.png" usemap="#StanzaFilter_map" alt=""/>
+  <map id="StanzaFilter_map" name="StanzaFilter_map">
+<area href="../../d3/dba/classxmpp4cj_1_1filter_1_1AbstractFromToMatchesFilter.html" alt="AbstractFromToMatchesFilter" shape="rect" coords="472,112,651,136"/>
+<area href="../../da/d13/classxmpp4cj_1_1filter_1_1AbstractJidTypeFilter.html" alt="AbstractJidTypeFilter" shape="rect" coords="472,168,651,192"/>
+<area href="../../d3/de4/classxmpp4cj_1_1filter_1_1AbstractListFilter.html" alt="AbstractListFilter" shape="rect" coords="472,224,651,248"/>
+<area href="../../d1/d99/classxmpp4cj_1_1filter_1_1EmptyToMatcher.html" alt="EmptyToMatcher" shape="rect" coords="472,280,651,304"/>
+<area href="../../d4/d8f/classxmpp4cj_1_1filter_1_1ExtensionElementFilter.html" alt="ExtensionElementFilter&lt;E&gt;" shape="rect" coords="472,336,651,360"/>
+<area href="../../d5/de6/classxmpp4cj_1_1filter_1_1FlexibleStanzaTypeFilter.html" alt="FlexibleStanzaTypeFilter&lt;S&gt;" shape="rect" coords="472,392,651,416"/>
+<area href="../../d0/d93/classxmpp4cj_1_1filter_1_1IQReplyFilter.html" alt="IQReplyFilter" shape="rect" coords="472,448,651,472"/>
+<area href="../../d6/daf/classxmpp4cj_1_1filter_1_1JidTypeAbstractJidTypeFilter.html" alt="JidTypeAbstractJidTypeFilter" shape="rect" coords="472,504,651,528"/>
+<area href="../../d4/d66/classxmpp4cj_1_1filter_1_1NotFilter.html" alt="NotFilter" shape="rect" coords="472,560,651,584"/>
+<area href="../../de/da8/classxmpp4cj_1_1filter_1_1StanzaExtensionFilter.html" alt="StanzaExtensionFilter" shape="rect" coords="472,616,651,640"/>
+<area href="../../d7/d18/classxmpp4cj_1_1filter_1_1StanzaIdFilter.html" alt="StanzaIdFilter" shape="rect" coords="472,672,651,696"/>
+<area href="../../d7/dc8/classxmpp4cj_1_1filter_1_1StanzaTypeFilter.html" alt="StanzaTypeFilter&lt;S&gt;" shape="rect" coords="472,728,651,752"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:acb995d54ff2b53a7caebe4585a16d6b5"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d7c/classxmpp4cj_1_1filter_1_1StanzaFilter.html#acb995d54ff2b53a7caebe4585a16d6b5">accept</a> (stanza: Stanza): Bool</td></tr>
+<tr class="separator:acb995d54ff2b53a7caebe4585a16d6b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c6b4c53298310e7eec2813f32bb6e61"><td class="memItemLeft" align="right" valign="top">public override func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d7c/classxmpp4cj_1_1filter_1_1StanzaFilter.html#a0c6b4c53298310e7eec2813f32bb6e61">test</a> (stanza: Stanza): Bool</td></tr>
+<tr class="separator:a0c6b4c53298310e7eec2813f32bb6e61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af66b3db1449113a778b4fb39ad65ed57"><td class="memItemLeft" align="right" valign="top">public func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d7c/classxmpp4cj_1_1filter_1_1StanzaFilter.html#af66b3db1449113a778b4fb39ad65ed57">asPredicate&lt;S, ST&gt;</a> (): Predicate&lt;S&gt; where S &lt;: Stanza</td></tr>
+<tr class="separator:af66b3db1449113a778b4fb39ad65ed57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a263cb3c2b4e4006dd5b128c4942b1118"><td class="memItemLeft" align="right" valign="top"><a id="a263cb3c2b4e4006dd5b128c4942b1118" name="a263cb3c2b4e4006dd5b128c4942b1118"></a>
+public func&#160;</td><td class="memItemRight" valign="bottom"><b>hashCode</b> (): Int64</td></tr>
+<tr class="separator:a263cb3c2b4e4006dd5b128c4942b1118"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52bd8f35ef4b68f106a164eb1e87667d"><td class="memItemLeft" align="right" valign="top"><a id="a52bd8f35ef4b68f106a164eb1e87667d" name="a52bd8f35ef4b68f106a164eb1e87667d"></a>
+public operator&#160;</td><td class="memItemRight" valign="bottom"><b>==</b> (that: <a class="el" href="../../d8/d7c/classxmpp4cj_1_1filter_1_1StanzaFilter.html">StanzaFilter</a>): Bool</td></tr>
+<tr class="separator:a52bd8f35ef4b68f106a164eb1e87667d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>public abstract class StanzaFilter &lt;: Predicate&lt;Stanza&gt; &amp; ToString</p>
+<p>定义了一种根据特定属性过滤 Stanza 的方法。Stanza 过滤器用于构建 Stanza 监听器或收集器， 过滤器定义哪些 Stanza 匹配收集器或监听器的标准，以便进行进一步的 Stanza 处理。 </p>
+<p>预定义了几个简单的过滤器。可以使用 <code><a class="el" href="../../d7/d6a/classxmpp4cj_1_1filter_1_1AndFilter.html">AndFilter</a></code> 和 <code><a class="el" href="../../d0/d12/namespacexmpp4cj.html">OrFilter</a></code> 过滤器逻辑组合这些过滤器，以实现更复杂的 Stanza 过滤。也可以通过实现该接口来定义自己的过滤器。下面的代码示例创建了一个用于特定 ID 的 Stanza 的简单过滤器（真实代码应使用 <code><a class="el" href="../../">StanzaIdFilter</a></code> 替代）。</p>
+<pre>
+ // 使用匿名内部类定义一个返回所有具有 Stanza ID 为 &quot;RS145&quot; 的 Stanza 的过滤器。
+ let myFilter:StanzaFilter = StanzaFilter() {
+     public func accept(stanza: Stanza):boolean {
+         return &quot;RS145&quot;.equals(stanza.getStanzaId())
+     }
+ };
+ // 使用我们创建的过滤器创建一个新的 Stanza 收集器。
+ let myCollector: StanzaCollector = connection.createStanzaCollector(myFilter)
+ </pre> <p>作为经验法则：如果您有一个谓词方法，即一个以单个 Stanza 作为参数、无副作用（纯粹）并且仅返回布尔值 的方法，那么这通常是一个很好的指示，表明该逻辑应该放入 <code><a class="el" href="../../">StanzaFilter</a></code> 中（并在 <code><a class="el" href="../../">StanzaListener</a></code> 中引用）。 </p>
+<dl class="section see"><dt>参见</dt><dd><a class="el" href="../../d8/d70/classxmpp4cj_1_1connection_1_1StanzaCollector.html">xmpp4cj.connection.StanzaCollector</a> </dd>
+<dd>
+<a class="el" href="../../d1/d23/interfacexmpp4cj_1_1feature_1_1StanzaListener.html">xmpp4cj.feature.StanzaListener</a> </dd></dl>
+</div><h2 class="groupheader">成员函数说明</h2>
+<a id="acb995d54ff2b53a7caebe4585a16d6b5" name="acb995d54ff2b53a7caebe4585a16d6b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb995d54ff2b53a7caebe4585a16d6b5">&#9670;&#160;</a></span>accept()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public func accept </td>
+          <td>(</td>
+          <td class="paramname"><em>stanza</em>:&#160;</td>
+          <td class="paramtype">Stanza</td><td>)</td>
+          <td>: Bool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>测试指定的 Stanza 是否应该通过过滤器。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stanza</td><td>要测试的 Stanza。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果且仅如果 <code>stanza</code> 通过过滤器，则返回 true。 </dd></dl>
+
+</div>
+</div>
+<a id="af66b3db1449113a778b4fb39ad65ed57" name="af66b3db1449113a778b4fb39ad65ed57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af66b3db1449113a778b4fb39ad65ed57">&#9670;&#160;</a></span>asPredicate&lt;S, ST&gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public func asPredicate&lt;S, ST&gt; </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: Predicate&lt;S&gt; where S &lt;: Stanza </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>将当前过滤器转换为适用于特定 Stanza 类的谓词。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stanzaClass</td><td>要匹配的 Stanza 类。 </td></tr>
+    <tr><td class="paramname">&lt;S&gt;</td><td>Stanza 的子类型。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>一个谓词，它检查 Stanza 是否与给定类型匹配并通过过滤器。 </dd></dl>
+
+</div>
+</div>
+<a id="a0c6b4c53298310e7eec2813f32bb6e61" name="a0c6b4c53298310e7eec2813f32bb6e61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c6b4c53298310e7eec2813f32bb6e61">&#9670;&#160;</a></span>test()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public override func test </td>
+          <td>(</td>
+          <td class="paramname"><em>stanza</em>:&#160;</td>
+          <td class="paramtype">Stanza</td><td>)</td>
+          <td>: Bool </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>定义一个抽象方法 test，接受参数 Stanza，返回一个布尔值。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stanza</td><td>Stanza。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>布尔值。 </dd></dl>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/filter/stanza_filter.cj</li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../d0/d12/namespacexmpp4cj.html">xmpp4cj</a></li><li class="navelem"><a class="el" href="../../d8/dac/namespacexmpp4cj_1_1filter.html">filter</a></li><li class="navelem"><a class="el" href="../../d8/d7c/classxmpp4cj_1_1filter_1_1StanzaFilter.html">StanzaFilter</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Xmpp4cj: C2sConnectionInternal抽象类 参考</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Xmpp4cj
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('d7/d9b/classxmpp4cj_1_1modular_1_1C2sConnectionInternal.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pub-attribs">Public 属性</a> &#124;
+<a href="../../dd/d40/classxmpp4cj_1_1modular_1_1C2sConnectionInternal-members.html">所有成员列表</a>  </div>
+  <div class="headertitle"><div class="title">C2sConnectionInternal抽象类 参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+类 C2sConnectionInternal 继承关系图:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="../../d7/d9b/classxmpp4cj_1_1modular_1_1C2sConnectionInternal.png" alt=""/>
+ </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a78804653689e63fb8fb8653ccae02348"><td class="memItemLeft" align="right" valign="top"><a id="a78804653689e63fb8fb8653ccae02348" name="a78804653689e63fb8fb8653ccae02348"></a>
+public&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (connection: <a class="el" href="../../d0/df3/classxmpp4cj_1_1modular_1_1C2sConnection.html">C2sConnection</a>, reactor: XmppReactor, xmppDebugger: ?XmppDebugger, outgoingElementsQueue: ArrayBlockingQueueWithShutdown&lt;TopLevelStreamElement&gt;)</td></tr>
+<tr class="separator:a78804653689e63fb8fb8653ccae02348"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adeff4915c536179359786adfe83f8ed8"><td class="memItemLeft" align="right" valign="top"><a id="adeff4915c536179359786adfe83f8ed8" name="adeff4915c536179359786adfe83f8ed8"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>registerWithSelector</b> (channel: SelectableChannel, ops: Int, callback: XmppReactorChannelSelectedCallback): SelectionKey</td></tr>
+<tr class="separator:adeff4915c536179359786adfe83f8ed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57b6fc23b2575d1013f8f6f503348e30"><td class="memItemLeft" align="right" valign="top"><a id="a57b6fc23b2575d1013f8f6f503348e30" name="a57b6fc23b2575d1013f8f6f503348e30"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>setInterestOps</b> (selectionKey: SelectionKey, interestOps: Int): Unit</td></tr>
+<tr class="separator:a57b6fc23b2575d1013f8f6f503348e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbe55f9789f2e6467a2f28aac3e51200"><td class="memItemLeft" align="right" valign="top"><a id="acbe55f9789f2e6467a2f28aac3e51200" name="acbe55f9789f2e6467a2f28aac3e51200"></a>
+public func&#160;</td><td class="memItemRight" valign="bottom"><b>withXmppDebugger</b> (xmppDebuggerConsumer: Consumer&lt;XmppDebugger&gt;): Unit</td></tr>
+<tr class="separator:acbe55f9789f2e6467a2f28aac3e51200"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21730e1e92348eb2b417e110b766ccb0"><td class="memItemLeft" align="right" valign="top"><a id="a21730e1e92348eb2b417e110b766ccb0" name="a21730e1e92348eb2b417e110b766ccb0"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>getOutgoingStreamXmlEnvironment</b> (): ?XmlEnvironment</td></tr>
+<tr class="separator:a21730e1e92348eb2b417e110b766ccb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c51bcf2ed19560f8152c2ae9db36c97"><td class="memItemLeft" align="right" valign="top"><a id="a3c51bcf2ed19560f8152c2ae9db36c97" name="a3c51bcf2ed19560f8152c2ae9db36c97"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>parseAndProcessElement</b> (wrappedCompleteIncomingElement: String): Unit</td></tr>
+<tr class="separator:a3c51bcf2ed19560f8152c2ae9db36c97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5830d3136e9a15bf44a0b56cab40eb4b"><td class="memItemLeft" align="right" valign="top"><a id="a5830d3136e9a15bf44a0b56cab40eb4b" name="a5830d3136e9a15bf44a0b56cab40eb4b"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>notifyConnectionError</b> (e: Exception): Unit</td></tr>
+<tr class="separator:a5830d3136e9a15bf44a0b56cab40eb4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39b0293d0c75be79e4cde56f9ab7b90e"><td class="memItemLeft" align="right" valign="top"><a id="a39b0293d0c75be79e4cde56f9ab7b90e" name="a39b0293d0c75be79e4cde56f9ab7b90e"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>onStreamOpen</b> (parser: XmlPullParser): Unit</td></tr>
+<tr class="separator:a39b0293d0c75be79e4cde56f9ab7b90e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f7ae2513d279491973e2a3e88197a35"><td class="memItemLeft" align="right" valign="top"><a id="a3f7ae2513d279491973e2a3e88197a35" name="a3f7ae2513d279491973e2a3e88197a35"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>onStreamClosed</b> (): Unit</td></tr>
+<tr class="separator:a3f7ae2513d279491973e2a3e88197a35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d4e696aaf3462e6af1bba8df8955e8e"><td class="memItemLeft" align="right" valign="top"><a id="a0d4e696aaf3462e6af1bba8df8955e8e" name="a0d4e696aaf3462e6af1bba8df8955e8e"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>fireFirstLevelElementSendListeners</b> (element: TopLevelStreamElement): Unit</td></tr>
+<tr class="separator:a0d4e696aaf3462e6af1bba8df8955e8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3514491913625f68b808b5fba2046ced"><td class="memItemLeft" align="right" valign="top"><a id="a3514491913625f68b808b5fba2046ced" name="a3514491913625f68b808b5fba2046ced"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>invokeConnectionStateMachineListener</b> (connectionStateEvent: <a class="el" href="../../dc/d9c/classxmpp4cj_1_1modular_1_1ConnectionStateEvent.html">ConnectionStateEvent</a>): Unit</td></tr>
+<tr class="separator:a3514491913625f68b808b5fba2046ced"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43c5cf32d646e24a795f94e05359ede9"><td class="memItemLeft" align="right" valign="top"><a id="a43c5cf32d646e24a795f94e05359ede9" name="a43c5cf32d646e24a795f94e05359ede9"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>addXmppInputOutputFilter</b> (xmppInputOutputFilter: XmppInputOutputFilter): Unit</td></tr>
+<tr class="separator:a43c5cf32d646e24a795f94e05359ede9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2169b27199775c84e1e6f11eb365208"><td class="memItemLeft" align="right" valign="top"><a id="ad2169b27199775c84e1e6f11eb365208" name="ad2169b27199775c84e1e6f11eb365208"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>getXmppInputOutputFilterBeginIterator</b> (): Iterator&lt;XmppInputOutputFilter&gt;</td></tr>
+<tr class="separator:ad2169b27199775c84e1e6f11eb365208"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f1eb5eefd4b5445887004532e49b3ff"><td class="memItemLeft" align="right" valign="top"><a id="a2f1eb5eefd4b5445887004532e49b3ff" name="a2f1eb5eefd4b5445887004532e49b3ff"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>getXmppInputOutputFilterEndIterator</b> (): ListIterator&lt;XmppInputOutputFilter&gt;</td></tr>
+<tr class="separator:a2f1eb5eefd4b5445887004532e49b3ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fb1684f404a07ac7ba327023552cdbf"><td class="memItemLeft" align="right" valign="top"><a id="a1fb1684f404a07ac7ba327023552cdbf" name="a1fb1684f404a07ac7ba327023552cdbf"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>newStreamOpenWaitForFeaturesSequence</b> (waitFor: String): Unit</td></tr>
+<tr class="separator:a1fb1684f404a07ac7ba327023552cdbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1124b90998f9b03e5864345ba6902daa"><td class="memItemLeft" align="right" valign="top"><a id="a1124b90998f9b03e5864345ba6902daa" name="a1124b90998f9b03e5864345ba6902daa"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>getXmppTlsContext</b> (): XmppTlsContext</td></tr>
+<tr class="separator:a1124b90998f9b03e5864345ba6902daa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4061a5e7c73341b753179d8a2ad7ba9a"><td class="memItemLeft" align="right" valign="top"><a id="a4061a5e7c73341b753179d8a2ad7ba9a" name="a4061a5e7c73341b753179d8a2ad7ba9a"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>sendAndWaitForResponse</b> (nonza: Nonza, successNonzaClass: ClassId, failedNonzaClass: ClassId): ?Nonza</td></tr>
+<tr class="separator:a4061a5e7c73341b753179d8a2ad7ba9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74b4432d7d18e7257da259b27a3c153b"><td class="memItemLeft" align="right" valign="top"><a id="a74b4432d7d18e7257da259b27a3c153b" name="a74b4432d7d18e7257da259b27a3c153b"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>asyncGo</b> (runnable: Runnable): Unit</td></tr>
+<tr class="separator:a74b4432d7d18e7257da259b27a3c153b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43866c06844b02fd7e6fb1bfbc5ed310"><td class="memItemLeft" align="right" valign="top"><a id="a43866c06844b02fd7e6fb1bfbc5ed310" name="a43866c06844b02fd7e6fb1bfbc5ed310"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>waitForConditionOrThrowConnectionException</b> (condition: Supplier&lt;Bool&gt;, waitFor: String): Unit</td></tr>
+<tr class="separator:a43866c06844b02fd7e6fb1bfbc5ed310"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92eebede3c57c538f299aa2e0d11e78a"><td class="memItemLeft" align="right" valign="top"><a id="a92eebede3c57c538f299aa2e0d11e78a" name="a92eebede3c57c538f299aa2e0d11e78a"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>notifyWaitingThreads</b> (): Unit</td></tr>
+<tr class="separator:a92eebede3c57c538f299aa2e0d11e78a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad56cb3d1d7b3cba161e32905e0b8455e"><td class="memItemLeft" align="right" valign="top"><a id="ad56cb3d1d7b3cba161e32905e0b8455e" name="ad56cb3d1d7b3cba161e32905e0b8455e"></a>
+public open func&#160;</td><td class="memItemRight" valign="bottom"><b>setCompressionEnabled</b> (compressionEnabled: Bool): Unit</td></tr>
+<tr class="separator:ad56cb3d1d7b3cba161e32905e0b8455e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c7b67afc391f1837c0e17185dd21524"><td class="memItemLeft" align="right" valign="top">public open func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d9b/classxmpp4cj_1_1modular_1_1C2sConnectionInternal.html#a6c7b67afc391f1837c0e17185dd21524">setTransport</a> (xmppTransport: ?<a class="el" href="../../df/d5f/classxmpp4cj_1_1modular_1_1C2sTransport.html">C2sTransport</a>): Unit</td></tr>
+<tr class="separator:a6c7b67afc391f1837c0e17185dd21524"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ee438080494447f7a9d120e295f999e"><td class="memItemLeft" align="right" valign="top"><a id="a3ee438080494447f7a9d120e295f999e" name="a3ee438080494447f7a9d120e295f999e"></a>
+public operator&#160;</td><td class="memItemRight" valign="bottom"><b>==</b> (that: <a class="el" href="../../d7/d9b/classxmpp4cj_1_1modular_1_1C2sConnectionInternal.html">C2sConnectionInternal</a>): Bool</td></tr>
+<tr class="separator:a3ee438080494447f7a9d120e295f999e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public 属性</h2></td></tr>
+<tr class="memitem:ab8b77c864c3846b3cf50f798eac4d1ad"><td class="memItemLeft" align="right" valign="top"><a id="ab8b77c864c3846b3cf50f798eac4d1ad" name="ab8b77c864c3846b3cf50f798eac4d1ad"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let connection</b> : <a class="el" href="../../d0/df3/classxmpp4cj_1_1modular_1_1C2sConnection.html">C2sConnection</a></td></tr>
+<tr class="separator:ab8b77c864c3846b3cf50f798eac4d1ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9550cacf677c8571ea59d728b6ff367"><td class="memItemLeft" align="right" valign="top"><a id="ae9550cacf677c8571ea59d728b6ff367" name="ae9550cacf677c8571ea59d728b6ff367"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let xmppDebugger</b> : ?XmppDebugger</td></tr>
+<tr class="separator:ae9550cacf677c8571ea59d728b6ff367"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf1b53332c4aa04c5d13f955c0808892"><td class="memItemLeft" align="right" valign="top"><a id="acf1b53332c4aa04c5d13f955c0808892" name="acf1b53332c4aa04c5d13f955c0808892"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let outgoingElementsQueue</b> : ArrayBlockingQueueWithShutdown&lt;TopLevelStreamElement&gt;</td></tr>
+<tr class="separator:acf1b53332c4aa04c5d13f955c0808892"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>public abstract class C2sConnectionInternal &lt;: Equatable&lt;C2sConnectionInternal&gt; </p>
+</div><h2 class="groupheader">成员函数说明</h2>
+<a id="a6c7b67afc391f1837c0e17185dd21524" name="a6c7b67afc391f1837c0e17185dd21524"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c7b67afc391f1837c0e17185dd21524">&#9670;&#160;</a></span>setTransport()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">public open func setTransport </td>
+          <td>(</td>
+          <td class="paramname"><em>xmppTransport</em>:&#160;</td>
+          <td class="paramtype">?C2sTransport</td><td>)</td>
+          <td>: Unit</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Set the active transport (TCP, BOSH, WebSocket, …) to be used for the XMPP connection. Also marks the connection as connected.</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xmppTransport</td><td>the active transport. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/modular/c2s_connection_internal.cj</li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../d0/d12/namespacexmpp4cj.html">xmpp4cj</a></li><li class="navelem"><a class="el" href="../../dc/d4c/namespacexmpp4cj_1_1modular.html">modular</a></li><li class="navelem"><a class="el" href="../../d7/d9b/classxmpp4cj_1_1modular_1_1C2sConnectionInternal.html">C2sConnectionInternal</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['randomstringstanzaidsource_0',['RandomStringStanzaIdSource',['../da/dc3/classxmpp4cj_1_1packet_1_1RandomStringStanzaIdSource.html',1,'xmpp4cj::packet']]],
+  ['randomstringstanzaidsourcefactory_1',['RandomStringStanzaIdSourceFactory',['../de/db4/classxmpp4cj_1_1packet_1_1RandomStringStanzaIdSourceFactory.html',1,'xmpp4cj::packet']]],
+  ['randomutil_2',['RandomUtil',['../d0/dbd/classxmpp4cj_1_1util_1_1RandomUtil.html',1,'xmpp4cj::util']]],
+  ['readerlistener_3',['ReaderListener',['../df/d8d/classxmpp4cj_1_1util_1_1ReaderListener.html',1,'xmpp4cj::util']]],
+  ['reconnectionlistener_4',['ReconnectionListener',['../d3/dfa/interfacexmpp4cj_1_1connection_1_1ReconnectionListener.html',1,'xmpp4cj::connection']]],
+  ['reconnectionmanager_5',['ReconnectionManager',['../d1/db1/classxmpp4cj_1_1connection_1_1ReconnectionManager.html',1,'xmpp4cj::connection']]],
+  ['reconnectionpolicy_6',['ReconnectionPolicy',['../dc/d5e/enumxmpp4cj_1_1connection_1_1ReconnectionPolicy.html',1,'xmpp4cj::connection']]],
+  ['remoteconnectionendpoint_7',['RemoteConnectionEndpoint',['../d8/d08/interfacexmpp4cj_1_1feature_1_1RemoteConnectionEndpoint.html',1,'xmpp4cj::feature']]],
+  ['remoteconnectionendpointlookupfailure_8',['RemoteConnectionEndpointLookupFailure',['../dc/d8e/classxmpp4cj_1_1feature_1_1RemoteConnectionEndpointLookupFailure.html',1,'xmpp4cj::feature']]],
+  ['remoteconnectionexception_9',['RemoteConnectionException',['../df/de1/classxmpp4cj_1_1feature_1_1RemoteConnectionException.html',1,'xmpp4cj::feature']]],
+  ['remotexmpptcpconnectionendpoints_10',['RemoteXmppTcpConnectionEndpoints',['../da/dfb/classxmpp4cj_1_1tcp_1_1RemoteXmppTcpConnectionEndpoints.html',1,'xmpp4cj::tcp']]],
+  ['remotexmpptcpconnectionendpointsresult_11',['RemoteXmppTcpConnectionEndpointsResult',['../d5/d0d/classxmpp4cj_1_1tcp_1_1RemoteXmppTcpConnectionEndpointsResult.html',1,'xmpp4cj::tcp']]],
+  ['resourcebindingnotofferedexception_12',['ResourceBindingNotOfferedException',['../d6/d21/classxmpp4cj_1_1feature_1_1ResourceBindingNotOfferedException.html',1,'xmpp4cj::feature']]],
+  ['resourcebindingstatedescriptor_13',['ResourceBindingStateDescriptor',['../d4/d70/classxmpp4cj_1_1modular_1_1ResourceBindingStateDescriptor.html',1,'xmpp4cj::modular']]],
+  ['resourceboundresult_14',['ResourceBoundResult',['../d5/d17/classxmpp4cj_1_1modular_1_1ResourceBoundResult.html',1,'xmpp4cj::modular']]],
+  ['resourcepart_15',['Resourcepart',['../d8/d41/classxmpp4cj_1_1jid_1_1Resourcepart.html',1,'xmpp4cj::jid']]],
+  ['resumestreamstate_16',['ResumeStreamState',['../db/d84/classxmpp4cj_1_1stream_1_1ResumeStreamState.html',1,'xmpp4cj::stream']]],
+  ['resumestreamstatedescriptor_17',['ResumeStreamStateDescriptor',['../dd/df4/classxmpp4cj_1_1stream_1_1ResumeStreamStateDescriptor.html',1,'xmpp4cj::stream']]],
+  ['rfc6120tcpremoteconnectionendpoint_18',['Rfc6120TcpRemoteConnectionEndpoint',['../dd/dbd/interfacexmpp4cj_1_1tcp_1_1Rfc6120TcpRemoteConnectionEndpoint.html',1,'xmpp4cj::tcp']]],
+  ['runnable_19',['Runnable',['../d8/d08/interfacexmpp4cj_1_1util_1_1Runnable.html',1,'xmpp4cj::util']]]
+];

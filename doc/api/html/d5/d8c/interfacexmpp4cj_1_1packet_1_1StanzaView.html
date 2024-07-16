@@ -1,0 +1,518 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Xmpp4cj: StanzaView接口 参考</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Xmpp4cj
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="../../d2/d18/interfacexmpp4cj_1_1packet_1_1StanzaView-members.html">所有成员列表</a>  </div>
+  <div class="headertitle"><div class="title">StanzaView接口 参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+类 StanzaView 继承关系图:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.png" usemap="#StanzaView_map" alt=""/>
+  <map id="StanzaView_map" name="StanzaView_map">
+<area href="../../d7/d66/interfacexmpp4cj_1_1packet_1_1XmlLangElement.html" alt="XmlLangElement" shape="rect" coords="728,0,900,24"/>
+<area href="../../dd/dc8/interfacexmpp4cj_1_1packet_1_1IqView.html" alt="IqView" shape="rect" coords="0,112,172,136"/>
+<area href="../../d5/dba/interfacexmpp4cj_1_1packet_1_1MessageView.html" alt="MessageView" shape="rect" coords="364,112,536,136"/>
+<area href="../../d4/d98/interfacexmpp4cj_1_1packet_1_1PresenceView.html" alt="PresenceView" shape="rect" coords="728,112,900,136"/>
+<area href="../../db/dba/classxmpp4cj_1_1packet_1_1Stanza.html" alt="Stanza" shape="rect" coords="1092,112,1264,136"/>
+<area href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html" alt="StanzaBuilder" shape="rect" coords="1456,112,1628,136"/>
+<area href="../../d2/d05/classxmpp4cj_1_1packet_1_1AbstractIqBuilder.html" alt="AbstractIqBuilder" shape="rect" coords="182,168,354,192"/>
+<area href="../../dd/d8a/classxmpp4cj_1_1packet_1_1IQ.html" alt="IQ" shape="rect" coords="182,224,354,248"/>
+<area href="../../d8/d20/classxmpp4cj_1_1packet_1_1Message.html" alt="Message" shape="rect" coords="546,168,718,192"/>
+<area href="../../de/d41/classxmpp4cj_1_1packet_1_1MessageBuilder.html" alt="MessageBuilder" shape="rect" coords="546,224,718,248"/>
+<area href="../../dd/d54/classxmpp4cj_1_1packet_1_1Presence.html" alt="Presence" shape="rect" coords="910,168,1082,192"/>
+<area href="../../de/d7d/classxmpp4cj_1_1packet_1_1PresenceBuilder.html" alt="PresenceBuilder" shape="rect" coords="910,224,1082,248"/>
+<area href="../../dd/d8a/classxmpp4cj_1_1packet_1_1IQ.html" alt="IQ" shape="rect" coords="1274,168,1446,192"/>
+<area href="../../db/d10/classxmpp4cj_1_1packet_1_1MessageOrPresence.html" alt="MessageOrPresence" shape="rect" coords="1274,224,1446,248"/>
+<area href="../../d2/d05/classxmpp4cj_1_1packet_1_1AbstractIqBuilder.html" alt="AbstractIqBuilder" shape="rect" coords="1638,168,1810,192"/>
+<area href="../../d0/d90/classxmpp4cj_1_1packet_1_1MessageOrPresenceBuilder.html" alt="MessageOrPresenceBuilder" shape="rect" coords="1638,224,1810,248"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:ad4eb6b7e204bb127db789991de291963"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#ad4eb6b7e204bb127db789991de291963">getStanzaId</a> (): ?String</td></tr>
+<tr class="separator:ad4eb6b7e204bb127db789991de291963"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a05d710a228c6ba8d72da0cc685f6c0"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#a4a05d710a228c6ba8d72da0cc685f6c0">getTo</a> (): ?Jid</td></tr>
+<tr class="separator:a4a05d710a228c6ba8d72da0cc685f6c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a0a490c3df38d286866c56aef914cca"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#a2a0a490c3df38d286866c56aef914cca">getFrom</a> (): ?Jid</td></tr>
+<tr class="separator:a2a0a490c3df38d286866c56aef914cca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4db3f39ac5a7394d482dc2efb1c7ab35"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#a4db3f39ac5a7394d482dc2efb1c7ab35">getError</a> (): ?<a class="el" href="../../d7/d98/classxmpp4cj_1_1packet_1_1StanzaError.html">StanzaError</a></td></tr>
+<tr class="separator:a4db3f39ac5a7394d482dc2efb1c7ab35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b8f52f6400717a048a18c46689095e2"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#a1b8f52f6400717a048a18c46689095e2">getExtension</a> (qname: QName): ?<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a></td></tr>
+<tr class="separator:a1b8f52f6400717a048a18c46689095e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafe3c58454088c6323d65c49a24dd6df"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#aafe3c58454088c6323d65c49a24dd6df">hasExtension</a> (qname: QName): Bool</td></tr>
+<tr class="separator:aafe3c58454088c6323d65c49a24dd6df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa0a25167bdbd1cce8392bd7b89ad194"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#aaa0a25167bdbd1cce8392bd7b89ad194">hasExtensionByType</a> (qnameFrom: ClassId): Bool</td></tr>
+<tr class="separator:aaa0a25167bdbd1cce8392bd7b89ad194"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2adfdad952c7edda1272acbed38e70b8"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#a2adfdad952c7edda1272acbed38e70b8">hasExtension</a> (namespace: String): Bool</td></tr>
+<tr class="separator:a2adfdad952c7edda1272acbed38e70b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a564e2575e4f2f8f90975db8c32d56793"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#a564e2575e4f2f8f90975db8c32d56793">getExtensionByType</a> (extensionElementClass: ClassId): ?<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a></td></tr>
+<tr class="separator:a564e2575e4f2f8f90975db8c32d56793"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7852dae49e2fd6d6cdf86d06f70cea1"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#aa7852dae49e2fd6d6cdf86d06f70cea1">getExtensions</a> (): ArrayList&lt;<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>&gt;</td></tr>
+<tr class="separator:aa7852dae49e2fd6d6cdf86d06f70cea1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c66ff6c7262e9152514802441e7b69f"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#a1c66ff6c7262e9152514802441e7b69f">getExtensions</a> (qname: QName): ArrayList&lt;<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>&gt;</td></tr>
+<tr class="separator:a1c66ff6c7262e9152514802441e7b69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4f6bf577020af54da1c937770c8d2f3"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#ac4f6bf577020af54da1c937770c8d2f3">getExtensionsByType</a> (extensionElementClass: ClassId): ArrayList&lt;<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>&gt;</td></tr>
+<tr class="separator:ac4f6bf577020af54da1c937770c8d2f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c028cab3991c20e2f0c547cca98ecda"><td class="memItemLeft" align="right" valign="top">static func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#a0c028cab3991c20e2f0c547cca98ecda">castExt&lt;E&gt;</a> (iter: ArrayList&lt;<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>&gt;): ArrayList&lt;E&gt; where E &lt;: <a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a> &amp; ClassIdentify</td></tr>
+<tr class="separator:a0c028cab3991c20e2f0c547cca98ecda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb05a9b320937741ede9a92430d51b06"><td class="memItemLeft" align="right" valign="top">static func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html#afb05a9b320937741ede9a92430d51b06">castExt&lt;E&gt;</a> (extensionElement: ?<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>): ?E where E &lt;: <a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a> &amp; ClassIdentify</td></tr>
+<tr class="separator:afb05a9b320937741ede9a92430d51b06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_interfacexmpp4cj_1_1packet_1_1XmlLangElement"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_interfacexmpp4cj_1_1packet_1_1XmlLangElement')"><img src="../../closed.png" alt="-"/>&#160;Public 成员函数 继承自 <a class="el" href="../../d7/d66/interfacexmpp4cj_1_1packet_1_1XmlLangElement.html">XmlLangElement</a></td></tr>
+<tr class="memitem:a32d616a1d347a967f7b1598790fcb7b8 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1XmlLangElement"><td class="memItemLeft" align="right" valign="top">func&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d66/interfacexmpp4cj_1_1packet_1_1XmlLangElement.html#a32d616a1d347a967f7b1598790fcb7b8">getLanguage</a> (): ?String</td></tr>
+<tr class="separator:a32d616a1d347a967f7b1598790fcb7b8 inherit pub_methods_interfacexmpp4cj_1_1packet_1_1XmlLangElement"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="afb05a9b320937741ede9a92430d51b06" name="afb05a9b320937741ede9a92430d51b06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb05a9b320937741ede9a92430d51b06">&#9670;&#160;</a></span>castExt&lt;E&gt;() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static func castExt&lt;E&gt; </td>
+          <td>(</td>
+          <td class="paramname"><em>extensionElement</em>:&#160;</td>
+          <td class="paramtype">?ExtensionElement</td><td>)</td>
+          <td>: ?E where E &lt;: <a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a> &amp; ClassIdentify </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>将ExtensionElement对象转换成泛型对象。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">extensionElement</td><td>ExtensionElement对象。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>泛型对象。 </dd></dl>
+
+</div>
+</div>
+<a id="a0c028cab3991c20e2f0c547cca98ecda" name="a0c028cab3991c20e2f0c547cca98ecda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c028cab3991c20e2f0c547cca98ecda">&#9670;&#160;</a></span>castExt&lt;E&gt;() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static func castExt&lt;E&gt; </td>
+          <td>(</td>
+          <td class="paramname"><em>iter</em>:&#160;</td>
+          <td class="paramtype">ArrayList&lt;ExtensionElement&gt;</td><td>)</td>
+          <td>: ArrayList&lt;E&gt; where E &lt;: <a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a> &amp; ClassIdentify </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>通过入参列表返回泛型列表。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">iter</td><td>ExtensionElement列表。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>泛型列表。 </dd></dl>
+
+</div>
+</div>
+<a id="a4db3f39ac5a7394d482dc2efb1c7ab35" name="a4db3f39ac5a7394d482dc2efb1c7ab35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4db3f39ac5a7394d482dc2efb1c7ab35">&#9670;&#160;</a></span>getError()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func getError </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?<a class="el" href="../../d7/d98/classxmpp4cj_1_1packet_1_1StanzaError.html">StanzaError</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>返回与此数据包相关联的错误，或者如果没有错误则为<code>None</code>。</p>
+<dl class="section return"><dt>返回</dt><dd>错误子包，如果没有错误则为<code>None</code>。 </dd></dl>
+
+<p>在 <a class="el" href="../../db/dba/classxmpp4cj_1_1packet_1_1Stanza.html#a2d2922190690c4480fba68be7924722c">Stanza</a> , 以及 <a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a2d2922190690c4480fba68be7924722c">StanzaBuilder</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a1b8f52f6400717a048a18c46689095e2" name="a1b8f52f6400717a048a18c46689095e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b8f52f6400717a048a18c46689095e2">&#9670;&#160;</a></span>getExtension()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func getExtension </td>
+          <td>(</td>
+          <td class="paramname"><em>qname</em>:&#160;</td>
+          <td class="paramtype">QName</td><td>)</td>
+          <td>: ?<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>通过QName获取扩展元素。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">qname</td><td>QName对象。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>ExtensionElement对象。 </dd></dl>
+
+<p>在 <a class="el" href="../../db/dba/classxmpp4cj_1_1packet_1_1Stanza.html#a786f1d563d8a7271de6a5c185e4c487c">Stanza</a> , 以及 <a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a786f1d563d8a7271de6a5c185e4c487c">StanzaBuilder</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a564e2575e4f2f8f90975db8c32d56793" name="a564e2575e4f2f8f90975db8c32d56793"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a564e2575e4f2f8f90975db8c32d56793">&#9670;&#160;</a></span>getExtensionByType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func getExtensionByType </td>
+          <td>(</td>
+          <td class="paramname"><em>extensionElementClass</em>:&#160;</td>
+          <td class="paramtype">ClassId</td><td>)</td>
+          <td>: ?<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a> </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>通过ClassId获取扩展名。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">extensionElementClass</td><td>ClassId。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>ExtensionElement对象。 </dd></dl>
+
+</div>
+</div>
+<a id="aa7852dae49e2fd6d6cdf86d06f70cea1" name="aa7852dae49e2fd6d6cdf86d06f70cea1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7852dae49e2fd6d6cdf86d06f70cea1">&#9670;&#160;</a></span>getExtensions() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func getExtensions </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ArrayList&lt;<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>返回此节的所有扩展元素列表。</p>
+<dl class="section return"><dt>返回</dt><dd>扩展元素列表。 </dd></dl>
+
+<p>在 <a class="el" href="../../db/dba/classxmpp4cj_1_1packet_1_1Stanza.html#a3e6464f416bd6c9767c2955067e55387">Stanza</a> , 以及 <a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a3e6464f416bd6c9767c2955067e55387">StanzaBuilder</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a1c66ff6c7262e9152514802441e7b69f" name="a1c66ff6c7262e9152514802441e7b69f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c66ff6c7262e9152514802441e7b69f">&#9670;&#160;</a></span>getExtensions() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func getExtensions </td>
+          <td>(</td>
+          <td class="paramname"><em>qname</em>:&#160;</td>
+          <td class="paramtype">QName</td><td>)</td>
+          <td>: ArrayList&lt;<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>通过QName对象返回扩展元素列表。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">qname</td><td>QName对象。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>扩展元素列表。 </dd></dl>
+
+<p>在 <a class="el" href="../../db/dba/classxmpp4cj_1_1packet_1_1Stanza.html#a75063029ec13f4ad7de9da5d5770c777">Stanza</a> , 以及 <a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a75063029ec13f4ad7de9da5d5770c777">StanzaBuilder</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="ac4f6bf577020af54da1c937770c8d2f3" name="ac4f6bf577020af54da1c937770c8d2f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4f6bf577020af54da1c937770c8d2f3">&#9670;&#160;</a></span>getExtensionsByType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func getExtensionsByType </td>
+          <td>(</td>
+          <td class="paramname"><em>extensionElementClass</em>:&#160;</td>
+          <td class="paramtype">ClassId</td><td>)</td>
+          <td>: ArrayList&lt;<a class="el" href="../../d7/d29/interfacexmpp4cj_1_1packet_1_1ExtensionElement.html">ExtensionElement</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>返回给定类型的所有扩展元素。如果没有则返回空列表。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">extensionElementClass</td><td>扩展元素类型的类。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>该类型的扩展元素列表，可能为空。 </dd></dl>
+
+<p>在 <a class="el" href="../../db/dba/classxmpp4cj_1_1packet_1_1Stanza.html#a5d727217f5630c254bebcb6e383d10d1">Stanza</a> , 以及 <a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#adc10c77928f5e784de7a8b5834596c7a">StanzaBuilder</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a2a0a490c3df38d286866c56aef914cca" name="a2a0a490c3df38d286866c56aef914cca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a0a490c3df38d286866c56aef914cca">&#9670;&#160;</a></span>getFrom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func getFrom </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?Jid</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>返回节从谁那里发送，或者如果未设置该值则为<code>None</code>。XMPP 协议通常使“from”属性是可选的，所以它并不总是需要被设置。</p>
+<dl class="section return"><dt>返回</dt><dd>节从谁那里发送，如果未设置该值则为<code>None</code>。 </dd></dl>
+
+<p>在 <a class="el" href="../../db/dba/classxmpp4cj_1_1packet_1_1Stanza.html#a9072ebcaeb4b9cdc59aad50025b0da03">Stanza</a> , 以及 <a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a9072ebcaeb4b9cdc59aad50025b0da03">StanzaBuilder</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="ad4eb6b7e204bb127db789991de291963" name="ad4eb6b7e204bb127db789991de291963"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4eb6b7e204bb127db789991de291963">&#9670;&#160;</a></span>getStanzaId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func getStanzaId </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?String</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>返回节的唯一 ID。返回值可能为<code>None</code>。</p>
+<dl class="section return"><dt>返回</dt><dd>数据包的唯一 ID，如果不可用则为<code>None</code>。 </dd></dl>
+
+<p>在 <a class="el" href="../../db/dba/classxmpp4cj_1_1packet_1_1Stanza.html#a2cc9af387c05bae6d7d532c5115ecda3">Stanza</a> , 以及 <a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a2cc9af387c05bae6d7d532c5115ecda3">StanzaBuilder</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a4a05d710a228c6ba8d72da0cc685f6c0" name="a4a05d710a228c6ba8d72da0cc685f6c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a05d710a228c6ba8d72da0cc685f6c0">&#9670;&#160;</a></span>getTo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func getTo </td>
+          <td>(</td>
+          <td class="paramtype"></td><td>)</td>
+          <td>: ?Jid</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>返回节要发送给谁，或者如果未设置该值则为<code>None</code>。XMPP 协议通常使“to”属性是可选的，所以它并不总是需要被设置。</p>
+<dl class="section return"><dt>返回</dt><dd>节要发送给谁，如果未设置该值则为<code>None</code>。 </dd></dl>
+
+<p>在 <a class="el" href="../../db/dba/classxmpp4cj_1_1packet_1_1Stanza.html#a31f53b2824154f79be7d9e3c302eee4e">Stanza</a> , 以及 <a class="el" href="../../de/d37/classxmpp4cj_1_1packet_1_1StanzaBuilder.html#a31f53b2824154f79be7d9e3c302eee4e">StanzaBuilder</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a2adfdad952c7edda1272acbed38e70b8" name="a2adfdad952c7edda1272acbed38e70b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2adfdad952c7edda1272acbed38e70b8">&#9670;&#160;</a></span>hasExtension() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func hasExtension </td>
+          <td>(</td>
+          <td class="paramname"><em>namespace</em>:&#160;</td>
+          <td class="paramtype">String</td><td>)</td>
+          <td>: Bool </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>检查具有给定命名空间的扩展元素是否存在。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">namespace</td><td>要检查的扩展元素的命名空间。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果存在节扩展则为 true，否则为 false。 </dd></dl>
+
+<p>在 <a class="el" href="../../db/dba/classxmpp4cj_1_1packet_1_1Stanza.html#a8980cf9deac9bf4fdc98018158e9a5f3">Stanza</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="aafe3c58454088c6323d65c49a24dd6df" name="aafe3c58454088c6323d65c49a24dd6df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafe3c58454088c6323d65c49a24dd6df">&#9670;&#160;</a></span>hasExtension() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func hasExtension </td>
+          <td>(</td>
+          <td class="paramname"><em>qname</em>:&#160;</td>
+          <td class="paramtype">QName</td><td>)</td>
+          <td>: Bool </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>判断getExtension方法返回值是否为None。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">qname</td><td>QName对象。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>true表示有值，false表示None。 </dd></dl>
+
+</div>
+</div>
+<a id="aaa0a25167bdbd1cce8392bd7b89ad194" name="aaa0a25167bdbd1cce8392bd7b89ad194"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa0a25167bdbd1cce8392bd7b89ad194">&#9670;&#160;</a></span>hasExtensionByType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">func hasExtensionByType </td>
+          <td>(</td>
+          <td class="paramname"><em>qnameFrom</em>:&#160;</td>
+          <td class="paramtype">ClassId</td><td>)</td>
+          <td>: Bool </td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>判断hasExtensionByType方法返回值是否为None。</p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">qnameFrom</td><td>ClassId。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>true表示有值，false表示None。 </dd></dl>
+
+</div>
+</div>
+<hr/>该接口的文档由以下文件生成:<ul>
+<li>src/packet/stanza_view.cj</li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../d0/d12/namespacexmpp4cj.html">xmpp4cj</a></li><li class="navelem"><a class="el" href="../../d7/de7/namespacexmpp4cj_1_1packet.html">packet</a></li><li class="navelem"><a class="el" href="../../d5/d8c/interfacexmpp4cj_1_1packet_1_1StanzaView.html">StanzaView</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>

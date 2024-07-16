@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.6"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Xmpp4cj: src/compression/zutil.cj 文件参考</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Xmpp4cj
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.6 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('de/d44/zutil_8cj.html','../../'); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">类</a> &#124;
+<a href="#namespaces">包</a> &#124;
+<a href="#var-members">变量</a>  </div>
+  <div class="headertitle"><div class="title">zutil.cj 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+包</h2></td></tr>
+<tr class="memitem:dd/d96/namespacexmpp4cj_1_1compression"><td class="memItemLeft" align="right" valign="top">package &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d96/namespacexmpp4cj_1_1compression.html">xmpp4cj.compression</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:a465ce776b71876766019ae74015d3888"><td class="memItemLeft" align="right" valign="top"><a id="a465ce776b71876766019ae74015d3888" name="a465ce776b71876766019ae74015d3888"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_OK</b> : UInt32 = 0</td></tr>
+<tr class="separator:a465ce776b71876766019ae74015d3888"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88cacfd3d65e489c3815d63494553aa9"><td class="memItemLeft" align="right" valign="top"><a id="a88cacfd3d65e489c3815d63494553aa9" name="a88cacfd3d65e489c3815d63494553aa9"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_STREAM_END</b> : UInt32 = 1</td></tr>
+<tr class="separator:a88cacfd3d65e489c3815d63494553aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab518e7fb285c5c2060328aa419deb89d"><td class="memItemLeft" align="right" valign="top"><a id="ab518e7fb285c5c2060328aa419deb89d" name="ab518e7fb285c5c2060328aa419deb89d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_NEED_DICT</b> : UInt32 = 2</td></tr>
+<tr class="separator:ab518e7fb285c5c2060328aa419deb89d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92f28d67e94cfed13ed4b901eccf7d3a"><td class="memItemLeft" align="right" valign="top"><a id="a92f28d67e94cfed13ed4b901eccf7d3a" name="a92f28d67e94cfed13ed4b901eccf7d3a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_ERRNO</b> : UInt32 = 3</td></tr>
+<tr class="separator:a92f28d67e94cfed13ed4b901eccf7d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e490c3055da30f536cf6a3485dffa6a"><td class="memItemLeft" align="right" valign="top"><a id="a1e490c3055da30f536cf6a3485dffa6a" name="a1e490c3055da30f536cf6a3485dffa6a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_STREAM_ERROR</b> : UInt32 = 4</td></tr>
+<tr class="separator:a1e490c3055da30f536cf6a3485dffa6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe4edebb5396bb2d52e3b7e0c509a259"><td class="memItemLeft" align="right" valign="top"><a id="afe4edebb5396bb2d52e3b7e0c509a259" name="afe4edebb5396bb2d52e3b7e0c509a259"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_DATA_ERROR</b> : UInt32 = 5</td></tr>
+<tr class="separator:afe4edebb5396bb2d52e3b7e0c509a259"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15395951532e6b8a8168a5c14e948156"><td class="memItemLeft" align="right" valign="top"><a id="a15395951532e6b8a8168a5c14e948156" name="a15395951532e6b8a8168a5c14e948156"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_MEM_ERROR</b> : UInt32 = 6</td></tr>
+<tr class="separator:a15395951532e6b8a8168a5c14e948156"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6e4d7787d320e5797a30e11c5668578"><td class="memItemLeft" align="right" valign="top"><a id="af6e4d7787d320e5797a30e11c5668578" name="af6e4d7787d320e5797a30e11c5668578"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_BUF_ERROR</b> : UInt32 = 7</td></tr>
+<tr class="separator:af6e4d7787d320e5797a30e11c5668578"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cf4680653f0a1413d0685b382ffa2ba"><td class="memItemLeft" align="right" valign="top"><a id="a5cf4680653f0a1413d0685b382ffa2ba" name="a5cf4680653f0a1413d0685b382ffa2ba"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_FLUSH_ERROR</b> : UInt32 = 8</td></tr>
+<tr class="separator:a5cf4680653f0a1413d0685b382ffa2ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95243820ccf601223d7500297f2942aa"><td class="memItemLeft" align="right" valign="top"><a id="a95243820ccf601223d7500297f2942aa" name="a95243820ccf601223d7500297f2942aa"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_NO_FLUSH</b> : UInt32 = 10</td></tr>
+<tr class="separator:a95243820ccf601223d7500297f2942aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1e3f4aa25c6181cda46aa3f60ac8fe8"><td class="memItemLeft" align="right" valign="top"><a id="ac1e3f4aa25c6181cda46aa3f60ac8fe8" name="ac1e3f4aa25c6181cda46aa3f60ac8fe8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_PARTIAL_FLUSH</b> : UInt32 = 11</td></tr>
+<tr class="separator:ac1e3f4aa25c6181cda46aa3f60ac8fe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e04c92db071eb701d633965a73e4075"><td class="memItemLeft" align="right" valign="top"><a id="a2e04c92db071eb701d633965a73e4075" name="a2e04c92db071eb701d633965a73e4075"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_SYNC_FLUSH</b> : UInt32 = 12</td></tr>
+<tr class="separator:a2e04c92db071eb701d633965a73e4075"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7c2037f0fe59fb93ea3bc7645cfd2ad"><td class="memItemLeft" align="right" valign="top"><a id="ad7c2037f0fe59fb93ea3bc7645cfd2ad" name="ad7c2037f0fe59fb93ea3bc7645cfd2ad"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_FULL_FLUSH</b> : UInt32 = 13</td></tr>
+<tr class="separator:ad7c2037f0fe59fb93ea3bc7645cfd2ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a471a6347b2ee0175b170a9055a685680"><td class="memItemLeft" align="right" valign="top"><a id="a471a6347b2ee0175b170a9055a685680" name="a471a6347b2ee0175b170a9055a685680"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_FINISH</b> : UInt32 = 14</td></tr>
+<tr class="separator:a471a6347b2ee0175b170a9055a685680"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8334fe03604185c0330c36de74538ee"><td class="memItemLeft" align="right" valign="top"><a id="af8334fe03604185c0330c36de74538ee" name="af8334fe03604185c0330c36de74538ee"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_BLOCK</b> : UInt32 = 15</td></tr>
+<tr class="separator:af8334fe03604185c0330c36de74538ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24781cd4dbb063d1e95fc5a551f046ab"><td class="memItemLeft" align="right" valign="top"><a id="a24781cd4dbb063d1e95fc5a551f046ab" name="a24781cd4dbb063d1e95fc5a551f046ab"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_TREES</b> : UInt32 = 16</td></tr>
+<tr class="separator:a24781cd4dbb063d1e95fc5a551f046ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9636bfeab87ea08c5e34cbed9db1419"><td class="memItemLeft" align="right" valign="top"><a id="ab9636bfeab87ea08c5e34cbed9db1419" name="ab9636bfeab87ea08c5e34cbed9db1419"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_UNKNOWN_FLUSH</b> : UInt32 = 17</td></tr>
+<tr class="separator:ab9636bfeab87ea08c5e34cbed9db1419"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4d513d6e69c0b4470726bad8a770e6d"><td class="memItemLeft" align="right" valign="top"><a id="ac4d513d6e69c0b4470726bad8a770e6d" name="ac4d513d6e69c0b4470726bad8a770e6d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_UNKNOWN</b> : Int32 = 0</td></tr>
+<tr class="separator:ac4d513d6e69c0b4470726bad8a770e6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a883ea86698029539e1f51014cb21e501"><td class="memItemLeft" align="right" valign="top"><a id="a883ea86698029539e1f51014cb21e501" name="a883ea86698029539e1f51014cb21e501"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_BINARY</b> : Int32 = 1</td></tr>
+<tr class="separator:a883ea86698029539e1f51014cb21e501"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e0d2c60c02c5c115fb1b168efdf1c42"><td class="memItemLeft" align="right" valign="top"><a id="a3e0d2c60c02c5c115fb1b168efdf1c42" name="a3e0d2c60c02c5c115fb1b168efdf1c42"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_TEXT</b> : Int32 = 2</td></tr>
+<tr class="separator:a3e0d2c60c02c5c115fb1b168efdf1c42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac54d6259cf3c7f22788d66cdf94ab84a"><td class="memItemLeft" align="right" valign="top"><a id="ac54d6259cf3c7f22788d66cdf94ab84a" name="ac54d6259cf3c7f22788d66cdf94ab84a"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_ASCII</b> : Int32 = 3</td></tr>
+<tr class="separator:ac54d6259cf3c7f22788d66cdf94ab84a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7202555d407850f73703ed2e5522f902"><td class="memItemLeft" align="right" valign="top"><a id="a7202555d407850f73703ed2e5522f902" name="a7202555d407850f73703ed2e5522f902"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_DEFAULT_STRATEGY</b> : UInt32 = 20</td></tr>
+<tr class="separator:a7202555d407850f73703ed2e5522f902"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa8e4e80ec0300a28275c934828266e3"><td class="memItemLeft" align="right" valign="top"><a id="aaa8e4e80ec0300a28275c934828266e3" name="aaa8e4e80ec0300a28275c934828266e3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_FILTERED</b> : UInt32 = 21</td></tr>
+<tr class="separator:aaa8e4e80ec0300a28275c934828266e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14163b1208e58728d8d012c29b182803"><td class="memItemLeft" align="right" valign="top"><a id="a14163b1208e58728d8d012c29b182803" name="a14163b1208e58728d8d012c29b182803"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_HUFFMAN_ONLY</b> : UInt32 = 22</td></tr>
+<tr class="separator:a14163b1208e58728d8d012c29b182803"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab86a8528dbce88af86977f796a7ac05f"><td class="memItemLeft" align="right" valign="top"><a id="ab86a8528dbce88af86977f796a7ac05f" name="ab86a8528dbce88af86977f796a7ac05f"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_RLE</b> : UInt32 = 23</td></tr>
+<tr class="separator:ab86a8528dbce88af86977f796a7ac05f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25b1320f4e44281cf99b702de73d78ac"><td class="memItemLeft" align="right" valign="top"><a id="a25b1320f4e44281cf99b702de73d78ac" name="a25b1320f4e44281cf99b702de73d78ac"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_FIXED</b> : UInt32 = 24</td></tr>
+<tr class="separator:a25b1320f4e44281cf99b702de73d78ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a868bb9eb905826cdcde06a7ae11d4944"><td class="memItemLeft" align="right" valign="top"><a id="a868bb9eb905826cdcde06a7ae11d4944" name="a868bb9eb905826cdcde06a7ae11d4944"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let LEVEL_NO_COMPRESSION</b> : UInt32 = 0</td></tr>
+<tr class="separator:a868bb9eb905826cdcde06a7ae11d4944"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a800e59e3d2c8ea9a42effe896fc1f74c"><td class="memItemLeft" align="right" valign="top"><a id="a800e59e3d2c8ea9a42effe896fc1f74c" name="a800e59e3d2c8ea9a42effe896fc1f74c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let LEVEL_BEST_SPEED</b> : UInt32 = 1</td></tr>
+<tr class="separator:a800e59e3d2c8ea9a42effe896fc1f74c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe839d944b584a7b62d8f2a7c7ba3729"><td class="memItemLeft" align="right" valign="top"><a id="abe839d944b584a7b62d8f2a7c7ba3729" name="abe839d944b584a7b62d8f2a7c7ba3729"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let LEVEL_DEFAULT_COMPRESSION</b> : UInt32 = 6</td></tr>
+<tr class="separator:abe839d944b584a7b62d8f2a7c7ba3729"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36c796f73ac5872c6d2b95629d20f990"><td class="memItemLeft" align="right" valign="top"><a id="a36c796f73ac5872c6d2b95629d20f990" name="a36c796f73ac5872c6d2b95629d20f990"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let LEVEL_BEST_COMPRESSION</b> : UInt32 = 9</td></tr>
+<tr class="separator:a36c796f73ac5872c6d2b95629d20f990"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b45b3ac97aa484ce42b93dfa6611ac8"><td class="memItemLeft" align="right" valign="top"><a id="a9b45b3ac97aa484ce42b93dfa6611ac8" name="a9b45b3ac97aa484ce42b93dfa6611ac8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let MIN_MEM_LEVEL</b> : UInt32 = 1</td></tr>
+<tr class="separator:a9b45b3ac97aa484ce42b93dfa6611ac8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a267dc45bc6bd0146d36e777fafb69c02"><td class="memItemLeft" align="right" valign="top"><a id="a267dc45bc6bd0146d36e777fafb69c02" name="a267dc45bc6bd0146d36e777fafb69c02"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let DEF_MEM_LEVEL</b> : UInt32 = 8</td></tr>
+<tr class="separator:a267dc45bc6bd0146d36e777fafb69c02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2ae7f068eaf8802941b2c3c4a164b94"><td class="memItemLeft" align="right" valign="top"><a id="ab2ae7f068eaf8802941b2c3c4a164b94" name="ab2ae7f068eaf8802941b2c3c4a164b94"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let MAX_MEM_LEVEL</b> : UInt32 = 9</td></tr>
+<tr class="separator:ab2ae7f068eaf8802941b2c3c4a164b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5edb4b2f9ca8aa2743dd9c1432c5276"><td class="memItemLeft" align="right" valign="top"><a id="aa5edb4b2f9ca8aa2743dd9c1432c5276" name="aa5edb4b2f9ca8aa2743dd9c1432c5276"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let MIN_WINDOW_BITS</b> : UInt32 = 8</td></tr>
+<tr class="separator:aa5edb4b2f9ca8aa2743dd9c1432c5276"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a863bda7afcfdd5ed24d023f1d17293e3"><td class="memItemLeft" align="right" valign="top"><a id="a863bda7afcfdd5ed24d023f1d17293e3" name="a863bda7afcfdd5ed24d023f1d17293e3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let DEF_WINDOW_BITS</b> : UInt32 = 15</td></tr>
+<tr class="separator:a863bda7afcfdd5ed24d023f1d17293e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8a71e1c5a16613db95df75be764922c"><td class="memItemLeft" align="right" valign="top"><a id="ac8a71e1c5a16613db95df75be764922c" name="ac8a71e1c5a16613db95df75be764922c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let MAX_WINDOW_BITS</b> : UInt32 = 15</td></tr>
+<tr class="separator:ac8a71e1c5a16613db95df75be764922c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a32c8f819eef26fc803cf5b21f573f0"><td class="memItemLeft" align="right" valign="top"><a id="a2a32c8f819eef26fc803cf5b21f573f0" name="a2a32c8f819eef26fc803cf5b21f573f0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let METHOD_DEFLATE</b> : UInt32 = 8</td></tr>
+<tr class="separator:a2a32c8f819eef26fc803cf5b21f573f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a625ea9369ed711fc1d56e55888bab516"><td class="memItemLeft" align="right" valign="top"><a id="a625ea9369ed711fc1d56e55888bab516" name="a625ea9369ed711fc1d56e55888bab516"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let FAT_FILESYSTEM</b> : Int32 = 0</td></tr>
+<tr class="separator:a625ea9369ed711fc1d56e55888bab516"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89cbd8c7257d729b9a67780a5ac361e0"><td class="memItemLeft" align="right" valign="top"><a id="a89cbd8c7257d729b9a67780a5ac361e0" name="a89cbd8c7257d729b9a67780a5ac361e0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let AMIGA</b> : Int32 = 1</td></tr>
+<tr class="separator:a89cbd8c7257d729b9a67780a5ac361e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b2cce3ea8a6df76ee00853fad6d1299"><td class="memItemLeft" align="right" valign="top"><a id="a0b2cce3ea8a6df76ee00853fad6d1299" name="a0b2cce3ea8a6df76ee00853fad6d1299"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let VMS</b> : Int32 = 2</td></tr>
+<tr class="separator:a0b2cce3ea8a6df76ee00853fad6d1299"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4178456190ae8dc7eafdcceebe68f3e"><td class="memItemLeft" align="right" valign="top"><a id="ac4178456190ae8dc7eafdcceebe68f3e" name="ac4178456190ae8dc7eafdcceebe68f3e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let UNIX</b> : Int32 = 3</td></tr>
+<tr class="separator:ac4178456190ae8dc7eafdcceebe68f3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb04ff6e8a112d7a01ff0f6256b29081"><td class="memItemLeft" align="right" valign="top"><a id="aeb04ff6e8a112d7a01ff0f6256b29081" name="aeb04ff6e8a112d7a01ff0f6256b29081"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let VM_CMS</b> : Int32 = 4</td></tr>
+<tr class="separator:aeb04ff6e8a112d7a01ff0f6256b29081"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99bbdaa75997f582cb98ed1eae285d86"><td class="memItemLeft" align="right" valign="top"><a id="a99bbdaa75997f582cb98ed1eae285d86" name="a99bbdaa75997f582cb98ed1eae285d86"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let ATARI_TOS</b> : Int32 = 5</td></tr>
+<tr class="separator:a99bbdaa75997f582cb98ed1eae285d86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83e082351379f8d68b24a978a03500bb"><td class="memItemLeft" align="right" valign="top"><a id="a83e082351379f8d68b24a978a03500bb" name="a83e082351379f8d68b24a978a03500bb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let HPFS_FILESYSTEM</b> : Int32 = 6</td></tr>
+<tr class="separator:a83e082351379f8d68b24a978a03500bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69f788a2dc09698107d8192bfe8d7e84"><td class="memItemLeft" align="right" valign="top"><a id="a69f788a2dc09698107d8192bfe8d7e84" name="a69f788a2dc09698107d8192bfe8d7e84"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let MACINTOSH</b> : Int32 = 7</td></tr>
+<tr class="separator:a69f788a2dc09698107d8192bfe8d7e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40c14c67332a364a4b79a3ca8fcb13f3"><td class="memItemLeft" align="right" valign="top"><a id="a40c14c67332a364a4b79a3ca8fcb13f3" name="a40c14c67332a364a4b79a3ca8fcb13f3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let Z_SYSTEM</b> : Int32 = 8</td></tr>
+<tr class="separator:a40c14c67332a364a4b79a3ca8fcb13f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a803ac3455505563273323009da7bbbd1"><td class="memItemLeft" align="right" valign="top"><a id="a803ac3455505563273323009da7bbbd1" name="a803ac3455505563273323009da7bbbd1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let CP_M</b> : Int32 = 9</td></tr>
+<tr class="separator:a803ac3455505563273323009da7bbbd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36bce95b080f712d999c7fad3272cad2"><td class="memItemLeft" align="right" valign="top"><a id="a36bce95b080f712d999c7fad3272cad2" name="a36bce95b080f712d999c7fad3272cad2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let TOPS_20</b> : Int32 = 10</td></tr>
+<tr class="separator:a36bce95b080f712d999c7fad3272cad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a421cfc19da6fd08ca18a266b94fbaa0b"><td class="memItemLeft" align="right" valign="top"><a id="a421cfc19da6fd08ca18a266b94fbaa0b" name="a421cfc19da6fd08ca18a266b94fbaa0b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let NTFS_FILESYSTEM</b> : Int32 = 11</td></tr>
+<tr class="separator:a421cfc19da6fd08ca18a266b94fbaa0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a257a0c889d0ce92707fa5d0c25146d09"><td class="memItemLeft" align="right" valign="top"><a id="a257a0c889d0ce92707fa5d0c25146d09" name="a257a0c889d0ce92707fa5d0c25146d09"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let QDOS</b> : Int32 = 12</td></tr>
+<tr class="separator:a257a0c889d0ce92707fa5d0c25146d09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a462e0ced279bd0098037aa72940308aa"><td class="memItemLeft" align="right" valign="top"><a id="a462e0ced279bd0098037aa72940308aa" name="a462e0ced279bd0098037aa72940308aa"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let ACORN_RISCOS</b> : Int32 = 13</td></tr>
+<tr class="separator:a462e0ced279bd0098037aa72940308aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cfcff8f761ddcfe2d6b795874a7f0b2"><td class="memItemLeft" align="right" valign="top"><a id="a5cfcff8f761ddcfe2d6b795874a7f0b2" name="a5cfcff8f761ddcfe2d6b795874a7f0b2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let UNKNOWN_SYSTEM</b> : Int32 = 255</td></tr>
+<tr class="separator:a5cfcff8f761ddcfe2d6b795874a7f0b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a630c14a5d9df7972b4a05901fe7793d8"><td class="memItemLeft" align="right" valign="top"><a id="a630c14a5d9df7972b4a05901fe7793d8" name="a630c14a5d9df7972b4a05901fe7793d8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let STORED_BLOCK</b> : UInt32 = 0</td></tr>
+<tr class="separator:a630c14a5d9df7972b4a05901fe7793d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0feef00973ca9af3968d5a985e5a51ef"><td class="memItemLeft" align="right" valign="top"><a id="a0feef00973ca9af3968d5a985e5a51ef" name="a0feef00973ca9af3968d5a985e5a51ef"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let STATIC_TREES</b> : UInt32 = 1</td></tr>
+<tr class="separator:a0feef00973ca9af3968d5a985e5a51ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b6de86243ee75e3b1311cb49aced89e"><td class="memItemLeft" align="right" valign="top"><a id="a0b6de86243ee75e3b1311cb49aced89e" name="a0b6de86243ee75e3b1311cb49aced89e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let DYN_TREES</b> : UInt32 = 2</td></tr>
+<tr class="separator:a0b6de86243ee75e3b1311cb49aced89e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5d1702ce8de47909e5e393840832193"><td class="memItemLeft" align="right" valign="top"><a id="ad5d1702ce8de47909e5e393840832193" name="ad5d1702ce8de47909e5e393840832193"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let MIN_MATCH</b> : UInt32 = 3</td></tr>
+<tr class="separator:ad5d1702ce8de47909e5e393840832193"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3798b2b6a3226aa4d5664eb3367add6c"><td class="memItemLeft" align="right" valign="top"><a id="a3798b2b6a3226aa4d5664eb3367add6c" name="a3798b2b6a3226aa4d5664eb3367add6c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let MAX_MATCH</b> : UInt32 = 258</td></tr>
+<tr class="separator:a3798b2b6a3226aa4d5664eb3367add6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa95c3cc0edb6becd5da29393e38adb98"><td class="memItemLeft" align="right" valign="top"><a id="aa95c3cc0edb6becd5da29393e38adb98" name="aa95c3cc0edb6becd5da29393e38adb98"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let PRESET_DICT</b> : UInt32 = 0x20</td></tr>
+<tr class="separator:aa95c3cc0edb6becd5da29393e38adb98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae798166bcc07ad98035b9ce5f9611424"><td class="memItemLeft" align="right" valign="top"><a id="ae798166bcc07ad98035b9ce5f9611424" name="ae798166bcc07ad98035b9ce5f9611424"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let error_msg</b> : Array&lt;String&gt; = [</td></tr>
+<tr class="separator:ae798166bcc07ad98035b9ce5f9611424"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af67e15eda5b00e34be24e6d84ab191fb"><td class="memItemLeft" align="right" valign="top"><a id="af67e15eda5b00e34be24e6d84ab191fb" name="af67e15eda5b00e34be24e6d84ab191fb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let bl_order</b> : Array&lt;Int64&gt; = [16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15]</td></tr>
+<tr class="separator:af67e15eda5b00e34be24e6d84ab191fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a622d8315e6220702d3b6a4bf2e39f3a1"><td class="memItemLeft" align="right" valign="top"><a id="a622d8315e6220702d3b6a4bf2e39f3a1" name="a622d8315e6220702d3b6a4bf2e39f3a1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let BASE</b> : UInt32 = 65521</td></tr>
+<tr class="separator:a622d8315e6220702d3b6a4bf2e39f3a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae407ff4710748891c15891909fb9ce5e"><td class="memItemLeft" align="right" valign="top"><a id="ae407ff4710748891c15891909fb9ce5e" name="ae407ff4710748891c15891909fb9ce5e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let NMAX</b> : Int64 = 5552</td></tr>
+<tr class="separator:ae407ff4710748891c15891909fb9ce5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeefe3e3397505cf56d5f49faa955d7b"><td class="memItemLeft" align="right" valign="top"><a id="aaeefe3e3397505cf56d5f49faa955d7b" name="aaeefe3e3397505cf56d5f49faa955d7b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>let CRC_TABLE</b> : Array&lt;UInt32&gt; = [0x00000000, 0x77073096, 0xee0e612c, 0x990951ba, 0x076dc419, 0x706af48f, 0xe963a535,</td></tr>
+<tr class="separator:aaeefe3e3397505cf56d5f49faa955d7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>Copyright (c) Huawei Technologies Co., Ltd. 2022-2024. All rights reserved.</p>
+<p>Defines common constants/type/function for decompression/compression </p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_40ed6a89610fc2370cf3ffcd6469b940.html">compression</a></li><li class="navelem"><a class="el" href="../../de/d44/zutil_8cj.html">zutil.cj</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6 </li>
+  </ul>
+</div>
+</body>
+</html>
