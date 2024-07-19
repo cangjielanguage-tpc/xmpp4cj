@@ -1,0 +1,18 @@
+[dependencies]
+
+[package]
+  cjc-version = "0.53.4"
+  compile-option = ""
+  description = "nothing here"
+  link-option = ""
+  name = "xmpp4cj"
+  output-type = "dynamic"
+  src-dir = ""
+  target-dir = ""
+  version = "1.0.0"
+  package-configuration = {}
+
+[profile]
+  build = {incremental = false, lto = ""}
+  customized-option = {debug = "-g -Woff all --error-count-limit all", release = "--fast-math -O2 -Woff all"}
+  test = {}
