@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
  */
 package xmpp4cj.xmpp
@@ -335,7 +335,7 @@ public class JidUtil {
     }
 
     /**
-     * Check if two JIDs are equals. Takes <code>null</code> values into consideration. Which means that this method will return <code>true</code> if both JIDs are <code>null</code>.
+     * Check if two JIDs are equals. Takes <code>None</code> values into consideration. Which means that this method will return <code>true</code> if both JIDs are <code>None</code>.
      *
      * @param jidOne The first JID to compare.
      * @param jidTwo The second JID to compare.

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
  */
 package xmpp4cj.xmpp
@@ -435,10 +435,7 @@ public class XmppXmlSplitter <: XmlSplitter {
         if ("stream" != localpart) {
             return
         }
-        let protocol = "http"
-        let host = "etherx.jabber.org"
-        let path = "/streams"
-        if ("${protocol}://${host}${path}" == (attributes.get("xmlns:${prefix}") ?? "")) {
+        if (attributes.get("xmlns:${prefix}") == ETHERX_JABBER_STREAMS_NAMESPACE) {
             streamPrefix = prefix
             newSplittedPart()
             xmppElementCallback?.streamOpened(prefix, HashMap(attributes))

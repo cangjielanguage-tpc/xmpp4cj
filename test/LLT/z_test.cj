@@ -12,12 +12,12 @@ internal import xmpp4cj.xmpp.*
 class Assert {
     static func assertNull<T>(any: ?T): Unit {
         if (any.isSome()) {
-            throw Exception("expected null, but was:Some()")
+            throw Exception("expected None, but was:Some()")
         }
     }
     static func assertNotNull<T>(any: ?T): Unit {
         if (any.isNone()) {
-            throw Exception("expected not null, but was:None")
+            throw Exception("expected not None, but was:None")
         }
     }
     static func assertTrue(any: Bool): Unit {
