@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
  */
 package xmpp4cj.xmpp
@@ -16,15 +16,15 @@ public interface Cache<K, V> {
      *
      * @param key the key of the value.
      * @param value the value.
-     * @return the previous value or {@code null}.
+     * @return the previous value or {@code None}.
      */
     func put(key: K, value: V): ?V
 
     /**
-     * Returns the value of the specified key, or {@code null}.
+     * Returns the value of the specified key, or {@code None}.
      *
      * @param key the key.
-     * @return the value found in the cache, or {@code null}.
+     * @return the value found in the cache, or {@code None}.
      */
     func lookup(key: K): ?V
 
@@ -83,7 +83,7 @@ public class ExpirationCache<K, V> <: Cache<K, V> where K <: Hashable & Equatabl
      * @param key the key of the value.
      * @param value the value.
      * @param expirationTime the expiration time in milliseconds.
-     * @return the previous value or {@code null}.
+     * @return the previous value or {@code None}.
      */
     public func put(key: K, value: V, expirationTime: Duration): ?V {
         let eOld: ?ExpireElement<V> = cache.put(key, ExpireElement<V>(value, expirationTime))

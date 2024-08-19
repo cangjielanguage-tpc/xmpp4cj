@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
  */
 package xmpp4cj.xmpp
@@ -407,7 +407,7 @@ public class XmppStringPrepUtil {
      */
     static func throwIfNullOrEmpty(string: ?String, types: XmppAddressParttype): Unit {
         if (string.isNone()) {
-            throw XmppStringprepException("None", "${types.getCapitalizedName()} can't be null")
+            throw XmppStringprepException("None", "${types.getCapitalizedName()} can't be None")
         }
         if (string?.isEmpty() ?? true) {
             throw XmppStringprepException("", "${types.getCapitalizedName()} can't be the empty string")

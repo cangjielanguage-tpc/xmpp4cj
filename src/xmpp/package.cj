@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
  */
 package xmpp4cj.xmpp
@@ -18,8 +18,12 @@ internal import std.sync.{AtomicInt64, Monitor, ReentrantMutex, Timer, Semaphore
 internal import std.time.*
 internal import std.unicode.{UnicodeExtension}
 
-extend<T> Option<T> {
-    operator func ()(): T {
+public interface OptionExt<T> {
+    operator func ()(): T
+}
+
+extend<T> Option<T> <: OptionExt<T> {
+    public operator func ()(): T {
         this.getOrThrow()
     }
 }
@@ -40,3 +44,6 @@ func binarySearch<T>(arr: Array<T>, key: T): Int64 where T <: Comparable<T> {
     // key not found.
     return -(low + 1)
 }
+
+public let ETHERX_JABBER_STREAMS_NAMESPACE: String = "http://etherx.jabber.org/streams"
+public let JABBER_PROTOCAL_NAMESPACE_PREFIX: String = "http://jabber.org/protocol"

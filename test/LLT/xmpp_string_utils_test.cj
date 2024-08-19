@@ -59,12 +59,12 @@ public class XmppStringUtilsTest {
 class XmppStringUtils {
     /**
      * Returns the localpart of an XMPP address (JID). For example, for the address "user@xmpp.org/Resource", "user"
-     * would be returned. Returns <code>null</code> if the given JID has no localpart. Returns the empty string if
+     * would be returned. Returns <code>None</code> if the given JID has no localpart. Returns the empty string if
      * the given JIDs localpart is the empty string (which is invalid).
      *
      * @param jid
      *            the XMPP address to parse.
-     * @return the name portion of the XMPP address, the empty String or <code>null</code>.
+     * @return the name portion of the XMPP address, the empty String or <code>None</code>.
      */
     public static func parseLocalpart(jid: String): ?String {
         let atIndex = jid.indexOf("@") ?? -1
@@ -74,7 +74,7 @@ class XmppStringUtils {
         if (atIndex == 0) {
             // '@' as first character, i.e. '@example.org". Return empty string as
             // localpart, to make it possible to differentiate this from 'example.org'
-            // (which would return 'null' as localpart).
+            // (which would return 'None' as localpart).
             return ""
         }
 
@@ -89,12 +89,12 @@ class XmppStringUtils {
 
     /**
      * Returns the domain of an XMPP address (JID). For example, for the address "user@xmpp.org/Resource", "xmpp.org"
-     * would be returned. If <code>jid</code> is <code>null</code>, then this method returns also <code>null</code>. If
+     * would be returned. If <code>jid</code> is <code>None</code>, then this method returns also <code>None</code>. If
      * the input String is no valid JID or has no domainpart, then this method will return the empty String.
      *
      * @param jid
      *            the XMPP address to parse.
-     * @return the domainpart of the XMPP address, the empty String or <code>null</code>.
+     * @return the domainpart of the XMPP address, the empty String or <code>None</code>.
      */
     public static func parseDomain(jid: String): String {
         let atIndex = jid.indexOf("@") ?? -1
@@ -114,7 +114,7 @@ class XmppStringUtils {
 
     /**
      * Returns the resource portion of an XMPP address (JID). For example, for the address "user@xmpp.org/Resource",
-     * "Resource" would be returned. Returns <code>null</code> if the given JID has no resourcepart. Returns the
+     * "Resource" would be returned. Returns <code>None</code> if the given JID has no resourcepart. Returns the
      * empty string if the given JID has an empty resourcepart (which is invalid).
      *
      * @param jid
