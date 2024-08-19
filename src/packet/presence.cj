@@ -157,21 +157,27 @@ public class Presence <: MessageOrPresence & PresenceView & ToString {
     public override func toXML(enclosingNamespace: ?XmlEnvironment): XmlStringBuilder {
         let buf = XmlStringBuilder(this, enclosingNamespace)
         addCommonAttributes(buf)
-        if (typ == PresenceType.available) {
+        if (typ != PresenceType.available) {
             buf.attribute("type", typ)
         }
+
         let extensions = getExtensions()
         if (status.isNone() && priority.isNone() && (mode.isNone() || mode == PresenceMode.available) &&
             extensions.isEmpty() && getError().isNone()) {
             return buf.closeEmptyElement()
         }
         buf.rightAngleBracket()
+
         buf.optElement("status", status)
         buf.optElement("priority", priority ?? None)
-        if (mode.isSome() && mode == PresenceMode.available) {
-            buf.element("show", mode)
+        match (mode) {
+            case Some(v) where v != PresenceMode.available => buf.element("show", v)
+            case _ => ()
         }
+
         buf.append(extensions |> map<ExtensionElement, Element> {v => v})
+
+        // Add the error sub-packet, if there is one.
         appendErrorIfExists(buf)
         buf.closeElement(ELEMENT)
         return buf

@@ -30,24 +30,21 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
 
     public init(elementName: String, xmlNs: String, xmlLang: ?String, enclosingXmlEnvironment: ?XmlEnvironment) {
         sb = LazyStringBuilder()
-        effectiveXmlEnvironment = XmlEnvironment.builder().withNamespace(xmlNs).withLanguage(xmlLang).withNext(
-            enclosingXmlEnvironment).build()
-
         sb.append('<').append(elementName) // halfOpenElement(elementName)
 
-        if (enclosingXmlEnvironment.isNone() || enclosingXmlEnvironment?.effectiveNamespaceEquals(xmlNs) == false) {
-            if (effectiveXmlEnvironment?.effectiveNamespaceEquals(xmlNs) != true) {
-                sb.append(XmlNsAttribute(xmlNs))
-            }
+        if ((enclosingXmlEnvironment?.effectiveNamespaceEquals(xmlNs) ?? false) == false) {
+            sb.append(XmlNsAttribute(xmlNs))
         }
-        if (enclosingXmlEnvironment.isNone() || enclosingXmlEnvironment?.effectiveLanguageEquals(xmlLang) == false) {
-            let lang = xmlLang ?? ""
-            if (lang.size > 0) {
-                sb.append(' ').append("xml:lang").append("=\'")
+        if ((enclosingXmlEnvironment?.effectiveLanguageEquals(xmlLang) ?? false) == false) {
+            if (let Some(lang) <- xmlLang) {
+                sb.append(' ').append("xml:lang").append("='")
                 sb.append(StringUtils.escapeForXmlAttributeApos(lang))
                 sb.append('\'')
             }
         }
+
+        effectiveXmlEnvironment = XmlEnvironment.builder().withNamespace(xmlNs).withLanguage(xmlLang).withNext(
+            enclosingXmlEnvironment).build()
     }
 
     public func getXmlEnvironment(): ?XmlEnvironment {
@@ -518,7 +515,7 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
         return res
     }
 
-    public override func toXML(enclosingXmlEnvironment: ?XmlEnvironment): ToString {
+    public override func toXML(enclosingXmlEnvironment: ?XmlEnvironment): StringBuilder {
         // This is only the potential length, since the actual length depends on the given XmlEnvironment.
         let potentialLength = size
         let res = StringBuilder(potentialLength)

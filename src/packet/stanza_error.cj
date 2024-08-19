@@ -181,7 +181,7 @@ public class StanzaError <: AbstractError & ExtensionElement & ToString {
 
     public func toXML(enclosingNamespace: ?XmlEnvironment): XmlStringBuilder {
         let xml = XmlStringBuilder(this, enclosingNamespace)
-        xml.attribute("typ", typ.toString())
+        xml.attribute("type", typ.toString())
         xml.optAttribute("by", errorGenerator)
         xml.rightAngleBracket()
 

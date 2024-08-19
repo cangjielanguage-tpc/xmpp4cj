@@ -44,8 +44,8 @@ public interface StanzaView <: XmlLangElement {
         return getExtension(qname).isSome()
     }
 
-    func hasExtensionWithType(qnameFrom: ClassId): Bool {
-        return getExtension(qnameFrom).isSome()
+    func hasExtensionByType(qnameFrom: ClassId): Bool {
+        return getExtensionByType(qnameFrom).isSome()
     }
 
     /**
@@ -63,12 +63,12 @@ public interface StanzaView <: XmlLangElement {
         return false
     }
 
-    func getExtension(extensionElementClass: ClassId): ?ExtensionElement {
+    func getExtensionByType(extensionElementClass: ClassId): ?ExtensionElement {
         let qname: QName = XmppElementUtil.getQNameFor(extensionElementClass)
         let extensionElement: ?ExtensionElement = getExtension(qname)
         extensionElement
     }
-    static func getExt<E>(extensionElement: ?ExtensionElement): ?E where E <: ExtensionElement & ClassIdentify {
+    static func castExt<E>(extensionElement: ?ExtensionElement): ?E where E <: ExtensionElement & ClassIdentify {
         if (let Some(extensionElement) <- extensionElement) {
             return XmppElementUtil.castOrThrow<E>(extensionElement)
         } else {
@@ -89,9 +89,9 @@ public interface StanzaView <: XmlLangElement {
      * @param extensionElementClass the class of the type of extension elements.
      * @return a list of extension elements of that type, which may be empty.
      */
-    func getExtensions(extensionElementClass: ClassId): ArrayList<ExtensionElement>
+    func getExtensionsByType(extensionElementClass: ClassId): ArrayList<ExtensionElement>
 
-    static func getExt<E>(iter: ArrayList<ExtensionElement>): ArrayList<E> where E <: ExtensionElement & ClassIdentify {
+    static func castExt<E>(iter: ArrayList<ExtensionElement>): ArrayList<E> where E <: ExtensionElement & ClassIdentify {
         let res = ArrayList<E>(iter.size)
         for (extensionElement in iter) {
             let e = XmppElementUtil.castOrThrow<E>(extensionElement)
@@ -99,6 +99,4 @@ public interface StanzaView <: XmlLangElement {
         }
         return res
     }
-
-    // func getExtensionElements(): MultiMap<QName, ExtensionElement>
 }

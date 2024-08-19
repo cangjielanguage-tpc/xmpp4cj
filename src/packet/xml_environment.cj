@@ -3,23 +3,19 @@
  */
 package xmpp4cj.packet
 
-public let XML_ENVIRONMENT_EMPTY: XmlEnvironment = XmlEnvironment(None)
-
 public class XmlEnvironment {
-    private var namespace: ?String = None
+    public static let EMPTY: XmlEnvironment = XmlEnvironment(None)
 
+    private var namespace: ?String = None
     private var language: ?String = None
 
     private var next: ?XmlEnvironment = None
 
     private var effectiveNamespaceDetermined: Bool = false
-
     private var effectiveLanguageDetermined: Bool = false
 
     private var effectiveNamespace: ?String = None
-
     private var effectiveLanguage: ?String = None
-
     private var toStringCache: ?String = None
 
     public init(namespace: ?String) {
@@ -96,9 +92,9 @@ public class XmlEnvironment {
     }
 
     public func effectiveLanguageEquals(language: ?String): Bool {
-        var effectiveLanguage: ?String = getEffectiveLanguage()
+        let effectiveLanguage: ?String = getEffectiveLanguage()
         return if (let Some(v) <- effectiveLanguage) {
-            effectiveLanguage == language
+            language == v
         } else {
             false
         }

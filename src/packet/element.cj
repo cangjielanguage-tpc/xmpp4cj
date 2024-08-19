@@ -24,7 +24,7 @@ public interface Element {
     }
 
     func toXML(): ToString {
-        return toXML(XML_ENVIRONMENT_EMPTY)
+        return toXML(XmlEnvironment.EMPTY)
     }
 }
 
