@@ -172,11 +172,11 @@ public class StanzaError <: AbstractError & ExtensionElement & ToString {
     }
 
     public func getElementName(): String {
-        return QNAME.localPart
+        return QNAME.getLocalPart()
     }
 
     public func getNamespace(): String {
-        return QNAME.namespaceURI
+        return QNAME.getNamespaceURI()
     }
 
     public func toXML(enclosingNamespace: ?XmlEnvironment): XmlStringBuilder {
@@ -277,14 +277,14 @@ public class StanzaErrorBuilder <: AbstractErrorBuilder<StanzaErrorBuilder> {
 }
 
 /**
- * A class to represent the typ of the Error. The types are:
+ * A class to represent the type of the Error. The types are:
  *
  * <ul>
- *      <li>XMPPError.Type.WAIT - retry after waiting (the error is temporary)
- *      <li>XMPPError.Type.CANCEL - do not retry (the error is unrecoverable)
- *      <li>XMPPError.Type.MODIFY - retry after changing the data sent
- *      <li>XMPPError.Type.AUTH - retry after providing credentials
- *      <li>XMPPError.Type.CONTINUE - proceed (the condition was only a warning)
+ *      <li>XMPPErrorType.WAIT - retry after waiting (the error is temporary)
+ *      <li>XMPPErrorType.CANCEL - do not retry (the error is unrecoverable)
+ *      <li>XMPPErrorType.MODIFY - retry after changing the data sent
+ *      <li>XMPPErrorType.AUTH - retry after providing credentials
+ *      <li>XMPPErrorType.CONTINUE - proceed (the condition was only a warning)
  * </ul>
  */
 public enum StanzaErrorType <: ToString {

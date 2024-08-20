@@ -3,53 +3,6 @@
  */
 package xmpp4cj.packet
 
-public class QName <: ToString & Hashable & Equatable<QName> {
-    let namespaceURI: String
-    let localPart: String
-    let prefix: String
-    public init(namespaceURI: String, localPart: String) {
-        this(namespaceURI, localPart, "")
-    }
-    public init(namespaceURI: String, localPart: String, prefix: String) {
-        this.namespaceURI = namespaceURI
-        this.localPart = localPart
-        this.prefix = prefix
-    }
-    public func getLocalPart(): String {
-        localPart
-    }
-    public func getNamespaceURI(): String {
-        namespaceURI
-    }
-    public override func toString(): String {
-        if (namespaceURI == "") {
-            return localPart
-        } else {
-            return "{" + namespaceURI + "}" + localPart
-        }
-    }
-    public operator func ==(qname: QName): Bool {
-        refEq(this, qname) || (namespaceURI == qname.namespaceURI && localPart == qname.localPart && prefix == qname.
-            prefix)
-    }
-    public operator func !=(qname: QName): Bool {
-        !(this == qname)
-    }
-
-    @OverflowWrapping
-    public func hashCode(): Int64 {
-        var result: Int64 = 17
-        result = 31 * result + namespaceURI.hashCode()
-        result = 31 * result + localPart.hashCode()
-        result = 31 * result + prefix.hashCode()
-        return result
-    }
-}
-
-let EMPTY_QNAME = QName("", "")
-let EMPTY_ELEMENT = ""
-let EMPTY_NAMESPACE = ""
-
 public interface QNameField {
     prop QNAME_FIELD: QName
 }
