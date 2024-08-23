@@ -1,11 +1,11 @@
 [
     {
-        "Name": " Smack ",
-        "License": " Apache License 2.0 ",
-        "License File": " LICENSE ",
+        "Name": "Smack",
+        "License": "Apache License 2.0",
+        "License File": "LICENSE",
         "Owner" : "",
         "Upstream URL": "https://github.com/igniterealtime/Smack",
-        "Version Number": " v4.4.8 ",
-        "Description": "A modular and portable open source XMPP client library written in Java for Android and Java (SE) VMs"
+        "Version Number": "4.4.8",
+        "Description": "Smack is an open source, highly modular, easy to use, XMPP client library written in Java for Java SE compatible JVMs and Android."
     }
 ]
