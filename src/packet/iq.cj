@@ -74,7 +74,7 @@ public abstract class IQ <: Stanza & IqView {
             if (childElementName == EMPTY_ELEMENT) {
                 EMPTY_QNAME
             } else {
-                QName(childElementNamespace, childElementNamespace)
+                QName(childElementNamespace, childElementName)
             }
         )
     }

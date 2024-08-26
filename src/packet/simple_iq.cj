@@ -19,7 +19,7 @@ public abstract class SimpleIQ <: IQ {
         super(iqBuilder, childElementName, childElementNamespace)
     }
 
-    protected override func getIQChildElementBuilder(xml: IQChildElementXmlStringBuilder): ?IQChildElementXmlStringBuilder {
+    protected open override func getIQChildElementBuilder(xml: IQChildElementXmlStringBuilder): ?IQChildElementXmlStringBuilder {
         xml.setEmptyElement()
         return xml
     }

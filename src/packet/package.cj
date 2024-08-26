@@ -16,7 +16,7 @@ internal import std.random.*
 internal import std.regex.*
 internal import std.sync.*
 internal import std.time.*
-internal import xmpp4cj.xmpp.*
+public import xmpp4cj.xmpp.*
 
 extend<T> ArrayList<T> {
     func remove(v: T): Bool {

@@ -7,8 +7,8 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
     let stanzaIdSource: ?StanzaIdSource
     let stanzaId: ?String
 
-    var to: ?Jid = None
-    var froms: ?Jid = None
+    var _to: ?Jid = None
+    var _from: ?Jid = None
     var stanzaError: ?StanzaError = None
     var language: ?String = None
     var extensionElements: MultiMap<QName, ExtensionElement> = MultiMap<QName, ExtensionElement>()
@@ -16,8 +16,8 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
     protected init(other: StanzaBuilder) {
         stanzaIdSource = other.stanzaIdSource
         stanzaId = other.stanzaId
-        to = other.to
-        froms = other.froms
+        _to = other._to
+        _from = other._from
         stanzaError = other.stanzaError
         language = other.language
         extensionElements = other.extensionElements.clone()
@@ -35,8 +35,8 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
 
     protected init(message: Stanza, stanzaId: ?String) {
         this(stanzaId)
-        to = message.getTo()
-        froms = message.getFrom()
+        _to = message.getTo()
+        _from = message.getFrom()
         stanzaError = message.getError()
         language = message.getLanguage()
         extensionElements = message.cloneExtensionsMap()
@@ -44,8 +44,8 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
 
     protected init(message: Stanza, stanzaIdSource: StanzaIdSource) {
         this(stanzaIdSource)
-        to = message.getTo()
-        froms = message.getFrom()
+        _to = message.getTo()
+        _from = message.getFrom()
         stanzaError = message.getError()
         language = message.getLanguage()
         extensionElements = message.cloneExtensionsMap()
@@ -57,10 +57,10 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @param to whoe the stanza is being sent to.
      * @return a reference to this builder.
      * @throws XmppStringprepException if the provided character sequence is not a valid XMPP address.
-     * @see #toMethod(Jid)
+     * @see #to(Jid)
      */
-    public func toMethod(to: String): StanzaBuilder {
-        return toMethod(JidCreate.froms(to))
+    public open func to(to: String): StanzaBuilder {
+        return this.to(JidCreate.froms(to))
     }
 
     /**
@@ -70,32 +70,32 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @param to who the stanza is being sent to.
      * @return a reference to this builder.
      */
-    public func toMethod(to: Jid): StanzaBuilder {
-        this.to = to
+    public open func to(to: ?Jid): StanzaBuilder {
+        this._to = to
         return getThis()
     }
 
     /**
      * Sets who the the stanza is being sent "from".
      *
-     * @param from who the stanza is being sent from.
+     * @param froms who the stanza is being sent from.
      * @return a reference to this builder.
      * @throws XmppStringprepException if the provided character sequence is not a valid XMPP address.
-     * @see #fromMethod(Jid)
+     * @see #froms(Jid)
      */
-    public func fromMethod(froms: String): StanzaBuilder {
-        return fromMethod(JidCreate.froms(froms))
+    public open func froms(froms: String): StanzaBuilder {
+        return this.froms(JidCreate.froms(froms))
     }
 
     /**
      * Sets who the stanza is being sent "from".
      * The XMPP protocol often makes the "from" attribute optional, so it does not always need to be set.
      *
-     * @param from who the stanza is being sent from.
+     * @param froms who the stanza is being sent from.
      * @return a reference to this builder.
      */
-    public func fromMethod(froms: Jid): StanzaBuilder {
-        this.froms = froms
+    public open func froms(froms: ?Jid): StanzaBuilder {
+        this._from = froms
         return getThis()
     }
 
@@ -105,7 +105,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @param stanzaError the error to associate with this stanza.
      * @return a reference to this builder.
      */
-    public func setError(stanzaError: StanzaError): StanzaBuilder {
+    public open func setError(stanzaError: StanzaError): StanzaBuilder {
         this.stanzaError = stanzaError
         return getThis()
     }
@@ -116,42 +116,42 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @param language the xml:lang of this stanza.
      * @return a reference to this builder.
      */
-    public func setLanguage(language: String): StanzaBuilder {
+    public open func setLanguage(language: String): StanzaBuilder {
         this.language = language
         return getThis()
     }
 
-    public func addExtension(extensionElement: ExtensionElement): StanzaBuilder {
+    public open func addExtension(extensionElement: ExtensionElement): StanzaBuilder {
         let key = extensionElement.getQName()
         extensionElements.put(key, extensionElement)
         return getThis()
     }
 
-    public func addOptExtensions(extensionElements: Collection<ExtensionElement>): StanzaBuilder {
+    public open func addOptExtensions(extensionElements: Collection<ExtensionElement>): StanzaBuilder {
         return addExtensions(extensionElements)
     }
 
-    public func addExtensions(extensionElements: Collection<ExtensionElement>): StanzaBuilder {
+    public open func addExtensions(extensionElements: Collection<ExtensionElement>): StanzaBuilder {
         for (extensionElement in extensionElements) {
             addExtension(extensionElement)
         }
         return getThis()
     }
 
-    public func overrideExtension(extensionElement: ExtensionElement): StanzaBuilder {
+    public open func overrideExtension(extensionElement: ExtensionElement): StanzaBuilder {
         let key = extensionElement.getQName()
         extensionElements.remove(key)
         extensionElements.put(key, extensionElement)
         return getThis()
     }
 
-    public func removeExtension(elementName: String, namespace: String): StanzaBuilder {
+    public open func removeExtension(elementName: String, namespace: String): StanzaBuilder {
         let key = QName(namespace, elementName)
         extensionElements.remove(key)
         return getThis()
     }
 
-    public func removeExtension(extension: ExtensionElement): StanzaBuilder {
+    public open func removeExtension(extension: ExtensionElement): StanzaBuilder {
         let key = extension.getQName()
         let list = extensionElements.getAll(key)
         list.remove(extension)
@@ -167,11 +167,11 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
     }
 
     public override func getTo(): ?Jid {
-        return to
+        return _to
     }
 
     public override func getFrom(): ?Jid {
-        return froms
+        return _from
     }
 
     public override func getLanguage(): ?String {
@@ -194,12 +194,8 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return extensionElements.getAll(qname)
     }
 
-    // public func getExtensionElements(): MultiMap<QName, ExtensionElement> {
-    //     extensionElements
-    // }
-
-    public override func getExtensions(qnameFrom: ClassId): ArrayList<ExtensionElement> {
-        return XmppElementUtil.getElementsFrom(extensionElements, qnameFrom)
+    public override func getExtensionsByType(extensionElementClass: ClassId): ArrayList<ExtensionElement> {
+        return XmppElementUtil.getElementsFrom(extensionElements, extensionElementClass)
     }
 
     public func willBuildStanzaWithId(): Bool {
@@ -216,8 +212,8 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
     protected open func addStanzaSpecificAttributes(builder: ToStringUtilBuilder): Unit
 
     public override func toString(): String {
-        let builder = ToStringUtil.builderFor("StanzaBuilder").addValue("id", stanzaId).addValue("from", froms ?? None).
-            addValue("to", to ?? None).addValue("language", language).addValue("error", stanzaError ?? None)
+        let builder = ToStringUtil.builderFor("StanzaBuilder").addValue("id", stanzaId).addValue("from", _from ?? None).
+            addValue("to", _to ?? None).addValue("language", language).addValue("error", stanzaError ?? None)
         addStanzaSpecificAttributes(builder)
         let iter: Iterator<ToString> = extensionElements.values() |> map {e => e.getQName()}
         builder.add("Extension Elements", iter)
@@ -262,8 +258,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
 
     public static func buildResponse<SB>(request: StanzaView, builderFromStanzaId: (?String) -> SB): SB where SB <: StanzaBuilder {
         let responseBuilder = builderFromStanzaId(request.getStanzaId())
-        responseBuilder.toMethod(request.getFrom().getOrThrow().toString()).fromMethod(
-            request.getTo().getOrThrow().toString())
+        responseBuilder.to(request.getFrom()).froms(request.getTo())
         return responseBuilder
     }
 }

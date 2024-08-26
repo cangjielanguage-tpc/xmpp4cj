@@ -47,7 +47,7 @@ public class Message <: MessageOrPresence & MessageView & ToString {
         this.typ = other.typ
     }
 
-    public override func getType(): MessageType {
+    public override func getType(): ?MessageType {
         return typ ?? MessageType.normal
     }
 

@@ -6,8 +6,8 @@ package xmpp4cj.packet
 public open class AbstractProvider<E> where E <: Element {
     private let elementClass: ClassId
 
-    protected init(cid: ClassId) {
-        elementClass = cid
+    protected init(elementClass: ClassId) {
+        this.elementClass = elementClass
     }
 
     public func getElementClass(): ClassId {
@@ -61,8 +61,8 @@ public abstract class Provider<E> <: AbstractProvider<E> where E <: Element {
  * of this abstract class <b>must</b> have a public, no-argument constructor.
  */
 public abstract class ExtensionElementProvider<EE> <: Provider<EE> where EE <: Element {
-    public init(cid: ClassId) {
-        super(cid)
+    public init(elementClass: ClassId) {
+        super(elementClass)
     }
 }
 

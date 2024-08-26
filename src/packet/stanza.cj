@@ -69,8 +69,8 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
             id = stanzaBuilder.stanzaId
             usedStanzaIdSource = None
         }
-        to = stanzaBuilder.to
-        froms = stanzaBuilder.froms
+        to = stanzaBuilder._to
+        froms = stanzaBuilder._from
         error = stanzaBuilder.stanzaError
         language = stanzaBuilder.language
         extensionElements = stanzaBuilder.extensionElements.clone()
@@ -224,9 +224,9 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
         return res // TODO Collections.unmodifiableList(res)
     }
 
-    public func getExtensions(qnameFrom: ClassId): ArrayList<ExtensionElement> {
+    public func getExtensionsByType(extensionElementClass: ClassId): ArrayList<ExtensionElement> {
         synchronized(extensionElements.lock) {
-            return XmppElementUtil.getElementsFrom(extensionElements, qnameFrom)
+            return XmppElementUtil.getElementsFrom(extensionElements, extensionElementClass)
         }
     }
 
@@ -256,13 +256,13 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
      * @param namespace the XML element namespace of the extension.
      * @return the extension, or <code>None</code> if it doesn't exist.
      */
-    public func getExtensionElement(elementName: String, namespaceStr: ?String): ?ExtensionElement {
-        let namespace = if (let Some(namespace) <- namespaceStr) {
-            namespace
+    public func getExtensionElement(elementName: String, namespace: ?String): ?ExtensionElement {
+        let ns = if (let Some(ns) <- namespace) {
+            ns
         } else {
             return None
         }
-        let key = QName(namespace, elementName)
+        let key = QName(ns, elementName)
         let packetExtension = getExtension(key)
         return packetExtension
     }
@@ -386,7 +386,7 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
      *
      * @return the default language
      */
-    public static func getDefaultLanguage(): ?String {
+    public static func getDefaultLanguage(): String {
         return DEFAULT_LANGUAGE
     }
 
@@ -396,8 +396,8 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
      * @param xml the {@link XmlStringBuilder}.
      */
     protected func addCommonAttributes(xml: XmlStringBuilder): Unit {
-        xml.optAttribute("to", getTo().toString())
-        xml.optAttribute("from", getFrom().toString())
+        xml.optAttribute("to", getTo()?.toString())
+        xml.optAttribute("from", getFrom()?.toString())
         xml.optAttribute("id", getStanzaId())
     }
 
@@ -409,7 +409,7 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
             sb.append("from=${froms},")
         }
         if (hasStanzaIdSet()) {
-            sb.append("id=${id},")
+            sb.append("id=${id??"null"},")
         }
     }
 
@@ -420,8 +420,8 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
      */
     protected func appendErrorIfExists(xml: XmlStringBuilder): Unit {
         let error = getError()
-        if (let Some(e) <- error) {
-            xml.append(e.toString())
+        if (let Some(e: Element) <- error) {
+            xml.append(e)
         }
     }
 

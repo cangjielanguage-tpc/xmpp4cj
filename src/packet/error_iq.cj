@@ -39,22 +39,12 @@ public class ErrorIQ <: IQ {
     }
 }
 
-// extend ErrorIQ <: Equatable<ErrorIQ> {
-//     public operator func == (that: ErrorIQ): Bool {
-//         return refEq(this, that)
-//     }
-
-//     public operator func != (that: ErrorIQ): Bool {
-//         return !(this == that)
-//     }
-// }
-
 public class ErrorIQBuilder <: IqBuilder {
     var request: ?IQ = None
 
     init(error: StanzaError, iqData: IqData) {
         super(iqData)
-        if (iqData.getType() == IQType.error) {
+        if (iqData.getType() != IQType.error) {
             throw IllegalArgumentException("Error IQs must be of type 'error'")
         }
         setError(error)
@@ -65,15 +55,63 @@ public class ErrorIQBuilder <: IqBuilder {
         this.request = request
     }
 
-    public func getThis(): ErrorIQBuilder {
-        return this
-    }
-
     public func build(): ErrorIQ {
         var childElementQname: ?QName = None
         if (let Some(v) <- request) {
             childElementQname = v.getChildElementQName()
         }
         return ErrorIQ(this, childElementQname)
+    }
+
+    public override func getThis(): ErrorIQBuilder {
+        return this
+    }
+    public override func to(to: String): ErrorIQBuilder {
+        super.to(to)
+        getThis()
+    }
+    public override func to(to: ?Jid): ErrorIQBuilder {
+        super.to(to)
+        getThis()
+    }
+    public override func froms(froms: String): ErrorIQBuilder {
+        super.froms(froms)
+        getThis()
+    }
+    public override func froms(froms: ?Jid): ErrorIQBuilder {
+        super.froms(froms)
+        getThis()
+    }
+    public override func setError(stanzaError: StanzaError): ErrorIQBuilder {
+        super.setError(stanzaError)
+        getThis()
+    }
+    public override func setLanguage(language: String): ErrorIQBuilder {
+        super.setLanguage(language)
+        getThis()
+    }
+    public override func addExtension(extensionElement: ExtensionElement): ErrorIQBuilder {
+        super.addExtension(extensionElement)
+        getThis()
+    }
+    public override func addOptExtensions(extensionElements: Collection<ExtensionElement>): ErrorIQBuilder {
+        super.addOptExtensions(extensionElements)
+        getThis()
+    }
+    public override func addExtensions(extensionElements: Collection<ExtensionElement>): ErrorIQBuilder {
+        super.addExtensions(extensionElements)
+        getThis()
+    }
+    public override func overrideExtension(extensionElement: ExtensionElement): ErrorIQBuilder {
+        super.overrideExtension(extensionElement)
+        getThis()
+    }
+    public override func removeExtension(elementName: String, namespace: String): ErrorIQBuilder {
+        super.removeExtension(elementName, namespace)
+        getThis()
+    }
+    public override func removeExtension(extension: ExtensionElement): ErrorIQBuilder {
+        super.removeExtension(extension)
+        getThis()
     }
 }

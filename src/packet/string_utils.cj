@@ -9,11 +9,11 @@ package xmpp4cj.packet
 public class StringUtils {
     public static let MD5: String = "MD5"
     public static let SHA1: String = "SHA-1"
-    public static let QUOTE_ENCODE: String = "&quot"
-    public static let APOS_ENCODE: String = "&apos"
-    public static let AMP_ENCODE: String = "&amp"
-    public static let LT_ENCODE: String = "&lt"
-    public static let GT_ENCODE: String = "&gt"
+    public static let QUOTE_ENCODE: String = "&quot;"
+    public static let APOS_ENCODE: String = "&apos;"
+    public static let AMP_ENCODE: String = "&amp;"
+    public static let LT_ENCODE: String = "&lt;"
+    public static let GT_ENCODE: String = "&gt;"
     public static let HEX_CHARS: Array<Byte> = "0123456789abcdef".toArray()
     /**
      * 24 upper case characters from the latin alphabet and numbers without '0' and 'O'.
@@ -40,7 +40,6 @@ public class StringUtils {
      *
      * @param input the input to escape.
      * @return the XML escaped variant of <code>input</code>.
-     * @since 4.2
      */
     public static func escapeForXmlAttribute(input: String): String {
         return escapeForXml(input, StringUtilsXmlEscapeMode.forAttribute)
@@ -75,16 +74,16 @@ public class StringUtils {
      * @param input the CharSequence to escape.
      * @return the string with appropriate characters escaped.
      */
-    private static func escapeForXml(inputStr: String, xmlEscapeMode: StringUtilsXmlEscapeMode): String {
-        let input = inputStr.toRuneArray()
-        let len: Int64 = input.size
+    private static func escapeForXml(input: String, xmlEscapeMode: StringUtilsXmlEscapeMode): String {
+        let inputer = input.toRuneArray()
+        let len: Int64 = inputer.size
         let out: StringBuilder = StringBuilder(Int64(Float64(len) * 1.3))
         var toAppend: ?String
         var last: Int64 = 0
         var i: Int64 = 0
         while (i < len) {
             toAppend = None
-            let ch = input[i]
+            let ch = inputer[i]
             match (xmlEscapeMode) {
                 case safe => match (ch) {
                     case r'<' => toAppend = LT_ENCODE
@@ -115,7 +114,7 @@ public class StringUtils {
             }
             if (let Some(toAppend) <- toAppend) {
                 if (i > last) {
-                    out.append(input[last..i])
+                    out.append(inputer[last..i])
                 }
                 out.append(toAppend)
                 i++
@@ -125,10 +124,10 @@ public class StringUtils {
             }
         }
         if (last == 0) {
-            return inputStr
+            return input
         }
         if (i > last) {
-            out.append(input[last..i])
+            out.append(inputer[last..i])
         }
         return out.toString()
     }

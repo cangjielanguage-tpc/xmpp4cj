@@ -10,7 +10,7 @@ public interface MessageView <: StanzaView {
      *
      * @return the type of the message.
      */
-    func getType(): MessageType
+    func getType(): ?MessageType
 
     /**
      * Returns the default subject of the message, or None if the subject has not been set.
@@ -56,7 +56,7 @@ public interface MessageView <: StanzaView {
      * @return a collection of all subjects in this message.
      */
     func getSubjects(): Set<MessageSubject> {
-        let subjectList = StanzaView.getExt<MessageSubject>(getExtensions(MessageSubject.getClassId()))
+        let subjectList = StanzaView.castExt<MessageSubject>(getExtensionsByType(MessageSubject.getClassId()))
         let subjects: Set<MessageSubject> = HashSet<MessageSubject>(subjectList.size)
         subjects.putAll(subjectList)
         return subjects
@@ -70,9 +70,9 @@ public interface MessageView <: StanzaView {
     func getSubjectLanguages(): Collection<String> {
         let defaultSubject = getMessageSubject(None)
         let languages = ArrayList<String>()
-        for (subject in StanzaView.getExt<MessageSubject>(getExtensions(MessageSubject.getClassId()))) {
+        for (subject in StanzaView.castExt<MessageSubject>(getExtensionsByType(MessageSubject.getClassId()))) {
             if (defaultSubject != subject) {
-                languages.append(subject.getLanguage() ?? "None")
+                languages.append(subject.getLanguage() ?? "null")
             }
         }
         return languages
@@ -137,12 +137,12 @@ public interface MessageView <: StanzaView {
      *
      * @return the languages being used for the bodies.
      */
-    func getBodyLanguages(): ArrayList<String> {
+    func getBodyLanguages(): ArrayList<?String> {
         let defaultBody = getMessageBody(None)
-        let languages = ArrayList<String>()
+        let languages = ArrayList<?String>()
         for (body in getBodies()) {
             if (defaultBody != body) {
-                languages.append(body.getLanguage().toString())
+                languages.append(body.getLanguage())
             }
         }
         return languages // TODO
@@ -155,7 +155,7 @@ public interface MessageView <: StanzaView {
      * @return the thread id of the message, or <code>None</code> if it doesn't exist.
      */
     func getThread(): ?String {
-        let thread = StanzaView.getExt<MessageThread>(getExtension(MessageThread.getClassId()))
+        let thread = StanzaView.castExt<MessageThread>(getExtensionByType(MessageThread.getClassId()))
         return thread?.getThread() ?? None
     }
 }

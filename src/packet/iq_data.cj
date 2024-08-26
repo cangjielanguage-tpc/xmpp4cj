@@ -19,12 +19,60 @@ public class IqData <: AbstractIqBuilder {
         return getThis()
     }
 
+    public override func build(): Stanza {
+        throw UnsupportedException()
+    }
+
     public override func getThis(): IqData {
         return this
     }
-
-    public override func build(): Stanza {
-        throw UnsupportedException()
+    public override func to(to: String): IqData {
+        super.to(to)
+        getThis()
+    }
+    public override func to(to: ?Jid): IqData {
+        super.to(to)
+        getThis()
+    }
+    public override func froms(froms: String): IqData {
+        super.froms(froms)
+        getThis()
+    }
+    public override func froms(froms: ?Jid): IqData {
+        super.froms(froms)
+        getThis()
+    }
+    public override func setError(stanzaError: StanzaError): IqData {
+        super.setError(stanzaError)
+        getThis()
+    }
+    public override func setLanguage(language: String): IqData {
+        super.setLanguage(language)
+        getThis()
+    }
+    public override func addExtension(extensionElement: ExtensionElement): IqData {
+        super.addExtension(extensionElement)
+        getThis()
+    }
+    public override func addOptExtensions(extensionElements: Collection<ExtensionElement>): IqData {
+        super.addOptExtensions(extensionElements)
+        getThis()
+    }
+    public override func addExtensions(extensionElements: Collection<ExtensionElement>): IqData {
+        super.addExtensions(extensionElements)
+        getThis()
+    }
+    public override func overrideExtension(extensionElement: ExtensionElement): IqData {
+        super.overrideExtension(extensionElement)
+        getThis()
+    }
+    public override func removeExtension(elementName: String, namespace: String): IqData {
+        super.removeExtension(elementName, namespace)
+        getThis()
+    }
+    public override func removeExtension(extension: ExtensionElement): IqData {
+        super.removeExtension(extension)
+        getThis()
     }
 }
 

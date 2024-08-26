@@ -169,11 +169,11 @@ public class Localpart <: Part {
      * @return the localpart.
      * @throws XmppStringprepException if an error occurs.
      */
-    public static func froms(localpartStr: ?String, context: XmppContext): Localpart {
-        let localpart = XmppStringPrepUtil.localprep(localpartStr, context)
+    public static func froms(localpart: ?String, context: XmppContext): Localpart {
+        let localpartStr = XmppStringPrepUtil.localprep(localpart, context)
         // First prep the String, then assure the limits of the *result*
-        assertNotLongerThan1023BytesOrEmpty(localpart)
-        return Localpart(localpart)
+        assertNotLongerThan1023BytesOrEmpty(localpartStr)
+        return Localpart(localpartStr)
     }
 }
 

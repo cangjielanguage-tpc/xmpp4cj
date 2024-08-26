@@ -15,21 +15,3 @@ public interface ClassIdentify {
     static func getClassId(): ClassId
     func getClass(): ClassId
 }
-
-// extend ExtensionElement <: ClassIdentify {
-//     public static func getClassId(): ClassId {
-//         return "ExtensionElement"
-//     }
-//     public func getClass(): ClassId {
-//         return "ExtensionElement"
-//     }
-// }
-
-// extend<B> StanzaBuilder<B> <: ClassIdentify where B <: StanzaBuilder<B> {
-//     public static func getClassId(): ClassId {
-//         return "StanzaBuilder"
-//     }
-//     public func getClass(): ClassId {
-//         return "StanzaBuilder"
-//     }
-// }

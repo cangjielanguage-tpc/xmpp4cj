@@ -61,10 +61,6 @@ public class PresenceBuilder <: MessageOrPresenceBuilder & PresenceView {
         return getThis()
     }
 
-    public override func getThis(): PresenceBuilder {
-        return this
-    }
-
     public override func build(): Presence {
         return Presence(this)
     }
@@ -87,5 +83,57 @@ public class PresenceBuilder <: MessageOrPresenceBuilder & PresenceView {
 
     public override func getMode(): PresenceMode {
         return mode ?? PresenceMode.available
+    }
+
+    public override func getThis(): PresenceBuilder {
+        return this
+    }
+    public override func to(to: String): PresenceBuilder {
+        super.to(to)
+        getThis()
+    }
+    public override func to(to: ?Jid): PresenceBuilder {
+        super.to(to)
+        getThis()
+    }
+    public override func froms(froms: String): PresenceBuilder {
+        super.froms(froms)
+        getThis()
+    }
+    public override func froms(froms: ?Jid): PresenceBuilder {
+        super.froms(froms)
+        getThis()
+    }
+    public override func setError(stanzaError: StanzaError): PresenceBuilder {
+        super.setError(stanzaError)
+        getThis()
+    }
+    public override func setLanguage(language: String): PresenceBuilder {
+        super.setLanguage(language)
+        getThis()
+    }
+    public override func addExtension(extensionElement: ExtensionElement): PresenceBuilder {
+        super.addExtension(extensionElement)
+        getThis()
+    }
+    public override func addOptExtensions(extensionElements: Collection<ExtensionElement>): PresenceBuilder {
+        super.addOptExtensions(extensionElements)
+        getThis()
+    }
+    public override func addExtensions(extensionElements: Collection<ExtensionElement>): PresenceBuilder {
+        super.addExtensions(extensionElements)
+        getThis()
+    }
+    public override func overrideExtension(extensionElement: ExtensionElement): PresenceBuilder {
+        super.overrideExtension(extensionElement)
+        getThis()
+    }
+    public override func removeExtension(elementName: String, namespace: String): PresenceBuilder {
+        super.removeExtension(elementName, namespace)
+        getThis()
+    }
+    public override func removeExtension(extension: ExtensionElement): PresenceBuilder {
+        super.removeExtension(extension)
+        getThis()
     }
 }

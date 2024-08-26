@@ -40,6 +40,7 @@ class UnmodifiableMap<K, V> <: Map<K, V> where K <: Equatable<K> {
         innermap[key]
     }
     public operator func [](_: K, value!: V): Unit {
+        value is ToString
         throw UnsupportedException("UnsupportedOperation")
     }
     public func keys(): EquatableCollection<K> {
@@ -95,6 +96,7 @@ class EmptyMap<K, V> <: Map<K, V> where K <: Equatable<K> {
         throw UnsupportedException("UnsupportedOperation")
     }
     public operator func [](_: K, value!: V): Unit {
+        value is ToString
         throw UnsupportedException("UnsupportedOperation")
     }
     public func keys(): EquatableCollection<K> {
