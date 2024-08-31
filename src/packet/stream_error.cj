@@ -80,12 +80,12 @@ public class StreamError <: AbstractError & Nonza & ToString {
     public static let ELEMENT = "stream:error"
     public static let NAMESPACE = "urn:ietf:params:xml:ns:xmpp-streams"
 
-    private let condition: StreamErrorCondition
+    private let condition: ?StreamErrorCondition
 
     private let conditionText: ?String
 
     public init(
-        condition: StreamErrorCondition,
+        condition: ?StreamErrorCondition,
         conditionTextStr: ?String,
         descriptiveTexts: Map<String, String>,
         extensions: ArrayList<ExtensionElement>
@@ -101,7 +101,7 @@ public class StreamError <: AbstractError & Nonza & ToString {
         }
         if (conditionText.isSome()) {
             match (condition) {
-                case StreamErrorCondition.see_other_host => ()
+                case Some(StreamErrorCondition.see_other_host) => ()
                 case _ => throw IllegalArgumentException(
                     "The given condition '${condition}' can not contain a conditionText")
             }
@@ -110,7 +110,7 @@ public class StreamError <: AbstractError & Nonza & ToString {
         this.conditionText = conditionText
     }
 
-    public func getCondition(): StreamErrorCondition {
+    public func getCondition(): ?StreamErrorCondition {
         return condition
     }
 

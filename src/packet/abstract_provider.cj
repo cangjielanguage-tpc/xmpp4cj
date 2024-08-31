@@ -4,11 +4,7 @@
 package xmpp4cj.packet
 
 public open class AbstractProvider<E> where E <: Element {
-    private let elementClass: ClassId
-
-    protected init(elementClass: ClassId) {
-        this.elementClass = elementClass
-    }
+    protected var elementClass: ClassId = "" // need init in subclass
 
     public func getElementClass(): ClassId {
         return elementClass
@@ -27,10 +23,6 @@ public open class AbstractProvider<E> where E <: Element {
  * @param <E> the type of the resulting element.
  */
 public abstract class Provider<E> <: AbstractProvider<E> where E <: Element {
-    protected init(cid: ClassId) {
-        super(cid)
-    }
-
     // throws IOException, XmlPullParserException, ParsingException
     public func parse(parser: XmlPullParser): E {
         return parse(parser, None)
@@ -60,23 +52,11 @@ public abstract class Provider<E> <: AbstractProvider<E> where E <: Element {
  * be registered with the ProviderManager class for it to be used. Every implementation
  * of this abstract class <b>must</b> have a public, no-argument constructor.
  */
-public abstract class ExtensionElementProvider<EE> <: Provider<EE> where EE <: Element {
-    public init(elementClass: ClassId) {
-        super(elementClass)
-    }
-}
+public abstract class ExtensionElementProvider<EE> <: Provider<EE> where EE <: Element {}
 
-public abstract class NonzaProvider<N> <: Provider<N> where N <: Element {
-    public init(cid: ClassId) {
-        super(cid)
-    }
-}
+public abstract class NonzaProvider<N> <: Provider<N> where N <: Element {}
 
 public abstract class IqProvider<I> <: AbstractProvider<I> where I <: IQ {
-    public init(cid: ClassId) {
-        super(cid)
-    }
-
     // throws XmlPullParserException, IOException, ParsingException 
     public func parse(parser: XmlPullParser, iqCommon: IqData): I {
         return parse(parser, iqCommon, None)

@@ -5,6 +5,7 @@ package xmpp4cj.packet
 
 internal import crypto.crypto.*
 internal import encoding.hex.*
+internal import encoding.xml.*
 internal import log.*
 internal import std.collection.*
 internal import std.collection.concurrent.{ConcurrentHashMap}
@@ -17,6 +18,7 @@ internal import std.regex.*
 internal import std.sync.*
 internal import std.time.*
 public import xmpp4cj.xmpp.*
+public import xmpp4cj.xml.*
 
 extend<T> ArrayList<T> {
     func remove(v: T): Bool {

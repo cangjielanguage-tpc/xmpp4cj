@@ -1,7 +1,7 @@
 [dependencies]
 
 [package]
-  cjc-version = "0.53.4"
+  cjc-version = "0.54.3"
   compile-option = "-O2"
   description = "xmpp client"
   link-option = ""
@@ -10,9 +10,13 @@
   src-dir = ""
   target-dir = ""
   version = "0.0.1"
-  package-configuration = {}
+  [package.package-configuration]
 
 [profile]
-  build = {incremental = true, lto = ""}
-  customized-option = {debug = "-g -Woff all --error-count-limit all", release = "--fast-math -O2 -Woff all"}
-  test = {}
+  [profile.build]
+    incremental = true
+    lto = ""
+  [profile.customized-option]
+    debug = "-g -Woff all --error-count-limit all"
+    release = "--fast-math -O2 -Woff all"
+  [profile.test]

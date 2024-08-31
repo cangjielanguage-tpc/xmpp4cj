@@ -1,13 +1,16 @@
-internal import std.unittest.*
 import std.unittest.testmacro.*
-internal import std.io.*
-internal import std.reflect.*
 internal import std.collection.*
 internal import std.fs.*
+internal import std.io.*
+internal import std.math.*
+internal import std.reflect.*
 internal import std.sync.*
 internal import std.time.*
 internal import std.unicode.UnicodeExtension
+internal import std.unittest.*
+internal import xmpp4cj.packet.*
 internal import xmpp4cj.xmpp.*
+internal import xmpp4cj.xml.*
 
 class Assert {
     static func assertNull<T>(any: ?T): Unit {
@@ -71,8 +74,16 @@ func assertEquals<T>(expected: ?T, actual: ?T): Unit where T <: Equatable<T> {
     Assert.assertEquals(expected, actual)
 }
 
+func assertEquals<T>(msg: String, expected: T, actual: T): Unit where T <: Equatable<T> {
+    Assert.assertEquals(msg, expected, actual)
+}
+
 func assertTrue(any: Bool): Unit {
     Assert.assertTrue(any)
+}
+
+func assertFalse(any: Bool): Unit {
+    Assert.assertFalse(any)
 }
 
 func assertTrue(msg: String, any: Bool): Unit {
@@ -83,11 +94,28 @@ func assertNotNull<T>(any: ?T): Unit {
     Assert.assertNotNull(any)
 }
 
+func assertNull<T>(any: ?T): Unit {
+    Assert.assertNull(any)
+}
+
+func assertNone<T>(any: ?T): Unit {
+    Assert.assertNull(any)
+}
+
+func assertThrows<E>(actual: () -> Any): Unit where E <: Exception {
+    try {
+        actual()
+    } catch (e: E) {
+        return
+    }
+    throw Exception("assertThrows fail")
+}
+
 type Assertions = Assert
 
-extend<T> Option<T> {
-    operator func ()(): T {
-        this.getOrThrow()
+extend String {
+    func equals(t: String): Bool {
+        this == t
     }
 }
 // extend Option<T> where T <: Equatable<?T> {

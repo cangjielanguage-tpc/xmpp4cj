@@ -1,37 +1,7 @@
 /*
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
  */
-package xmpp4cj.packet
-
-public class XmppXmlParser {
-    private static var xmlPullParserFactory: ?XmlPullParserFactory = None // TODO
-
-    public static func getXmlPullParserFactory(): XmlPullParserFactory {
-        return xmlPullParserFactory ?? throw Exception("No XmlPullParserFactory registered")
-    }
-
-    public static func setXmlPullParserFactory(xmlPullParserFactory: XmlPullParserFactory) {
-        XmppXmlParser.xmlPullParserFactory = xmlPullParserFactory
-    }
-
-    /**
-     * Creates a new XmlPullParser suitable for parsing XMPP.
-     * This means in particular that FEATURE_PROCESS_NAMESPACES is enabled.
-     * <p>
-     * Note that not all XmlPullParser implementations will return a String on
-     * <code>getText()</code> if the parser is on START_ELEMENT or END_ELEMENT.
-     * So you must not rely on this behavior when using the parser.
-     * </p>
-     *
-     * @param reader a reader to read the XML data from.
-     * @return A suitable XmlPullParser for XMPP parsing.
-     * @throws XmlPullParserException in case of an XmlPullParserException.
-     */
-    public static func newXmlParser(reader: StringReader<InputStream>): XmlPullParser {
-        let xmlPullParserFactory = getXmlPullParserFactory()
-        return xmlPullParserFactory.newXmlPullParser(reader)
-    }
-}
+package xmpp4cj.xml
 
 /**
  * Xmpp's interface for XML pull parsers.
@@ -85,9 +55,9 @@ public interface XmlPullParser {
 
     func getNamespaceUri(pos: Int64): String
 
-    func getNamespace(prefix: ?String): String
+    func getNamespace(prefix: ?String): ?String
 
-    func getDefaultNamespace(): String {
+    func getDefaultNamespace(): ?String {
         return getNamespace(None)
     }
 
@@ -138,9 +108,9 @@ public interface XmlPullParser {
 
     func getAttributeValue(index: Int64): String
 
-    func getAttributeValue(namespace: ?String, name: String): String
+    func getAttributeValue(namespace: ?String, name: String): ?String
 
-    func getAttributeValue(name: String): String {
+    func getAttributeValue(name: String): ?String {
         return getAttributeValue(None, name)
     }
 
@@ -172,7 +142,7 @@ public enum XmlPullParserTagEvent {
     | END_ELEMENT
 }
 
-public enum XmlPullParserEvent <: Equatable<XmlPullParserEvent> {
+public enum XmlPullParserEvent <: Equatable<XmlPullParserEvent> & ToString {
     START_DOCUMENT
     | END_DOCUMENT
     | START_ELEMENT
@@ -205,10 +175,24 @@ public enum XmlPullParserEvent <: Equatable<XmlPullParserEvent> {
     public operator func !=(other: XmlPullParserEvent): Bool {
         !(this == other)
     }
+    public func toString(): String {
+        match (this) {
+            case START_DOCUMENT => "START_DOCUMENT"
+            case END_DOCUMENT => "END_DOCUMENT"
+            case START_ELEMENT => "START_ELEMENT"
+            case END_ELEMENT => "END_ELEMENT"
+            case TEXT_CHARACTERS => "TEXT_CHARACTERS"
+            case PROCESSING_INSTRUCTION => "PROCESSING_INSTRUCTION"
+            case COMMENT => "COMMENT"
+            case IGNORABLE_WHITESPACE => "IGNORABLE_WHITESPACE"
+            case ENTITY_REFERENCE => "ENTITY_REFERENCE"
+            case OTHER => "OTHER"
+        }
+    }
 }
 
 public interface XmlPullParserFactory {
-    func newXmlPullParser(reader: StringReader<InputStream>): XmlPullParser
+    func newXmlPullParser(reader: InputStream): XmlPullParser
 }
 
 public class XmlPullParserException <: Exception {

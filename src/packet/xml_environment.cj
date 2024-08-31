@@ -115,8 +115,8 @@ public class XmlEnvironment {
     }
 
     public static func froms(parser: XmlPullParser, outerXmlEnvironment: ?XmlEnvironment): XmlEnvironment {
-        var namespace: String = parser.getDefaultNamespace()
-        var xmlLang: String = ParserUtils.getXmlLang(parser)
+        var namespace = parser.getDefaultNamespace()
+        var xmlLang = ParserUtils.getXmlLang(parser)
         return XmlEnvironment(namespace, xmlLang, outerXmlEnvironment)
     }
 
