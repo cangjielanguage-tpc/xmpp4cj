@@ -198,7 +198,7 @@ public class MessageSubject <: ExtensionElement & Hashable & Equatable<MessageSu
     private let hashCodeCache = HashCodeCache()
 
     public override func hashCode(): Int64 {
-        return hashCodeCache.getHashCode {c => c.append(language ?? None).append(subject)}
+        return hashCodeCache.getHashCode {c => c.append(language ?? None).append<String>(subject)}
     }
 
     public operator override func ==(other: MessageSubject): Bool {
@@ -264,7 +264,7 @@ public class MessageBody <: ExtensionElement & Hashable & Equatable<MessageBody>
 
     public override func hashCode(): Int64 {
         let hashable: ?Hashable = language ?? None
-        return Int64(hashCodeCache.getHashCode({c => c.append(hashable).append(message)}))
+        return Int64(hashCodeCache.getHashCode({c => c.append(hashable).append<String>(message)}))
     }
 
     public operator override func ==(obj: MessageBody): Bool {

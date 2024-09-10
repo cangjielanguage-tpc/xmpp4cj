@@ -19,12 +19,8 @@ public class ToStringUtilBuilder {
         this.sb = sb
     }
 
-    public func addValue(name: String, valueStr: ?ToString): ToStringUtilBuilder {
-        let value = if (let Some(v) <- valueStr) {
-            v.toString()
-        } else {
-            return this
-        }
+    public func addValue<S>(name: String, valueStr: ?S): ToStringUtilBuilder where S <: ToString {
+        let value = valueStr?.toString() ?? return this
         if (sb.toString()[sb.size - 1] != b'(') {
             sb.append(' ')
         }
@@ -32,21 +28,8 @@ public class ToStringUtilBuilder {
         return this
     }
 
-    public func addValue(name: String, valueStr: ?String): ToStringUtilBuilder {
-        let value = if (let Some(v) <- valueStr) {
-            v.toString()
-        } else {
-            return this
-        }
-        if (sb.toString()[sb.size - 1] != b'(') {
-            sb.append(' ')
-        }
-        sb.append("${name}='${value}'")
-        return this
-    }
-
-    public func add(name: String, values: Iterator<ToString>): ToStringUtilBuilder {
-        let str = values |> collectString(delimiter: ", ")
+    public func add<S>(name: String, values: Iterable<S>): ToStringUtilBuilder where S <: ToString {
+        let str = values |> map<S, ToString> {s => s} |> collectString(delimiter: ", ")
 
         if (str.size == 0) {
             return this

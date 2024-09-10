@@ -386,7 +386,7 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
         return this
     }
 
-    public func optAppend(elements: ?Iterator<Element>): XmlStringBuilder {
+    public func optAppend(elements: ?Iterable<Element>): XmlStringBuilder {
         if (let Some(elements) <- elements) {
             append(elements)
         }
@@ -414,7 +414,7 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
         return this
     }
 
-    public func append(elements: Iterator<Element>): XmlStringBuilder {
+    public func append(elements: Iterable<Element>): XmlStringBuilder {
         for (element in elements) {
             append(element)
         }

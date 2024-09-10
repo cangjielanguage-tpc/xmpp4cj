@@ -94,7 +94,7 @@ public class ErrorIQBuilder <: IqBuilder {
         super.addExtension(extensionElement)
         getThis()
     }
-    public override func addOptExtensions(extensionElements: Collection<ExtensionElement>): ErrorIQBuilder {
+    public override func addOptExtensions(extensionElements: ?Collection<ExtensionElement>): ErrorIQBuilder {
         super.addOptExtensions(extensionElements)
         getThis()
     }

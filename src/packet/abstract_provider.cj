@@ -82,13 +82,13 @@ public interface ProviderLoader {
      * Provides the IQ provider info for the creation of IQ providers to be added to the <code>ProviderManager</code>.
      * @return The IQ provider info to load.
      */
-    func getIQProviderInfo(): Iterator<IQProviderInfo>
+    func getIQProviderInfo(): Iterable<IQProviderInfo>
 
     /**
      * Provides the extension providers for the creation of extension providers to be added to the <code>ProviderManager</code>.
      * @return The extension provider info to load.
      */
-    func getExtensionProviderInfo(): Iterator<ExtensionProviderInfo>
+    func getExtensionProviderInfo(): Iterable<ExtensionProviderInfo>
 
     /**
      * Provides the stream feature providers information for the creation of stream feature
@@ -96,5 +96,5 @@ public interface ProviderLoader {
      *
      * @return The extension provider info to load.
      */
-    func getStreamFeatureProviderInfo(): Iterator<StreamFeatureProviderInfo>
+    func getStreamFeatureProviderInfo(): Iterable<StreamFeatureProviderInfo>
 }

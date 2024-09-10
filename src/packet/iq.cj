@@ -22,7 +22,7 @@ public interface IqView <: StanzaView & ToString {
     }
 
     /**
-     * Return true if this IQ is a request, i.e. an IQ of type {@link Type#result} or {@link Type#error}.
+     * Return true if this IQ is a response IQ, i.e. an IQ of type {@link Type#result} or {@link Type#error}.
      *
      * @return true if IQ type is 'result' or 'error', false otherwise.
      */
@@ -383,7 +383,7 @@ public class IQChildElementXmlStringBuilder <: XmlStringBuilder {
     var elementName: String = EMPTY_ELEMENT
     var isEmptyElement: Bool = false
 
-    public init(extensionElement: ExtensionElement, enclosingXmlEnvironment: XmlEnvironment) {
+    public init(extensionElement: ExtensionElement, enclosingXmlEnvironment: ?XmlEnvironment) {
         this(
             extensionElement.getElementName(),
             extensionElement.getNamespace(),

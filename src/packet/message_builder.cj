@@ -147,7 +147,7 @@ public class MessageBuilder <: MessageOrPresenceBuilder & MessageView {
         super.addExtension(extensionElement)
         getThis()
     }
-    public override func addOptExtensions(extensionElements: Collection<ExtensionElement>): MessageBuilder {
+    public override func addOptExtensions(extensionElements: ?Collection<ExtensionElement>): MessageBuilder {
         super.addOptExtensions(extensionElements)
         getThis()
     }

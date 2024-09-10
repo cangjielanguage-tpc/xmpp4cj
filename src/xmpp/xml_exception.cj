@@ -23,24 +23,24 @@ public abstract class InvalidXmlException <: Exception {
     }
 }
 
-public class InvalidXmlException_InvalidEmptyTagException <: InvalidXmlException {
+public class InvalidEmptyTagException <: InvalidXmlException {
     private init(message: String, c: Rune, xml: String) {
         super(message, c, xml)
     }
 
-    public static func create(c: Rune, xml: String): InvalidXmlException_InvalidEmptyTagException {
+    public static func create(c: Rune, xml: String): InvalidEmptyTagException {
         let message = "Invalid empty tag, expected '>', but got '${c}'. Parsed xml so far: ${xml}"
-        return InvalidXmlException_InvalidEmptyTagException(message, c, xml)
+        return InvalidEmptyTagException(message, c, xml)
     }
 }
 
-public class InvalidXmlException_InvalidAttributeDeclarationException <: InvalidXmlException {
+public class InvalidAttributeDeclarationException <: InvalidXmlException {
     private init(message: String, c: Rune, xml: String) {
         super(message, c, xml)
     }
 
-    public static func create(c: Rune, xml: String): InvalidXmlException_InvalidAttributeDeclarationException {
+    public static func create(c: Rune, xml: String): InvalidAttributeDeclarationException {
         let message = "Invalid attribute declaration, expected ''' or '\"', but got '${c}'. Parsed xml so far: ${xml}"
-        return InvalidXmlException_InvalidAttributeDeclarationException(message, c, xml)
+        return InvalidAttributeDeclarationException(message, c, xml)
     }
 }

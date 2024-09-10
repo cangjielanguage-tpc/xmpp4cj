@@ -8,7 +8,7 @@ public abstract class XmlPrinter {
 
     public func onChunkEnd(): Unit
 
-    public func onNextChar(c: Rune, depth: Int64, initialState: XmlSplitter_State, currentState: XmlSplitter_State): Unit
+    public func onNextChar(c: Rune, depth: Int64, initialState: XmlSplitterState, currentState: XmlSplitterState): Unit
 
     public func onCompleteElement(): Unit
 }
@@ -20,11 +20,11 @@ public class XmlPrettyPrinter <: XmlPrinter {
 
     private let tabWidth: Int64
 
-    private let newChunkCallback: ?XmlPrettyPrinter_PrettyPrintedXmlChunkWithCurrentPartCallback
+    private let newChunkCallback: ?PrettyPrintedXmlChunkWithCurrentPartCallback
 
-    private let newPartCallback: ?XmlPrettyPrinter_PrettyPrintedXmlPartCallback
+    private let newPartCallback: ?PrettyPrintedXmlPartCallback
 
-    private let prettyWriter: ?XmlPrettyPrinter_PrettyPrintedXmlChunkSink
+    private let prettyWriter: ?PrettyPrintedXmlChunkSink
 
     private var currentPart: ?StringBuilder = None
 
@@ -37,7 +37,7 @@ public class XmlPrettyPrinter <: XmlPrinter {
      *
      * @param partCallback a part callback.
      */
-    public init(partCallback: XmlPrettyPrinter_PrettyPrintedXmlPartCallback) {
+    public init(partCallback: PrettyPrintedXmlPartCallback) {
         this(builder().setPartCallback(partCallback))
     }
 
@@ -46,11 +46,11 @@ public class XmlPrettyPrinter <: XmlPrinter {
      *
      * @param prettyWriter a writer for the pretty printed XML stream.
      */
-    public init(prettyWriter: XmlPrettyPrinter_PrettyPrintedXmlChunkSink) {
+    public init(prettyWriter: PrettyPrintedXmlChunkSink) {
         this(builder().setPrettyWriter(prettyWriter))
     }
 
-    init(builder: XmlPrettyPrinter_Builder) {
+    init(builder: XmlPrettyPrinterBuilder) {
         super()
         this.indent = builder.indent
         this.attributeIndent = builder.attributeIndent
@@ -83,24 +83,24 @@ public class XmlPrettyPrinter <: XmlPrinter {
         }
     }
 
-    public func onNextChar(c: Rune, depth: Int64, initialState: XmlSplitter_State, currentState: XmlSplitter_State): Unit {
+    public func onNextChar(c: Rune, depth: Int64, initialState: XmlSplitterState, currentState: XmlSplitterState): Unit {
         let stateChange = initialState != currentState
         let sb = StringBuilder()
         if (stateChange) {
             var deferredLeftAngle = false
             var indent = 0
             match (currentState) {
-                case XmlSplitter_State.TAG_LEFT_ANGLE_BRACKET => return
-                case XmlSplitter_State.END_TAG_SOLIDUS =>
+                case XmlSplitterState.TAG_LEFT_ANGLE_BRACKET => return
+                case XmlSplitterState.END_TAG_SOLIDUS =>
                     indent = getElementIndent(depth - 1)
                     deferredLeftAngle = true
-                case XmlSplitter_State.IN_TAG_NAME =>
+                case XmlSplitterState.IN_TAG_NAME =>
                     indent = getElementIndent(depth)
                     deferredLeftAngle = true
-                case XmlSplitter_State.IN_ATTRIBUTE_NAME => if (attributeIndent > 0) {
+                case XmlSplitterState.IN_ATTRIBUTE_NAME => if (attributeIndent > 0) {
                     indent = getAttributeIndent(depth)
                 }
-                case XmlSplitter_State.START => indent = getElementIndent(depth)
+                case XmlSplitterState.START => indent = getElementIndent(depth)
                 case _ => ()
             }
             if (indent > 0 || deferredLeftAngle) {
@@ -166,35 +166,35 @@ public class XmlPrettyPrinter <: XmlPrinter {
      *
      * @return a new builder.
      */
-    public static func builder(): XmlPrettyPrinter_Builder {
-        return XmlPrettyPrinter_Builder()
+    public static func builder(): XmlPrettyPrinterBuilder {
+        return XmlPrettyPrinterBuilder()
     }
 }
 
-public interface XmlPrettyPrinter_PrettyPrintedXmlChunkWithCurrentPartCallback {
+public interface PrettyPrintedXmlChunkWithCurrentPartCallback {
     func onPrettyPrintedXmlChunk(chunk: StringBuilder): Unit
 }
 
-public interface XmlPrettyPrinter_PrettyPrintedXmlPartCallback {
+public interface PrettyPrintedXmlPartCallback {
     func onPrettyPrintedXmlPart(part: StringBuilder): Unit
 }
 
-public interface XmlPrettyPrinter_PrettyPrintedXmlChunkSink {
+public interface PrettyPrintedXmlChunkSink {
     func sink(stringBuilder: StringBuilder): Unit
 }
 
-public class XmlPrettyPrinter_Builder {
+public class XmlPrettyPrinterBuilder {
     var indent = 2
 
     var attributeIndent: Int64 = 0
 
     var tabWidth: Int64 = 0
 
-    var newChunkCallback: ?XmlPrettyPrinter_PrettyPrintedXmlChunkWithCurrentPartCallback = None
+    var newChunkCallback: ?PrettyPrintedXmlChunkWithCurrentPartCallback = None
 
-    var newPartCallback: ?XmlPrettyPrinter_PrettyPrintedXmlPartCallback = None
+    var newPartCallback: ?PrettyPrintedXmlPartCallback = None
 
-    var prettyWriter: ?XmlPrettyPrinter_PrettyPrintedXmlChunkSink = None
+    var prettyWriter: ?PrettyPrintedXmlChunkSink = None
 
     /**
      * Set the indent for elements in whitespace characters.
@@ -202,7 +202,7 @@ public class XmlPrettyPrinter_Builder {
      * @param indent the indent for elements in whitespace characters.
      * @return a reference to this builders.
      */
-    public func setIndent(indent: Int64): XmlPrettyPrinter_Builder {
+    public func setIndent(indent: Int64): XmlPrettyPrinterBuilder {
         ensureNotNegative(indent)
         this.indent = indent
         return this
@@ -214,7 +214,7 @@ public class XmlPrettyPrinter_Builder {
      * @param attributeIndent the attribute indent in whitespace characters.
      * @return a reference to this builder.
      */
-    public func setAttributeIndent(attributeIndent: Int64): XmlPrettyPrinter_Builder {
+    public func setAttributeIndent(attributeIndent: Int64): XmlPrettyPrinterBuilder {
         ensureNotNegative(attributeIndent)
         this.attributeIndent = attributeIndent
         return this
@@ -226,7 +226,7 @@ public class XmlPrettyPrinter_Builder {
      * @param tabWidth the tab width in whitespace characters.
      * @return a reference to this builder.
      */
-    public func setTabWidth(tabWidth: Int64): XmlPrettyPrinter_Builder {
+    public func setTabWidth(tabWidth: Int64): XmlPrettyPrinterBuilder {
         ensureNotNegative(tabWidth)
         this.tabWidth = tabWidth
         return this
@@ -238,7 +238,7 @@ public class XmlPrettyPrinter_Builder {
      * @param chunkCallback the chunk callback.
      * @return a reference to this builder.
      */
-    public func setChunkCallback(chunkCallback: XmlPrettyPrinter_PrettyPrintedXmlChunkWithCurrentPartCallback): XmlPrettyPrinter_Builder {
+    public func setChunkCallback(chunkCallback: PrettyPrintedXmlChunkWithCurrentPartCallback): XmlPrettyPrinterBuilder {
         this.newChunkCallback = chunkCallback
         return this
     }
@@ -249,7 +249,7 @@ public class XmlPrettyPrinter_Builder {
      * @param partCallback the part callback.
      * @return a reference to this builder.
      */
-    public func setPartCallback(partCallback: XmlPrettyPrinter_PrettyPrintedXmlPartCallback): XmlPrettyPrinter_Builder {
+    public func setPartCallback(partCallback: PrettyPrintedXmlPartCallback): XmlPrettyPrinterBuilder {
         this.newPartCallback = partCallback
         return this
     }
@@ -260,7 +260,7 @@ public class XmlPrettyPrinter_Builder {
      * @param prettyWriter the writer to pretty print to.
      * @return a reference to this builder.
      */
-    public func setPrettyWriter(prettyWriter: XmlPrettyPrinter_PrettyPrintedXmlChunkSink): XmlPrettyPrinter_Builder {
+    public func setPrettyWriter(prettyWriter: PrettyPrintedXmlChunkSink): XmlPrettyPrinterBuilder {
         this.prettyWriter = prettyWriter
         return this
     }

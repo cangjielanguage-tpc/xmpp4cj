@@ -41,7 +41,7 @@ public class HashCodeBuilder {
         hashcode = HashCode.MULTIPLIERVALUE * hashcode + hash
     }
 
-    public func append(object: ?Hashable): HashCodeBuilder {
+    public func append<T>(object: ?T): HashCodeBuilder where T <: Hashable {
         let hashcode = if (let Some(v) <- object) {
             v.hashCode()
         } else {
@@ -52,7 +52,7 @@ public class HashCodeBuilder {
         return this
     }
 
-    public func append(object: Iterator<Hashable>): HashCodeBuilder {
+    public func append<T>(object: Iterable<T>): HashCodeBuilder where T <: Hashable {
         for (element in object) {
             applyHash(element.hashCode())
         }

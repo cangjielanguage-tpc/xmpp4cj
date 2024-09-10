@@ -20,8 +20,8 @@ public class EqualsUtil {
 
     public static func equals<T>(a: T, b: T): Bool {
         match ((a, b)) {
-            case (a: Object, b: Object) => refEq(a, b)
             case (a: Equatable<T>, _: Equatable<T>) => a == b
+            case (a: Object, b: Object) => refEq(a, b)
             case _ => throw UnsupportedException("${a as ToString} ${b as ToString}")
         }
     }

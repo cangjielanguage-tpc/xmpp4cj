@@ -267,7 +267,8 @@ public class JidUtil {
      * @return a set of JIDs.
      */
     public static func jidSetFrom(jids: Array<String>): Set<Jid> {
-        return jidSetFrom(jids)
+        let strs: Collection<String> = jids
+        return jidSetFrom(strs)
     }
 
     /**

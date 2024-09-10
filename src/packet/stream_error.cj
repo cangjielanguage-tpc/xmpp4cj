@@ -204,7 +204,7 @@ public enum StreamErrorCondition <: ToString & Equatable<StreamErrorCondition> {
             case "unsupported_feature" => StreamErrorCondition.unsupported_feature
             case "unsupported_stanza_type" => StreamErrorCondition.unsupported_stanza_type
             case "unsupported_version" => StreamErrorCondition.unsupported_version
-            case _ => throw IllegalStateException("Could not transform string '${str}' to XMPPErrorCondition")
+            case _ => throw IllegalArgumentException("Could not transform string '${str}' to XMPPErrorCondition")
         }
     }
 

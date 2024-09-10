@@ -1,10 +1,9 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-
 package xmpp4cj.xml
 
-public enum XmlEvent <: Equatable<XmlEvent> & Hashable & ToString {
+public enum XmlEvent <: Equatable<XmlEvent> & ToString {
     | Decl
     | Comment
     | ProcInst
@@ -18,15 +17,11 @@ public enum XmlEvent <: Equatable<XmlEvent> & Hashable & ToString {
     | EntityRef
 
     public operator func ==(other: XmlEvent): Bool {
-        this.id == other.id
+        this.toString() == other.toString()
     }
 
     public operator func !=(other: XmlEvent): Bool {
         return !(this == other)
-    }
-
-    public func hashCode(): Int64 {
-        return this.id
     }
 
     public func toString(): String {
@@ -42,24 +37,6 @@ public enum XmlEvent <: Equatable<XmlEvent> & Hashable & ToString {
             case Text => "Text"
             case CData => "CData"
             case EntityRef => "EntityRef"
-        }
-    }
-
-    private prop id: Int64 {
-        get() {
-            return match (this) {
-                case Decl => 0
-                case Comment => 1
-                case ProcInst => 2
-                case DTD => 3
-                case ElementStart => 4
-                case ElementEnd => 5
-                case Attribute => 6
-                case Namespace => 7
-                case Text => 8
-                case CData => 9
-                case EntityRef => 10
-            }
         }
     }
 

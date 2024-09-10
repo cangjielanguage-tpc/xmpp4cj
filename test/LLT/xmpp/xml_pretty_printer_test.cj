@@ -26,7 +26,7 @@ public class XmlPrettyPrinterTest {
     }
 
     private static func xmlPrettyPrintTest(expectedPrettyPrintedXml: String, inputXml: String,
-        xmlPrettyPrinterBuilder: XmlPrettyPrinter_Builder): Unit {
+        xmlPrettyPrinterBuilder: XmlPrettyPrinterBuilder): Unit {
         let stringHolder = XmlPrettyPrinterTest_StringHolder()
         let xmlPrettyPrinter = xmlPrettyPrinterBuilder.setPartCallback(XmlPrettyPrinterTest_1(stringHolder)).build()
         let xmlSplitter = XmlSplitter(1024, XmlPrettyPrinterTest_2(), xmlPrettyPrinter)
@@ -43,7 +43,7 @@ class XmlPrettyPrinterTest_StringHolder {
     public var string: String = ""
 }
 
-class XmlPrettyPrinterTest_1 <: XmlPrettyPrinter_PrettyPrintedXmlPartCallback {
+class XmlPrettyPrinterTest_1 <: PrettyPrintedXmlPartCallback {
     let val_stringHolder: XmlPrettyPrinterTest_StringHolder
 
     init(val_stringHolder: XmlPrettyPrinterTest_StringHolder) {

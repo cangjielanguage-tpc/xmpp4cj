@@ -248,6 +248,7 @@ class XmppStringUtils {
             if (doAppendC) {
                 buf.append(c)
             }
+            i++
         }
         let res = unsafe { String.fromUtf8Unchecked(buf.getRawArray()[..buf.size]) }
         LOCALPART_UNESCAPE_CACHE.put(localpart, res)

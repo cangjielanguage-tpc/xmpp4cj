@@ -306,11 +306,11 @@ public enum StanzaErrorType <: ToString {
 
     public static func fromString(string: String): StanzaErrorType {
         match (string.toAsciiUpper()) {
-            case "wait" => WAIT
-            case "cancel" => CANCEL
-            case "modify" => MODIFY
-            case "auth" => AUTH
-            case "continue" => CONTINUE
+            case "WAIT" => WAIT
+            case "CANCEL" => CANCEL
+            case "MODIFY" => MODIFY
+            case "AUTH" => AUTH
+            case "CONTINUE" => CONTINUE
             case _ => throw IllegalArgumentException("Not a valid typ: ${string}")
         }
     }
@@ -343,8 +343,8 @@ public enum StanzaErrorCondition <: ToString & Equatable<StanzaErrorCondition> &
     public static func fromString(string: String): StanzaErrorCondition {
         return match (string.replace('-', '_')) {
             case "bad_request" => StanzaErrorCondition.bad_request
-            case "conflict" => StanzaErrorCondition.bad_request
-            case "feature_not_implemented" => StanzaErrorCondition.bad_request
+            case "conflict" => StanzaErrorCondition.conflict
+            case "feature_not_implemented" => StanzaErrorCondition.feature_not_implemented
             case "forbidden" => StanzaErrorCondition.forbidden
             case "gone" => StanzaErrorCondition.gone
             case "internal_server_error" => StanzaErrorCondition.internal_server_error
@@ -364,7 +364,7 @@ public enum StanzaErrorCondition <: ToString & Equatable<StanzaErrorCondition> &
             case "subscription_required" => StanzaErrorCondition.subscription_required
             case "undefined_condition" => StanzaErrorCondition.undefined_condition
             case "unexpected_request" => StanzaErrorCondition.unexpected_request
-            case v => throw IllegalStateException("Could not transform string '${v}' to XMPPErrorCondition")
+            case v => throw IllegalArgumentException("Could not transform string '${v}' to XMPPErrorCondition")
         }
     }
 

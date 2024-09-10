@@ -158,19 +158,7 @@ public enum XmlPullParserEvent <: Equatable<XmlPullParserEvent> & ToString {
     | OTHER
 
     public operator func ==(other: XmlPullParserEvent): Bool {
-        match ((this, other)) {
-            case (START_DOCUMENT, START_DOCUMENT) => true
-            case (END_DOCUMENT, END_DOCUMENT) => true
-            case (START_ELEMENT, START_ELEMENT) => true
-            case (END_ELEMENT, END_ELEMENT) => true
-            case (TEXT_CHARACTERS, TEXT_CHARACTERS) => true
-            case (PROCESSING_INSTRUCTION, PROCESSING_INSTRUCTION) => true
-            case (COMMENT, COMMENT) => true
-            case (IGNORABLE_WHITESPACE, IGNORABLE_WHITESPACE) => true
-            case (ENTITY_REFERENCE, ENTITY_REFERENCE) => true
-            case (OTHER, OTHER) => true
-            case _ => false
-        }
+        this.toString() == other.toString()
     }
     public operator func !=(other: XmlPullParserEvent): Bool {
         !(this == other)

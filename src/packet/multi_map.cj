@@ -42,12 +42,14 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
         this.map = map
     }
 
-    public func size(): Int {
-        var size = 0
-        for (list in map.values()) {
-            size += list.size
+    public prop size: Int {
+        get() {
+            var size = 0
+            for (list in map.values()) {
+                size += list.size
+            }
+            return size
         }
-        return size
     }
 
     public func isEmpty(): Bool {
@@ -196,7 +198,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
      * @return a new list with all values.
      */
     public func values(): ArrayList<V> {
-        let values = ArrayList<V>(size())
+        let values = ArrayList<V>(size)
         for (list in map.values()) {
             values.appendAll(list)
         }

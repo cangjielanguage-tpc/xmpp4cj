@@ -30,7 +30,7 @@ public class Compress <: Nonza {
     }
 }
 
-public class Feature <: ExtensionElement {
+public class CompressFeature <: ExtensionElement {
     public static let ELEMENT: String = "compression"
     public static let QNAME: QName = QName(Compress.NAMESPACE, ELEMENT)
 
