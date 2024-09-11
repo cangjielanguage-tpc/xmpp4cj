@@ -54,7 +54,7 @@ public class IqData <: AbstractIqBuilder {
         super.addExtension(extensionElement)
         getThis()
     }
-    public override func addOptExtensions(extensionElements: Collection<ExtensionElement>): IqData {
+    public override func addOptExtensions(extensionElements: ?Collection<ExtensionElement>): IqData {
         super.addOptExtensions(extensionElements)
         getThis()
     }

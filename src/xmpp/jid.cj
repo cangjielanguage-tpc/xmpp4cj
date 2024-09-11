@@ -610,11 +610,12 @@ public class DomainAndResourcepartJid <: AbstractJid & DomainFullJid {
     }
 
     public override func toString(): String {
-        if (cache.isSome()) {
-            return cache()
-        }
-        cache = "${domainBareJid}/${resource}"
-        return cache()
+        cache ?? {
+            =>
+            let str = "${domainBareJid}/${resource}"
+            cache = str
+            str
+        }()
     }
 
     public override func asDomainBareJid(): DomainBareJid {

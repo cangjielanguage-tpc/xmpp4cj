@@ -33,7 +33,7 @@ public open class XmlSplitter <: Resource {
 
     private var attributeName: String = ""
 
-    private var state: XmlSplitter_State = XmlSplitter_State.START
+    private var state: XmlSplitterState = XmlSplitterState.START
 
     private var attributeValueQuotes: XmlSplitter_AttributeValueQuotes = XmlSplitter_AttributeValueQuotes.non
 
@@ -85,10 +85,10 @@ public open class XmlSplitter <: Resource {
     protected func newSplittedPart(): Unit {
         depth = 0
         splittedPartBuffer.reset()
-        if (state == XmlSplitter_State.START) {
+        if (state == XmlSplitterState.START) {
             throw Exception("Invalid state: ${state}")
         }
-        state = XmlSplitter_State.START
+        state = XmlSplitterState.START
     }
 
     private func processChar(c: Rune): Unit {
@@ -97,107 +97,106 @@ public open class XmlSplitter <: Resource {
         var endTagFinished = false
         let initialState = state
         match (state) {
-            case XmlSplitter_State.TAG_RIGHT_ANGLE_BRACKET =>
-                state = XmlSplitter_State.START
+            case XmlSplitterState.TAG_RIGHT_ANGLE_BRACKET =>
+                state = XmlSplitterState.START
                 match (c) {
-                    case r'<' => state = XmlSplitter_State.TAG_LEFT_ANGLE_BRACKET
+                    case r'<' => state = XmlSplitterState.TAG_LEFT_ANGLE_BRACKET
                     case _ => ()
                 }
-            case XmlSplitter_State.START => match (c) {
-                case r'<' => state = XmlSplitter_State.TAG_LEFT_ANGLE_BRACKET
+            case XmlSplitterState.START => match (c) {
+                case r'<' => state = XmlSplitterState.TAG_LEFT_ANGLE_BRACKET
                 case _ => ()
             }
-            case XmlSplitter_State.TAG_LEFT_ANGLE_BRACKET => match (c) {
-                case r'/' => state = XmlSplitter_State.END_TAG_SOLIDUS
-                case r'?' => state = XmlSplitter_State.IN_PROCESSING_INSTRUCTION_OR_DECLARATION
-                case r'!' => state = XmlSplitter_State.AFTER_COMMENT_BANG
+            case XmlSplitterState.TAG_LEFT_ANGLE_BRACKET => match (c) {
+                case r'/' => state = XmlSplitterState.END_TAG_SOLIDUS
+                case r'?' => state = XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION
+                case r'!' => state = XmlSplitterState.AFTER_COMMENT_BANG
                 case _ =>
                     tokenBuffer.append(c)
-                    state = XmlSplitter_State.IN_TAG_NAME
+                    state = XmlSplitterState.IN_TAG_NAME
             }
-            case XmlSplitter_State.END_TAG_SOLIDUS =>
-                state = XmlSplitter_State.IN_END_TAG
+            case XmlSplitterState.END_TAG_SOLIDUS =>
+                state = XmlSplitterState.IN_END_TAG
                 tokenBuffer.append(c)
-            case XmlSplitter_State.IN_TAG_NAME => match (c) {
+            case XmlSplitterState.IN_TAG_NAME => match (c) {
                 case r' ' | r'\n' | r'\r' | r'\t' =>
                     qName = getToken()
-                    state = XmlSplitter_State.AFTER_START_NAME
+                    state = XmlSplitterState.AFTER_START_NAME
                 case r'/' =>
                     qName = getToken()
                     onStartTagFinished()
-                    state = XmlSplitter_State.IN_EMPTY_TAG
+                    state = XmlSplitterState.IN_EMPTY_TAG
                 case r'>' =>
                     qName = getToken()
                     onStartTagFinished()
-                    state = XmlSplitter_State.TAG_RIGHT_ANGLE_BRACKET
+                    state = XmlSplitterState.TAG_RIGHT_ANGLE_BRACKET
                 case _ => tokenBuffer.append(c)
             }
-            case XmlSplitter_State.IN_END_TAG => match (c) {
+            case XmlSplitterState.IN_END_TAG => match (c) {
                 case r'>' =>
                     endTagFinished = true
-                    state = XmlSplitter_State.TAG_RIGHT_ANGLE_BRACKET
+                    state = XmlSplitterState.TAG_RIGHT_ANGLE_BRACKET
                 case _ => tokenBuffer.append(c)
             }
-            case XmlSplitter_State.AFTER_START_NAME => match (c) {
+            case XmlSplitterState.AFTER_START_NAME => match (c) {
                 case r'/' =>
                     onStartTagFinished()
-                    state = XmlSplitter_State.IN_EMPTY_TAG
+                    state = XmlSplitterState.IN_EMPTY_TAG
                 case r'>' =>
                     onStartTagFinished()
-                    state = XmlSplitter_State.TAG_RIGHT_ANGLE_BRACKET
+                    state = XmlSplitterState.TAG_RIGHT_ANGLE_BRACKET
                 case r' ' | r'\n' | r'\r' | r'\t' => ()
                 case _ =>
                     tokenBuffer.append(c)
-                    state = XmlSplitter_State.IN_ATTRIBUTE_NAME
+                    state = XmlSplitterState.IN_ATTRIBUTE_NAME
             }
-            case XmlSplitter_State.IN_ATTRIBUTE_NAME => match (c) {
+            case XmlSplitterState.IN_ATTRIBUTE_NAME => match (c) {
                 case r'=' =>
                     attributeName = getToken()
-                    state = XmlSplitter_State.AFTER_ATTRIBUTE_EQUALS
+                    state = XmlSplitterState.AFTER_ATTRIBUTE_EQUALS
                 case _ => tokenBuffer.append(c)
             }
-            case XmlSplitter_State.AFTER_ATTRIBUTE_EQUALS => match (c) {
+            case XmlSplitterState.AFTER_ATTRIBUTE_EQUALS => match (c) {
                 case r'\'' =>
                     attributeValueQuotes = XmlSplitter_AttributeValueQuotes.apos
-                    state = XmlSplitter_State.IN_ATTRIBUTE_VALUE
+                    state = XmlSplitterState.IN_ATTRIBUTE_VALUE
                 case r'"' =>
                     attributeValueQuotes = XmlSplitter_AttributeValueQuotes.quot
-                    state = XmlSplitter_State.IN_ATTRIBUTE_VALUE
-                case _ => throw InvalidXmlException_InvalidAttributeDeclarationException.create(c,
-                    splittedPartBuffer.toString())
+                    state = XmlSplitterState.IN_ATTRIBUTE_VALUE
+                case _ => throw InvalidAttributeDeclarationException.create(c, splittedPartBuffer.toString())
             }
-            case XmlSplitter_State.IN_ATTRIBUTE_VALUE => if (c == attributeValueQuotes.c) {
+            case XmlSplitterState.IN_ATTRIBUTE_VALUE => if (c == attributeValueQuotes.c) {
                 attributes.put(attributeName, getToken())
-                state = XmlSplitter_State.AFTER_START_NAME
+                state = XmlSplitterState.AFTER_START_NAME
             } else {
                 tokenBuffer.append(c)
             }
-            case XmlSplitter_State.IN_EMPTY_TAG => match (c) {
+            case XmlSplitterState.IN_EMPTY_TAG => match (c) {
                 case r'>' =>
                     endTagFinished = true
-                    state = XmlSplitter_State.TAG_RIGHT_ANGLE_BRACKET
-                case _ => throw InvalidXmlException_InvalidEmptyTagException.create(c, splittedPartBuffer.toString())
+                    state = XmlSplitterState.TAG_RIGHT_ANGLE_BRACKET
+                case _ => throw InvalidEmptyTagException.create(c, splittedPartBuffer.toString())
             }
-            case XmlSplitter_State.IN_PROCESSING_INSTRUCTION_OR_DECLARATION => match (c) {
+            case XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION => match (c) {
                 case r'\'' =>
                     attributeValueQuotes = XmlSplitter_AttributeValueQuotes.apos
-                    state = XmlSplitter_State.IN_PROCESSING_INSTRUCTION_OR_DECLARATION_PSEUDO_ATTRIBUTE_VALUE
+                    state = XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION_PSEUDO_ATTRIBUTE_VALUE
                 case r'"' =>
                     attributeValueQuotes = XmlSplitter_AttributeValueQuotes.quot
-                    state = XmlSplitter_State.IN_PROCESSING_INSTRUCTION_OR_DECLARATION_PSEUDO_ATTRIBUTE_VALUE
-                case r'?' => state = XmlSplitter_State.IN_PROCESSING_INSTRUCTION_OR_DECLARATION_QUESTION_MARK
+                    state = XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION_PSEUDO_ATTRIBUTE_VALUE
+                case r'?' => state = XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION_QUESTION_MARK
                 case _ => ()
             }
-            case XmlSplitter_State.IN_PROCESSING_INSTRUCTION_OR_DECLARATION_PSEUDO_ATTRIBUTE_VALUE => if (c ==
+            case XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION_PSEUDO_ATTRIBUTE_VALUE => if (c ==
                 attributeValueQuotes.c) {
-                state = XmlSplitter_State.IN_PROCESSING_INSTRUCTION_OR_DECLARATION
+                state = XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION
             }
-            case XmlSplitter_State.IN_PROCESSING_INSTRUCTION_OR_DECLARATION_QUESTION_MARK => if (c == r'>') {
+            case XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION_QUESTION_MARK => if (c == r'>') {
                 let processingInstructionOrDeclaration: String = splittedPartBuffer.toString()
                 onProcessingInstructionOrDeclaration(processingInstructionOrDeclaration)
                 newSplittedPart()
             } else {
-                state = XmlSplitter_State.IN_PROCESSING_INSTRUCTION_OR_DECLARATION
+                state = XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION
             }
             case AFTER_COMMENT_BANG | AFTER_COMMENT_DASH1 | AFTER_COMMENT_DASH2 | AFTER_COMMENT | AFTER_COMMENT_CLOSING_DASH1 | AFTER_COMMENT_CLOSING_DASH2 => throw Exception(
                 "XML comments are not supported by XmlSplitter (yet). They are also not allowed in XMPP streams (cf. RFC 6120 \u{00a7} 11.1)."
@@ -230,10 +229,10 @@ public open class XmlSplitter <: Resource {
             xmlPrinter?.onCompleteElement()
         }
         onEndTag(endTagName)
-        if (state == XmlSplitter_State.START) {
+        if (state == XmlSplitterState.START) {
             throw Exception("Invalid state: ${state}")
         }
-        state = XmlSplitter_State.START
+        state = XmlSplitterState.START
     }
 
     private func getToken(): String {
@@ -274,7 +273,7 @@ public open class XmlSplitter <: Resource {
     public open override func close(): Unit {}
 }
 
-public enum XmlSplitter_State <: Equatable<XmlSplitter_State> & ToString {
+public enum XmlSplitterState <: Equatable<XmlSplitterState> & ToString {
     | START
     | TAG_LEFT_ANGLE_BRACKET
     | TAG_RIGHT_ANGLE_BRACKET
@@ -296,35 +295,13 @@ public enum XmlSplitter_State <: Equatable<XmlSplitter_State> & ToString {
     | IN_PROCESSING_INSTRUCTION_OR_DECLARATION_PSEUDO_ATTRIBUTE_VALUE
     | IN_PROCESSING_INSTRUCTION_OR_DECLARATION_QUESTION_MARK
 
-    public operator func ==(that: XmlSplitter_State) {
-        match ((this, that)) {
-            case (START, START) => true
-            case (TAG_LEFT_ANGLE_BRACKET, TAG_LEFT_ANGLE_BRACKET) => true
-            case (TAG_RIGHT_ANGLE_BRACKET, TAG_RIGHT_ANGLE_BRACKET) => true
-            case (END_TAG_SOLIDUS, END_TAG_SOLIDUS) => true
-            case (IN_TAG_NAME, IN_TAG_NAME) => true
-            case (IN_END_TAG, IN_END_TAG) => true
-            case (AFTER_START_NAME, AFTER_START_NAME) => true
-            case (IN_EMPTY_TAG, IN_EMPTY_TAG) => true
-            case (IN_ATTRIBUTE_NAME, IN_ATTRIBUTE_NAME) => true
-            case (AFTER_ATTRIBUTE_EQUALS, AFTER_ATTRIBUTE_EQUALS) => true
-            case (IN_ATTRIBUTE_VALUE, IN_ATTRIBUTE_VALUE) => true
-            case (AFTER_COMMENT_BANG, AFTER_COMMENT_BANG) => true
-            case (AFTER_COMMENT_DASH1, AFTER_COMMENT_DASH1) => true
-            case (AFTER_COMMENT_DASH2, AFTER_COMMENT_DASH2) => true
-            case (AFTER_COMMENT, AFTER_COMMENT) => true
-            case (AFTER_COMMENT_CLOSING_DASH1, AFTER_COMMENT_CLOSING_DASH1) => true
-            case (AFTER_COMMENT_CLOSING_DASH2, AFTER_COMMENT_CLOSING_DASH2) => true
-            case (IN_PROCESSING_INSTRUCTION_OR_DECLARATION, IN_PROCESSING_INSTRUCTION_OR_DECLARATION) => true
-            case (IN_PROCESSING_INSTRUCTION_OR_DECLARATION_PSEUDO_ATTRIBUTE_VALUE, IN_PROCESSING_INSTRUCTION_OR_DECLARATION_PSEUDO_ATTRIBUTE_VALUE) => true
-            case (IN_PROCESSING_INSTRUCTION_OR_DECLARATION_QUESTION_MARK, IN_PROCESSING_INSTRUCTION_OR_DECLARATION_QUESTION_MARK) => true
-            case (_, _) => false
-        }
+    public operator func ==(that: XmlSplitterState) {
+        this.toString() == that.toString()
     }
-    public operator func !=(that: XmlSplitter_State) {
+    public operator func !=(that: XmlSplitterState) {
         return !(this == that)
     }
-    public func toString(): String {
+    public override func toString(): String {
         match (this) {
             case START => "START"
             case TAG_LEFT_ANGLE_BRACKET => "TAG_LEFT_ANGLE_BRACKET"

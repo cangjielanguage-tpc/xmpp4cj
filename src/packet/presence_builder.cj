@@ -116,7 +116,7 @@ public class PresenceBuilder <: MessageOrPresenceBuilder & PresenceView {
         super.addExtension(extensionElement)
         getThis()
     }
-    public override func addOptExtensions(extensionElements: Collection<ExtensionElement>): PresenceBuilder {
+    public override func addOptExtensions(extensionElements: ?Collection<ExtensionElement>): PresenceBuilder {
         super.addOptExtensions(extensionElements)
         getThis()
     }

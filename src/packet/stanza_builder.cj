@@ -127,8 +127,8 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return getThis()
     }
 
-    public open func addOptExtensions(extensionElements: Collection<ExtensionElement>): StanzaBuilder {
-        return addExtensions(extensionElements)
+    public open func addOptExtensions(extensionElements: ?Collection<ExtensionElement>): StanzaBuilder {
+        return addExtensions(extensionElements ?? return getThis())
     }
 
     public open func addExtensions(extensionElements: Collection<ExtensionElement>): StanzaBuilder {

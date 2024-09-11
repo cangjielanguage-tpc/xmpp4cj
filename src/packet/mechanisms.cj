@@ -14,7 +14,7 @@ public class Mechanisms <: ExtensionElement {
         mechanisms.append(mechanism)
     }
 
-    public init(mechanisms: Iterator<String>) {
+    public init(mechanisms: Iterable<String>) {
         for (v in mechanisms) {
             this.mechanisms.append(v)
         }
