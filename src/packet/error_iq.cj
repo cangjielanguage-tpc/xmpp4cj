@@ -4,10 +4,9 @@
 package xmpp4cj.packet
 
 /**
- * An XMPP error IQ.
+ * 一个 XMPP 错误 IQ。
  * <p>
- * According to RFC 6120 § 8.3.1 "4. An error stanza MUST contain an &lt;error/&gt; child element.",
- * so this class can only be constructed if a stanza error is provided.
+ * 根据 RFC 6120 § 8.3.1 “4. 一个错误节必须包含一个 &lt;error/&gt; 子元素。”，所以只有在提供了节错误的情况下才能构造这个类。
  */
 public class ErrorIQ <: IQ {
     public static let ELEMENT = StanzaError.ERROR

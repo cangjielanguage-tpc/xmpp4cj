@@ -4,12 +4,9 @@
 package xmpp4cj.packet
 
 /**
- * IQ stanza that will be sent to the server to establish a session.<p>
+ * 将会发送到服务器以建立会话的 IQ 节。<p>
  *
- * If a server supports sessions, it MUST include a <i>session</i> element in the
- * stream features it advertises to a client after the completion of stream authentication.
- * Upon being informed that session establishment is required by the server the client MUST
- * establish a session if it desires to engage in instant messaging and presence functionality.<p>
+ * 如果服务器支持会话，它必须在流认证完成后向客户端通告的流特性中包含一个<i>session</i>元素。当客户端被告知服务器要求建立会话时，如果它希望使用即时消息和存在功能，则必须建立会话。<p>
  *
  * For more information refer to the following
  * <a href=xmpp/org/specs/rfc3921.html#session>link</a>.

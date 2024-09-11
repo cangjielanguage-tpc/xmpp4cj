@@ -27,12 +27,12 @@ public open class AbstractError {
     }
 
     /**
-     * Get the descriptive text of this SASLFailure.
+     * 获取此错误的描述性文本。
      * <p>
-     * Returns the descriptive text of this SASLFailure in the system default language if possible. May return None.
+     * 如果可能，以系统默认语言返回此错误的描述性文本。可能返回 None。
      * </p>
      *
-     * @return the descriptive text or None.
+     * @return 描述性文本或 None。
      */
     public func getDescriptiveText(): ?String {
         if (descriptiveTexts.size == 0) {
@@ -55,25 +55,24 @@ public open class AbstractError {
     }
 
     /**
-     * Get the descriptive test of this SASLFailure.
+     * 获取此错误的描述性文本。
      * <p>
-     * Returns the descriptive text of this SASLFailure in the given language. May return None if not available.
+     * 以给定语言返回此错误的描述性文本。如果不可用，则可能返回 None。
      * </p>
      *
-     * @param xmllang the language.
-     * @return the descriptive text or None.
+     * @param xmllang 语言。
+     * @return 描述性文本或 None。
      */
     public func getDescriptiveText(xmllang: String): ?String {
         return descriptiveTexts.get(xmllang)
     }
 
     /**
-     * Returns the first stanza extension that matches the specified element name and
-     * namespace, or <code>None</code> if it doesn't exist.
+     * 返回第一个与指定元素名称和命名空间匹配的节扩展，或者如果不存在则返回 <code>None</code>。
      *
-     * @param elementName the XML element name of the stanza extension.
-     * @param namespace the XML element namespace of the stanza extension.
-     * @return the extension, or <code>None</code> if it doesn't exist.
+     * @param elementName 节扩展的 XML 元素名称。
+     * @param namespace 节扩展的 XML 元素命名空间。
+     * @return 扩展，或者如果不存在则返回 <code>None</code>。
      */
     public func getExtension<PE>(elementName: String, namespace: String): ?ExtensionElement where PE <: ExtensionElement {
         return PacketUtil.extensionElementFrom(extensions, elementName, namespace)

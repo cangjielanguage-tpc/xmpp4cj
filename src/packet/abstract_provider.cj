@@ -12,15 +12,14 @@ public open class AbstractProvider<E> where E <: Element {
 }
 
 /**
- * Xmpp provider are the parsers used to deserialize raw XMPP into the according {@link Element}s.
+ * XMPP 提供者是用于将原始 XMPP 反序列化为相应的 {@link Element} 的解析器。
  * <p>
- * At any time when {@link #parse(XmlPullParser, int, XmlEnvironment)} is invoked any type of exception can be thrown.
- * If the parsed element does not follow the specification,
- * for example by putting a string where only integers are allowed,
- * then a {@link Xmpp4cjException} should be thrown.
+ * 在任何时候调用 {@link #parse(XmlPullParser, int, XmlEnvironment)} 时都可能抛出任何类型的异常。
+ * 如果解析的元素不符合规范，例如在只允许整数的地方放入一个字符串，
+ * 那么应该抛出一个 {@link Xmpp4cjException}。
  * </p>
  *
- * @param <E> the type of the resulting element.
+ * @param <E> 结果元素的类型。
  */
 public abstract class Provider<E> <: AbstractProvider<E> where E <: Element {
     // throws IOException, XmlPullParserException, ParsingException
@@ -48,9 +47,8 @@ public abstract class Provider<E> <: AbstractProvider<E> where E <: Element {
 }
 
 /**
- * An abstract class for parsing custom extensions elements. Each ExtensionElementProvider must
- * be registered with the ProviderManager class for it to be used. Every implementation
- * of this abstract class <b>must</b> have a public, no-argument constructor.
+ * 一个用于解析自定义扩展元素的抽象类。每个 ExtensionElementProvider 都必须在 ProviderManager 类中注册才能被使用。
+ * 这个抽象类的每个实现<b>必须</b>有一个公共的无参构造函数。
  */
 public abstract class ExtensionElementProvider<EE> <: Provider<EE> where EE <: Element {}
 
@@ -75,26 +73,25 @@ public abstract class IqProvider<I> <: AbstractProvider<I> where I <: IQ {
 }
 
 /**
- * Used to load providers into the {@link ProviderManager}.
+ * 用于将提供者加载到 {@link ProviderManager} 中。
  */
 public interface ProviderLoader {
     /**
-     * Provides the IQ provider info for the creation of IQ providers to be added to the <code>ProviderManager</code>.
-     * @return The IQ provider info to load.
+     * 提供用于创建要添加到<code>ProviderManager</code>的 IQ 提供者的 IQ 提供者信息。
+     * @return 要加载的 IQ 提供者信息。
      */
     func getIQProviderInfo(): Iterable<IQProviderInfo>
 
     /**
-     * Provides the extension providers for the creation of extension providers to be added to the <code>ProviderManager</code>.
-     * @return The extension provider info to load.
+     * 提供用于创建要添加到<code>ProviderManager</code>的扩展提供者的扩展提供者信息。
+     * @return 要加载的扩展提供者信息。
      */
     func getExtensionProviderInfo(): Iterable<ExtensionProviderInfo>
 
     /**
-     * Provides the stream feature providers information for the creation of stream feature
-     * providers to be added to the <code>ProviderManager</code>.
+     * 提供用于创建要添加到<code>ProviderManager</code>的流特征提供者的流特征提供者信息。
      *
-     * @return The extension provider info to load.
+     * @return 要加载的扩展提供者信息。
      */
     func getStreamFeatureProviderInfo(): Iterable<StreamFeatureProviderInfo>
 }

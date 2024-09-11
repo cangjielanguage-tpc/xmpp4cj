@@ -4,10 +4,7 @@
 package xmpp4cj.packet
 
 /**
- * IQ stanza used by Xmpp to bind a resource and to obtain the jid assigned by the server.
- * There are two ways to bind a resource. One is simply sending an empty Bind stanza where the
- * server will assign a new resource for this connection. The other option is to set a desired
- * resource but the server may return a modified version of the sent resource.<p>
+ * XMPP 用于绑定资源并获取服务器分配的 JID 的 IQ 节。有两种绑定资源的方法。一种是简单地发送一个空的 Bind 节，此时服务器将为这个连接分配一个新的资源。另一种选择是设置一个期望的资源，但服务器可能会返回发送的资源的修改版本。<p>
  *
  * For more information refer to the following
  * <a href=xmpp/org/specs/rfc3920.html#bind>link</a>.

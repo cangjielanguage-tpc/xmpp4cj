@@ -4,9 +4,9 @@
 package xmpp4cj.xmpp
 
 /**
- * Interface for commonly used Stringprep operations used in XMPP.
+ * XMPP 中常用的 Stringprep 操作的接口。
  * <p>
- * The relevant RFCs are:
+ * 相关的 RFC 文档有：
  * <ul>
  * <li>RFC 6122</li>
  * <li>draft-ietf-xmpp-6122bis-14</li>
@@ -16,30 +16,28 @@ package xmpp4cj.xmpp
 public interface XmppStringprep <: Hashable & Equatable<XmppStringprep> {
 
     /**
-     * Performs String preparation on the localpart String of a JID. In RFC 6122 terms this means applying the
-     * <i>nodeprep</i> profile of Stringprep.
+     * 对 JID 的本地部分字符串执行字符串准备操作。在 RFC 6122 中，这意味着应用 Stringprep 的<i>nodeprep</i>配置文件。
      *
-     * @param string the String to transform.
-     * @return the prepared String.
-     * @throws XmppStringprepException if there is an error.
+     * @param string 要转换的字符串。
+     * @return 准备后的字符串。
+     * @throws XmppStringprepException 如果出现错误。
      */
     func localprep(string: String): String
 
     /**
-     * Performs String preparation on the domainpart String of a JID. In RFC 61ss terms, this means applying the
-     * <i>nameprep</i> profile of Stringprep.
+     * 对 JID 的域部分字符串执行字符串准备操作。在 RFC 6122 中，这意味着应用 Stringprep 的<i>nameprep</i>配置文件。
      *
-     * @param string the String to transform.
-     * @return the prepared String.
-     * @throws XmppStringprepException if there is an error.
+     * @param string 要转换的字符串。
+     * @return 准备后的字符串。
+     * @throws XmppStringprepException 如果出现错误。
      */
     func domainprep(string: String): String
 
     /**
-     * Performs String preparation on the resourcepart String of a JID. In RFC 6122 terms this means applying the <i>resourceprep</i> profile of Stringprep.
-     * @param string the String to transform.
-     * @return the prepared String.
-     * @throws XmppStringprepException if there is an error.
+     * 对 JID 的资源部分字符串执行字符串准备操作。在 RFC 6122 中，这意味着应用 Stringprep 的<i>resourceprep</i>配置文件。
+     * @param string 要转换的字符串。
+     * @return 准备后的字符串。
+     * @throws XmppStringprepException 如果出现错误。
      */
     func resourceprep(string: String): String
 }
@@ -50,7 +48,7 @@ public class SimpleXmppStringprep <: XmppStringprep {
     public static let NAME: String = "simple"
 
     /**
-     * Setup Simple XMPP Stringprep as implementation to use.
+     * 设置简单 XMPP Stringprep 为要使用的实现。
      */
     public static func setup(): Unit {
         XmppContext.setDefaultXmppStringprep(getInstance())
@@ -61,9 +59,9 @@ public class SimpleXmppStringprep <: XmppStringprep {
     }()
 
     /**
-     * Get the Simple XMPP Stringprep singleton.
+     * 获取简单 XMPP Stringprep 的单例。
      *
-     * @return the simple XMPP Stringprep singleton.
+     * @return 简单 XMPP Stringprep 的单例。
      */
     public static func getInstance(): SimpleXmppStringprep {
         return if (let Some(v) <- instance) {
@@ -126,10 +124,10 @@ public class SimpleXmppStringprep <: XmppStringprep {
     }
 
     /**
-     * Ensure that the input string does not contain any of the further excluded characters of XMPP localparts.
+     * 确保输入字符串不包含 XMPP 本地部分的任何进一步被排除的字符。
      *
-     * @param localpart the input string.
-     * @throws XmppStringprepException if one of the further excluded characters is found.
+     * @param localpart 输入字符串。
+     * @throws XmppStringprepException 如果发现进一步被排除的字符之一。
      * @see RFC 7622 § 3.3.1
      */
     public static func ensureLocalpartDoesNotIncludeFurtherExcludedCharacters(localpart: String): Unit {
@@ -168,12 +166,12 @@ public class SimpleXmppStringprep <: XmppStringprep {
     }
 
     /**
-     * XML 1.0 disallows certain characters. Below 0x20 (SPACE) only 0x09 (\t), 0x0A (\n), and 0x0D (\r) are allowed.
-     * See XML 1.0 § 2.2 which has the following production rule:
+     * XML 1.0 禁止某些字符。在 0x20（空格）以下，仅允许 0x09（\t）、0x0A（\n）和 0x0D（\r）。
+     * 请参阅 XML 1.0 § 2.2，其中有以下产生式规则：
      *  Rune       ::=       #x9 | #xA | #xD | [#x20-#xD7FF] | [#xE000-#xFFFD] | [#x10000-#x10FFFF]
      *
-     * @param c the character is check.
-     * @return true if the character is disallowed by XML.
+     * @param c 要检查的字符。
+     * @return 如果该字符被 XML 禁止，则为 true。
      */
     private static func isDisallowedAsciiChar(c: Byte): Bool {
         if (c >= 0x20) {
@@ -202,17 +200,17 @@ public class SimpleXmppStringprep <: XmppStringprep {
 }
 
 /**
- * XMPP Stringprep exceptions signal an error when performing a particular Stringprep profile on a String.
+ * XMPP Stringprep 异常在对字符串执行特定的 Stringprep 配置文件时表示错误。
  */
 public open class XmppStringprepException <: Exception {
     private let causingString: String
     private var causingException: ?Exception = None
 
     /**
-     * Construct a XMPP Stringprep exception with the given causing String and exception.
+     * 使用给定的导致异常的字符串和异常构造一个 XMPP Stringprep 异常。
      *
-     * @param causingString the String causing the exception.
-     * @param exception the exception.
+     * @param causingString 导致异常的字符串。
+     * @param exception 异常。
      */
     public init(causingString: String, exception: Exception) {
         super("XmppStringprepException caused by '${causingString}': ${exception}")
@@ -221,10 +219,10 @@ public open class XmppStringprepException <: Exception {
     }
 
     /**
-     * Construct a XMPP Stringprep exception with the given causing String and exception message.
+     * 使用给定的导致异常的字符串和异常消息构造一个 XMPP Stringprep 异常。
      *
-     * @param causingString the String causing the exception.
-     * @param message the message of the exception.
+     * @param causingString 导致异常的字符串。
+     * @param message 异常消息。
      */
     public init(causingString: String, message: String) {
         super(message)
@@ -232,9 +230,9 @@ public open class XmppStringprepException <: Exception {
     }
 
     /**
-     * Get the String causing the XMPP Stringprep exception.
+     * 获取导致 XMPP Stringprep 异常的字符串。
      *
-     * @return the causing String.
+     * @return 导致异常的字符串。
      */
     public func getCausingString(): String {
         return causingString
@@ -242,7 +240,7 @@ public open class XmppStringprepException <: Exception {
 }
 
 /**
- * The input string does not contain a domainpart.
+ * 输入字符串不包含域部分。
  */
 public class MissingDomainpart <: XmppStringprepException {
     private MissingDomainpart(causingString: String) {
@@ -250,11 +248,11 @@ public class MissingDomainpart <: XmppStringprepException {
     }
 
     /**
-     * Create a "missing domainpart" exception from the give parts.
+     * 从给定的部分创建一个“缺少域部分”异常。
      *
-     * @param localpart the localpart.
-     * @param resourcepart the resourcepart.
-     * @return a "missing domanipart" exception.
+     * @param localpart 本地部分。
+     * @param resourcepart 资源部分。
+     * @return 一个“缺少域部分”异常。
      */
     public static func froms(localpart: ?String, resourcepart: ?String): MissingDomainpart {
         let causingString: StringBuilder = StringBuilder()
@@ -281,23 +279,23 @@ public class XmppStringPrepUtil {
     private static let RESOURCEPREP_CACHE: Cache<String, String> = LruCache<String, String>(100)
 
     /**
-     * Perform localprep on the input String.
+     * 对输入字符串执行 localprep。
      *
-     * @param string the input String.
-     * @return the localpreped String.
-     * @throws XmppStringprepException if the input String can not be transformed.
+     * @param string 输入字符串。
+     * @return 经过 localprep 的字符串。
+     * @throws XmppStringprepException 如果输入字符串无法转换。
      */
     public static func localprep(string: String): String {
         return localprep(string, XmppContext.getDefaultContext())
     }
 
     /**
-     * Perform localprep on the input String.
+     * 对输入字符串执行 localprep。
      *
-     * @param string the input String.
-     * @param context the XMPP JID context.
-     * @return the localpreped String.
-     * @throws XmppStringprepException if the input String can not be transformed.
+     * @param string 输入字符串。
+     * @param context XMPP JID 上下文。
+     * @return 经过 localprep 的字符串。
+     * @throws XmppStringprepException 如果输入字符串无法转换。
      */
     public static func localprep(strings: ?String, context: XmppContext): String {
         throwIfNullOrEmpty(strings, XmppAddressParttype.localpart)
@@ -317,23 +315,23 @@ public class XmppStringPrepUtil {
     }
 
     /**
-     * Perform domainprep on the input String.
+     * 对输入字符串执行 domainprep。
      *
-     * @param string the input String.
-     * @return the domainprep String.
-     * @throws XmppStringprepException if the input String can not be transformed.
+     * @param string 输入字符串。
+     * @return 经过 domainprep 的字符串。
+     * @throws XmppStringprepException 如果输入字符串无法转换。
      */
     public static func domainprep(string: String): String {
         return domainprep(string, XmppContext.getDefaultContext())
     }
 
     /**
-     * Perform domainprep on the input String.
+     * 对输入字符串执行 domainprep。
      *
-     * @param string the input String.
-     * @param context the XMPP JID context.
-     * @return the domainprep String.
-     * @throws XmppStringprepException if the input String can not be transformed.
+     * @param string 输入字符串。
+     * @param context XMPP JID 上下文。
+     * @return 经过 domainprep 的字符串。
+     * @throws XmppStringprepException 如果输入字符串无法转换。
      */
     public static func domainprep(strings: ?String, context: XmppContext): String {
         throwIfNullOrEmpty(strings, XmppAddressParttype.domainpart)
@@ -353,23 +351,23 @@ public class XmppStringPrepUtil {
     }
 
     /**
-     * Perform resourceprep on the input String.
+     * 对输入字符串执行 resourceprep。
      *
-     * @param string the input String.
-     * @return the resourceprep String.
-     * @throws XmppStringprepException if the input String can not be transformed.
+     * @param string 输入字符串。
+     * @return 经过 resourceprep 的字符串。
+     * @throws XmppStringprepException 如果输入字符串无法转换。
      */
     public static func resourceprep(string: String): String {
         return resourceprep(string, XmppContext.getDefaultContext())
     }
 
     /**
-     * Perform resourceprep on the input String.
+     * 对输入字符串执行 resourceprep。
      *
-     * @param string the input String.
-     * @param context the XMPP JID context.
-     * @return the resourceprep String.
-     * @throws XmppStringprepException if the input String can not be transformed.
+     * @param string 输入字符串。
+     * @param context XMPP JID 上下文。
+     * @return 经过 resourceprep 的字符串。
+     * @throws XmppStringprepException 如果输入字符串无法转换。
      */
     public static func resourceprep(strings: ?String, context: XmppContext): String {
         throwIfNullOrEmpty(strings, XmppAddressParttype.resourcepart)
@@ -389,9 +387,9 @@ public class XmppStringPrepUtil {
     }
 
     /**
-     * Set the maximum cache sizes.
+     * 设置最大缓存大小。
      *
-     * @param size the maximum cache size.
+     * @param size 最大缓存大小。
      */
     public static func setMaxCacheSizes(size: Int): Unit {
         NODEPREP_CACHE.setMaxCacheSize(size)
@@ -400,10 +398,10 @@ public class XmppStringPrepUtil {
     }
 
     /**
-     * Throws a XMPP Stringprep exception if string is the empty string.
+     * 如果字符串为空字符串，则抛出 XMPP Stringprep 异常。
      *
-     * @param string the string to check
-     * @throws XmppStringprepException exception telling that the argument was the empty string
+     * @param string 要检查的字符串
+     * @throws XmppStringprepException 异常表示参数为空字符串
      */
     static func throwIfNullOrEmpty(string: ?String, types: XmppAddressParttype): Unit {
         if (string.isNone()) {

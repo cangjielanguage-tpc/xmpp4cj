@@ -4,264 +4,282 @@
 package xmpp4cj.xmpp
 
 /**
-    An XMPP address, also known as JID (formerly for "Jabber Identifier"), which acts as globally unique address within the XMPP network.
-    JIDs are created from String or CharSequence with the JidCreate utility.
-    let jid:Jid = JidCreate.froms("juliet@capulet.org/balcony")
-    let bareJid:EntityBareJid = JidCreate.entityBareFrom("romeo@montague.net")
-
-    This is the super interface for all JID types, which are constructed from two dimensions: Bare/ Full and Domain/ Entity.
-    Every JID consists at least of a Domainpart.
-    Bare JID types do not come with a Resourcepart, full JID types always have a Resourcepart.
-    Domain JID types do not possess a Localpart, whereas entity JID types always do.
-    The following table shows a few examples of JID types.
-                XMPP Address Types
-        Example                   Type
-        example.org               DomainBareJid
-        example.org/resource      DomainFullJid
-        user@example.org          EntityBareJid
-        user@example.org/resource EntityFullJid
-    You can retrieve the escaped String representing the Jid with toString() or the unescaped String of the JID with asUnescapedString().
-
-    URL Encoded JIDs
-    The URL encoded representation of a JID is ideal if a JID should be stored as part of a path name, e.g. as file name.
-    You can retrieve this information using asUrlEncodedString().
-    The JidCreate API provides methods to create JIDs from URL encoded Strings like JidCreate.fromUrlEncoded(String).
-    See Also:
-        RFC 6120 (XMPP: Core) § 2.1 Global Addresses , RFC 6122 (XMPP: Address Format) § 2.1 Fundamentals
+ * XMPP 地址，也称为 JID（以前是 “Jabber Identifier” 的缩写），它在 XMPP 网络中作为全局唯一的地址。
+ * <p>
+ * JIDs 可以通过{@link xmpp4cj.xmpp.JidCreate}工具类从String创建。
+ * </p>
+ *
+ * <pre>
+ * let jid:Jid = JidCreate.froms("juliet@capulet.org/balcony");
+ * let bareJid:EntityBareJid = JidCreate.entityBareFrom("romeo@montague.net");
+ * </pre>
+ * <p>
+ * 这是所有 JID 类型的超接口，JID 由两个维度构建：裸（Bare）/ 全（Full）和 域（Domain）/ 实体（Entity）。
+ * 1. 每个 JID 至少由一个域部分（{@link xmpp4cj.xmpp.Domainpart}）组成。
+ * 2. 裸 JID 类型没有资源部分（{@link xmpp4cj.xmpp.Resourcepart}），全 JID 类型总是有资源部分。
+ * 3. 域 JID 类型没有本地部分（{@link xmpp4cj.xmpp.Localpart}），而实体 JID 类型总是有本地部分。
+ * </p>
+ * <p>
+ * 一些 JID 类型的示例：
+ * </p>
+ * <table>
+ * <caption>XMPP Address Types</caption>
+ * <tr>
+ * <td>Example</td>
+ * <td>Type</td>
+ * </tr>
+ * <tr>
+ * <td><code>example.org</code></td>
+ * <td>{@link xmpp4cj.xmpp.DomainBareJid}</td>
+ * </tr>
+ * <tr>
+ * <td><code>example.org/resource</code></td>
+ * <td>{@link xmpp4cj.xmpp.DomainFullJid}</td>
+ * </tr>
+ * <tr>
+ * <td><code>user@example.org</code></td>
+ * <td>{@link xmpp4cj.xmpp.EntityBareJid}</td>
+ * </tr>
+ * <tr>
+ * <td><code>user@example.org/resource</code></td>
+ * <td>{@link xmpp4cj.xmpp.EntityFullJid}</td>
+ * </tr>
+ * </table>
+ * <p>
+ * 可以使用 {@link #toString()} 方法获取表示 JID 的转义字符串，或者使用 {@link #asUnescapedString()} 方法获取 JID 的未转义字符串。
+ * </p>
+ * <h2>URL Encoded JIDs</h2>
+ * <p>
+ * 如果 JID 应该作为路径名的一部分存储，例如作为文件名，那么 JID 的 URL 编码表示是理想的。
+ * 可以使用 {@link #asUrlEncodedString()} 方法获取此信息。
+ * JidCreate API 提供了从 URL 编码的字符串创建 JIDs 的方法，如 {@link xmpp4cj.xmpp.JidCreate#fromUrlEncoded(String)} 。
+ * </p>
+ *
+ * @see <a href="http://xmpp.org/rfcs/rfc6120.html#arch-addresses">RFC 6120 (XMPP: Core) § 2.1 Global Addresses</a>
+ * @see <a href="http://xmpp.org/rfcs/rfc6122.html#addressing-fundamentals">RFC 6122 (XMPP: Address Format) § 2.1 Fundamentals</a>
  */
 public interface Jid <: Equatable<Jid> & ToString & Hashable {
 
     /**
-     * Get the {@link Domainpart} of this Jid.
+     * 用于获取这个 Jid 的Domainpart（域部分）
      *
-     * @return the domainpart.
+     * @return 这个 Jid 的域部分对象
      */
     func getDomain(): Domainpart
 
     /**
-     * Return the <b>unescaped</b> String representation of this JID.
+     * 此方法用于返回这个 JID 的未转义字符串表示形式。
      * <p>
-     * Since certain Unicode code points are disallowed in the localpart of a JID by the required stringprep profile,
-     * those need to get escaped when used in a real JID. The unescaped representation of the JID is only for
-     * presentation to a human user or for gatewaying to a non-XMPP system.
+     * 由于某些 Unicode 码点在 JID 的本地部分（localpart）中是不被允许的，按照所需的 stringprep 规范，这些码点在实际的 JID 中需要被转义。未转义的 JID 表示形式仅用于向人类用户展示或用于与非 XMPP 系统进行交互。
      * </p>
-     * For example, if the users inputs {@code 'at&t guy@example.com'}, the escaped real JID created with
-     * {@link xmpp.jid.impl.JidCreate} will be {@code 'at\26t\20guy@example.com'}, which is what
-     * {@link Jid#toString()} will return. But {@link Jid#asUnescapedString()} will return again
-     * {@code 'at&t guy@example.com'}.
+     * 例如，如果用户输入 {@code 'at&t guy@example.com'}，使用{@link xmpp4cj.xmpp.JidCreate}创建的转义后的实际 JID 将是{@code 'at\26t\20guy@example.com'}，这是 {@link Jid#toString()} 方法将返回的结果。而 {@link Jid#asUnescapedString()} 方法将再次返回{@code 'at&t guy@example.com'}。
      *
-     * @return the unescaped String representation of this JID.
+     * @return 这个 JID 的未转义字符串表示。
      */
     func asUnescapedString(): String
 
     /**
-     * Get the URL encoded version of this JID.
+     * 用于获取此 JID 的 URL 编码版本。
      *
-     * @return the URL encoded version of this JID.
+     * @return 这个 JID 的 URL 编码形式。
      */
     func asUrlEncodedString(): String
 
     /**
      * Check if this is a {@link EntityBareJid} or {@link EntityFullJid}.
      *
-     * @return true if this is an instance of BareJid or FullJid.
+     * @return true 若当前对象为 BareJid or FullJid.
      */
     func isEntityJid(): Bool
 
     /**
-     * Check if this is an instance of {@link EntityBareJid}.
+     * 检查是否为 {@link EntityBareJid}.
      *
-     * @return true if this is an instance of EntityBareJid
+     * @return true 若当前对象为 EntityBareJid
      */
     func isEntityBareJid(): Bool
 
     /**
-     * Check if this is an instance of {@link EntityFullJid}.
+     * 检查是否为 {@link EntityFullJid}.
      *
-     * @return true if this is an instance of EntityFullJid
+     * @return true 若当前对象为 EntityFullJid
      */
     func isEntityFullJid(): Bool
 
     /**
-     * Check if this is an instance of {@link DomainBareJid}.
+     * 检查是否为 {@link DomainBareJid}.
      *
-     * @return true if this is an instance of DomainBareJid
+     * @return true 若当前对象为 DomainBareJid
      */
     func isDomainBareJid(): Bool
 
     /**
-     * Check if this is an instance of {@link DomainFullJid}.
+     * 检查是否为 {@link DomainFullJid}.
      *
-     * @return true if this is an instance of DomainFullJid
+     * @return true 若当前对象为 DomainFullJid
      */
     func isDomainFullJid(): Bool
 
     /**
-     * Check if this is an instance of {@link EntityBareJid} or {@link DomainBareJid}.
+     * 检查是否为 {@link EntityBareJid} or {@link DomainBareJid}.
      *
-     * @return true if this is an instance of BareJid or DomainBareJid
+     * @return true 若当前对象为 BareJid or DomainBareJid
      */
     func hasNoResource(): Bool
 
     /**
-     * Check if this is a Jid with a {@link Resourcepart}.
+     * 检查是否为 Jid with a {@link Resourcepart}.
      *
-     * @return true if this Jid has a resourcepart.
+     * @return true 若此 Jid 有 resourcepart.
      */
     func hasResource(): Bool
 
     /**
-     * Check if this is a Jid with a {@link Localpart}.
+     * 检查是否为 Jid with a {@link Localpart}.
      *
-     * @return true if this Jid has a localpart.
+     * @return true 若此 Jid 有 localpart.
      */
     func hasLocalpart(): Bool
 
     /**
-     * Return a JID created by removing the Resourcepart from this JID.
+     * 返回一个通过从这个 JID 中移除资源部分创建的 JID。
      *
-     * @return this Jid without a Resourcepart.
+     * @return 没有资源部分的这个 Jid。
      */
     func asBareJid(): BareJid
 
     /**
-     * Convert this Jid to a {@link EntityBareJid} if possible.
+     * 如果可能，将这个 Jid 转换为一个实体裸 JID（EntityBareJid）。
      *
-     * @return the corresponding {@link EntityBareJid} or None.
+     * @return 对应的实体裸 JID 或 None。
      */
     func asEntityBareJidIfPossible(): ?EntityBareJid
 
     /**
-     * Convert this Jid to a {@link EntityBareJid} or throw an {@code IllegalStateException} if this is not possible.
+     * 如果不可能将这个 Jid 转换为实体裸 JID（EntityBareJid），则抛出 IllegalStateException。
      *
-     * @return the corresponding {@link EntityBareJid}.
+     * @return 对应的实体裸 JID。
      */
     func asEntityBareJidOrThrow(): EntityBareJid
 
     /**
-     * Convert this Jid to a {@link EntityFullJid} if possible.
+     * 如果可能，将这个 Jid 转换为一个实体完整 JID（EntityFullJid）。
      *
-     * @return the corresponding {@link EntityFullJid} or None.
+     * @return 对应的实体完整 JID 或 None。
      */
     func asEntityFullJidIfPossible(): ?EntityFullJid
 
     /**
-     * Convert this Jid to a {@link EntityFullJid} or throw an {@code IllegalStateException} if this is not possible.
+     * 如果不可能将这个 Jid 转换为实体完整 JID（EntityFullJid），则抛出 IllegalStateException。
      *
-     * @return the corresponding {@link EntityFullJid}.
+     * @return 对应的实体完整 JID。
      */
     func asEntityFullJidOrThrow(): EntityFullJid
 
     /**
-     * Convert this Jid to a {@link EntityJid} if possible.
+     * 如果可能，将这个 Jid 转换为一个实体 JID（EntityJid）。
      *
-     * @return the corresponding {@link EntityJid} or None.
+     * @return 对应的实体 JID 或 None。
      */
     func asEntityJidIfPossible(): ?EntityJid
 
     /**
-     * Convert this Jid to a {@link EntityJid} or throw an {@code IllegalStateException} if this is not possible.
+     * 如果不可能将这个 Jid 转换为实体 JID（EntityJid），则抛出 IllegalStateException。
      *
-     * @return the corresponding {@link EntityJid}.
+     * @return 对应的实体 JID。
      */
     func asEntityJidOrThrow(): EntityJid
 
     /**
-     * Convert this Jid to a {@link FullJid} if possible.
+     * 如果可能，将这个 Jid 转换为一个完整 JID（FullJid）。
      *
-     * @return the corresponding {@link FullJid} or None.
+     * @return 对应的完整 JID 或 None。
      */
     func asFullJidIfPossible(): ?FullJid
 
     /**
-     * Convert this Jid to a {@link FullJid} or throw an {@code IllegalStateException} if this is not possible.
+     * 如果不可能将这个 Jid 转换为完整 JID（FullJid），则抛出 IllegalStateException。
      *
-     * @return the corresponding {@link FullJid}.
+     * @return 对应的完整 JID。
      */
     func asFullJidOrThrow(): EntityFullJid
 
     /**
-     * Convert this Jid to a {@link DomainBareJid}.
+     * 将这个 Jid 转换为一个域裸 JID（DomainBareJid）。
      * <p>
-     * Note that it is always possible to convert a Jid to a DomainBareJid, since every Jid has a domain part.
+     * 注意，总是可以将一个 Jid 转换为域裸 JID，因为每个 Jid 都有一个域部分。
      * </p>
      *
-     * @return the corresponding DomainBareJid.
+     * @return 对应的域裸 JID。
      */
     func asDomainBareJid(): DomainBareJid
 
     /**
-     * Convert this Jid to a {@link DomainFullJid} if possible.
+     * 如果可能，将这个 Jid 转换为一个域完整 JID（DomainFullJid）。
      *
-     * @return the corresponding DomainFullJid or None.
+     * @return 对应的域完整 JID 或 None。
      */
     func asDomainFullJidIfPossible(): ?DomainFullJid
 
     /**
-     * Convert this Jid to a {@link DomainFullJid} or throw an {@code IllegalStateException} if this is not possible.
+     * 如果不可能将这个 Jid 转换为域完整 JID（DomainFullJid），则抛出 IllegalStateException。
      *
-     * @return the corresponding {@link DomainFullJid}.
+     * @return 对应的域完整 JID。
      */
     func asDomainFullJidOrThrow(): DomainFullJid
 
     /**
-     * Get the resourcepart of this JID or None.
+     * 获取这个 JID 的资源部分或 None。
      * <p>
-     * If the JID is of form {@code <localpart@domain.example/resource>} then this method returns 'resource'. If the JID no
-     * resourcepart, then <code>None</code> is returned.
+     * 如果 JID 是 {@code <localpart@domain.example/resource>} 的形式，那么这个方法返回 'resource'。如果 JID 没有资源部分，那么返回 None。
      * </p>
      *
-     * @return the resource of this JID or None.
+     * @return 这个 JID 的资源部分或 None。
      */
     func getResourceOrNull(): ?Resourcepart
 
     /**
-     * Get the resourcepart of this JID or return the empty resourcepart.
+     * 获取这个 JID 的资源部分或返回空资源部分。
      * <p>
-     * If the JID is of form {@code <localpart@domain.example/resource>} then this method returns 'resource'. If the JID no
-     * resourcepart, then {@link xmpp.jid.parts.Resourcepart#EMPTY} is returned.
+     * 如果 JID 是 {@code <localpart@domain.example/resource>} 的形式，那么这个方法返回 'resource'。如果 JID 没有资源部分，那么返回 {@link xmpp.jid.parts.Resourcepart#EMPTY}。
      * </p>
      *
-     * @return the resource of this JID or the empty resourcepart.
+     * @return 这个 JID 的资源部分或空资源部分。
      */
     func getResourceOrEmpty(): Resourcepart
 
     /**
-     * Get the resourcepart of this JID or throw an {@code IllegalStateException}.
+     * 获取这个 JID 的资源部分或抛出 IllegalStateException。
      * <p>
-     * If the JID is of form {@code <localpart@domain.example/resource>} then this method returns 'resource'. If the JID no
-     * resourcepart, then an {@code IllegalStateException} is thrown.
+     * 如果 JID 是 {@code <localpart@domain.example/resource>} 的形式，那么这个方法返回 'resource'。如果 JID 没有资源部分，那么抛出 IllegalStateException。
      * </p>
      *
-     * @return the resource of this JID.
+     * @return 这个 JID 的资源部分。
      */
     func getResourceOrThrow(): Resourcepart
 
     /**
-     * Get the localpart of this JID or None.
+     * 获取这个 JID 的本地部分或 None。
      * <p>
-     * If the JID is of form {@code <localpart@domain.example>} then this method returns 'localpart'. If the JID has no
-     * localpart, then <code>None</code> is returned.
+     * 如果 JID 是 {@code <localpart@domain.example>} 的形式，那么这个方法返回 'localpart'。如果 JID 没有本地部分，那么返回 None。
      * </p>
      *
-     * @return the localpart of this JID or None.
+     * @return 这个 JID 的本地部分或 None。
      */
     func getLocalpartOrNull(): ?Localpart
 
     /**
-     * Get the localpart of this JID or throw an {@code IllegalStateException}.
+     * 获取这个 JID 的本地部分或抛出 IllegalStateException。
      * <p>
-     * If the JID is of form {@code <localpart@domain.example>} then this method returns 'localpart'. If the JID has no
-     * localpart, then <code>None</code> is returned.
+     * 如果 JID 是 {@code <localpart@domain.example>} 的形式，那么这个方法返回 'localpart'。如果 JID 没有本地部分，那么返回 None。
      * </p>
      *
-     * @return the localpart of this JID.
+     * @return 这个 JID 的本地部分。
      */
     func getLocalpartOrThrow(): Localpart
 
     /**
-     * Check if this JID is the parent of another JID. The <b>parent of</b> relation is defined, under the
-     * precondition that the JID parts (localpart, domainpart and resourcepart) are equal, as follows:
+     * 用于检查当前的 JID 是否是另一个给定 JID 的 “父级”。“父级” 关系的定义如下：在 JID 的各个部分（本地部分、域部分和资源部分）相等的前提下，如果满足特定条件，则认为当前 JID 是另一个 JID 的父级。通过一个表格展示不同情况下的判断结果：
      * <pre>
      * | this JID (parentOf) | other JID           | result |
      * |---------------------+---------------------+--------|
@@ -284,145 +302,174 @@ public interface Jid <: Equatable<Jid> & ToString & Hashable {
      * </pre>
      *
      * @param jid
-     *            the other JID to compare with
-     * @return true if this JID is a parent of the given JID.
+     *            要与之比较的另一个 JID
+     * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
      */
     func isParentOf(jid: Jid): Bool
 
     /**
-     * See {@link #isParentOf(Jid)}.
+     * 参见 {@link #isParentOf(Jid)}。
      *
-     * @param bareJid the bare JID.
-     * @return true if this JID is a parent of the given JID.
+     * @param bareJid 裸 JID。
+     * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
      */
     func isParentOf(bareJid: EntityBareJid): Bool
 
     /**
-     * See {@link #isParentOf(Jid)}.
+     * 参见 {@link #isParentOf(Jid)}。
      *
-     * @param fullJid the full JID.
-     * @return true if this JID is a parent of the given JID.
+     * @param fullJid 完整 JID。
+     * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
      */
     func isParentOf(fullJid: EntityFullJid): Bool
 
     /**
-     * See {@link #isParentOf(Jid)}.
+     * 参见 {@link #isParentOf(Jid)}。
      *
-     * @param domainBareJid the domain bare JID.
-     * @return true if this JID is a parent of the given JID.
+     * @param domainBareJid 域裸 JID。
+     * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
      */
     func isParentOf(domainBareJid: DomainBareJid): Bool
 
     /**
-     * See {@link #isParentOf(Jid)}.
+     * 参见 {@link #isParentOf(Jid)}。
      *
-     * @param domainFullJid the domain full JID.
-     * @return true if this JID is a parent of the given JID.
+     * @param domainFullJid 域完整 JID。
+     * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
      */
     func isParentOf(domainFullJid: DomainFullJid): Bool
 }
 
 /**
- * An XMPP address (JID) which has no {@link xmpp.jid.parts.Resourcepart}. Either
- * {@link EntityBareJid} or {@link DomainBareJid}.
+ * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个没有资源部分（{@link xmpp.jid.parts.Resourcepart}）的 JID。它可以是{@link EntityBareJid}或{@link DomainBareJid}类型。
+ * <p>
  * Examples:
- *  localpart@domain.part
- *  domain.part
+ * </p>
+ * <ul>
+ * <li><code>localpart@domain.part</code></li>
+ * <li><code>domain.part</code></li>
+ * </ul>
  *
  * @see Jid
  */
 public interface BareJid <: Jid {}
 /**
- * An XMPP address (JID) which has no {@link xmpp.jid.parts.Localpart}. Either
- * {@link DomainBareJid} or {@link DomainFullJid}.
+ * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个没有本地部分（{@link xmpp4cj.xmpp.Localpart}）的 JID，可以是{@link DomainBareJid}或{@link DomainFullJid}类型。
+ * <p>
  * Examples:
- *  domain.part
- *  domain.part/resourcepart
+ * </p>
+ * <ul>
+ * <li><code>domain.part</code></li>
+ * <li><code>domain.part/resourcepart</code></li>
+ * </ul>
  *
  * @see Jid
  */
 public interface DomainJid <: Jid {}
 /**
- * An XMPP address (JID) consisting of a domainpart and a resourcepart.
+ * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个由域部分（domainpart）和资源部分（resourcepart）组成的完整 JID。例如 “xmpp.org/resource”。
+ * <p>
  * Examples:
- *  domain.part/resource
- *  example.net/8c6def89
+ * </p>
+ * <ul>
+ * <li><code>domain.part/resource</code></li>
+ * <li><code>example.net/8c6def89</code></li>
+ * </ul>
  *
  * @see Jid
  */
 public interface DomainFullJid <: Jid & FullJid & DomainJid & Equatable<DomainFullJid> {}
 
 /**
- * An XMPP address (JID) which has a {@link Resourcepart}. Either {@link EntityFullJid} or {@link DomainFullJid}.
+ * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个具有资源部分（{@link Resourcepart}）的 JID，可以是{@link EntityFullJid}或{@link DomainFullJid}类型。
+ * <p>
  * Examples:
- *  localpart@domain.part/resourcepart
- *  domain.part/resourcepart
+ * </p>
+ * <ul>
+ * <li><code>localpart@domain.part/resourcepart</code></li>
+ * <li><code>domain.part/resourcepart</code></li>
+ * </ul>
  *
  * @see Jid
  */
 public interface FullJid <: Jid {
 
     /**
-     * Return the {@link Resourcepart} of this JID.
+     * 返回 JID 的资源部分 {@link Resourcepart}
      *
-     * @return the resourcepart.
+     * @return 资源部分
      */
     func getResourcepart(): Resourcepart
 }
 /**
- * An XMPP address (JID) which has a {@link Localpart}. Either {@link EntityBareJid} or {@link EntityFullJid}.
+ * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个具有本地部分（{@link Localpart}）的 JID. 可以是 {@link EntityBareJid} 或 {@link EntityFullJid}.
+ * <p>
  * Examples:
- *  localpart@domain.part
- *  localpart@domain.part/resourcepart
+ * </p>
+ * <ul>
+ * <li><code>localpart@domain.part</code></li>
+ * <li><code>localpart@domain.part/resourcepart</code></li>
+ * </ul>
  *
  * @see Jid
  */
 public interface EntityJid <: Jid {
-
     /**
-     * Return the {@link Localpart} of this JID.
+     * 返回这个 JID 的本地部分（Localpart）。
      *
-     * @return the localpart.
+     * @return 本地部分。
      */
     func getLocalpart(): Localpart
 
     /**
-     * Return the bare JID of this entity JID.
+     * 返回这个实体 JID 的裸 JID（EntityBareJid）。
      *
-     * @return the bare JID.
+     * @return 裸 JID。
      */
     func asEntityBareJid(): EntityBareJid
 
     /**
-     * Return the bare JID string of this full JID.
+     * 返回这个完整 JID 的实体裸 JID 字符串。
      *
-     * @return the bare JID string.
+     * @return 裸 JID 字符串。
      */
     func asEntityBareJidString(): String
 }
 /**
- * An XMPP address (JID) consisting of a localpart, domainpart and resourcepart.
+ * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个由本地部分（localpart）、域部分（domainpart）和资源部分（resourcepart）组成的完整实体 JID。例如 “user@xmpp.org/resource”。
+ * <p>
  * Examples:
- *  localpart@domain.part/resource
- *  juliet@xmpp.org/balcony
+ * </p>
+ * <ul>
+ * <li><code>localpart@domain.part/resource</code></li>
+ * <li><code>juliet@xmpp.org/balcony</code></li>
+ * </ul>
  *
  * @see Jid
  */
 public interface EntityFullJid <: Jid & FullJid & EntityJid & Equatable<EntityFullJid> {}
 /**
- * An XMPP address (JID) consisting of a localpart and a domainpart.
+ * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个由本地部分（localpart）和域部分（domainpart）组成的实体裸 JID。例如 “user@xmpp.org”。
+ * <p>
  * Examples:
- *  localpart@domain.part
- *  user@example.net
+ * </p>
+ * <ul>
+ * <li><code>localpart@domain.part</code></li>
+ * <li><code>user@example.net</code></li>
+ * </ul>
  *
  * @see Jid
  */
 public interface EntityBareJid <: Jid & EntityJid & BareJid & Equatable<EntityBareJid> {}
 /**
- * An XMPP address (JID) consisting of the domainpart.
+ * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个仅由域部分（domainpart）组成的域裸 JID。例如 “xmpp.org”。
+ * <p>
  * Examples:
- *  xmpp.org
- *  example.net
+ * </p>
+ * <ul>
+ * <li><code>xmpp.org</code></li>
+ * <li><code>example.net</code></li>
+ * </ul>
  *
  * @see Jid
  */
@@ -589,12 +636,10 @@ public abstract class AbstractJid <: Jid {
 }
 
 /**
- * RFC6122 2.4 allows JIDs with only a domain and resource part.
+ * 代表一种特定类型的 XMPP 地址（JID），根据 RFC6122 2.4 标准，允许 JID 仅由域部分和资源部分组成。
  * <p>
- * Note that this implementation does not require an cache for the unescaped
- * string, compared to {@link LocalDomainAndResourcepartJid}.
+ * 与LocalDomainAndResourcepartJid相比，这个实现不需要为未转义的字符串设置缓存。
  * </p>
- *
  */
 public class DomainAndResourcepartJid <: AbstractJid & DomainFullJid {
     private let domainBareJid: DomainBareJid

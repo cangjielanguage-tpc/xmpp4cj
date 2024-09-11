@@ -3,15 +3,15 @@
  */
 package xmpp4cj.xmpp
 /**
- * A context with describes the configuration used by XMPP.
+ * 一个描述 XMPP 所使用配置的上下文。
  */
 public class XmppContext {
     private static var defaultContext: ?XmppContext = None
 
     /**
-     * Get the default context.
+     * 获取默认上下文。
      *
-     * @return the default context.
+     * @return 默认上下文。
      */
     public static func getDefaultContext(): XmppContext {
         return defaultContext()
@@ -20,9 +20,9 @@ public class XmppContext {
     private static var defaultXmppStringprep: ?XmppStringprep = None
 
     /**
-     * Set the default XmppStringprep interface.
+     * 设置默认的 XmppStringprep 接口。
      *
-     * @param defaultXmppStringprep the default XmppStringprep interface.
+     * @param defaultXmppStringprep 默认的 XmppStringprep 接口。
      */
     public static func setDefaultXmppStringprep(defaultXmppStringprep: XmppStringprep): Unit {
         XmppContext.defaultXmppStringprep = defaultXmppStringprep
@@ -45,18 +45,18 @@ public class XmppContext {
     }
 
     /**
-     * Returns true if String, Part and Jid caching is enabled.
+     * 如果启用了字符串、部分和 JID 缓存，则返回 true。
      *
-     * @return true if caching is enabled.
+     * @return 如果缓存已启用，则返回 true。
      */
     public func isCachingEnabled(): Bool {
         return cachingEnabled
     }
 
     /**
-     * Construct and retrieve a new builder.
+     * 构造并检索一个新的构建器。
      *
-     * @return a new builder.
+     * @return 一个新的构建器。
      */
     public static func builder(): XmppContextBuilder {
         return XmppContextBuilder()
@@ -69,9 +69,9 @@ public class XmppContextBuilder {
     var xmppStringprep: ?XmppStringprep = None
 
     /**
-     * Enable String, Part and Jid caching.
+     * 启用字符串、部分和 JID 缓存。
      *
-     * @return a reference to this builder.
+     * @return 对这个构建器的引用。
      */
     public func enableCaching(): XmppContextBuilder {
         cachingEnabled = true
@@ -79,10 +79,10 @@ public class XmppContextBuilder {
     }
 
     /**
-     * Set the used XmppStringprep.
+     * 设置要使用的 XmppStringprep。
      *
-     * @param xmppStringprep the XmppStringprep to use.
-     * @return a reference to this builder.
+     * @param xmppStringprep 要使用的 XmppStringprep。
+     * @return 对这个构建器的引用。
      */
     public func withXmppStringprep(xmppStringprep: XmppStringprep): XmppContextBuilder {
         this.xmppStringprep = xmppStringprep
@@ -90,9 +90,9 @@ public class XmppContextBuilder {
     }
 
     /**
-     * Build a XmppContext.
+     * 构建一个 XmppContext。
      *
-     * @return a newly build XmppContext.
+     * @return 一个新构建的 XmppContext。
      */
     public func build(): XmppContext {
         return XmppContext(this)
@@ -105,9 +105,9 @@ public enum XmppAddressParttype {
     | resourcepart
 
     /**
-     * Get the capitalized name of this XMPP address part.
+     * 获取此 XMPP 地址部分的大写名称。
      *
-     * @return the capitalized name of this part.
+     * @return 此部分的大写名称。
      */
     public func getCapitalizedName(): String {
         return match (this) {

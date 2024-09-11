@@ -4,11 +4,9 @@
 package xmpp4cj.xmpp
 
 /**
- * A XML splitter capable of splitting XML into top-level elements.
+ * 一个能够将 XML 拆分为顶级元素的 XML 拆分器。
  * <p>
- * Note that this class does not yet support the feature set of XML. Only the
- * required features for XMPP are supported. XML comments and processing
- * instructions are not supported.
+ * 请注意，这个类尚未支持完整的 XML 特性集。仅支持 XMPP 所需的特性。不支持 XML 注释和处理指令。
  * </p>
  * StringWriter & Resource
  */
@@ -344,8 +342,7 @@ enum XmlSplitter_AttributeValueQuotes {
 }
 
 /**
- * A XML splitter for XMPP. Unlike {@link XmlSplitter}, this splitter is aware
- * of the special semantics of XMPP's {@code <stream:stream>} element.
+ * 一个用于 XMPP 的 XML 拆分器。与 {@link XmlSplitter} 不同，这个拆分器知道 XMPP 的 {@code <stream:stream>} 元素的特殊语义。
  */
 public class XmppXmlSplitter <: XmlSplitter {
     private let xmppElementCallback: ?XmppElementCallback
@@ -430,12 +427,9 @@ public class XmppXmlSplitter <: XmlSplitter {
 }
 
 /**
- * Extended version of {@link XmppXmlSplitter} allowing input to be bytes or
- * {@link ByteArrayStream} representing a UTF-8 encoded XML string for XMPP. Just as
- * they come from a network socket.
+ * {@link XmppXmlSplitter}的扩展版本，允许输入为字节或表示 UTF-8 编码的 XMPP XML 字符串的{@link ByteArrayStream}，就像它们来自网络套接字一样。
  * <p>
- * This class respects the byte order mark (BOM )requirement of RFC 6120 11.6
- * and treats the BOM as zero width no-break space, and not as byte order mark.
+ * 这个类遵循 RFC 6120 11.6 的字节顺序标记（BOM）要求，并将 BOM 视为零宽度不间断空格，而不是字节顺序标记。
  * </p>
  */
 public class Utf8ByteXmppXmlSplitter <: OutputStream {
@@ -453,10 +447,10 @@ public class Utf8ByteXmppXmlSplitter <: OutputStream {
     private let reader: StringReader<ByteArrayStream> = StringReader<ByteArrayStream>(buffer)
 
     /**
-     * Write a single byte. The byte must be part of a UTF-8 String.
+     * 写入一个字节。该字节必须是 UTF-8 字符串的一部分。
      *
-     * @param b the byte to write.
-     * @throws IOException if an error occurs.
+     * @param b 要写入的字节。
+     * @throws IOException 如果发生错误。
      */
     public override func write(bytes: Array<Byte>): Unit {
         buffer.write(bytes)
@@ -464,10 +458,10 @@ public class Utf8ByteXmppXmlSplitter <: OutputStream {
     }
 
     /**
-     * Write the given collection of byte buffers.
+     * 写入给定的字节缓冲区集合。
      *
-     * @param byteBuffers the collection of byte buffers.
-     * @throws IOException if an error occurs.
+     * @param byteBuffers 字节缓冲区集合。
+     * @throws IOException 如果发生错误。
      */
     public func write(byteBuffers: Array<ByteArrayStream>): Unit {
         for (byteBuffer in byteBuffers) {

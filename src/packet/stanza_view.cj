@@ -5,36 +5,30 @@ package xmpp4cj.packet
 
 public interface StanzaView <: XmlLangElement {
     /**
-     * Returns the unique ID of the stanza. The returned value could be <code>None</code>.
+     * 返回节的唯一 ID。返回值可能为<code>None</code>。
      *
-     * @return the packet's unique ID or <code>None</code> if the id is not available.
+     * @return 数据包的唯一 ID，如果不可用则为<code>None</code>。
      */
     func getStanzaId(): ?String
 
     /**
-     * Returns who the stanza is being sent "to", or <code>None</code> if
-     * the value is not set. The XMPP protocol often makes the "to"
-     * attribute optional, so it does not always need to be set.<p>
+     * 返回节要发送给谁，或者如果未设置该值则为<code>None</code>。XMPP 协议通常使“to”属性是可选的，所以它并不总是需要被设置。<p>
      *
-     * @return who the stanza is being sent to, or <code>None</code> if the
-     *      value has not been set.
+     * @return 节要发送给谁，如果未设置该值则为<code>None</code>。
      */
     func getTo(): ?Jid
 
     /**
-     * Returns who the stanza is being sent "from" or <code>None</code> if
-     * the value is not set. The XMPP protocol often makes the "from"
-     * attribute optional, so it does not always need to be set.<p>
+     * 返回节从谁那里发送，或者如果未设置该值则为<code>None</code>。XMPP 协议通常使“from”属性是可选的，所以它并不总是需要被设置。<p>
      *
-     * @return who the stanza is being sent from, or <code>None</code> if the
-     *      value has not been set.
+     * @return 节从谁那里发送，如果未设置该值则为<code>None</code>。
      */
     func getFrom(): ?Jid
 
     /**
-     * Returns the error associated with this packet, or <code>None</code> if there are no errors.
+     * 返回与此数据包相关联的错误，或者如果没有错误则为<code>None</code>。
      *
-     * @return the error sub-packet or <code>None</code> if there isn't an error.
+     * @return 错误子包，如果没有错误则为<code>None</code>。
      */
     func getError(): ?StanzaError
 
@@ -49,10 +43,10 @@ public interface StanzaView <: XmlLangElement {
     }
 
     /**
-     * Check if a extension element with the given namespace exists.
+     * 检查具有给定命名空间的扩展元素是否存在。
      *
-     * @param namespace the namespace of the extension element to check for.
-     * @return true if a stanza extension exists, false otherwise.
+     * @param namespace 要检查的扩展元素的命名空间。
+     * @return 如果存在节扩展则为 true，否则为 false。
      */
     func hasExtension(namespace: String): Bool {
         for (packetExtension in getExtensions()) {
@@ -77,17 +71,17 @@ public interface StanzaView <: XmlLangElement {
     }
 
     /**
-     * Returns a list of all extension elements of this stanza.
+     * 返回此节的所有扩展元素列表。
      */
     func getExtensions(): ArrayList<ExtensionElement>
 
     func getExtensions(qname: QName): ArrayList<ExtensionElement>
 
     /**
-     * Return all extension elements of the given type. Returns the empty list if there a none.
+     * 返回给定类型的所有扩展元素。如果没有则返回空列表。
      *
-     * @param extensionElementClass the class of the type of extension elements.
-     * @return a list of extension elements of that type, which may be empty.
+     * @param extensionElementClass 扩展元素类型的类。
+     * @return 该类型的扩展元素列表，可能为空。
      */
     func getExtensionsByType(extensionElementClass: ClassId): ArrayList<ExtensionElement>
 

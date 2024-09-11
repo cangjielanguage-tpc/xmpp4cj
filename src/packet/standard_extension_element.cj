@@ -4,12 +4,12 @@
 package xmpp4cj.packet
 
 /**
- * An {@link ExtensionElement} modeling the often required and used XML features when using XMPP.
- * It is therefore suitable for most use cases.
- * Use {@link StandardExtensionElement#builder(String, String)} to build these elements.
+ * 一个 {@link ExtensionElement}，对使用 XMPP 时经常需要和使用的 XML 特性进行建模。
+ * 因此，它适用于大多数用例。
+ * 使用 {@link StandardExtensionElement#builder(String, String)} 来构建这些元素。
  * <p>
- * Note the this is only meant as catch-all if no particular extension element provider is registered.
- * Protocol implementations should prefer to model their own extension elements tailored to their use cases.
+ * 请注意，这仅在没有注册特定的扩展元素提供程序时作为万能方案。
+ * 协议实现应该更倾向于为其用例定制自己的扩展元素模型。
  * </p>
  */
 public open class StandardExtensionElement <: ExtensionElement {
@@ -26,13 +26,13 @@ public open class StandardExtensionElement <: ExtensionElement {
     private var xmlCache: ?XmlStringBuilder = None
 
     /**
-     * Constructs a new extension element with the given name and namespace and nothing else.
+     * 用给定的名称和命名空间构建一个新的扩展元素，不包含其他内容。
      * <p>
-     * This is meant to construct extension elements used as simple flags in Stanzas.
+     * 这是为了构建在节中用作简单标志的扩展元素。
      * <p>
      *
-     * @param name the name of the extension element.
-     * @param namespace the namespace of the extension element.
+     * @param name 扩展元素的名称。
+     * @param namespace 扩展元素的命名空间。
      */
     public init(name: String, namespace: String) {
         this(name, namespace, None, None, None)

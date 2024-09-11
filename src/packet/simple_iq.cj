@@ -4,10 +4,9 @@
 package xmpp4cj.packet
 
 /**
- * A simple IQ.
+ * 一个简单的 IQ。
  * <p>
- * Simple IQs child elements do not contain further attributes besides 'xmlns'.
- * They may contain additional packet extensions.
+ * 简单 IQ 的子元素除了“xmlns”之外不包含其他属性。它们可能包含额外的数据包扩展。
  * </p>
  */
 public abstract class SimpleIQ <: IQ {

@@ -4,13 +4,9 @@
 package xmpp4cj.packet
 
 /**
- * A Nonza, i.e everything that is <b>not a stanza</b> as defined
- * RFC 6120 8. Stanzas are {@link Message}, {@link Presence} and {@link IQ}.
- * Everything else should sublcass this class instead of {@link Stanza}.
+ * 一个 Nonza，即如 RFC 6120 8 所定义的<b>不是节</b>的所有内容。节是 {@link Message}、{@link Presence} 和 {@link IQ}。其他所有内容都应该继承这个类而不是 {@link Stanza}。
  * <p>
- * It is important to cleanly distinguish between stanzas and non-stanzas. For
- * example plain stream elements don't count into the stanza count of XEP-198
- * Stream Management.
+ * 清楚地区分节和非节非常重要。例如，普通的流元素不计入 XEP-198 流管理的节计数中。
  * </p>
  *
  * @see <a href="xmpp/org/extensions/xep-0360.html">XEP-0360: Nonzas (are not Stanzas)</a>

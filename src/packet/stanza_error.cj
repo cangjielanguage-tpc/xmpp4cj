@@ -4,11 +4,9 @@
 package xmpp4cj.packet
 
 /**
- * Represents an XMPP error sub-packet.
- * Typically, a server responds to a request that has problems by sending the stanza back and including an error packet.
- * Each error has a typ, error condition as well as as an optional text explanation.
- * Typical errors are:
- *
+ * 表示 XMPP 错误子包。
+ * 通常，服务器通过将节回传并包含一个错误包来响应有问题的请求。每个错误都有一个类型、错误条件以及一个可选的文本解释。典型的错误有：
+
  * <table border=1>
  *      <caption>XMPP Errors</caption>
  *      <tr>  <th>XMPP Error StanzaErrorCondition</th> <th>StanzaErrorType</th> <th>RFC 6120 Section</th>  </tr>
@@ -16,7 +14,7 @@ package xmpp4cj.packet
  *      <tr> <td>conflict</td>                         <td>CANCEL</td>          <td>8.3.3.2</td>           </tr>
  *      <tr> <td>feature-not-implemented</td>          <td>CANCEL</td>          <td>8.3.3.3</td>           </tr>
  *      <tr> <td>forbidden</td>                        <td>AUTH</td>            <td>8.3.3.4</td>           </tr>
- *      <tr> <td>gone</td>                             td>CANCEL</td>           <td>8.3.3.5</td>           </tr>
+ *      <tr> <td>gone</td>                             <td>CANCEL</td>          <td>8.3.3.5</td>           </tr>
  *      <tr> <td>internal-server-error</td>            <td>WAIT</td>            <td>8.3.3.6</td>           </tr>
  *      <tr> <td>item-not-found</td>                   <td>CANCEL</td>          <td>8.3.3.7</td>           </tr>
  *      <tr> <td>jid-malformed</td>                    <td>MODIFY</td>          <td>8.3.3.8</td>           </tr>
@@ -78,17 +76,15 @@ public class StanzaError <: AbstractError & ExtensionElement & ToString {
     private let typ: StanzaErrorType
 
     /**
-     * Creates a new error with the specified typ, condition and message.
-     * This constructor is used when the condition is not recognized automatically by XMPPError
-     * i.e. there is not a defined instance of ErrorCondition or it does not apply the default
-     * specification.
+     * 用指定的类型、条件和消息创建一个新的错误。
+     * 当 XMPPError 不能自动识别条件时，即没有定义的错误条件实例或它不适用默认规范时，使用这个构造函数。
      *
-     * @param typ the error typ.
-     * @param condition the error condition.
+     * @param typ 错误类型。
+     * @param condition 错误条件。
      * @param conditionText
      * @param errorGenerator
      * @param descriptiveTexts
-     * @param extensions list of stanza extensions
+     * @param extensions 节扩展列表。
      */
     public init(
         condition: StanzaErrorCondition,
@@ -133,18 +129,18 @@ public class StanzaError <: AbstractError & ExtensionElement & ToString {
     }
 
     /**
-     * Returns the error condition.
+     * 返回错误条件。
      *
-     * @return the error condition.
+     * @return 错误条件。
      */
     public func getCondition(): StanzaErrorCondition {
         return condition
     }
 
     /**
-     * Returns the error typ.
+     * 返回错误类型。
      *
-     * @return the error typ.
+     * @return 错误类型。
      */
     public func getType(): StanzaErrorType {
         return typ
@@ -277,14 +273,14 @@ public class StanzaErrorBuilder <: AbstractErrorBuilder<StanzaErrorBuilder> {
 }
 
 /**
- * A class to represent the type of the Error. The types are:
- *
+ * 一个表示错误类型的类。类型有：
+
  * <ul>
- *      <li>XMPPErrorType.WAIT - retry after waiting (the error is temporary)
- *      <li>XMPPErrorType.CANCEL - do not retry (the error is unrecoverable)
- *      <li>XMPPErrorType.MODIFY - retry after changing the data sent
- *      <li>XMPPErrorType.AUTH - retry after providing credentials
- *      <li>XMPPErrorType.CONTINUE - proceed (the condition was only a warning)
+ *      <li>XMPPErrorType.WAIT - 等待后重试（错误是暂时的）
+ *      <li>XMPPErrorType.CANCEL - 不要重试（错误不可恢复）
+ *      <li>XMPPErrorType.MODIFY - 在更改发送的数据后重试
+ *      <li>XMPPErrorType.AUTH - 在提供凭证后重试
+ *      <li>XMPPErrorType.CONTINUE - 继续（条件只是一个警告）
  * </ul>
  */
 public enum StanzaErrorType <: ToString {

@@ -59,11 +59,11 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
     }
 
     /**
-     * Add a new element to this builder.
+     * 向此构建器添加一个新元素。
      *
      * @param name
      * @param content
-     * @return the XmlStringBuilder
+     * @return XmlStringBuilder
      */
     public func element(name: String, content: String): XmlStringBuilder {
         if (content.size == 0) {
@@ -76,23 +76,22 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
     }
 
     /**
-     * Add a new element to this builder, with the {@link DateTime} instance as its content,
-     * which will get formatted with {@link XmppDateTime#formatXEP0082Date(Date)}.
+     * 向此构建器添加一个新元素，将 {@link DateTime} 实例作为其内容，该内容将使用 {@link XmppDateTime#formatXEP0082Date(Date)} 进行格式化。
      *
-     * @param name element name
-     * @param content content of element
-     * @return this XmlStringBuilder
+     * @param name 元素名称
+     * @param content 元素内容
+     * @return 此 XmlStringBuilder
      */
     public func element(name: String, content: DateTime): XmlStringBuilder {
         return element(name, XmppDateTime.formatXEP0082Date(content))
     }
 
     /**
-     * Add a new element to this builder.
+     * 向此构建器添加一个新元素。
      *
      * @param name
      * @param content
-     * @return the XmlStringBuilder
+     * @return XmlStringBuilder
      */
     public func element(name: String, content: ToString): XmlStringBuilder {
         element(name, content.toString())
@@ -107,13 +106,11 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
     }
 
     /**
-     * Add a new element to this builder, with the {@link DateTime} instance as its content,
-     * which will get formatted with {@link XmppDateTime#formatXEP0082Date(Date)}
-     * if {@link DateTime} instance is not <code>None</code>.
+     * 向此构建器添加一个新元素，将 {@link DateTime} 实例作为其内容，如果 {@link DateTime} 实例不是<code>None</code>，则使用 {@link XmppDateTime#formatXEP0082Date(Date)} 进行格式化。
      *
-     * @param name element name
-     * @param content content of element
-     * @return this XmlStringBuilder
+     * @param name 元素名称
+     * @param content 元素内容
+     * @return 此 XmlStringBuilder
      */
     public func optElement(name: String, content: ?DateTime): XmlStringBuilder {
         if (let Some(content) <- content) {
@@ -174,9 +171,9 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
     }
 
     /**
-     * Add a right angle bracket '&gt;'.
+     * 添加一个右尖括号“>”。
      *
-     * @return a reference to this object.
+     * @return 对此对象的引用。
      */
     public func rightAngleBracket(): XmlStringBuilder {
         sb.append(RIGHT_ANGLE_BRACKET)
@@ -184,11 +181,11 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
     }
 
     /**
-     * Does nothing if value is None.
+     * 如果值是<code>None</code>，则什么也不做。
      *
      * @param name
      * @param value
-     * @return the XmlStringBuilder
+     * @return XmlStringBuilder
      */
     public func attribute(name: String, value: String): XmlStringBuilder {
         sb.append(' ').append(name).append("=\'")
@@ -202,12 +199,11 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
     }
 
     /**
-     * Add a new attribute to this builder, with the {@link DateTime} instance as its value,
-     * which will get formatted with {@link XmppDateTime#formatXEP0082Date(Date)}.
+     * 向此构建器添加一个新属性，将 {@link DateTime} 实例作为其值，该值将使用 {@link XmppDateTime#formatXEP0082Date(Date)} 进行格式化。
      *
-     * @param name name of attribute
-     * @param value value of attribute
-     * @return this XmlStringBuilder
+     * @param name 属性名称
+     * @param value 属性值
+     * @return 此 XmlStringBuilder
      */
     public func attribute(name: String, value: DateTime): XmlStringBuilder {
         return attribute(name, XmppDateTime.formatXEP0082Date(value))
@@ -236,13 +232,11 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
     }
 
     /**
-     * Add a new attribute to this builder, with the {@link DateTime} instance as its value,
-     * which will get formatted with {@link XmppDateTime#formatXEP0082Date(Date)}
-     * if {@link DateTime} instance is not <code>None</code>.
+     * 向此构建器添加一个新属性，将 {@link DateTime} 实例作为其值，如果 {@link DateTime} 实例不是<code>None</code>，则使用 {@link XmppDateTime#formatXEP0082Date(Date)} 进行格式化。
      *
-     * @param name attribute name
-     * @param value value of this attribute
-     * @return this XmlStringBuilder
+     * @param name 属性名称
+     * @param value 属性值
+     * @return 此 XmlStringBuilder
      */
     public func optAttribute(name: String, value: ?DateTime): XmlStringBuilder {
         if (let Some(value) <- value) {
@@ -259,24 +253,22 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
     // }
 
     /**
-     * Same as {@link #optAttribute(String, CharSequence)}, but with a different method name.
-     * This method can be used if the provided attribute value argument type causes ambiguity in method overloading.
-     * For example if the type is a subclass of Number and CharSequence.
+     * 与 {@link #optAttribute(String, CharSequence)} 相同，但方法名称不同。如果提供的属性值参数类型在方法重载中引起歧义，可以使用此方法。例如，如果类型是 Number 和 CharSequence 的子类。
      *
-     * @param name the name of the attribute.
-     * @param value the value of the attribute.
-     * @return a reference to this object.
+     * @param name 属性名称。
+     * @param value 属性值。
+     * @return 对此对象的引用。
      */
     public func optAttributeCs(name: String, value: ?ToString): XmlStringBuilder {
         return optAttribute(name, value?.toString())
     }
 
     /**
-     * Add the given attribute if {@code value => 0}.
+     * 如果值<code>=> 0</code>，则添加给定属性。
      *
      * @param name
      * @param value
-     * @return a reference to this object
+     * @return 对此对象的引用。
      */
     public func optIntAttribute(name: String, value: Int): XmlStringBuilder {
         if (value >= 0) {
@@ -286,12 +278,11 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
     }
 
     /**
-     * If the provided Integer argument is not None,
-     * then add a new XML attribute with the given name and the Integer as value.
+     * 如果提供的整数参数不是<code>None</code>，则使用给定名称和整数作为值添加一个新的 XML 属性。
      *
-     * @param name the XML attribute name.
-     * @param value the optional integer to use as the attribute's value.
-     * @return a reference to this object.
+     * @param name XML 属性名称。
+     * @param value 用作属性值的可选整数。
+     * @return 对此对象的引用。
      */
     public func optIntAttribute(name: String, value: ?Int): XmlStringBuilder {
         if (let Some(value) <- value) {

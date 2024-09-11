@@ -197,10 +197,10 @@ public class XmlPrettyPrinterBuilder {
     var prettyWriter: ?PrettyPrintedXmlChunkSink = None
 
     /**
-     * Set the indent for elements in whitespace characters.
+     * 设置元素的缩进，以空白字符表示。
      *
-     * @param indent the indent for elements in whitespace characters.
-     * @return a reference to this builders.
+     * @param indent 元素的缩进，以空白字符表示。
+     * @return 对这个构建器的引用。
      */
     public func setIndent(indent: Int64): XmlPrettyPrinterBuilder {
         ensureNotNegative(indent)
@@ -209,10 +209,10 @@ public class XmlPrettyPrinterBuilder {
     }
 
     /**
-     * Set the attribute indent in whitespace characters. Use a value smaller one to disable attribute indentation.
+     * 设置属性的缩进，以空白字符表示。使用较小的值可禁用属性缩进。
      *
-     * @param attributeIndent the attribute indent in whitespace characters.
-     * @return a reference to this builder.
+     * @param attributeIndent 属性的缩进，以空白字符表示。
+     * @return 对这个构建器的引用。
      */
     public func setAttributeIndent(attributeIndent: Int64): XmlPrettyPrinterBuilder {
         ensureNotNegative(attributeIndent)
@@ -221,10 +221,10 @@ public class XmlPrettyPrinterBuilder {
     }
 
     /**
-     * Set the tab width in whitespace characters. Use a value smaller one to disable pretty printing with tabs.
+     * 设置制表符宽度，以空白字符表示。使用较小的值可禁用使用制表符进行的漂亮打印。
      *
-     * @param tabWidth the tab width in whitespace characters.
-     * @return a reference to this builder.
+     * @param tabWidth 制表符宽度，以空白字符表示。
+     * @return 对这个构建器的引用。
      */
     public func setTabWidth(tabWidth: Int64): XmlPrettyPrinterBuilder {
         ensureNotNegative(tabWidth)
@@ -233,10 +233,10 @@ public class XmlPrettyPrinterBuilder {
     }
 
     /**
-     * Set a chunk callback.
+     * 设置块回调。
      *
-     * @param chunkCallback the chunk callback.
-     * @return a reference to this builder.
+     * @param chunkCallback 块回调。
+     * @return 对这个构建器的引用。
      */
     public func setChunkCallback(chunkCallback: PrettyPrintedXmlChunkWithCurrentPartCallback): XmlPrettyPrinterBuilder {
         this.newChunkCallback = chunkCallback
@@ -244,10 +244,10 @@ public class XmlPrettyPrinterBuilder {
     }
 
     /**
-     * Set a part callback.
+     * 设置部分回调。
      *
-     * @param partCallback the part callback.
-     * @return a reference to this builder.
+     * @param partCallback 部分回调。
+     * @return 对这个构建器的引用。
      */
     public func setPartCallback(partCallback: PrettyPrintedXmlPartCallback): XmlPrettyPrinterBuilder {
         this.newPartCallback = partCallback
@@ -255,10 +255,10 @@ public class XmlPrettyPrinterBuilder {
     }
 
     /**
-     * Set a {@link PrettyPrintedXmlChunkSink} for the pretty printed XML stream.
+     * 为漂亮打印的 XML 流设置一个 {@link PrettyPrintedXmlChunkSink}。
      *
-     * @param prettyWriter the writer to pretty print to.
-     * @return a reference to this builder.
+     * @param prettyWriter 用于漂亮打印的写入器。
+     * @return 对这个构建器的引用。
      */
     public func setPrettyWriter(prettyWriter: PrettyPrintedXmlChunkSink): XmlPrettyPrinterBuilder {
         this.prettyWriter = prettyWriter
@@ -266,9 +266,9 @@ public class XmlPrettyPrinterBuilder {
     }
 
     /**
-     * Build an XML pretty printer.
+     * 构建一个 XmlPrettyPrinter。
      *
-     * @return the newly build XML pretty printer.
+     * @return 新构建的 XmlPrettyPrinter。
      */
     public func build(): XmlPrettyPrinter {
         return XmlPrettyPrinter(this)

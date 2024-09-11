@@ -5,34 +5,28 @@ package xmpp4cj.packet
 
 public interface MessageView <: StanzaView {
     /**
-     * Returns the type of the message.
-     * If no type has been set this method will return {@link MessageType#normal}.
+     * 返回消息的类型。如果没有设置类型，此方法将返回 {@link MessageType#normal}。
      *
-     * @return the type of the message.
+     * @return 消息的类型。
      */
     func getType(): ?MessageType
 
     /**
-     * Returns the default subject of the message, or None if the subject has not been set.
-     * The subject is a short description of message contents.
+     * 返回消息的默认主题，如果主题未设置则返回 None。主题是消息内容的简短描述。
      * <p>
-     * The default subject of a message is the subject that corresponds to the message's language.
-     * (see {@link #getLanguage()}) or if no language is set to the applications default
-     * language (see {@link Stanza#getDefaultLanguage()}).
+     * 消息的默认主题是与消息的语言相对应的主题（见 {@link #getLanguage()}），或者如果没有设置语言，则为应用程序的默认语言（见 {@link Stanza#getDefaultLanguage()}）。
      *
-     * @return the subject of the message.
+     * @return 消息的主题。
      */
     func getSubject(): ?String {
         return getSubject(None)
     }
 
     /**
-     * Returns the subject corresponding to the language.
-     * If the language is None, the method result will be the same as {@link #getSubject()}.
-     * Null will be returned if the language does not have a corresponding subject.
+     * 返回与给定语言相对应的主题。如果语言为 None，方法结果将与 {@link #getSubject()} 相同。如果语言没有相应的主题，则返回 null。
      *
-     * @param language the language of the subject to return.
-     * @return the subject related to the passed in language.
+     * @param language 要返回的主题的语言。
+     * @return 与传入语言相关的主题。
      */
     func getSubject(language: ?String): ?String {
         let subject = getMessageSubject(language)
@@ -50,10 +44,9 @@ public interface MessageView <: StanzaView {
     }
 
     /**
-     * Returns a set of all subjects in this Message,
-     * including the default message subject accessible from {@link #getSubject()}.
+     * 返回此消息中的所有主题集合，包括可从 {@link #getSubject()} 访问的默认消息主题。
      *
-     * @return a collection of all subjects in this message.
+     * @return 此消息中的所有主题集合。
      */
     func getSubjects(): Set<MessageSubject> {
         let subjectList = StanzaView.castExt<MessageSubject>(getExtensionsByType(MessageSubject.getClassId()))
@@ -63,9 +56,9 @@ public interface MessageView <: StanzaView {
     }
 
     /**
-     * Returns all the languages being used for the subjects, not including the default subject.
+     * 返回所有用于主题的语言，不包括默认主题。
      *
-     * @return the languages being used for the subjects.
+     * @return 用于主题的语言集合。
      */
     func getSubjectLanguages(): Collection<String> {
         let defaultSubject = getMessageSubject(None)
@@ -79,26 +72,21 @@ public interface MessageView <: StanzaView {
     }
 
     /**
-     * Returns the default body of the message, or None if the body has not been set. The body
-     * is the main message contents.
+     * 返回消息的默认正文，如果正文未设置则返回 None。正文是消息的主要内容。
      * <p>
-     * The default body of a message is the body that corresponds to the message's language.
-     * (see {@link #getLanguage()}) or if no language is set to the applications default
-     * language (see {@link Stanza#getDefaultLanguage()}).
+     * 消息的默认正文是与消息的语言相对应的正文（见 {@link #getLanguage()}），或者如果没有设置语言，则为应用程序的默认语言（见 {@link Stanza#getDefaultLanguage()}）。
      *
-     * @return the body of the message.
+     * @return 消息的正文。
      */
     func getBody(): ?String {
         return getBody(getLanguage())
     }
 
     /**
-     * Returns the body corresponding to the language.
-     * If the language is None, the method result will be the same as {@link #getBody()}.
-     * Null will be returned if the language does not have a corresponding body.
+     * 返回与给定语言相对应的正文。如果语言为 None，方法结果将与 {@link #getBody()} 相同。如果语言没有相应的正文，则返回 null。
      *
-     * @param language the language of the body to return.
-     * @return the body related to the passed in language.
+     * @param language 要返回的正文的语言。
+     * @return 与传入语言相关的正文。
      */
     func getBody(language: ?String): ?String {
         let body = getMessageBody(language)
@@ -117,10 +105,9 @@ public interface MessageView <: StanzaView {
     }
 
     /**
-     * Returns a set of all bodies in this Message,
-     * including the default message body accessible from {@link #getBody()}.
+     * 返回此消息中的所有正文集合，包括可从 {@link #getBody()} 访问的默认消息正文。
      *
-     * @return a collection of all bodies in this Message.
+     * @return 此消息中的所有正文集合。
      */
     func getBodies(): Set<MessageBody> {
         let bodiesList = getExtensions(MessageBody.QNAME)
@@ -133,9 +120,9 @@ public interface MessageView <: StanzaView {
     }
 
     /**
-     * Returns all the languages being used for the bodies, not including the default body.
+     * 返回所有用于正文的语言，不包括默认正文。
      *
-     * @return the languages being used for the bodies.
+     * @return 用于正文的语言集合。
      */
     func getBodyLanguages(): ArrayList<?String> {
         let defaultBody = getMessageBody(None)
@@ -149,10 +136,9 @@ public interface MessageView <: StanzaView {
     }
 
     /**
-     * Returns the thread id of the message, which is a unique identifier for a sequence
-     * of "chat" messages. If no thread id is set, <code>None</code> will be returned.
+     * 返回消息的线程 ID，如果没有设置线程 ID，则返回 None。线程 ID 是一系列“聊天”消息的唯一标识符。
      *
-     * @return the thread id of the message, or <code>None</code> if it doesn't exist.
+     * @return 消息的线程 ID，或者如果不存在则返回 None。
      */
     func getThread(): ?String {
         let thread = StanzaView.castExt<MessageThread>(getExtensionByType(MessageThread.getClassId()))

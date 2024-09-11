@@ -5,16 +5,16 @@ package xmpp4cj.packet
 
 public interface IqView <: StanzaView & ToString {
     /**
-     * Returns the type of the IQ packet.
+     * 返回 IQ 包的类型。
      *
-     * @return the type of the IQ packet.
+     * @return IQ 包的类型。
      */
     func getType(): IQType
 
     /**
-     * Return true if this IQ is a request IQ, i.e. an IQ of type {@link Type#get} or {@link Type#set}.
+     * 如果这是一个请求 IQ（即 IQ 类型为 {@link Type#get} 或 {@link Type#set}），则返回 true。
      *
-     * @return true if IQ type is 'get' or 'set', false otherwise.
+     * @return 如果 IQ 类型是“get”或“set”，则为 true，否则为 false。
      */
     func isRequestIQ(): Bool {
         let typ = getType()
@@ -22,9 +22,9 @@ public interface IqView <: StanzaView & ToString {
     }
 
     /**
-     * Return true if this IQ is a response IQ, i.e. an IQ of type {@link Type#result} or {@link Type#error}.
+     * 如果这是一个响应 IQ（即 IQ 类型为 {@link Type#result} 或 {@link Type#error}），则返回 true。
      *
-     * @return true if IQ type is 'result' or 'error', false otherwise.
+     * @return 如果 IQ 类型是“result”或“error”，则为 true，否则为 false。
      */
     func isResponseIQ(): Bool {
         return !isRequestIQ()
@@ -32,18 +32,13 @@ public interface IqView <: StanzaView & ToString {
 }
 
 /**
- * The base IQ (Info/Query) packet. IQ packets are used to get and set information
- * on the server, including authentication, roster operations, and creating
- * accounts. Each IQ stanza has a specific type that indicates what type of action
- * is being taken: "get", "set", "result", or "error".<p>
+ * 基础 IQ（信息/查询）包。IQ 包用于在服务器上获取和设置信息，包括认证、通讯录操作和创建账户。每个 IQ 节都有一个特定的类型，指示正在采取的操作类型：“get”、“set”、“result”或“error”。<p>
  *
- * IQ packets can contain a single child element that exists in a specific XML
- * namespace. The combination of the element name and namespace determines what
- * type of IQ stanza it is. Some example IQ subpacket snippets:<ul>
+ * IQ 包可以包含一个存在于特定 XML 命名空间中的子元素。元素名称和命名空间的组合决定了它是哪种类型的 IQ 节。一些 IQ 子包片段的示例：<ul>
  *
- *  <li>&lt;query xmlns="jabber:iq:auth"&gt; -- an authentication IQ.
- *  <li>&lt;query xmlns="jabber:iq:private"&gt; -- a private storage IQ.
- *  <li>&lt;pubsub xmlns="${JABBER_PROTOCAL_NAMESPACE_PREFIX}/pubsub"&gt; -- a pubsub IQ.
+ *  <li>&lt;query xmlns="jabber:iq:auth"&gt; -- 一个认证 IQ。
+ *  <li>&lt;query xmlns="jabber:iq:private"&gt; -- 一个私有存储 IQ。
+ *  <li>&lt;pubsub xmlns="${JABBER_PROTOCAL_NAMESPACE_PREFIX}/pubsub"&gt; -- 一个发布订阅 IQ。
  * </ul>
  */
 public abstract class IQ <: Stanza & IqView {
@@ -98,13 +93,12 @@ public abstract class IQ <: Stanza & IqView {
     }
 
     /**
-     * Sets the type of the IQ packet.
+     * 设置 IQ 包的类型。
      * <p>
-     * Since the type of an IQ must present, an IllegalArgmentException will be thrown when type is
-     * <code>None</code>.
+     * 由于 IQ 的类型必须存在，当类型为 <code>None</code> 时，将抛出 IllegalArgumentException。
      * </p>
      *
-     * @param type the type of the IQ packet.
+     * @param type IQ 包的类型。
      */
     public func setType(typ: IQType): Unit {
         this.typ = typ
@@ -152,10 +146,9 @@ public abstract class IQ <: Stanza & IqView {
     }
 
     /**
-     * Returns the sub-element XML section of the IQ packet,
-     * or the empty String if there isn't one.
+     * 返回 IQ 包的子元素 XML 部分，如果没有则返回空字符串。
      *
-     * @return the child element section of the IQ XML.
+     * @return IQ XML 的子元素部分。
      */
     public func getChildElementXML(): XmlStringBuilder {
         let xml = XmlStringBuilder()
@@ -164,9 +157,9 @@ public abstract class IQ <: Stanza & IqView {
     }
 
     /**
-     * Append the sub-element XML section of the IQ stanza.
+     * 追加 IQ 节的子元素 XML 部分。
      *
-     * @param xml the XmlStringBuilder to append to.
+     * @param xml 要追加的 XmlStringBuilder。
      */
     private func appendInnerXml(xml: XmlStringBuilder): Unit {
         if (typ == IQType.error) {
@@ -198,11 +191,9 @@ public abstract class IQ <: Stanza & IqView {
     }
 
     /**
-     * This method must be overwritten by IQ subclasses to create their child content. It is important you don't use the builder
-     * <b>to add the final end tag</b>. This will be done automatically by {@link IQChildElementXmlStringBuilder}
-     * after eventual existing {@link ExtensionElement}s have been added.
+     * 这个方法必须由 IQ 子类重写以创建它们的子内容。重要的是你不要使用构建器<b>添加最终的结束标签</b>。这将在最终存在的 {@link ExtensionElement} 被添加后由 {@link IQChildElementXmlStringBuilder} 自动完成。
      * <p>
-     * For example to create an IQ with a extra attribute and an additional child element
+     * 例如，要创建一个带有额外属性和一个附加子元素的 IQ：
      * </p>
      * <pre>
      * {@code
@@ -213,68 +204,60 @@ public abstract class IQ <: Stanza & IqView {
      * </iq>
      * }
      * </pre>
-     * the body of the {@code getIQChildElementBuilder} looks like
+     * {@code getIQChildElementBuilder} 的主体如下所示：
      * <pre>
      * {@code
-     * // The builder 'xml' will already have the child element and the 'xmlns' attribute added
-     * // So the current builder state is "<bar xmlns='example:bar'"
+     * // 构建器“xml”已经添加了子元素和“xmlns”属性
+     * // 所以当前构建器状态是“<bar xmlns='example:bar'”
      * xml.attribute("extraAttribute", "blaz");
      * xml.rightAngleBracket();
      * xml.element("extraElement", "elementText");
-     * // Do not close the 'bar' attribute by calling xml.closeElement('bar')
+     * // 不要通过调用 xml.closeElement('bar') 关闭“bar”属性
      * }
      * </pre>
-     * If your IQ only contains attributes and no child elements, i.e. it can be represented as empty element, then you
-     * can mark it as such.
+     * 如果你的 IQ 只包含属性而没有子元素，即它可以表示为空元素，那么你可以将其标记为这样。
      * <pre>
-     * xml.attribute(&quot;myAttribute&quot;, &quot;myAttributeValue&quot;);
+     * xml.attribute("myAttribute", "myAttributeValue");
      * xml.setEmptyElement();
      * </pre>
-     * If your IQ does not contain any attributes or child elements (besides {@link ExtensionElement}s), consider sub-classing
-     * {@link SimpleIQ} instead.
+     * 如果你的 IQ 不包含任何属性或子元素（除了 {@link ExtensionElement} 之外），考虑继承 {@link SimpleIQ} 代替。
      *
-     * @param xml a pre-created builder which already has the child element and the 'xmlns' attribute set.
-     * @return the build to create the IQ child content.
+     * @param xml 一个预先创建的构建器，已经设置了子元素和“xmlns”属性。
+     * @return 创建 IQ 子内容的构建器。
      */
     protected func getIQChildElementBuilder(xml: IQChildElementXmlStringBuilder): ?IQChildElementXmlStringBuilder
 
     /**
-     * Convenience method to create a new empty {@link Type#result IQType.result}
-     * IQ based on a {@link Type#get IQType.get} or {@link Type#set IQType.set}
-     * IQ. The new stanza will be initialized with:<ul>
-     *      <li>The sender set to the recipient of the originating IQ.
-     *      <li>The recipient set to the sender of the originating IQ.
-     *      <li>The type set to {@link Type#result IQType.result}.
-     *      <li>The id set to the id of the originating IQ.
-     *      <li>No child element of the IQ element.
+     * 方便方法，基于 {@link Type#get IQType.get} 或 {@link Type#set IQType.set} 的 IQ 创建一个新的空 {@link Type#result IQType.result} IQ。新的节将以下列方式初始化：<ul>
+     *      <li>发送者设置为原始 IQ 的接收者。
+     *      <li>接收者设置为原始 IQ 的发送者。
+     *      <li>类型设置为 {@link Type#result IQType.result}。
+     *      <li>ID 设置为原始 IQ 的 ID。
+     *      <li>IQ 元素没有子元素。
      * </ul>
      *
-     * @param request the {@link Type#get IQType.get} or {@link Type#set IQType.set} IQ packet.
-     * @throws IllegalArgumentException if the IQ stanza does not have a type of
-     *      {@link Type#get IQType.get} or {@link Type#set IQType.set}.
-     * @return a new {@link Type#result IQType.result} IQ based on the originating IQ.
+     * @param request {@link Type#get IQType.get} 或 {@link Type#set IQType.set} 的 IQ 包。
+     * @throws IllegalArgumentException 如果 IQ 节的类型不是 {@link Type#get IQType.get} 或 {@link Type#set IQType.set}。
+     * @return 基于原始 IQ 的新的 {@link Type#result IQType.result} IQ。
      */
     public static func createResultIQ(request: IQ): IQ {
         return EmptyResultIQ(request)
     }
 
     /**
-     * Convenience method to create a new {@link Type#error IQType.error} IQ
-     * based on a {@link Type#get IQType.get} or {@link Type#set IQType.set}
-     * IQ. The new stanza will be initialized with:<ul>
-     *      <li>The sender set to the recipient of the originating IQ.
-     *      <li>The recipient set to the sender of the originating IQ.
-     *      <li>The type set to {@link Type#error IQType.error}.
-     *      <li>The id set to the id of the originating IQ.
-     *      <li>The child element contained in the associated originating IQ.
-     *      <li>The provided {@link StanzaError XMPPError}.
+     * 方便方法，基于 {@link Type#get IQType.get} 或 {@link Type#set IQType.set} 的 IQ 创建一个新的 {@link Type#error IQType.error} IQ。新的节将以下列方式初始化：<ul>
+     *      <li>发送者设置为原始 IQ 的接收者。
+     *      <li>接收者设置为原始 IQ 的发送者。
+     *      <li>类型设置为 {@link Type#error IQType.error}。
+     *      <li>ID 设置为原始 IQ 的 ID。
+     *      <li>包含在相关原始 IQ 中的子元素。
+     *      <li>提供的 {@link StanzaError XMPPError}。
      * </ul>
      *
-     * @param request the {@link Type#get IQType.get} or {@link Type#set IQType.set} IQ packet.
-     * @param error the error to associate with the created IQ packet.
-     * @throws IllegalArgumentException if the IQ stanza does not have a type of
-     *      {@link Type#get IQType.get} or {@link Type#set IQType.set}.
-     * @return a new {@link Type#error IQType.error} IQ based on the originating IQ.
+     * @param request {@link Type#get IQType.get} 或 {@link Type#set IQType.set} 的 IQ 包。
+     * @param error 与创建的 IQ 包相关联的错误。
+     * @throws IllegalArgumentException 如果 IQ 节的类型不是 {@link Type#get IQType.get} 或 {@link Type#set IQType.set}。
+     * @return 基于原始 IQ 的新的 {@link Type#error IQType.error} IQ。
      */
     public static func createErrorResponse(request: IQ, error: StanzaError): ErrorIQ {
         return ErrorIQ.createErrorResponse(request, error)
@@ -286,33 +269,32 @@ public abstract class IQ <: Stanza & IqView {
 }
 
 /**
- * A enum to represent the type of the IQ stanza.
+ * 一个枚举来表示 IQ 节的类型。
  */
 public enum IQType <: ToString & Equatable<IQType> {
     /**
-     * The IQ stanza requests information, inquires about what data is needed in order to complete further operations, etc.
+     * IQ 节请求信息，询问为了完成进一步操作需要什么数据等。
      */
     get
     /**
-     * The IQ stanza provides data that is needed for an operation to be completed, sets new values, replaces existing values, etc.
+     * IQ 节提供完成操作所需的数据，设置新值，替换现有值等。
      */
     | set
     /**
-     * The IQ stanza is a response to a successful get or set request.
+     * IQ 节是对成功的 get 或 set 请求的响应。
      */
     | result
     /**
-     * The IQ stanza reports an error that has occurred regarding processing or delivery of a get or set request.
+     * IQ 节报告在处理或传递 get 或 set 请求时发生的错误。
      */
     | error
 
     /**
-     * Converts a String into the corresponding types. Valid String values
-     * that can be converted to types are: "get", "set", "result", and "error".
+     * 将字符串转换为相应的类型。可以转换为类型的有效字符串值是：“get”、“set”、“result”和“error”。
      *
-     * @param string the String value to covert.
-     * @return the corresponding Type.
-     * @throws IllegalArgumentException when not able to parse the string parameter
+     * @param string 要转换的字符串值。
+     * @return 相应的类型。
+     * @throws IllegalArgumentException 当无法解析字符串参数时。
      */
     public static func fromString(string: String): IQType {
         match (string.toAsciiLower()) {

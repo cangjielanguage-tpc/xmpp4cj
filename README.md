@@ -6,7 +6,7 @@
 <img alt="" src="https://img.shields.io/badge/release-v0.0.1-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/cjc-v0.54.3-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjcov-NA-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjcov-90.5%25-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/project-open-brightgreen" style="display: inline-block;" />
 </p>
 
@@ -36,7 +36,7 @@ xmpp4cj是一个开源、高度模块化、易于使用的 XMPP 客户端库
 
 ### 接口说明
 
-主要类和函数接口说明，详见 [API](./doc/api/index.html)
+主要类和函数接口说明，详见 [API](https://gitcode.com/Cangjie-TPC/xmpp4cj/blob/xmpp_document/doc/api/html/index.html)
 
 ## 使用说明
 
