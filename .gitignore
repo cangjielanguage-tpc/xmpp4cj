@@ -46,10 +46,9 @@ log/
 temp_ci_lib/
 lib/
 *.o
-latex
-html
 z_main.cj
-
+doc/api/html
+doc/Doxyfile
 
 
 

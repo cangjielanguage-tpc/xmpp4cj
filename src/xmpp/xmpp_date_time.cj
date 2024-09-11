@@ -4,7 +4,7 @@
 package xmpp4cj.xmpp
 
 /**
- * Utility class for date and time handling in XMPP.
+ * XMPP 中用于日期和时间处理的工具类
  *
  * @see XEP-82: XMPP DateTime and Time Profiles
  */
@@ -67,11 +67,11 @@ public class XmppDateTime {
     )
 
     /**
-     * Parses the given date string in the XEP-0082 - XMPP DateTime and Time Profiles.
+     * 解析给定的日期字符串，遵循 XEP-0082 - XMPP 日期时间和时间配置文件。
      *
-     * @param dateString  the date string to parse
-     * @return the parsed DateTime
-     * @throws ParseException  if the specified string cannot be parsed
+     * @param dateString 要解析的日期字符串。
+     * @return 解析后的 DateTime。
+     * @throws ParseException 如果指定的字符串无法解析。
      */
     static func parseXEP0082Date(dateString: String): DateTime {
         for (coupling in couplings) {
@@ -84,15 +84,11 @@ public class XmppDateTime {
     }
 
     /**
-     * Parses the given date string in either of the three profiles of
-     * XEP-0082 - XMPP DateTime and Time Profiles or XEP-0091 - Legacy Delayed Delivery format.
-     * This method uses internal date formatters and is thus threadsafe.
+     * 解析给定的日期字符串，可以是 XEP-0082 - XMPP 日期时间和时间配置文件的三种配置之一，或者是 XEP-0091 - 传统延迟交付格式。此方法使用内部日期格式化器，因此是线程安全的。
      *
-     * @param dateString
-     *            the date string to parse
-     * @return the parsed DateTime
-     * @throws ParseException
-     *             if the specified string cannot be parsed
+     * @param dateString 要解析的日期字符串。
+     * @return 解析后的 DateTime。
+     * @throws ParseException 如果指定的字符串无法解析。
      */
     public static func parseDate(dateString: String): DateTime {
         let matcher = xep0091Pattern.matcher(dateString)
@@ -126,23 +122,20 @@ public class XmppDateTime {
     private static let XEP_0082_DATETIME_MILLIS_PROFILE = DateFormatType("yyyy-MM-ddTHH:mm:ss.SOO") // XEP_0082_DATETIME_MILLIS_PROFILE
 
     /**
-     * Formats a DateTime into a XEP-0082 - XMPP DateTime and Time Profiles string.
+     * 将 DateTime 格式化为 XEP-0082 - XMPP 日期时间和时间配置文件的字符串。
      *
-     * @param date
-     *            the time value to be formatted into a time string
-     * @return the formatted time string in XEP-0082 format
+     * @param date 要格式化为时间字符串的时间值。
+     * @return 以 XEP-0082 格式格式化后的时间字符串。
      */
     public static func formatXEP0082Date(date: DateTime): String {
         return XEP_0082_DATETIME_MILLIS_PROFILE.format(date)
     }
 
     /**
-     * Converts a XEP-0082 date String's time zone definition into a RFC822 time
-     * zone definition. The major difference is that XEP-0082 uses a semicolon
-     * between hours and minutes and RFC822 does not.
+     * 将 XEP-0082 日期字符串的时区定义转换为 RFC822 时区定义。主要区别在于 XEP-0082 在小时和分钟之间使用分号，而 RFC822 则不使用。
      *
-     * @param dateString the date String.
-     * @return the String with converted timezone
+     * @param dateString 日期字符串。
+     * @return 具有转换后的时区的字符串。
      */
     static func convertXep82TimezoneToRfc822(dateString: String): String {
         if (dateString[dateString.size - 1] == b'Z') {
@@ -153,10 +146,10 @@ public class XmppDateTime {
     }
 
     /**
-     * Convert a RFC 822 Timezone to the Timezone format used in XEP-82.
+     * 将 RFC 822 时区转换为 XEP-82 中使用的时区格式。
      *
-     * @param dateString the input date String.
-     * @return the input String with the timezone converted to XEP-82.
+     * @param dateString 输入日期字符串。
+     * @return 输入字符串，其时区转换为 XEP-82。
      */
     static func convertRfc822TimezoneToXep82(dateString: String): String {
         let length = dateString.size
@@ -167,15 +160,12 @@ public class XmppDateTime {
     }
 
     /**
-     * Parses the given date string in different ways and returns the date that
-     * lies in the past and/or is nearest to the current date-time.
+     * 以不同方式解析给定的日期字符串，并返回位于过去和/或最接近当前日期时间的日期。
      *
-     * @param stampString
-     *            date in string representation
-     * @param dateLength the length of the date prefix of stampString
-     * @return the parsed date
-     * @throws ParseException
-     *             The date string was of an unknown format
+     * @param stampString 字符串表示的日期。
+     * @param dateLength stampString 中日期前缀的长度。
+     * @return 解析后的日期。
+     * @throws ParseException 日期字符串格式未知。
      */
     private static func handleDateWithMissingLeadingZeros(stampString: String, dateLength: Int64): ?DateTime {
         if (dateLength == 6 || (b'2' <= stampString[4] && stampString[5] <= b'9') || (stampString[4] == b'1' &&

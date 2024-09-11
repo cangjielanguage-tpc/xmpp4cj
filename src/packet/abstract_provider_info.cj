@@ -28,16 +28,15 @@ public abstract class AbstractProviderInfo {
 }
 
 /**
- * Defines the information required to register an IQ Provider
- * with the {@link ProviderManager} when using the {@link ProviderLoader}.
+ * 定义了在使用 {@link ProviderLoader} 时向 {@link ProviderManager} 注册一个 IQ 提供者所需的信息。
  */
 public class IQProviderInfo <: AbstractProviderInfo {
     /**
-     * Defines an IQ provider which implements the <code>IQProvider</code> interface.
+     * 定义一个实现了 <code>IQProvider</code> 接口的 IQ 提供者。
      *
-     * @param elementName Element that provider parses.
-     * @param namespace Namespace that provider parses.
-     * @param iqProvider The provider implementation.
+     * @param elementName 提供者解析的元素名称。
+     * @param namespace 提供者解析的命名空间。
+     * @param iqProvider 提供者的实现。
      */
     public IQProviderInfo(elementName: String, namespace: String, iqProvider: IqProvider<IQ>) {
         super(elementName, namespace, iqProvider)
@@ -45,17 +44,16 @@ public class IQProviderInfo <: AbstractProviderInfo {
 }
 
 /**
- * Defines the information required to register a stanza extension Provider
- * with the {@link ProviderManager} when using the {@link ProviderLoader}.
+ * 定义了在使用 {@link ProviderLoader} 时向 {@link ProviderManager} 注册一个节扩展提供者所需的信息。
  */
 public class ExtensionProviderInfo <: AbstractProviderInfo {
 
     /**
-     * Defines an extension provider which implements the <code>ExtensionElementProvider</code> interface.
+     * 定义一个实现了 <code>ExtensionElementProvider</code> 接口的扩展提供者。
      *
-     * @param elementName Element that provider parses.
-     * @param namespace Namespace that provider parses.
-     * @param extProvider The provider implementation.
+     * @param elementName 提供者解析的元素名称。
+     * @param namespace 提供者解析的命名空间。
+     * @param extProvider 提供者的实现。
      */
     public ExtensionProviderInfo(
         elementName: String,
@@ -69,11 +67,11 @@ public class ExtensionProviderInfo <: AbstractProviderInfo {
 public class StreamFeatureProviderInfo <: AbstractProviderInfo {
 
     /**
-     * Defines an extension provider which implements the <code>StreamFeatureProvider</code> interface.
+     * 定义一个实现了 <code>StreamFeatureProvider</code> 接口的扩展提供者。
      *
-     * @param elementName Element that provider parses.
-     * @param namespace Namespace that provider parses.
-     * @param extProvider The provider implementation.
+     * @param elementName 提供者解析的元素名称。
+     * @param namespace 提供者解析的命名空间。
+     * @param extProvider 提供者的实现。
      */
     public StreamFeatureProviderInfo(
         elementName: String,

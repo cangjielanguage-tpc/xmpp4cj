@@ -4,7 +4,7 @@
 package xmpp4cj.packet
 
 /**
- * An IQ stanzas that could not be parsed because no provider was found.
+ * 由于未找到提供程序而无法解析的 IQ 节。
  */
 public class UnparsedIQ <: IQ {
     public init(element: String, namespace: String, content: String) {

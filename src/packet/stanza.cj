@@ -4,19 +4,15 @@
 package xmpp4cj.packet
 
 /**
- * Base class for XMPP Stanzas.
+ * XMPP 节的基类。
  * <p>
- * Every stanza has a unique ID (which is automatically generated, but can be overridden). Stanza
- * IDs are required for IQ stanzas and recommended for presence and message stanzas. Optionally, the
- * "to" and "from" fields can be set.
+ * 每个节都有一个唯一的 ID（自动生成，但可以被覆盖）。IQ 节需要节 ID，对于存在和消息节则建议使用。可选地，可以设置“to”和“from”字段。
  * </p>
  * <p>
- * XMPP Stanzas are {@link Message}, {@link IQ} and {@link Presence}. Which therefore subclass this
- * class. <b>If you think you need to subclass this class, then you are doing something wrong.</b>
+ * XMPP 节有 {@link Message}、{@link IQ} 和 {@link Presence}。因此它们都是这个类的子类。<b>如果你认为你需要子类化这个类，那么你可能做错了什么。</b>
  * </p>
  * <p>
- * Use {@link StanzaBuilder} to construct a stanza instance. All instance mutating methods of this
- * class are deprecated, although not all of them are currently marked as such, and must not be used.
+ * 使用 {@link StanzaBuilder} 来构建节实例。这个类的所有实例修改方法都已过时，尽管目前并非所有方法都被标记为过时，但绝不能使用。
  * </p>
  * @see <a href="xmpp/org/rfcs/rfc6120.html#stanzas">RFC 6120 § 8. XML Stanzas</a>
  */
@@ -40,13 +36,10 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
     private var error: ?StanzaError = None
 
     /**
-     * Optional value of the 'xml:lang' attribute of the outermost element of
-     * the stanza.
+     * 节最外层元素的“xml:lang”属性的可选值。
      * <p>
-     * Such an attribute is defined for all stanza types. For IQ, see for
-     * example XEP-50 3.7:
-     * "The requester SHOULD provide its locale information using the "xml:lang
-     * " attribute on either the &lt;iq/&gt; (RECOMMENDED) or &lt;command/&gt; element."
+     * 这样的属性对所有节类型都有定义。对于 IQ，例如参见 XEP-50 3.7：
+     * “请求者应该在&lt;iq/&gt;（推荐）或&lt;command/&gt;元素上使用‘xml:lang’属性提供其区域设置信息。”
      * </p>
      */
     protected var language: ?String = None
@@ -90,10 +83,9 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
     }
 
     /**
-     * Sets the unique ID of the packet. To indicate that a stanza has no id
-     * pass <code>None</code> as the packet's id value.
+     * 设置数据包的唯一 ID。要表示一个节没有 ID，将<code>None</code>作为数据包的 ID 值传递。
      *
-     * @param id the unique ID for the packet.
+     * @param id 数据包的唯一 ID。
      */
     public open func setStanzaId(id: ?String): Unit {
         if (id.isSome()) {
@@ -103,18 +95,18 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
     }
 
     /**
-     * Check if this stanza has an ID set.
+     * 检查这个节是否设置了 ID。
      *
-     * @return true if the stanza ID is set, false otherwise.
+     * @return 如果节 ID 已设置则为 true，否则为 false。
      */
     public func hasStanzaIdSet(): Bool {
         return id.isSome()
     }
 
     /**
-     * Throws an {@link IllegalArgumentException} if this stanza has no stanza ID set.
+     * 如果这个节没有设置节 ID，则抛出 {@link IllegalArgumentException}。
      *
-     * @throws IllegalArgumentException if this stanza has no stanza ID set.
+     * @throws IllegalArgumentException 如果这个节没有设置节 ID。
      */
     public func throwIfNoStanzaId(): Unit {
         if (hasStanzaIdSet()) {
@@ -124,9 +116,9 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
     }
 
     /**
-     * Ensure that a stanza ID is set.
+     * 确保设置一个节 ID。
      *
-     * @return the stanza ID.
+     * @return 节 ID。
      */
     protected open func setNewStanzaId(): ?String {
         if (usedStanzaIdSource.isSome()) {
@@ -142,10 +134,9 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
     }
 
     /**
-     * Sets who the packet is being sent "to". The XMPP protocol often makes
-     * the "to" attribute optional, so it does not always need to be set.
+     * 设置数据包要发送给谁。XMPP 协议通常使“to”属性是可选的，所以它并不总是需要被设置。
      *
-     * @param to who the packet is being sent to.
+     * @param to 数据包要发送给谁。
      */
     public open func setTo(to: ?Jid): Unit {
         this.to = to
@@ -156,11 +147,9 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
     }
 
     /**
-     * Sets who the packet is being sent "from". The XMPP protocol often
-     * makes the "from" attribute optional, so it does not always need to
-     * be set.
+     * 设置数据包从谁那里发送。XMPP 协议通常使“from”属性是可选的，所以它并不总是需要被设置。
      *
-     * @param from who the packet is being sent to.
+     * @param from 数据包从谁那里发送。
      */
     public open func setFrom(froms: ?Jid): Unit {
         this.froms = froms
@@ -171,9 +160,9 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
     }
 
     /**
-     * Sets the error for this stanza.
+     * 为这个节设置错误。
      *
-     * @param stanzaError the error that this stanza carries and hence signals.
+     * @param stanzaError 这个节携带并因此表示的错误。
      */
     public open func setError(stanzaError: ?StanzaError): Unit {
         error = stanzaError
@@ -200,14 +189,14 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
     }
 
     /**
-     * Return a list of all extensions with the given element name <em>and</em> namespace.
+     * 返回具有给定元素名称和命名空间的所有扩展的列表。
      * <p>
-     * Changes to the returned set will update the stanza extensions, if the returned set is not the empty set.
+     * 如果返回的集合不是空集合，对返回集合的更改将更新节扩展。
      * </p>
      *
-     * @param elementName the element name, must not be None.
-     * @param namespace the namespace of the element(s), must not be None.
-     * @return a set of all matching extensions.
+     * @param elementName 元素名称，不能为空。
+     * @param namespace 元素的命名空间，不能为空。
+     * @return 所有匹配扩展的集合。
      */
     public func getExtensions(elementName: String, namespace: String): ArrayList<ExtensionElement> {
         StringUtils.requireNotNullNorEmpty(elementName, "elementName must not be None nor empty")
@@ -231,30 +220,27 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
     }
 
     /**
-     * Returns the first extension of this stanza that has the given namespace.
+     * 返回这个节中具有给定命名空间的第一个扩展。
      * <p>
-     * When possible, use {@link #getExtensionElement(String, String)} instead.
+     * 在可能的情况下，使用 {@link #getExtensionElement(String, String)} 代替。
      * </p>
      *
-     * @param namespace the namespace of the extension that is desired.
-     * @return the stanza extension with the given namespace.
+     * @param namespace 所需扩展的命名空间。
+     * @return 具有给定命名空间的节扩展。
      */
     public func getExtension(namespace: String): ?ExtensionElement {
         return PacketUtil.extensionElementFrom(getExtensions(), None, namespace)
     }
 
     /**
-     * Returns the first extension that matches the specified element name and
-     * namespace, or <code>None</code> if it doesn't exist. Extensions are
-     * are arbitrary XML elements in standard XMPP stanzas.
+     * 返回第一个与指定元素名称和命名空间匹配的扩展，或者如果不存在则返回<code>None</code>。扩展是标准 XMPP 节中的任意 XML 元素。
      * <p>
-     * Note that it is recommended to use {@link #getExtension(Class)} instead of this method.
-     * The {@link #getExtension(Class)} is more robust, as it is type safe.
+     * 请注意，建议使用 {@link #getExtension(Class)} 代替这个方法。{@link #getExtension(Class)} 更健壮，因为它是类型安全的。
      * </p>
      *
-     * @param elementName the XML element name of the extension.
-     * @param namespace the XML element namespace of the extension.
-     * @return the extension, or <code>None</code> if it doesn't exist.
+     * @param elementName 扩展的 XML 元素名称。
+     * @param namespace 扩展的 XML 元素命名空间。
+     * @return 扩展，或者如果不存在则返回<code>None</code>。
      */
     public func getExtensionElement(elementName: String, namespace: ?String): ?ExtensionElement {
         let ns = if (let Some(ns) <- namespace) {
@@ -274,13 +260,12 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
     }
 
     /**
-     * Adds a stanza extension to the packet. Does nothing if extension is None.
+     * 将节扩展添加到数据包中。如果扩展是<code>None</code>则什么也不做。
      * <p>
-     * Please note that although this method is not yet marked as deprecated, it is recommended to use
-     * {@link StanzaBuilder#addExtension(ExtensionElement)} instead.
+     * 请注意，尽管这个方法还没有被标记为过时，但建议使用 {@link StanzaBuilder#addExtension(ExtensionElement)} 代替。
      * </p>
      *
-     * @param extension a stanza extension.
+     * @param extension 节扩展。
      */
     public func addExtension(extension: ?ExtensionElement): Unit {
         let ext = if (let Some(v) <- extension) {
@@ -295,15 +280,13 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
     }
 
     /**
-     * Add the given extension and override eventually existing extensions with the same name and
-     * namespace.
+     * 添加给定的扩展，并覆盖具有相同名称和命名空间的最终现有扩展。
      * <p>
-     * Please note that although this method is not yet marked as deprecated, it is recommended to use
-     * {@link StanzaBuilder#overrideExtension(ExtensionElement)} instead.
+     * 请注意，尽管这个方法还没有被标记为过时，但建议使用 {@link StanzaBuilder#overrideExtension(ExtensionElement)} 代替。
      * </p>
      *
-     * @param extension the extension element to add.
-     * @return one of the removed extensions or <code>None</code> if there are none.
+     * @param extensionElement 要添加的扩展元素。
+     * @return 被移除的扩展之一，或者如果没有则返回<code>None</code>。
      */
     public func overrideExtension(extensionElement: ?ExtensionElement): ?ExtensionElement {
         let extension = if (let Some(v) <- extensionElement) {
@@ -319,9 +302,9 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
     }
 
     /**
-     * Adds a collection of stanza extensions to the packet. Does nothing if extensions is None.
+     * 将一组节扩展添加到数据包中。如果扩展是<code>None</code>则什么也不做。
      *
-     * @param extensions a collection of stanza extensions
+     * @param extensions 一组节扩展。
      */
     public func addExtensions(extensions: Collection<ExtensionElement>): Unit {
         for (packetExtension in extensions) {
@@ -330,14 +313,14 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
     }
 
     /**
-     * Check if a stanza extension with the given element and namespace exists.
+     * 检查具有给定元素和命名空间的节扩展是否存在。
      * <p>
-     * The argument <code>elementName</code> may be None.
+     * 参数<code>elementName</code>可以是<code>None</code>。
      * </p>
      *
      * @param elementName
      * @param namespace
-     * @return true if a stanza extension exists, false otherwise.
+     * @return 如果节扩展存在则为 true，否则为 false。
      */
     public func hasExtension(elementNameStr: ?String, namespace: String): Bool {
         let elementName = if (let Some(v) <- elementNameStr) {
@@ -364,11 +347,11 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
     }
 
     /**
-     * Remove the stanza extension with the given elementName and namespace.
+     * 移除具有给定元素名称和命名空间的节扩展。
      *
      * @param elementName
      * @param namespace
-     * @return the removed stanza extension or None.
+     * @return 被移除的节扩展，或者如果没有则返回<code>None</code>。
      */
     public func removeExtension(elementName: String, namespace: String): ?ExtensionElement {
         let key = QName(namespace, elementName)
@@ -382,18 +365,18 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
     }
 
     /**
-     * Returns the default language used for all messages containing localized content.
+     * 返回用于所有包含本地化内容的消息的默认语言。
      *
-     * @return the default language
+     * @return 默认语言。
      */
     public static func getDefaultLanguage(): String {
         return DEFAULT_LANGUAGE
     }
 
     /**
-     * Add to, from, and id attributes.
+     * 添加“to”、“from”和“id”属性。
      *
-     * @param xml the {@link XmlStringBuilder}.
+     * @param xml {@link XmlStringBuilder}。
      */
     protected func addCommonAttributes(xml: XmlStringBuilder): Unit {
         xml.optAttribute("to", getTo()?.toString())
@@ -414,9 +397,9 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
     }
 
     /**
-     * Append an XMPPError is this stanza has one set.
+     * 如果这个节设置了错误，则附加一个 XMPPError。
      *
-     * @param xml the XmlStringBuilder to append the error to.
+     * @param xml 要附加错误的 XmlStringBuilder。
      */
     protected func appendErrorIfExists(xml: XmlStringBuilder): Unit {
         let error = getError()
@@ -426,10 +409,11 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement {
     }
 
     /**
-     * Return the provided non-empty language, or use this {@link XmlLangElement} language (if set).
+     * 返回提供的非空语言，或者使用这个 {@link XmlLangElement} 的语言（如果设置了）。
      *
-     * @param language the provided language, may be the empty string or <code>None</code>.
-     * @return the provided language or this element's language (if set).
+     * @param xmlLangElement XmlLangElement。
+     * @param language 提供的语言，可以是空字符串或<code>None</code>。
+     * @return 提供的语言或者这个元素的语言（如果设置了）。
      */
     static func determineLanguage(xmlLangElement: XmlLangElement, language: ?String): ?String {
         if (language.isSome() && !language.getOrThrow().isEmpty()) {

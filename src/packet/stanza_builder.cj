@@ -52,11 +52,11 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
     }
 
     /**
-     * Set the recipent address of the stanza.
+     * 设置节的接收方地址。
      *
-     * @param to whoe the stanza is being sent to.
-     * @return a reference to this builder.
-     * @throws XmppStringprepException if the provided character sequence is not a valid XMPP address.
+     * @param to 节要发送给谁。
+     * @return 对这个构建器的引用。
+     * @throws XmppStringprepException 如果提供的字符序列不是有效的 XMPP 地址。
      * @see #to(Jid)
      */
     public open func to(to: String): StanzaBuilder {
@@ -64,11 +64,11 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
     }
 
     /**
-     * Sets who the stanza is being sent "to".
-     * The XMPP protocol often makes the "to" attribute optional, so it does not always need to be set.
+     * 设置节要发送给谁。
+     * XMPP 协议通常使“to”属性是可选的，所以它并不总是需要被设置。
      *
-     * @param to who the stanza is being sent to.
-     * @return a reference to this builder.
+     * @param to 节要发送给谁。
+     * @return 对这个构建器的引用。
      */
     public open func to(to: ?Jid): StanzaBuilder {
         this._to = to
@@ -76,11 +76,11 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
     }
 
     /**
-     * Sets who the the stanza is being sent "from".
+     * 设置节从谁那里发送。
      *
-     * @param froms who the stanza is being sent from.
-     * @return a reference to this builder.
-     * @throws XmppStringprepException if the provided character sequence is not a valid XMPP address.
+     * @param froms 节从谁那里发送。
+     * @return 对这个构建器的引用。
+     * @throws XmppStringprepException 如果提供的字符序列不是有效的 XMPP 地址。
      * @see #froms(Jid)
      */
     public open func froms(froms: String): StanzaBuilder {
@@ -88,11 +88,11 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
     }
 
     /**
-     * Sets who the stanza is being sent "from".
-     * The XMPP protocol often makes the "from" attribute optional, so it does not always need to be set.
+     * 设置节从谁那里发送。
+     * XMPP 协议通常使“from”属性是可选的，所以它并不总是需要被设置。
      *
-     * @param froms who the stanza is being sent from.
-     * @return a reference to this builder.
+     * @param froms 节从谁那里发送。
+     * @return 对这个构建器的引用。
      */
     public open func froms(froms: ?Jid): StanzaBuilder {
         this._from = froms
@@ -100,10 +100,10 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
     }
 
     /**
-     * Sets the error for this stanza.
+     * 设置这个节的错误。
      *
-     * @param stanzaError the error to associate with this stanza.
-     * @return a reference to this builder.
+     * @param stanzaError 要与这个节关联的错误。
+     * @return 对这个构建器的引用。
      */
     public open func setError(stanzaError: StanzaError): StanzaBuilder {
         this.stanzaError = stanzaError
@@ -111,10 +111,10 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
     }
 
     /**
-     * Sets the xml:lang for this stanza.
+     * 设置这个节的 xml:lang。
      *
-     * @param language the xml:lang of this stanza.
-     * @return a reference to this builder.
+     * @param language 这个节的 xml:lang。
+     * @return 对这个构建器的引用。
      */
     public open func setLanguage(language: String): StanzaBuilder {
         this.language = language

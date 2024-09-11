@@ -4,24 +4,18 @@
 package xmpp4cj.packet
 
 /**
- * Manages providers for parsing custom XML sub-documents of XMPP packets. Two types of
- * providers exist:<ul>
- *      <li>IQProvider -- parses IQ requests into objects.
- *      <li>PacketExtension -- parses XML sub-documents attached to packets into
- *          PacketExtension instances.</ul>
+ * 管理用于解析 XMPP 数据包的自定义 XML 子文档的提供程序。存在两种类型的提供程序：<ul>
+ *      <li>IQProvider -- 将 IQ 请求解析为对象。
+ *      <li>PacketExtension -- 将附加到数据包的 XML 子文档解析为 PacketExtension 实例。</ul>
  *
  * <b>IQProvider</b><p>
  *
- * By default, Xmpp only knows how to process IQ packets with sub-packets that
- * are in a few namespaces such as:<ul>
+ * 默认情况下，Xmpp 仅知道如何处理具有子包的 IQ 数据包，这些子包位于少数几个命名空间中，例如：<ul>
  *      <li>jabber:iq:auth
  *      <li>jabber:iq:roster
  *      <li>jabber:iq:register</ul>
  *
- * Because many more IQ types are part of XMPP and its extensions, a pluggable IQ parsing
- * mechanism is provided. IQ providers are registered programmatically or by creating a
- * providers file. The file is an XML
- * document that contains one or more iqProvider entries, as in the following example:
+ * 由于 XMPP 及其扩展中有更多的 IQ 类型，因此提供了一个可插拔的 IQ 解析机制。IQ 提供程序可以通过编程方式注册，也可以通过创建提供程序文件进行注册。该文件是一个 XML 文档，其中包含一个或多个 iqProvider 条目，如下例所示：
  *
  * <pre>
  * &lt;?xml version="1.0"?&gt;
@@ -33,13 +27,7 @@ package xmpp4cj.packet
  *     &lt;/iqProvider&gt;
  * &lt;/xmppProviders&gt;</pre>
  *
- * Each IQ provider is associated with an element name and a namespace. If multiple provider
- * entries attempt to register to handle the same namespace, the first entry loaded from the
- * classpath will take precedence. The IQ provider class can either implement the IQProvider
- * interface, or extend the IQ class. In the former case, each IQProvider is responsible for
- * parsing the raw XML stream to create an IQ instance. In the latter case, bean introspection
- * is used to try to automatically set properties of the IQ instance using the values found
- * in the IQ stanza XML. For example, an XMPP time stanza resembles the following:
+ * 每个 IQ 提供程序都与一个元素名称和一个命名空间相关联。如果多个提供程序条目试图注册以处理相同的命名空间，则从类路径加载的第一个条目将具有优先权。IQ 提供程序类可以实现 IQProvider 接口，也可以扩展 IQ 类。在前一种情况下，每个 IQProvider 负责解析原始 XML 流以创建一个 IQ 实例。在后一种情况下，使用 bean 内省来尝试使用在 IQ 节 XML 中找到的值自动设置 IQ 实例的属性。例如，一个 XMPP 时间节类似于以下内容：
  * <pre>
  * &lt;iq type='result' to='joe@example.com' from='mary@example.com' id='time_1'&gt;
  *     &lt;query xmlns='jabber:iq:time'&gt;
@@ -49,15 +37,9 @@ package xmpp4cj.packet
  *     &lt;/query&gt;
  * &lt;/iq&gt;</pre>
  *
- * In order for this stanza to be automatically mapped to the Time object listed in the
- * providers file above, it must have the methods setUtc(String), setTz(String), and
- * setDisplay(String). The introspection service will automatically try to convert the String
- * value from the XML into a boolean, int, long, float, double, or Class depending on the
- * type the IQ instance expects.<p>
+ * 为了使这个节自动映射到上面提供程序文件中列出的 Time 对象，它必须具有 setUtc(String)、setTz(String) 和 setDisplay(String) 方法。内省服务将自动尝试根据 IQ 实例期望的类型将 XML 中的字符串值转换为布尔值、整数、长整数、浮点数、双精度数或类。<p>
  *
- * A pluggable system for stanza extensions, child elements in a custom namespace for
- * message and presence packets, also exists. Each extension provider
- * is registered with a name space in the xmpp.providers file as in the following example:
+ * 还存在一个用于节扩展的可插拔系统，即消息和存在数据包的自定义命名空间中的子元素。每个扩展提供程序都在 xmpp.providers 文件中使用名称空间进行注册，如下例所示：
  *
  * <pre>
  * &lt;?xml version="1.0"?&gt;
@@ -69,16 +51,7 @@ package xmpp4cj.packet
  *     &lt;/extensionProvider&gt;
  * &lt;/xmppProviders&gt;</pre>
  *
- * If multiple provider entries attempt to register to handle the same element name and namespace,
- * the first entry loaded from the classpath will take precedence.
- * Whenever a stanza extension is found in a packet, parsing will be passed to the correct provider.
- * Each provider can implement the PacketExtensionProvider interface.
- * In the former case, each extension provider is responsible for parsing the raw XML stream to
- * construct an object. In the latter case, bean introspection is used to try to automatically
- * set the properties of th class using the values in the stanza extension sub-element. When an
- * extension provider is not registered for an element name and namespace combination, will
- * store all top-level elements of the sub-packet in DefaultPacketExtension object and then
- * attach it to the packet.<p>
+ * 如果多个提供程序条目试图注册以处理相同的元素名称和命名空间，则从类路径加载的第一个条目将具有优先权。每当在数据包中找到节扩展时，解析将传递给正确的提供程序。每个提供程序都可以实现 PacketExtensionProvider 接口。在前一种情况下，每个扩展提供程序负责解析原始 XML 流以构造一个对象。在后一种情况下，使用 bean 内省来尝试使用在节扩展子元素中的值自动设置类的属性。当没有为元素名称和命名空间组合注册扩展提供程序时，将把子包的所有顶级元素存储在 DefaultPacketExtension 对象中，然后将其附加到数据包上。<p>
  */
 public class ProviderManager {
     public init() {}
@@ -112,9 +85,7 @@ public class ProviderManager {
         }
     }
     /**
-     * Returns the IQ provider registered to the specified XML element name and namespace.
-     * For example, if a provider was registered to the element name "query" and the
-     * namespace "jabber:iq:time", then the following stanza would trigger the provider:
+     * 返回注册到指定 XML 元素名称和命名空间的 IQ 提供程序。例如，如果一个提供程序注册到元素名称为“query”且命名空间为“jabber:iq:time”，那么以下节将触发该提供程序：
      *
      * <pre>
      * &lt;iq type='result' to='joe@example.com' from='mary@example.com' id='time_1'&gt;
@@ -125,11 +96,11 @@ public class ProviderManager {
      *     &lt;/query&gt;
      * &lt;/iq&gt;</pre>
      *
-     * <p>Note: this method is generally only called by the internal Xmpp classes.
+     * <p>注意：此方法通常仅由内部 Xmpp 类调用。
      *
-     * @param elementName the XML element name.
-     * @param namespace the XML namespace.
-     * @return the IQ provider.
+     * @param elementName XML 元素名称。
+     * @param namespace XML 命名空间。
+     * @return IQ 提供程序。
      */
     public static func getIQProvider(elementName: String, namespace: String): ?IqProvider<IQ> {
         let key = getQName(elementName, namespace)
@@ -137,11 +108,9 @@ public class ProviderManager {
     }
 
     /**
-     * Returns an unmodifiable collection of all IQProvider instances.
-     * Each object in the collection will either be an IQProvider instance,
-     * or a Class object that implements the IQProvider interface.
+     * 返回所有 IQProvider 实例的不可修改集合。集合中的每个对象要么是一个 IQProvider 实例，要么是实现 IQProvider 接口的 Class 对象。
      *
-     * @return all IQProvider instances.
+     * @return 所有 IQProvider 实例。
      */
     public static func getIQProviders(): ArrayList<IqProvider<IQ>> {
         let providers = ArrayList<IqProvider<IQ>>(iqProviders.size)
@@ -152,13 +121,11 @@ public class ProviderManager {
     }
 
     /**
-     * Adds an IQ provider (must be an instance of IQProvider or Class object that is an IQ)
-     * with the specified element name and name space. The provider will override any providers
-     * loaded through the classpath.
+     * 添加具有指定元素名称和命名空间的 IQ 提供程序（必须是 IQProvider 的实例或实现 IQProvider 的 Class 对象）。该提供程序将覆盖通过类路径加载的任何提供程序。
      *
-     * @param elementName the XML element name.
-     * @param namespace the XML namespace.
-     * @param provider the IQ provider.
+     * @param elementName XML 元素名称。
+     * @param namespace XML 命名空间。
+     * @param provider IQ 提供程序。
      */
     public static func addIQProvider(elementName: String, namespace: String, provider: Any): Unit {
         validate(elementName, namespace)
@@ -170,13 +137,11 @@ public class ProviderManager {
     }
 
     /**
-     * Removes an IQ provider with the specified element name and namespace. This
-     * method is typically called to cleanup providers that are programmatically added
-     * using the {@link #addIQProvider(String, String, Object) addIQProvider} method.
+     * 移除具有指定元素名称和命名空间的 IQ 提供程序。此方法通常用于清理通过 {@link #addIQProvider(String, String, Object) addIQProvider} 方法以编程方式添加的提供程序。
      *
-     * @param elementName the XML element name.
-     * @param namespace the XML namespace.
-     * @return the QName of the removed provider
+     * @param elementName XML 元素名称。
+     * @param namespace XML 命名空间。
+     * @return 已移除提供程序的 QName。
      */
     public static func removeIQProvider(elementName: String, namespace: String): QName {
         let key = getQName(elementName, namespace)
@@ -185,9 +150,7 @@ public class ProviderManager {
     }
 
     /**
-     * Returns the stanza extension provider registered to the specified XML element name
-     * and namespace. For example, if a provider was registered to the element name "x" and the
-     * namespace "jabber:x:event", then the following stanza would trigger the provider:
+     * 返回注册到指定 XML 元素名称和命名空间的节扩展提供程序。例如，如果一个提供程序注册到元素名称为“x”且命名空间为“jabber:x:event”，那么以下节将触发该提供程序：
      *
      * <pre>
      * &lt;message to='romeo@montague.net' id='message_1'&gt;
@@ -197,11 +160,11 @@ public class ProviderManager {
      *     &lt;/x&gt;
      * &lt;/message&gt;</pre>
      *
-     * <p>Note: this method is generally only called by the internal Xmpp classes.
+     * <p>注意：此方法通常仅由内部 Xmpp 类调用。
      *
-     * @param elementName element name associated with extension provider.
-     * @param namespace namespace associated with extension provider.
-     * @return the extension provider.
+     * @param elementName 与扩展提供程序相关联的元素名称。
+     * @param namespace 与扩展提供程序相关联的命名空间。
+     * @return 扩展提供程序。
      */
     public static func getExtensionProvider(elementName: String, namespace: String): ?ExtensionElementProvider<ExtensionElement> {
         let key = getQName(elementName, namespace)
@@ -213,13 +176,11 @@ public class ProviderManager {
     }
 
     /**
-     * Adds an extension provider with the specified element name and name space.
-     * The provider will override any providers loaded through the classpath.
-     * The provider must be either a PacketExtensionProvider instance.
+     * 添加具有指定元素名称和命名空间的扩展提供程序。该提供程序将覆盖通过类路径加载的任何提供程序。提供程序必须是 PacketExtensionProvider 实例。
      *
-     * @param elementName the XML element name.
-     * @param namespace the XML namespace.
-     * @param provider the extension provider.
+     * @param elementName XML 元素名称。
+     * @param namespace XML 命名空间。
+     * @param provider 扩展提供程序。
      */
     public static func addExtensionProvider(elementName: String, namespace: String, provider: Any): Unit {
         validate(elementName, namespace)
@@ -231,13 +192,11 @@ public class ProviderManager {
     }
 
     /**
-     * Removes an extension provider with the specified element name and namespace. This
-     * method is typically called to cleanup providers that are programmatically added
-     * using the {@link #addExtensionProvider(String, String, Object) addExtensionProvider} method.
+     * 移除具有指定元素名称和命名空间的扩展提供程序。此方法通常用于清理通过 {@link #addExtensionProvider(String, String, Object) addExtensionProvider} 方法以编程方式添加的提供程序。
      *
-     * @param elementName the XML element name.
-     * @param namespace the XML namespace.
-     * @return the QName of the removed stanza extension provider
+     * @param elementName XML 元素名称。
+     * @param namespace XML 命名空间。
+     * @return 已移除的节扩展提供程序的 QName。
      */
     public static func removeExtensionProvider(elementName: String, namespace: String): QName {
         let key = getQName(elementName, namespace)
@@ -246,11 +205,9 @@ public class ProviderManager {
     }
 
     /**
-     * Returns an unmodifiable collection of all PacketExtensionProvider instances.
-     * Each object in the collection will either be a PacketExtensionProvider instance,
-     * or a Class object that implements the PacketExtensionProvider interface.
+     * 返回所有 PacketExtensionProvider 实例的不可修改集合。集合中的每个对象要么是一个 PacketExtensionProvider 实例，要么是实现 PacketExtensionProvider 接口的 Class 对象。
      *
-     * @return all PacketExtensionProvider instances.
+     * @return 所有 PacketExtensionProvider 实例。
      */
     public static func getExtensionProviders(): ArrayList<ExtensionElementProvider<ExtensionElement>> {
         let providers = ArrayList<ExtensionElementProvider<ExtensionElement>>(extensionProviders.size)

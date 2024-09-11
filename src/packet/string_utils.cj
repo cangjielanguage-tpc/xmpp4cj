@@ -4,7 +4,7 @@
 package xmpp4cj.packet
 
 /**
- * A collection of utility methods for String objects.
+ * 一个用于字符串对象的工具方法集合。
  */
 public class StringUtils {
     public static let MD5: String = "MD5"
@@ -26,53 +26,52 @@ public class StringUtils {
     private static let RANDOM_STRING_CHUNK_SIZE: Int64 = 4
 
     /**
-     * Escape <code>input</code> for XML.
+     * 对<code>input</code>进行 XML 转义。
      *
-     * @param input the input to escape.
-     * @return the XML escaped variant of <code>input</code>.
+     * @param input 要转义的输入。
+     * @return <code>input</code>的 XML 转义变体。
      */
     public static func escapeForXml(input: String): String {
         return escapeForXml(input, StringUtilsXmlEscapeMode.safe)
     }
 
     /**
-     * Escape <code>input</code> for XML.
+     * 对<code>input</code>进行 XML 转义。
      *
-     * @param input the input to escape.
-     * @return the XML escaped variant of <code>input</code>.
+     * @param input 要转义的输入。
+     * @return <code>input</code>的 XML 转义变体。
      */
     public static func escapeForXmlAttribute(input: String): String {
         return escapeForXml(input, StringUtilsXmlEscapeMode.forAttribute)
     }
 
     /**
-     * Escape <code>input</code> for XML.
+     * 对<code>input</code>进行 XML 转义。
      * <p>
-     * This is an optimized variant of {@link #escapeForXmlAttribute(CharSequence)} for XML where the
-     * XML attribute is quoted using ''' (Apos).
+     * 这是 {@link #escapeForXmlAttribute(CharSequence)} 的优化变体，用于 XML 属性用'''（Apos）引用的情况。
      * </p>
      *
-     * @param input the input to escape.
-     * @return the XML escaped variant of <code>input</code>.
+     * @param input 要转义的输入。
+     * @return <code>input</code>的 XML 转义变体。
      */
     public static func escapeForXmlAttributeApos(input: String): String {
         return escapeForXml(input, StringUtilsXmlEscapeMode.forAttributeApos)
     }
 
     /**
-     * Escape <code>input</code> for XML.
+     * 对<code>input</code>进行 XML 转义。
      *
-     * @param input the input to escape.
-     * @return the XML escaped variant of <code>input</code>.
+     * @param input 要转义的输入。
+     * @return <code>input</code>的 XML 转义变体。
      */
     public static func escapeForXmlText(input: String): String {
         return escapeForXml(input, StringUtilsXmlEscapeMode.forText)
     }
     /**
-     * Escapes all necessary characters in the CharSequence so that it can be used in an XML doc.
+     * 转义 CharSequence 中的所有必要字符，以便它可以在 XML 文档中使用。
      *
-     * @param input the CharSequence to escape.
-     * @return the string with appropriate characters escaped.
+     * @param input 要转义的 CharSequence。
+     * @return 带有适当转义字符的字符串。
      */
     private static func escapeForXml(input: String, xmlEscapeMode: StringUtilsXmlEscapeMode): String {
         let inputer = input.toRuneArray()
@@ -133,10 +132,10 @@ public class StringUtils {
     }
 
     /**
-     * Encodes an array of bytes as String representation of hexadecimal.
+     * 将字节数组编码为十六进制的字符串表示形式。
      *
-     * @param bytes an array of bytes to convert to a hex string.
-     * @return generated hex string.
+     * @param bytes 要转换为十六进制字符串的字节数组。
+     * @return 生成的十六进制字符串。
      */
     public static func encodeHex(bytes: Array<Byte>): String {
         return toHexString(bytes)
@@ -147,16 +146,14 @@ public class StringUtils {
     }
 
     /**
-     * Returns a random String of numbers and letters (lower and upper case) of the specified length.
-     * The method uses the Random class that is built-in to Cangjie.
-     * This means that the output is only pseudo random, i.e., each number is
-     * mathematically generated so is not truly random.<p>
+     * 返回指定长度的由数字和字母（大小写）组成的随机字符串。
+     * 该方法使用 Cangjie 内置的 Random 类。
+     * 这意味着输出只是伪随机的，即每个数字都是数学生成的，因此不是真正的随机。<p>
      *
-     * The specified length must be at least one. If not, the method will return
-     * None.
+     * 指定的长度必须至少为一。如果不是，该方法将返回 None。
      *
-     * @param length the desired length of the random String to return.
-     * @return a random String of numbers and letters of the specified length.
+     * @param length 要返回的随机字符串的所需长度。
+     * @return 指定长度的数字和字母组成的随机字符串。
      */
     public static func insecureRandomString(length: Int64): String {
         return randomString(length, RandomUtil.RANDOM)
@@ -178,18 +175,15 @@ public class StringUtils {
     }
 
     /**
-     * Generate a secure random string with is human readable. The resulting string consists of 24 upper case characters
-     * from the Latin alphabet and numbers without '0' and 'O', grouped into 4-characters chunks, e.g.
-     * "TWNK-KD5Y-MT3T-E1GS-DRDB-KVTW". The characters are randomly selected by a cryptographically secure pseudorandom
-     * number generator (CSPRNG).
+     * 生成一个人类可读的安全随机字符串。结果字符串由 24 个拉丁字母中的大写字符和数字组成，不包括'0'和'O'，分成 4 个字符的块，例如
+     * "TWNK-KD5Y-MT3T-E1GS-DRDB-KVTW"。字符由密码学安全的伪随机数生成器（CSPRNG）随机选择。
      * <p>
-     * The string can be used a backup "code" for secrets,
-     * and is in fact the same as the one backup code specified in XEP-0373 and the one used by the
-     * <a href="github/com/open-keychain/open-keychain/wiki/Backups">Backup Format v2 of OpenKeychain</a>.
+     * 该字符串可以用作秘密的备份“代码”，实际上与 XEP-0373 中指定的备份代码以及
+     * <a href="github.com/open-keychain/open-keychain/wiki/Backups">OpenKeychain 的备份格式 v2</a>中使用的代码相同。
      * </p>
      *
-     * @see xep-0373/#backup-encryption XEP-0373 §5.4 Encrypting the Secret Key Backup
-     * @return a human readable secure random string.
+     * @see xep-0373/#backup-encryption XEP-0373 §5.4 加密密钥备份
+     * @return 一个人类可读的安全随机字符串。
      */
     public static func secureOfflineAttackSafeRandomString(): String {
         // 34^24 = 2^122.10 possible combinations. Which is enough to protect against offline brute force attacks.
@@ -242,35 +236,35 @@ public class StringUtils {
     }
 
     /**
-     * Returns true if CharSequence is not None and is not empty, false otherwise.
-     * Examples:
+     * 如果字符序列不是 None 且不为空，则返回 true，否则返回 false。
+     * 示例：
      *    isNotEmpty(None) - false
      *    isNotEmpty("") - false
      *    isNotEmpty(" ") - true
      *    isNotEmpty("empty") - true
      *
-     * @param cs checked CharSequence
-     * @return true if string is not None and is not empty, false otherwise
+     * @param cs 被检查的字符序列
+     * @return 如果字符串不是 None 且不为空，则为 true，否则为 false
      */
     public static func isNotEmpty<T>(cs: ?T): Bool where T <: ToString {
         return !isNullOrEmpty(cs)
     }
 
     /**
-     * Returns true if the given CharSequence is None or empty.
+     * 如果给定的字符序列是 None 或为空，则返回 true。
      *
      * @param cs
-     * @return true if the given CharSequence is None or empty
+     * @return 如果给定的字符序列是 None 或为空，则为 true
      */
     public static func isNullOrEmpty<T>(cs: ?T): Bool where T <: ToString {
         return cs.isNone() || isEmpty(cs.getOrThrow())
     }
 
     /**
-     * Returns true if all given CharSequences are not empty.
+     * 如果所有给定的字符序列都不为空，则返回 true。
      *
-     * @param css the CharSequences to test.
-     * @return true if all given CharSequences are not empty.
+     * @param css 要测试的字符序列。
+     * @return 如果所有给定的字符序列都不为空，则为 true。
      */
     public static func isNotEmpty(css: Array<CharSequence>): Bool {
         for (cs in css) {
@@ -282,10 +276,10 @@ public class StringUtils {
     }
 
     /**
-     * Returns true if all given CharSequences are either None or empty.
+     * 如果所有给定的字符序列都是 None 或为空，则返回 true。
      *
-     * @param css the CharSequences to test.
-     * @return true if all given CharSequences are None or empty.
+     * @param css 要测试的字符序列。
+     * @return 如果所有给定的字符序列都是 None 或为空，则为 true。
      */
     public static func isNullOrEmpty(css: Array<CharSequence>): Bool {
         for (cs in css) {
@@ -301,31 +295,31 @@ public class StringUtils {
     }
 
     /**
-     * Returns true if the given CharSequence is empty.
+     * 如果给定的字符序列为空，则返回 true。
      *
      * @param cs
-     * @return true if the given CharSequence is empty
+     * @return 如果给定的字符序列为空，则为 true
      */
     public static func isEmpty(cs: ToString): Bool {
         return cs.toString().size == 0
     }
 
     /**
-     * Transform a collection of objects to a whitespace delimited String.
+     * 将一个对象集合转换为以空格分隔的字符串。
      *
-     * @param collection the collection to transform.
-     * @return a String with all the elements of the collection.
+     * @param collection 要转换的集合。
+     * @return 包含集合中所有元素的字符串。
      */
     public static func collectionToString<T>(collection: Collection<T>): String where T <: ToString {
         return toStringBuilder(collection, " ").toString()
     }
 
     /**
-     * Transform a collection of objects to a delimited String.
+     * 将一个对象集合转换为以指定分隔符分隔的字符串。
      *
-     * @param collection the collection to transform.
-     * @param delimiter the delimiter used to delimit the Strings.
-     * @return a StringBuilder with all the elements of the collection.
+     * @param collection 要转换的集合。
+     * @param delimiter 用于分隔字符串的分隔符。
+     * @return 包含集合中所有元素的 StringBuilder。
      */
     public static func toStringBuilder<T>(collection: Collection<T>, delimiter: String): StringBuilder where T <: ToString {
         let sb: StringBuilder = StringBuilder(collection.size * 20)
@@ -379,11 +373,11 @@ public class StringUtils {
     }
 
     /**
-     * Require a {@link CharSequence} to be neither None, nor empty.
+     * 要求一个 {@link CharSequence} 既不是 None，也不是空。
      *
      * @param cs CharSequence
-     * @param message error message
-     * @param <CS> CharSequence type
+     * @param message 错误消息
+     * @param <CS> CharSequence 类型
      * @return cs
      */
     public static func requireNotNullNorEmpty<CS>(cs: ?CS, message: String): CS where CS <: CharSequence {
@@ -402,10 +396,10 @@ public class StringUtils {
     }
 
     /**
-     * Return the String representation of the given char sequence if it is not None.
+     * 如果给定的字符序列不是 None，则返回其字符串表示。
      *
-     * @param cs the char sequence or None.
-     * @return the String representation of <code>cs</code> or None.
+     * @param cs 字符序列或 None。
+     * @return <code>cs</code> 的字符串表示或 None。
      */
     public static func maybeToString(cs: CharSequence): String {
         return cs.toString()

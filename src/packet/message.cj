@@ -4,25 +4,25 @@
 package xmpp4cj.packet
 
 /**
- * Represents XMPP message packets. A message can be one of several types:
+ * 表示 XMPP 消息包。消息可以是以下几种类型之一：
  *
  * <ul>
- *      <li>MessageType.NORMAL -- (Default) a normal text message used in email like interface.
- *      <li>MessageType.CHAT -- a typically short text message used in line-by-line chat interfaces.
- *      <li>MessageType.GROUP_CHAT -- a chat message sent to a groupchat server for group chats.
- *      <li>MessageType.HEADLINE -- a text message to be displayed in scrolling marquee displays.
- *      <li>MessageType.ERROR -- indicates a messaging error.
+ *      <li>MessageType.NORMAL --（默认）用于类似电子邮件界面的普通文本消息。
+ *      <li>MessageType.CHAT -- 用于逐行聊天界面的通常较短的文本消息。
+ *      <li>MessageType.GROUP_CHAT -- 发送到群聊服务器的群聊消息。
+ *      <li>MessageType.HEADLINE -- 用于滚动字幕显示的文本消息。
+ *      <li>MessageType.ERROR -- 表示消息错误。
  * </ul>
  *
- * For each message type, different message fields are typically used as follows:
+ * 对于每种消息类型，通常不同的消息字段如下使用：
  * <table border="1">
- * <caption>Message Types</caption>
- * <tr><td>&nbsp;</td><td colspan="5"><b>Message type</b></td></tr>
- * <tr><td><i>Field</i></td><td><b>Normal</b></td><td><b>Chat</b></td><td><b>Group Chat</b></td><td><b>Headline</b></td><td><b>XMPPError</b></td></tr>
- * <tr><td><i>subject</i></td> <td>SHOULD</td><td>SHOULD NOT</td><td>SHOULD NOT</td><td>SHOULD NOT</td><td>SHOULD NOT</td></tr>
- * <tr><td><i>thread</i></td>  <td>OPTIONAL</td><td>SHOULD</td><td>OPTIONAL</td><td>OPTIONAL</td><td>SHOULD NOT</td></tr>
- * <tr><td><i>body</i></td>    <td>SHOULD</td><td>SHOULD</td><td>SHOULD</td><td>SHOULD</td><td>SHOULD NOT</td></tr>
- * <tr><td><i>error</i></td>   <td>MUST NOT</td><td>MUST NOT</td><td>MUST NOT</td><td>MUST NOT</td><td>MUST</td></tr>
+ * <caption>消息类型</caption>
+ * <tr><td>&nbsp;</td><td colspan="5"><b>消息类型</b></td></tr>
+ * <tr><td><i>字段</i></td><td><b>普通</b></td><td><b>聊天</b></td><td><b>群聊</b></td><td><b>头条</b></td><td><b>XMPP 错误</b></td></tr>
+ * <tr><td><i>主题</i></td><td>应该</td><td>不应该</td><td>不应该</td><td>不应该</td><td>不应该</td></tr>
+ * <tr><td><i>线程</i></td><td>可选</td><td>应该</td><td>可选</td><td>可选</td><td>不应该</td></tr>
+ * <tr><td><i>正文</i></td><td>应该</td><td>应该</td><td>应该</td><td>应该</td><td>不应该</td></tr>
+ * <tr><td><i>错误</i></td><td>不应该</td><td>不应该</td><td>不应该</td><td>不应该</td><td>必须</td></tr>
  * </table>
  */
 public class Message <: MessageOrPresence & MessageView & ToString {
@@ -37,9 +37,9 @@ public class Message <: MessageOrPresence & MessageView & ToString {
     }
 
     /**
-     * Copy constructor.
+     * 复制构造函数。
      * <p>
-     * This does not perform a deep clone, as extension elements are shared between the new and old instance.
+     * 这不会执行深度克隆，因为扩展元素在新实例和旧实例之间共享。
      * </p>
      */
     public init(other: Message) {
@@ -98,37 +98,37 @@ public class Message <: MessageOrPresence & MessageView & ToString {
 }
 
 /**
- * Represents the type of a message.
+ * 表示消息的类型。
  */
 public enum MessageType <: Equatable<MessageType> & ToString {
     /**
-     * (Default) a normal text message used in email like interface.
+     * （默认）用于类似电子邮件界面的普通文本消息。
      */
     | normal
     /**
-     * Typically short text message used in line-by-line chat interfaces.
+     * 用于逐行聊天界面的通常较短的文本消息。
      */
     | chat
     /**
-     * Chat message sent to a groupchat server for group chats.
+     * 发送到群聊服务器的群聊消息。
      */
     | groupchat
     /**
-     * Text message to be displayed in scrolling marquee displays.
+     * 用于滚动字幕显示的文本消息。
      */
     | headline
     /**
-     * indicates a messaging error.
+     * 表示消息错误。
      */
     | error
 
     /**
-     * Converts a String into the corresponding types.
-     * Valid String values that can be converted to types are: "normal", "chat", "groupchat", "headline" and "error".
+     * 将字符串转换为相应的类型。
+     * 可以转换为类型的有效字符串值是：“normal”、“chat”、“groupchat”、“headline”和“error”。
      *
-     * @param string the String value to covert.
-     * @return the corresponding Type.
-     * @throws IllegalArgumentException when not able to parse the string parameter
+     * @param string 要转换的字符串值。
+     * @return 相应的类型。
+     * @throws IllegalArgumentException 当无法解析字符串参数时。
      */
     public static func fromString(string: String): MessageType {
         match (string.toAsciiLower()) {
@@ -167,7 +167,7 @@ public enum MessageType <: Equatable<MessageType> & ToString {
 }
 
 /**
- * Represents a message subject, its language and the content of the subject.
+ * 表示消息主题、其语言以及主题内容。
  */
 public class MessageSubject <: ExtensionElement & Hashable & Equatable<MessageSubject> {
     public static let ELEMENT = "subject"
@@ -187,9 +187,9 @@ public class MessageSubject <: ExtensionElement & Hashable & Equatable<MessageSu
     }
 
     /**
-     * Returns the subject content.
+     * 返回主题内容。
      *
-     * @return the content of the subject.
+     * @return 主题的内容。
      */
     public func getSubject(): String {
         return subject
@@ -226,7 +226,7 @@ public class MessageSubject <: ExtensionElement & Hashable & Equatable<MessageSu
 }
 
 /**
- * Represents a message body, its language and the content of the message.
+ * 表示消息正文、其语言以及消息内容。
  */
 public class MessageBody <: ExtensionElement & Hashable & Equatable<MessageBody> {
     public static let ELEMENT: String = "body"
@@ -252,9 +252,9 @@ public class MessageBody <: ExtensionElement & Hashable & Equatable<MessageBody>
     }
 
     /**
-     * Returns the message content.
+     * 返回消息内容。
      *
-     * @return the content of the message.
+     * @return 消息的内容。
      */
     public func getMessage(): String {
         return message

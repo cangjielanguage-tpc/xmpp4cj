@@ -4,35 +4,25 @@
 package xmpp4cj.packet
 
 /**
- * Represents XMPP presence stanzas. Every presence stanza has a type, which is one of
- * the following values:
+ * 表示 XMPP 存在节。每个存在节都有一个类型，以下是类型的值：
  * <ul>
- *      <li>{@link PresenceType#available available} -- (Default) indicates the user is available to
- *          receive messages.
- *      <li>{@link PresenceType#unavailable unavailable} -- the user is unavailable to receive messages.
- *      <li>{@link PresenceType#subscribe subscribe} -- request subscription to recipient's presence.
- *      <li>{@link PresenceType#subscribed subscribed} -- grant subscription to sender's presence.
- *      <li>{@link PresenceType#unsubscribe unsubscribe} -- request removal of subscription to
- *          sender's presence.
- *      <li>{@link PresenceType#unsubscribed unsubscribed} -- grant removal of subscription to
- *          sender's presence.
- *      <li>{@link PresenceType#error error} -- the presence stanza contains an error message.
+ *      <li>{@link PresenceType#available 可用} --（默认）表示用户可接收消息。
+ *      <li>{@link PresenceType#unavailable 不可用} -- 用户不可接收消息。
+ *      <li>{@link PresenceType#subscribe 订阅} -- 请求订阅接收者的存在。
+ *      <li>{@link PresenceType#subscribed 已订阅} -- 同意发送者的存在订阅。
+ *      <li>{@link PresenceType#unsubscribe 取消订阅} -- 请求移除对发送者存在的订阅。
+ *      <li>{@link PresenceType#unsubscribed 已取消订阅} -- 同意移除对发送者存在的订阅。
+ *      <li>{@link PresenceType#error 错误} -- 存在节包含错误消息。
  * </ul><p>
  *
- * A number of attributes are optional:
+ * 一些属性是可选的：
  * <ul>
- *      <li>Status -- free-form text describing a user's presence (i.e., gone to lunch).
- *      <li>Priority -- non-negative numerical priority of a sender's resource. The
- *          highest resource priority is the default recipient of packets not addressed
- *          to a particular resource.
- *      <li>PresenceMode -- one of five presence modes: {@link PresenceMode#available available} (the default),
- *          {@link PresenceMode#chat chat}, {@link PresenceMode#away away}, {@link PresenceMode#xa xa} (extended away), and
- *          {@link PresenceMode#dnd dnd} (do not disturb).
+ *      <li>状态 -- 描述用户存在的自由格式文本（例如，去吃午饭了）。
+ *      <li>优先级 -- 发送者资源的非负数字优先级。最高资源优先级是未指定特定资源的数据包的默认接收者。
+ *      <li>存在模式 -- 五种存在模式之一：{@link PresenceMode#available 可用}（默认）、{@link PresenceMode#chat 聊天}、{@link PresenceMode#away 离开}、{@link PresenceMode#xa 长时间离开}和{@link PresenceMode#dnd 请勿打扰}。
  * </ul><p>
  *
- * Presence stanzas are used for two purposes. First, to notify the server of
- * the user's current presence status. Second, they are used to subscribe and
- * unsubscribe users from the roster.
+ * 存在节有两个用途。首先，通知服务器用户当前的存在状态。其次，它们用于在通讯录中订阅和取消订阅用户。
  */
 public class Presence <: MessageOrPresence & PresenceView & ToString {
     public static let ELEMENT = "presence"
@@ -42,8 +32,7 @@ public class Presence <: MessageOrPresence & PresenceView & ToString {
     private var status: ?String = None
 
     /**
-     * The priority of the presence. It is <code>None</code> to indicate that the original
-     * presence stanza did not had an explicit priority set. In which case the priority defaults to 0.
+     * 存在的优先级。如果原始存在节没有明确设置优先级，则为<code>None</code>。在这种情况下，优先级默认为 0。
      *
      * @see <a href="tools/ietf/org/html/rfc6121#section-4.7.2.3">RFC 6121 § 4.7.2.3.</a>
      */
@@ -60,9 +49,9 @@ public class Presence <: MessageOrPresence & PresenceView & ToString {
     }
 
     /**
-     * Copy constructor.
+     * 复制构造函数。
      * <p>
-     * This does not perform a deep clone, as extension elements are shared between the new and old instance.
+     * 这不会执行深度克隆，因为扩展元素在新实例和旧实例之间共享。
      * </p>
      *
      * @param other Presence
@@ -76,15 +65,9 @@ public class Presence <: MessageOrPresence & PresenceView & ToString {
     }
 
     /**
-     * Returns true if the {@link PresenceType presence type} is available (online) and
-     * false if the user is unavailable (offline), or if this is a presence packet
-     * involved in a subscription operation. This is a convenience method
-     * equivalent to <code>getType() == PresenceType.available</code>. Note that even
-     * when the user is available, their presence mode may be {@link PresenceMode#away away},
-     * {@link PresenceMode#xa extended away} or {@link PresenceMode#dnd do not disturb}. Use
-     * {@link #isAway()} to determine if the user is away.
+     * 如果{@link PresenceType 存在类型}是可用（在线），则返回 true，如果用户不可用（离线），或者这是一个参与订阅操作的存在包，则返回 false。这是一个方便方法，等同于<code>getType() == PresenceType.available</code>。请注意，即使用户可用，他们的存在模式也可能是{@link PresenceMode#away 离开}、{@link PresenceMode#xa 长时间离开}或{@link PresenceMode#dnd 请勿打扰}。使用{@link #isAway()}确定用户是否离开。
      *
-     * @return true if the presence type is available.
+     * @return 如果存在类型是可用，则为 true。
      */
     public func isAvailable(): Bool {
         return typ == PresenceType.available
@@ -185,54 +168,48 @@ public class Presence <: MessageOrPresence & PresenceView & ToString {
 }
 
 /**
- * An enum to represent the presence type. Note that presence type is often confused
- * with presence mode. Generally, if a user is signed in to a server, they have a presence
- * type of {@link #available available}, even if the mode is {@link PresenceMode#away away},
- * {@link PresenceMode#dnd dnd}, etc. The presence type is only {@link #unavailable unavailable} when
- * the user is signing out of the server.
+ * 一个枚举来表示存在类型。请注意，存在类型经常与存在模式混淆。一般来说，如果用户登录到服务器，他们的存在类型是{@link #available 可用}，即使模式是{@link PresenceMode#away 离开}、{@link PresenceMode#dnd 请勿打扰}等。只有当用户退出服务器时，存在类型才是{@link #unavailable 不可用}。
  */
 public enum PresenceType <: ToString & Equatable<PresenceType> {
     /**
-     * The user is available to receive messages (default).
+     * 用户可接收消息（默认）。
      */
     available
     /**
-     * The user is unavailable to receive messages.
+     * 用户不可接收消息。
      */
     | unavailable
     /**
-     * Request subscription to recipient's presence.
+     * 请求订阅接收者的存在。
      */
     | subscribe
     /**
-     * Grant subscription to sender's presence.
+     * 同意发送者的存在订阅。
      */
     | subscribed
     /**
-     * Request removal of subscription to sender's presence.
+     * 请求移除对发送者存在的订阅。
      */
     | unsubscribe
     /**
-     * Grant removal of subscription to sender's presence.
+     * 同意移除对发送者存在的订阅。
      */
     | unsubscribed
     /**
-     * The presence stanza contains an error message.
+     * 存在节包含错误消息。
      */
     | error
     /**
-     * A presence probe as defined in section 4.3 of RFC 6121.
+     * 如 RFC 6121 第 4.3 节所定义的存在探测。
      */
     | probe
 
     /**
-     * Converts a String into the corresponding types. Valid String values that can be converted
-     * to types are: "available", "unavailable", "subscribe", "subscribed", "unsubscribe",
-     * "unsubscribed" and "error".
+     * 将字符串转换为相应的类型。可以转换为类型的有效字符串值是：“available”、“unavailable”、“subscribe”、“subscribed”、“unsubscribe”、“unsubscribed”和“error”。
      *
-     * @param string the String value to covert.
-     * @return the corresponding PresenceType.
-     * @throws IllegalArgumentException when not able to parse the string parameter
+     * @param string 要转换的字符串值。
+     * @return 相应的存在类型。
+     * @throws IllegalArgumentException 当无法解析字符串参数时。
      */
     public static func fromString(string: String): PresenceType {
         return match (string.toAsciiLower()) {
@@ -281,37 +258,36 @@ public enum PresenceType <: ToString & Equatable<PresenceType> {
 }
 
 /**
- * An enum to represent the presence mode.
+ * 一个枚举来表示存在模式。
  */
 public enum PresenceMode <: ToString & Equatable<PresenceMode> {
     /**
-     * Free to chat.
+     * 可以聊天。
      */
     chat
     /**
-     * Available (the default).
+     * 可用（默认）。
      */
     | available
     /**
-     * Away.
+     * 离开。
      */
     | away
     /**
-     * Away for an extended period of time.
+     * 长时间离开。
      */
     | xa
     /**
-     * Do not disturb.
+     * 请勿打扰。
      */
     | dnd
 
     /**
-     * Converts a String into the corresponding types. Valid String values that can be converted
-     * to types are: "chat", "available", "away", "xa", and "dnd".
+     * 将字符串转换为相应的类型。可以转换为类型的有效字符串值是：“chat”、“available”、“away”、“xa”和“dnd”。
      *
-     * @param string the String value to covert.
-     * @return the corresponding PresenceMode.
-     * @throws IllegalArgumentException when not able to parse the string parameter
+     * @param string 要转换的字符串值。
+     * @return 相应的存在模式。
+     * @throws IllegalArgumentException 当无法解析字符串参数时。
      */
     public static func fromString(string: String): PresenceMode {
         return match (string.toAsciiLower()) {
