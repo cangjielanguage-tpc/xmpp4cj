@@ -1,5 +1,5 @@
 import std.time.*
-import xmpp4cj.xmpp.*
+import xmpp4cj.jid.*
 
 public abstract class JidCase <: ToString {
     /*JID from parse*/
@@ -125,12 +125,12 @@ func testValidJids(xmppStringPrepperState: XmppStringPrepperState, validJid: Val
         jid = JidCreate.froms(validJid.unnormalizedJid, xmppStringPrepperState.context)
         validJid.jid = jid
     } catch (e: XmppStringprepException) {
-        let time = Duration.since(startTime)
+        let time = DateTime.now() - startTime
         let failed = JidTestResult(validJid, time, e)
         xmppStringPrepperState.validJidFailedTestresults.append(failed)
         return
     }
-    let time = Duration.since(startTime)
+    let time = DateTime.now() - startTime
     var domainpartMismatch = false
     var localpartMismatch = false
     var resourcepartMismatch = false
@@ -177,12 +177,12 @@ func testInvalidJids(xmppStringPrepperState: XmppStringPrepperState, invalidJid:
     try {
         jid = JidCreate.froms(invalidJid.invalidJid, xmppStringPrepperState.context)
     } catch (e: XmppStringprepException) {
-        let time = Duration.since(startTime)
+        let time = DateTime.now() - startTime
         let successful = JidTestResult(invalidJid, time, e)
         xmppStringPrepperState.invalidJidSuccessfulTestresults.append(successful)
         return
     }
-    let time = Duration.since(startTime)
+    let time = DateTime.now() - startTime
     let failed = JidTestResult(invalidJid, time, None)
     xmppStringPrepperState.invalidJidFailedTestresults.append(failed)
 }

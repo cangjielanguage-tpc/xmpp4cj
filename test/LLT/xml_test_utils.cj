@@ -1,23 +1,115 @@
-import encoding.xml.*
 import std.collection.*
 import std.sort.*
 import std.regex.*
 import std.unittest.testmacro.*
+import xmpp4cj.xml.*
+
+public class XmlAttr <: ToString {
+    var name: String
+    var value: String
+    init(name: String, value: String) {
+        this.name = name
+        this.value = value
+    }
+    public func toString(): String {
+        "${name}='${value}'"
+    }
+}
+
+public class XmlElement <: ToString {
+    var parent: XmlElement = unsafe { zeroValue<XmlElement>() }
+    let namespaces = ArrayList<QName>()
+    let attributes = ArrayList<XmlAttr>()
+    let childrenElements = ArrayList<XmlElement>()
+    var name: String
+    var content: String
+    init(name: String, content: String) {
+        this.name = name
+        this.content = content
+    }
+    public func toXmlString(): String {
+        let str = StringBuilder("<${name}")
+        for (ns in namespaces) {
+            if (ns.getPrefix() == "") {
+                str.append(" xmlns='${ns.getNamespaceURI()}'")
+            } else {
+                str.append(" xmlns:${ns.getPrefix()}='${ns.getNamespaceURI()}'")
+            }
+        }
+        for (attr in attributes) {
+            str.append(" ${attr.name}='${attr.value}'")
+        }
+        str.append(">")
+        for (child in childrenElements) {
+            str.append(child.toXmlString())
+        }
+        str.append("</${name}>")
+        str.toString()
+    }
+    public func toString(): String {
+        toXmlString()
+    }
+    static func parse(xml: String): XmlElement {
+        let input = ByteArrayStream()
+        input.write(xml.toArray())
+        let parser = XmppXmlParser.newXmlParser(input)
+
+        // root 空节点
+        let tag = QName("")
+        var current: XmlElement = XmlElement("", "")
+
+        while (!(parser.next() == XmlPullParserEvent.END_ELEMENT && parser.getQName() == tag)) {
+            match (parser.getEventType()) {
+                case XmlPullParserEvent.START_ELEMENT =>
+                    let element = XmlElement(parser.getQName().getFullName(), "")
+                    // namespaces
+                    for (i in 0..parser.getNamespaceCount()) {
+                        let prefix = parser.getNamespacePrefix(i)
+                        let nsuri = parser.getNamespaceUri(i)
+                        let qname = QName(nsuri, "", prefix)
+                        current.namespaces.append(qname)
+                    }
+                    // attributes
+                    for (i in 0..parser.getAttributeCount()) {
+                        let qname = parser.getAttributeQName(i)
+                        let value = parser.getAttributeValue(i)
+                        let attr = XmlAttr(qname.getFullName(), value)
+                        current.attributes.append(attr)
+                    }
+                    current.childrenElements.append(element)
+                    element.parent = current
+                    current = element
+                case XmlPullParserEvent.TEXT_CHARACTERS => current.content = parser.getText()
+                case XmlPullParserEvent.END_ELEMENT => current = current.parent
+                case v => break
+            }
+        }
+        current.childrenElements[0]
+    }
+}
 
 public class XMLBuilder {
     public static func create(name: String): XMLBuilder {
         let doc = XMLBuilder(name)
-        doc.parent = doc
+        doc
+    }
+    public static func create(name: String, namespace: String): XMLBuilder {
+        let doc = XMLBuilder(name, namespace)
         doc
     }
 
     var namespaceURI: String = ""
     let ele: XmlElement
     let children = ArrayList<XMLBuilder>()
-    var parent: XMLBuilder = unsafe { zeroValue<XMLBuilder>() }
+    var parent: ?XMLBuilder = None
 
     public init(name: String) {
         ele = XmlElement(name, "")
+    }
+    public init(name: String, namespaceURI: String) {
+        ele = XmlElement(name, "")
+        ele.attributes.append(XmlAttr("xmlns", namespaceURI))
+        this.namespaceURI = namespaceURI
     }
 
     public func attribute(name: String, value: String): XMLBuilder {
@@ -45,6 +137,7 @@ public class XMLBuilder {
 
     public func element(name: String): XMLBuilder {
         let child = XMLBuilder(name)
+        child.parent = this
         children.append(child)
         ele.childrenElements.append(child.ele)
         child
@@ -54,18 +147,26 @@ public class XMLBuilder {
     }
 
     public func up(): XMLBuilder {
-        this.parent
+        this.parent.getOrThrow()
     }
 
     public func asString(property: Map<String, String>): String {
         if ((property.get("omit-xml-declaration") ?? "yes") == "yes") {
-            ele.toXmlString()
+            getRoot().ele.toXmlString()
         } else {
-            ele.toXmlString()
+            getRoot().ele.toXmlString()
         }
     }
     public func asString(): String {
-        ele.toXmlString()
+        let e = getRoot().ele
+        e.toString()
+    }
+    func getRoot(): XMLBuilder {
+        var e = this
+        while (let Some(v) <- e.parent) {
+            e = v
+        }
+        e
     }
 }
 
@@ -89,8 +190,6 @@ func xmlSimilarSimple(expected: ToString, actual: ToString): Bool {
     expectedArr == actualArr
 }
 
-let Xml_Parser: XmlParser = XmlParser()
-
 func xmlSimilarParser(expected: ToString, actual: ToString): Bool {
     if (expected.toString() == actual.toString()) {
         return true
@@ -100,8 +199,8 @@ func xmlSimilarParser(expected: ToString, actual: ToString): Bool {
     println("expected: ${expectedStr}")
     println("  actual: ${actualStr}")
 
-    expectedStr = Xml_Parser.parse(expectedStr).getOrThrow().toXmlString()
-    actualStr = Xml_Parser.parse(actualStr).getOrThrow().toXmlString()
+    expectedStr = XmlElement.parse(expectedStr).toXmlString()
+    actualStr = XmlElement.parse(actualStr).toXmlString()
 
     expectedStr == actualStr
 }
@@ -142,7 +241,7 @@ public class XmlAssert {
     var actual: String
     var expected: String
     var _ignoreChildNodesOrder = true
-    var matcher: Iterator<NodeMatcher> = Array<NodeMatcher>([]).iterator()
+    var matcher: Iterable<NodeMatcher> = []
     var _normalizeWhitespace = false
 
     public init(actual: String, expected: String) {

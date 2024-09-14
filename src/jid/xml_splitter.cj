@@ -1,7 +1,7 @@
 /*
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
  */
-package xmpp4cj.xmpp
+package xmpp4cj.jid
 
 /**
  * 一个能够将 XML 拆分为顶级元素的 XML 拆分器。

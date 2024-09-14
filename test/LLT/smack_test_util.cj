@@ -1,6 +1,6 @@
 import std.reflect.*
 import std.io.*
-// import xmpp4cj.packet.*
+import xmpp4cj.packet.*
 // func factoryinit(factoryClass: TypeInfo): XmlPullParserFactory {
 //     return factoryClass.getDeclaredConstructor().newInstance()
 // }
@@ -23,21 +23,15 @@ public enum XmlPullParserKind {
 let Xml_Pull_Parser_Factorys: Array<XmlPullParserFactory> = [StaxXmlPullParserFactory()]
 
 public class SmackTestUtil {
-    public static func parse<P, E>(
-        xml: CharSequence,
-        providerClass: TypeInfo,
-        parserKind: XmlPullParserKind
-    ): E where E <: Element, P <: AbstractProvider<E> {
-        let provider: P = providerClassToProvider<E, P>(providerClass)
+    public static func parse<P, E>(xml: CharSequence, parserKind: XmlPullParserKind): E where E <: Element,
+        P <: AbstractProvider<E> {
+        let provider: P = providerClassToProvider<P, E>()
         return parse(xml, provider, parserKind)
     }
 
-    public static func parse<P, E>(
-        inputStream: InputStream,
-        providerClass: TypeInfo,
-        parserKind: XmlPullParserKind
-    ): E where E <: Element, P <: AbstractProvider<E> {
-        let provider: P = providerClassToProvider<E, P>(providerClass)
+    public static func parse<P, E>(inputStream: InputStream, parserKind: XmlPullParserKind): E where E <: Element,
+        P <: AbstractProvider<E> {
+        let provider: P = providerClassToProvider<P, E>()
         return parse(inputStream, provider, parserKind)
     }
 
@@ -97,18 +91,22 @@ public class SmackTestUtil {
         return parser
     }
 
-    private static func providerClassToProvider<E, P>(providerClass: TypeInfo): P where P <: AbstractProvider<E>,
-        E <: Element {
-        match (providerClass.getStaticProperty("INSTANCE").getValue()) {
-            case v: P => return v
-            case _ => ()
-        }
+    private static func providerClassToProvider<P, E>(): P where P <: AbstractProvider<E>, E <: Element {
+        let providerClass = TypeInfo.of<P>()
+        try {
+            match (providerClass.getStaticProperty("INSTANCE").getValue()) {
+                case v: P => return v
+                case _ => ()
+            }
+        } catch (_: InfoNotFoundException) {}
 
         let cti: ClassTypeInfo = (providerClass as ClassTypeInfo).getOrThrow()
-        match (cti.getStaticVariable("INSTANCE").getValue()) {
-            case v: P => return v
-            case _ => ()
-        }
+        try {
+            match (cti.getStaticVariable("INSTANCE").getValue()) {
+                case v: P => return v
+                case _ => ()
+            }
+        } catch (_: InfoNotFoundException) {}
 
         match (cti.getConstructor().apply()) {
             case v: P => return v
@@ -133,5 +131,10 @@ public class SmackTestUtil {
             }
             parser.next()
         }
+    }
+
+    private static func createDummyParser(): XmlPullParser {
+        let dummyElement: String = "<empty-element/>"
+        return PacketParserUtils.getParserFor(dummyElement)
     }
 }

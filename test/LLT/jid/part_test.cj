@@ -18,5 +18,4 @@ class PartTest_1 <: Part {
         this.this_0 = this_0
     }
 
-    private static let serialVersionUID = 0
 }

@@ -1,6 +1,6 @@
 // DEPENDENCE: ../z_test.cj
 // DEPENDENCE: ../jid_test_util.cj
-// DEPENDENCE: xml_test_utils.cj
+// DEPENDENCE: ../xml_test_utils.cj
 // EXEC: cjc %import-path %L %l %f z_test.cj jid_test_util.cj xml_test_utils.cj --test
 // EXEC: ./main
 

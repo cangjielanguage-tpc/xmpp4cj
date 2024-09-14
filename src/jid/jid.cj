@@ -1,12 +1,12 @@
 /*
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
  */
-package xmpp4cj.xmpp
+package xmpp4cj.jid
 
 /**
  * XMPP 地址，也称为 JID（以前是 “Jabber Identifier” 的缩写），它在 XMPP 网络中作为全局唯一的地址。
  * <p>
- * JIDs 可以通过{@link xmpp4cj.xmpp.JidCreate}工具类从String创建。
+ * JIDs 可以通过{@link xmpp4cj.jid.JidCreate}工具类从String创建。
  * </p>
  *
  * <pre>
@@ -15,9 +15,9 @@ package xmpp4cj.xmpp
  * </pre>
  * <p>
  * 这是所有 JID 类型的超接口，JID 由两个维度构建：裸（Bare）/ 全（Full）和 域（Domain）/ 实体（Entity）。
- * 1. 每个 JID 至少由一个域部分（{@link xmpp4cj.xmpp.Domainpart}）组成。
- * 2. 裸 JID 类型没有资源部分（{@link xmpp4cj.xmpp.Resourcepart}），全 JID 类型总是有资源部分。
- * 3. 域 JID 类型没有本地部分（{@link xmpp4cj.xmpp.Localpart}），而实体 JID 类型总是有本地部分。
+ * 1. 每个 JID 至少由一个域部分（{@link xmpp4cj.jid.Domainpart}）组成。
+ * 2. 裸 JID 类型没有资源部分（{@link xmpp4cj.jid.Resourcepart}），全 JID 类型总是有资源部分。
+ * 3. 域 JID 类型没有本地部分（{@link xmpp4cj.jid.Localpart}），而实体 JID 类型总是有本地部分。
  * </p>
  * <p>
  * 一些 JID 类型的示例：
@@ -30,19 +30,19 @@ package xmpp4cj.xmpp
  * </tr>
  * <tr>
  * <td><code>example.org</code></td>
- * <td>{@link xmpp4cj.xmpp.DomainBareJid}</td>
+ * <td>{@link xmpp4cj.jid.DomainBareJid}</td>
  * </tr>
  * <tr>
  * <td><code>example.org/resource</code></td>
- * <td>{@link xmpp4cj.xmpp.DomainFullJid}</td>
+ * <td>{@link xmpp4cj.jid.DomainFullJid}</td>
  * </tr>
  * <tr>
  * <td><code>user@example.org</code></td>
- * <td>{@link xmpp4cj.xmpp.EntityBareJid}</td>
+ * <td>{@link xmpp4cj.jid.EntityBareJid}</td>
  * </tr>
  * <tr>
  * <td><code>user@example.org/resource</code></td>
- * <td>{@link xmpp4cj.xmpp.EntityFullJid}</td>
+ * <td>{@link xmpp4cj.jid.EntityFullJid}</td>
  * </tr>
  * </table>
  * <p>
@@ -52,11 +52,11 @@ package xmpp4cj.xmpp
  * <p>
  * 如果 JID 应该作为路径名的一部分存储，例如作为文件名，那么 JID 的 URL 编码表示是理想的。
  * 可以使用 {@link #asUrlEncodedString()} 方法获取此信息。
- * JidCreate API 提供了从 URL 编码的字符串创建 JIDs 的方法，如 {@link xmpp4cj.xmpp.JidCreate#fromUrlEncoded(String)} 。
+ * JidCreate API 提供了从 URL 编码的字符串创建 JIDs 的方法，如 {@link xmpp4cj.jid.JidCreate#fromUrlEncoded(String)} 。
  * </p>
  *
- * @see <a href="http://xmpp.org/rfcs/rfc6120.html#arch-addresses">RFC 6120 (XMPP: Core) § 2.1 Global Addresses</a>
- * @see <a href="http://xmpp.org/rfcs/rfc6122.html#addressing-fundamentals">RFC 6122 (XMPP: Address Format) § 2.1 Fundamentals</a>
+ * @see <a href="xmpp/org/rfcs/rfc6120.html#arch-addresses">RFC 6120 (XMPP: Core) § 2.1 Global Addresses</a>
+ * @see <a href="xmpp/org/rfcs/rfc6122.html#addressing-fundamentals">RFC 6122 (XMPP: Address Format) § 2.1 Fundamentals</a>
  */
 public interface Jid <: Equatable<Jid> & ToString & Hashable {
 
@@ -72,7 +72,7 @@ public interface Jid <: Equatable<Jid> & ToString & Hashable {
      * <p>
      * 由于某些 Unicode 码点在 JID 的本地部分（localpart）中是不被允许的，按照所需的 stringprep 规范，这些码点在实际的 JID 中需要被转义。未转义的 JID 表示形式仅用于向人类用户展示或用于与非 XMPP 系统进行交互。
      * </p>
-     * 例如，如果用户输入 {@code 'at&t guy@example.com'}，使用{@link xmpp4cj.xmpp.JidCreate}创建的转义后的实际 JID 将是{@code 'at\26t\20guy@example.com'}，这是 {@link Jid#toString()} 方法将返回的结果。而 {@link Jid#asUnescapedString()} 方法将再次返回{@code 'at&t guy@example.com'}。
+     * 例如，如果用户输入 {@code 'at&t guy@example.com'}，使用{@link xmpp4cj.jid.JidCreate}创建的转义后的实际 JID 将是{@code 'at\26t\20guy@example.com'}，这是 {@link Jid#toString()} 方法将返回的结果。而 {@link Jid#asUnescapedString()} 方法将再次返回{@code 'at&t guy@example.com'}。
      *
      * @return 这个 JID 的未转义字符串表示。
      */
@@ -354,7 +354,7 @@ public interface Jid <: Equatable<Jid> & ToString & Hashable {
  */
 public interface BareJid <: Jid {}
 /**
- * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个没有本地部分（{@link xmpp4cj.xmpp.Localpart}）的 JID，可以是{@link DomainBareJid}或{@link DomainFullJid}类型。
+ * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个没有本地部分（{@link xmpp4cj.jid.Localpart}）的 JID，可以是{@link DomainBareJid}或{@link DomainFullJid}类型。
  * <p>
  * Examples:
  * </p>
@@ -378,7 +378,11 @@ public interface DomainJid <: Jid {}
  *
  * @see Jid
  */
-public interface DomainFullJid <: Jid & FullJid & DomainJid & Equatable<DomainFullJid> {}
+public interface DomainFullJid <: Jid & FullJid & DomainJid & Equatable<DomainFullJid> {
+    operator override func !=(that: Jid): Bool {
+        !(this == that)
+    }
+}
 
 /**
  * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个具有资源部分（{@link Resourcepart}）的 JID，可以是{@link EntityFullJid}或{@link DomainFullJid}类型。
@@ -447,7 +451,11 @@ public interface EntityJid <: Jid {
  *
  * @see Jid
  */
-public interface EntityFullJid <: Jid & FullJid & EntityJid & Equatable<EntityFullJid> {}
+public interface EntityFullJid <: Jid & FullJid & EntityJid & Equatable<EntityFullJid> {
+    operator override func !=(that: Jid): Bool {
+        !(this == that)
+    }
+}
 /**
  * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个由本地部分（localpart）和域部分（domainpart）组成的实体裸 JID。例如 “user@xmpp.org”。
  * <p>
@@ -460,7 +468,11 @@ public interface EntityFullJid <: Jid & FullJid & EntityJid & Equatable<EntityFu
  *
  * @see Jid
  */
-public interface EntityBareJid <: Jid & EntityJid & BareJid & Equatable<EntityBareJid> {}
+public interface EntityBareJid <: Jid & EntityJid & BareJid & Equatable<EntityBareJid> {
+    operator override func !=(that: Jid): Bool {
+        !(this == that)
+    }
+}
 /**
  * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个仅由域部分（domainpart）组成的域裸 JID。例如 “xmpp.org”。
  * <p>
@@ -473,7 +485,11 @@ public interface EntityBareJid <: Jid & EntityJid & BareJid & Equatable<EntityBa
  *
  * @see Jid
  */
-public interface DomainBareJid <: Jid & BareJid & DomainJid {}
+public interface DomainBareJid <: Jid & BareJid & DomainJid {
+    operator override func !=(that: Jid): Bool {
+        !(this == that)
+    }
+}
 
 public abstract class AbstractJid <: Jid {
     /**
@@ -612,26 +628,14 @@ public abstract class AbstractJid <: Jid {
     public operator override func ==(other: Jid): Bool {
         return this.toString() == other.toString()
     }
-    public operator override func !=(other: Jid): Bool {
-        return this.toString() != other.toString()
-    }
     public operator func ==(other: EntityFullJid): Bool {
         this.toString() == other.toString()
-    }
-    public operator func !=(other: EntityFullJid): Bool {
-        this.toString() != other.toString()
     }
     public operator func ==(other: EntityBareJid): Bool {
         this.toString() == other.toString()
     }
-    public operator func !=(other: EntityBareJid): Bool {
-        this.toString() != other.toString()
-    }
     public operator func ==(other: DomainFullJid): Bool {
         this.toString() == other.toString()
-    }
-    public operator func !=(other: DomainFullJid): Bool {
-        this.toString() != other.toString()
     }
 }
 

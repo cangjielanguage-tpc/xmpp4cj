@@ -4,7 +4,7 @@
 package xmpp4cj.packet
 
 class UUID <: ToString {
-    private let bytes: Array<Byte> = Array(16, item: 0)
+    private let bytes: Array<Byte> = Array(16, repeat: 0)
 
     public init(data: Array<Byte>) {
         if (data.size != 16) {
