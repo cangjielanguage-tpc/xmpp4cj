@@ -227,7 +227,7 @@ public class StringUtils {
         if (length == 0) {
             return ""
         }
-        let randomChars: Array<Byte> = Array<Byte>(length, item: 0)
+        let randomChars: Array<Byte> = Array<Byte>(length, repeat: 0)
         for (i in 0..length) {
             let index: Int64 = random.nextInt64(UNAMBIGUOUS_NUMBERS_AND_LETTERS.size)
             randomChars[i] = UNAMBIGUOUS_NUMBERS_AND_LETTERS[index]

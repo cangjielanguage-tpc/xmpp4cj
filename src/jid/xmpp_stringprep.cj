@@ -1,7 +1,7 @@
 /*
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
  */
-package xmpp4cj.xmpp
+package xmpp4cj.jid
 
 /**
  * XMPP 中常用的 Stringprep 操作的接口。

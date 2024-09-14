@@ -8,6 +8,20 @@ package xmpp4cj.packet
  * between many clients must be placed in this utility class.
  */
 public class PacketParserUtils {
+    private static let LOGGER = getGlobalLogger(("name", "PacketParserUtils"))
+
+    public static func getParserFor(stanza: String): XmlPullParser {
+        let input = ByteArrayStream()
+        input.write(stanza.toArray())
+        return getParserFor(input)
+    }
+
+    public static func getParserFor(inputStream: InputStream): XmlPullParser {
+        var parser: XmlPullParser = XmppXmlParser.newXmlParser(inputStream)
+        ParserUtils.forwardToStartElement(parser)
+        return parser
+    }
+    
     // throws XmppStringprepException
     public static func parseIqData(parser: XmlPullParser): IqData {
         let id: ?String = parser.getAttributeValue("", "id")

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
  */
-package xmpp4cj.xmpp
+package xmpp4cj.jid
 
 /**
  * XMPP 中用于日期和时间处理的工具类
@@ -73,7 +73,7 @@ public class XmppDateTime {
      * @return 解析后的 DateTime。
      * @throws ParseException 如果指定的字符串无法解析。
      */
-    static func parseXEP0082Date(dateString: String): DateTime {
+    public static func parseXEP0082Date(dateString: String): DateTime {
         for (coupling in couplings) {
             let matcher = coupling.pattern.matcher(dateString)
             if (matcher.find().isSome()) {

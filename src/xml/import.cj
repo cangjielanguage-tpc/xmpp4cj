@@ -5,7 +5,6 @@ package xmpp4cj.xml
 
 internal import std.collection.{ArrayList, HashMap}
 internal import std.io.{InputStream, OutputStream}
-internal import encoding.xml.*
 
 // BA: ByteArray
 // S: Space

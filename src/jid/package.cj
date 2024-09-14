@@ -1,7 +1,7 @@
 /*
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
  */
-package xmpp4cj.xmpp
+package xmpp4cj.jid
 
 internal import encoding.hex.{toHexString}
 internal import encoding.url.{URL}
@@ -14,7 +14,7 @@ internal import std.log.*
 internal import std.regex.{MatchData, Regex}
 internal import std.socket.*
 internal import std.sort.*
-internal import std.sync.{AtomicInt64, Monitor, ReentrantMutex, Timer, Semaphore, sleep}
+internal import std.sync.{AtomicInt64, Monitor, ReentrantMutex, Timer, Semaphore}
 internal import std.time.*
 internal import std.unicode.{UnicodeExtension}
 

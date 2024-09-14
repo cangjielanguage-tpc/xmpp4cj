@@ -9,7 +9,7 @@ internal import std.time.*
 internal import std.unicode.UnicodeExtension
 internal import std.unittest.*
 internal import xmpp4cj.packet.*
-internal import xmpp4cj.xmpp.*
+internal import xmpp4cj.jid.*
 internal import xmpp4cj.xml.*
 
 class Assert {

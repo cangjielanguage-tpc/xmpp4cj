@@ -1,7 +1,7 @@
 // DEPENDENCE: ../z_test.cj
 // DEPENDENCE: ../jid_test_util.cj
-// DEPENDENCE: xml_test_utils.cj
-// DEPENDENCE: smack_test_util.cj
+// DEPENDENCE: ../xml_test_utils.cj
+// DEPENDENCE: ../smack_test_util.cj
 // EXEC: cjc %import-path %L %l %f z_test.cj jid_test_util.cj xml_test_utils.cj smack_test_util.cj --test
 /// EXEC: ./main 
 //--filter=*.setPresenceModeTest
