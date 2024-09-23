@@ -398,6 +398,11 @@ public class XmlReader {
             i++
         }
         let local = buf.read(i)
-        QName("", local, prefix)
+        let namespace = if (prefix == "xml") {
+            W3_XML_NAMESPACE
+        } else {
+            ""
+        }
+        QName(namespace, local, prefix)
     }
 }

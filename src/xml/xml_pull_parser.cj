@@ -307,9 +307,6 @@ public enum XmlPullParserEvent <: Equatable<XmlPullParserEvent> & ToString {
     public operator func ==(other: XmlPullParserEvent): Bool {
         this.toString() == other.toString()
     }
-    public operator func !=(other: XmlPullParserEvent): Bool {
-        !(this == other)
-    }
     public func toString(): String {
         match (this) {
             case START_DOCUMENT => "START_DOCUMENT"

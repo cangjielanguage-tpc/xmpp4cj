@@ -46,10 +46,6 @@ struct Status <: Equatable<Status> & ToString {
         return this.v == other.v
     }
 
-    public operator func !=(other: Status): Bool {
-        return this.v != other.v
-    }
-
     public func toString(): String {
         var addPrefix = false
         let sb = StringBuilder()
@@ -243,7 +239,7 @@ func toAsciiLower(b: Byte): Byte {
     }
 }
 
-class Stack<T> {
+public class Stack<T> {
     private var buff = Array<T>(16, repeat: unsafe { zeroValue<T>() })
     private var idx = 0
 

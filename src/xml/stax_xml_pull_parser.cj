@@ -9,6 +9,8 @@ package xmpp4cj.xml
 public class StaxXmlPullParser <: XmlPullParser {
     let reader: XmlReader
 
+    private var xmlNode: ?XmlNode = None
+
     public init(input: InputStream) {
         this.reader = XmlReader(input)
     }
@@ -147,7 +149,6 @@ public class StaxXmlPullParser <: XmlPullParser {
 
                     let qnameTask = HashMap<String, (String) -> Unit>()
                     this.qname = reader.readElementStart()
-
                     while (let Some(e) <- reader.peek()) {
                         match (e) {
                             case XmlEvent.Namespace =>
@@ -161,9 +162,13 @@ public class StaxXmlPullParser <: XmlPullParser {
                     }
 
                     // set namespace of qname
-                    qname.namespace = nss.get(qname.prefix) ?? ""
-                    for (attr in attrs where attr.qname.prefix.size > 0) {
-                        attr.qname.namespace = nss.get(attr.qname.prefix) ?? ""
+                    if (let Some(uri) <- nss.get(qname.prefix)) {
+                        qname.namespace = uri
+                    }
+                    for (attr in attrs where attr.qname.prefix.size > 0 && attr.qname.namespace.size == 0) {
+                        ifSome(nss.get(attr.qname.prefix)) {
+                            uri => attr.qname.namespace = uri
+                        }
                     }
 
                     depth++
@@ -180,7 +185,7 @@ public class StaxXmlPullParser <: XmlPullParser {
                     text = str.toString()
                     this.eventType = XmlPullParserEvent.TEXT_CHARACTERS
                 case ElementEnd =>
-                    reader.readElementEnd()
+                    this.qname = reader.readElementEnd()
                     this.eventType = XmlPullParserEvent.END_ELEMENT
                 case _ =>
                     reader.skip()
