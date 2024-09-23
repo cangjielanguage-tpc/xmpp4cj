@@ -98,15 +98,6 @@ public class QName <: ToString & Hashable & Equatable<QName> {
     }
 
     /**
-     * 重写不等于运算符方法。
-     * @param qname 要比较的 QName 对象。
-     * @return 取等于运算符结果的反值。
-     */
-    public operator func !=(qname: QName): Bool {
-        !(this == qname)
-    }
-
-    /**
      * 计算哈希值的方法，并使用了 @OverflowWrapping 属性修饰。
      * @return 计算后的哈希值。
      */

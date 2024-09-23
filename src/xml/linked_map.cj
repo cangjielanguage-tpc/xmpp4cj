@@ -3,12 +3,20 @@
  */
 package xmpp4cj.xml
 
+/*
+ * 内部使用 不完全实现
+ */
 class LinkedHashMap<K, V> where K <: Hashable & Equatable<K> {
     private let map: HashMap<K, V> = HashMap<K, V>()
     private let kvs: ArrayList<(K, V)> = ArrayList<(K, V)>()
     func put(k: K, v: V): Unit {
-        map.put(k, v)
-        kvs.append((k, v))
+        if (let Some(old) <- map.put(k, v)) {
+            for (i in 0..kvs.size where kvs[i][0] == k) {
+                kvs[i] = (k, v)
+            }
+        } else {
+            kvs.append((k, v))
+        }
     }
     operator func [](key: K): V {
         map[key]
