@@ -3,20 +3,17 @@
  */
 package xmpp4cj.jid
 
-internal import encoding.hex.{toHexString}
 internal import encoding.url.{URL}
-internal import net.tls.*
 internal import std.collection.*
-internal import std.collection.concurrent.{ConcurrentHashMap, NonBlockingQueue}
-internal import std.convert.*
-internal import std.io.{ByteArrayStream, InputStream, IOException, OutputStream, StringReader, ChainedInputStream}
-internal import std.log.*
-internal import std.regex.{MatchData, Regex}
-internal import std.socket.*
-internal import std.sort.*
-internal import std.sync.{AtomicInt64, Monitor, ReentrantMutex, Timer, Semaphore}
-internal import std.time.*
-internal import std.unicode.{UnicodeExtension}
+internal import std.convert.Parsable
+internal import std.io.{ByteArrayStream, IOException, OutputStream, StringReader}
+internal import std.regex.{Regex}
+internal import std.sort.stableSort
+internal import std.sync.{AtomicInt64, ReentrantMutex}
+internal import std.time.{DateTime, DateTimeFormat, TimeParseException, TimeZone}
+// internal import std.unicode.{UnicodeExtension}
+
+public type CharSequence = ToString
 
 public interface OptionExt<T> {
     operator func ()(): T

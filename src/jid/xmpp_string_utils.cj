@@ -14,10 +14,7 @@ class XmppStringUtils {
      * @return the name portion of the XMPP address, the empty String or <code>None</code>.
      */
     public static func parseLocalpart(jid: String): ?String {
-        let atIndex = jid.indexOf("@") ?? -1
-        if (atIndex < 0) {
-            return None
-        }
+        let atIndex = jid.indexOf("@") ?? return None
         if (atIndex == 0) {
             // '@' as first character, i.e. '@example.org". Return empty string as
             // localpart, to make it possible to differentiate this from 'example.org'
@@ -134,7 +131,7 @@ class XmppStringUtils {
                 case b'>' => buf.appendAll("\\3e".toArray())
                 case b'@' => buf.appendAll("\\40".toArray())
                 case b'\\' => buf.appendAll("\\5c".toArray())
-                case _ => if (Rune(c).isWhiteSpace()) {
+                case _ => if ((0x9 <= c && c <= 0xd) || c == 0x20) {
                     buf.appendAll("\\20".toArray())
                 } else {
                     buf.append(c)

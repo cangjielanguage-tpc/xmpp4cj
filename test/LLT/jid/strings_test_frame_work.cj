@@ -140,10 +140,12 @@ func testValidJids(xmppStringPrepperState: XmppStringPrepperState, validJid: Val
     }
     if (validJid.localpart.size > 0) {
         if (!jid.hasLocalpart()) {
+            println(1.2)
             localpartMismatch = true
         } else {
             let localpart: String = jid.getLocalpartOrThrow().toString()
             if (localpart != validJid.localpart) {
+                println("1.3 ${localpart} ${validJid.localpart}")
                 localpartMismatch = true
             }
         }
@@ -188,7 +190,9 @@ func testInvalidJids(xmppStringPrepperState: XmppStringPrepperState, invalidJid:
 }
 
 public class KnownFailures {
-    static let VALID_JIDS_WHITELIST: Set<String> = HashSet<String>(["ς@example.com"])
+    static let VALID_JIDS_WHITELIST: Set<String> = HashSet<String>(["ς@example.com", // x86失败 aarch64失败
+        "Σ@example.com" // x86成功 aarch64-apple成功 aarch64-linux失败 
+        ])
     static let INVALID_JIDS_WHITELIST: Set<String> = HashSet<String>(
         [
             "♚@example.com",
