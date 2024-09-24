@@ -296,9 +296,6 @@ public enum XmlSplitterState <: Equatable<XmlSplitterState> & ToString {
     public operator func ==(that: XmlSplitterState) {
         this.toString() == that.toString()
     }
-    public operator func !=(that: XmlSplitterState) {
-        return !(this == that)
-    }
     public override func toString(): String {
         match (this) {
             case START => "START"

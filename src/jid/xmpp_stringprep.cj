@@ -150,7 +150,7 @@ public class SimpleXmppStringprep <: XmppStringprep {
     }
 
     private static func simpleStringprep(string: String): String {
-        let res = string.toLower()
+        let res = string.toAsciiLower()
         return res
     }
 
@@ -193,9 +193,6 @@ public class SimpleXmppStringprep <: XmppStringprep {
             case v: SimpleXmppStringprep => refEq(this, v)
             case _ => false
         }
-    }
-    public operator func !=(other: XmppStringprep): Bool {
-        !(this == other)
     }
 }
 

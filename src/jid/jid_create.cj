@@ -1377,9 +1377,6 @@ class JidStringAndStringprep <: Hashable & Equatable<JidStringAndStringprep> {
     public operator func ==(other: JidStringAndStringprep): Bool {
         return jidString == other.jidString && stringprep == other.stringprep
     }
-    public operator func !=(other: JidStringAndStringprep): Bool {
-        !(this == other)
-    }
 
     private var hash: ?Int = None
 

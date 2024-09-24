@@ -1,6 +1,6 @@
 // DEPENDENCE: z_test.cj strings_test_frame_work.cj
 // EXEC: cjc %import-path %L %l %f z_test.cj strings_test_frame_work.cj --test
-// EXEC: ./main 
+// EXEC: ./main
 
 @Test
 public class StringsTestframeworkTest {
@@ -18,7 +18,16 @@ public class StringsTestframeworkTest {
         //     println("${jid.jid} ${jid.e} ${jid.jid.jid}")
         // }
         @Assert(state.validJidFailedTestresults.size+state.validJidSuccessfulTestresults.size, ValidJids.size)
+        println("1.0 ${state.validJidFailedTestresults.size} ${state.validJidSuccessfulTestresults.size}")
+
+        for (res in state.validJidFailedTestresults) {
+            println("1.01 ${res.jid} ${res.e}")
+        }
         KnownFailures.checkAgainstWhitelist(state.validJidFailedTestresults)
+        for (res in state.validJidFailedTestresults) {
+            println("1.02 ${res.jid} ${res.e}")
+        }
+
         @Assert(state.validJidFailedTestresults.size, 0)
 
         state = XmppStringPrepperState(SimpleXmppStringprep.getInstance(), InvalidJids.size)
@@ -39,4 +48,12 @@ public class StringsTestframeworkTest {
         // let invalidJids = StringsTestframework.parseInvalidJids()
         @Assert(INVALID_JID_CORPUS_SIZE, InvalidJids.size)
     }
+}
+
+@Test
+func lowerTest(): Unit {
+    var rune = 'ς'
+    println("${rune} toAsciiLower:${rune.toAsciiLower()} toLower:${rune.toLower()}")
+    rune = 'Σ'
+    println("${rune} toAsciiLower:${rune.toAsciiLower()} toLower:${rune.toLower()}")
 }
