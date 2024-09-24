@@ -23,7 +23,7 @@ public open class AbstractError {
     ) {
         this.descriptiveTexts = descriptiveTexts ?? Collections.EMPTY_STRING_MAP
         this.textNamespace = textNamespace
-        this.extensions = extensions ?? Collections.EMPTY_EXTENSION_ELEMENT_COLLECTION
+        this.extensions = extensions ?? EMPTY_EXTENSION_ELEMENT_COLLECTION
     }
 
     /**
@@ -83,6 +83,6 @@ public open class AbstractError {
             xml.halfOpenElement("text").xmlnsAttribute(textNamespace).optXmlLangAttribute(xmllang).rightAngleBracket().
                 escape(text).closeElement("text")
         }
-        xml.append(extensions |> map<ExtensionElement, Element> {e => e})
+        xml.append(extensions)
     }
 }

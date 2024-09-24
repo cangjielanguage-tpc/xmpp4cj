@@ -135,11 +135,11 @@ public class MessageBuilder <: MessageOrPresenceBuilder & MessageView {
         super.froms(froms)
         getThis()
     }
-    public override func setError(stanzaError: StanzaError): MessageBuilder {
+    public override func setError(stanzaError: ?StanzaError): MessageBuilder {
         super.setError(stanzaError)
         getThis()
     }
-    public override func setLanguage(language: String): MessageBuilder {
+    public override func setLanguage(language: ?String): MessageBuilder {
         super.setLanguage(language)
         getThis()
     }

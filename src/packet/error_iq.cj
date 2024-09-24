@@ -29,11 +29,11 @@ public class ErrorIQ <: IQ {
         return request?.getIQChildElementBuilder(xml) ?? None
     }
 
-    public static func builder(error: StanzaError): ErrorIQBuilder {
+    public static func builder(error: ?StanzaError): ErrorIQBuilder {
         return ErrorIQBuilder(error, IqData.EMPTY.ofType(IQType.error))
     }
 
-    public static func builder(error: StanzaError, iqData: IqData): ErrorIQBuilder {
+    public static func builder(error: ?StanzaError, iqData: IqData): ErrorIQBuilder {
         return ErrorIQBuilder(error, iqData)
     }
 }
@@ -41,7 +41,7 @@ public class ErrorIQ <: IQ {
 public class ErrorIQBuilder <: IqBuilder {
     var request: ?IQ = None
 
-    init(error: StanzaError, iqData: IqData) {
+    init(error: ?StanzaError, iqData: IqData) {
         super(iqData)
         if (iqData.getType() != IQType.error) {
             throw IllegalArgumentException("Error IQs must be of type 'error'")
@@ -81,11 +81,11 @@ public class ErrorIQBuilder <: IqBuilder {
         super.froms(froms)
         getThis()
     }
-    public override func setError(stanzaError: StanzaError): ErrorIQBuilder {
+    public override func setError(stanzaError: ?StanzaError): ErrorIQBuilder {
         super.setError(stanzaError)
         getThis()
     }
-    public override func setLanguage(language: String): ErrorIQBuilder {
+    public override func setLanguage(language: ?String): ErrorIQBuilder {
         super.setLanguage(language)
         getThis()
     }

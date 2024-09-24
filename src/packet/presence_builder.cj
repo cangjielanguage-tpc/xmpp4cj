@@ -104,11 +104,11 @@ public class PresenceBuilder <: MessageOrPresenceBuilder & PresenceView {
         super.froms(froms)
         getThis()
     }
-    public override func setError(stanzaError: StanzaError): PresenceBuilder {
+    public override func setError(stanzaError: ?StanzaError): PresenceBuilder {
         super.setError(stanzaError)
         getThis()
     }
-    public override func setLanguage(language: String): PresenceBuilder {
+    public override func setLanguage(language: ?String): PresenceBuilder {
         super.setLanguage(language)
         getThis()
     }

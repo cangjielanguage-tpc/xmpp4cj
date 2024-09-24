@@ -105,7 +105,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @param stanzaError 要与这个节关联的错误。
      * @return 对这个构建器的引用。
      */
-    public open func setError(stanzaError: StanzaError): StanzaBuilder {
+    public open func setError(stanzaError: ?StanzaError): StanzaBuilder {
         this.stanzaError = stanzaError
         return getThis()
     }
@@ -116,7 +116,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @param language 这个节的 xml:lang。
      * @return 对这个构建器的引用。
      */
-    public open func setLanguage(language: String): StanzaBuilder {
+    public open func setLanguage(language: ?String): StanzaBuilder {
         this.language = language
         return getThis()
     }

@@ -61,7 +61,7 @@ public class StreamError <: AbstractError & Nonza & ToString {
     public init(
         condition: ?StreamErrorCondition,
         conditionTextStr: ?String,
-        descriptiveTexts: Map<String, String>,
+        descriptiveTexts: ?Map<String, String>,
         extensions: ArrayList<ExtensionElement>
     ) {
         super(descriptiveTexts, extensions)
@@ -214,9 +214,5 @@ public enum StreamErrorCondition <: ToString & Equatable<StreamErrorCondition> {
 
     public operator func ==(that: StreamErrorCondition): Bool {
         this.toString() == that.toString()
-    }
-
-    public operator func !=(that: StreamErrorCondition): Bool {
-        return !(this == that)
     }
 }

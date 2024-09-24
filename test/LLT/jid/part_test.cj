@@ -17,5 +17,4 @@ class PartTest_1 <: Part {
         super(part)
         this.this_0 = this_0
     }
-
 }

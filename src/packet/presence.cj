@@ -158,7 +158,7 @@ public class Presence <: MessageOrPresence & PresenceView & ToString {
             case _ => ()
         }
 
-        buf.append(extensions |> map<ExtensionElement, Element> {v => v})
+        buf.append(extensions)
 
         // Add the error sub-packet, if there is one.
         appendErrorIfExists(buf)
@@ -251,10 +251,6 @@ public enum PresenceType <: ToString & Equatable<PresenceType> {
             case _ => false
         }
     }
-
-    public operator func !=(that: PresenceType): Bool {
-        return !(this == that)
-    }
 }
 
 /**
@@ -319,9 +315,5 @@ public enum PresenceMode <: ToString & Equatable<PresenceMode> {
             case (dnd, dnd) => true
             case _ => false
         }
-    }
-
-    public operator func !=(that: PresenceMode): Bool {
-        return !(this == that)
     }
 }

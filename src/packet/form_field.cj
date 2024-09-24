@@ -93,8 +93,4 @@ public enum FormFieldType <: ToString & Equatable<FormFieldType> {
     public operator func ==(that: FormFieldType): Bool {
         this.toString() == that.toString()
     }
-
-    public operator func !=(that: FormFieldType): Bool {
-        return !(this == that)
-    }
 }
