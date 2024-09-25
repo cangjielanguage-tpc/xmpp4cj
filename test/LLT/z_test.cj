@@ -11,6 +11,7 @@ internal import std.unittest.*
 internal import xmpp4cj.packet.*
 internal import xmpp4cj.jid.*
 internal import xmpp4cj.xml.*
+internal import xmpp4cj.util.*
 
 class Assert {
     static func assertNull<T>(any: ?T): Unit {

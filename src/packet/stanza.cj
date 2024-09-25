@@ -16,7 +16,7 @@ package xmpp4cj.packet
  * </p>
  * @see <a href="xmpp/org/rfcs/rfc6120.html#stanzas">RFC 6120 § 8. XML Stanzas</a>
  */
-public abstract class Stanza <: StanzaView & TopLevelStreamElement {
+public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
     public static let TEXT = "text"
     public static let ITEM = "item"
     protected static let DEFAULT_LANGUAGE = "en" // TODO

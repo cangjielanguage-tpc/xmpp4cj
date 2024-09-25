@@ -13,7 +13,7 @@ internal import std.sync.{AtomicInt64, ReentrantMutex}
 internal import std.time.{DateTime, DateTimeFormat, TimeParseException, TimeZone}
 // internal import std.unicode.{UnicodeExtension}
 
-public type CharSequence = ToString
+type CharSequence = ToString
 
 public interface OptionExt<T> {
     operator func ()(): T

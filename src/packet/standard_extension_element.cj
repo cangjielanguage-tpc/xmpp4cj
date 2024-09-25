@@ -60,7 +60,7 @@ public open class StandardExtensionElement <: ExtensionElement {
     }
 
     public open func getAttributes(): Map<String, String> {
-        return UnmodifiableMap(attributes)
+        return Collections.unmodifiableMap(attributes)
     }
 
     public open func getFirstElement(element: String, namespace: String): ?StandardExtensionElement {
@@ -88,7 +88,7 @@ public open class StandardExtensionElement <: ExtensionElement {
     }
 
     public open func getElements(): Collection<StandardExtensionElement> {
-        return elements?.values() ?? Collections.EMPTY_STANDARD_EXTENSION_ELEMENT_COLLECTION
+        return elements?.values() ?? EMPTY_STANDARD_EXTENSION_ELEMENT_COLLECTION
     }
 
     public open func getText(): ?String {
@@ -177,8 +177,5 @@ public open class StandardExtensionElementBuilder {
 extend StandardExtensionElement <: Equatable<StandardExtensionElement> {
     public operator func ==(rhs: StandardExtensionElement): Bool {
         return refEq(this, rhs)
-    }
-    public operator func !=(rhs: StandardExtensionElement): Bool {
-        return !refEq(this, rhs)
     }
 }

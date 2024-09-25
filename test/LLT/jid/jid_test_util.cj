@@ -1,4 +1,4 @@
-public import xmpp4cj.jid.*
+import xmpp4cj.jid.*
 
 public class JidTestUtil {
     public static let EXAMPLE_ORG: DomainBareJid = JidCreate.domainBareFrom("example.org")

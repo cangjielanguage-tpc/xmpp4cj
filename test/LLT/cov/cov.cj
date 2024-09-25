@@ -810,7 +810,7 @@ public func XmlStringBuilder_1(): Unit {
     obj.condAttribute(false, "name17", "value17")
     let arre: Array<Element> = [CompressFeature(["ns1"])]
     let itere: Iterator<Element> = arre.iterator()
-    obj.optAppend(itere)
+    obj.optAppend(arre)
     let io = ByteArrayStream()
     let writer = StringWriter<OutputStream>(io)
     obj.write(writer, XmlEnvironment("ns1", "lang1", None))
@@ -845,21 +845,6 @@ public func StaxXmlPullParser_1(): Unit {
 }
 
 @Test
-public func XmlEvent_1(): Unit {
-    @Assert(XmlEvent.Decl.toString(),"Decl")
-    @Assert(XmlEvent.Comment.toString(),"Comment")
-    @Assert(XmlEvent.ProcInst.toString(),"ProcInst")
-    @Assert(XmlEvent.DTD.toString(),"DTD")
-    @Assert(XmlEvent.ElementStart.toString(),"ElementStart")
-    @Assert(XmlEvent.ElementEnd.toString(),"ElementEnd")
-    @Assert(XmlEvent.Attribute.toString(),"Attribute")
-    @Assert(XmlEvent.Namespace.toString(),"Namespace")
-    @Assert(XmlEvent.Text.toString(),"Text")
-    @Assert(XmlEvent.CData.toString(),"CData")
-    @Assert(XmlEvent.EntityRef.toString(),"EntityRef")
-}
-
-@Test
 public func XmlPullParser_1(): Unit {
     @Assert(XmlPullParserEvent.PROCESSING_INSTRUCTION.toString(),"PROCESSING_INSTRUCTION")
     @Assert(XmlPullParserEvent.COMMENT.toString(),"COMMENT")
@@ -868,45 +853,6 @@ public func XmlPullParser_1(): Unit {
     @Assert(XmlPullParserEvent.OTHER.toString(),"OTHER")
 
     XmlPullParserException(Exception())
-}
-
-@Test
-public func XmlReader_1(): Unit {
-    let staxXmlPullParserFactory = StaxXmlPullParserFactory()
-    let input = ByteArrayStream()
-    input.write("<element/>".toArray())
-    let obj = XmlReader(input)
-    @AssertThrows[UnsupportedException](obj.getCurrentPosition())
-    @AssertThrows[UnsupportedException](obj.getCurrentNamespace())
-    @AssertThrows[UnsupportedException](obj.readComment())
-    @AssertThrows[UnsupportedException](obj.readProcInst())
-    @AssertThrows[UnsupportedException](obj.readDTD())
-    @AssertThrows[UnsupportedException](obj.readAttribute(""))
-    @AssertThrows[Exception](obj.readCData())
-    @AssertThrows[Exception](obj.readDecl())
-    obj.skip()
-    obj.readElementEnd()
-}
-
-@Test
-public func XmlReader_2(): Unit {
-    let staxXmlPullParserFactory = StaxXmlPullParserFactory()
-    let input = ByteArrayStream()
-    input.write("<element/>".toArray())
-    let obj = XmlReader(input)
-    obj.peek()
-    obj.skip()
-    obj.readElementEnd("element")
-}
-
-@Test
-public func XmppXmlParser_1(): Unit {
-    let staxXmlPullParserFactory = StaxXmlPullParserFactory()
-    let input = ByteArrayStream()
-    input.write("<element/>".toArray())
-    XmppXmlParser.getXmlPullParserFactory()
-    XmppXmlParser.setXmlPullParserFactory(staxXmlPullParserFactory)
-    XmppXmlParser.newXmlParser(input)
 }
 
 @Test

@@ -399,10 +399,6 @@ public enum StanzaErrorCondition <: ToString & Equatable<StanzaErrorCondition> &
         }
     }
 
-    public operator func !=(that: StanzaErrorCondition): Bool {
-        return !(this == that)
-    }
-
     public func hashCode(): Int64 {
         return toString().hashCode()
     }

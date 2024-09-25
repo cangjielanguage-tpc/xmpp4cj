@@ -42,7 +42,7 @@ public interface IqView <: StanzaView & ToString {
  * </ul>
  */
 public abstract class IQ <: Stanza & IqView {
-    // Don't name this field 'ELEMENT'. When it comes to IQ, ELEMENT is the child element!
+    // Don't name this field 'ELEMENT'. When it froms to IQ, ELEMENT is the child element!
     public static let IQ_ELEMENT = "iq"
     public static let QUERY_ELEMENT = "query"
 
@@ -186,7 +186,7 @@ public abstract class IQ <: Stanza & IqView {
             }
             xml.rightAngleBracket()
         }
-        xml.append(extensionsXml |> map<ExtensionElement, Element> {v => v})
+        xml.append(extensionsXml)
         xml.closeElement(iqChildElement.elementName)
     }
 
@@ -324,10 +324,6 @@ public enum IQType <: ToString & Equatable<IQType> {
             case _ => false
         }
     }
-
-    public operator func !=(that: IQType): Bool {
-        return !(this == that)
-    }
 }
 
 public enum IQResponseType <: ToString & Equatable<IQResponseType> {
@@ -354,10 +350,6 @@ public enum IQResponseType <: ToString & Equatable<IQResponseType> {
             case (error, error) => true
             case _ => false
         }
-    }
-
-    public operator func !=(that: IQResponseType): Bool {
-        return !(this == that)
     }
 }
 

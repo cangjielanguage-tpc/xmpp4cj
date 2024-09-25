@@ -7,9 +7,9 @@ public abstract class AbstractTextElement <: ExtensionElement {
     public static let ELEMENT: String = "text"
 
     private let text: String
-    private let lang: String
+    private let lang: ?String
 
-    protected AbstractTextElement(text: String, lang: String) {
+    protected AbstractTextElement(text: String, lang: ?String) {
         this.text = StringUtils.requireNotNullNorEmpty(text, "Text must not be None nor empty")
         this.lang = lang
     }
@@ -38,7 +38,7 @@ public abstract class AbstractTextElement <: ExtensionElement {
 public class StanzaErrorTextElement <: AbstractTextElement {
     public static let NAMESPACE: String = StanzaError.ERROR_CONDITION_AND_TEXT_NAMESPACE
 
-    public StanzaErrorTextElement(text: String, lang: String) {
+    public StanzaErrorTextElement(text: String, lang: ?String) {
         super(text, lang)
     }
 

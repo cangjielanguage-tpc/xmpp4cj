@@ -91,7 +91,7 @@ public class Message <: MessageOrPresence & MessageView & ToString {
         }
 
         // Add extension elements, if any are defined.
-        buf.append(getExtensions() |> map<ExtensionElement, Element> {v => v})
+        buf.append(getExtensions())
         buf.closeElement(ELEMENT)
         return buf
     }
@@ -160,9 +160,6 @@ public enum MessageType <: Equatable<MessageType> & ToString {
             case (error, error) => true
             case _ => false
         }
-    }
-    public operator func !=(that: MessageType): Bool {
-        return !(this == that)
     }
 }
 
@@ -309,7 +306,7 @@ public class MessageThread <: ExtensionElement {
     public static let ELEMENT: String = "thread"
     public static let NAMESPACE: String = StreamOpen.CLIENT_NAMESPACE
     public static let QNAME = QName(NAMESPACE, ELEMENT)
-    public static let PARENTATTRIBUTENAME = "parent"
+    public static let PARENT_ATTRIBUTE_NAME = "parent"
 
     private let thread: String
     private let parent: ?String
@@ -345,7 +342,7 @@ public class MessageThread <: ExtensionElement {
 
     public override func toXML(xmlEnvironment: ?XmlEnvironment): XmlStringBuilder {
         let xml = XmlStringBuilder(this, xmlEnvironment)
-        xml.optAttribute(PARENTATTRIBUTENAME, parent)
+        xml.optAttribute(PARENT_ATTRIBUTE_NAME, parent)
         xml.rightAngleBracket()
         xml.escape(thread)
         xml.closeElement(this)

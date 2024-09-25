@@ -1,35 +1,30 @@
 /*
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
  */
+/**
+ * XML stanzas and extension elements that are part of the XMPP protocol.
+ */
 package xmpp4cj.packet
 
 internal import crypto.crypto.*
 internal import encoding.hex.*
+internal import encoding.url.*
 internal import log.*
+internal import logger.*
 internal import std.collection.*
 internal import std.collection.concurrent.{ConcurrentHashMap}
 internal import std.convert.*
 internal import std.io.*
+internal import std.net.*
 internal import std.math.*
 internal import std.math.numeric.*
 internal import std.random.*
 internal import std.regex.*
 internal import std.sync.*
 internal import std.time.*
-public import xmpp4cj.jid.*
-public import xmpp4cj.xml.*
-
-extend<T> ArrayList<T> {
-    func remove(v: T): Bool {
-        for (i in 0..this.size) {
-            if (EqualsUtil.equals(this[i], v)) {
-                this.remove(i)
-                return true
-            }
-        }
-        return false
-    }
-}
+internal import xmpp4cj.jid.*
+internal import xmpp4cj.util.*
+internal import xmpp4cj.xml.*
 
 extend<K, V> ConcurrentHashMap<K, V> where K <: Hashable & Equatable<K> {
     func values(): Iterator<V> {
@@ -43,8 +38,19 @@ public class Objects {
     }
 }
 
-func assert(exp: Bool): Unit {
+public func assert(exp: Bool): Unit {
     if (!exp) {
         throw Exception("assert failed")
     }
 }
+
+func castOrThrow<T, R>(t: T): R {
+    match (t) {
+        case v: R => v
+        case v: Option<R> => v.getOrThrow()
+        case _ => throw Exception("Type cast fail.")
+    }
+}
+
+let EMPTY_EXTENSION_ELEMENT_COLLECTION: Collection<ExtensionElement> = []
+let EMPTY_STANDARD_EXTENSION_ELEMENT_COLLECTION: Collection<StandardExtensionElement> = []

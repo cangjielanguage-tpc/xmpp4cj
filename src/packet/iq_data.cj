@@ -42,11 +42,11 @@ public class IqData <: AbstractIqBuilder {
         super.froms(froms)
         getThis()
     }
-    public override func setError(stanzaError: StanzaError): IqData {
+    public override func setError(stanzaError: ?StanzaError): IqData {
         super.setError(stanzaError)
         getThis()
     }
-    public override func setLanguage(language: String): IqData {
+    public override func setLanguage(language: ?String): IqData {
         super.setLanguage(language)
         getThis()
     }
@@ -79,9 +79,5 @@ public class IqData <: AbstractIqBuilder {
 extend IqData <: Equatable<IqData> {
     public operator func ==(that: IqData): Bool {
         return refEq(this, that)
-    }
-
-    public operator func !=(that: IqData): Bool {
-        return !(this == that)
     }
 }

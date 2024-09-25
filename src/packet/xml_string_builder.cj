@@ -33,7 +33,9 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
         sb.append('<').append(elementName) // halfOpenElement(elementName)
 
         if ((enclosingXmlEnvironment?.effectiveNamespaceEquals(xmlNs) ?? false) == false) {
-            sb.append(XmlNsAttribute(xmlNs))
+            if (!xmlNs.isEmpty()) {
+                sb.append(XmlNsAttribute(xmlNs))
+            }
         }
         if ((enclosingXmlEnvironment?.effectiveLanguageEquals(xmlLang) ?? false) == false) {
             if (let Some(lang) <- xmlLang) {
@@ -377,7 +379,7 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
         return this
     }
 
-    public func optAppend(elements: ?Iterable<Element>): XmlStringBuilder {
+    public func optAppend<E>(elements: ?Collection<E>): XmlStringBuilder where E <: Element {
         if (let Some(elements) <- elements) {
             append(elements)
         }
@@ -405,7 +407,7 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
         return this
     }
 
-    public func append(elements: Iterable<Element>): XmlStringBuilder {
+    public func append<E>(elements: Collection<E>): XmlStringBuilder where E <: Element {
         for (element in elements) {
             append(element)
         }
