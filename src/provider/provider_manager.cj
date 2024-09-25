@@ -1,7 +1,7 @@
 /*
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
  */
-package xmpp4cj.packet
+package xmpp4cj.provider
 
 /**
  * 管理用于解析 XMPP 数据包的自定义 XML 子文档的提供程序。存在两种类型的提供程序：<ul>

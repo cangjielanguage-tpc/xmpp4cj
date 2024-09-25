@@ -1,0 +1,39 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ */
+/**
+ * Provides pluggable parsing of incoming IQ's and extensions elements.
+ */
+package xmpp4cj.provider
+
+internal import log.*
+internal import std.collection.*
+internal import std.collection.concurrent.ConcurrentHashMap
+internal import std.convert.*
+internal import std.io.*
+internal import std.reflect.*
+internal import std.unicode.*
+internal import xmpp4cj.jid.*
+internal import xmpp4cj.packet.*
+internal import xmpp4cj.util.*
+internal import xmpp4cj.xml.*
+
+extend<K, V> ConcurrentHashMap<K, V> where K <: Hashable & Equatable<K> {
+    func values(): Iterator<V> {
+        this |> map<(K, V), V> {kv => kv[1]}
+    }
+}
+
+public func assert(exp: Bool): Unit {
+    if (!exp) {
+        throw Exception("assert failed")
+    }
+}
+
+func castOrThrow<T, R>(t: T): R {
+    match (t) {
+        case v: R => v
+        case v: Option<R> => v.getOrThrow()
+        case _ => throw Exception("Type cast fail.")
+    }
+}
