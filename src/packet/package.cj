@@ -12,37 +12,15 @@ internal import encoding.url.*
 internal import log.*
 internal import logger.*
 internal import std.collection.*
-internal import std.collection.concurrent.{ConcurrentHashMap}
 internal import std.convert.*
 internal import std.io.*
 internal import std.net.*
-internal import std.math.*
-internal import std.math.numeric.*
 internal import std.random.*
-internal import std.regex.*
 internal import std.sync.*
 internal import std.time.*
 internal import xmpp4cj.jid.*
 internal import xmpp4cj.util.*
 internal import xmpp4cj.xml.*
-
-extend<K, V> ConcurrentHashMap<K, V> where K <: Hashable & Equatable<K> {
-    func values(): Iterator<V> {
-        this |> map<(K, V), V> {kv => kv[1]}
-    }
-}
-
-public class Objects {
-    public static func requireNonNull<T>(obj: ?T, message: ?String): T {
-        obj ?? throw IllegalArgumentException(message ?? "Can not provide None argument")
-    }
-}
-
-public func assert(exp: Bool): Unit {
-    if (!exp) {
-        throw Exception("assert failed")
-    }
-}
 
 func castOrThrow<T, R>(t: T): R {
     match (t) {

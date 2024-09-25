@@ -1,7 +1,7 @@
 /*
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
  */
-package xmpp4cj.packet
+package xmpp4cj.compress
 
 public class Failure <: Nonza {
     public static let ELEMENT: String = "failure"
@@ -11,12 +11,12 @@ public class Failure <: Nonza {
     private let compressFailureError: FailureCompressFailureError
     private let stanzaError: ?StanzaError
 
-    public init(compressFailureError: FailureCompressFailureError) {
+    public init(compressFailureError: ?FailureCompressFailureError) {
         this(compressFailureError, None)
     }
 
-    public init(compressFailureError: FailureCompressFailureError, stanzaError: ?StanzaError) {
-        this.compressFailureError = compressFailureError
+    public init(compressFailureError: ?FailureCompressFailureError, stanzaError: ?StanzaError) {
+        this.compressFailureError = Objects.requireNonNull(compressFailureError)
         this.stanzaError = stanzaError
     }
 
@@ -58,6 +58,15 @@ public enum FailureCompressFailureError <: ToString {
             case setup_failed => "setup-failed"
             case processing_failed => "processing-failed"
             case unsupported_method => "unsupported-method"
+        }
+    }
+
+    public static func fromString(s: String): ?FailureCompressFailureError {
+        match (s) {
+            case "setup_failed" => setup_failed
+            case "processing_failed" => processing_failed
+            case "unsupported_method" => unsupported_method
+            case _ => None
         }
     }
 }

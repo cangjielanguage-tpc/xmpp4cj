@@ -16,7 +16,7 @@ public abstract class MessageOrPresence <: Stanza {
 
     public func asBuilder(id: String): MessageOrPresenceBuilder
 
-    // public func asBuilder(connection: XMPPConnection): MessageOrPresenceBuilder // TODO
+    // public func asBuilder(connection: XMPPConnection): MessageOrPresenceBuilder
 }
 
 public abstract class MessageOrPresenceBuilder <: StanzaBuilder {
