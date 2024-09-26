@@ -11,7 +11,7 @@ public class UnparseableStanza {
 
     private let e: Exception
 
-    init(content: String, e: Exception) {
+    public init(content: String, e: Exception) {
         this.content = content
         this.e = e
     }
