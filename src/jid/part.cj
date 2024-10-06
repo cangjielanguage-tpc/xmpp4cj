@@ -3,9 +3,17 @@
  */
 package xmpp4cj.jid
 
+/**
+ * JID资源实体。
+ */
 public abstract class Part <: ToString & Hashable & Equatable<Part> {
     private let part: String
 
+    /**
+     * 构造方法。
+     *
+     * @param part String数据。
+     */
     protected Part(part: String) {
         this.part = part
     }
@@ -17,6 +25,7 @@ public abstract class Part <: ToString & Hashable & Equatable<Part> {
     public operator override func ==(other: Part): Bool {
         return part.toString() == other.toString()
     }
+
     public operator override func !=(other: Part): Bool {
         return part.toString() != other.toString()
     }
@@ -26,11 +35,16 @@ public abstract class Part <: ToString & Hashable & Equatable<Part> {
         return part.hashCode()
     }
 
+    /**
+     * 判断传入内容的长度。
+     *
+     * @param string 需要校验的内容。
+     * @throw XmppStringprepException 长度大于1023或者为空的时候抛异常。
+     */
     protected static func assertNotLongerThan1023BytesOrEmpty(string: String): Unit {
         let bytes = string
 
-        // Better throw XmppStringprepException instead of IllegalArgumentException here, because users don't expect an
-        // IAE and it also makes the error handling for users easier.
+        // 这里最好抛出XmppStringprepException而不是IllegalArgumentException，因为用户不期望IAE，这也让用户更容易处理错误。
         if (bytes.size > 1023) {
             throw XmppStringprepException(string, "Given string is longer then 1023 bytes")
         } else if (bytes.size == 0) {
@@ -163,7 +177,7 @@ public class Localpart <: Part {
      */
     public static func froms(localpart: ?String, context: XmppContext): Localpart {
         let localpartStr = XmppStringPrepUtil.localprep(localpart, context)
-        // First prep the String, then assure the limits of the *result*
+        // 首先准备String，然后确保*结果的限制*
         assertNotLongerThan1023BytesOrEmpty(localpartStr)
         return Localpart(localpartStr)
     }
@@ -178,7 +192,6 @@ public class Localpart <: Part {
  * @see RFC 6122 § 2.4. 资源部分
  */
 public class Resourcepart <: Part {
-
     /**
      * 空资源部分。
      * <p>
@@ -242,7 +255,7 @@ public class Resourcepart <: Part {
      */
     public static func froms(resource: ?String, context: XmppContext): Resourcepart {
         let str = XmppStringPrepUtil.resourceprep(resource, context)
-        // First prep the String, then assure the limits of the *result*
+        // 首先准备String，然后确保*结果的限制*
         assertNotLongerThan1023BytesOrEmpty(str)
         return Resourcepart(str)
     }
@@ -311,14 +324,14 @@ public class Domainpart <: Part {
      * @throws XmppStringprepException 如果发生错误。
      */
     public static func froms(domainStr: String, context: XmppContext): Domainpart {
-        // RFC 6122 § 2.2 "If the domainpart includes a final character considered to be a label
-        // separator (dot) by [IDNA2003] or [DNS], this character MUST be stripped …"
+        //RFC 6122§2.2“如果域部分包含被视为标签的最后一个字符
+        //用[IDNA2003]或[DNS]分隔（点），此字符必须被删除…”
         var domain = domainStr
         if (domain.size > 0 && domain[domain.size - 1] == b'.') {
             domain = domain[..domain.size]
         }
         domain = XmppStringPrepUtil.domainprep(domain, context)
-        // First prep the String, then assure the limits of the *result*
+        // 首先准备String，然后确保*结果的限制*
         assertNotLongerThan1023BytesOrEmpty(domain)
         return Domainpart(domain)
     }

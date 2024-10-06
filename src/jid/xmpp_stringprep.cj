@@ -11,10 +11,8 @@ package xmpp4cj.jid
  * <li>RFC 6122</li>
  * <li>draft-ietf-xmpp-6122bis-14</li>
  * </ul>
- *
  */
 public interface XmppStringprep <: Hashable & Equatable<XmppStringprep> {
-
     /**
      * 对 JID 的本地部分字符串执行字符串准备操作。在 RFC 6122 中，这意味着应用 Stringprep 的<i>nodeprep</i>配置文件。
      *
@@ -45,6 +43,9 @@ public interface XmppStringprep <: Hashable & Equatable<XmppStringprep> {
 public class SimpleXmppStringprep <: XmppStringprep {
     private static var instance: ?SimpleXmppStringprep = None
 
+    /**
+     * simple常量。
+     */
     public static let NAME: String = "simple"
 
     /**
@@ -112,13 +113,13 @@ public class SimpleXmppStringprep <: XmppStringprep {
 
     private static func ensurePartDoesNotContain(parttype: XmppAddressParttype, input: String,
         excludedChars: Array<Byte>): Unit {
-        // assert isSorted(excludedChars))
-
         for (c in input) {
             let forbiddenCharPos = binarySearch(excludedChars, c)
             if (forbiddenCharPos >= 0) {
-                throw XmppStringprepException(input,
-                    "${parttype.getCapitalizedName()} must not contain '${excludedChars[forbiddenCharPos]}'")
+                throw XmppStringprepException(
+                    input,
+                    "${parttype.getCapitalizedName()} must not contain '${String.fromUtf8(excludedChars[forbiddenCharPos])}'"
+                )
             }
         }
     }
@@ -185,9 +186,11 @@ public class SimpleXmppStringprep <: XmppStringprep {
     }
 
     private let hash = DateTime.now().hashCode()
-    public func hashCode(): Int {
+
+    public override func hashCode(): Int {
         hash
     }
+
     public operator func ==(other: XmppStringprep): Bool {
         match (other) {
             case v: SimpleXmppStringprep => refEq(this, v)
@@ -201,6 +204,7 @@ public class SimpleXmppStringprep <: XmppStringprep {
  */
 public open class XmppStringprepException <: Exception {
     private let causingString: String
+
     private var causingException: ?Exception = None
 
     /**
@@ -234,6 +238,15 @@ public open class XmppStringprepException <: Exception {
     public func getCausingString(): String {
         return causingString
     }
+
+    /**  
+     * 获得类名，用字符串表示。
+     *
+     * @return 类名。
+     */
+    protected open override func getClassName(): String {
+        "XmppStringprepException"
+    }
 }
 
 /**
@@ -263,6 +276,15 @@ public class MissingDomainpart <: XmppStringprepException {
         }
         return MissingDomainpart(causingString.toString())
     }
+
+    /**  
+     * 获得类名，用字符串表示。
+     *
+     * @return 类名。
+     */
+    protected override func getClassName(): String {
+        "MissingDomainpart"
+    }
 }
 
 public class XmppStringPrepUtil {
@@ -272,7 +294,9 @@ public class XmppStringPrepUtil {
     }
 
     private static let NODEPREP_CACHE: Cache<String, String> = LruCache<String, String>(100)
+
     private static let DOMAINPREP_CACHE: Cache<String, String> = LruCache<String, String>(100)
+
     private static let RESOURCEPREP_CACHE: Cache<String, String> = LruCache<String, String>(100)
 
     /**
@@ -402,10 +426,10 @@ public class XmppStringPrepUtil {
      */
     static func throwIfNullOrEmpty(string: ?String, types: XmppAddressParttype): Unit {
         if (string.isNone()) {
-            throw XmppStringprepException("None", "${types.getCapitalizedName()} can't be None")
+            throw XmppStringprepException("None", "${types.toString()} can't be None")
         }
         if (string?.isEmpty() ?? true) {
-            throw XmppStringprepException("", "${types.getCapitalizedName()} can't be the empty string")
+            throw XmppStringprepException("", "${types.toString()} can't be the empty string")
         }
     }
 }

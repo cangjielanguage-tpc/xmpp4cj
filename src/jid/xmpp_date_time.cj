@@ -204,9 +204,7 @@ public class XmppDateTime {
     }
 
     /**
-     * A pattern with 3 capturing groups, the second one are at least 1 digits
-     * after the 'dot'. The last one is the timezone definition, either 'Z',
-     * '+1234' or '-1234'.
+     * 一个有3个捕获组的图案，第二个捕获组在“点”后至少有1位数字。最后一个是时区定义，可以是“Z”、“+1234”或“-1234”。
      */
     private static let SECOND_FRACTION = Regex(#".*\.(\d+)"#)
 

@@ -3,7 +3,7 @@
  */
 package xmpp4cj.jid
 
-internal import encoding.url.{URL}
+internal import encoding.url.{URL, Form}
 internal import std.collection.*
 internal import std.convert.Parsable
 internal import std.io.{ByteArrayStream, IOException, OutputStream, StringReader}

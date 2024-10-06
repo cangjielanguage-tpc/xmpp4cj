@@ -17,6 +17,9 @@ public open class XmlSplitter <: Resource {
 
     private let xmlPrinter: ?XmlPrinter
 
+    /**
+     * CompleteElementCallback接口。
+     */
     protected let completeElementCallback: ?CompleteElementCallback
 
     private let splittedPartBuffer: StringBuilder
@@ -33,21 +36,57 @@ public open class XmlSplitter <: Resource {
 
     private var state: XmlSplitterState = XmlSplitterState.START
 
-    private var attributeValueQuotes: XmlSplitter_AttributeValueQuotes = XmlSplitter_AttributeValueQuotes.non
+    private var attributeValueQuotes: XmlSplitterAttributeValueQuotes = XmlSplitterAttributeValueQuotes.non
 
+    /**
+     * 构造一个新的XML拆分器。
+     *
+     * @param maxElementSize 缓冲区的初始大小。
+     * @param xmppElementCallback 处理完一个完整的元素后调用的回调。
+     * @param declarationCallback XML声明的可选回调。
+     * @param processingInstructionCallback 处理指令的可选回调。
+     * @param xmlPrinter 可选的{@link XmlPrinter}。
+     */
     public init(bufferSize: Int64, completeElementCallback: ?CompleteElementCallback,
         declarationCallback: ?DeclarationCallback, processingInstructionCallback: ?ProcessingInstructionCallback) {
         this(bufferSize, completeElementCallback, declarationCallback, processingInstructionCallback, None)
     }
 
+    /**
+     * 构造一个新的XML拆分器。
+     *
+     * @param maxElementSize 缓冲区的初始大小。
+     * @param xmppElementCallback 处理完一个完整的元素后调用的回调。
+     * @param declarationCallback XML声明的可选回调。
+     * @param processingInstructionCallback 处理指令的可选回调。
+     * @param xmlPrinter 可选的{@link XmlPrinter}。
+     */
     public init(bufferSize: Int64, completeElementCallback: ?CompleteElementCallback, xmlPrinter: ?XmlPrinter) {
         this(bufferSize, completeElementCallback, None, None, xmlPrinter)
     }
 
+    /**
+     * 构造一个新的XML拆分器。
+     *
+     * @param maxElementSize 缓冲区的初始大小。
+     * @param xmppElementCallback 处理完一个完整的元素后调用的回调。
+     * @param declarationCallback XML声明的可选回调。
+     * @param processingInstructionCallback 处理指令的可选回调。
+     * @param xmlPrinter 可选的{@link XmlPrinter}。
+     */
     public init(bufferSize: Int64, completeElementCallback: ?CompleteElementCallback) {
         this(bufferSize, completeElementCallback, None, None)
     }
 
+    /**
+     * 构造一个新的XML拆分器。
+     *
+     * @param maxElementSize 缓冲区的初始大小。
+     * @param xmppElementCallback 处理完一个完整的元素后调用的回调。
+     * @param declarationCallback XML声明的可选回调。
+     * @param processingInstructionCallback 处理指令的可选回调。
+     * @param xmlPrinter 可选的{@link XmlPrinter}。
+     */
     public init(bufferSize: Int64, completeElementCallback: ?CompleteElementCallback,
         declarationCallback: ?DeclarationCallback, processingInstructionCallback: ?ProcessingInstructionCallback,
         xmlPrinter: ?XmlPrinter) {
@@ -62,6 +101,11 @@ public open class XmlSplitter <: Resource {
         this.xmlPrinter = xmlPrinter
     }
 
+    /**
+     * 写入数组数据。
+     *
+     * @param cbuf 数组数据。
+     */
     public func write(cbuf: Array<Rune>): Unit {
         xmlPrinter?.onChunkStart()
         for (c in cbuf) {
@@ -70,16 +114,39 @@ public open class XmlSplitter <: Resource {
         xmlPrinter?.onChunkEnd()
     }
 
+    /**
+     * 获取长度。
+     *
+     * @return 长度。
+     */
     public func getCurrentSplittedPartSize(): Int64 {
         return splittedPartBuffer.size
     }
 
+    /**
+     * 下一条数据。
+     */
     protected open func onNextChar(): Unit {}
 
+    /**
+     * 开始标签。
+     *
+     * @param _ String。
+     * @param _ String。
+     * @param _ Map。
+     */
     protected open func onStartTag(_: String, _: String, _: Map<String, String>): Unit {}
 
+    /**
+     * 结束标签。
+     *
+     * @param _ 数据。
+     */
     protected open func onEndTag(_: String): Unit {}
 
+    /**
+     * 新的拆分部件。
+     */
     protected func newSplittedPart(): Unit {
         depth = 0
         splittedPartBuffer.reset()
@@ -156,10 +223,10 @@ public open class XmlSplitter <: Resource {
             }
             case XmlSplitterState.AFTER_ATTRIBUTE_EQUALS => match (c) {
                 case r'\'' =>
-                    attributeValueQuotes = XmlSplitter_AttributeValueQuotes.apos
+                    attributeValueQuotes = XmlSplitterAttributeValueQuotes.apos
                     state = XmlSplitterState.IN_ATTRIBUTE_VALUE
                 case r'"' =>
-                    attributeValueQuotes = XmlSplitter_AttributeValueQuotes.quot
+                    attributeValueQuotes = XmlSplitterAttributeValueQuotes.quot
                     state = XmlSplitterState.IN_ATTRIBUTE_VALUE
                 case _ => throw InvalidAttributeDeclarationException.create(c, splittedPartBuffer.toString())
             }
@@ -177,10 +244,10 @@ public open class XmlSplitter <: Resource {
             }
             case XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION => match (c) {
                 case r'\'' =>
-                    attributeValueQuotes = XmlSplitter_AttributeValueQuotes.apos
+                    attributeValueQuotes = XmlSplitterAttributeValueQuotes.apos
                     state = XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION_PSEUDO_ATTRIBUTE_VALUE
                 case r'"' =>
-                    attributeValueQuotes = XmlSplitter_AttributeValueQuotes.quot
+                    attributeValueQuotes = XmlSplitterAttributeValueQuotes.quot
                     state = XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION_PSEUDO_ATTRIBUTE_VALUE
                 case r'?' => state = XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION_QUESTION_MARK
                 case _ => ()
@@ -265,37 +332,110 @@ public open class XmlSplitter <: Resource {
         }
     }
 
+    /**
+     * 是否关闭资源。
+     *
+     * @return true表示资源已经关闭，false表示资源未关闭。
+     */
     public open override func isClosed(): Bool {
         false
     }
+
+    /**
+     * 关闭资源。
+     */
     public open override func close(): Unit {}
 }
 
+/**  
+ * 定义 XML 解析的状态。
+ */
 public enum XmlSplitterState <: Equatable<XmlSplitterState> & ToString {
+    /**
+     * 开始状态
+     */
     | START
+    /**
+     * 标签左尖括号状态
+     */
     | TAG_LEFT_ANGLE_BRACKET
+    /**
+     * 标签右尖括号状态
+     */
     | TAG_RIGHT_ANGLE_BRACKET
+    /**
+     * 结束标签斜杠状态
+     */
     | END_TAG_SOLIDUS
+    /**
+     * 在标签名称内
+     */
     | IN_TAG_NAME
+    /**
+     * 在结束标签内
+     */
     | IN_END_TAG
+    /**
+     * 在开始名称之后
+     */
     | AFTER_START_NAME
+    /**
+     * 在空标签内
+     */
     | IN_EMPTY_TAG
+    /**
+     * 在属性名称内
+     */
     | IN_ATTRIBUTE_NAME
+    /**
+     * 在属性等号之后
+     */
     | AFTER_ATTRIBUTE_EQUALS
+    /**
+     * 在属性值内
+     */
     | IN_ATTRIBUTE_VALUE
+    /**
+     * 在注释感叹号之后
+     */
     | AFTER_COMMENT_BANG
+    /**
+     * 在注释第一个破折号之后
+     */
     | AFTER_COMMENT_DASH1
+    /**
+     * 在注释第二个破折号之后
+     */
     | AFTER_COMMENT_DASH2
+    /**
+     * 在注释结束之后
+     */
     | AFTER_COMMENT
+    /**
+     * 在注释关闭第一个破折号之后
+     */
     | AFTER_COMMENT_CLOSING_DASH1
+    /**
+     * 在注释关闭第二个破折号之后
+     */
     | AFTER_COMMENT_CLOSING_DASH2
+    /**
+     * 在处理指令或声明内
+     */
     | IN_PROCESSING_INSTRUCTION_OR_DECLARATION
+    /**
+     * 在处理指令或声明伪属性值内
+     */
     | IN_PROCESSING_INSTRUCTION_OR_DECLARATION_PSEUDO_ATTRIBUTE_VALUE
+    /**
+     * 在处理指令或声明问号内
+     */
     | IN_PROCESSING_INSTRUCTION_OR_DECLARATION_QUESTION_MARK
 
     public operator func ==(that: XmlSplitterState) {
         this.toString() == that.toString()
     }
+
     public override func toString(): String {
         match (this) {
             case START => "START"
@@ -322,7 +462,7 @@ public enum XmlSplitterState <: Equatable<XmlSplitterState> & ToString {
     }
 }
 
-enum XmlSplitter_AttributeValueQuotes {
+enum XmlSplitterAttributeValueQuotes {
     | apos
     | quot
     | non
@@ -348,32 +488,79 @@ public class XmppXmlSplitter <: XmlSplitter {
 
     private var streamPrefix: String = ""
 
+    /**
+     * 构造一个新的XML拆分器。
+     *
+     * @param xmppElementCallback 处理完一个完整的元素后调用的回调。
+     */
     public init(xmppElementCallback: ?XmppElementCallback) {
         this(10000, xmppElementCallback)
     }
 
+    /**
+     * 构造一个新的XML拆分器。
+     *
+     * @param xmppElementCallback 处理完一个完整的元素后调用的回调。
+     * @param declarationCallback XML声明的可选回调。
+     * @param processingInstructionCallback 处理指令的可选回调。
+     */
     public init(xmppElementCallback: ?XmppElementCallback, declarationCallback: ?DeclarationCallback,
         processingInstructionCallback: ?ProcessingInstructionCallback) {
         this(10000, xmppElementCallback, declarationCallback, processingInstructionCallback)
     }
 
+    /**
+     * 构造一个新的XML拆分器。
+     *
+     * @param maxElementSize 缓冲区的初始大小。
+     * @param xmppElementCallback 处理完一个完整的元素后调用的回调。
+     */
     public init(maxElementSize: Int64, xmppElementCallback: ?XmppElementCallback) {
         this(maxElementSize, xmppElementCallback, None, None)
     }
 
+    /**
+     * 构造一个新的XML拆分器。
+     *
+     * @param maxElementSize 缓冲区的初始大小。
+     * @param xmppElementCallback 处理完一个完整的元素后调用的回调。
+     * @param declarationCallback XML声明的可选回调。
+     * @param processingInstructionCallback 处理指令的可选回调。
+     */
     public init(maxElementSize: Int64, xmppElementCallback: ?XmppElementCallback,
         declarationCallback: ?DeclarationCallback, processingInstructionCallback: ?ProcessingInstructionCallback) {
         this(maxElementSize, xmppElementCallback, declarationCallback, processingInstructionCallback, None)
     }
 
+    /**
+     * 构造一个新的XML拆分器。
+     *
+     * @param xmlPrinter 可选的{@link XmlPrinter}。
+     */
     public init(xmlPrinter: ?XmlPrinter) {
         this(-1, None, xmlPrinter)
     }
 
+    /**
+     * 构造一个新的XML拆分器。
+     *
+     * @param maxElementSize 缓冲区的初始大小。
+     * @param xmppElementCallback 处理完一个完整的元素后调用的回调。
+     * @param xmlPrinter 可选的{@link XmlPrinter}。
+     */
     public init(maxElementSize: Int64, xmppElementCallback: ?XmppElementCallback, xmlPrinter: ?XmlPrinter) {
         this(maxElementSize, xmppElementCallback, None, None, xmlPrinter)
     }
 
+    /**
+     * 构造一个新的XML拆分器。
+     *
+     * @param maxElementSize 缓冲区的初始大小。
+     * @param xmppElementCallback 处理完一个完整的元素后调用的回调。
+     * @param declarationCallback XML声明的可选回调。
+     * @param processingInstructionCallback 处理指令的可选回调。
+     * @param xmlPrinter 可选的{@link XmlPrinter}。
+     */
     public init(
         maxElementSize: Int64,
         xmppElementCallback: ?XmppElementCallback,
@@ -396,12 +583,22 @@ public class XmppXmlSplitter <: XmlSplitter {
         this.xmppElementCallback = xmppElementCallback
     }
 
+    /**
+     * 下一条数据。
+     */
     protected override func onNextChar(): Unit {
         if (maxElementSize > 0 && getCurrentSplittedPartSize() >= maxElementSize) {
             throw IOException("Max element size exceeded")
         }
     }
 
+    /**
+     * 开始标签。
+     *
+     * @param prefix String。
+     * @param localpart String。
+     * @param attributes Map。
+     */
     protected override func onStartTag(prefix: String, localpart: String, attributes: Map<String, String>): Unit {
         if ("stream" != localpart) {
             return
@@ -413,6 +610,11 @@ public class XmppXmlSplitter <: XmlSplitter {
         }
     }
 
+    /**
+     * 结束标签。
+     *
+     * @param qName 数据。
+     */
     protected override func onEndTag(qName: String): Unit {
         if (streamPrefix.isEmpty() || !qName.startsWith(streamPrefix)) {
             return
@@ -432,15 +634,26 @@ public class XmppXmlSplitter <: XmlSplitter {
 public class Utf8ByteXmppXmlSplitter <: OutputStream {
     private let xmppXmlSplitter: XmppXmlSplitter
 
+    /**
+     * 通过XmppElementCallback构造对象。
+     *
+     * @param xmppElementCallback XmppElementCallback。
+     */
     public init(xmppElementCallback: XmppElementCallback) {
         this(XmppXmlSplitter(xmppElementCallback))
     }
 
+    /**
+     * 通过XmppXmlSplitter构造对象。
+     *
+     * @param xmppXmlSplitter XmppXmlSplitter。
+     */
     public init(xmppXmlSplitter: XmppXmlSplitter) {
         this.xmppXmlSplitter = xmppXmlSplitter
     }
 
     private let buffer = ByteArrayStream()
+
     private let reader: StringReader<ByteArrayStream> = StringReader<ByteArrayStream>(buffer)
 
     /**
@@ -468,6 +681,10 @@ public class Utf8ByteXmppXmlSplitter <: OutputStream {
     }
 
     private let tmp: Array<Rune> = [r'\0']
+
+    /**
+     * 释放数据。
+     */
     public override func flush(): Unit {
         for (r in reader.runes()) {
             tmp[0] = r
