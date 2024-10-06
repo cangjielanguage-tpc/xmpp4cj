@@ -46,7 +46,7 @@ struct Status <: Equatable<Status> & ToString {
         return this.v == other.v
     }
 
-    public func toString(): String {
+    public override func toString(): String {
         var addPrefix = false
         let sb = StringBuilder()
         addPrefix = checkAndAppend(Init, "Init", sb, addPrefix)
@@ -108,7 +108,7 @@ struct Status <: Equatable<Status> & ToString {
     }
 }
 
-class BytesInputStream {
+class BytesInputStream <: ToString {
     protected let buffer = Array<Byte>(4096, repeat: 0)
     protected var window = Array<Byte>() // the slice of data buffer, for fast path
 
@@ -215,9 +215,96 @@ class BytesInputStream {
         }
         return false
     }
+
+    func readName(): String {
+        var (name, nameEnd) = doReadName()
+        if (nameEnd) { // fast path
+            return name
+        }
+
+        let sb = StringBuilder(name)
+        while (!nameEnd) {
+            (name, nameEnd) = doReadName()
+            sb.append(name)
+        }
+        return sb.toString()
+    }
+
+    private func doReadName(): (String, Bool) {
+        var (rune, runeSize) = peekRune(0)
+        if (!isNameStartChar(rune)) {
+            return ("", true)
+        }
+
+        var readLen = runeSize
+
+        (rune, runeSize) = peekRune(readLen)
+        while (readLen < this.size && isNameChar(rune)) {
+            readLen += runeSize
+            (rune, runeSize) = peekRune(readLen)
+        }
+
+        let readData = window.slice(0, readLen)
+        window = window.slice(readLen, window.size - readLen)
+        return (String.fromUtf8(readData), true)
+    }
+
+    /**
+     * UTF-8:
+     * 0xxx_xxxx
+     * 110x_xxxx 10xx_xxxx
+     * 1110_xxxx 10xx_xxxx 10xx_xxxx
+     * 1111_0xxx 10xx_xxxx 10xx_xxxx 10xx_xxxx
+     */
+    func peekRune(idx: Int64): (Rune, Int64) {
+        const trailingMask = 0b1011_1111u8
+        const leadingMask2 = 0b0001_1111u8
+        const leadingMask3 = 0b0000_1111u8
+        const leadingMask4 = 0b0000_0111u8
+
+        let b = this[idx]
+        return match {
+            case (b & 0x80) == 0x00 => (Rune(b), 1)
+            case (b & 0xE0) == 0xC0 => (Rune(UInt32(leadingMask2 & b) << 8 | UInt32(this[idx + 1])), 2)
+            case (b & 0xF0) == 0xE0 => (Rune(UInt32(leadingMask3 & b) << 16 | UInt32(this[idx + 1] & trailingMask) << 8 |
+                    UInt32(this[idx + 2])), 3)
+            case (b & 0xF8) == 0xF0 => (Rune(UInt32(leadingMask4 & b) << 24 | UInt32(this[idx + 1] & trailingMask) << 16 |
+                    UInt32(this[idx + 2] & trailingMask) << 8 | UInt32(this[idx + 3])), 4)
+            case _ => throw XmlException("Failed to read Rune, by leader byte `${b}` at: `${this}`.")
+        }
+    }
+
+    public override func toString(): String {
+        return match (this.size > TO_STRING_MAX_LEN) {
+            case true =>
+                let sb = StringBuilder()
+                var idx = 0
+                for (_ in 0..TO_STRING_MAX_LEN) {
+                    let (rune, size) = peekRune(idx)
+                    match (rune) {
+                        case r'\t' => sb.append("\\t")
+                        case r'\r' => sb.append("\\r")
+                        case r'\n' => sb.append("\\n")
+                        case _ => sb.append(rune)
+                    }
+                    idx += size
+                }
+                return sb.toString() + "..."
+            case false => String.fromUtf8(window)
+        }
+    }
 }
 
+/**
+ * 对String进行扩展。
+ */
 extend String {
+    /**
+     * 不区分大小写的比较String的Ascii是否一致。
+     *
+     * @param asciiLower 比较的String。
+     * @return 是否一致。true 表示相同。false 表示不相同。
+     */
     public func toAsciiLowerCompare(asciiLower: String): Bool {
         let src = unsafe { this.rawData() }
         let dst = unsafe { asciiLower.rawData() }
@@ -239,16 +326,28 @@ func toAsciiLower(b: Byte): Byte {
     }
 }
 
+/**
+ * 后进先出的栈。
+ */
 public class Stack<T> {
     private var buff = Array<T>(16, repeat: unsafe { zeroValue<T>() })
     private var idx = 0
 
+    /**
+     * 栈的长度。
+     */
     public prop size: Int64 {
         get() {
             idx
         }
     }
 
+    /**
+     * 返回栈顶元素，并删除它。
+     *
+     * @return 栈顶的数据。
+     * @throws XmlException 数据为空的的时候为空抛XmlException异常。
+     */
     public func pop(): T {
         if (isEmpty()) {
             throw XmlException("Failed to pop, stack is empty!")
@@ -257,6 +356,12 @@ public class Stack<T> {
         return buff[idx]
     }
 
+    /**
+     * 返回栈顶元素，不删除它。
+     *
+     * @return 栈顶的数据。
+     * @throws XmlException 数据为空的的时候为空抛XmlException异常。
+     */
     public func peek(): T {
         if (isEmpty()) {
             throw XmlException("Failed to peek, stack is empty!")
@@ -264,6 +369,11 @@ public class Stack<T> {
         return buff[idx - 1]
     }
 
+    /**
+     * 将数据存入栈中。
+     *
+     * @param v 存入栈中的数据。
+     */
     public func push(v: T): Unit {
         if (isFull()) {
             let newSize = buff.size + (buff.size >> 1)
@@ -275,10 +385,20 @@ public class Stack<T> {
         idx++
     }
 
+    /**
+     * 判断栈是否为空。
+     *
+     * @return 是否为空。flase代表不为空。true代表为空。
+     */
     public func isEmpty(): Bool {
         return idx == 0
     }
 
+    /**
+     * 判断栈是否已经存满。
+     *
+     * @return 否已经存满。flase代表栈数据没有存满。true代表栈数据已经存满了。
+     */
     public func isFull(): Bool {
         return idx == buff.size
     }

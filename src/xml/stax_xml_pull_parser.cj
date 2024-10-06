@@ -4,17 +4,28 @@
 package xmpp4cj.xml
 
 /**
- * XML pull parsers that use an Stax interface.
+ * 使用Stax接口的XML拉取解析器。
  */
 public class StaxXmlPullParser <: XmlPullParser {
     let reader: XmlReader
 
     private var xmlNode: ?XmlNode = None
 
+    /**
+     * 初始化对象。
+     *
+     * @param input 数据流。
+     */
     public init(input: InputStream) {
         this.reader = XmlReader(input)
     }
 
+    /**
+     * 获取指定名称的属性。
+     *
+     * @param _ 属性名称。
+     * @return 属性值对象。
+     */
     public override func getProperty(_: String): Object {
         throw UnsupportedException()
     }
@@ -105,6 +116,13 @@ public class StaxXmlPullParser <: XmlPullParser {
         attrs[index].qname.prefix
     }
 
+    /**
+     * 获取指定索引的属性的类型。
+     *
+     * @param index 属性索引。
+     * @return 属性类型字符串。
+     * @throws XmlPullParserException index越界的时候抛XmlPullParserException异常。
+     */
     public override func getAttributeType(index: Int64): String {
         if (attrs.size > index) {
             "CDATA"
@@ -213,6 +231,12 @@ public class StaxXmlPullParser <: XmlPullParser {
         return text
     }
 
+    /**
+     * 移动到下一个标签事件。
+     *
+     * @return 下一个标签事件类型对象。
+     * @throws XmlPullParserException 当下个标签对象没有开始结束标签的时候抛XmlPullParserException异常。
+     */
     public override func nextTag(): XmlPullParserTagEvent {
         while (next() != XmlPullParserEvent.END_DOCUMENT) {
             if (eventType == XmlPullParserEvent.START_ELEMENT) {
@@ -230,7 +254,16 @@ public class StaxXmlPullParser <: XmlPullParser {
     }
 }
 
+/**
+ * 使用Stax接口的XML拉取解析器的工厂类
+ */
 public class StaxXmlPullParserFactory <: XmlPullParserFactory {
+    /**
+     * 新建一个XmlPullParser对象
+     *
+     * @param reader 数据流。
+     * @return XmlPullParser对象。
+     */
     public func newXmlPullParser(reader: InputStream): XmlPullParser {
         return StaxXmlPullParser(reader)
     }

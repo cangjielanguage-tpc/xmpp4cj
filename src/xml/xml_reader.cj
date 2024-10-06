@@ -3,21 +3,43 @@
  */
 package xmpp4cj.xml
 
-public interface XmlDeserializable<T> {
+/**
+ * xml反序列化接口。
+ */
+interface XmlDeserializable<T> {
+    /**
+     * 获取XML拉取解析器工厂类。
+     *
+     * @param xmlPullParserFactory XML拉取解析器工厂类。
+     * @return XML拉取解析器工厂类。
+     */
     static func fromXml(r: XmlReader): T
 }
 
-public class XmlReader {
+/**
+ * xml读入解析器。
+ */
+class XmlReader {
     private var status = Status.Init
     private var readAfterLastPeek = false
     private let stack = Stack<QName>()
 
     private let buf: BytesInputStream
 
+    /**
+     * 初始化对象。
+     *
+     * @param input 数据流。
+     */
     public init(input: InputStream) {
         buf = BytesInputStream(input)
     }
 
+    /**
+     * 读取XmlDeserializable对象。
+     *
+     * @return XmlDeserializable对象。
+     */
     public func readObject<T>(): T where T <: XmlDeserializable<T> {
         // stash status
         let stashStatus = status
@@ -34,6 +56,11 @@ public class XmlReader {
         return v
     }
 
+    /**
+     * 获取XmlEvent。
+     *
+     * @return XmlEvent。
+     */
     public func peek(): ?XmlEvent {
         if (status == Status.EOF) {
             return None
@@ -74,6 +101,9 @@ public class XmlReader {
         return status.toEvent()
     }
 
+    /**
+     * 跳过数据。
+     */
     public func skip(): Unit {
         match (status.toEvent()) {
             case ElementStart => readElementStart()
@@ -302,7 +332,7 @@ public class XmlReader {
         Attribute(qname, value)
     }
 
-    public func readAttribute(name: String, namespace!: ?String = None): String {
+    public func readAttribute(_: String, namespace!: ?String = None): String {
         throw UnsupportedException()
     }
 

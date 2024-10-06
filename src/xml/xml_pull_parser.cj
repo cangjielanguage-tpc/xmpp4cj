@@ -284,30 +284,70 @@ public interface XmlPullParser {
     func supportsRoundtrip(): Bool
 }
 
+/**
+ * XML拉取解析器的标签状态枚举。
+ */
 public enum XmlPullParserTagEvent {
+    /**
+     * 开始。
+     */
     START_ELEMENT
+    /**
+     * 结束。
+     */
     | END_ELEMENT
 }
 
+/**
+ * XML拉取解析器的状态枚举。
+ */
 public enum XmlPullParserEvent <: Equatable<XmlPullParserEvent> & ToString {
+    /**
+     * DOCUMENT开始。
+     */
     START_DOCUMENT
+    /**
+     * DOCUMENT结束。
+     */
     | END_DOCUMENT
+    /**
+     * ELEMENT开始。
+     */
     | START_ELEMENT
+    /**
+     * ELEMENT结束。
+     */
     | END_ELEMENT
     /**
-     * Replaces TEXT from XPP3.
+     * 替换XPP3中的文本。
      */
     | TEXT_CHARACTERS
+    /**
+     * 处理指令。
+     */
     | PROCESSING_INSTRUCTION
+    /**
+     * 评论。
+     */
     | COMMENT
+    /**
+     * 可忽略的空白。
+     */
     | IGNORABLE_WHITESPACE
+    /**
+     * 实体引用。
+     */
     | ENTITY_REFERENCE
+    /**
+     * 其他标签。
+     */
     | OTHER
 
     public operator func ==(other: XmlPullParserEvent): Bool {
         this.toString() == other.toString()
     }
-    public func toString(): String {
+
+    public override func toString(): String {
         match (this) {
             case START_DOCUMENT => "START_DOCUMENT"
             case END_DOCUMENT => "END_DOCUMENT"
@@ -323,16 +363,47 @@ public enum XmlPullParserEvent <: Equatable<XmlPullParserEvent> & ToString {
     }
 }
 
+/**
+ * XML拉取解析器的工厂类接口。
+ */
 public interface XmlPullParserFactory {
+    /**
+     * 新建一个XmlPullParser对象。
+     *
+     * @param reader 数据流。
+     * @return XmlPullParser对象。
+     */
     func newXmlPullParser(reader: InputStream): XmlPullParser
 }
 
+/**
+ * XML拉取解析器的异常类。
+ */
 public class XmlPullParserException <: Exception {
+    /**
+     * 初始化异常类。
+     *
+     * @param wrapped 异常对象。
+     */
     public init(wrapped: Exception) {
         super(wrapped.toString())
     }
 
+    /**
+     * 初始化异常类。
+     *
+     * @param message 异常信息。
+     */
     public init(message: String) {
         super(message)
+    }
+
+    /**
+     * 获得类名，用字符串表示。
+     *
+     * @return 类名。
+     */
+    protected override func getClassName(): String {
+        return "XmlPullParserException"
     }
 }
