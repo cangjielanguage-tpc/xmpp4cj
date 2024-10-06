@@ -3,13 +3,27 @@
  */
 package xmpp4cj.xml
 
+/**
+ * XML解析器。
+ */
 public class XmppXmlParser {
     private static var xmlPullParserFactory: ?XmlPullParserFactory = StaxXmlPullParserFactory()
 
+    /**
+     * 获取XML解析器工厂类。
+     *
+     * @return XML解析器工厂类。
+     * @throws Exception xmlPullParserFactory为Non的时候为空抛Exception异常。
+     */
     public static func getXmlPullParserFactory(): XmlPullParserFactory {
         return xmlPullParserFactory ?? throw Exception("No XmlPullParserFactory registered")
     }
 
+    /**
+     * 设置XML解析器工厂类。
+     *
+     * @param xmlPullParserFactory XML解析器工厂类。
+     */
     public static func setXmlPullParserFactory(xmlPullParserFactory: XmlPullParserFactory) {
         XmppXmlParser.xmlPullParserFactory = xmlPullParserFactory
     }

@@ -3,7 +3,7 @@
  */
 package xmpp4cj.xml
 
-public enum XmlEvent <: Equatable<XmlEvent> & ToString {
+enum XmlEvent <: Equatable<XmlEvent> & ToString {
     | Decl
     | Comment
     | ProcInst
@@ -20,7 +20,7 @@ public enum XmlEvent <: Equatable<XmlEvent> & ToString {
         this.toString() == other.toString()
     }
 
-    public func toString(): String {
+    public override func toString(): String {
         return match (this) {
             case Decl => "Decl"
             case Comment => "Comment"
@@ -44,7 +44,7 @@ public enum XmlEvent <: Equatable<XmlEvent> & ToString {
     }
 }
 
-public class DocTypeDecl {
+class DocTypeDecl {
     public init(name: String) {
         this(name, None, None)
     }
@@ -74,7 +74,7 @@ public class DocTypeDecl {
     }
 }
 
-public class EntityDecl {
+class EntityDecl {
     public EntityDecl(private let _name: String, private let _value: String) {}
 
     public prop name: String {
@@ -89,7 +89,7 @@ public class EntityDecl {
     }
 }
 
-public class EntityReference {
+class EntityReference {
     public EntityReference(private let _name: String, private let _decl: EntityDecl) {}
 
     public prop name: String {
@@ -104,7 +104,7 @@ public class EntityReference {
     }
 }
 
-public class Attribute {
+class Attribute {
     public Attribute(private let _qname: QName, private let _value: String) {}
 
     public prop qname: QName {
@@ -119,22 +119,25 @@ public class Attribute {
     }
 }
 
-public class Namespace {
-    public func getNamespace(prefix: String): ?String {
+class Namespace {
+    public func getNamespace(_: String): ?String {
         return None
     }
-    public func getFirstPrefix(namespace: String): ?String {
+
+    public func getFirstPrefix(_: String): ?String {
         return None
     }
-    public func getPrefix(namespace: String): ?Array<String> {
+
+    public func getPrefix(_: String): ?Array<String> {
         return None
     }
+
     public func getAll(): ?Array<(String, String)> {
         return None
     }
 }
 
-public struct Position {
+struct Position {
     public init() {
         this(0, 0, 0)
     }
@@ -168,7 +171,7 @@ public struct Position {
     }
 }
 
-public open class XmlException <: Exception {
+open class XmlException <: Exception {
     public init() {
         super()
     }
@@ -181,7 +184,7 @@ public open class XmlException <: Exception {
     }
 }
 
-public class XmlStatusException <: XmlException {
+class XmlStatusException <: XmlException {
     public init() {
         super()
     }

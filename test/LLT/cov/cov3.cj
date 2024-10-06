@@ -1,7 +1,10 @@
 // DEPENDENCE: ../z_test.cj
 // DEPENDENCE: ../jid_test_util.cj
-// EXEC: cjc %import-path %L %l %f z_test.cj jid_test_util.cj --test
-// EXEC: ./main
+/// EXEC: cjc %import-path %L %l %f z_test.cj jid_test_util.cj --test
+/// EXEC: ./main
+
+// 内部化导致部分用例不可运行，跑覆盖率时可放开。
+
 import xmpp4cj.packet.*
 import std.unittest.testmacro.*
 import std.collection.*
