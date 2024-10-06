@@ -2,6 +2,7 @@
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
  */
 package xmpp4cj.jid
+
 /**
  * 一个描述 XMPP 所使用配置的上下文。
  */
@@ -35,6 +36,9 @@ public class XmppContext {
 
     private let cachingEnabled: Bool
 
+    /**
+     * XmppStringprep对象
+     */
     public let xmppStringprep: XmppStringprep
 
     XmppContext(builder: XmppContextBuilder) {
@@ -99,9 +103,18 @@ public class XmppContextBuilder {
     }
 }
 
-public enum XmppAddressParttype {
+public enum XmppAddressParttype <: ToString {
+    /**
+     * 本地域。
+     */
     | localpart
+    /**
+     * 部分域。
+     */
     | domainpart
+    /**
+     * 域资源部分。
+     */
     | resourcepart
 
     /**
@@ -114,6 +127,14 @@ public enum XmppAddressParttype {
             case localpart => "Localpart"
             case domainpart => "Domainpart"
             case resourcepart => "Resourcepart"
+        }
+    }
+
+    public override func toString(): String {
+        return match (this) {
+            case localpart => "localpart"
+            case domainpart => "domainpart"
+            case resourcepart => "resourcepart"
         }
     }
 }

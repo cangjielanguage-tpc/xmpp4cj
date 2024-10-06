@@ -4,49 +4,49 @@
 package xmpp4cj.jid
 
 /**
- * cache interface.
+ * 缓存接口。
  *
- * @param <K> the type of the keys of this cache.
- * @param <V> the type of the values this cache caches.
+ * @param <K> 此缓存的键的类型。
+ * @param <V> 此缓存缓存的值的类型。
  */
 public interface Cache<K, V> {
-
     /**
-     * Put a value in the cache.
+     * 在缓存中放置一个值。
      *
-     * @param key the key of the value.
-     * @param value the value.
-     * @return the previous value or {@code None}.
+     * @param key 键。
+     * @param value 值。
+     * @return 上一个值或{@code None}。
      */
     func put(key: K, value: V): ?V
 
     /**
-     * Returns the value of the specified key, or {@code None}.
+     * 返回指定键的值，或{@code None}。
      *
-     * @param key the key.
-     * @return the value found in the cache, or {@code None}.
+     * @param key 键。
+     * @return 缓存中找到的值，或{@code None}。
      */
     func lookup(key: K): ?V
 
     /**
-     * Return the maximum cache Size.
+     * 返回最大缓存大小。
      *
-     * @return the maximum cache size.
+     * @return 最大缓存大小。
      */
     func getMaxCacheSize(): Int
 
     /**
-     * Set the maximum cache size.
-     * @param size the maximum cache size.
+     * 设置最大缓存大小。
+     *
+     * @param size 最大缓存大小。
      */
     func setMaxCacheSize(size: Int): Unit
 }
 
 /**
- * A cache which expires its values.
+ * 值过期的缓存。
  *
- * @param <K> the type of the keys of this cache.
- * @param <V> the type of the values this cache caches.
+ * @param <K> 此缓存的键的类型。
+ * @param <V> 此缓存缓存的值的类型。
  */
 public class ExpirationCache<K, V> <: Cache<K, V> where K <: Hashable & Equatable<K> {
     private let cache: LruCache<K, ExpireElement<V>>
@@ -54,10 +54,10 @@ public class ExpirationCache<K, V> <: Cache<K, V> where K <: Hashable & Equatabl
     private var defaultExpirationTime: Duration = Duration.nanosecond
 
     /**
-     * Construct a expiration cache.
+     * 构建过期缓存。
      *
-     * @param maxSize the maximum size.
-     * @param defaultExpirationTime the default expiration time in milliseconds.
+     * @param maxSize 最大大小。
+     * @param defaultExpirationTime 默认过期时间（毫秒）。
      */
     public ExpirationCache(maxSize: Int, defaultExpirationTime: Duration) {
         cache = LruCache<K, ExpireElement<V>>(maxSize)
@@ -65,25 +65,32 @@ public class ExpirationCache<K, V> <: Cache<K, V> where K <: Hashable & Equatabl
     }
 
     /**
-     * Set the default expiration time in milliseconds.
+     * 设置默认过期时间（毫秒）。
      *
-     * @param defaultExpirationTime the default expiration time.
+     * @param defaultExpirationTime 默认过期时间。
      */
     public func setDefaultExpirationTime(defaultExpirationTime: Duration): Unit {
         this.defaultExpirationTime = defaultExpirationTime
     }
 
+    /**
+     * 插入键值对。
+     *
+     * @param key 键。
+     * @param value 值。
+     * @return 值。
+     */
     public override func put(key: K, value: V): ?V {
         return put(key, value, defaultExpirationTime)
     }
 
     /**
-     * Put a value in the cache with the specified expiration time in milliseconds.
+     * 将具有指定过期时间（毫秒）的值放入缓存中。
      *
-     * @param key the key of the value.
-     * @param value the value.
-     * @param expirationTime the expiration time in milliseconds.
-     * @return the previous value or {@code None}.
+     * @param key 键。
+     * @param value 值。
+     * @param expirationTime 过期时间（毫秒）。
+     * @return 上一个值或{@code None}。
      */
     public func put(key: K, value: V, expirationTime: Duration): ?V {
         let eOld: ?ExpireElement<V> = cache.put(key, ExpireElement<V>(value, expirationTime))
@@ -94,6 +101,12 @@ public class ExpirationCache<K, V> <: Cache<K, V> where K <: Hashable & Equatabl
         return get(key)
     }
 
+    /**
+     * 通过键获取值。
+     *
+     * @param key 键。
+     * @return 值。
+     */
     public func get(key: K): ?V {
         if (let Some(v: ExpireElement<V>) <- cache.get(key)) {
             if (v.isExpired()) {
@@ -105,10 +118,20 @@ public class ExpirationCache<K, V> <: Cache<K, V> where K <: Hashable & Equatabl
         return None
     }
 
+    /**
+     * 获取缓存大小。
+     *
+     * @return 缓存大小。
+     */
     public override func getMaxCacheSize(): Int {
         return cache.getMaxCacheSize()
     }
 
+    /**
+     * 设置缓存大小。
+     *
+     * @param maxCacheSize 缓存大小。
+     */
     public override func setMaxCacheSize(maxCacheSize: Int): Unit {
         cache.setMaxCacheSize(maxCacheSize)
     }
@@ -152,44 +175,44 @@ class ExpireElement<V> {
 }
 
 /**
- * A specialized Map that is size-limited (using an LRU algorithm). The Map is
- * thread-safe.
+ * 一种大小有限的专用Map（使用LRU算法）。Map是线程安全。
  *
- * @param <K> the type of the keys of this cache.
- * @param <V> the type of the values this cache caches.
+ * @param <K> 此缓存的键的类型。
+ * @param <V> 此缓存缓存的值的类型。
  */
 public class LruCache<K, V> <: Cache<K, V> where K <: Hashable & Equatable<K> {
     private let lock: ReentrantMutex = ReentrantMutex()
 
     /**
-     * The default initial value for the used data structures.
+     * 所用数据结构的默认初始值。
      */
     private static let DEFAULT_INITIAL_SIZE: Int = 50
 
     /**
-     * Maximum number of items the cache will hold.
+     * 缓存将容纳的最大项目数。
      */
     private var maxCacheSize: Int = 0
 
     /**
-     * Maintain the number of cache hits and misses. A cache hit occurs every
-     * time the get method is called and the cache contains the requested
-     * object. A cache miss represents the opposite occurrence.
-     * <p>
-     * Keeping track of cache hits and misses lets one measure how efficient
-     * the cache is; the higher the percentage of hits, the more efficient.
+     * 保持缓存命中和未命中的次数。每次都会发生缓存命中
+     * 调用get方法并且缓存包含所请求的
+     * 对象。缓存未命中表示相反的情况。
+     * 跟踪缓存命中和未命中可以衡量效率
+     * 缓存是；命中率越高，效率越高。
      */
     private let cacheHits: AtomicInt64 = AtomicInt64(0)
+
     private let cacheMisses: AtomicInt64 = AtomicInt64(0)
+
     private let map: HashMap<K, V>
+
     private let arr: LinkedList<K>
 
     /**
-     * Create a cache and specify the maximum size of for the cache in
-     * bytes, and the maximum lifetime of objects.
+     * 在中创建缓存并指定缓存的最大大小。
+     * 字节数和对象的最大生存期。
      *
-     * @param maxSize the maximum number of objects the cache will hold. -1
-     *      means the cache has no max size.
+     * @param maxSize 缓存将容纳的最大对象数-1表示缓存没有最大大小。
      */
     public LruCache(maxSize: Int) {
         if (maxSize < 1) {
@@ -222,23 +245,34 @@ public class LruCache<K, V> <: Cache<K, V> where K <: Hashable & Equatable<K> {
         return map.get(key)
     }
 
+    /**
+     * 通过键获取值。
+     *
+     * @param key 键。
+     * @return 值。
+     */
     public func get(key: K): ?V {
         let cacheObject: ?V = synchronized(lock) {
             map.get(key)
         }
         if (cacheObject.isNone()) {
-            // The object didn't exist in cache, so increment cache misses.
+            // 缓存中不存在该对象，因此增量缓存未命中。
             cacheMisses.fetchAdd(1)
             return None
         }
 
-        // The object exists in cache, so increment cache hits. Also, increment
-        // the object's read count.
+        // 对象存在于缓存中，因此缓存命中率会增加。此外，增加对象的读取计数。
         cacheHits.fetchAdd(1)
 
         return cacheObject
     }
 
+    /**
+     * 通过键删除数据。
+     *
+     * @param key 键。
+     * @return 值。
+     */
     public func remove(key: K): ?V {
         synchronized(lock) {
             arr.removeIf {k => k == key}
@@ -247,18 +281,18 @@ public class LruCache<K, V> <: Cache<K, V> where K <: Hashable & Equatable<K> {
     }
 
     /**
-     * Get the number of cache hits.
+     * 获取缓存命中次数。
      *
-     * @return the number of cache hits.
+     * @return 缓存命中次数。
      */
     public func getCacheHits(): Int {
         return cacheHits.load()
     }
 
     /**
-     * Get the number of cache misses.
+     * 获取缓存未命中次数。
      *
-     * @return the number of cache misses.
+     * @return 缓存未命中的次数。
      */
     public func getCacheMisses(): Int {
         return cacheMisses.load()

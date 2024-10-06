@@ -19,18 +19,25 @@ package xmpp4cj.jid
  */
 public class JidCreate {
     private static let JID_CACHE: Cache<JidStringAndStringprep, Jid> = LruCache<JidStringAndStringprep, Jid>(100)
+
     private static let BAREJID_CACHE: Cache<JidStringAndStringprep, BareJid> = LruCache<JidStringAndStringprep, BareJid>(
         100)
+
     private static let ENTITYJID_CACHE: Cache<JidStringAndStringprep, EntityJid> = LruCache<JidStringAndStringprep, EntityJid>(
         100)
+
     private static let FULLJID_CACHE: Cache<JidStringAndStringprep, FullJid> = LruCache<JidStringAndStringprep, FullJid>(
         100)
+
     private static let ENTITY_BAREJID_CACHE: Cache<JidStringAndStringprep, EntityBareJid> = LruCache<JidStringAndStringprep, EntityBareJid>(
         100)
+
     private static let ENTITY_FULLJID_CACHE: Cache<JidStringAndStringprep, EntityFullJid> = LruCache<JidStringAndStringprep, EntityFullJid>(
         100)
+
     private static let DOMAINJID_CACHE: Cache<JidStringAndStringprep, DomainBareJid> = LruCache<JidStringAndStringprep, DomainBareJid>(
         100)
+
     private static let DOMAINRESOURCEJID_CACHE: Cache<JidStringAndStringprep, DomainFullJid> = LruCache<JidStringAndStringprep, DomainFullJid>(
         100)
 
@@ -63,7 +70,10 @@ public class JidCreate {
      * @return 由给定部分组成的 JID。
      * @throws XmppStringprepException 如果发生错误。
      */
-    public static func froms(localpart: ?String, domainpart: String, resource: ?String, context: XmppContext): Jid {
+    public static func froms(localpart: ?String, domainpart: String, resource: ?String, context: XmppContext): Jid { // Every JID must come with an domainpart.
+        if (domainpart.isEmpty()) {
+            throw MissingDomainpart.froms(localpart, resource);
+        }
         let jid: String = XmppStringUtils.completeJidFrom(localpart, domainpart, resource)
         return froms(localpart, domainpart, resource, jid, context)
     }
@@ -81,12 +91,12 @@ public class JidCreate {
      */
     private static func froms(localpart: ?String, domainpart: String, resource: ?String, jidString: String,
         context: XmppContext): Jid {
-        // Every JID must come with an domainpart.
+        // 每个JID都必须带有域名部分。
         if (domainpart.isEmpty()) {
             throw MissingDomainpart.froms(localpart, resource)
         }
 
-        // The provided jidString must be equal to the assembled parts.
+        // 提供的jidString必须等于组装好的零件。
         if (jidString != XmppStringUtils.completeJidFrom(localpart, domainpart, resource)) {
             throw Exception("The provided jidString does not match the assembled parts")
         }
@@ -125,7 +135,7 @@ public class JidCreate {
         try {
             return froms(cs)
         } catch (e: XmppStringprepException) {
-            throw IllegalArgumentException(e.message)
+            throw IllegalArgumentException(e.toString())
         }
     }
 
@@ -187,7 +197,7 @@ public class JidCreate {
         try {
             return fromUnescaped(cs)
         } catch (e: XmppStringprepException) {
-            throw IllegalArgumentException(e.message)
+            throw IllegalArgumentException(e.toString())
         }
     }
 
@@ -451,7 +461,17 @@ public class JidCreate {
                 LocalDomainAndResourcepartJid(localpart(), domainpart, resource, context)
             }
         } catch (e: XmppStringprepException) {
-            throw XmppStringprepException("${localpart}@${domainpart}/${resource}", e)
+            let localpartStr = if (let Some(v) <- localpart) {
+                v
+            } else {
+                "None"
+            }
+            let resourceStr = if (let Some(v) <- resource) {
+                v
+            } else {
+                "None"
+            }
+            throw XmppStringprepException("${localpartStr}@${domainpart}/${resourceStr}", e)
         }
         return fullJid
     }
@@ -1356,8 +1376,33 @@ public class JidCreate {
     }
 
     private static func urlDecode(cs: String): String {
-        let url = URL.parse("xmpp://${cs}")
-        return "${url.userInfo}@${url.hostName}${url.path}"
+        let url = URL.parse("${cs}")
+        let urlScheme = if (url.scheme.isEmpty()) {
+            ""
+        } else {
+            "${url.scheme}://"
+        }
+        let urlUserInfo = if (url.userInfo.toString().isEmpty()) {
+            ""
+        } else {
+            "${url.userInfo}@"
+        }
+        let urlHostName = if (url.hostName.isEmpty()) {
+            ""
+        } else {
+            "${url.hostName}"
+        }
+        let urlPath = if (url.path.isEmpty()) {
+            ""
+        } else {
+            "${url.path}"
+        }
+        let urlQuery = if (let Some(v) <- url.query) {
+            "?${v}"
+        } else {
+            ""
+        }
+        return "${urlScheme}${urlUserInfo}${urlHostName}${urlPath}${urlQuery}"
     }
 }
 

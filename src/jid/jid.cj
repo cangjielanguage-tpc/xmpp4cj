@@ -59,7 +59,6 @@ package xmpp4cj.jid
  * @see <a href="xmpp/org/rfcs/rfc6122.html#addressing-fundamentals">RFC 6122 (XMPP: Address Format) § 2.1 Fundamentals</a>
  */
 public interface Jid <: Equatable<Jid> & ToString & Hashable {
-
     /**
      * 用于获取这个 Jid 的Domainpart（域部分）
      *
@@ -353,6 +352,7 @@ public interface Jid <: Equatable<Jid> & ToString & Hashable {
  * @see Jid
  */
 public interface BareJid <: Jid {}
+
 /**
  * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个没有本地部分（{@link xmpp4cj.jid.Localpart}）的 JID，可以是{@link DomainBareJid}或{@link DomainFullJid}类型。
  * <p>
@@ -366,6 +366,7 @@ public interface BareJid <: Jid {}
  * @see Jid
  */
 public interface DomainJid <: Jid {}
+
 /**
  * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个由域部分（domainpart）和资源部分（resourcepart）组成的完整 JID。例如 “xmpp.org/resource”。
  * <p>
@@ -397,7 +398,6 @@ public interface DomainFullJid <: Jid & FullJid & DomainJid & Equatable<DomainFu
  * @see Jid
  */
 public interface FullJid <: Jid {
-
     /**
      * 返回 JID 的资源部分 {@link Resourcepart}
      *
@@ -405,6 +405,7 @@ public interface FullJid <: Jid {
      */
     func getResourcepart(): Resourcepart
 }
+
 /**
  * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个具有本地部分（{@link Localpart}）的 JID. 可以是 {@link EntityBareJid} 或 {@link EntityFullJid}.
  * <p>
@@ -439,6 +440,7 @@ public interface EntityJid <: Jid {
      */
     func asEntityBareJidString(): String
 }
+
 /**
  * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个由本地部分（localpart）、域部分（domainpart）和资源部分（resourcepart）组成的完整实体 JID。例如 “user@xmpp.org/resource”。
  * <p>
@@ -456,6 +458,7 @@ public interface EntityFullJid <: Jid & FullJid & EntityJid & Equatable<EntityFu
         !(this == that)
     }
 }
+
 /**
  * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个由本地部分（localpart）和域部分（domainpart）组成的实体裸 JID。例如 “user@xmpp.org”。
  * <p>
@@ -473,6 +476,7 @@ public interface EntityBareJid <: Jid & EntityJid & BareJid & Equatable<EntityBa
         !(this == that)
     }
 }
+
 /**
  * 这是一个关于 XMPP 地址（JID）的接口定义，代表一个仅由域部分（domainpart）组成的域裸 JID。例如 “xmpp.org”。
  * <p>
@@ -491,9 +495,14 @@ public interface DomainBareJid <: Jid & BareJid & DomainJid {
     }
 }
 
+/**
+ * Jid抽象类。
+ *
+ * @see Jid
+ */
 public abstract class AbstractJid <: Jid {
     /**
-     * Cache for the String representation of this JID.
+     * 缓存此JID的字符串表示形式。
      */
     protected var cache: ?String = None
 
@@ -614,7 +623,8 @@ public abstract class AbstractJid <: Jid {
         return if (let Some(v) <- urlEncodedCache) {
             v
         } else {
-            let v = toString()
+            let formStr = Form(toString()).toEncodeString()
+            let v = formStr.removeSuffix("=")
             urlEncodedCache = v
             v
         }
@@ -628,12 +638,15 @@ public abstract class AbstractJid <: Jid {
     public operator override func ==(other: Jid): Bool {
         return this.toString() == other.toString()
     }
+
     public operator func ==(other: EntityFullJid): Bool {
         this.toString() == other.toString()
     }
+
     public operator func ==(other: EntityBareJid): Bool {
         this.toString() == other.toString()
     }
+
     public operator func ==(other: DomainFullJid): Bool {
         this.toString() == other.toString()
     }
@@ -647,6 +660,7 @@ public abstract class AbstractJid <: Jid {
  */
 public class DomainAndResourcepartJid <: AbstractJid & DomainFullJid {
     private let domainBareJid: DomainBareJid
+
     private let resource: Resourcepart
 
     init(domain: String, resource: ?String, context: XmppContext) {
@@ -691,14 +705,32 @@ public class DomainAndResourcepartJid <: AbstractJid & DomainFullJid {
         return getResourcepart()
     }
 
+    /**
+     * 参见 {@link #isParentOf(Jid)}。
+     *
+     * @param _ 完整 JID。
+     * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
+     */
     public override func isParentOf(_: EntityBareJid): Bool {
         return false
     }
 
+    /**
+     * 参见 {@link #isParentOf(Jid)}。
+     *
+     * @param _ 域裸 JID。
+     * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
+     */
     public override func isParentOf(_: EntityFullJid): Bool {
         return false
     }
 
+    /**
+     * 参见 {@link #isParentOf(Jid)}。
+     *
+     * @param _ 域完整 JID。
+     * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
+     */
     public override func isParentOf(_: DomainBareJid): Bool {
         return false
     }
@@ -737,6 +769,9 @@ public class DomainAndResourcepartJid <: AbstractJid & DomainFullJid {
     }
 }
 
+/**
+ * JID域名
+ */
 public class DomainpartJid <: AbstractJid & DomainBareJid {
     let domain: Domainpart
 
@@ -827,8 +862,12 @@ public class DomainpartJid <: AbstractJid & DomainBareJid {
     }
 }
 
+/**
+ * JID本地域名。
+ */
 public class LocalAndDomainpartJid <: AbstractJid & EntityBareJid {
     private let domainBareJid: DomainBareJid
+
     private let localpart: Localpart
 
     private var unescapedCache: ?String = None
@@ -883,10 +922,22 @@ public class LocalAndDomainpartJid <: AbstractJid & EntityBareJid {
         return isParentOf(fullJid.asBareJid())
     }
 
+    /**
+     * 参见 {@link #isParentOf(Jid)}。
+     *
+     * @param _ 域裸 JID。
+     * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
+     */
     public override func isParentOf(_: DomainBareJid): Bool {
         return false
     }
 
+    /**
+     * 参见 {@link #isParentOf(Jid)}。
+     *
+     * @param _ 域完整 JID。
+     * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
+     */
     public override func isParentOf(_: DomainFullJid): Bool {
         return false
     }
@@ -932,8 +983,12 @@ public class LocalAndDomainpartJid <: AbstractJid & EntityBareJid {
     }
 }
 
+/**
+ * JID本地域名和资源。
+ */
 public class LocalDomainAndResourcepartJid <: AbstractJid & EntityFullJid {
     private let bareJid: EntityBareJid
+
     private let resource: Resourcepart
 
     private var unescapedCache: ?String = None
@@ -995,6 +1050,12 @@ public class LocalDomainAndResourcepartJid <: AbstractJid & EntityFullJid {
         return getResourcepart()
     }
 
+    /**
+     * 参见 {@link #isParentOf(Jid)}。
+     *
+     * @param bareJid 裸 JID。
+     * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
+     */
     public override func isParentOf(_: EntityBareJid): Bool {
         return false
     }
@@ -1003,10 +1064,22 @@ public class LocalDomainAndResourcepartJid <: AbstractJid & EntityFullJid {
         return this == fullJid
     }
 
+    /**
+     * 参见 {@link #isParentOf(Jid)}。
+     *
+     * @param _ 域裸 JID。
+     * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
+     */
     public override func isParentOf(_: DomainBareJid): Bool {
         return false
     }
 
+    /**
+     * 参见 {@link #isParentOf(Jid)}。
+     *
+     * @param _ 域完整 JID。
+     * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
+     */
     public override func isParentOf(_: DomainFullJid): Bool {
         return false
     }

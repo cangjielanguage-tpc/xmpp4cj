@@ -3,8 +3,10 @@
  */
 package xmpp4cj.jid
 
+/**
+ * Jid相关工具类。
+ */
 public class JidUtil {
-
     /**
      * 用于检查给定的字符序列是否代表一个典型且有效的实体裸 JID（EntityBareJid）。该方法执行与isValidEntityBareJid(CharSequence)相同的检查，并且还会额外验证 JID 的域部分是否至少包含一个点（'.'）字符。
      * <p>
@@ -26,15 +28,17 @@ public class JidUtil {
     }
 
     /**
-     * 用于检查给定的字符序列是否是一个典型且有效的实体裸 JID。该方法执行与isValidEntityBareJid(CharSequence)相同的检查，并且还额外验证 JID 的域部分是否至少包含一个点（'.'）字符。
+     * 用于检查给定的字符序列是否是一个典型且有效的实体裸 JID。
+     * 该方法执行与isValidEntityBareJid(CharSequence)相同的检查，并且还额外验证 JID 的域部分是否至少包含一个点（'.'）字符。
      * <p>
-     * “…TypicalValidEntityBareJid (CharSequence)” 方法在你期望用户始终输入完全限定域名（FQDN）作为域部分时很有用。而 “isValidEntityBareJid (CharSequence)” 和 “validateEntityBareJid” 方法也接受像 “foo@example” 这样的输入，但 “是典型 JID” 方法要求域部分包含一个点，例如 “foo@example.org”。
+     * “…TypicalValidEntityBareJid (CharSequence)” 方法在你期望用户始终输入完全限定域名（FQDN）作为域部分时很有用。
+     * 而 “isValidEntityBareJid (CharSequence)” 和 “validateEntityBareJid” 方法也接受像 “foo@example” 这样的输入，
+     * 但 “是典型 JID” 方法要求域部分包含一个点，例如 “foo@example.org”。
      * </p>
      *
      * @param jidcs 要检查的 JID 字符序列。
      * @return 如果输入是有效的典型实体裸 JID，则返回一个EntityBareJid实例，表示给定的 JID 字符序列。
      * @throws NotAEntityBareJidStringException 如果给定的字符序列不是裸 JID
-     * @throws XmppStringprepException 如果发生错误
      */
     public static func validateTypicalEntityBareJid(jidcs: String): EntityBareJid {
         let jid = validateEntityBareJid(jidcs)
@@ -352,8 +356,25 @@ public class JidUtil {
     }
 }
 
+/**
+ * JID异常类。
+ */
 public class NotAEntityBareJidStringException <: Exception {
+    /**
+     * 构造方法。
+     *
+     * @param message 异常信息。
+     */
     public init(message: String) {
         super(message)
+    }
+
+    /**  
+     * 获得类名，用字符串表示。
+     *
+     * @return 类名。
+     */
+    protected override func getClassName(): String {
+        "NotAEntityBareJidStringException"
     }
 }
