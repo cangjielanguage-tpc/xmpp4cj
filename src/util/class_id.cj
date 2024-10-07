@@ -12,6 +12,17 @@ public type ClassId = String
  * 用于获取ClassId
  */
 public interface ClassIdentify {
+    /**
+     * 获取ClassId。
+     *
+     * @return ClassId。
+     */
     static func getClassId(): ClassId
+
+    /**
+     * 获取ClassId。
+     *
+     * @return ClassId。
+     */
     func getClass(): ClassId
 }

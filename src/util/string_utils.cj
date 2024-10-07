@@ -7,22 +7,56 @@ package xmpp4cj.util
  * 一个用于字符串对象的工具方法集合。
  */
 public class StringUtils {
-    public static let MD5: String = "MD5"
-    public static let SHA1: String = "SHA-1"
-    public static let QUOTE_ENCODE: String = "&quot;"
-    public static let APOS_ENCODE: String = "&apos;"
-    public static let AMP_ENCODE: String = "&amp;"
-    public static let LT_ENCODE: String = "&lt;"
-    public static let GT_ENCODE: String = "&gt;"
-    public static let HEX_CHARS: Array<Byte> = "0123456789abcdef".toArray()
     /**
-     * 24 upper case characters from the latin alphabet and numbers without '0' and 'O'.
+     * MD5。
+     */
+    public static let MD5: String = "MD5"
+
+    /**
+     * SHA1。
+     */
+    public static let SHA1: String = "SHA-1"
+
+    /**
+     * &quot;字符串。
+     */
+    public static let QUOTE_ENCODE: String = "&quot;"
+
+    /**
+     * &apos;字符串。
+     */
+    public static let APOS_ENCODE: String = "&apos;"
+
+    /**
+     * &amp;字符串。
+     */
+    public static let AMP_ENCODE: String = "&amp;"
+
+    /**
+     * &lt;字符串。
+     */
+    public static let LT_ENCODE: String = "&lt;"
+
+    /**
+     * &gt;字符串。
+     */
+    public static let GT_ENCODE: String = "&gt;"
+
+    /**
+     * 0-9加abcdef的Byte数组。
+     */
+    public static let HEX_CHARS: Array<Byte> = "0123456789abcdef".toArray()
+
+    /**
+     * 24个拉丁字母大写字符和不含“0”和“O”的数字。
      */
     public static let UNAMBIGUOUS_NUMBERS_AND_LETTERS_STRING: String = "123456789ABCDEFGHIJKLMNPQRSTUVWXYZ"
+
     /**
-     * 24 upper case characters from the latin alphabet and numbers without '0' and 'O'.
+     * 24个拉丁字母大写字符和不含“0”和“O”的数字。
      */
     private static let UNAMBIGUOUS_NUMBERS_AND_LETTERS: Array<Byte> = UNAMBIGUOUS_NUMBERS_AND_LETTERS_STRING.toArray()
+
     private static let RANDOM_STRING_CHUNK_SIZE: Int64 = 4
 
     /**
@@ -67,6 +101,7 @@ public class StringUtils {
     public static func escapeForXmlText(input: String): String {
         return escapeForXml(input, StringUtilsXmlEscapeMode.forText)
     }
+
     /**
      * 转义 CharSequence 中的所有必要字符，以便它可以在 XML 文档中使用。
      *
@@ -141,6 +176,12 @@ public class StringUtils {
         return toHexString(bytes)
     }
 
+    /**
+     * 将字符串为字节数组编码的表示形式。
+     *
+     * @param string 字符串。
+     * @return 字节数组编码。
+     */
     public static func toUtf8Bytes(string: String): Array<Byte> {
         return string.toArray()
     }
@@ -159,6 +200,11 @@ public class StringUtils {
         return randomString(length, RandomUtil.RANDOM)
     }
 
+    /**
+     * 生成一个线程安全的随机字符串。
+     *
+     * @return 线程安全的随机字符串。
+     */
     public static func secureOnlineAttackSafeRandomString(): String {
         // 34^10 = 2.06e15 possible combinations. Which is enough to protect against online brute force attacks.
         // See also grc/com/haystack.htm
@@ -167,6 +213,11 @@ public class StringUtils {
         return randomString(RandomUtil.SECURE_RANDOM, UNAMBIGUOUS_NUMBERS_AND_LETTERS, REQUIRED_LENGTH)
     }
 
+    /**
+     * 生成一个唯一字符串。
+     *
+     * @return 唯一字符串。
+     */
     public static func secureUniqueRandomString(): String {
         // 34^13 = 8.11e19 possible combinations, which is > 2^64.
         let REQUIRED_LENGTH: Int64 = 13
@@ -219,10 +270,23 @@ public class StringUtils {
         }
     }
 
+    /**
+     * 生一个[0,length]的随机字符串。
+     *
+     * @param length 最大值。
+     * @return 随机字符串。
+     */
     public static func randomString(length: Int64): String {
         return randomString(length, RandomUtil.SECURE_RANDOM)
     }
 
+    /**
+     * 生一个[0,length]的随机字符串。
+     *
+     * @param length 最大值。
+     * @param random 随机数规则。
+     * @return 随机字符串。
+     */
     public static func randomString(length: Int64, random: Random): String {
         if (length == 0) {
             return ""
@@ -253,7 +317,7 @@ public class StringUtils {
     /**
      * 如果给定的字符序列是 None 或为空，则返回 true。
      *
-     * @param cs
+     * @param cs 被检查的字符序列
      * @return 如果给定的字符序列是 None 或为空，则为 true
      */
     public static func isNullOrEmpty<T>(cs: ?T): Bool where T <: ToString {
@@ -290,6 +354,12 @@ public class StringUtils {
         return true
     }
 
+    /**
+     * 如果所有给定的字符序列都是 None 或不为空，则返回 true。
+     *
+     * @param css 要测试的字符序列。
+     * @return 如果所有给定的字符序列都是 None 或不为空，则为 true。
+     */
     public static func isNullOrNotEmpty(cs: CharSequence): Bool {
         return !cs.toString().isEmpty()
     }
@@ -297,7 +367,7 @@ public class StringUtils {
     /**
      * 如果给定的字符序列为空，则返回 true。
      *
-     * @param cs
+     * @param cs 要测试的字符序列
      * @return 如果给定的字符序列为空，则为 true
      */
     public static func isEmpty(cs: ToString): Bool {
@@ -327,18 +397,46 @@ public class StringUtils {
         return sb
     }
 
+    /**
+     * 添加数据到StringBuilder中。
+     *
+     * @param collection 迭代器。
+     * @param sb StringBuilder。
+     */
     public static func appendTo<T>(collection: Iterable<T>, sb: StringBuilder): Unit where T <: ToString {
         appendTo(collection, ", ", sb)
     }
 
+    /**
+     * 添加数据到StringBuilder中。
+     *
+     * @param collection 迭代器。
+     * @param sb StringBuilder。
+     * @param appendFunction 需要处理的接口。
+     */
     public static func appendTo<T>(collection: Iterable<T>, sb: StringBuilder, appendFunction: (T) -> Unit): Unit where T <: ToString {
         appendTo(collection, ", ", sb, appendFunction)
     }
 
+    /**
+     * 添加数据到StringBuilder中。
+     *
+     * @param collection 迭代器。
+     * @param delimiter 添加的数据。
+     * @param sb StringBuilder。
+     */
     public static func appendTo<T>(collection: Iterable<T>, delimiter: String, sb: StringBuilder): Unit where T <: ToString {
         appendTo(collection, delimiter, sb, {obj => sb.append(obj)})
     }
 
+    /**
+     * 添加数据到StringBuilder中。
+     *
+     * @param collection 迭代器。
+     * @param delimiter 添加的数据。
+     * @param sb StringBuilder。
+     * @param appendFunction 需要处理的接口。
+     */
     public static func appendTo<T>(
         collection: Iterable<T>,
         delimiter: String,
@@ -355,14 +453,34 @@ public class StringUtils {
         }
     }
 
+    /**
+     * 不为空时对String进行trimAscii操作。
+     *
+     * @param string 可空的文本。
+     * @return 处理后的文本数据。
+     */
     public static func returnIfNotEmptyTrimmed(string: ?String): ?String {
         string?.trimAscii()
     }
 
+    /**
+     * 判断csOne和csTwo大小关系。
+     *
+     * @param csOne CharSequence对象。
+     * @param csTwo CharSequence对象。
+     * @return csOne等于csTwo时返回true,否则返回false。
+     */
     public static func nullSafeCharSequenceEquals(csOne: CharSequence, csTwo: CharSequence): Bool {
         return nullSafeCharSequenceComparator(csOne, csTwo) == Ordering.EQ
     }
 
+    /**
+     * 判断csOne和csTwo大小关系。
+     *
+     * @param csOne CharSequence对象。
+     * @param csTwo CharSequence对象。
+     * @return Ordering对象。
+     */
     public static func nullSafeCharSequenceComparator(csOne: ?CharSequence, csTwo: ?CharSequence): Ordering {
         "${csOne}".compare("${csTwo}")
     }
@@ -370,10 +488,10 @@ public class StringUtils {
     /**
      * 要求一个 {@link CharSequence} 既不是 None，也不是空。
      *
-     * @param cs CharSequence
-     * @param message 错误消息
-     * @param <CS> CharSequence 类型
-     * @return cs
+     * @param cs CharSequence。
+     * @param message 错误消息。
+     * @return CharSequence 类型。
+     * @throws IllegalArgumentException 为None或者不为None的时候为空抛IllegalArgumentException异常。
      */
     public static func requireNotNullNorEmpty<CS>(cs: ?CS, message: String): CS where CS <: CharSequence {
         match (cs) {
@@ -382,6 +500,14 @@ public class StringUtils {
         }
     }
 
+    /**
+     * 要求一个 {@link CharSequence} 既不是 None，也不是空。
+     *
+     * @param cs CharSequence。
+     * @param message 错误消息。
+     * @return 可None的CharSequence类型。
+     * @throws IllegalArgumentException 不为None的时候为空抛IllegalArgumentException异常。
+     */
     public static func requireNullOrNotEmpty<CS>(cs: ?CS, message: String): ?CS where CS <: CharSequence {
         match (cs) {
             case Some(v) where v.toString().size > 0 => v
@@ -408,14 +534,35 @@ public class StringUtils {
      */
     private static let XML_WHITESPACE: Regex = Regex("[\t\n\r ]")
 
+    /**
+     * 通过正则处理String,去除\t\n\r和空格。
+     *
+     * @param string 需要处理的文本。
+     * @return 处理后的文本。
+     */
     public static func deleteXmlWhitespace(string: String): String {
         return XML_WHITESPACE.matcher(string).replaceAll("")
     }
 
+    /**
+     * 添加头部文本。
+     *
+     * @param appendable 需要处理的文本。
+     * @param heading 头部文本。
+     * @return Appendable对象。
+     */
     public static func appendHeading(appendable: Appendable, heading: String): Appendable {
         return appendHeading(appendable, heading, r'-')
     }
 
+    /**
+     * 添加头部文本。
+     *
+     * @param appendable 需要处理的文本。
+     * @param heading 头部文本。
+     * @param underlineChar Char文本。
+     * @return Appendable对象。
+     */
     public static func appendHeading(appendable: Appendable, heading: String, underlineChar: Rune): Appendable {
         appendable.append(heading).append(r'\n')
         for (_ in heading.toRuneArray()) {
@@ -424,13 +571,28 @@ public class StringUtils {
         return appendable.append(r'\n')
     }
 
+    /**
+     * \r \n字符。
+     */
     public static let PORTABLE_NEWLINE_REGEX: String = "\\r?\\n"
 
+    /**
+     * 通过正则处理String,通过\r或\n分割String转换成列表。
+     *
+     * @param input 需要处理的文本。
+     * @return 转换的列表。
+     */
     public static func splitLinesPortable(input: String): ArrayList<String> {
         let lines: Array<String> = input.split(PORTABLE_NEWLINE_REGEX)
         return ArrayList<String>(lines)
     }
 
+    /**
+     * 打印列表文本。
+     *
+     * @param charSequences 列表。
+     * @return 列表文本。
+     */
     public static func toStrings(charSequences: Collection<String>): ArrayList<String> {
         let res: ArrayList<String> = ArrayList<String>(charSequences.size)
         for (cs in charSequences) {
@@ -447,8 +609,15 @@ enum StringUtilsXmlEscapeMode {
     | forText
 }
 
+/**
+ * any对象转换成String对象
+ */
 public func anyToString(any: Any): String {
-    var str = (any as ToString)?.toString() ?? "None"
+    var str = if (any is ToString) {
+        (any as ToString).getOrThrow().toString()
+    } else {
+        "None"
+    }
     while (str.startsWith("Some(")) {
         str = str[5..str.size - 1]
     }

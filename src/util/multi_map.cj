@@ -4,44 +4,55 @@
 package xmpp4cj.util
 
 /**
- * A lightweight implementation of a MultiMap, that is a Map that is able to hold multiple values for every key.
- * <p>
- * This MultiMap uses a {@link LinkedHashMap} together with a {@link ArrayList} in order to keep the order of its entries.
- * </p>
+ * MultiMap的轻量级实现，即能够为每个键保存多个值的Map。
+ * 此MultiMap使用{@link LinkedHashMap}和{@link ArrayList}来保持其条目的顺序。
  *
- * @param <K> the type of the keys the map uses.
- * @param <V> the type of the values the map uses.
+ * @param <K> 映射使用的键的类型。
+ * @param <V> 映射使用的值的类型。
  */
 public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
     /**
-     * The constant value {@value}.
+     * 常数值。
      */
     public static let DEFAULT_MAP_SIZE = 6
+
     private static let ENTRY_LIST_SIZE = 3
 
     private let map: Map<K, ArrayList<V>>
+
+    /**
+     * 锁。
+     */
     public let lock: Monitor = Monitor()
 
     /**
-     * Constructs a new MultiMap with a initial capacity of {@link #DEFAULT_MAP_SIZE}.
+     * 构造一个初始容量为{@link#DEFAULT_MAP_SIZE}的新MultiMap。
      */
     public init() {
         this(DEFAULT_MAP_SIZE)
     }
 
     /**
-     * Constructs a new MultiMap.
+     * 构造一个新的MultiMap。
      *
-     * @param size the initial capacity.
+     * @param size 初始容量。
      */
     public init(size: Int) {
         this(HashMap<K, ArrayList<V>>(size))
     }
 
+    /**
+     * 构造一个新的MultiMap。
+     *
+     * @param map Map对象。
+     */
     private init(map: Map<K, ArrayList<V>>) {
         this.map = map
     }
 
+    /**
+     * Map长度。
+     */
     public prop size: Int {
         get() {
             var size = 0
@@ -52,19 +63,30 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
         }
     }
 
+    /**
+     * 内容是否为空。
+     *
+     * @return 空返回true，不为空返回false。
+     */
     public func isEmpty(): Bool {
         return map.isEmpty()
     }
 
+    /**
+     * 集合中是否包含key。
+     *
+     * @param key 键。
+     * @return 包含返回true，不包含返回false。
+     */
     public func containsKey(key: K): Bool {
         return map.contains(key)
     }
 
     /**
-     * Get the first value for the given key, or <code>None</code> if there are no entries.
+     * 获取给定键的第一个值，如果没有条目，则获取<code>None</code>。
      *
-     * @param key
-     * @return the first value or None.
+     * @param key 键。
+     * @return 第一个值或None。
      */
     public func getFirst(key: K): ?V {
         let res = getAll(key)
@@ -76,13 +98,11 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
     }
 
     /**
-     * Get all values for the given key. Returns the empty set if there are none.
-     * <p>
-     * Changes to the returned set will update the underlying MultiMap if the return set is not empty.
-     * </p>
+     * 获取给定键的所有值。如果没有，则返回空集。
+     * 如果返回集不为空，则对返回集的更改将更新基础MultiMap。
      *
-     * @param key
-     * @return all values for the given key.
+     * @param key 键。
+     * @return 给定键的所有值。
      */
     public func getAll(key: K): ArrayList<V> {
         return if (let Some(res) <- map.get(key)) {
@@ -92,14 +112,35 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
         }
     }
 
+    /**
+     * 插入键值对。
+     *
+     * @param ket 键。
+     * @param value 值。
+     * @return 是否插入成功。true标识插入成功，false标识插入失败。
+     */
     public func put(key: K, value: V): Bool {
         return putInternal(key, {list => list.append(value)})
     }
 
+    /**
+     * 插入键值对，插入到数据顶部。
+     *
+     * @param ket 键。
+     * @param value 值。
+     * @return 是否插入成功。true标识插入成功，false标识插入失败。
+     */
     public func putFirst(key: K, value: V): Bool {
         return putInternal(key, {list => list.prepend(value)})
     }
 
+    /**
+     * 插入键值对。
+     *
+     * @param ket 键。
+     * @param value 值。
+     * @return 是否插入成功。true标识插入成功，false标识插入失败。
+     */
     private func putInternal(key: K, valueListConsumer: (ArrayList<V>) -> Unit): Bool {
         let keyExisted: Bool
         let list = if (let Some(list) <- map.get(key)) {
@@ -116,10 +157,10 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
     }
 
     /**
-     * Removes all mappings for the given key and returns the first value if there where mappings or <code>None</code> if not.
+     * 删除给定键的所有映射，如果存在映射，则返回第一个值，否则返回<code>None</code>。
      *
-     * @param key
-     * @return the first value of the given key or None.
+     * @param  key 键。
+     * @return 给定键的第一个值或None。
      */
     public func remove(key: K): ?V {
         return if (let Some(res) <- map.remove(key)) {
@@ -130,20 +171,18 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
     }
 
     /**
-     * Remove the mapping of the given key to the value.
-     * <p>
-     * Returns <code>true</code> if the mapping was removed and <code>false</code> if the mapping did not exist.
-     * </p>
+     * 删除给定键到值的映射。
+     * 如果映射已删除，则返回<code>true</code>，如果映射不存在，则返回<code>false</code]。
      *
-     * @param key
-     * @param value
-     * @return true if the mapping was removed, false otherwise.
+     * @param key 键。
+     * @param value 值。
+     * @return 如果映射被删除，则返回true，否则返回false。
      */
     public func removeOne(key: K, value: V): Bool {
         if (let Some(list) <- map.get(key)) {
             let res: Bool = list.remove(value)
             if (list.size == 0) {
-                // Remove the key also if the value set is now empty
+                // 如果值集现在为空，也删除该键。
                 map.remove(key)
             }
             return res
@@ -153,11 +192,11 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
     }
 
     /**
-     * Remove the given number of values for a given key. May return less values then requested.
+     * 删除给定键的给定数量的值。可能返回的值比请求的值少。
      *
-     * @param key the key to remove from.
-     * @param num the number of values to remove.
-     * @return a list of the removed values.
+     * @param key 要删除的键。
+     * @param num 表示要删除的值的数量。
+     * @return 已删除值的列表。
      */
     public func remove(key: K, num: Int): ?ArrayList<V> {
         let values = if (let Some(values) <- map.get(key)) {
@@ -178,24 +217,37 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
         return result
     }
 
+    /**
+     * 插入一整条Map数据。
+     *
+     * @param map Map。
+     */
     public func putAll(map: Map<K, V>): Unit {
         for ((k, v) in map) {
             put(k, v)
         }
     }
 
+    /**
+     * 清除Map数据。
+     */
     public func clear(): Unit {
         map.clear()
     }
 
+    /**
+     * 获取所有的key列表。
+     *
+     * @return key列表。
+     */
     public func keySet(): Set<K> {
         return HashSet<K>(map.keys())
     }
 
     /**
-     * Returns a new list containing all values of this multi map.
+     * 返回一个新列表，其中包含此多映射的所有值。
      *
-     * @return a new list with all values.
+     * @return 一个包含所有值的新列表。
      */
     public func values(): ArrayList<V> {
         let values = ArrayList<V>(size)
@@ -205,6 +257,11 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
         return values
     }
 
+    /**
+     * 克隆一个新的Map对象。
+     *
+     * @return 新的Map对象。
+     */
     public func clone(): MultiMap<K, V> {
         let newMap = HashMap<K, ArrayList<V>>(map.size)
         for ((k, list) in map) {
