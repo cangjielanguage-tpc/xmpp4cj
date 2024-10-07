@@ -14,6 +14,7 @@ internal import std.math.*
 internal import std.random.*
 internal import std.regex.*
 internal import std.sync.*
+internal import log.*
 
 /*
  * ArrayList工具类
@@ -80,6 +81,7 @@ public class Objects {
 /*
  * 判断是否为true。不为true抛异常。
  *
+ * @param exp 判断true false的值。
  * @throws Exception 不为true的时候抛异常。
  */
 public func assert(exp: Bool): Unit {
@@ -91,4 +93,13 @@ public func assert(exp: Bool): Unit {
 /*
  * 继承Exception的异常类。
  */
-public class AssertionError <: Exception {}
+public class AssertionError <: Exception {
+    /**  
+     * 获得类名，用字符串表示。
+     *
+     * @return 类名。
+     */
+    protected override func getClassName(): String {
+        "AssertionError"
+    }
+}

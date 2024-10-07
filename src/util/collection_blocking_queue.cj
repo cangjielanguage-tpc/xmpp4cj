@@ -3,14 +3,24 @@
  */
 package xmpp4cj.util
 
-/* 提供可迭代的BlockingQueue */
+/** 
+ * 提供可迭代的BlockingQueue。
+ */
 public class CollectionBlockingQueue<E> <: Collection<E> {
     private let lock: Monitor = Monitor() // 所有方法都应该是synchronized
+
     private var queue: ArrayBlockingQueue<E>
+
+    /**
+     * 构造一个初始容量为capacity的新ArrayBlockingQueue。
+     */
     public init(capacity: Int) {
         queue = ArrayBlockingQueue<E>(capacity)
     }
 
+    /**
+     * 列表长度。
+     */
     public override prop size: Int64 {
         get() {
             synchronized(lock) {
@@ -19,12 +29,22 @@ public class CollectionBlockingQueue<E> <: Collection<E> {
         }
     }
 
+    /**
+     * 内容是否为空。
+     *
+     * @return 空返回true，不为空返回false。
+     */
     public override func isEmpty(): Bool {
         synchronized(lock) {
             queue.size == 0
         }
     }
 
+    /**
+     * 返回列表的迭代器。
+     *
+     * @return 迭代器。
+     */
     public override func iterator(): Iterator<E> {
         synchronized(lock) {
             let old = queue
