@@ -17,22 +17,38 @@ package xmpp4cj.packet
  * @see <a href="xmpp/org/rfcs/rfc6120.html#stanzas">RFC 6120 § 8. XML Stanzas</a>
  */
 public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
+    /**
+     * text文本。
+     */
     public static let TEXT = "text"
-    public static let ITEM = "item"
-    protected static let DEFAULT_LANGUAGE = "en" // TODO
 
-    /*
-     * Assume that all stanzas Xmpp handles are in the client namespace,
-     * since Xmpp4cj is an XMPP client library.
-     * We can change this behavior later if it is required.
+    /**
+     * item文本。
+     */
+    public static let ITEM = "item"
+
+    /**
+     * TODO 默认语言。
+     */
+    protected static let DEFAULT_LANGUAGE = "en"
+
+    /**
+     * 假设所有节Xmpp句柄都在客户端命名空间中，
+     * 因为Xmpp4cj是一个XMPP客户端库。
+     * 如果需要，我们可以稍后更改此行为。
      */
     private let namespace = StreamOpen.CLIENT_NAMESPACE
+
     private let extensionElements: MultiMap<QName, ExtensionElement>
+
     private let usedStanzaIdSource: ?StanzaIdSource
 
     private var id: ?String
+
     private var to: ?Jid = None
+
     private var froms: ?Jid = None
+
     private var error: ?StanzaError = None
 
     /**
@@ -44,12 +60,20 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
      */
     protected var language: ?String = None
 
+    /**
+     * 默认构造方法
+     */
     protected init() {
         extensionElements = MultiMap<QName, ExtensionElement>()
         usedStanzaIdSource = None
         id = StandardStanzaIdSource.DEFAULT.getNewStanzaId()
     }
 
+    /**
+     * 通过StanzaBuilder对象构造构造Stanza
+     *
+     * @param stanzaBuilder StanzaBuilder对象。
+     */
     protected init(stanzaBuilder: StanzaBuilder) {
         super()
         if (let Some(stanzaIdSource) <- stanzaBuilder.stanzaIdSource) {
@@ -69,6 +93,11 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
         extensionElements = stanzaBuilder.extensionElements.clone()
     }
 
+    /**
+     * 通过Stanza对象构造构造Stanza
+     *
+     * @param p Stanza对象。
+     */
     protected init(p: Stanza) {
         usedStanzaIdSource = p.usedStanzaIdSource
         id = p.getStanzaId()
@@ -178,6 +207,11 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
         }
     }
 
+    /**
+     * 获取节点列表。
+     *
+     * @return 获取节点列表。
+     */
     public func getExtensionsMap(): MultiMap<QName, ExtensionElement> {
         return cloneExtensionsMap()
     }
@@ -213,6 +247,12 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
         return res // TODO Collections.unmodifiableList(res)
     }
 
+    /**
+     * 通过ClassId获取节点元素列表。
+     *
+     * @param extensionElementClass ClassId。
+     * @return 获取节点元素列表。
+     */
     public func getExtensionsByType(extensionElementClass: ClassId): ArrayList<ExtensionElement> {
         synchronized(extensionElements.lock) {
             return XmppElementUtil.getElementsFrom(extensionElements, extensionElementClass)
@@ -334,7 +374,13 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
         }
     }
 
-    // Overridden in order to avoid an extra copy.
+    /**
+     * 检查具有给定命名空间的扩展元素是否存在
+     * 覆盖以避免额外的副本
+     *
+     * @param namespace 命名空间
+     * @return true表示有值，false表示None。
+     */
     public override func hasExtension(namespace: String): Bool {
         synchronized(extensionElements.lock) {
             for (packetExtension in extensionElements.values()) {
@@ -349,8 +395,8 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
     /**
      * 移除具有给定元素名称和命名空间的节扩展。
      *
-     * @param elementName
-     * @param namespace
+     * @param elementName 名称
+     * @param namespace 命名空间
      * @return 被移除的节扩展，或者如果没有则返回<code>None</code>。
      */
     public func removeExtension(elementName: String, namespace: String): ?ExtensionElement {
@@ -384,6 +430,12 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
         xml.optAttribute("id", getStanzaId())
     }
 
+    /**
+     * 对属性做String处理。
+     *
+     * @param sb StringBuilder
+     * @param namespace 命名空间
+     */
     protected open func logCommonAttributes(sb: StringBuilder): Unit {
         if (let Some(to) <- getTo()) {
             sb.append("to=${to},")

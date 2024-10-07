@@ -4,7 +4,7 @@
 package xmpp4cj.packet
 
 /**
- * Simple parsing exception callback that only logs the encountered parsing exception to java util logging.
+ * 简单的解析异常回调，仅将遇到的解析异常记录到java.util.日志中。
  */
 public class ExceptionLoggingCallback <: ParsingExceptionCallback {
     private static let LOGGER = getGlobalLogger(("name", "ExceptionLoggingCallback"))

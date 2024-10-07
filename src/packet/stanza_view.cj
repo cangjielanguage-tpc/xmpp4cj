@@ -32,12 +32,30 @@ public interface StanzaView <: XmlLangElement {
      */
     func getError(): ?StanzaError
 
+    /**
+     * 通过QName获取扩展元素。
+     *
+     * @param qname QName对象。
+     * @return ExtensionElement对象。
+     */
     func getExtension(qname: QName): ?ExtensionElement
 
+    /**
+     * 判断getExtension方法返回值是否为None。
+     *
+     * @param qname QName对象。
+     * @return true表示有值，false表示None。
+     */
     func hasExtension(qname: QName): Bool {
         return getExtension(qname).isSome()
     }
 
+    /**
+     * 判断hasExtensionByType方法返回值是否为None。
+     *
+     * @param qnameFrom ClassId。
+     * @return true表示有值，false表示None。
+     */
     func hasExtensionByType(qnameFrom: ClassId): Bool {
         return getExtensionByType(qnameFrom).isSome()
     }
@@ -57,24 +75,31 @@ public interface StanzaView <: XmlLangElement {
         return false
     }
 
+    /**
+     * 通过ClassId获取扩展名。
+     *
+     * @param extensionElementClass ClassId。
+     * @return ExtensionElement对象。
+     */
     func getExtensionByType(extensionElementClass: ClassId): ?ExtensionElement {
         let qname: QName = XmppElementUtil.getQNameFor(extensionElementClass)
         let extensionElement: ?ExtensionElement = getExtension(qname)
         extensionElement
     }
-    static func castExt<E>(extensionElement: ?ExtensionElement): ?E where E <: ExtensionElement & ClassIdentify {
-        if (let Some(extensionElement) <- extensionElement) {
-            return XmppElementUtil.castOrThrow<E>(extensionElement)
-        } else {
-            return None
-        }
-    }
 
     /**
      * 返回此节的所有扩展元素列表。
+     *
+     * @return 扩展元素列表。
      */
     func getExtensions(): ArrayList<ExtensionElement>
 
+    /**
+     * 通过QName对象返回扩展元素列表。
+     *
+     * @param qname QName对象。
+     * @return 扩展元素列表。
+     */
     func getExtensions(qname: QName): ArrayList<ExtensionElement>
 
     /**
@@ -85,6 +110,12 @@ public interface StanzaView <: XmlLangElement {
      */
     func getExtensionsByType(extensionElementClass: ClassId): ArrayList<ExtensionElement>
 
+    /**
+     * 通过入参列表返回泛型列表。
+     *
+     * @param iter ExtensionElement列表。
+     * @return 泛型列表。
+     */
     static func castExt<E>(iter: ArrayList<ExtensionElement>): ArrayList<E> where E <: ExtensionElement & ClassIdentify {
         let res = ArrayList<E>(iter.size)
         for (extensionElement in iter) {
@@ -92,5 +123,19 @@ public interface StanzaView <: XmlLangElement {
             res.append(e)
         }
         return res
+    }
+
+    /**
+     * 将ExtensionElement对象转换成泛型对象。
+     *
+     * @param extensionElement ExtensionElement对象。
+     * @return 泛型对象。
+     */
+    static func castExt<E>(extensionElement: ?ExtensionElement): ?E where E <: ExtensionElement & ClassIdentify {
+        if (let Some(extensionElement) <- extensionElement) {
+            return XmppElementUtil.castOrThrow<E>(extensionElement)
+        } else {
+            return None
+        }
     }
 }

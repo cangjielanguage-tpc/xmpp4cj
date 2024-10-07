@@ -51,13 +51,28 @@ package xmpp4cj.packet
  * </pre>
  */
 public class StreamError <: AbstractError & Nonza & ToString {
+    /**
+     * XML 元素名称
+     */
     public static let ELEMENT = "stream:error"
+
+    /**
+     * XML 命名空间
+     */
     public static let NAMESPACE = "urn:ietf:params:xml:ns:xmpp-streams"
 
     private let condition: ?StreamErrorCondition
 
     private let conditionText: ?String
 
+    /**
+     * 构造方法。
+     *
+     * @param condition 错误枚举。
+     * @param conditionTextStr 错误信息。
+     * @param descriptiveTexts 描述文本。
+     * @param extensions 节点列表。
+     */
     public init(
         condition: ?StreamErrorCondition,
         conditionTextStr: ?String,
@@ -66,10 +81,10 @@ public class StreamError <: AbstractError & Nonza & ToString {
     ) {
         super(descriptiveTexts, extensions)
         var conditionText = conditionTextStr
-        // Some implementations may send the condition as non-empty element containing the empty string,
-        //  that is <condition xmlns='foo'></condition>,
-        // in this case the parser may calls this constructor with the empty string as conditionText,
-        // therefore reset it to None if it's the empty string
+        // 一些实现可以将条件作为包含空字符串的非空元素发送，
+        // 即<条件xmlns='fo'></condition>，
+        // 在这种情况下，解析器可以使用空字符串作为conditionText调用此构造函数，
+        // 因此，如果它是空字符串，则将其重置为None
         if (StringUtils.isNullOrEmpty(conditionText)) {
             conditionText = None
         }
@@ -84,10 +99,20 @@ public class StreamError <: AbstractError & Nonza & ToString {
         this.conditionText = conditionText
     }
 
+    /**
+     * 获取错误枚举
+     *
+     * @return 错误枚举。
+     */
     public func getCondition(): ?StreamErrorCondition {
         return condition
     }
 
+    /**
+     * 获取错误信息
+     *
+     * @return 错误信息。
+     */
     public func getConditionText(): ?String {
         return conditionText
     }
@@ -115,35 +140,116 @@ public class StreamError <: AbstractError & Nonza & ToString {
 }
 
 /**
- * The defined stream error conditions, see RFC 6120 § 4.9.3.
+ * 定义的流错误条件。
  */
 public enum StreamErrorCondition <: ToString & Equatable<StreamErrorCondition> {
+    /**
+     * 实体发送了无法处理的 XML
+     */
     bad_format
+    /**
+     * 实体发送了不支持的命名空间前缀
+     */
     | bad_namespace_prefix
+    /**
+     * 远程服务器超时
+     */
     | conflict
+    /**
+     * 服务器正在关闭此实体的活动流，因为已启动的新流与现有流冲突
+     */
     | connection_timeout
+    /**
+     * 流头中发起实体提供的“to”属性的值对应于不再由服务器托管的主机名
+     */
     | host_gone
+    /**
+     * 流头中发起实体提供的“to”属性的值与服务器托管的主机名不对应
+     */
     | host_unknown
+    /**
+     * 在两个服务器之间发送的节缺少“to”或“from”属性
+     */
     | improper_addressing
+    /**
+     * 服务器遇到了配置错误
+     */
     | internal_server_error
+    /**
+     * 地址中提供的 JID 或主机名与授权的 JID 不匹配
+     */
     | invalid_from
+    /**
+     * 流的命名空间名称无效
+     */
     | invalid_namespace
+    /**
+     * 实体在流上发送了无效的 XM
+     */
     | invalid_xml
+    /**
+     * 实体在流进行身份验证之前尝试发送数据
+     */
     | not_authorized
+    /**
+     * 没有形成数据
+     */
     | not_well_formed
+    /**
+     * 实体违反了一些本地服务策略
+     */
     | policy_violation
+    /**
+     * 服务器无法正确连接到远程实体
+     */
     | remote_connection_failed
+    /**
+     * 流重置
+     */
     | reset
+    /**
+     * 服务器缺乏为流提供服务所需的系统资源
+     */
     | resource_constraint
+    /**
+     * 实体尝试发送受限制的 XML 特性
+     */
     | restricted_xml
+    /**
+     * >服务器不会为发起实体提供服务，而是将流量重定向到另一个主机
+     */
     | see_other_host
+    /**
+     * 服务器正在关闭，所有活动流都在被关闭
+     */
     | system_shutdown
+    /**
+     * 错误条件不是此列表中其他条件所定义的那些之一
+     */
     | undefined_condition
+    /**
+     * 发起实体已使用不支持的编码对流进行编码
+     */
     | unsupported_encoding
+    /**
+     * 不支持的功能
+     */
     | unsupported_feature
+    /**
+     * 发起实体已发送流的不支持的一级子元素
+     */
     | unsupported_stanza_type
+    /**
+     * 流头中发起实体提供的“version”属性的值指定了不支持的 XMPP 版本
+     */
     | unsupported_version
 
+    /**
+     * 通过入参String判断是哪个枚举.
+     *
+     * @param string String。
+     * @return StreamErrorCondition枚举
+     */
     public static func fromString(string: String): StreamErrorCondition {
         // Backwards compatibility for older implementations still using RFC 3920.
         // RFC 6120 changed 'xml-not-well-formed' to 'not-well-formed'.

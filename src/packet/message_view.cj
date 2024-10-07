@@ -33,6 +33,12 @@ public interface MessageView <: StanzaView {
         return subject?.getSubject()
     }
 
+    /**
+     * 返回与给定语言相对应的主题。如果语言为 None，方法结果将与 {@link #getSubject()} 相同。如果语言没有相应的主题，则返回 null。
+     *
+     * @param language 要返回的主题的语言。
+     * @return 与传入语言相关的主题。
+     */
     func getMessageSubject(language: ?String): ?MessageSubject {
         let lan = Stanza.determineLanguage(this, language)
         for (subject in getSubjects()) {
@@ -93,6 +99,12 @@ public interface MessageView <: StanzaView {
         return body?.getMessage() ?? None
     }
 
+    /**
+     * 返回与给定语言相对应的正文。如果语言为 None，方法结果将与 {@link #getBody()} 相同。如果语言没有相应的正文，则返回 null。
+     *
+     * @param language 要返回的正文的语言。
+     * @return 与传入语言相关的正文。
+     */
     func getMessageBody(language: ?String): ?MessageBody {
         var lan: ?String = language
         lan = Stanza.determineLanguage(this, lan)

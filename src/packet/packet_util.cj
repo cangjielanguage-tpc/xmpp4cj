@@ -3,17 +3,19 @@
  */
 package xmpp4cj.packet
 
+/**
+ * Packet 工具类
+ */
 public class PacketUtil {
-
     /**
-     * Get a extension element from a collection.
+     * 从集合中获取扩展元素。
      *
-     * @param collection Collection of ExtensionElements.
-     * @param element name of the targeted ExtensionElement.
-     * @param namespace namespace of the targeted ExtensionElement.
-     * @param <PE> Type of the ExtensionElement
+     * @param collection 集合扩展元素的集合。
+     * @param element 元素名称。
+     * @param namespace 命名空间。
+     * @param <PE> 扩展元素的类型。
      *
-     * @return the extension element
+     * @return 扩展元素的类型
      */
     public static func extensionElementFrom<PE>(
         collection: Collection<ExtensionElement>,

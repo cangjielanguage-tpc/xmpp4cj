@@ -42,15 +42,32 @@ public interface IqView <: StanzaView & ToString {
  * </ul>
  */
 public abstract class IQ <: Stanza & IqView {
-    // Don't name this field 'ELEMENT'. When it froms to IQ, ELEMENT is the child element!
+    /**
+     * 不要将此字段命名为“ELEMENT”。当它从IQ变为ELEMENT时，ELEMENT是子元素！
+     */
     public static let IQ_ELEMENT = "iq"
+
+    /**
+     * query常量
+     */
     public static let QUERY_ELEMENT = "query"
 
     private let childElementQName: QName
+
     private let childElementName: String
+
     private let childElementNamespace: String
+
+    /**
+     * IQType对象
+     */
     protected var typ: IQType = IQType.get
 
+    /**  
+     * 使用现有 IQ 对象初始化新 IQ 对象。
+     *
+     * @param iq 现有的 IQ 对象。
+     */
     protected init(iq: IQ) {
         super(iq)
         typ = iq.getType()
@@ -59,10 +76,26 @@ public abstract class IQ <: Stanza & IqView {
         this.childElementQName = iq.childElementQName
     }
 
+    /**  
+     * 使用子元素名称和命名空间初始化 IQ 对象。
+     * <p>
+     * 该构造函数将被弃用，待数据包构造器准备就绪后。
+     * </p>
+     *
+     * @param childElementName 子元素的名称
+     * @param childElementNamespace 子元素的命名空间
+     */
     protected init(childElementName: String, childElementNamespace: String) {
         this(IqData.EMPTY, childElementName, childElementNamespace)
     }
 
+    /**  
+     * 使用 IQ Builder 和子元素名称及命名空间初始化 IQ 对象。
+     *
+     * @param iqBuilder IQ 的 Builder 对象
+     * @param childElementName 子元素的名称
+     * @param childElementNamespace 子元素的命名空间
+     */
     protected init(iqBuilder: AbstractIqBuilder, childElementName: String, childElementNamespace: String) {
         this(
             iqBuilder,
@@ -74,6 +107,12 @@ public abstract class IQ <: Stanza & IqView {
         )
     }
 
+    /**  
+     * 使用 IQ Builder 和子元素的 QName 初始化 IQ 对象。
+     *
+     * @param iqBuilder IQ 的 Builder 对象
+     * @param childElementQName 子元素的 QName
+     */
     protected init(iqBuilder: AbstractIqBuilder, childElementQName: ?QName) {
         super(iqBuilder)
         typ = iqBuilder.typ
@@ -88,6 +127,11 @@ public abstract class IQ <: Stanza & IqView {
         }
     }
 
+    /**  
+     * 获取 IQ 数据包的类型。
+     *
+     * @return IQ 的类型。
+     */
     public override func getType(): IQType {
         return typ
     }
@@ -104,18 +148,38 @@ public abstract class IQ <: Stanza & IqView {
         this.typ = typ
     }
 
+    /**  
+     * 获取子元素的QName。
+     *
+     * @return 子元素的QName。
+     */
     public func getChildElementQName(): QName {
         return childElementQName
     }
 
+    /**  
+     * 获取子元素的名称。
+     *
+     * @return 子元素的名称。
+     */
     public func getChildElementName(): String {
         return childElementName
     }
 
+    /**  
+     * 获取子元素的命名空间。
+     *
+     * @return 子元素的命名空间。
+     */
     public func getChildElementNamespace(): String {
         return childElementNamespace
     }
 
+    /**  
+     * 获取当前元素的标识。
+     *
+     * @return 当前元素的标识。
+     */
     public override func getElementName(): String {
         return IQ_ELEMENT
     }
@@ -263,6 +327,21 @@ public abstract class IQ <: Stanza & IqView {
         return ErrorIQ.createErrorResponse(request, error)
     }
 
+    /**
+     * 方便方法，基于 {@link Type#get IQType.get} 或 {@link Type#set IQType.set} 的 IQ 创建一个新的 {@link Type#error IQType.error} IQ。新的节将以下列方式初始化：<ul>
+     *      <li>发送者设置为原始 IQ 的接收者。
+     *      <li>接收者设置为原始 IQ 的发送者。
+     *      <li>类型设置为 {@link Type#error IQType.error}。
+     *      <li>ID 设置为原始 IQ 的 ID。
+     *      <li>包含在相关原始 IQ 中的子元素。
+     *      <li>提供的 {@link StanzaError XMPPError}。
+     * </ul>
+     *
+     * @param request {@link Type#get IQType.get} 或 {@link Type#set IQType.set} 的 IQ 包。
+     * @param condition StanzaErrorCondition。
+     * @throws IllegalArgumentException 如果 IQ 节的类型不是 {@link Type#get IQType.get} 或 {@link Type#set IQType.set}。
+     * @return 基于原始 IQ 的新的 {@link Type#error IQType.error} IQ。
+     */
     public static func createErrorResponse(request: IQ, condition: StanzaErrorCondition): ErrorIQ {
         return createErrorResponse(request, StanzaError.getBuilder(condition).build())
     }
@@ -327,7 +406,13 @@ public enum IQType <: ToString & Equatable<IQType> {
 }
 
 public enum IQResponseType <: ToString & Equatable<IQResponseType> {
+    /**
+     * 返回成功。
+     */
     result
+    /**
+     * 返回失败。
+     */
     | error
 
     func getType(): IQType {
@@ -353,10 +438,24 @@ public enum IQResponseType <: ToString & Equatable<IQResponseType> {
     }
 }
 
+/**  
+ * {@code IQChildElementXmlStringBuilder} 是一个用于构建 IQ 数据包子元素的 XML 字符串构造器。
+ * <p>
+ * 此类扩展了 {@link XmlStringBuilder}，用于生成特定于 IQ 数据包的 XML 子元素的字符串表示。
+ * 它提供了对元素名称、命名空间、语言和 XML 环境的支持，允许灵活地创建 XML 数据结构。
+ * </p>
+ */
 public class IQChildElementXmlStringBuilder <: XmlStringBuilder {
     var elementName: String = EMPTY_ELEMENT
-    var isEmptyElement: Bool = false
 
+    var isEmptyElement: Bool = false // 指示当前构建器是否应生成一个空元素  
+
+    /**  
+     * 使用给定的扩展元素和 XML 环境初始化 {@code IQChildElementXmlStringBuilder}。
+     *
+     * @param extensionElement 要构建的扩展元素。
+     * @param enclosingXmlEnvironment 包含的 XML 环境。
+     */
     public init(extensionElement: ExtensionElement, enclosingXmlEnvironment: ?XmlEnvironment) {
         this(
             extensionElement.getElementName(),
@@ -366,11 +465,25 @@ public class IQChildElementXmlStringBuilder <: XmlStringBuilder {
         )
     }
 
+    /**  
+     * 使用指定的元素名称、命名空间、语言和 XML 环境初始化 {@code IQChildElementXmlStringBuilder} 实例。
+     *
+     * @param elementName 元素的名称。
+     * @param xmlNs 元素的命名空间。
+     * @param xmlLang 元素的语言。
+     * @param enclosingXmlEnvironment 包含的 XML 环境，可以用于定义 XML 属性和结构。
+     */
     init(elementName: String, xmlNs: String, xmlLang: ?String, enclosingXmlEnvironment: ?XmlEnvironment) {
         super(elementName, xmlNs, xmlLang, enclosingXmlEnvironment)
         this.elementName = elementName
     }
 
+    /**  
+     * 设置构建器为生成一个空元素。
+     * <p>
+     * 该方法被调用后，在构建 XML 时，将生成自闭合的 XML 元素。
+     * </p>
+     */
     public func setEmptyElement(): Unit {
         isEmptyElement = true
     }

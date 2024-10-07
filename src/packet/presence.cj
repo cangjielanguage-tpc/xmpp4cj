@@ -25,6 +25,9 @@ package xmpp4cj.packet
  * 存在节有两个用途。首先，通知服务器用户当前的存在状态。其次，它们用于在通讯录中订阅和取消订阅用户。
  */
 public class Presence <: MessageOrPresence & PresenceView & ToString {
+    /**
+     * 元素名称。
+     */
     public static let ELEMENT = "presence"
 
     private var typ: PresenceType = PresenceType.available
@@ -40,6 +43,11 @@ public class Presence <: MessageOrPresence & PresenceView & ToString {
 
     private var mode: ?PresenceMode = None
 
+    /**  
+     * 构造一个 Presence 实例，基于给定的 PresenceBuilder。
+     *
+     * @param presenceBuilder   基于的 PresenceBuilder 对象
+     */
     init(presenceBuilder: PresenceBuilder) {
         super(presenceBuilder)
         typ = presenceBuilder.typ
@@ -54,7 +62,7 @@ public class Presence <: MessageOrPresence & PresenceView & ToString {
      * 这不会执行深度克隆，因为扩展元素在新实例和旧实例之间共享。
      * </p>
      *
-     * @param other Presence
+     * @param other Presence 对象
      */
     public init(other: Presence) {
         super(other)
@@ -73,6 +81,16 @@ public class Presence <: MessageOrPresence & PresenceView & ToString {
         return typ == PresenceType.available
     }
 
+    /**
+     * 如果存在类型为{@link type#available}并且存在
+     * 模式为{@link mode#away}、{@link mode#xa extended away}，或
+     * {@link模式#dnd请勿打扰}。当输入类型或模式时，将返回False
+     * 是任何其他值，包括当前状态类型不可用（脱机）时。
+     * 这是一种方便的方法，相当于
+     * <code>类型==类型可用&amp；（mode==mode.away|| mode==mode.xa|| mode==mode.dnd）</code>。
+     *
+     * @return 如果存在类型可用，并且存在模式为away、xa或dnd，则返回true。
+     */
     public func isAway(): Bool {
         return typ == PresenceType.available && (mode == PresenceMode.away || mode == PresenceMode.xa || mode ==
             PresenceMode.dnd)
@@ -94,6 +112,9 @@ public class Presence <: MessageOrPresence & PresenceView & ToString {
         return priority ?? 0
     }
 
+    /**
+     * 设置优先级。
+     */
     public func setPriority(priority: UInt8): Unit {
         this.priority = priority
     }
@@ -106,19 +127,30 @@ public class Presence <: MessageOrPresence & PresenceView & ToString {
         return ELEMENT
     }
 
+    /**  
+     * 返回一个构造器来构建当前的消息或存在状态。
+     *
+     * @return 当前消息或存在状态的构造器。
+     */
     public override func asBuilder(): PresenceBuilder {
         return StanzaBuilder.buildPresenceFrom(this, getStanzaId())
     }
 
+    /**  
+     * 使用指定的标识符返回一个构造器来构建当前的消息或存在状态。
+     *
+     * @param id 消息或存在状态的标识符。
+     * @return 带有指定标识符的构造器。
+     */
     public override func asBuilder(id: String): PresenceBuilder {
         return StanzaBuilder.buildPresenceFrom(this, id)
     }
 
-    /* TODO
-    override public  func asBuilder(connection: XMPPConnection): PresenceBuilder {
-        return connection.getStanzaFactory().buildPresenceStanzaFrom(this)
-    }
-     */
+    // TODO
+    // override public  func asBuilder(connection: XMPPConnection): PresenceBuilder {
+    //     return connection.getStanzaFactory().buildPresenceStanzaFrom(this)
+    // }
+
     public override func toString(): String {
         let sb = StringBuilder()
         sb.append("Presence Stanza [")

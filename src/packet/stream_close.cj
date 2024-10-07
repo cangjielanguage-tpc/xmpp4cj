@@ -3,9 +3,18 @@
  */
 package xmpp4cj.packet
 
+/**
+ * 流关闭类
+ */
 public class StreamClose <: Nonza {
+    /**
+     * 单例实例
+     */
     public static let INSTANCE = StreamClose()
 
+    /**
+     * 默认构造方法
+     */
     private init() {}
 
     public override func toXML(_: ?XmlEnvironment): ToString {

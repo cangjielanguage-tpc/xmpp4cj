@@ -3,11 +3,33 @@
  */
 package xmpp4cj.packet
 
+/**
+ * Builder 类用于构建 AbstractError 实例
+ *
+ * @param <B> Builder 类型的子类
+ */
 public abstract class AbstractErrorBuilder<B> where B <: AbstractErrorBuilder<B> {
+    /**
+     * 文本命名空间。
+     */
     protected var textNamespace: ?String = None
+
+    /**
+     * 描述性文本映射。
+     */
     protected var descriptiveTexts: ?Map<String, String> = None
+
+    /**
+     * 扩展元素列表。
+     */
     protected var extensions: ?ArrayList<ExtensionElement> = None
 
+    /**  
+     * 设置描述性文本
+     *
+     * @param descriptiveTexts 描述性文本映射
+     * @return Builder 的子类实例
+     */
     public func setDescriptiveTexts(descriptiveTexts: ?Map<String, String>): B {
         if (let Some(v) <- descriptiveTexts) {
             if (let Some(w) <- this.descriptiveTexts) {
@@ -21,6 +43,12 @@ public abstract class AbstractErrorBuilder<B> where B <: AbstractErrorBuilder<B>
         return getThis()
     }
 
+    /**  
+     * 设置英语的描述性文本。
+     *
+     * @param descriptiveEnText 英语描述性文本
+     * @return Builder 的子类实例
+     */
     public func setDescriptiveEnText(descriptiveEnText: String): B {
         if (descriptiveTexts.isNone()) {
             descriptiveTexts = HashMap<String, String>()
@@ -29,6 +57,13 @@ public abstract class AbstractErrorBuilder<B> where B <: AbstractErrorBuilder<B>
         return getThis()
     }
 
+    /**  
+     * 设置英语的描述性文本，并附加异常堆栈信息。
+     *
+     * @param descriptiveEnText 英语描述性文本
+     * @param exception 附加的异常
+     * @return Builder 的子类实例
+     */
     public func setDescriptiveEnText(descriptiveEnText: String, exception: Exception): B {
         var sb: StringBuilder = StringBuilder(512)
         sb.append(descriptiveEnText)
@@ -38,11 +73,23 @@ public abstract class AbstractErrorBuilder<B> where B <: AbstractErrorBuilder<B>
         return setDescriptiveEnText(sb.toString())
     }
 
+    /**  
+     * 设置文本命名空间。
+     *
+     * @param textNamespace 文本命名空间
+     * @return Builder 的子类实例
+     */
     public func setTextNamespace(textNamespace: ?String): B {
         this.textNamespace = textNamespace
         return getThis()
     }
 
+    /**  
+     * 设置扩展元素列表。
+     *
+     * @param extensions 扩展元素列表
+     * @return Builder 的子类实例
+     */
     public func setExtensions(extensions: Collection<ExtensionElement>): B {
         if (let Some(v) <- this.extensions) {
             v.appendAll(extensions)
@@ -52,6 +99,12 @@ public abstract class AbstractErrorBuilder<B> where B <: AbstractErrorBuilder<B>
         return getThis()
     }
 
+    /**  
+     * 添加扩展元素。
+     *
+     * @param extensions 扩展元素
+     * @return Builder 的子类实例
+     */
     public func addExtension(extension: ExtensionElement): B {
         if (extensions.isNone()) {
             extensions = ArrayList<ExtensionElement>()
@@ -60,5 +113,10 @@ public abstract class AbstractErrorBuilder<B> where B <: AbstractErrorBuilder<B>
         return getThis()
     }
 
+    /**  
+     * 获取Builder 的子类实例。
+     *
+     * @return Builder 的子类实例
+     */
     protected func getThis(): B
 }
