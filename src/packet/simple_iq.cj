@@ -10,14 +10,33 @@ package xmpp4cj.packet
  * </p>
  */
 public abstract class SimpleIQ <: IQ {
+    /**  
+     * SimpleIQ类的构造函数。
+     *
+     * @param childElementName 名称。
+     * @param childElementNamespace 命名空间。
+     */
     protected init(childElementName: String, childElementNamespace: String) {
         super(childElementName, childElementNamespace)
     }
 
+    /**  
+     * SimpleIQ类的构造函数。
+     *
+     * @param iqBuilder IqData类。
+     * @param childElementName 名称。
+     * @param childElementNamespace 命名空间。
+     */
     protected init(iqBuilder: IqData, childElementName: String, childElementNamespace: String) {
         super(iqBuilder, childElementName, childElementNamespace)
     }
 
+    /**
+     * 创建IQChildElementXmlStringBuilder
+     *
+     * @param xml 一个预先创建的构建器，已经设置了子元素和“xmlns”属性。
+     * @return IQChildElementXmlStringBuilder。
+     */
     protected open override func getIQChildElementBuilder(xml: IQChildElementXmlStringBuilder): ?IQChildElementXmlStringBuilder {
         xml.setEmptyElement()
         return xml

@@ -3,16 +3,29 @@
  */
 package xmpp4cj.packet
 
+/**  
+ * 抽象类 StanzaBuilder，用于构建 XMPP 的 Stanza（消息、存在状态和 IQ 数据）。
+ */
 public abstract class StanzaBuilder <: StanzaView & ToString {
-    let stanzaIdSource: ?StanzaIdSource
-    let stanzaId: ?String
+    let stanzaIdSource: ?StanzaIdSource // 消息 ID 源  
 
-    var _to: ?Jid = None
-    var _from: ?Jid = None
-    var stanzaError: ?StanzaError = None
-    var language: ?String = None
-    var extensionElements: MultiMap<QName, ExtensionElement> = MultiMap<QName, ExtensionElement>()
+    let stanzaId: ?String // 消息 ID  
 
+    var _to: ?Jid = None // 消息接收者 
+
+    var _from: ?Jid = None // 消息发送者  
+
+    var stanzaError: ?StanzaError = None // 消息错误信息  
+
+    var language: ?String = None // 语言设置  
+
+    var extensionElements: MultiMap<QName, ExtensionElement> = MultiMap<QName, ExtensionElement>() // 扩展元素  
+
+    /**  
+     * 通过另一个StanzaBuilder对象构造当前对象。
+     *
+     * @param other 其他StanzaBuilder对象。
+     */
     protected init(other: StanzaBuilder) {
         stanzaIdSource = other.stanzaIdSource
         stanzaId = other.stanzaId
@@ -23,16 +36,32 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         extensionElements = other.extensionElements.clone()
     }
 
+    /**  
+     * 通过StanzaIdSource对象构造当前对象。
+     *
+     * @param stanzaIdSource StanzaIdSource对象。
+     */
     protected init(stanzaIdSource: StanzaIdSource) {
         this.stanzaIdSource = stanzaIdSource
         this.stanzaId = None
     }
 
+    /**  
+     * 通过ID构造当前对象。
+     *
+     * @param stanzaId 消息ID。
+     */
     protected init(stanzaId: ?String) {
         this.stanzaIdSource = None
-        this.stanzaId = stanzaId
+        this.stanzaId = StringUtils.requireNullOrNotEmpty(stanzaId, "Stanza ID must not be the empty String")
     }
 
+    /**  
+     * 通过Stanza对象和ID构造当前对象。
+     *
+     * @param message Stanza对象。
+     * @param stanzaId 消息ID。
+     */
     protected init(message: Stanza, stanzaId: ?String) {
         this(stanzaId)
         _to = message.getTo()
@@ -42,6 +71,12 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         extensionElements = message.cloneExtensionsMap()
     }
 
+    /**  
+     * 通过Stanza对象和StanzaIdSource对象构造当前对象。
+     *
+     * @param message Stanza对象。
+     * @param stanzaIdSource StanzaIdSource对象。
+     */
     protected init(message: Stanza, stanzaIdSource: StanzaIdSource) {
         this(stanzaIdSource)
         _to = message.getTo()
@@ -121,16 +156,34 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return getThis()
     }
 
+    /**  
+     * 添加子元素到构建器中。
+     *
+     * @param extensionElement 要添加的子元素（不能为 null）
+     * @return 当前的构建器实例，以便进行方法链调用
+     */
     public open func addExtension(extensionElement: ExtensionElement): StanzaBuilder {
         let key = extensionElement.getQName()
         extensionElements.put(key, extensionElement)
         return getThis()
     }
 
+    /**  
+     * 添加可选的多个子元素。
+     *
+     * @param extensionElements 要添加的子元素集（可以为空，但不能为 null）
+     * @return 当前的构建器实例，以便进行方法链调用
+     */
     public open func addOptExtensions(extensionElements: ?Collection<ExtensionElement>): StanzaBuilder {
         return addExtensions(extensionElements ?? return getThis())
     }
 
+    /**  
+     * 添加多个子元素。
+     *
+     * @param extensionElements 要添加的子元素集（不能为 null）
+     * @return 当前的构建器实例，以便进行方法链调用
+     */
     public open func addExtensions(extensionElements: Collection<ExtensionElement>): StanzaBuilder {
         for (extensionElement in extensionElements) {
             addExtension(extensionElement)
@@ -138,6 +191,12 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return getThis()
     }
 
+    /**  
+     * 替换现有的子元素。
+     *
+     * @param extensionElement 要替换的子元素（不能为 null）
+     * @return 当前的构建器实例，以便进行方法链调用
+     */
     public open func overrideExtension(extensionElement: ExtensionElement): StanzaBuilder {
         let key = extensionElement.getQName()
         extensionElements.remove(key)
@@ -145,12 +204,25 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return getThis()
     }
 
+    /**  
+     * 移除指定的子元素。
+     *
+     * @param elementName 要移除的元素名称
+     * @param namespace 该元素的命名空间
+     * @return 当前的构建器实例，以便进行方法链调用
+     */
     public open func removeExtension(elementName: String, namespace: String): StanzaBuilder {
         let key = QName(namespace, elementName)
         extensionElements.remove(key)
         return getThis()
     }
 
+    /**  
+     * 移除指定的子元素。
+     *
+     * @param extension 要移除的子元素（不能为 null）
+     * @return 当前的构建器实例，以便进行方法链调用
+     */
     public open func removeExtension(extension: ExtensionElement): StanzaBuilder {
         let key = extension.getQName()
         let list = extensionElements.getAll(key)
@@ -158,8 +230,18 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return getThis()
     }
 
+    /**  
+     * 构建并返回一个新的 Stanza 实例。
+     *
+     * @return 新建的 Stanza 实例
+     */
     public open func build(): Stanza
 
+    /**  
+     * 获取当前类的实例。
+     *
+     * @return 当前类实例
+     */
     public open func getThis(): StanzaBuilder
 
     public override func getStanzaId(): ?String {
@@ -198,10 +280,20 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return XmppElementUtil.getElementsFrom(extensionElements, extensionElementClass)
     }
 
+    /**  
+     * 判断是否将构建的 Stanza 设置 ID。
+     *
+     * @return 如果设置了 ID 返回 true，否则返回 false
+     */
     public func willBuildStanzaWithId(): Bool {
         return stanzaIdSource.isSome() || StringUtils.isNotEmpty(stanzaId)
     }
 
+    /**  
+     * 如果没有设置 Stanza ID 则抛出异常。
+     *
+     * @throws IllegalArgumentException 如果没有设置 Stanza ID
+     */
     public func throwIfNoStanzaId(): Unit {
         if (willBuildStanzaWithId()) {
             return
@@ -209,6 +301,11 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         throw IllegalArgumentException("The builder will not build a stanza with an ID set, although it is required")
     }
 
+    /**  
+     * 添加特定于 Stanza 的属性。
+     *
+     * @param builder 用于构建字符串的构建器。
+     */
     protected open func addStanzaSpecificAttributes(builder: ToStringUtilBuilder): Unit
 
     public override func toString(): String {
@@ -220,42 +317,105 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return builder.build()
     }
 
+    /**  
+     * 创建一个空的MessageBuilder对象。
+     *
+     * @return MessageBuilder对象。
+     */
     public static func buildMessage(): MessageBuilder {
         return buildMessage(None)
     }
 
+    /**  
+     * 通过入参ID创建一个MessageBuilder对象。
+     *
+     * @param stanzaId ID。
+     * @return MessageBuilder对象。
+     */
     public static func buildMessage(stanzaId: ?String): MessageBuilder {
         return MessageBuilder(stanzaId)
     }
 
+    /**  
+     * 通过ID和内容创建一个MessageBuilder对象。
+     *
+     * @param message 内容。
+     * @param stanzaId ID。
+     * @return MessageBuilder对象。
+     */
     public static func buildMessageFrom(message: Message, stanzaId: ?String): MessageBuilder {
         return MessageBuilder(message, stanzaId)
     }
 
+    /**  
+     * 通过ID资源和内容创建一个MessageBuilder对象。
+     *
+     * @param message 内容。
+     * @param stanzaIdSource ID资源。
+     * @return MessageBuilder对象。
+     */
     public static func buildMessageFrom(message: Message, stanzaIdSource: StanzaIdSource): MessageBuilder {
         return MessageBuilder(message, stanzaIdSource)
     }
 
+    /**  
+     * 创建一个空的PresenceBuilder对象。
+     *
+     * @return PresenceBuilder对象。
+     */
     public static func buildPresence(): PresenceBuilder {
         return buildPresence(None)
     }
 
+    /**  
+     * 通过入参ID创建一个PresenceBuilder对象。
+     *
+     * @param stanzaId ID。
+     * @return PresenceBuilder对象。
+     */
     public static func buildPresence(stanzaId: ?String): PresenceBuilder {
         return PresenceBuilder(stanzaId)
     }
 
+    /**  
+     * 通过ID和Presence对象创建一个PresenceBuilder对象。
+     *
+     * @param presence Presence对象。
+     * @param stanzaId ID。
+     * @return PresenceBuilder对象。
+     */
     public static func buildPresenceFrom(presence: Presence, stanzaId: ?String): PresenceBuilder {
         return PresenceBuilder(presence, stanzaId)
     }
 
+    /**  
+     * 通过ID资源和Presence对象创建一个PresenceBuilder对象。
+     *
+     * @param presence Presence对象。
+     * @param stanzaIdSource ID资源。
+     * @return PresenceBuilder对象。
+     */
     public static func buildPresenceFrom(presence: Presence, stanzaIdSource: StanzaIdSource): PresenceBuilder {
         return PresenceBuilder(presence, stanzaIdSource)
     }
 
+    /**  
+     * 通过入参ID创建一个IqData对象。
+     *
+     * @param stanzaId ID资源。。
+     * @return IqData对象。
+     */
     public static func buildIqData(stanzaId: ?String): IqData {
         return IqData(stanzaId)
     }
 
+    /**  
+     * 通过入参创建一个泛型对象，泛型对象是StanzaBuilder的子类。
+     *
+     * @param request StanzaView对象
+     * @param builderFromStanzaId 方法
+     * @return 泛型对象
+     */
     public static func buildResponse<SB>(request: StanzaView, builderFromStanzaId: (?String) -> SB): SB where SB <: StanzaBuilder {
         let responseBuilder = builderFromStanzaId(request.getStanzaId())
         responseBuilder.to(request.getFrom()).froms(request.getTo())

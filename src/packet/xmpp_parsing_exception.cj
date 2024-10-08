@@ -3,36 +3,101 @@
  */
 package xmpp4cj.packet
 
+/**
+ * xmpp异常类。
+ */
 public open class XmppParsingException <: Exception {
+    /**
+     * 通过异常类构造当前对象。
+     *
+     * @param exception Exception。
+     */
     protected init(exception: Exception) {
-        super()
+        super(exception.toString())
     }
 
+    /**
+     * 通过异常信息构造当前对象。
+     *
+     * @param message 异常信息。
+     */
     public init(message: String) {
         super(message)
     }
+
+    protected open override func getClassName(): String {
+        "XmppParsingException"
+    }
 }
 
+/**
+ * xmpp异常类。
+ */
 public class XmppTextParseException <: XmppParsingException {
+    /**
+     * 通过异常类构造当前对象。
+     *
+     * @param exception Exception。
+     */
     public init(parsingException: Exception) {
         super(parsingException)
     }
+
+    protected override func getClassName(): String {
+        "XmppTextParseException"
+    }
 }
 
+/**
+ * xmpp异常类。
+ */
 public class XmppUriSyntaxParsingException <: XmppParsingException {
+    /**
+     * 通过异常类构造当前对象。
+     *
+     * @param uriSyntaxException Exception。
+     */
     public init(uriSyntaxException: Exception) {
         super(uriSyntaxException)
     }
-}
 
-public open class XmppRequiredValueMissingException <: XmppParsingException {
-    public init(message: String) {
-        super(message)
+    protected override func getClassName(): String {
+        "XmppUriSyntaxParsingException"
     }
 }
 
+/**
+ * xmpp异常类。
+ */
+public open class XmppRequiredValueMissingException <: XmppParsingException {
+    /**
+     * 通过异常信息构造当前对象。
+     *
+     * @param message 异常信息。
+     */
+    public init(message: String) {
+        super(message)
+    }
+
+    protected open override func getClassName(): String {
+        "XmppRequiredValueMissingException"
+    }
+}
+
+/**
+ * xmpp异常类。
+ */
 public class XmppRequiredAttributeMissingException <: XmppRequiredValueMissingException {
+    /**
+     * 通过属性名称构造当前对象。
+     *
+     * @param attributeName 属性名称
+     */
     public init(attributeName: String) {
-        super("The required attribute \'" + (attributeName) + "\' is missing (or has the empty String as value)")
+        super("The required attribute \'${attributeName}" + "\' is missing (or has the empty String as value)")
+    }
+
+    protected override func getClassName(): String {
+        "XmppRequiredAttributeMissingException"
     }
 }

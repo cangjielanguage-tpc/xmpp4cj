@@ -26,7 +26,14 @@ package xmpp4cj.packet
  * </table>
  */
 public class Message <: MessageOrPresence & MessageView & ToString {
+    /**
+     * message常量
+     */
     public static let ELEMENT = "message"
+
+    /**
+     * body常量
+     */
     public static let BODY = "body"
 
     private var typ: ?MessageType = None
@@ -55,19 +62,30 @@ public class Message <: MessageOrPresence & MessageView & ToString {
         return ELEMENT
     }
 
+    /**  
+     * 返回一个构造器来构建当前的消息或存在状态。
+     *
+     * @return 当前消息或存在状态的构造器。
+     */
     public override func asBuilder(): MessageBuilder {
         return StanzaBuilder.buildMessageFrom(this, getStanzaId())
     }
 
+    /**  
+     * 使用指定的标识符返回一个构造器来构建当前的消息或存在状态。
+     *
+     * @param id 消息或存在状态的标识符。
+     * @return 带有指定标识符的构造器。
+     */
     public override func asBuilder(id: String): MessageBuilder {
         return StanzaBuilder.buildMessageFrom(this, id)
     }
 
-    /* TODO
-    public override func asBuilder(connection: XMPPConnection): MessageBuilder {
-        return connection.getStanzaFactory().buildMessageStanzaFrom(this)
-    }
-     */
+    //TODO
+    // public override func asBuilder(connection: XMPPConnection): MessageBuilder {
+    //     return connection.getStanzaFactory().buildMessageStanzaFrom(this)
+    // }
+
     public override func toString(): String {
         let sb = StringBuilder()
         sb.append("Message Stanza [")
@@ -167,13 +185,31 @@ public enum MessageType <: Equatable<MessageType> & ToString {
  * 表示消息主题、其语言以及主题内容。
  */
 public class MessageSubject <: ExtensionElement & Hashable & Equatable<MessageSubject> {
+    /**
+     * 元素名称。
+     */
     public static let ELEMENT = "subject"
+
+    /**
+     * 命名空间。
+     */
     public static let NAMESPACE = StreamOpen.CLIENT_NAMESPACE
+
+    /**
+     * QNAME对象。
+     */
     public static let QNAME = QName(NAMESPACE, ELEMENT)
 
     private let subject: String
+
     let language: ?String
 
+    /**
+     * 构造方法。
+     *
+     * @param language 语言。
+     * @param subject 主题。
+     */
     public init(language: ?String, subject: String) {
         this.language = language
         this.subject = subject
@@ -226,18 +262,44 @@ public class MessageSubject <: ExtensionElement & Hashable & Equatable<MessageSu
  * 表示消息正文、其语言以及消息内容。
  */
 public class MessageBody <: ExtensionElement & Hashable & Equatable<MessageBody> {
+    /**
+     * body名称。
+     */
     public static let ELEMENT: String = "body"
+
+    /**
+     * 命名空间。
+     */
     public static let NAMESPACE: String = StreamOpen.CLIENT_NAMESPACE
+
+    /**
+     * QNAME对象。
+     */
     public static let QNAME = QName(NAMESPACE, ELEMENT)
 
     private let message: String
+
     private let language: ?String
+
     private let namespace: MessageBodyElementNamespace
 
+    /**
+     * 构造方法。
+     *
+     * @param language 语言。
+     * @param subject 主题。
+     */
     public init(language: ?String, message: String) {
         this(language, message, MessageBodyElementNamespace.client)
     }
 
+    /**
+     * 构造方法。
+     *
+     * @param language 语言。
+     * @param message 消息信息。
+     * @param namespace 命名空间。
+     */
     public init(language: ?String, message: String, namespace: MessageBodyElementNamespace) {
         this.language = language
         this.message = message
@@ -267,6 +329,7 @@ public class MessageBody <: ExtensionElement & Hashable & Equatable<MessageBody>
     public operator override func ==(obj: MessageBody): Bool {
         return EqualsUtil.equals(this, obj, {e, o => e.append(language, o.language).append(message, o.message)})
     }
+
     public operator override func !=(obj: MessageBody): Bool {
         return !(this == obj)
     }
@@ -289,9 +352,18 @@ public class MessageBody <: ExtensionElement & Hashable & Equatable<MessageBody>
 }
 
 public enum MessageBodyElementNamespace {
+    /**
+     * 客户端
+     */
     | client
+    /**
+     * 服务端
+     */
     | server
 
+    /**
+     * 通过枚举获取具体哪个端
+     */
     prop xmlNamespace: String {
         get() {
             match (this) {
@@ -303,27 +375,64 @@ public enum MessageBodyElementNamespace {
 }
 
 public class MessageThread <: ExtensionElement {
+    /**
+     * thread常量
+     */
     public static let ELEMENT: String = "thread"
+
+    /**
+     * 命名空间
+     */
     public static let NAMESPACE: String = StreamOpen.CLIENT_NAMESPACE
+
+    /**
+     * QNAME对象
+     */
     public static let QNAME = QName(NAMESPACE, ELEMENT)
+
+    /**
+     * parent常量
+     */
     public static let PARENT_ATTRIBUTE_NAME = "parent"
 
     private let thread: String
+
     private let parent: ?String
 
+    /**  
+     * 通过线程名称构造当前对象。
+     *
+     * @param thread 线程名称。
+     */
     public init(thread: String) {
         this(thread, None)
     }
 
+    /**  
+     * 通过线程名称和父类名称构造当前对象。
+     *
+     * @param thread 线程名称。
+     * @param parent 父类名称。
+     */
     public init(thread: String, parent: ?String) {
         this.thread = StringUtils.requireNotNullNorEmpty(thread, "thread must not be None nor empty")
         this.parent = StringUtils.requireNullOrNotEmpty(parent, "parent must be None or not empty")
     }
 
+    /**  
+     * 获取线程名称。
+     *
+     * @return 线程名称。
+     */
     public func getThread(): String {
         return thread
     }
 
+    /**  
+     * 获取父类名称。
+     *
+     * @return 父类名称。
+     */
     public func getParent(): ?String {
         return parent
     }

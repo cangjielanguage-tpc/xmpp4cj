@@ -7,6 +7,12 @@ package xmpp4cj.packet
  * 表示 XML 元素的接口。这与 {@link ExtensionElement} 类似，但不携带命名空间，通常作为节扩展的子元素包含在内。
  */
 public interface Element {
+    /**
+     * 返回此元素的 XML 表示形式。
+     *
+     * @param xmlEnvironment 节点。
+     * @return 节扩展作为 XML。
+     */
     func toXML(xmlEnvironment: ?XmlEnvironment): ToString
 
     /**
@@ -20,6 +26,11 @@ public interface Element {
         return toXML(xmlEnvironment)
     }
 
+    /**
+     * 返回此元素的 XML 表示形式。
+     *
+     * @return 节扩展作为 XML。
+     */
     func toXML(): ToString {
         return toXML(XmlEnvironment.EMPTY)
     }
@@ -57,12 +68,22 @@ public interface FullyQualifiedElement <: NamedElement & XmlLangElement {
      */
     func getNamespace(): String
 
+    /**
+     * 返回QName对象。
+     *
+     * @return QName对象。
+     */
     func getQName(): QName {
         let namespaceURI = getNamespace()
         let localPart = getElementName()
         return QName(namespaceURI, localPart)
     }
 
+    /**
+     * 返回语言标识。
+     *
+     * @return 语言标识。
+     */
     func getLanguage(): ?String {
         return None
     }

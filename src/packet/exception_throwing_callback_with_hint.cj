@@ -4,14 +4,17 @@
 package xmpp4cj.packet
 
 /**
- * Like {@link ExceptionThrowingCallback} but additionally logs a warning message.
+ * 类似于{@link ExceptionThrowingCallback}，但还会记录一条警告消息。
  */
 public class ExceptionThrowingCallbackWithHint <: ExceptionThrowingCallback {
+    private static let LOGGER = getGlobalLogger(("name", "ExceptionThrowingCallbackWithHint"))
+
+    /**
+     * 空参构造方法
+     */
     public init() {
         super()
     }
-
-    private static let LOGGER = getGlobalLogger(("name", "ExceptionThrowingCallbackWithHint"))
 
     public override func handleUnparsableStanza(packetData: UnparseableStanza): Unit {
         LOGGER.warn(

@@ -37,8 +37,19 @@ package xmpp4cj.packet
  * @see <a href="xmpp/org/rfcs/rfc6120.html#stanzas-error-syntax">RFC 6120 - 8.3.2 Syntax: The Syntax of XMPP error stanzas</a>
  */
 public class StanzaError <: AbstractError & ExtensionElement & ToString {
+    /**
+     * 命名空间
+     */
     public static let ERROR_CONDITION_AND_TEXT_NAMESPACE: String = "urn:ietf:params:xml:ns:xmpp-stanzas"
+
+    /**
+     * 错误常量
+     */
     public static let ERROR: String = "error"
+
+    /**
+     * QName对象
+     */
     public static let QNAME: QName = QName(StreamOpen.CLIENT_NAMESPACE, ERROR)
 
     private static let LOGGER: Logger = getGlobalLogger(("name", "StanzaError"))
@@ -71,8 +82,11 @@ public class StanzaError <: AbstractError & ExtensionElement & ToString {
     )
 
     private let condition: StanzaErrorCondition
+
     private let conditionText: ?String
+
     private let errorGenerator: ?String
+
     private let typ: StanzaErrorType
 
     /**
@@ -146,15 +160,25 @@ public class StanzaError <: AbstractError & ExtensionElement & ToString {
         return typ
     }
 
+    /**
+     * 返回错误生成器。
+     *
+     * @return 错误生成器。
+     */
     public func getErrorGenerator(): ?String {
         return errorGenerator
     }
 
+    /**
+     * 返回条件文本。
+     *
+     * @return 条件文本。
+     */
     public func getConditionText(): ?String {
         return conditionText
     }
 
-    public func toString(): String {
+    public override func toString(): String {
         let sb = StringBuilder("XMPPError: ${condition} - ${typ}")
 
         if (let Some(v) <- getDescriptiveText()) {
@@ -167,15 +191,25 @@ public class StanzaError <: AbstractError & ExtensionElement & ToString {
         return sb.toString()
     }
 
-    public func getElementName(): String {
+    /**
+     * 返回节点元素名称。
+     *
+     * @return 节点元素名称。
+     */
+    public override func getElementName(): String {
         return QNAME.getLocalPart()
     }
 
-    public func getNamespace(): String {
+    /**
+     * 返回节点元素命名空间。
+     *
+     * @return 节点元素命名空间。
+     */
+    public override func getNamespace(): String {
         return QNAME.getNamespaceURI()
     }
 
-    public func toXML(enclosingNamespace: ?XmlEnvironment): XmlStringBuilder {
+    public override func toXML(enclosingNamespace: ?XmlEnvironment): XmlStringBuilder {
         let xml = XmlStringBuilder(this, enclosingNamespace)
         xml.attribute("type", typ.toString())
         xml.optAttribute("by", errorGenerator)
@@ -197,6 +231,13 @@ public class StanzaError <: AbstractError & ExtensionElement & ToString {
         return xml
     }
 
+    /**
+     * 通过StanzaErrorCondition对象和描述文本生成StanzaErrorBuilder对象
+     *
+     * @param condition StanzaErrorCondition对象
+     * @param descriptiveText 描述文本
+     * @return StanzaErrorBuilder对象
+     */
     public static func froms(condition: StanzaErrorCondition, descriptiveText: ?String): StanzaErrorBuilder {
         let builder = getBuilder().setCondition(condition)
         if (let Some(descriptiveText) <- descriptiveText) {
@@ -206,47 +247,94 @@ public class StanzaError <: AbstractError & ExtensionElement & ToString {
         return builder
     }
 
+    /**
+     * 生成一个空的StanzaErrorBuilder对象
+     *
+     * @return 空的StanzaErrorBuilder对象
+     */
     public static func getBuilder(): StanzaErrorBuilder {
         return StanzaErrorBuilder()
     }
 
+    /**
+     * 通过StanzaErrorCondition对象生成StanzaErrorBuilder对象
+     *
+     * @param condition StanzaErrorCondition对象
+     * @return StanzaErrorBuilder对象
+     */
     public static func getBuilder(condition: StanzaErrorCondition): StanzaErrorBuilder {
         return getBuilder().setCondition(condition)
     }
 
+    /**
+     * 通过StanzaError对象生成StanzaErrorBuilder对象
+     *
+     * @param xmppError StanzaError对象
+     * @return StanzaErrorBuilder
+     */
     public static func getBuilder(xmppError: StanzaError): StanzaErrorBuilder {
         return getBuilder().copyFrom(xmppError)
     }
 }
 
 public class StanzaErrorBuilder <: AbstractErrorBuilder<StanzaErrorBuilder> {
-    private var condition: ?StanzaErrorCondition = None
-    private var conditionText: ?String = None
-    private var errorGenerator: ?String = None
-    private var typ: ?StanzaErrorType = None
+    private var condition: ?StanzaErrorCondition = None // 错误条件
+    private var conditionText: ?String = None // 条件文本
+    private var errorGenerator: ?String = None // 错误生成器
+    private var typ: ?StanzaErrorType = None // 错误类型
 
     init() {}
 
+    /**
+     * 设置错误条件
+     *
+     * @param condition 错误条件
+     * @return 当前 Builder 实例
+     */
     public func setCondition(condition: StanzaErrorCondition): StanzaErrorBuilder {
         this.condition = condition
         return this
     }
 
+    /**
+     * 设置错误类型
+     *
+     * @param type 错误类型
+     * @return 当前 Builder 实例
+     */
     public func setType(typ: StanzaErrorType): StanzaErrorBuilder {
         this.typ = typ
         return this
     }
 
+    /**
+     * 设置条件文本
+     *
+     * @param conditionText 条件文本
+     * @return 当前 Builder 实例
+     */
     public func setConditionText(conditionText: ?String): StanzaErrorBuilder {
         this.conditionText = conditionText
         return this
     }
 
+    /**
+     * 设置错误生成器
+     *
+     * @param errorGenerator 错误生成器
+     * @return 当前 Builder 实例
+     */
     public func setErrorGenerator(errorGenerator: ?String): StanzaErrorBuilder {
         this.errorGenerator = errorGenerator
         return this
     }
 
+    /**
+     * 从给定的 StanzaError 对象复制属性到当前 Builder
+     *
+     * @param xmppError 源 StanzaError 对象
+     * @return 当前 Builder 实例
+     */
     public func copyFrom(xmppError: StanzaError): StanzaErrorBuilder {
         setCondition(xmppError.getCondition())
         setType(xmppError.getType())
@@ -258,6 +346,11 @@ public class StanzaErrorBuilder <: AbstractErrorBuilder<StanzaErrorBuilder> {
         return this
     }
 
+    /**
+     * 构建并返回一个 StanzaError 对象
+     *
+     * @return 新创建的 StanzaError 对象
+     */
     public func build(): StanzaError {
         let exts: ?Collection<ExtensionElement> = if (let Some(v) <- extensions) {
             v
@@ -267,7 +360,12 @@ public class StanzaErrorBuilder <: AbstractErrorBuilder<StanzaErrorBuilder> {
         return StanzaError(condition.getOrThrow(), conditionText, errorGenerator, typ, descriptiveTexts, exts)
     }
 
-    protected func getThis(): StanzaErrorBuilder {
+    /**  
+     * 获取StanzaErrorBuilder实例。
+     *
+     * @return StanzaErrorBuilder实例
+     */
+    protected override func getThis(): StanzaErrorBuilder {
         return this
     }
 }
@@ -284,10 +382,25 @@ public class StanzaErrorBuilder <: AbstractErrorBuilder<StanzaErrorBuilder> {
  * </ul>
  */
 public enum StanzaErrorType <: ToString {
+    /**
+     * 等待后重试（错误是暂时的）
+     */
     | WAIT
+    /**
+     * 不要重试（错误不可恢复）
+     */
     | CANCEL
+    /**
+     * 在更改发送的数据后重试
+     */
     | MODIFY
+    /**
+     * 在提供凭证后重试
+     */
     | AUTH
+    /**
+     * 继续（条件只是一个警告）
+     */
     | CONTINUE
 
     public func toString(): String {
@@ -300,6 +413,12 @@ public enum StanzaErrorType <: ToString {
         }
     }
 
+    /**
+     * 通过传入参数获取枚举值。
+     *
+     * #param string 文本
+     * @return 枚举值
+     */
     public static func fromString(string: String): StanzaErrorType {
         match (string.toAsciiUpper()) {
             case "WAIT" => WAIT
@@ -312,30 +431,106 @@ public enum StanzaErrorType <: ToString {
     }
 }
 
+/**  
+ * 枚举类 Condition，表示 XMPP 错误条件。
+ */
 public enum StanzaErrorCondition <: ToString & Equatable<StanzaErrorCondition> & Hashable {
+    /**
+     * 错误请求
+     */
     bad_request
+    /**
+     * 冲突
+     */
     | conflict
+    /**
+     * 功能未实现
+     */
     | feature_not_implemented
+    /**
+     * 禁止
+     */
     | forbidden
+    /**
+     * 已消失
+     */
     | gone
+    /**
+     * 服务器内部错误
+     */
     | internal_server_error
+    /**
+     * 找不到项目
+     */
     | item_not_found
+    /**
+     * JID 格式错误
+     */
     | jid_malformed
+    /**
+     * 不可接受
+     */
     | not_acceptable
+    /**
+     * 不允许
+     */
     | not_allowed
+    /**
+     * 未授权
+     */
     | not_authorized
+    /**
+     * 政策违规
+     */
     | policy_violation
+    /**
+     * 收件人不可用
+     */
     | recipient_unavailable
+    /**
+     * 重定向
+     */
     | redirect
+    /**
+     * 需要注册
+     */
     | registration_required
+    /**
+     * 找不到远程服务器
+     */
     | remote_server_not_found
+    /**
+     * 远程服务器超时
+     */
     | remote_server_timeout
+    /**
+     * 资源限制
+     */
     | resource_constraint
+    /**
+     * 服务不可用
+     */
     | service_unavailable
+    /**
+     * 需要订阅
+     */
     | subscription_required
+    /**
+     * 未定义条件
+     */
     | undefined_condition
+    /**
+     * 意外请求
+     */
     | unexpected_request
 
+    /**  
+     * 从字符串创建对应的 Condition 枚举常量。
+     *
+     * @param string 要转换的字符串，使用连字符
+     * @return 对应的 Condition 枚举常量
+     * @throws IllegalStateException 如果无法转换字符串为 Condition
+     */
     public static func fromString(string: String): StanzaErrorCondition {
         return match (string.replace('-', '_')) {
             case "bad_request" => StanzaErrorCondition.bad_request
@@ -399,7 +594,7 @@ public enum StanzaErrorCondition <: ToString & Equatable<StanzaErrorCondition> &
         }
     }
 
-    public func hashCode(): Int64 {
+    public override func hashCode(): Int64 {
         return toString().hashCode()
     }
 }

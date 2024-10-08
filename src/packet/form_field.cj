@@ -4,60 +4,58 @@
 package xmpp4cj.packet
 
 /**
- * Form Field Types as defined in XEP-4 § 3.3.
+ * XEP-4§3.3中定义的表单字段类型。
  *
  * @see <a href="xmpp/org/extensions/xep-0004.html#protocol-fieldtypes">XEP-4 § 3.3 Field Types</a>
  */
 public enum FormFieldType <: ToString & Equatable<FormFieldType> {
     /**
-     * Boolean type. Can be 0 or 1, true or false, yes or no. Default value is 0.
-     * <p>
-     * Note that in XEP-4 this type is called 'boolean'.
-     * </p>
+     * 布尔类型。可以是0或1，true或false，yes或no。默认值为0。
+     * 请注意，在XEP-4中，这种类型被称为“boolean”。
      */
     boolean
     /**
-     * Fixed for putting in text to show sections, or just advertise your web site in the middle of the form.
+     * 修正了在表格中间插入文本以显示部分或只是广告你的网站。
      */
     | fixed
     /**
-     * Is not given to the user at all, but returned with the questionnaire.
+     * 根本不给用户，而是随问卷一起返回。
      */
     | hidden
     /**
-     * multiple entries for JIDs.
+     * JID的多个条目。
      */
     | jid_multi
     /**
-     * Jabber ID - choosing a JID from your roster, and entering one based on the rules for a JID.
+     * Jabber ID-从您的名单中选择一个JID，并根据JID的规则输入一个。
      */
     | jid_single
     /**
-     * Given a list of choices, pick one or more.
+     * 给定一个选项列表，选择一个或多个。
      */
     | list_multi
     /**
-     * Given a list of choices, pick one.
+     * 给定一个选项列表，选择一个。
      */
     | list_single
     /**
-     * Multiple lines of text entry.
+     * 多行文本输入。
      */
     | text_multi
     /**
-     * Instead of showing the user what they typed, you show ***** to protect it.
+     * 您显示*****以保护它，而不是向用户显示他们键入的内容。
      */
     | text_private
     /**
-     * Single line or word of text.
+     * 单行或单词文本。
      */
     | text_single
 
     /**
-     * Get a form field type from the given string. If <code>string</code> is None, then None will be returned.
+     * 从给定的字符串中获取表单字段类型。如果<code>字符串</code>为None，则将返回None。
      *
-     * @param string the string to transform or None.
-     * @return the type or None.
+     * @param string要转换的字符串或None。
+     * @return type或None。
      */
     public static func fromString(string: String): ?FormFieldType {
         match (string.replace('-', '_')) {
