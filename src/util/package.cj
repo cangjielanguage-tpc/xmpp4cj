@@ -8,13 +8,15 @@ package xmpp4cj.util
 
 internal import crypto.crypto.*
 internal import encoding.hex.*
+internal import log.*
+internal import net.tls.*
 internal import std.collection.*
 internal import std.collection.concurrent.*
 internal import std.math.*
+internal import std.net.*
 internal import std.random.*
 internal import std.regex.*
 internal import std.sync.*
-internal import log.*
 
 /*
  * ArrayList工具类
@@ -74,7 +76,7 @@ public class Objects {
      * @throws IllegalArgumentException 如果为None时抛IllegalArgumentException异常。
      */
     public static func requireNonNull<T>(obj: ?T, message: ?String): T {
-        obj ?? throw IllegalArgumentException(message ?? "Can not provide None argument")
+        obj.getOrThrow {=> IllegalArgumentException(message ?? "Can not provide None argument")}
     }
 }
 

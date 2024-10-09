@@ -779,7 +779,7 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
      * @param enclosingXmlEnvironment 封闭的XML环境。
      * @throws IOException  如果发生I/O错误，会抛出IOException。
      */
-    public func write(writer: StringWriter<OutputStream>, enclosingXmlEnvironment: XmlEnvironment): Unit {
+    public func write(writer: StringWriter<OutputStream>, enclosingXmlEnvironment: ?XmlEnvironment): Unit {
         try {
             appendXmlTo(
                 {

@@ -9,7 +9,7 @@ package xmpp4cj.util
 public class ConcurrentSet<T> <: Collection<T> {
     let list = LinkedList<T>()
 
-    let lock = Monitor()
+    public let lock = Monitor()
 
     /**
      * set长度。

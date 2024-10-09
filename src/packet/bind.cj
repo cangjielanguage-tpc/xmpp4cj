@@ -58,7 +58,7 @@ public class Bind <: IQ {
      * @param resource 资源对象。
      * @return 新的 Bind 对象。
      */
-    public static func newSet(resource: Resourcepart): Bind {
+    public static func newSet(resource: ?Resourcepart): Bind {
         let bind = Bind(resource, None)
         bind.setType(IQType.set)
         return bind
@@ -128,10 +128,10 @@ public class BindFeature <: ExtensionElement {
     /**
      * 返回xml文本信息。
      *
-     * @param xmlEnvironment xml标签节点。
+     * @param _ xml标签节点。
      * @return xml文本信息。
      */
-    public override func toXML(xmlEnvironment: ?XmlEnvironment): ToString {
+    public override func toXML(_: ?XmlEnvironment): ToString {
         return "<${Bind.ELEMENT} xmlns='${Bind.NAMESPACE}'/>"
     }
 }

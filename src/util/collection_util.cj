@@ -16,11 +16,8 @@ public class CollectionUtil {
      * @throws IllegalArgumentException collection没数据的时候抛IllegalArgumentException异常。
      */
     public static func requireNotEmpty<T>(collection: Collection<T>, collectionName: String): Collection<T> {
-        // if (collection.isEmpty()) {
-        //     throw NoneValueException((collectionName) + " must not be null.")
-        // }
         if (collection.isEmpty()) {
-            throw IllegalArgumentException((collectionName) + " must not be empty.")
+            throw IllegalArgumentException("${collectionName} must not be empty.")
         }
         return collection
     }

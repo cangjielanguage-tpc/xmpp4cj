@@ -25,6 +25,11 @@ public open class XmppParsingException <: Exception {
         super(message)
     }
 
+    /**  
+     * 获得类名，用字符串表示。
+     *
+     * @return 类名。
+     */
     protected open override func getClassName(): String {
         "XmppParsingException"
     }
@@ -43,6 +48,11 @@ public class XmppTextParseException <: XmppParsingException {
         super(parsingException)
     }
 
+    /**  
+     * 获得类名，用字符串表示。
+     *
+     * @return 类名。
+     */
     protected override func getClassName(): String {
         "XmppTextParseException"
     }
@@ -61,6 +71,11 @@ public class XmppUriSyntaxParsingException <: XmppParsingException {
         super(uriSyntaxException)
     }
 
+    /**  
+     * 获得类名，用字符串表示。
+     *
+     * @return 类名。
+     */
     protected override func getClassName(): String {
         "XmppUriSyntaxParsingException"
     }
@@ -79,6 +94,11 @@ public open class XmppRequiredValueMissingException <: XmppParsingException {
         super(message)
     }
 
+    /**  
+     * 获得类名，用字符串表示。
+     *
+     * @return 类名。
+     */
     protected open override func getClassName(): String {
         "XmppRequiredValueMissingException"
     }
@@ -97,6 +117,11 @@ public class XmppRequiredAttributeMissingException <: XmppRequiredValueMissingEx
         super("The required attribute \'${attributeName}" + "\' is missing (or has the empty String as value)")
     }
 
+    /**  
+     * 获得类名，用字符串表示。
+     *
+     * @return 类名。
+     */
     protected override func getClassName(): String {
         "XmppRequiredAttributeMissingException"
     }

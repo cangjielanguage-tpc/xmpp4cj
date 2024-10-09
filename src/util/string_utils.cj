@@ -230,7 +230,7 @@ public class StringUtils {
      * "TWNK-KD5Y-MT3T-E1GS-DRDB-KVTW"。字符由密码学安全的伪随机数生成器（CSPRNG）随机选择。
      * <p>
      * 该字符串可以用作秘密的备份“代码”，实际上与 XEP-0373 中指定的备份代码以及
-     * <a href="github.com/open-keychain/open-keychain/wiki/Backups">OpenKeychain 的备份格式 v2</a>中使用的代码相同。
+     * <a href="github/com/open-keychain/open-keychain/wiki/Backups">OpenKeychain 的备份格式 v2</a>中使用的代码相同。
      * </p>
      *
      * @see xep-0373/#backup-encryption XEP-0373 §5.4 加密密钥备份

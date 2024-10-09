@@ -71,10 +71,10 @@ public class Mechanisms <: ExtensionElement {
     /**  
      * 将此 {@code Mechanisms} 实例转换为对应的 XML 表示形式。
      *
-     * @param enclosingNamespace 包含的 XML 环境，用于生成正确的 XML 结构。
+     * @param _ 包含的 XML 环境，用于生成正确的 XML 结构。
      * @return XML 字符串构建器，表示该机制的 XML 表示。
      */
-    public override func toXML(enclosingNamespace: ?XmlEnvironment): XmlStringBuilder {
+    public override func toXML(_: ?XmlEnvironment): XmlStringBuilder {
         let xml = XmlStringBuilder(this)
         xml.rightAngleBracket()
         for (mechanism in mechanisms) {
