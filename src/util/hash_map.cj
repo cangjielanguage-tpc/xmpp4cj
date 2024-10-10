@@ -15,7 +15,7 @@ package xmpp4cj.util
  * - 由于不限定K, 所以无法继承Map
  */
 public class SimpleHashMap<K, V> <: Collection<(K, V)> {
-    public let lock = Monitor()
+    public let lock: ReentrantReadWriteMutex = ReentrantReadWriteMutex()
 
     private let inner = HashMap<HashMapKey<K>, V>()
 

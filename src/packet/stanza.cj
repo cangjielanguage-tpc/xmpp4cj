@@ -202,7 +202,7 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
     }
 
     public override func getExtensions(): ArrayList<ExtensionElement> {
-        synchronized(extensionElements.lock) {
+        synchronized(extensionElements.lock.writeMutex) {
             return extensionElements.values()
         }
     }
@@ -217,7 +217,7 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
     }
 
     func cloneExtensionsMap(): MultiMap<QName, ExtensionElement> {
-        synchronized(extensionElements.lock) {
+        synchronized(extensionElements.lock.writeMutex) {
             return extensionElements.clone()
         }
     }
@@ -241,7 +241,7 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
 
     public override func getExtensions(qname: QName): ArrayList<ExtensionElement> {
         let res: ArrayList<ExtensionElement>
-        synchronized(extensionElements.lock) {
+        synchronized(extensionElements.lock.writeMutex) {
             res = extensionElements.getAll(qname)
         }
         return res // TODO Collections.unmodifiableList(res)
@@ -254,7 +254,7 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
      * @return 获取节点元素列表。
      */
     public func getExtensionsByType(extensionElementClass: ClassId): ArrayList<ExtensionElement> {
-        synchronized(extensionElements.lock) {
+        synchronized(extensionElements.lock.writeMutex) {
             return XmppElementUtil.getElementsFrom(extensionElements, extensionElementClass)
         }
     }
@@ -294,7 +294,7 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
     }
 
     public override func getExtension(qname: QName): ?ExtensionElement {
-        synchronized(extensionElements.lock) {
+        synchronized(extensionElements.lock.writeMutex) {
             return extensionElements.getFirst(qname)
         }
     }
@@ -314,7 +314,7 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
             return
         }
         let key = ext.getQName()
-        synchronized(extensionElements.lock) {
+        synchronized(extensionElements.lock.writeMutex) {
             extensionElements.put(key, ext)
         }
     }
@@ -334,7 +334,7 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
         } else {
             return None
         }
-        synchronized(extensionElements.lock) {
+        synchronized(extensionElements.lock.writeMutex) {
             let removedExtension = removeExtension(extension.getElementName(), extension.getNamespace())
             addExtension(extension)
             return removedExtension
@@ -369,7 +369,7 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
             return hasExtension(namespace)
         }
         let key = QName(namespace, elementName)
-        synchronized(extensionElements.lock) {
+        synchronized(extensionElements.lock.writeMutex) {
             return extensionElements.containsKey(key)
         }
     }
@@ -382,7 +382,7 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
      * @return true表示有值，false表示None。
      */
     public override func hasExtension(namespace: String): Bool {
-        synchronized(extensionElements.lock) {
+        synchronized(extensionElements.lock.writeMutex) {
             for (packetExtension in extensionElements.values()) {
                 if (packetExtension.getNamespace() == namespace) {
                     return true
@@ -401,7 +401,7 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
      */
     public func removeExtension(elementName: String, namespace: String): ?ExtensionElement {
         let key = QName(namespace, elementName)
-        synchronized(extensionElements.lock) {
+        synchronized(extensionElements.lock.writeMutex) {
             return extensionElements.remove(key)
         }
     }
