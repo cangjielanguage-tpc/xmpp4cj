@@ -26,3 +26,11 @@ public interface ClassIdentify {
      */
     func getClass(): ClassId
 }
+
+public func anyClassId(any: Any): ClassId {
+    if (any is ClassIdentify) {
+        (any as ClassIdentify).getOrThrow().getClass()
+    } else {
+        "NoClassInfo"
+    }
+}

@@ -936,7 +936,7 @@ public class JidCreate {
         try {
             return entityFullFrom(cs)
         } catch (e: XmppStringprepException) {
-            throw IllegalArgumentException(e.message)
+            throw IllegalArgumentException(e.toString())
         }
     }
 
@@ -1111,7 +1111,17 @@ public class JidCreate {
         try {
             fullJid = LocalDomainAndResourcepartJid(localpart, domainpart, resource, context)
         } catch (e: XmppStringprepException) {
-            throw XmppStringprepException("${localpart}@${domainpart}/${resource}", e)
+            let localpartStr = if (let Some(v) <- localpart) {
+                v
+            } else {
+                "None"
+            }
+            let resourceStr = if (let Some(v) <- resource) {
+                v
+            } else {
+                "None"
+            }
+            throw XmppStringprepException("${localpartStr}@${domainpart}/${resourceStr}", e)
         }
         return fullJid()
     }
@@ -1376,33 +1386,7 @@ public class JidCreate {
     }
 
     private static func urlDecode(cs: String): String {
-        let url = URL.parse("${cs}")
-        let urlScheme = if (url.scheme.isEmpty()) {
-            ""
-        } else {
-            "${url.scheme}://"
-        }
-        let urlUserInfo = if (url.userInfo.toString().isEmpty()) {
-            ""
-        } else {
-            "${url.userInfo}@"
-        }
-        let urlHostName = if (url.hostName.isEmpty()) {
-            ""
-        } else {
-            "${url.hostName}"
-        }
-        let urlPath = if (url.path.isEmpty()) {
-            ""
-        } else {
-            "${url.path}"
-        }
-        let urlQuery = if (let Some(v) <- url.query) {
-            "?${v}"
-        } else {
-            ""
-        }
-        return "${urlScheme}${urlUserInfo}${urlHostName}${urlPath}${urlQuery}"
+        return URLDecoder.urlDecoderDecode(cs)
     }
 }
 

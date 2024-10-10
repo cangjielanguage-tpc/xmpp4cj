@@ -17,6 +17,12 @@ public class CollectionBlockingQueue<E> <: Collection<E> {
     public init(capacity: Int) {
         queue = ArrayBlockingQueue<E>(capacity)
     }
+    /**
+     * 构造
+     */
+    public init(arr: ArrayBlockingQueue<E>) {
+        queue = arr
+    }
 
     /**
      * 列表长度。

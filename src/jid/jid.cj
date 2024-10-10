@@ -623,8 +623,7 @@ public abstract class AbstractJid <: Jid {
         return if (let Some(v) <- urlEncodedCache) {
             v
         } else {
-            let formStr = Form(toString()).toEncodeString()
-            let v = formStr.removeSuffix("=")
+            let v = URLEncoder.encode(toString())
             urlEncodedCache = v
             v
         }
