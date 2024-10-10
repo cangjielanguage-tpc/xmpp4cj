@@ -30,14 +30,14 @@ public open class XmppElementUtil {
             return qname
         }
 
-        if (let Some(qname) <- getQnameFromClassid(qnameFrom)) {
+        if (let Some(qname) <- QNAME_MAPPING.get(qnameFrom)) {
             CLASS_TO_QNAME_CACHE.put(cid, qname)
             return qname
         }
         LOGGER.warn("The ${cid} has no static QNAME field. Consider adding one.")
 
-        let element = getElementFromClassid(qnameFrom) ?? ""
-        let namespace = getNamespaceFromClassid(qnameFrom) ?? ""
+        let element = ELEMENT_MAPPING.get(qnameFrom) ?? ""
+        let namespace = NAMESPACE_MAPPING.get(qnameFrom) ?? ""
         if (element == "" || namespace == "") {
             throw IllegalArgumentException(
                 "The ${cid} has no ELEMENT, NAMESPACE or QNAME member. Consider adding QNAME")

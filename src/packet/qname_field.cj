@@ -149,29 +149,60 @@ extend MessageBody <: XmlField {
     }
 }
 
-func getQnameFromClassid(cid: ClassId): ?QName {
-    match (cid) {
-        case "MessageSubject" => MessageSubject.QNAME
-        case "MessageThread" => MessageThread.QNAME
-        case "MessageBody" => MessageBody.QNAME
-        case _ => None
-    }
-}
-
-func getElementFromClassid(cid: ClassId): ?String {
-    match (cid) {
-        case "MessageSubject" => MessageSubject.ELEMENT
-        case "MessageThread" => MessageThread.ELEMENT
-        case "MessageBody" => MessageBody.ELEMENT
-        case _ => None
-    }
-}
-
-func getNamespaceFromClassid(cid: ClassId): ?String {
-    match (cid) {
-        case "MessageSubject" => MessageSubject.NAMESPACE
-        case "MessageThread" => MessageThread.NAMESPACE
-        case "MessageBody" => MessageBody.NAMESPACE
-        case _ => None
-    }
-}
+/* 
+ * 定义所有QName映射 因为不能用反射
+ * 扩展的Element应在此注册
+ */
+public let QNAME_MAPPING = HashMap<String, QName>(
+    [
+        ("BindFeature", BindFeature.QNAME),
+        ("Mechanisms", Mechanisms.QNAME),
+        ("MessageBody", MessageBody.QNAME),
+        ("MessageSubject", MessageSubject.QNAME),
+        ("MessageThread", MessageThread.QNAME),
+        ("SessionFeature", SessionFeature.QNAME),
+        ("StartTls", StartTls.QNAME),
+        ("TlsFailure", TlsFailure.QNAME),
+        ("TlsProceed", TlsProceed.QNAME)
+    ]
+)
+/* 
+ * 定义所有ELEMENT映射 因为不能用反射
+ * 扩展的Element应在此注册
+ */
+public let ELEMENT_MAPPING = HashMap<String, String>(
+    [
+        ("Bind", Bind.ELEMENT),
+        ("ErrorIQ", ErrorIQ.ELEMENT),
+        ("Mechanisms", Mechanisms.ELEMENT),
+        ("Message", Message.ELEMENT),
+        ("MessageBody", MessageBody.ELEMENT),
+        ("MessageSubject", MessageSubject.ELEMENT),
+        ("MessageThread", MessageThread.ELEMENT),
+        ("Presence", Presence.ELEMENT),
+        ("Session", Session.ELEMENT),
+        ("StartTls", StartTls.ELEMENT),
+        ("StreamError", StreamError.ELEMENT),
+        ("StreamOpen", StreamOpen.ELEMENT),
+        ("TlsFailure", TlsFailure.ELEMENT),
+        ("TlsProceed", TlsProceed.ELEMENT)
+    ]
+)
+/* 
+ * 定义所有NAMESPACE映射 因为不能用反射
+ * 扩展的Element应在此注册
+ */
+public let NAMESPACE_MAPPING = HashMap<String, String>(
+    [
+        ("Bind", Bind.NAMESPACE),
+        ("Mechanisms", Mechanisms.NAMESPACE),
+        ("MessageBody", MessageBody.NAMESPACE),
+        ("MessageSubject", MessageSubject.NAMESPACE),
+        ("MessageThread", MessageThread.NAMESPACE),
+        ("Session", Session.NAMESPACE),
+        ("StartTls", StartTls.NAMESPACE),
+        ("StreamError", StreamError.NAMESPACE),
+        ("TlsFailure", TlsFailure.NAMESPACE),
+        ("TlsProceed", TlsProceed.NAMESPACE)
+    ]
+)
