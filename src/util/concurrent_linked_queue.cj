@@ -7,7 +7,7 @@ package xmpp4cj.util
  * 线程安全的LinkedList
  */
 public class ConcurrentLinkedQueue<T> <: Collection<T> {
-    private let lock = Monitor()
+    private let lock: ReentrantReadWriteMutex = ReentrantReadWriteMutex()
     private let list = LinkedList<T>()
 
     /**
@@ -15,7 +15,7 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
      */
     public prop size: Int64 {
         get() {
-            synchronized(lock) {
+            synchronized(lock.writeMutex) {
                 list.size
             }
         }
@@ -27,7 +27,7 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
      * @param t 数据。
      */
     public func append(t: T): Unit {
-        synchronized(lock) {
+        synchronized(lock.writeMutex) {
             list.append(t)
         }
     }
@@ -39,7 +39,7 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
      * @return true 删除成功，false 未找到。
      */
     public func remove(t: T): Bool {
-        synchronized(lock) {
+        synchronized(lock.writeMutex) {
             let res = [false]
             list.removeIf {
                 item =>
@@ -60,7 +60,7 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
      * @return index旧数据
      */
     public func remove(index: Int): ?T {
-        synchronized(lock) {
+        synchronized(lock.writeMutex) {
             var node = list.nodeAt(index)
             if (let Some(n) <- node) {
                 list.remove(n)
@@ -74,7 +74,7 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
      * 清空列表。
      */
     public func clear(): Unit {
-        synchronized(lock) {
+        synchronized(lock.writeMutex) {
             list.clear()
         }
     }
@@ -85,7 +85,7 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
      * @return true表示列表为空，false表示列表不为空。
      */
     public override func isEmpty(): Bool {
-        synchronized(lock) {
+        synchronized(lock.writeMutex) {
             list.isEmpty()
         }
     }
@@ -96,7 +96,7 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
      * @return 迭代器。
      */
     public override func iterator(): Iterator<T> {
-        synchronized(lock) {
+        synchronized(lock.writeMutex) {
             list.iterator()
         }
     }

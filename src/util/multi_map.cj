@@ -23,7 +23,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
     /**
      * 锁。
      */
-    public let lock: Monitor = Monitor()
+    public let lock: ReentrantReadWriteMutex = ReentrantReadWriteMutex()
 
     /**
      * 构造一个初始容量为{@link#DEFAULT_MAP_SIZE}的新MultiMap。

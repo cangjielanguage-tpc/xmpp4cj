@@ -24,7 +24,7 @@ public interface Delayed {
 public class DelayQueue<T> where T <: Delayed & Comparable<T> & Object {
     let list = LinkedList<T>()
 
-    let lock = Monitor()
+    let lock: ReentrantReadWriteMutex = ReentrantReadWriteMutex()
 
     /**
      * 添加一个元素。
@@ -32,7 +32,7 @@ public class DelayQueue<T> where T <: Delayed & Comparable<T> & Object {
      * @param t 添加的元素。
      */
     public func append(t: T): Unit {
-        synchronized(lock) {
+        synchronized(lock.writeMutex) {
             var node = list.firstNode()
             while (let Some(n) <- node) {
                 if (t.getDelay() < n.value.getDelay()) {
@@ -51,7 +51,7 @@ public class DelayQueue<T> where T <: Delayed & Comparable<T> & Object {
      * @return true 成功删除了一个元素 false 无变化
      */
     public func remove(t: T): Bool {
-        synchronized(lock) {
+        synchronized(lock.writeMutex) {
             var node = list.firstNode()
             while (let Some(n) <- node) {
                 if (refEq(n.value, t)) {
@@ -69,7 +69,7 @@ public class DelayQueue<T> where T <: Delayed & Comparable<T> & Object {
      * @return 头元素
      */
     public func peek(): Option<T> {
-        synchronized(lock) {
+        synchronized(lock.writeMutex) {
             list.first
         }
     }
@@ -82,7 +82,7 @@ public class DelayQueue<T> where T <: Delayed & Comparable<T> & Object {
      * @return 到期头元素
      */
     public func poll(): Option<T> {
-        synchronized(lock) {
+        synchronized(lock.writeMutex) {
             let node = list.first ?? return None
             if (node.getDelay() > Duration.Zero) {
                 return None
@@ -99,7 +99,7 @@ public class DelayQueue<T> where T <: Delayed & Comparable<T> & Object {
      * @return 头元素
      */
     public func take(): Option<T> {
-        synchronized(lock) {
+        synchronized(lock.writeMutex) {
             let node = list.first ?? return None
             let delay = node.getDelay()
             if (delay > Duration.Zero) {

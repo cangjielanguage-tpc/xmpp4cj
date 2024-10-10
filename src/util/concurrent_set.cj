@@ -9,14 +9,14 @@ package xmpp4cj.util
 public class ConcurrentSet<T> <: Collection<T> {
     let list = LinkedList<T>()
 
-    public let lock = Monitor()
+    public let lock: ReentrantReadWriteMutex = ReentrantReadWriteMutex()
 
     /**
      * set长度。
      */
     public prop size: Int64 {
         get() {
-            synchronized(lock) {
+            synchronized(lock.writeMutex) {
                 list.size
             }
         }
@@ -28,7 +28,7 @@ public class ConcurrentSet<T> <: Collection<T> {
      * @return true表示为空，false表示不为空。
      */
     public override func isEmpty(): Bool {
-        synchronized(lock) {
+        synchronized(lock.writeMutex) {
             list.isEmpty()
         }
     }
@@ -39,7 +39,7 @@ public class ConcurrentSet<T> <: Collection<T> {
      * @return 迭代器。
      */
     public override func iterator(): Iterator<T> {
-        synchronized(lock) {
+        synchronized(lock.writeMutex) {
             list.iterator()
         }
     }
@@ -48,7 +48,7 @@ public class ConcurrentSet<T> <: Collection<T> {
      * 清除set数据。
      */
     public func clear(): Unit {
-        synchronized(lock) {
+        synchronized(lock.writeMutex) {
             list.clear()
         }
     }
@@ -72,7 +72,7 @@ public class ConcurrentSet<T> <: Collection<T> {
      * @return true表示插入成功，false表示插入失败。
      */
     public func put(t: T): Bool {
-        synchronized(lock) {
+        synchronized(lock.writeMutex) {
             var node: ?LinkedListNode<T> = list.firstNode()
             while (let Some(n) <- node) {
                 node = n.next
@@ -96,7 +96,7 @@ public class ConcurrentSet<T> <: Collection<T> {
      * @return true表示删除成功，false表示删除失败。
      */
     public func remove(t: T): Bool {
-        synchronized(lock) {
+        synchronized(lock.writeMutex) {
             let flag = [false]
             list.removeIf {
                 v =>
