@@ -4,7 +4,6 @@
 package xmpp4cj.provider
 
 public class StreamFeatureProviderInfo <: AbstractProviderInfo {
-
     /**
      * 定义一个实现了 <code>StreamFeatureProvider</code> 接口的扩展提供者。
      *

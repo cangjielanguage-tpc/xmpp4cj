@@ -7,12 +7,25 @@ package xmpp4cj.provider
  * The parser for {@link StandardExtensionElement}s.
  */
 public class StandardExtensionElementProvider <: ExtensionElementProvider<StandardExtensionElement> {
-    public init() {
+    private init() {
         super()
     }
 
+    /**  
+     * 单例实例，用于访问 {@link StandardExtensionElementProvider}
+     */
     public static var INSTANCE: StandardExtensionElementProvider = StandardExtensionElementProvider()
 
+    /**  
+     * 解析 XML 中的标准扩展元素并返回 {@link StandardExtensionElement} 的实例。
+     *
+     * @param parser 用于解析 XML 的 {@link XmlPullParser}
+     * @param initialDepth 初始深度，用于跟踪 XML 解析的层级
+     * @param xmlEnvironment 当前 XML 环境的上下文
+     * @return 返回解析后的 {@link StandardExtensionElement} 实例
+     * @throws XmlPullParserException 如果解析过程中发生 XML 解析异常
+     * @throws IOException 如果在解析期间发生 I/O 错误
+     */
     public override func parse(parser: XmlPullParser, initialDepth: Int, xmlEnvironment: ?XmlEnvironment): StandardExtensionElement {
         let name = parser.getName()
         let namespace = parser.getNamespace()
@@ -29,7 +42,7 @@ public class StandardExtensionElementProvider <: ExtensionElementProvider<Standa
                 throw Exception("AssertionError")
             }
             let nsuri = parser.getNamespaceUri(i)
-            attributes.put("xmlns:" + (nsprefix), nsuri)
+            attributes.put("xmlns:${nsprefix}", nsuri)
         }
         for (i in 0..attributeCount) {
             let attributePrefix = parser.getAttributePrefix(i)
