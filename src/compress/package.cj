@@ -2,9 +2,9 @@
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
  */
 /**
- * Classes and interfaces for XMPP stream compression (XEP-138).
- * Stanzas and extension elements for XMPP stream compression (XEP-138).
- * Providers for XMPP stream compression (XEP-138).
+ * XMPP流压缩的类和接口（XEP-138）。
+ * XMPP流压缩用三角架和扩展元件（XEP-138）。
+ * XMPP流压缩提供程序（XEP-138）。
  */
 package xmpp4cj.compress
 
@@ -16,12 +16,12 @@ internal import xmpp4cj.xml.*
 internal import xmpp4cj.util.*
 
 /**
- * Parse the Compression Feature reported from the server.
+ * 解析服务器报告的压缩功能。
  *
- * @param parser the XML parser, positioned at the start of the compression stanza.
- * @return The CompressionFeature stream element
- * @throws IOException if an I/O error occurred.
- * @throws XmlPullParserException if an exception occurs while parsing the stanza.
+ * @param parser XML解析器，位于压缩节的开头。
+ * @return CompressionFeature流元素
+ * @throws IOException 如果发生I/O错误，会抛出IOException。
+ * @throws XmlPullParserException 如果在解析节时发生异常，会抛出XmlPullParserException。
  */
 public func parseCompressionFeature(parser: XmlPullParser): CompressFeature {
     if (parser.getEventType() != XmlPullParserEvent.START_ELEMENT) {
