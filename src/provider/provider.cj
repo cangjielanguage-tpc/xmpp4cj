@@ -14,14 +14,31 @@ package xmpp4cj.provider
  * @param <E> 结果元素的类型。
  */
 public abstract class Provider<E> <: AbstractProvider<E> where E <: Element {
-    // throws IOException, XmlPullParserException, ParsingException
+    /**  
+     * 使用给定的 XML Pull 解析器解析元素。
+     *
+     * @param parser XmlPullParser 实例，用于解析 XML 数据
+     * @return 解析得到的元素实例
+     * @throws IOException 读写过程中的异常
+     * @throws XmlPullParserException 解析 XML 时抛出的异常
+     * @throws XmppParsingException Xmpp 解析过程中抛出的异常
+     */
     public func parse(parser: XmlPullParser): E {
         return parse(parser, None)
     }
 
-    // throws IOException, XmlPullParserException, ParsingException
+    /**  
+     * 使用给定的 XML Pull 解析器和外部 XML 环境设置解析元素。
+     *
+     * @param parser XmlPullParser 实例，用于解析 XML 数据
+     * @param outerXmlEnvironment 外部 XML 环境设置，可能为 null
+     * @return 解析得到的元素实例
+     * @throws IOException 读写过程中的异常
+     * @throws XmlPullParserException 解析 XML 时抛出的异常
+     * @throws XmppParsingException Xmpp 解析过程中抛出的异常
+     */
     public func parse(parser: XmlPullParser, outerXmlEnvironment: ?XmlEnvironment): E {
-        // XPP3 calling convention assert: Parser should be at start tag
+        // XPP3 调用约定断言：解析器应位于开始标签 
         ParserUtils.assertAtStartTag(parser)
 
         let initialDepth = parser.getDepth()
@@ -29,11 +46,22 @@ public abstract class Provider<E> <: AbstractProvider<E> where E <: Element {
 
         let e: E = parse(parser, initialDepth, xmlEnvironment)
 
-        // XPP3 calling convention assert: Parser should be at end tag of the consumed/parsed element
+        //  XPP3 调用约定断言：解析器应位于已处理/解析元素的结束标签 
         ParserUtils.forwardToEndTagOfDepth(parser, initialDepth)
         return e
     }
 
-    // throws XmlPullParserException, IOException, ParsingException
+    /**  
+     * 抽象方法，用于解析元素。
+     * 实际解析逻辑由子类实现。
+     *
+     * @param parser XmlPullParser 实例，用于解析 XML 数据
+     * @param initialDepth 解析时的初始深度
+     * @param xmlEnvironment 当前的 XML 环境设置
+     * @return 解析得到的元素实例
+     * @throws XmlPullParserException 解析 XML 时抛出的异常
+     * @throws IOException 读写过程中的异常
+     * @throws XmppParsingException Xmpp 解析过程中抛出的异常
+     */
     public func parse(parser: XmlPullParser, initialDepth: Int, xmlEnvironment: ?XmlEnvironment): E
 }

@@ -4,40 +4,63 @@
 package xmpp4cj.provider
 
 /**
- * Utility class that helps to parse packets. Any parsing packets method that must be shared
- * between many clients must be placed in this utility class.
+ * 有助于解析数据包的实用程序类。必须共享的任何解析数据包方法
+ * 许多客户端之间必须放置在这个实用程序类中。
  */
 public class PacketParserUtils {
     private static let LOGGER = getGlobalLogger(("name", "PacketParserUtils"))
 
+    /**  
+     * 从给定的字符串获取 XMLPullParser 实例。
+     *
+     * @param stanza 要解析的 stanzas（数据包）的字符串表示。
+     * @return XMLPullParser 实例。
+     * @throws XmlPullParserException 如果创建解析器失败。
+     * @throws IOException 如果读取输入时发生 I/O 错误。
+     */
     public static func getParserFor(stanza: String): XmlPullParser {
         let input = ByteArrayStream()
         input.write(stanza.toArray())
         return getParserFor(input)
     }
 
+    /**  
+     * 从输入流获取 XMLPullParser 实例。
+     *
+     * @param inputStream 输入流。
+     * @return XMLPullParser 实例。
+     * @throws XmlPullParserException 如果创建解析器失败。
+     */
     public static func getParserFor(inputStream: InputStream): XmlPullParser {
         var parser: XmlPullParser = XmppXmlParser.newXmlParser(inputStream)
         ParserUtils.forwardToStartElement(parser)
         return parser
     }
 
-    /**
-     * Tries to parse and return either a Message, IQ or Presence stanza.
+    /**  
+     * 解析给定的 stanzas 字符串为 {@link Stanza} 对象。
      *
-     * connection is optional and is used to return feature-not-implemented errors for unknown IQ stanzas.
-     *
-     * @param parser TODO javadoc me please
-     * @param outerXmlEnvironment the outer XML environment (optional).
-     * @return a stanza which is either a Message, IQ or Presence.
-     * @throws XmlPullParserException if an error in the XML parser occurred.
-     * @throws XmppParsingException if the Xmpp parser (provider) encountered invalid input.
-     * @throws IOException if an I/O error occurred.
+     * @param stanza XML 格式的 stanzas 字符串。
+     * @param <S> 解析的 Stanza 类型。
+     * @return 解析后的 Stanza 对象。
+     * @throws XmlPullParserException 如果解析失败。
+     * @throws XmppParsingException 如果解析期间发生问题。
+     * @throws IOException 如果读取输入时发生 I/O 错误。
      */
     public static func parseStanza<S>(stanza: String): S where S <: Stanza {
         return (parseStanza(getParserFor(stanza), XmlEnvironment.EMPTY) as S).getOrThrow()
     }
 
+    /**  
+     * 解析 XMLPullParser 中的 Stanza。
+     *
+     * @param parser XMLPullParser 实例。
+     * @param outerXmlEnvironment 包含此 Stanza 的外部 XML 环境。
+     * @return 解析得到的 Stanza。
+     * @throws XmlPullParserException 如果解析失败。
+     * @throws XmppParsingException 如果解析期间发生问题。
+     * @throws IOException 如果读取输入时发生 I/O 错误。
+     */
     public static func parseStanza(parser: XmlPullParser, outerXmlEnvironment: XmlEnvironment): Stanza {
         ParserUtils.assertAtStartTag(parser)
         let name = parser.getName()
@@ -47,7 +70,7 @@ public class PacketParserUtils {
             case v where v == IQ.IQ_ELEMENT => return castOrThrow<IQ, Stanza>(parseIQ(parser, outerXmlEnvironment))
             case v where v == Presence.ELEMENT => return castOrThrow<Presence, Stanza>(
                 parsePresence(parser, outerXmlEnvironment))
-            case _ => throw IllegalArgumentException("Can only parse message, iq or presence, not " + (name))
+            case _ => throw IllegalArgumentException("Can only parse message, iq or presence, not ${name}")
         }
     }
 
@@ -64,19 +87,28 @@ public class PacketParserUtils {
         return stanzaBuilder
     }
 
+    /**  
+     * 解析给定的 XMLPullParser 中的消息。
+     *
+     * @param parser XMLPullParser 实例，用于解析消息。
+     * @return 解析后的 Message 对象。
+     * @throws XmlPullParserException 如果解析过程中出现 XML 解析错误。
+     * @throws IOException 如果在解析过程中出现 I/O 异常。
+     * @throws XmppParsingException 如果解析失败或其他解析问题。
+     */
     public static func parseMessage(parser: XmlPullParser): Message {
         return parseMessage(parser, XmlEnvironment.EMPTY)
     }
 
-    /**
-     * Parses a message packet.
+    /**  
+     * 解析给定的 XMLPullParser 中的消息，并考虑外部 XML 环境。
      *
-     * @param parser the XML parser, positioned at the start of a message packet.
-     * @param outerXmlEnvironment the outer XML environment (optional).
-     * @return a Message packet.
-     * @throws XmlPullParserException if an error in the XML parser occurred.
-     * @throws IOException if an I/O error occurred.
-     * @throws XmppParsingException if the Xmpp parser (provider) encountered invalid input.
+     * @param parser XMLPullParser 实例，用于解析消息。
+     * @param outerXmlEnvironment 外部 XML 环境上下文。
+     * @return 解析后的 Message 对象。
+     * @throws XmlPullParserException 如果解析过程中出现 XML 解析错误。
+     * @throws IOException 如果在解析过程中出现 I/O 异常。
+     * @throws XmppParsingException 如果解析失败或其他解析问题。
      */
     public static func parseMessage(parser: XmlPullParser, outerXmlEnvironment: XmlEnvironment): Message {
         ParserUtils.assertAtStartTag(parser)
@@ -114,20 +146,13 @@ public class PacketParserUtils {
         return message.build()
     }
 
-    /**
-     * Returns the textual content of an element as String. After this method returns the parser
-     * position will be END_ELEMENT, following the established pull parser calling convention.
-     * <p>
-     * The parser must be positioned on a START_ELEMENT of an element which MUST NOT contain Mixed
-     * Content (as defined in XML 3.2.2), or else an XmlPullParserException will be thrown.
-     * </p>
-     * This method is used for the parts where the XMPP specification requires elements that contain
-     * only text or are the empty element.
+    /**  
+     * 解析给定元素的文本内容。
      *
-     * @param parser TODO javadoc me please
-     * @return the textual content of the element as String
-     * @throws XmlPullParserException if an error in the XML parser occurred.
-     * @throws IOException if an I/O error occurred.
+     * @param parser XMLPullParser 实例，并处于开始标签位置。
+     * @return 元素的文本内容。
+     * @throws XmlPullParserException 如果解析过程出现 XML 解析错误。
+     * @throws IOException 如果在解析过程中出现 I/O 异常。
      */
     public static func parseElementText(parser: XmlPullParser): String {
         if (parser.getEventType() != XmlPullParserEvent.START_ELEMENT) {
@@ -152,22 +177,27 @@ public class PacketParserUtils {
         return res
     }
 
-    /**
-     * Returns the current element as string.
-     * <p>
-     * The parser must be positioned on START_ELEMENT.
-     * </p>
-     * Note that only the outermost namespace attributes ("xmlns") will be returned, not nested ones.
+    /**  
+     * 解析指定的 XML 元素，返回其内容。
      *
-     * @param parser the XML pull parser
-     * @return the element as string
-     * @throws XmlPullParserException if an error in the XML parser occurred.
-     * @throws IOException if an I/O error occurred.
+     * @param parser XMLPullParser 实例，并处于开始标签位置。
+     * @return 元素的内容。
+     * @throws XmlPullParserException 如果解析过程出现 XML 解析错误。
+     * @throws IOException 如果在解析过程中出现 I/O 异常。
      */
     public static func parseElement(parser: XmlPullParser): String {
         return parseElement(parser, false)
     }
 
+    /**  
+     * 解析指定的 XML 元素，返回其内容，可以选择解析完整命名空间。
+     *
+     * @param parser XMLPullParser 实例，并处于开始标签位置。
+     * @param fullNamespaces 是否解析完整命名空间。
+     * @return 元素的内容。
+     * @throws XmlPullParserException 如果解析过程出现 XML 解析错误。
+     * @throws IOException 如果在解析过程中出现 I/O 异常。
+     */
     public static func parseElement(parser: XmlPullParser, fullNamespaces: Bool): String {
         if (parser.getEventType() != XmlPullParserEvent.START_ELEMENT) {
             throw Exception("AssertionError")
@@ -175,55 +205,28 @@ public class PacketParserUtils {
         return parseContentDepth(parser, parser.getDepth(), fullNamespaces)
     }
 
-    /**
-     * Returns the content from the current position of the parser up to the closing tag of the
-     * given depth. Note that only the outermost namespace attributes ("xmlns") will be returned,
-     * not nested ones, if <code>fullNamespaces</code> is false. If it is true, then namespaces of
-     * parent elements will be added to child elements that don't define a different namespace.
-     * <p>
-     * This method is able to parse the content with MX- and KXmlParser. KXmlParser does not support
-     * xml-roundtrip. i.e. return a String on getText() on START_ELEMENT and END_ELEMENT. We check for the
-     * XML_ROUNDTRIP feature. If it's not found we are required to work around this limitation, which
-     * results in only partial support for XML namespaces ("xmlns"): Only the outermost namespace of
-     * elements will be included in the resulting String, if <code>fullNamespaces</code> is set to false.
-     * </p>
-     * <p>
-     * In particular Android's XmlPullParser does not support XML_ROUNDTRIP.
-     * </p>
+    /**  
+     * 解析在指定深度开始的内容。
      *
-     * @param parser TODO javadoc me please
-     * @param depth TODO javadoc me please
-     * @param fullNamespaces TODO javadoc me please
-     * @return the content of the current depth
-     * @throws XmlPullParserException if an error in the XML parser occurred.
-     * @throws IOException if an I/O error occurred.
+     * @param parser XMLPullParser 实例，用于解析内容。
+     * @param depth 当前深度。
+     * @return 解析的内容。
+     * @throws XmlPullParserException 如果解析过程中出现 XML 解析错误。
+     * @throws IOException 如果在解析过程中出现 I/O 异常。
      */
     public static func parseContentDepth(parser: XmlPullParser, depth: Int): String {
         return parseContentDepth(parser, depth, false)
     }
 
-    /**
-     * Returns the content from the current position of the parser up to the closing tag of the
-     * given depth. Note that only the outermost namespace attributes ("xmlns") will be returned,
-     * not nested ones, if <code>fullNamespaces</code> is false. If it is true, then namespaces of
-     * parent elements will be added to child elements that don't define a different namespace.
-     * <p>
-     * This method is able to parse the content with MX- and KXmlParser. KXmlParser does not support
-     * xml-roundtrip. i.e. return a String on getText() on START_ELEMENT and END_ELEMENT. We check for the
-     * XML_ROUNDTRIP feature. If it's not found we are required to work around this limitation, which
-     * results in only partial support for XML namespaces ("xmlns"): Only the outermost namespace of
-     * elements will be included in the resulting String, if <code>fullNamespaces</code> is set to false.
-     * </p>
-     * <p>
-     * In particular Android's XmlPullParser does not support XML_ROUNDTRIP.
-     * </p>
+    /**  
+     * 解析在指定深度开始的内容，支持完全命名空间的解析选择。
      *
-     * @param parser TODO javadoc me please
-     * @param depth TODO javadoc me please
-     * @param fullNamespaces TODO javadoc me please
-     * @return the content of the current depth
-     * @throws XmlPullParserException if an error in the XML parser occurred.
-     * @throws IOException if an I/O error occurred.
+     * @param parser XMLPullParser 实例，用于解析内容。
+     * @param depth 当前深度。
+     * @param fullNamespaces 是否解析完整命名空间。
+     * @return 解析的内容。
+     * @throws XmlPullParserException 如果解析过程中出现 XML 解析错误。
+     * @throws IOException 如果在解析过程中出现 I/O 异常。
      */
     public static func parseContentDepth(parser: XmlPullParser, depth: Int, fullNamespaces: Bool): String {
         if (parser.supportsRoundtrip()) {
@@ -321,19 +324,28 @@ public class PacketParserUtils {
         return sb
     }
 
+    /**  
+     * 解析 Presence 数据包。
+     *
+     * @param parser XMLPullParser 实例，用于解析 Presence 数据包。
+     * @return 解析后的 Presence 对象。
+     * @throws XmlPullParserException 如果解析过程中出现 XML 解析错误。
+     * @throws IOException 如果在解析过程中出现 I/O 异常。
+     * @throws XmppParsingException 如果解析失败或遇到其他解析问题。
+     */
     public static func parsePresence(parser: XmlPullParser): Presence {
         return parsePresence(parser, XmlEnvironment.EMPTY)
     }
 
-    /**
-     * Parses a presence packet.
+    /**  
+     * 解析 Presence 数据包，并考虑外部 XML 环境。
      *
-     * @param parser the XML parser, positioned at the start of a presence packet.
-     * @param outerXmlEnvironment the outer XML environment (optional).
-     * @return a Presence packet.
-     * @throws IOException if an I/O error occurred.
-     * @throws XmlPullParserException if an error in the XML parser occurred.
-     * @throws XmppParsingException if the Xmpp parser (provider) encountered invalid input.
+     * @param parser XMLPullParser 实例，用于解析 Presence 数据包。
+     * @param outerXmlEnvironment 外部 XML 环境上下文。
+     * @return 解析后的 Presence 对象。
+     * @throws XmlPullParserException 如果解析过程中出现 XML 解析错误。
+     * @throws IOException 如果在解析过程中出现 I/O 异常。
+     * @throws XmppParsingException 如果解析失败或遇到其他解析问题。
      */
     public static func parsePresence(parser: XmlPullParser, outerXmlEnvironment: XmlEnvironment): Presence {
         ParserUtils.assertAtStartTag(parser)
@@ -390,21 +402,24 @@ public class PacketParserUtils {
         return presence.build()
     }
 
-    /**
-     * Parses an IQ packet.
+    /**  
+     * 解析 IQ 数据包。
      *
-     * @param parser the XML parser, positioned at the start of an IQ packet.
-     * @param outerXmlEnvironment the outer XML environment (optional).
-     * @return an IQ object.
-     * @throws XmlPullParserException if an error in the XML parser occurred.
-     * @throws XmppStringprepException if the provided string is invalid.
-     * @throws IOException if an I/O error occurred.
-     * @throws XmppParsingException if the Xmpp parser (provider) encountered invalid input.
+     * @param parser XMLPullParser 实例，用于解析 IQ 数据包。
+     * @return 解析后的 IQ 对象。
+     * @throws Exception 如果解析过程中出现错误。
      */
     public static func parseIQ(parser: XmlPullParser): IQ {
         return parseIQ(parser, None)
     }
 
+    /**  
+     * 解析 IQ 数据的详细信息。
+     *
+     * @param parser XMLPullParser 实例，用于解析 IQ 数据。
+     * @return 解析后的 IqData 对象。
+     * @throws XmppStringprepException 如果字符串预处理失败（如 JID 格式错误）。
+     */
     public static func parseIqData(parser: XmlPullParser): IqData {
         let id = parser.getAttributeValue("", "id")
         let iqData = StanzaBuilder.buildIqData(id)
@@ -418,6 +433,17 @@ public class PacketParserUtils {
         return iqData
     }
 
+    /**  
+     * 解析 IQ 数据包。
+     *
+     * @param parser XMLPullParser 实例，用于解析 IQ 数据包。
+     * @param outerXmlEnvironment 外部 XML 环境上下文。
+     * @return 解析后的 IQ 对象。
+     * @throws XmlPullParserException 如果解析过程中出现 XML 解析错误。
+     * @throws XmppStringprepException 如果字符串预处理失败（如 JID 格式错误）。
+     * @throws IOException 如果在解析过程中出现 I/O 异常。
+     * @throws XmppParsingException 如果解析失败或遇到其他解析问题。
+     */
     public static func parseIQ(parser: XmlPullParser, outerXmlEnvironment: ?XmlEnvironment): IQ {
         ParserUtils.assertAtStartTag(parser)
         let initialDepth = parser.getDepth()
@@ -465,13 +491,13 @@ public class PacketParserUtils {
         return iqPacket.getOrThrow()
     }
 
-    /**
-     * Parse the available SASL mechanisms reported from the server.
+    /**  
+     * 解析 SASL 机制。
      *
-     * @param parser the XML parser, positioned at the start of the mechanisms stanza.
-     * @return a collection of Stings with the mechanisms included in the mechanisms stanza.
-     * @throws IOException if an I/O error occurred.
-     * @throws XmlPullParserException if an error in the XML parser occurred.
+     * @param parser XMLPullParser 实例，用于解析 SASL 机制。
+     * @return 解析后的机制列表。
+     * @throws XmlPullParserException 如果解析过程中出现 XML 解析错误。
+     * @throws IOException 如果在解析过程中出现 I/O 异常。
      */
     public static func parseMechanisms(parser: XmlPullParser): Collection<String> {
         let mechanisms = ArrayList<String>()
@@ -492,6 +518,54 @@ public class PacketParserUtils {
         return mechanisms
     }
 
+    /**  
+     * 解析压缩特性。
+     *
+     * @param parser 用于解析压缩特性的 XMLPullParser 实例。
+     * @return 解析后的 Compress.Feature 对象，包含支持的压缩方法。
+     * @throws IOException 如果在解析过程中发生 I/O 异常。
+     * @throws XmlPullParserException 如果发生 XML 解析异常。
+     */
+    // public static Compress.Feature parseCompressionFeature(XmlPullParser parser)  
+    //         throws IOException, XmlPullParserException {  
+    //     assert parser.getEventType() == XmlPullParser.Event.START_ELEMENT;  
+    //     String name;  
+    //     final int initialDepth = parser.getDepth();  
+    //     List<String> methods = new LinkedList<>();  
+    //     outerloop: while (true) {  
+    //         XmlPullParser.Event eventType = parser.next();  
+    //         switch (eventType) {  
+    //         case START_ELEMENT:  
+    //             name = parser.getName();  
+    //             if ("method".equals(name)) {  
+    //                 methods.add(parser.nextText());  
+    //             }  
+    //             break;  
+    //         case END_ELEMENT:  
+    //             name = parser.getName();  
+    //             if (Compress.Feature.ELEMENT.equals(name) && parser.getDepth() == initialDepth) {  
+    //                 break outerloop;  
+    //             }  
+    //             break;  
+    //         default:  
+    //             // 捕获未处理的事件  
+    //             break;  
+    //         }  
+    //     }  
+    //     assert parser.getEventType() == XmlPullParser.Event.END_ELEMENT;  
+    //     assert parser.getDepth() == initialDepth;  
+    //     return new Compress.Feature(methods);  
+    // }  
+
+    /**  
+     * 解析描述性文本。
+     *
+     * @param parser 用于解析的 XMLPullParser 实例。
+     * @param descriptiveTexts 现有的描述性文本映射，如果为空，则创建一个新的映射。
+     * @return 解析后的描述性文本映射。
+     * @throws XmlPullParserException 如果发生 XML 解析异常。
+     * @throws IOException 如果在解析过程中发生 I/O 异常。
+     */
     public static func parseDescriptiveTexts(parser: XmlPullParser, descriptiveTexts: ?Map<String, String>): Map<String,
         String> {
         let tempdescriptiveTexts = descriptiveTexts ?? HashMap<String, String>()
@@ -504,20 +578,29 @@ public class PacketParserUtils {
         return tempdescriptiveTexts
     }
 
-    /**
-     * Parses stream error packets.
+    /**  
+     * 解析流错误。
      *
-     * @param parser the XML parser.
-     * @param outerXmlEnvironment the outer XML environment (optional).
-     * @return an stream error packet.
-     * @throws IOException if an I/O error occurred.
-     * @throws XmlPullParserException if an error in the XML parser occurred.
-     * @throws XmppParsingException if the Xmpp parser (provider) encountered invalid input.
+     * @param parser 用于解析的 XMLPullParser 实例。
+     * @return 解析后的 StreamError 对象。
+     * @throws XmlPullParserException 如果发生 XML 解析异常。
+     * @throws IOException 如果在解析过程中发生 I/O 异常。
+     * @throws XmppParsingException 如果解析失败或遇到其他解析问题。
      */
     public static func parseStreamError(parser: XmlPullParser): StreamError {
         return parseStreamError(parser, None)
     }
 
+    /**  
+     * 解析带有外部 XML 环境的流错误。
+     *
+     * @param parser 用于解析的 XMLPullParser 实例。
+     * @param outerXmlEnvironment 外部 XML 环境上下文。
+     * @return 解析后的 StreamError 对象。
+     * @throws XmlPullParserException 如果发生 XML 解析异常。
+     * @throws IOException 如果在解析过程中发生 I/O 异常。
+     * @throws XmppParsingException 如果解析失败或遇到其他解析问题。
+     */
     public static func parseStreamError(parser: XmlPullParser, outerXmlEnvironment: ?XmlEnvironment): StreamError {
         let initialDepth = parser.getDepth()
         let extensions = ArrayList<ExtensionElement>()
@@ -554,20 +637,29 @@ public class PacketParserUtils {
         return StreamError(condition, conditionText, descriptiveTexts, extensions)
     }
 
-    /**
-     * Parses error sub-packets.
+    /**  
+     * 解析 XMPP 数据包中的错误。
      *
-     * @param parser the XML parser.
-     * @param outerXmlEnvironment the outer XML environment (optional).
-     * @return an error sub-packet.
-     * @throws IOException if an I/O error occurred.
-     * @throws XmlPullParserException if an error in the XML parser occurred.
-     * @throws XmppParsingException if the Xmpp parser (provider) encountered invalid input.
+     * @param parser 用于解析错误的 XMLPullParser 实例。
+     * @return 解析后的 StanzaError 对象。
+     * @throws XmlPullParserException 如果解析过程中发生 XML 解析错误。
+     * @throws IOException 如果在解析过程中发生 I/O 异常。
+     * @throws XmppParsingException 如果解析失败或遇到其他问题。
      */
     public static func parseError(parser: XmlPullParser): StanzaError {
         return parseError(parser, None)
     }
 
+    /**  
+     * 解析 XMPP 数据包中的错误，并考虑外部 XML 环境。
+     *
+     * @param parser 用于解析错误的 XMLPullParser 实例。
+     * @param outerXmlEnvironment 外部 XML 环境信息。
+     * @return 解析后的 StanzaError 对象。
+     * @throws XmlPullParserException 如果解析过程中发生 XML 解析错误。
+     * @throws IOException 如果在解析过程中发生 I/O 异常。
+     * @throws XmppParsingException 如果解析失败或遇到其他问题。
+     */
     public static func parseError(parser: XmlPullParser, outerXmlEnvironment: ?XmlEnvironment): StanzaError {
         let initialDepth = parser.getDepth()
         var descriptiveTexts: ?Map<String, String> = None
@@ -606,6 +698,18 @@ public class PacketParserUtils {
         return builder.build()
     }
 
+    /**  
+     * 解析扩展元素。
+     *
+     * @param elementName 元素名称。
+     * @param namespace 命名空间。
+     * @param parser 用于解析扩展元素的 XMLPullParser 实例。
+     * @param outerXmlEnvironment 外部 XML 环境。
+     * @return 解析后的 ExtensionElement 对象。
+     * @throws XmlPullParserException 如果解析过程中发生 XML 解析错误。
+     * @throws IOException 如果在解析过程中发生 I/O 异常。
+     * @throws XmppParsingException 如果解析失败或遇到其他问题。
+     */
     public static func parseExtensionElement(elementName: String, namespace: String, parser: XmlPullParser,
         outerXmlEnvironment: ?XmlEnvironment): ExtensionElement {
         ParserUtils.assertAtStartTag(parser)
@@ -616,6 +720,14 @@ public class PacketParserUtils {
         return StandardExtensionElementProvider.INSTANCE.parse(parser, outerXmlEnvironment)
     }
 
+    /**  
+     * 解析 StartTLS 特性。
+     *
+     * @param parser 用于解析 StartTLS 特性的 XMLPullParser 实例。
+     * @return 解析后的 StartTls 对象，指示是否为必需。
+     * @throws XmlPullParserException 如果解析过程中发生 XML 解析错误。
+     * @throws IOException 如果在解析过程中发生 I/O 异常。
+     */
     public static func parseStartTlsFeature(parser: XmlPullParser): StartTls {
         ParserUtils.assertAtStartTag(parser)
         if (parser.getNamespace() != StartTls.NAMESPACE) {
@@ -643,6 +755,14 @@ public class PacketParserUtils {
         return StartTls(required)
     }
 
+    /**  
+     * 解析会话特性。
+     *
+     * @param parser 用于解析会话特性的 XMLPullParser 实例。
+     * @return 解析后的 Session.Feature 对象，指示是否为可选。
+     * @throws XmlPullParserException 如果解析过程中发生 XML 解析错误。
+     * @throws IOException 如果在解析过程中发生 I/O 异常。
+     */
     public static func parseSessionFeature(parser: XmlPullParser): SessionFeature {
         ParserUtils.assertAtStartTag(parser)
         let initialDepth = parser.getDepth()
@@ -665,39 +785,117 @@ public class PacketParserUtils {
         return SessionFeature(optional)
     }
 
+    /**  
+     * 向 StanzaBuilder 添加扩展元素。
+     *
+     * @param stanzaBuilder 被添加扩展的 StanzaBuilder 实例。
+     * @param parser 用于解析扩展元素的 XMLPullParser 实例。
+     * @param outerXmlEnvironment 外部 XML 环境。
+     * @throws XmlPullParserException 如果解析过程中发生 XML 解析错误。
+     * @throws IOException 如果在解析过程中发生 I/O 异常。
+     * @throws XmppParsingException 如果解析失败或遇到其他问题。
+     */
     public static func addExtensionElement(stanzaBuilder: StanzaBuilder, parser: XmlPullParser,
         outerXmlEnvironment: ?XmlEnvironment): Unit {
         ParserUtils.assertAtStartTag(parser)
         addExtensionElement(stanzaBuilder, parser, parser.getName(), parser.getNamespace(), outerXmlEnvironment)
     }
 
-    public static func addExtensionElement(stanzaBuilder: StanzaBuilder, parser: XmlPullParser, elementName: String,
+    /**  
+     * 向给定的 StanzaBuilder 添加扩展元素。
+     *
+     * @param _ 要添加扩展的 StanzaBuilder 实例
+     * @param parser 用于解析扩展元素的 XMLPullParser 实例
+     * @param elementName XML 元素的名称
+     * @param namespace XML 元素的命名空间
+     * @param outerXmlEnvironment 外部 XML 环境
+     * @throws XmlPullParserException 如果解析过程发生 XML 解析错误
+     * @throws IOException 如果在解析过程中发生 I/O 异常
+     * @throws XmppParsingException 如果解析失败或遇到其他问题
+     */
+    public static func addExtensionElement(_: StanzaBuilder, parser: XmlPullParser, elementName: String,
         namespace: String, outerXmlEnvironment: ?XmlEnvironment): Unit {
         let extensionElement = parseExtensionElement(elementName, namespace, parser, outerXmlEnvironment)
     }
 
+    /**  
+     * 向给定的数据包添加扩展元素，自动提取元素名称和命名空间。
+     *
+     * @param packet 要添加扩展的 Stanza 实例
+     * @param parser 用于解析扩展元素的 XMLPullParser 实例
+     * @param outerXmlEnvironment 外部 XML 环境
+     * @throws XmlPullParserException 如果解析过程发生 XML 解析错误
+     * @throws IOException 如果在解析过程中发生 I/O 异常
+     * @throws XmppParsingException 如果解析失败或遇到其他问题
+     */
     public static func addExtensionElement(packet: Stanza, parser: XmlPullParser, outerXmlEnvironment: ?XmlEnvironment): Unit {
         ParserUtils.assertAtStartTag(parser)
         addExtensionElement(packet, parser, parser.getName(), parser.getNamespace(), outerXmlEnvironment)
     }
 
+    /**  
+     * 向给定的数据包添加扩展元素，指定元素名称和命名空间。
+     *
+     * @param packet 要添加扩展的 Stanza 实例
+     * @param parser 用于解析扩展元素的 XMLPullParser 实例
+     * @param elementName XML 元素的名称
+     * @param namespace XML 元素的命名空间
+     * @param outerXmlEnvironment 外部 XML 环境
+     * @throws XmlPullParserException 如果解析过程发生 XML 解析错误
+     * @throws IOException 如果在解析过程中发生 I/O 异常
+     * @throws XmppParsingException 如果解析失败或遇到其他问题
+     */
     public static func addExtensionElement(packet: Stanza, parser: XmlPullParser, elementName: String,
         namespace: String, outerXmlEnvironment: ?XmlEnvironment): Unit {
         let packetExtension = parseExtensionElement(elementName, namespace, parser, outerXmlEnvironment)
         packet.addExtension(packetExtension)
     }
 
+    /**  
+     * 向给定的集合添加扩展元素，自动提取元素名称和命名空间。
+     *
+     * @param collection 要添加扩展的集合
+     * @param parser 用于解析扩展元素的 XMLPullParser 实例
+     * @param outerXmlEnvironment 外部 XML 环境
+     * @throws XmlPullParserException 如果解析过程发生 XML 解析错误
+     * @throws IOException 如果在解析过程中发生 I/O 异常
+     * @throws XmppParsingException 如果解析失败或遇到其他问题
+     */
     public static func addExtensionElement(collection: ArrayList<ExtensionElement>, parser: XmlPullParser,
         outerXmlEnvironment: ?XmlEnvironment): Unit {
         addExtensionElement(collection, parser, parser.getName(), parser.getNamespace(), outerXmlEnvironment)
     }
 
+    /**  
+     * 向给定的集合添加扩展元素，指定元素名称和命名空间。
+     *
+     * @param collection 要添加扩展的集合
+     * @param parser 用于解析扩展元素的 XMLPullParser 实例
+     * @param elementName XML 元素的名称
+     * @param namespace XML 元素的命名空间
+     * @param outerXmlEnvironment 外部 XML 环境
+     * @throws XmlPullParserException 如果解析过程发生 XML 解析错误
+     * @throws IOException 如果在解析过程中发生 I/O 异常
+     * @throws XmppParsingException 如果解析失败或遇到其他问题
+     */
     public static func addExtensionElement(collection: ArrayList<ExtensionElement>, parser: XmlPullParser,
         elementName: String, namespace: String, outerXmlEnvironment: ?XmlEnvironment): Unit {
         let packetExtension = parseExtensionElement(elementName, namespace, parser, outerXmlEnvironment)
         collection.append(packetExtension)
     }
 
+    /**  
+     * 解析扩展元素。
+     *
+     * @param elementName XML 元素的名称
+     * @param namespace XML 元素的命名空间
+     * @param parser 用于解析扩展元素的 XMLPullParser 实例
+     * @param outerXmlEnvironment 外部 XML 环境
+     * @return 解析后的 ExtensionElement 对象
+     * @throws XmlPullParserException 如果解析过程发生 XML 解析错误
+     * @throws IOException 如果在解析过程中发生 I/O 异常
+     * @throws XmppParsingException 如果解析失败或遇到其他问题
+     */
     public static func parseDescriptiveTexts(
         parser: XmlPullParser,
         descriptiveTexts: Map<String, String>
@@ -715,18 +913,17 @@ public class PacketParserUtils {
         return tempdescriptiveTexts
     }
 
-    /**
-     * Parses an extension element.
+    /**  
+     * 解析扩展元素。
      *
-     * @param elementName the XML element name of the extension element.
-     * @param namespace the XML namespace of the stanza extension.
-     * @param parser the XML parser, positioned at the starting element of the extension.
-     * @param outerXmlEnvironment the outer XML environment (optional).
-     *
-     * @return an extension element.
-     * @throws XmlPullParserException if an error in the XML parser occurred.
-     * @throws IOException if an I/O error occurred.
-     * @throws XmppParsingException if the Xmpp parser (provider) encountered invalid input.
+     * @param elementName 元素名称。
+     * @param namespace 命名空间。
+     * @param parser 用于解析扩展元素的 XMLPullParser 实例。
+     * @param outerXmlEnvironment 外部 XML 环境。
+     * @return 解析后的 ExtensionElement 对象。
+     * @throws XmlPullParserException 如果解析过程中发生 XML 解析错误。
+     * @throws IOException 如果在解析过程中发生 I/O 异常。
+     * @throws XmppParsingException 如果解析失败或遇到其他问题。
      */
     public static func parseExtensionElement(elementName: String, namespace: String, parser: XmlPullParser,
         outerXmlEnvironment: XmlEnvironment): ExtensionElement {
@@ -739,33 +936,99 @@ public class PacketParserUtils {
         throw Exception("TODO")
     }
 
+    /**  
+     * 向 StanzaBuilder 添加扩展元素。
+     *
+     * @param stanzaBuilder 被添加扩展的 StanzaBuilder 实例。
+     * @param parser 用于解析扩展元素的 XMLPullParser 实例。
+     * @param outerXmlEnvironment 外部 XML 环境。
+     * @throws XmlPullParserException 如果解析过程中发生 XML 解析错误。
+     * @throws IOException 如果在解析过程中发生 I/O 异常。
+     * @throws XmppParsingException 如果解析失败或遇到其他问题。
+     */
     public static func addExtensionElement(stanzaBuilder: StanzaBuilder, parser: XmlPullParser,
         outerXmlEnvironment: XmlEnvironment): Unit {
         ParserUtils.assertAtStartTag(parser)
         addExtensionElement(stanzaBuilder, parser, parser.getName(), parser.getNamespace(), outerXmlEnvironment)
     }
 
-    public static func addExtensionElement(stanzaBuilder: StanzaBuilder, parser: XmlPullParser, elementName: String,
+    /**  
+     * 向给定的 StanzaBuilder 添加扩展元素。
+     *
+     * @param _ 要添加扩展的 StanzaBuilder 实例
+     * @param parser 用于解析扩展元素的 XMLPullParser 实例
+     * @param elementName XML 元素的名称
+     * @param namespace XML 元素的命名空间
+     * @param outerXmlEnvironment 外部 XML 环境
+     * @throws XmlPullParserException 如果解析过程发生 XML 解析错误
+     * @throws IOException 如果在解析过程中发生 I/O 异常
+     * @throws XmppParsingException 如果解析失败或遇到其他问题
+     */
+    public static func addExtensionElement(_: StanzaBuilder, parser: XmlPullParser, elementName: String,
         namespace: String, outerXmlEnvironment: XmlEnvironment): Unit {
         let extensionElement = parseExtensionElement(elementName, namespace, parser, outerXmlEnvironment)
     }
 
+    /**  
+     * 向给定的数据包添加扩展元素，自动提取元素名称和命名空间。
+     *
+     * @param packet 要添加扩展的 Stanza 实例
+     * @param parser 用于解析扩展元素的 XMLPullParser 实例
+     * @param outerXmlEnvironment 外部 XML 环境
+     * @throws XmlPullParserException 如果解析过程发生 XML 解析错误
+     * @throws IOException 如果在解析过程中发生 I/O 异常
+     * @throws XmppParsingException 如果解析失败或遇到其他问题
+     */
     public static func addExtensionElement(packet: Stanza, parser: XmlPullParser, outerXmlEnvironment: XmlEnvironment): Unit {
         ParserUtils.assertAtStartTag(parser)
         addExtensionElement(packet, parser, parser.getName(), parser.getNamespace(), outerXmlEnvironment)
     }
 
+    /**  
+     * 向给定的数据包添加扩展元素，指定元素名称和命名空间。
+     *
+     * @param packet 要添加扩展的 Stanza 实例
+     * @param parser 用于解析扩展元素的 XMLPullParser 实例
+     * @param elementName XML 元素的名称
+     * @param namespace XML 元素的命名空间
+     * @param outerXmlEnvironment 外部 XML 环境
+     * @throws XmlPullParserException 如果解析过程发生 XML 解析错误
+     * @throws IOException 如果在解析过程中发生 I/O 异常
+     * @throws XmppParsingException 如果解析失败或遇到其他问题
+     */
     public static func addExtensionElement(packet: Stanza, parser: XmlPullParser, elementName: String,
         namespace: String, outerXmlEnvironment: XmlEnvironment): Unit {
         let packetExtension = parseExtensionElement(elementName, namespace, parser, outerXmlEnvironment)
         packet.addExtension(packetExtension)
     }
 
+    /**  
+     * 向给定的集合添加扩展元素，自动提取元素名称和命名空间。
+     *
+     * @param collection 要添加扩展的集合
+     * @param parser 用于解析扩展元素的 XMLPullParser 实例
+     * @param outerXmlEnvironment 外部 XML 环境
+     * @throws XmlPullParserException 如果解析过程发生 XML 解析错误
+     * @throws IOException 如果在解析过程中发生 I/O 异常
+     * @throws XmppParsingException 如果解析失败或遇到其他问题
+     */
     public static func addExtensionElement(collection: ArrayList<ExtensionElement>, parser: XmlPullParser,
         outerXmlEnvironment: XmlEnvironment): Unit {
         addExtensionElement(collection, parser, parser.getName(), parser.getNamespace(), outerXmlEnvironment)
     }
 
+    /**  
+     * 向给定的集合添加扩展元素，指定元素名称和命名空间。
+     *
+     * @param collection 要添加扩展的集合
+     * @param parser 用于解析扩展元素的 XMLPullParser 实例
+     * @param elementName XML 元素的名称
+     * @param namespace XML 元素的命名空间
+     * @param outerXmlEnvironment 外部 XML 环境
+     * @throws XmlPullParserException 如果解析过程发生 XML 解析错误
+     * @throws IOException 如果在解析过程中发生 I/O 异常
+     * @throws XmppParsingException 如果解析失败或遇到其他问题
+     */
     public static func addExtensionElement(collection: ArrayList<ExtensionElement>, parser: XmlPullParser,
         elementName: String, namespace: String, outerXmlEnvironment: XmlEnvironment): Unit {
         let packetExtension = parseExtensionElement(elementName, namespace, parser, outerXmlEnvironment)

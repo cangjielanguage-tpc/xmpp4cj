@@ -54,6 +54,9 @@ package xmpp4cj.provider
  * 如果多个提供程序条目试图注册以处理相同的元素名称和命名空间，则从类路径加载的第一个条目将具有优先权。每当在数据包中找到节扩展时，解析将传递给正确的提供程序。每个提供程序都可以实现 PacketExtensionProvider 接口。在前一种情况下，每个扩展提供程序负责解析原始 XML 流以构造一个对象。在后一种情况下，使用 bean 内省来尝试使用在节扩展子元素中的值自动设置类的属性。当没有为元素名称和命名空间组合注册扩展提供程序时，将把子包的所有顶级元素存储在 DefaultPacketExtension 对象中，然后将其附加到数据包上。<p>
  */
 public class ProviderManager {
+    /**  
+     * 构造函数，初始化 ProviderManager 实例。
+     */
     public init() {}
 
     private static let extensionProviders = ConcurrentHashMap<QName, ExtensionElementProvider<ExtensionElement>>()
@@ -69,6 +72,11 @@ public class ProviderManager {
     // Xmpp.ensureInitialized() // TODO
     }()
 
+    /**  
+     * 添加提供程序加载器，允许注册多个 IQ 提供程序和扩展提供程序。
+     *
+     * @param loader 要添加的 {@link ProviderLoader} 实例。
+     */
     public static func addLoader(loader: ProviderLoader): Unit {
         for (info in loader.getIQProviderInfo()) {
             addIQProvider(info.getElementName(), info.getNamespace(), info.getProvider())
@@ -84,6 +92,7 @@ public class ProviderManager {
             )
         }
     }
+
     /**
      * 返回注册到指定 XML 元素名称和命名空间的 IQ 提供程序。例如，如果一个提供程序注册到元素名称为“query”且命名空间为“jabber:iq:time”，那么以下节将触发该提供程序：
      *
@@ -171,6 +180,12 @@ public class ProviderManager {
         return getExtensionProvider(key)
     }
 
+    /**  
+     * 根据给定的 QName 获取注册的扩展元素提供程序。
+     *
+     * @param qname 对应于扩展元素的 QName。
+     * @return 匹配的扩展元素提供程序，如果未找到则返回 null。
+     */
     public static func getExtensionProvider(qname: QName): ?ExtensionElementProvider<ExtensionElement> {
         return extensionProviders.get(qname)
     }
@@ -217,11 +232,25 @@ public class ProviderManager {
         return providers
     }
 
+    /**  
+     * 根据元素名称和命名空间获取流特性提供程序。
+     *
+     * @param elementName 流特性元素的名称。
+     * @param namespace 流特性元素的命名空间。
+     * @return 返回与给定元素名称和命名空间匹配的流特性提供程序。
+     */
     public static func getStreamFeatureProvider(elementName: String, namespace: String): ?ExtensionElementProvider<ExtensionElement> {
         let key = getQName(elementName, namespace)
         return streamFeatureProviders.get(key)
     }
 
+    /**  
+     * 添加流特性提供程序。该提供程序将与指定的元素名称和命名空间相关联。
+     *
+     * @param elementName 流特性元素的名称。
+     * @param namespace 流特性元素的命名空间。
+     * @param provider 要添加的流特性提供程序。
+     */
     public static func addStreamFeatureProvider(
         elementName: String,
         namespace: String,
@@ -232,40 +261,89 @@ public class ProviderManager {
         streamFeatureProviders.put(key, provider)
     }
 
+    /**  
+     * 移除指定元素名称和命名空间的流特性提供程序。
+     *
+     * @param elementName 流特性元素的名称。
+     * @param namespace 流特性元素的命名空间。
+     */
     public static func removeStreamFeatureProvider(elementName: String, namespace: String): Unit {
         let key = getQName(elementName, namespace)
         streamFeatureProviders.remove(key)
     }
 
+    /**  
+     * 根据指定的元素名称和命名空间获取 Nonza 提供程序。
+     *
+     * @param elementName Nonza 元素的名称。
+     * @param namespace Nonza 元素的命名空间。
+     * @return 匹配的 Nonza 提供程序，如果未找到则返回 null。
+     */
     public static func getNonzaProvider(elementName: String, namespace: String): ?NonzaProvider<Nonza> {
         let key = getQName(elementName, namespace)
         return getNonzaProvider(key)
     }
 
+    /**  
+     * 根据 QName 获取 Nonza 提供程序。
+     *
+     * @param key 对应于 Nonza 元素的 QName。
+     * @return 匹配的 Nonza 提供程序，如果未找到则返回 null。
+     */
     public static func getNonzaProvider(key: QName): ?NonzaProvider<Nonza> {
         return nonzaProviders.get(key)
     }
 
+    /**  
+     * 添加 Nonza 提供程序。
+     *
+     * @param nonzaProvider 要添加的 Nonza 提供程序。
+     */
     public static func addNonzaProvider(nonzaProvider: NonzaProvider<Nonza>): Unit {
         let nonzaClass = nonzaProvider.getElementClass()
         let key = XmppElementUtil.getQNameFor(nonzaClass)
         nonzaProviders.put(key, nonzaProvider)
     }
 
+    /**  
+     * 根据 Nonza 类移除相应的 Nonza 提供程序。
+     *
+     * @param nonzaClass 需要移除的 Nonza 类。
+     */
     public static func removeNonzaProvider(nonzaClass: ClassId): Unit {
         let key = XmppElementUtil.getQNameFor(nonzaClass)
         nonzaProviders.remove(key)
     }
 
+    /**  
+     * 根据元素名称和命名空间移除 Nonza 提供程序。
+     *
+     * @param elementName Nonza 元素的名称。
+     * @param namespace Nonza 元素的命名空间。
+     */
     public static func removeNonzaProvider(elementName: String, namespace: String): Unit {
         let key = getQName(elementName, namespace)
         nonzaProviders.remove(key)
     }
 
+    /**  
+     * 根据元素名称和命名空间创建 QName。
+     *
+     * @param elementName XML 元素名称。
+     * @param namespace XML 命名空间。
+     * @return 返回创建的 QName 对象。
+     */
     private static func getQName(elementName: String, namespace: String): QName {
         return QName(namespace, elementName)
     }
 
+    /**  
+     * 验证元素名称和命名空间是否有效。
+     *
+     * @param elementName XML 元素名称。
+     * @param namespace XML 命名空间。
+     * @throws IllegalArgumentException 如果元素名称或命名空间为空或无效。
+     */
     private static func validate(elementName: String, namespace: String): Unit {
         if (StringUtils.isNullOrEmpty(elementName)) {
             throw IllegalArgumentException("elementName must not be None or empty")

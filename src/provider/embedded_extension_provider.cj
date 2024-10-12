@@ -6,7 +6,7 @@ package xmpp4cj.provider
 /**
  *
  * This class simplifies parsing of embedded elements by using the
- * <a href="http://en.wikipedia.org/wiki/Template_method_pattern">Template Method Pattern</a>.
+ * <a href="http/en/wikipedia/org/wiki/Template_method_pattern">Template Method Pattern</a>.
  * After extracting the current element attributes and content of any child elements, the template method
  * ({@link #createReturnExtension(String, String, Map, List)} is called.  Subclasses
  * then override this method to create the specific return type.
@@ -55,10 +55,24 @@ package xmpp4cj.provider
  * </pre>
  */
 public abstract class EmbeddedExtensionProvider<PE> <: ExtensionElementProvider<PE> where PE <: ExtensionElement {
+    /**  
+     * 构造函数，初始化 EmbeddedExtensionProvider 实例。
+     */
     public init() {
         super()
     }
 
+    /**  
+     * 解析 XML pull 解析器中的嵌入式扩展元素。
+     *
+     * @param parser XmlPullParser 实例，用于解析 XML 数据
+     * @param initialDepth 解析时的初始深度，用于跟踪 XML 文档的层次结构
+     * @param xmlEnvironment XML 环境设置
+     * @return 解析得到的扩展元素 PE
+     * @throws XmlPullParserException 解析 XML 时抛出的异常
+     * @throws IOException 读写过程中的异常
+     * @throws XmppParsingException 特定于 Xmpp 的解析异常
+     */
     public override func parse(parser: XmlPullParser, initialDepth: Int, xmlEnvironment: ?XmlEnvironment): PE {
         let namespace = parser.getNamespace()
         let name = parser.getName()
@@ -80,6 +94,16 @@ public abstract class EmbeddedExtensionProvider<PE> <: ExtensionElementProvider<
         return createReturnExtension(name, namespace, attMap, extensions)
     }
 
+    /**  
+     * 创建返回的扩展元素。
+     * 这个方法应由子类实现，根据解析的内容创建具体的扩展元素实例。
+     *
+     * @param currentElement 扩展元素的名称
+     * @param currentNamespace 扩展元素的命名空间
+     * @param attributeMap 扩展元素的属性映射
+     * @param content 嵌入式扩展元素列表
+     * @return 创建的扩展元素实例
+     */
     protected func createReturnExtension(currentElement: String, currentNamespace: String,
         attributeMap: Map<String, String>, content: ArrayList<ExtensionElement>): PE
 }
