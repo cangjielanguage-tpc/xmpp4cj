@@ -14,6 +14,9 @@ internal import xmpp4cj.xml.*
 internal import xmpp4cj.provider.*
 internal import xmpp4cj.util.*
 internal import xmpp4cj.compress.*
+internal import xmpp4cj.feature.*
+internal import xmpp4cj.filter.*
+internal import xmpp4cj.compress.*
 
 class Assert {
     static func assertNull<T>(any: ?T): Unit {

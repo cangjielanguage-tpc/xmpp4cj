@@ -280,10 +280,16 @@ public func XmlSplitter_2(): Unit {
 }
 
 class callback1 <: PrettyPrintedXmlPartCallback {
+    init() {
+        super({_ =>})
+    }
     public func onPrettyPrintedXmlPart(part: StringBuilder): Unit {}
 }
 
 class callback2 <: PrettyPrintedXmlChunkSink {
+    init() {
+        super {_ =>}
+    }
     public func sink(part: StringBuilder): Unit {}
 }
 

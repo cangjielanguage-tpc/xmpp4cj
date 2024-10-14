@@ -19,7 +19,10 @@ public class ExceptionUtil {
             fold<StackTraceElement, StringBuilder>(sb) {
             sb, element =>
             sb.append(
-                "\n\t at ${element.declaringClass}.${element.methodName}(${element.fileName}:${element.lineNumber}")
+                """
+
+    at ${element.declaringClass}.${element.methodName}(${element.fileName}:${element.lineNumber}"""
+            )
             sb
         }
         sb.toString()

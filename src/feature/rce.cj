@@ -8,7 +8,7 @@ public interface RemoteConnectionEndpoint {
 
     func getPort(): UInt16
 
-    func getInetAddresses(): Collection<SocketAddress>
+    func getInetAddresses(): Collection<IPSocketAddress>
 
     func getDescription(): String
 }
@@ -16,9 +16,9 @@ public interface RemoteConnectionEndpoint {
 public class InetSocketAddressCoupling<RCE> <: ToString where RCE <: RemoteConnectionEndpoint {
     private let connectionEndpoint: RCE
 
-    private let inetSocketAddress: SocketAddress
+    private let inetSocketAddress: ?IPSocketAddress
 
-    public init(connectionEndpoint: RCE, inetAddress: SocketAddress) {
+    public init(connectionEndpoint: RCE, inetAddress: ?IPSocketAddress) {
         this.connectionEndpoint = connectionEndpoint
         let port = connectionEndpoint.getPort()
         inetSocketAddress = inetAddress
@@ -28,7 +28,7 @@ public class InetSocketAddressCoupling<RCE> <: ToString where RCE <: RemoteConne
         return connectionEndpoint
     }
 
-    public func getSocketAddress(): SocketAddress {
+    public func getSocketAddress(): ?IPSocketAddress {
         return inetSocketAddress
     }
 
@@ -70,9 +70,6 @@ public abstract class RemoteConnectionEndpointLookupFailure <: ToString {
     }
 }
 
-/* TODO */
-public interface DnsName <: ToString {}
-
 public class DnsLookupFailure <: RemoteConnectionEndpointLookupFailure {
     private let dnsName: DnsName
 
@@ -91,7 +88,7 @@ public class RemoteConnectionException<RCE> <: ToString where RCE <: RemoteConne
 
     private let exception: Exception
 
-    public init(remoteConnectionEndpoint: RCE, inetAddress: SocketAddress, exception: Exception) {
+    public init(remoteConnectionEndpoint: RCE, inetAddress: ?IPSocketAddress, exception: Exception) {
         this(InetSocketAddressCoupling<RCE>(remoteConnectionEndpoint, inetAddress), exception)
     }
 
@@ -135,9 +132,9 @@ public class RemoteConnectionException<RCE> <: ToString where RCE <: RemoteConne
 }
 
 public interface SingleAddressRemoteConnectionEndpoint <: RemoteConnectionEndpoint {
-    func getInetAddress(): SocketAddress
+    func getInetAddress(): IPSocketAddress
 
-    func getInetAddresses(): Collection<SocketAddress> {
-        return [getInetAddress()] // TODO Collections.singletonList(getInetAddress())
+    func getInetAddresses(): Collection<IPSocketAddress> {
+        return [getInetAddress()]
     }
 }

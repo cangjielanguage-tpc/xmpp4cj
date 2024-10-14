@@ -197,7 +197,7 @@ public class ProviderManager {
      * @param namespace XML 命名空间。
      * @param provider 扩展提供程序。
      */
-    public static func addExtensionProvider(elementName: String, namespace: String, provider: Any): Unit {
+    public static func addExtensionProvider(elementName: String, namespace: String, provider: Object): Unit {
         validate(elementName, namespace)
         let key = removeExtensionProvider(elementName, namespace)
         match (provider) {

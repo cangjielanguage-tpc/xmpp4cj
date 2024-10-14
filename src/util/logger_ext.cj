@@ -16,14 +16,6 @@ public interface LogExt {
      */
     func log(logLevel: LogLevel, msg: String, error: Exception): Unit
     /**  
-     * 日志。
-     *
-     * @param logLevel 日志等级。
-     * @param msg 内容。
-     */
-    func log(logLevel: LogLevel, msg: String): Unit
-
-    /**  
      * 判断日志等级。
      *
      * @param level 日志等级。
@@ -47,17 +39,6 @@ extend Logger <: LogExt {
         this.log(logLevel, msg, ("exception", error))
     }
     /**  
-     * 日志。
-     *
-     * @param logLevel 日志等级。
-     * @param msg 内容。
-     * @param error 异常信息。
-     */
-    public func log(logLevel: LogLevel, msg: String): Unit {
-        this.log(logLevel, msg)
-    }
-
-    /**  
      * 判断日志等级。
      *
      * @param level 日志等级。
@@ -71,3 +52,5 @@ extend Logger <: LogExt {
 public func getGlobalLogger(loggerName: String): Logger {
     getGlobalLogger(("name", loggerName))
 }
+
+public let DEBUGER = getGlobalLogger("DEBUGER")

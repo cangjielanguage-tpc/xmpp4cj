@@ -8,14 +8,15 @@
  */
 package xmpp4cj.feature
 
-internal import std.collection.*
-internal import std.net.*
-internal import std.io.*
-internal import net.tls.*
+internal import log.*
 internal import net.http.*
+internal import net.tls.*
+internal import std.collection.*
+internal import std.io.*
+internal import std.net.*
 internal import std.sync.*
 internal import std.time.*
+internal import xmpp4cj.jid.*
 internal import xmpp4cj.packet.*
 internal import xmpp4cj.util.*
-internal import xmpp4cj.jid.*
 internal import xmpp4cj.xml.*

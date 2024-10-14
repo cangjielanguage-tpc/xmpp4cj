@@ -40,10 +40,9 @@ public interface XmppInputOutputFilter {
      *
      * @throws IOException 如果在等待过程中发生错误。
      * @throws 如果没有响应，则抛出NoResponseException。
-     * @throws CertificateException如果发生证书错误。
-     * @throws InterruptedException如果等待进程被中断。
-     * @throws SmackException如果发生与Smack相关的错误。
-     * @throws 如果发生与XMPP相关的错误，则抛出XMPPException。
+     * @throws CertificateException 如果发生证书错误。
+     * @throws InterruptedException 如果等待进程被中断。
+     * @throws Xmpp4cjException 如果发生与Xmpp相关的错误。
      */
     func waitUntilInputOutputClosed(): Unit {}
 

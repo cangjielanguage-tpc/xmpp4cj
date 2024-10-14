@@ -7,16 +7,19 @@
 package xmpp4cj.util
 
 internal import crypto.crypto.*
+internal import crypto.digest.*
 internal import encoding.hex.*
 internal import log.*
 internal import net.tls.*
 internal import std.collection.*
 internal import std.collection.concurrent.*
+internal import std.io.*
 internal import std.math.*
 internal import std.net.*
 internal import std.random.*
 internal import std.regex.*
 internal import std.sync.*
+internal import std.reflect.* // TODO
 
 /*
  * ArrayList工具类
@@ -96,6 +99,14 @@ public func assert(exp: Bool): Unit {
  * 继承Exception的异常类。
  */
 public class AssertionError <: Exception {
+    public init() {
+    }
+    public init(msg: String) {
+        super(msg)
+    }
+    public init(e: Exception) {
+        super(e.toString())
+    }
     /**  
      * 获得类名，用字符串表示。
      *
@@ -105,3 +116,5 @@ public class AssertionError <: Exception {
         "AssertionError"
     }
 }
+
+public type CallbackHandler = (Any) -> Unit

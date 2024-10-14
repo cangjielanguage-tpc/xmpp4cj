@@ -523,7 +523,7 @@ public class StringUtils {
      * @return <code>cs</code> 的字符串表示或 None。
      */
     public static func maybeToString(cs: CharSequence): String {
-        return cs.toString()
+        return anyToString(cs)
     }
 
     /**
@@ -622,4 +622,11 @@ public func anyToString(any: Any): String {
         str = str[5..str.size - 1]
     }
     str
+}
+
+/**
+ * 使用unsafe方法将ArrayList<Byte>转String
+ */
+public func byteList2String(arr: ArrayList<Byte>) {
+    unsafe { String.fromUtf8Unchecked(arr.getRawArray()[..arr.size]) }
 }

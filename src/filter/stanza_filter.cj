@@ -7,8 +7,8 @@ package xmpp4cj.filter
  * 定义了一种根据特定属性过滤 Stanza 的方法。Stanza 过滤器用于构建 Stanza 监听器或收集器，
  * 过滤器定义哪些 Stanza 匹配收集器或监听器的标准，以便进行进一步的 Stanza 处理。
  * <p>
- * 预定义了几个简单的过滤器。可以使用 {@link org.jivesoftware.smack.filter.AndFilter AndFilter} 和
- * {@link org.jivesoftware.smack.filter.OrFilter OrFilter} 过滤器逻辑组合这些过滤器，以实现更复杂的
+ * 预定义了几个简单的过滤器。可以使用 {@link xmpp4cj.filter.AndFilter AndFilter} 和
+ * {@link xmpp4cj OrFilter} 过滤器逻辑组合这些过滤器，以实现更复杂的
  * Stanza 过滤。也可以通过实现该接口来定义自己的过滤器。下面的代码示例创建了一个用于特定 ID
  * 的 Stanza 的简单过滤器（真实代码应使用 {@link StanzaIdFilter} 替代）。
  *
@@ -25,11 +25,11 @@ package xmpp4cj.filter
  * <p>
  * 作为经验法则：如果您有一个谓词方法，即一个以单个 Stanza 作为参数、无副作用（纯粹）并且仅返回布尔值
  * 的方法，那么这通常是一个很好的指示，表明该逻辑应该放入 {@link StanzaFilter} 中（并在
- * {@link org.jivesoftware.smack.StanzaListener} 中引用）。
+ * {@link StanzaListener} 中引用）。
  * </p>
  *
- * @see org.jivesoftware.smack.StanzaCollector
- * @see org.jivesoftware.smack.StanzaListener
+ * @see xmpp4cj.connection.StanzaCollector
+ * @see xmpp4cj.feature.StanzaListener
  */
 public abstract class StanzaFilter <: Predicate<Stanza> & ToString {
     /**  
