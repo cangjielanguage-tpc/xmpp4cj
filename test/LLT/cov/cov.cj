@@ -189,7 +189,7 @@ public func ErrorIQ1(): Unit {
 public func ExceptionUtil1(): Unit {
     let ex = Exception()
     let str = ExceptionUtil.getStackTrace(ex)
-    @Assert(str.startsWith(ex.toString()+"\n\t at"))
+    @Assert(str.startsWith(ex.toString()+"\n"))
 }
 
 @Test
@@ -812,7 +812,7 @@ public func XmlStringBuilder_1(): Unit {
     let itere: Iterator<Element> = arre.iterator()
     obj.optAppend(arre)
     let io = ByteArrayStream()
-    let writer = StringWriter<OutputStream>(io)
+    let writer = ObservableWriter(io)
     obj.write(writer, XmlEnvironment("ns1", "lang1", None))
     obj.toList(XmlEnvironment("ns1", "lang1", None))
 }

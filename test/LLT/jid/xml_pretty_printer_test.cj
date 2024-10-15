@@ -47,6 +47,7 @@ class XmlPrettyPrinterTest_1 <: PrettyPrintedXmlPartCallback {
     let val_stringHolder: XmlPrettyPrinterTest_StringHolder
 
     init(val_stringHolder: XmlPrettyPrinterTest_StringHolder) {
+        super{_=>}
         this.val_stringHolder = val_stringHolder
     }
 

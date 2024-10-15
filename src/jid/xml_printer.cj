@@ -235,26 +235,32 @@ public interface PrettyPrintedXmlChunkWithCurrentPartCallback {
  * PrettyPrintedXmlPartCallback 接口用于定义一个回调，
  * 该回调在接收到美观格式打印的 XML 部分时被调用。
  */
-public interface PrettyPrintedXmlPartCallback {
+public open class PrettyPrintedXmlPartCallback {
+    public PrettyPrintedXmlPartCallback(let callback: (StringBuilder) -> Unit) {}
     /**  
      * 当接收到一个美观格式打印的 XML 部分时调用此方法。
      *
      * @param part 包含 XML 部分的字符串构建器
      */
-    func onPrettyPrintedXmlPart(part: StringBuilder): Unit
+    public open func onPrettyPrintedXmlPart(part: StringBuilder): Unit {
+        callback(part)
+    }
 }
 
 /**  
  * PrettyPrintedXmlChunkSink 接口用于定义一个接收器，
  * 该接收器接受以美观格式打印的 XML 片段。
  */
-public interface PrettyPrintedXmlChunkSink {
+public open class PrettyPrintedXmlChunkSink {
+    public PrettyPrintedXmlChunkSink(let callback: (StringBuilder) -> Unit) {}
     /**  
      * 接收一个字符串构建器，其中包含要处理的 XML 字符串。
      *
      * @param stringBuilder 包含 XML 片段的字符串构建器
      */
-    func sink(stringBuilder: StringBuilder): Unit
+    public open func sink(stringBuilder: StringBuilder): Unit {
+        callback(stringBuilder)
+    }
 }
 
 public class XmlPrettyPrinterBuilder {

@@ -103,7 +103,7 @@ public open class LazyStringBuilder <: CharSequence & Appendable {
         return if (let Some(v) <- cache) {
             ArrayList<CharSequence>(v)
         } else {
-            let arr: ArrayList<CharSequence> = ArrayList<CharSequence>()
+            let arr: ArrayList<CharSequence> = ArrayList<CharSequence>(list.size)
             for (csq in list) {
                 arr.append(csq.toString())
             }

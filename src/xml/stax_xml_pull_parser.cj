@@ -21,10 +21,11 @@ public class StaxXmlPullParser <: XmlPullParser {
     }
 
     /**
-     * 获取指定名称的属性。
+     * 获取指定名称的属性。(不支持)
      *
      * @param _ 属性名称。
      * @return 属性值对象。
+     * @throws UnsupportedException 不支持的接口抛UnsupportedException异常。
      */
     public override func getProperty(_: String): Object {
         throw UnsupportedException()
@@ -54,18 +55,42 @@ public class StaxXmlPullParser <: XmlPullParser {
         depth
     }
 
+    /**
+     * 获取位置描述。（不支持）
+     *
+     * @return 位置描述字符串。
+     * @throws UnsupportedException 不支持的接口抛UnsupportedException异常。
+     */
     public override func getPositionDescription(): String {
         throw UnsupportedException()
     }
 
+    /**
+     * 获取当前行号。（不支持）
+     *
+     * @return 行号。
+     * @throws UnsupportedException 不支持的接口抛UnsupportedException异常。
+     */
     public override func getLineNumber(): Int64 {
         throw UnsupportedException()
     }
 
+    /**
+     * 获取当前列号。（不支持）
+     *
+     * @return 列号。
+     * @throws UnsupportedException 不支持的接口抛UnsupportedException异常。
+     */
     public override func getColumnNumber(): Int64 {
         throw UnsupportedException()
     }
 
+    /**
+     * 判断是否为空白字符。（不支持）
+     *
+     * @return 如果是空白字符则为 true，否则为 false。
+     * @throws UnsupportedException 不支持的接口抛UnsupportedException异常。
+     */
     public override func isWhiteSpace(): Bool {
         throw UnsupportedException()
     }
@@ -75,7 +100,7 @@ public class StaxXmlPullParser <: XmlPullParser {
     }
 
     public override func getNamespace(): String {
-        qname.namespace
+        qname.getOrThrow().namespace
     }
 
     public override func getName(): String {
@@ -84,11 +109,11 @@ public class StaxXmlPullParser <: XmlPullParser {
     }
 
     public override func getQName(): QName {
-        qname
+        qname.getOrThrow()
     }
 
     public override func getPrefix(): String {
-        qname.prefix
+        qname.getOrThrow().prefix
     }
 
     public override func getAttributeCount(): Int64 {
@@ -149,7 +174,7 @@ public class StaxXmlPullParser <: XmlPullParser {
     }
 
     var eventType: XmlPullParserEvent = XmlPullParserEvent.START_DOCUMENT
-    var qname: QName = unsafe { zeroValue<QName>() }
+    var qname: ?QName = None
     var nss: LinkedHashMap<String, String> = LinkedHashMap<String, String>()
     var attrs: ArrayList<Attribute> = ArrayList<Attribute>()
     var text: String = ""
@@ -180,8 +205,8 @@ public class StaxXmlPullParser <: XmlPullParser {
                     }
 
                     // set namespace of qname
-                    if (let Some(uri) <- nss.get(qname.prefix)) {
-                        qname.namespace = uri
+                    if (let Some(uri) <- nss.get(qname.getOrThrow().prefix)) {
+                        qname.getOrThrow().namespace = uri
                     }
                     for (attr in attrs where attr.qname.prefix.size > 0 && attr.qname.namespace.size == 0) {
                         ifSome(nss.get(attr.qname.prefix)) {

@@ -296,9 +296,10 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
      * @param value 属性值
      * @return XmlStringBuilder
      */
-    public func attribute(name: String, value: String): XmlStringBuilder {
+    public func attribute(name: String, value: ?String): XmlStringBuilder {
+        let val = Objects.requireNonNull(value)
         sb.append(' ').append(name).append("=\'")
-        escapeAttributeValue(value)
+        escapeAttributeValue(val)
         sb.append('\'')
         return this
     }
@@ -333,7 +334,12 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
      * @return 当前 XmlStringBuilder 实例
      */
     public func attribute(name: String, value: ToString): XmlStringBuilder {
-        return attribute(name, value.toString())
+        var str = value.toString()
+        while (str.startsWith("Some(")) {
+            str = str[5..str.size - 1]
+        }
+        assert(str != "None")
+        return attribute(name, str)
     }
 
     /**
@@ -388,13 +394,6 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
         }
         return this
     }
-
-    // public func optAttribute(name: String, value: ?ToString): XmlStringBuilder {
-    //     if (let Some(value) <- value) {
-    //         attribute(name, value.toString())
-    //     }
-    //     return this
-    // }
 
     /**
      * 与 {@link #optAttribute(String, CharSequence)} 相同，但方法名称不同。如果提供的属性值参数类型在方法重载中引起歧义，可以使用此方法。例如，如果类型是 Number 和 CharSequence 的子类。
@@ -779,7 +778,7 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
      * @param enclosingXmlEnvironment 封闭的XML环境。
      * @throws IOException  如果发生I/O错误，会抛出IOException。
      */
-    public func write(writer: StringWriter<OutputStream>, enclosingXmlEnvironment: ?XmlEnvironment): Unit {
+    public func write(writer: ObservableWriter, enclosingXmlEnvironment: ?XmlEnvironment): Unit {
         try {
             appendXmlTo(
                 {
