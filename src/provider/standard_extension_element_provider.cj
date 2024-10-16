@@ -8,7 +8,7 @@ package xmpp4cj.provider
  */
 public class StandardExtensionElementProvider <: ExtensionElementProvider<StandardExtensionElement> {
     private init() {
-        super()
+        super("StandardExtensionElement")
     }
 
     /**  

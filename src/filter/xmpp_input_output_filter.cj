@@ -28,7 +28,7 @@ public interface XmppInputOutputFilter {
      * @return 过滤后的输入数据作为ByteBuffer。
      * @throws IOException 如果在输入处理过程中发生错误。
      */
-    func input(inputData: ByteArrayStream): ByteArrayStream
+    func input(inputData: ByteArrayStream): ?ByteArrayStream
 
     /**  
      * 关闭输入输出过滤器，释放所有相关资源。
@@ -42,7 +42,8 @@ public interface XmppInputOutputFilter {
      * @throws 如果没有响应，则抛出NoResponseException。
      * @throws CertificateException 如果发生证书错误。
      * @throws InterruptedException 如果等待进程被中断。
-     * @throws Xmpp4cjException 如果发生与Xmpp相关的错误。
+     * @throws Xmpp4cjException 发生与Xmpp业务相关的错误。
+     * @throws XMPPException 发生Xmpp底层相关的错误。
      */
     func waitUntilInputOutputClosed(): Unit {}
 

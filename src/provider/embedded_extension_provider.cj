@@ -58,8 +58,8 @@ public abstract class EmbeddedExtensionProvider<PE> <: ExtensionElementProvider<
     /**  
      * 构造函数，初始化 EmbeddedExtensionProvider 实例。
      */
-    public init() {
-        super()
+    public init(elementClass: ClassId) {
+        super(elementClass)
     }
 
     /**  

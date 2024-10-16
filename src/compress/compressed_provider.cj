@@ -22,7 +22,7 @@ public class CompressedProvider <: NonzaProvider<Compressed> {
      * </p>
      */
     private init() {
-        super()
+        super("Compressed")
     }
 
     /**  

@@ -8,7 +8,7 @@ public class MessageSubjectElementProvider <: ExtensionElementProvider<MessageSu
      * 构造函数，初始化 MessageSubjectElementProvider 实例。
      */
     public init() {
-        super()
+        super("MessageSubject")
     }
 
     /**  

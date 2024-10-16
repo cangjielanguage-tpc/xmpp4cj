@@ -19,7 +19,7 @@ public class FromMatchesFilter <: AbstractFromToMatchesFilter {
      * 第二个参数指定比较是完整地址还是裸地址。
      *
      * @param address  要过滤的地址。如果给定 <code>null</code>，则数据包不得有 “from” 地址。
-     * @param ignoreResourcepart 是否忽略资源部分的比较 TODO 请补充文档
+     * @param ignoreResourcepart Bool
      */
     public init(address: ?Jid, ignoreResourcepart: Bool) {
         super(address, ignoreResourcepart)

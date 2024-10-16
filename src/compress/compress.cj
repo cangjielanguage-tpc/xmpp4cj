@@ -20,6 +20,11 @@ public class Compress <: Nonza {
      */
     public static let NAMESPACE: String = "http://jabber.org/protocol/compress"
 
+    static init() {
+        ELEMENT_MAPPING.put("Compress", ELEMENT)
+        NAMESPACE_MAPPING.put("Compress", NAMESPACE)
+    }
+
     /**  
      * 描述所使用的压缩方法。
      */

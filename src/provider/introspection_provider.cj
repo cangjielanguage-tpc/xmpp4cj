@@ -88,7 +88,7 @@ public abstract class IntrospectionProviderIQIntrospectionProvider<I> <: IqProvi
      * @param elementClass IQ 类型的类对象
      */
     protected init(elementClass: ClassTypeInfo) {
-        super()
+        super(elementClass.name)
         this._elementClass = elementClass
     }
 
@@ -132,7 +132,7 @@ public abstract class IntrospectionProviderPacketExtensionIntrospectionProvider<
      * @param elementClass 扩展元素类型的类对象
      */
     protected init(elementClass: ClassTypeInfo) {
-        super()
+        super(elementClass.name)
         this._elementClass = elementClass
     }
 

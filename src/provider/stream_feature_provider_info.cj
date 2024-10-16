@@ -4,6 +4,7 @@
 package xmpp4cj.provider
 
 public class StreamFeatureProviderInfo <: AbstractProviderInfo {
+    let extProvider: ExtensionElementProvider<ExtensionElement>
     /**
      * 定义一个实现了 <code>StreamFeatureProvider</code> 接口的扩展提供者。
      *
@@ -17,5 +18,9 @@ public class StreamFeatureProviderInfo <: AbstractProviderInfo {
         extProvider: ExtensionElementProvider<ExtensionElement>
     ) {
         super(elementName, namespace, extProvider)
+        this.extProvider = extProvider
+    }
+    public override func getProvider(): ExtensionElementProvider<ExtensionElement> {
+        return extProvider
     }
 }

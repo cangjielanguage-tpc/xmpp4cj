@@ -7,6 +7,7 @@ package xmpp4cj.provider
  * 定义了在使用 {@link ProviderLoader} 时向 {@link ProviderManager} 注册一个节扩展提供者所需的信息。
  */
 public class ExtensionProviderInfo <: AbstractProviderInfo {
+    let extProvider: ExtensionElementProvider<ExtensionElement>
     /**
      * 定义一个实现了 <code>ExtensionElementProvider</code> 接口的扩展提供者。
      *
@@ -20,5 +21,9 @@ public class ExtensionProviderInfo <: AbstractProviderInfo {
         extProvider: ExtensionElementProvider<ExtensionElement>
     ) {
         super(elementName, namespace, extProvider)
+        this.extProvider = extProvider
+    }
+    public override func getProvider(): ExtensionElementProvider<ExtensionElement> {
+        return extProvider
     }
 }

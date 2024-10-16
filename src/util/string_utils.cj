@@ -392,7 +392,11 @@ public class StringUtils {
      * @return 包含集合中所有元素的 StringBuilder。
      */
     public static func toStringBuilder<T>(collection: Collection<T>, delimiter: String): StringBuilder where T <: ToString {
-        let sb: StringBuilder = StringBuilder(collection.size * 20)
+        let sb: StringBuilder = if (collection.size == 0) {
+            StringBuilder()
+        } else {
+            StringBuilder(collection.size * 20)
+        }
         appendTo(collection, delimiter, sb)
         return sb
     }

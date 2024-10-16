@@ -40,6 +40,12 @@ public abstract class StanzaFilter <: Predicate<Stanza> & ToString {
      */
     public func accept(stanza: Stanza): Bool
 
+    /**
+     * 定义一个抽象方法 test，接受参数 Stanza，返回一个布尔值。
+     *
+     * @param stanza Stanza。
+     * @return 布尔值。
+     */
     public override func test(stanza: Stanza): Bool {
         return accept(stanza)
     }

@@ -39,7 +39,15 @@ public abstract class XMPPInputOutputStream {
     public func getOutputStream(outputStream: OutputStream): OutputStream
 }
 
-public enum XMPPInputOutputStreamFlushMethod {
+public enum XMPPInputOutputStreamFlushMethod <: Equatable<XMPPInputOutputStreamFlushMethod> {
     | FULL_FLUSH
     | SYNC_FLUSH
+
+    public operator override func ==(that: XMPPInputOutputStreamFlushMethod): Bool {
+        match ((this, that)) {
+            case (FULL_FLUSH, FULL_FLUSH) => true
+            case (SYNC_FLUSH, SYNC_FLUSH) => true
+            case _ => false
+        }
+    }
 }

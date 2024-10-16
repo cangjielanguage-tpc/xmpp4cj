@@ -7,6 +7,7 @@ package xmpp4cj.provider
  * 定义了在使用 {@link ProviderLoader} 时向 {@link ProviderManager} 注册一个 IQ 提供者所需的信息。
  */
 public class IQProviderInfo <: AbstractProviderInfo {
+    let iqProvider: IqProvider<IQ>
     /**
      * 定义一个实现了 <code>IQProvider</code> 接口的 IQ 提供者。
      *
@@ -16,5 +17,9 @@ public class IQProviderInfo <: AbstractProviderInfo {
      */
     public IQProviderInfo(elementName: String, namespace: String, iqProvider: IqProvider<IQ>) {
         super(elementName, namespace, iqProvider)
+        this.iqProvider = iqProvider
+    }
+    public override func getProvider(): IqProvider<IQ> {
+        return iqProvider
     }
 }

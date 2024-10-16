@@ -27,7 +27,7 @@ public class FailureProvider <: NonzaProvider<Failure> {
      * </p>
      */
     private init() {
-        super()
+        super("Failure")
     }
 
     /**  
@@ -55,7 +55,7 @@ public class FailureProvider <: NonzaProvider<Failure> {
                     if (namespace == Failure.NAMESPACE) {
                         compressFailureError = FailureCompressFailureError.fromString(name.replace("-", "_"))
                         if (compressFailureError.isNone()) {
-                            LOGGER.warn("Unknown element in " + Failure.NAMESPACE + ": ${name}")
+                            LOGGER.warn("Unknown element in ${Failure.NAMESPACE}: ${name}")
                         }
                     } else if (namespace == StreamOpen.CLIENT_NAMESPACE || namespace == StreamOpen.SERVER_NAMESPACE) {
                         if (name == StanzaError.ERROR) {

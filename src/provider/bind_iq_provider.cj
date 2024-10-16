@@ -12,6 +12,7 @@ public class BindIQProvider <: IqProvider<Bind> {
      * 构造函数，初始化 BindIQProvider 实例。
      */
     public init() {
+        super("Bind")
     }
 
     /**  

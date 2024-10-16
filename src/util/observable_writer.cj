@@ -59,7 +59,7 @@ public open class ObservableWriter <: OutputStream & Resource {
         wrappedWriter?.write(str)
         wrappedOutput?.write(str.toArray())
         if (let Some(v) <- wrappedOutput) {
-            DEBUGER.debug("5.0 ${wrappedWriter.isNone()} ${wrappedOutput.isNone()} ${TypeInfo.of(v)} ${str}")
+            // DEBUGER.debug("5.0 ${wrappedWriter.isNone()} ${wrappedOutput.isNone()} ${TypeInfo.of(v)} ${str}")
         }
         maybeNotifyListeners(str)
     }

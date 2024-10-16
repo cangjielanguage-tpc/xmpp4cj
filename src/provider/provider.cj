@@ -14,6 +14,10 @@ package xmpp4cj.provider
  * @param <E> 结果元素的类型。
  */
 public abstract class Provider<E> <: AbstractProvider<E> where E <: Element {
+    public init(elementClass: ClassId) {
+        super(elementClass)
+    }
+
     /**  
      * 使用给定的 XML Pull 解析器解析元素。
      *
