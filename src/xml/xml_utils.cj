@@ -289,7 +289,7 @@ class BytesInputStream <: ToString {
                     }
                     idx += size
                 }
-                return sb.toString() + "..."
+                return "${sb.toString()}..."
             case false => String.fromUtf8(window)
         }
     }
@@ -329,7 +329,7 @@ func toAsciiLower(b: Byte): Byte {
 /**
  * 后进先出的栈。
  */
-public class Stack<T> {
+class Stack<T> {
     private var buff = Array<T>(16, repeat: unsafe { zeroValue<T>() })
     private var idx = 0
 

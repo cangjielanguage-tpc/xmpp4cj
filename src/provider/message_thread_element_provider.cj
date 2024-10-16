@@ -8,7 +8,7 @@ public class MessageThreadElementProvider <: ExtensionElementProvider<MessageThr
      * 构造函数，初始化 MessageThreadElementProvider 实例。
      */
     public init() {
-        super()
+        super("MessageThread")
     }
 
     /**  

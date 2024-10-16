@@ -48,7 +48,7 @@ public abstract class AbstractProviderInfo {
      *
      * @return 提供者对象
      */
-    func getProvider(): Object {
+    public open func getProvider(): Object {
         return provider
     }
 }

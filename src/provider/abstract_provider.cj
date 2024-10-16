@@ -14,6 +14,14 @@ public open class AbstractProvider<E> where E <: Element {
      */
     protected var elementClass: ClassId = ""
 
+    /*
+     * 构造函数
+     * @param elementClass Element泛型的ClassId
+     */
+    public init(elementClass: ClassId) {
+        this.elementClass = elementClass
+    }
+
     /**  
      * 获取元素类型的 Class 对象。
      *

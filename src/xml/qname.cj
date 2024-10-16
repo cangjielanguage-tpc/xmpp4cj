@@ -84,7 +84,7 @@ public class QName <: ToString & Hashable & Equatable<QName> {
         if (namespace == "") {
             return local
         } else {
-            return "{" + namespace + "}" + local
+            return "{${namespace}}${local}"
         }
     }
 

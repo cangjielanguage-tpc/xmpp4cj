@@ -64,13 +64,12 @@ public class ProviderManager {
     private static let streamFeatureProviders = ConcurrentHashMap<QName, ExtensionElementProvider<ExtensionElement>>()
     private static let nonzaProviders = ConcurrentHashMap<QName, NonzaProvider<Nonza>>()
 
-    private static let Xmpp_EnsureInitialized = {
-        =>
-    // Ensure that Xmpp is initialized by calling getVersion,
-    // so that user registered providers do not get overwritten by a following Xmpp initialization.
-    // This guarantees that Xmpp is initialized before a new provider is registered
-    // Xmpp.ensureInitialized() // TODO
-    }()
+    static init() {
+        // Ensure that Xmpp is initialized by calling getVersion,
+        // so that user registered providers do not get overwritten by a following Xmpp initialization.
+        // This guarantees that Xmpp is initialized before a new provider is registered
+        // Xmpp.ensureInitialized() // TODO
+    }
 
     /**  
      * 添加提供程序加载器，允许注册多个 IQ 提供程序和扩展提供程序。
@@ -88,7 +87,7 @@ public class ProviderManager {
             addStreamFeatureProvider(
                 info.getElementName(),
                 info.getNamespace(),
-                (info.getProvider() as ExtensionElementProvider<ExtensionElement>).getOrThrow()
+                info.getProvider()
             )
         }
     }
@@ -136,13 +135,11 @@ public class ProviderManager {
      * @param namespace XML 命名空间。
      * @param provider IQ 提供程序。
      */
-    public static func addIQProvider(elementName: String, namespace: String, provider: Any): Unit {
+    public static func addIQProvider<I>(elementName: String, namespace: String, provider: IqProvider<I>): Unit where I <: IQ {
         validate(elementName, namespace)
         let key = removeIQProvider(elementName, namespace)
-        match (provider) {
-            case v: IqProvider<IQ> => iqProviders.put(key, v)
-            case _ => throw IllegalArgumentException("Provider must be an instance of IqProvider")
-        }
+        let v = IqProviderWrapper(provider.getElementClass(), provider.parse)
+        iqProviders.put(key, v)
     }
 
     /**
@@ -197,13 +194,12 @@ public class ProviderManager {
      * @param namespace XML 命名空间。
      * @param provider 扩展提供程序。
      */
-    public static func addExtensionProvider(elementName: String, namespace: String, provider: Object): Unit {
+    public static func addExtensionProvider<E>(elementName: String, namespace: String,
+        provider: ExtensionElementProvider<E>): Unit where E <: ExtensionElement {
         validate(elementName, namespace)
         let key = removeExtensionProvider(elementName, namespace)
-        match (provider) {
-            case v: ExtensionElementProvider<ExtensionElement> => extensionProviders.put(key, v)
-            case _ => throw IllegalArgumentException("Provider must be a PacketExtensionProvider")
-        }
+        let v = ExtensionElementProviderWrapper(provider.getElementClass(), provider.parse)
+        extensionProviders.put(key, v)
     }
 
     /**
@@ -299,10 +295,11 @@ public class ProviderManager {
      *
      * @param nonzaProvider 要添加的 Nonza 提供程序。
      */
-    public static func addNonzaProvider(nonzaProvider: NonzaProvider<Nonza>): Unit {
+    public static func addNonzaProvider<N>(nonzaProvider: NonzaProvider<N>): Unit where N <: Nonza {
         let nonzaClass = nonzaProvider.getElementClass()
         let key = XmppElementUtil.getQNameFor(nonzaClass)
-        nonzaProviders.put(key, nonzaProvider)
+        let wrapper = NonzaProviderWrapper(nonzaProvider.getElementClass(), nonzaProvider.parse)
+        nonzaProviders.put(key, wrapper)
     }
 
     /**  

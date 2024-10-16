@@ -12,7 +12,7 @@ public class BodyElementProvider <: ExtensionElementProvider<MessageBody> {
      * 构造函数，初始化 BodyElementProvider 实例。
      */
     public init() {
-        super()
+        super("MessageBody")
     }
 
     /**  

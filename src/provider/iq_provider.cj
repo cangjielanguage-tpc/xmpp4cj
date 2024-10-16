@@ -9,6 +9,9 @@ package xmpp4cj.provider
  * @param <I> 解析的 IQ 类型，必须是 IQ 的子类
  */
 public abstract class IqProvider<I> <: AbstractProvider<I> where I <: IQ {
+    public init(elementClass: ClassId) {
+        super(elementClass)
+    }
     /**  
      * 解析给定的 XML Pull 解析器中的 IQ 数据。
      *
@@ -55,4 +58,15 @@ public abstract class IqProvider<I> <: AbstractProvider<I> where I <: IQ {
      * @throws XmppParsingException Xmpp 解析过程中抛出的异常
      */
     public func parse(parser: XmlPullParser, initialDepth: Int, iqData: IqData, xmlEnvironment: ?XmlEnvironment): I
+}
+
+type IqProviderParse4 = (XmlPullParser, Int, IqData, ?XmlEnvironment) -> IQ
+
+class IqProviderWrapper <: IqProvider<IQ> {
+    public IqProviderWrapper(elementClass: ClassId, let parse4: IqProviderParse4) {
+        super(elementClass)
+    }
+    public func parse(parser: XmlPullParser, initialDepth: Int, iqData: IqData, xmlEnvironment: ?XmlEnvironment): IQ {
+        parse4(parser, initialDepth, iqData, xmlEnvironment)
+    }
 }

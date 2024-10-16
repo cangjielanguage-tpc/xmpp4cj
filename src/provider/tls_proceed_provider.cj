@@ -17,7 +17,7 @@ public class TlsProceedProvider <: NonzaProvider<TlsFailure> {
      * 私有构造函数，防止外部实例化。
      */
     private init() {
-        super()
+        super("TlsFailure")
     }
 
     /**  

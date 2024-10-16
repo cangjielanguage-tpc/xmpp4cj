@@ -358,7 +358,7 @@ class XmlReader {
     }
 
     public func readEntityRef(): EntityReference {
-        let ref = buf.readUntil(b';') + ";"
+        let ref = "${buf.readUntil(b';')};"
         buf.skip(1)
         readAfterLastPeek = true
         EntityReference(ref, EntityDecl(ref, ESCAPE_MAPPING[ref]))

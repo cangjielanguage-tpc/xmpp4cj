@@ -932,8 +932,7 @@ public class PacketParserUtils {
         if (let Some(provider) <- provider) {
             return provider.parse(parser, outerXmlEnvironment)
         }
-        // return StandardExtensionElementProvider.INSTANCE.parse(parser, outerXmlEnvironment)
-        throw Exception("TODO")
+        return StandardExtensionElementProvider.INSTANCE.parse(parser, outerXmlEnvironment)
     }
 
     /**  

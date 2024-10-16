@@ -41,11 +41,21 @@ public open class ObservableReader <: InputStream & Resource {
     }
 
     public open override func read(cbuf: Array<Byte>): Int {
-        if (let Some(v) <- wrappedReader) {
+        let count = if (let Some(v) <- wrappedReader) {
             v.read(cbuf)
         } else {
             wrappedInput.getOrThrow().read(cbuf)
         }
+        if (count > 0) {
+            let str = String.fromUtf8(cbuf[..count])
+            let readerListeners: Array<ReaderListener> = synchronized(listenersLock) {
+                listeners.toArray()
+            }
+            for (i in 0..readerListeners.size) {
+                readerListeners[i].read(str)
+            }
+        }
+        return count
     }
 
     /**

@@ -9,4 +9,5 @@ public class MAC {
         HMAC_SHA1.write(input)
         return HMAC_SHA1.finish()
     }
+
 }

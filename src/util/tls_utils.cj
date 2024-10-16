@@ -138,7 +138,7 @@ public class TLSUtils {
      * @throws SSLPeerUnverifiedException if we TLS peer could not be verified.
      * @throws CertificateEncodingException if there was an encoding error with the certificate.
      * @throws NoSuchAlgorithmException if no such algorithm is available.
-     * @see <a href="https://tools.ietf.org/html/rfc5929#section-4">RFC 5929 § 4.</a>
+     * @see <a href="https/tools/ietf/org/html/rfc5929#section-4">RFC 5929 § 4.</a>
      */
     public static func getChannelBindingTlsServerEndPoint(tlsSession: TlsSession): Array<UInt8> {
         // let peerCertificates = tlsSession.getPeerCertificates()
@@ -205,9 +205,8 @@ public class TLSUtils {
     }
 
     /**
-     * Tries to determine if the default truststore type is of type jks and sets the javax.net.ssl.trustStoreType system
-     * property to 'JKS' if so. This is meant as workaround in situations where the default truststore type is (still)
-     * 'jks' but we run on a newer JRE/JDK which uses PKCS#12 as type. See for example <a href="https://bugs.gentoo.org/712290">Gentoo bug #712290</a>.
+     * Tries to determine if the default truststore type is of type jks and sets the trustStoreType system
+     * property to 'JKS' if so.
      */
     public static func setDefaultTrustStoreTypeToJksIfRequired(): Unit {
         // let defaultTrustStoreType: TLSUtils_DefaultTrustStoreType

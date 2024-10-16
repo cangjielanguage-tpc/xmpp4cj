@@ -25,6 +25,12 @@ public class Failure <: Nonza {
      */
     public static let QNAME: QName = QName(NAMESPACE, ELEMENT)
 
+    static init() {
+        ELEMENT_MAPPING.put("Failure", ELEMENT)
+        NAMESPACE_MAPPING.put("Failure", NAMESPACE)
+        QNAME_MAPPING.put("Failure", QNAME)
+    }
+
     private let compressFailureError: FailureCompressFailureError // 压缩失败错误  
 
     private let stanzaError: ?StanzaError // 可选的 StanzaError  
