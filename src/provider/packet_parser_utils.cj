@@ -519,45 +519,6 @@ public class PacketParserUtils {
     }
 
     /**  
-     * 解析压缩特性。
-     *
-     * @param parser 用于解析压缩特性的 XMLPullParser 实例。
-     * @return 解析后的 Compress.Feature 对象，包含支持的压缩方法。
-     * @throws IOException 如果在解析过程中发生 I/O 异常。
-     * @throws XmlPullParserException 如果发生 XML 解析异常。
-     */
-    // public static Compress.Feature parseCompressionFeature(XmlPullParser parser)  
-    //         throws IOException, XmlPullParserException {  
-    //     assert parser.getEventType() == XmlPullParser.Event.START_ELEMENT;  
-    //     String name;  
-    //     final int initialDepth = parser.getDepth();  
-    //     List<String> methods = new LinkedList<>();  
-    //     outerloop: while (true) {  
-    //         XmlPullParser.Event eventType = parser.next();  
-    //         switch (eventType) {  
-    //         case START_ELEMENT:  
-    //             name = parser.getName();  
-    //             if ("method".equals(name)) {  
-    //                 methods.add(parser.nextText());  
-    //             }  
-    //             break;  
-    //         case END_ELEMENT:  
-    //             name = parser.getName();  
-    //             if (Compress.Feature.ELEMENT.equals(name) && parser.getDepth() == initialDepth) {  
-    //                 break outerloop;  
-    //             }  
-    //             break;  
-    //         default:  
-    //             // 捕获未处理的事件  
-    //             break;  
-    //         }  
-    //     }  
-    //     assert parser.getEventType() == XmlPullParser.Event.END_ELEMENT;  
-    //     assert parser.getDepth() == initialDepth;  
-    //     return new Compress.Feature(methods);  
-    // }  
-
-    /**  
      * 解析描述性文本。
      *
      * @param parser 用于解析的 XMLPullParser 实例。
