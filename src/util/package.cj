@@ -6,20 +6,15 @@
  */
 package xmpp4cj.util
 
-internal import crypto.crypto.*
-internal import crypto.digest.*
-internal import encoding.hex.*
 internal import log.*
 internal import net.tls.*
 internal import std.collection.*
 internal import std.collection.concurrent.*
 internal import std.io.*
-internal import std.math.*
 internal import std.net.*
 internal import std.random.*
 internal import std.regex.*
 internal import std.sync.*
-internal import std.reflect.* // TODO
 
 /*
  * ArrayList工具类

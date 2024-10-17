@@ -247,14 +247,14 @@ public class ProviderManager {
      * @param namespace 流特性元素的命名空间。
      * @param provider 要添加的流特性提供程序。
      */
-    public static func addStreamFeatureProvider(
+    public static func addStreamFeatureProvider<E>(
         elementName: String,
         namespace: String,
-        provider: ExtensionElementProvider<ExtensionElement>
-    ): Unit {
+        provider: ExtensionElementProvider<E>
+    ): Unit where E <: ExtensionElement {
         validate(elementName, namespace)
         let key = getQName(elementName, namespace)
-        streamFeatureProviders.put(key, provider)
+        streamFeatureProviders.put(key, ExtensionElementProviderWrapper(provider.getElementClass(), provider.parse))
     }
 
     /**  

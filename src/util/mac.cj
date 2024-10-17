@@ -3,11 +3,13 @@
  */
 package xmpp4cj.util
 
+import crypto.digest.HMAC
+import crypto.digest.HashType
+
 public class MAC {
     public static func hmacsha1(key: Array<Byte>, input: Array<UInt8>): Array<UInt8> {
         let HMAC_SHA1 = HMAC(key, HashType.SHA1)
         HMAC_SHA1.write(input)
         return HMAC_SHA1.finish()
     }
-
 }

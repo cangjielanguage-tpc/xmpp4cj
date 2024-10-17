@@ -3,24 +3,24 @@
  */
 package xmpp4cj.filter
 
- /**  
- * 用于过滤有效的 IQ 请求回复的数据包。  
- * <p>  
- * 这样的数据包必须具有相同的 stanza id，并且必须是类型为   
- * <code>RESULT</code> 或 <code>ERROR</code> 的 IQ stanza。此外，还需检查   
- * <code>from</code> 地址，以忽略伪造的回复。  
- * <p>  
- * 我们接受的 <code>from</code> 地址如果满足以下条件之一：  
- * <ul>  
- * <li>与请求的 <code>to</code> 地址匹配。  
- * <li>请求的 <code>to</code> 地址为空，并且 <code>from</code> 地址与  
- * 服务器的 bare jid 或客户端的 (bare 或 full jid) 匹配。  
- * <li>请求的 <code>to</code> 是我们的 bare 地址，并且 <code>from</code> 为空。  
- * </ul>  
- * <p>  
- * 有关问题的讨论，请参阅 2014-01 在 jdev@jabber.org 邮件列表中   
+/**  
+ * 用于过滤有效的 IQ 请求回复的数据包。
+ * <p>
+ * 这样的数据包必须具有相同的 stanza id，并且必须是类型为
+ * <code>RESULT</code> 或 <code>ERROR</code> 的 IQ stanza。此外，还需检查
+ * <code>from</code> 地址，以忽略伪造的回复。
+ * <p>
+ * 我们接受的 <code>from</code> 地址如果满足以下条件之一：
+ * <ul>
+ * <li>与请求的 <code>to</code> 地址匹配。
+ * <li>请求的 <code>to</code> 地址为空，并且 <code>from</code> 地址与
+ * 服务器的 bare jid 或客户端的 (bare 或 full jid) 匹配。
+ * <li>请求的 <code>to</code> 是我们的 bare 地址，并且 <code>from</code> 为空。
+ * </ul>
+ * <p>
+ * 有关问题的讨论，请参阅 2014-01 在 jdev@jabber.org 邮件列表中
  * 讨论的“IQ id 的欺骗和表现不当的服务器”主题，以及 2 月和 3 月的后续讨论。
- */ 
+ */
 public open class IQReplyFilter <: StanzaFilter {
     private static let LOGGER: Logger = getGlobalLogger(("name", "IQReplyFilter"))
 
@@ -37,23 +37,23 @@ public open class IQReplyFilter <: StanzaFilter {
     private let packetId: ?String
 
     /**  
-     * 构造一个过滤器用于处理 IQ 请求的有效回复。  
-     * <p>  
-     * 这样的数据包必须具有相同的 stanza id，并且必须是类型为   
-     * <code>RESULT</code> 或 <code>ERROR</code> 的 IQ stanza。此外，还需检查   
-     * <code>from</code> 地址，以忽略伪造的回复。  
-     * <p>  
-     * 我们接受的 <code>from</code> 地址如果满足以下条件之一：  
-     * <ul>  
-     * <li>与请求的 <code>to</code> 地址匹配。  
-     * <li>请求的 <code>to</code> 地址为空，并且 <code>from</code> 地址与  
-     * 服务器的 bare jid 或客户端的 (bare 或 full jid) 匹配。  
-     * <li>请求的 <code>to</code> 是我们的 bare 地址，并且 <code>from</code> 为空。  
-     * </ul>  
-     *  
-     * @param iqPacket 需要过滤回复的 IQ 请求。  
-     * @param conn 连接对象。  
-     */  
+     * 构造一个过滤器用于处理 IQ 请求的有效回复。
+     * <p>
+     * 这样的数据包必须具有相同的 stanza id，并且必须是类型为
+     * <code>RESULT</code> 或 <code>ERROR</code> 的 IQ stanza。此外，还需检查
+     * <code>from</code> 地址，以忽略伪造的回复。
+     * <p>
+     * 我们接受的 <code>from</code> 地址如果满足以下条件之一：
+     * <ul>
+     * <li>与请求的 <code>to</code> 地址匹配。
+     * <li>请求的 <code>to</code> 地址为空，并且 <code>from</code> 地址与
+     * 服务器的 bare jid 或客户端的 (bare 或 full jid) 匹配。
+     * <li>请求的 <code>to</code> 是我们的 bare 地址，并且 <code>from</code> 为空。
+     * </ul>
+     *
+     * @param iqPacket 需要过滤回复的 IQ 请求。
+     * @param conn 连接对象。
+     */
     public init(iqPacket: IQ, user: ?EntityFullJid, xmppServiceDomain: DomainBareJid) {
         if (!iqPacket.isRequestIQ()) {
             throw IllegalArgumentException("IQ must be a request IQ, i.e. of type \'get\' or \'set\'.")
@@ -77,7 +77,7 @@ public open class IQReplyFilter <: StanzaFilter {
             fromFilter.addFilter(FromMatchesFilter.createFull(server))
         }
     }
-    
+
     /**  
      * 测试指定的 Stanza 是否应该通过过滤器。
      *
