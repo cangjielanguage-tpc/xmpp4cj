@@ -3,6 +3,8 @@
  */
 package xmpp4cj.util
 
+import encoding.hex.toHexString
+
 /**
  * 一个用于字符串对象的工具方法集合。
  */
@@ -111,7 +113,7 @@ public class StringUtils {
     private static func escapeForXml(input: String, xmlEscapeMode: StringUtilsXmlEscapeMode): String {
         let inputer = input.toRuneArray()
         let len: Int64 = inputer.size
-        let out: StringBuilder = StringBuilder(Int64(floor(Float64(len) * 1.3)) + 1)
+        let out: StringBuilder = StringBuilder(Int64(Float64(len) * 1.3) + 1)
         var toAppend: ?String
         var last: Int64 = 0
         var i: Int64 = 0

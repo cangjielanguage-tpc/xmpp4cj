@@ -58,9 +58,6 @@ public open class ObservableWriter <: OutputStream & Resource {
     public open func write(str: String): Unit {
         wrappedWriter?.write(str)
         wrappedOutput?.write(str.toArray())
-        if (let Some(v) <- wrappedOutput) {
-            // DEBUGER.debug("5.0 ${wrappedWriter.isNone()} ${wrappedOutput.isNone()} ${TypeInfo.of(v)} ${str}")
-        }
         maybeNotifyListeners(str)
     }
 

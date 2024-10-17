@@ -405,6 +405,18 @@ public func test_FromTypeFilter1(): Unit {
 }
 
 @Test
+public func test_IQReplyFilter1(): Unit {
+    // let messageSubject: String = "This is a test of the emergency broadcast system."
+    // let message: Message = StanzaBuilder.buildMessage().setSubject(messageSubject).build()
+    // let iqReplyFilter :IQReplyFilter  = IQReplyFilter(message, None, )
+}
+
+@Test
+public func test_IQResultReplyFilter1(): Unit {
+    // let IQResultReplyFilter :IQResultReplyFilter  =IQResultReplyFilter ()
+}
+
+@Test
 public func test_IQTypeFilter1(): Unit {
     let FULL_JID_1_RESOURCE_1: EntityFullJid = JidCreate.entityFullFrom("one@exampleOne.org/resourceOne")
     let obj: Bind = Bind.newResult(FULL_JID_1_RESOURCE_1)

@@ -11,7 +11,6 @@ internal import std.collection.*
 internal import std.collection.concurrent.ConcurrentHashMap
 internal import std.convert.*
 internal import std.io.*
-internal import std.reflect.*
 internal import std.unicode.*
 internal import xmpp4cj.jid.*
 internal import xmpp4cj.packet.*

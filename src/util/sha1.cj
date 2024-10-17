@@ -3,6 +3,8 @@
  */
 package xmpp4cj.util
 
+import crypto.digest.SHA1
+
 /**  
  * SHA1工具类
  */

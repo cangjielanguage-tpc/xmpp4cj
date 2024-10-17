@@ -17,7 +17,7 @@ public class ProviderConfigTest {
     // throws Exception 
     @TestCase
     public func addClasspathFileLoaderProvider(): Unit {
-        ProviderManager.addLoader(ProviderFileLoader(FileUtils.getStreamForClasspathFile("test.providers", None)))
+        ProviderManager.addLoader(ProviderSimpleLoader(FileUtils.getStreamForClasspathFile("test.providers", None)))
         Assert.assertNotNull(ProviderManager.getIQProvider("provider", "test:file_provider"))
     }
 }
