@@ -44,13 +44,13 @@ public abstract class MessageOrPresence <: Stanza {
      */
     public func asBuilder(id: String): MessageOrPresenceBuilder
 
-    /**  
-     * 使用指定的 {@code XMPPConnection} 返回一个构造器来构建当前的消息或存在状态。
+    /**
+     * 使用指定的{@link StanzaFactory}构建{@link PresenceBuilder}
      *
-     * @param connection 当前的 {@code XMPPConnection}。
-     * @return 关联到当前连接的构造器。
+     * @param stanzaFactory 来自于{@link XMPPConnection#getStanzaFactory()}
+     * @return Presence构造器
      */
-    // public func asBuilder(connection: XMPPConnection): MessageOrPresenceBuilder
+    public func asBuilder(stanzaFactory: StanzaFactory): MessageOrPresenceBuilder
 }
 
 /**  

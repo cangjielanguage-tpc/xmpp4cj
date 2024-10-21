@@ -886,19 +886,22 @@ public class LocalAndDomainpartJid <: AbstractJid & EntityBareJid {
     }
 
     public override func toString(): String {
-        if (cache.isSome()) {
-            return cache()
-        }
-        cache = "${getLocalpart()}@${domainBareJid}"
-        return cache()
+        cache ?? {
+            =>
+            let v = "${getLocalpart().toString()}@${domainBareJid.toString()}"
+            cache = v
+            return v
+        }()
     }
 
     public override func asUnescapedString(): String {
-        if (unescapedCache.isSome()) {
-            return unescapedCache()
-        }
-        unescapedCache = getLocalpart().asUnescapedString() + "@" + domainBareJid.toString()
-        return unescapedCache()
+        unescapedCache ??
+            {
+            =>
+            let v = "${getLocalpart().asUnescapedString()}@${domainBareJid.toString()}"
+            unescapedCache = v
+            v
+        }()
     }
 
     public override func asEntityBareJidIfPossible(): ?EntityBareJid {
@@ -1002,19 +1005,21 @@ public class LocalDomainAndResourcepartJid <: AbstractJid & EntityFullJid {
     }
 
     public override func toString(): String {
-        if (cache.isSome()) {
-            return cache()
-        }
-        cache = bareJid.toString() + "/" + resource.toString()
-        return cache()
+        cache ?? {
+            =>
+            let v = "${bareJid.toString()}/${resource.toString()}"
+            cache = v
+            v
+        }()
     }
 
     public override func asUnescapedString(): String {
-        if (unescapedCache.isSome()) {
-            return unescapedCache()
-        }
-        unescapedCache = bareJid.asUnescapedString() + "/" + resource.toString()
-        return unescapedCache()
+        unescapedCache ?? {
+            =>
+            let v = "${bareJid.asUnescapedString()}/${resource.toString()}"
+            unescapedCache = v
+            v
+        }()
     }
 
     public override func asEntityBareJid(): EntityBareJid {
@@ -1111,5 +1116,3 @@ public class LocalDomainAndResourcepartJid <: AbstractJid & EntityFullJid {
         return this
     }
 }
-
-extend LocalAndDomainpartJid {}
