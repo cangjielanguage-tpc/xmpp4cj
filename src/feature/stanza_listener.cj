@@ -3,46 +3,66 @@
  */
 package xmpp4cj.feature
 
-/**
- * Provides a mechanism to listen for packets that pass a specified filter.
- * This allows event-style programming -- every time a new stanza is found,
- * the {@link #processStanza(Stanza)} method will be called. This is the
- * opposite approach to the functionality provided by a {@link StanzaCollector}
- * which lets you block while waiting for results.
+/**  
+ * 提供一个机制，用于监听通过指定过滤器的消息包（stanza）。
+ * 这允许事件风格的编程——每当发现一个新的消息包时，
+ * {@link #processStanza(Stanza)} 方法将被调用。这与 {@link StanzaCollector}
+ * 提供的功能相反，后者允许你在等待结果时阻塞。
  * <p>
- * Additionally you are able to intercept Packets that are going to be send and
- * make modifications to them. You can register a PacketListener as interceptor
- * by using {@link XMPPConnection#addStanzaInterceptor(StanzaListener,
- * xmpp4cj.filter.StanzaFilter)}
+ * 此外，你还可以拦截即将发送的消息包，并对其进行修改。
+ * 你可以通过 {@link XMPPConnection#addStanzaInterceptor(StanzaListener,
+ * xmpp4cj.filter.StanzaFilter)} 方法注册一个消息包监听器作为拦截器。
  * </p>
  *
  * @see XMPPConnection#addAsyncStanzaListener(StanzaListener, xmpp4cj.filter.StanzaFilter)
  */
 public interface StanzaListener <: Hashable & Equatable<StanzaListener> {
-    /**
-     * Process the next stanza sent to this stanza listener.
+    /**  
+     * 处理发送到此消息包监听器的下一个消息包。
      * <p>
-     * If this listener is synchronous, then a single thread is responsible for invoking all listeners, so
-     * it's very important that implementations of this method not block
-     * for any extended period of time.
+     * 如果此监听器是同步的，则由单个线程负责调用所有监听器，因此
+     * 实现此方法的代码不应阻塞太长时间。
      * </p>
      *
-     * @param packet the stanza to process.
-     * @throws NotConnectedException if the XMPP connection is not connected.
-     * @throws InterruptedException if the calling thread was interrupted.
-     * @throws NotLoggedInException if the XMPP connection is not authenticated.
+     * @param packet 要处理的消息包
+     * @throws NotConnectedException 如果 XMPP 连接未连接
+     * @throws InterruptedException 如果调用线程被中断
+     * @throws NotLoggedInException 如果 XMPP 连接未通过身份验证
      */
     func processStanza(packet: Stanza): Unit
+
     func hashCode(): Int64 {
         0
     }
+
     operator func ==(that: StanzaListener): Bool {
         EqualsUtil.equals(this, that)
     }
 }
 
+/**  
+ * 简单的StanzaListener
+ */
 public class SimpleStanzaListener <: StanzaListener {
+    /**  
+     * 初始化 SimpleStanzaListener
+     *
+     * @param processor 回调接口
+     */
     public SimpleStanzaListener(let processor: (Stanza, StanzaListener) -> Unit) {}
+
+    /**  
+     * 处理发送到此消息包监听器的下一个消息包。
+     * <p>
+     * 如果此监听器是同步的，则由单个线程负责调用所有监听器，因此
+     * 实现此方法的代码不应阻塞太长时间。
+     * </p>
+     *
+     * @param packet 要处理的消息包
+     * @throws NotConnectedException 如果 XMPP 连接未连接
+     * @throws InterruptedException 如果调用线程被中断
+     * @throws NotLoggedInException 如果 XMPP 连接未通过身份验证
+     */
     public override func processStanza(packet: Stanza): Unit {
         processor(packet, this)
     }

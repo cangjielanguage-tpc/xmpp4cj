@@ -37,7 +37,12 @@ public class UnparsedIQ <: IQ {
      * @return IQChildElementXmlStringBuilder。
      */
     protected override func getIQChildElementBuilder(xml: IQChildElementXmlStringBuilder): ?IQChildElementXmlStringBuilder {
-        xml.escape(content)
+        if (StringUtils.isEmpty(content)) {
+            xml.setEmptyElement()
+        } else {
+            xml.rightAngleBracket()
+            xml.escape(content)
+        }
         return xml
     }
 }

@@ -31,19 +31,6 @@ public class TLSUtils {
     // }
 
     /**
-     *  Accept all TLS certificates.
-     * <p>
-     * <b>Warning:</b> Use with care. This method make the Connection use {@link AcceptAllTrustManager} and essentially
-     * <b>invalidates all security guarantees provided by TLS</b>. Only use this method if you understand the
-     * implications.
-     * </p>
-     *
-     * @param builder a connection configuration builder.
-     * @param <B> Type of the ConnectionConfiguration builder.
-     * @return the given builder.
-     */
-
-    /**
      * Accept all TLS certificates.
      * <p>
      * <b>Warning:</b> Use with care. This method make the Connection use {@link AcceptAllTrustManager} and essentially
@@ -60,19 +47,6 @@ public class TLSUtils {
     //     builder.setCustomX509TrustManager(TLSUtils_AcceptAllTrustManager())
     //     return builder
     // }
-
-    /**
-     *  Disable the hostname verification of TLS certificates.
-     * <p>
-     * <b>Warning:</b> Use with care. This disables hostname verification of TLS certificates and essentially
-     * <b>invalidates all security guarantees provided by TLS</b>. Only use this method if you understand the
-     * implications.
-     * </p>
-     *
-     * @param builder a connection configuration builder.
-     * @param <B> Type of the ConnectionConfiguration builder.
-     * @return the given builder.
-     */
 
     /**
      * Disable the hostname verification of TLS certificates.
