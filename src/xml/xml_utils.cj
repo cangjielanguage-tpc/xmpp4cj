@@ -175,17 +175,33 @@ class BytesInputStream <: ToString {
     }
 
     public func readUntil(condition: (Byte, Int64) -> Bool): String {
+        let sb = StringBuilder()
+        while (!tryRead(sb, condition)) {}
+        return sb.toString()
+    }
+
+    private func tryRead(sb: StringBuilder, condition: (Byte, Int64) -> Bool): Bool {
         var idx = 0
         while (idx < window.size && !condition(this[idx], idx)) {
             idx++
         }
-        if (idx >= window.size) {
-            throw XmlException("Failed to readUntil from `${this}`.")
+
+        let done = idx < window.size
+        if (done == false) {
+            idx--
+            // 向前寻找utf8第一个字节
+            while (idx >= 0 && window[idx] >> 6 == 0b10) {
+                idx--
+            }
         }
 
-        let readData = window.slice(0, idx) // read data
-        window = window.slice(idx, window.size - idx) // remain data
-        return String.fromUtf8(readData)
+        let readData = window[..idx] // read data
+        sb.append(unsafe { String.fromUtf8Unchecked(readData) })
+        window = window[idx..] // remain data
+        if (!done) {
+            this.tryFill(idx)
+        }
+        return done
     }
 
     private func tryFill(minSize: Int64): Bool {

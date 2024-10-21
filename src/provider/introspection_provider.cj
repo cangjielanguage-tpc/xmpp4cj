@@ -11,7 +11,6 @@ public class IntrospectionProvider {
     /**  
      * 解析 XML 元素并返回相应的对象。
      *
-     * @param objectClass 对应的类类型
      * @param parser XmlPullParser 实例
      * @param initialDepth 解析时的初始深度
      * @param eInit 泛型的构造函数

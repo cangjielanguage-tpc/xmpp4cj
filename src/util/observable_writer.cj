@@ -16,7 +16,7 @@ public open class ObservableWriter <: OutputStream & Resource {
     let listeners = ArrayList<WriterListener>()
     let listenersLock = Monitor()
 
-    private let stringBuilder = StringBuilder()
+    private let stringBuilder = StringBuilder(MAX_STRING_BUILDER_SIZE)
 
     public init(wrappedWriter: ObservableWriter) {
         this.wrappedWriter = wrappedWriter
@@ -87,13 +87,6 @@ public open class ObservableWriter <: OutputStream & Resource {
     }
 
     /**
-     *  Adds a writer listener to this writer that will be notified when
-     * new strings are sent.
-     *
-     * @param writerListener a writer listener.
-     */
-
-    /**
      * Adds a writer listener to this writer that will be notified when
      * new strings are sent.
      *
@@ -106,12 +99,6 @@ public open class ObservableWriter <: OutputStream & Resource {
             }
         }
     }
-
-    /**
-     *  Removes a writer listener from this writer.
-     *
-     * @param writerListener a writer listener.
-     */
 
     /**
      * Removes a writer listener from this writer.
