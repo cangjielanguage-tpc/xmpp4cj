@@ -538,7 +538,7 @@ public class ParserUtils {
     public static func getRequiredNextText(parser: XmlPullParser): String {
         let text = parser.nextText()
         if (StringUtils.isNullOrEmpty(text)) {
-            throw IOException("Next text is null or empty (${text}" + r')'.toString())
+            throw IOException("Next text is null or empty (${text})")
         }
         return text
     }

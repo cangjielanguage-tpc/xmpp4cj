@@ -146,10 +146,15 @@ public class Presence <: MessageOrPresence & PresenceView & ToString {
         return StanzaBuilder.buildPresenceFrom(this, id)
     }
 
-    // TODO
-    // override public  func asBuilder(connection: XMPPConnection): PresenceBuilder {
-    //     return connection.getStanzaFactory().buildPresenceStanzaFrom(this)
-    // }
+    /**
+     * 使用指定的{@link StanzaFactory}构建{@link PresenceBuilder}
+     *
+     * @param stanzaFactory 来自于{@link XMPPConnection#getStanzaFactory()}
+     * @return Presence构造器
+     */
+    public override func asBuilder(stanzaFactory: StanzaFactory): PresenceBuilder {
+        return stanzaFactory.buildPresenceStanzaFrom(this)
+    }
 
     public override func toString(): String {
         let sb = StringBuilder()
