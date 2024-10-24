@@ -15,11 +15,7 @@ internal import std.time.{DateTime, DateTimeFormat, TimeParseException, TimeZone
 
 type CharSequence = ToString
 
-public interface OptionExt<T> {
-    operator func ()(): T
-}
-
-extend<T> Option<T> <: OptionExt<T> {
+extend<T> Option<T> {
     public operator func ()(): T {
         this.getOrThrow()
     }

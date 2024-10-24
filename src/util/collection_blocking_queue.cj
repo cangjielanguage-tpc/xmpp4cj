@@ -30,7 +30,7 @@ public class CollectionBlockingQueue<E> <: Collection<E> {
      */
     public override prop size: Int64 {
         get() {
-            synchronized(lock.writeMutex) {
+            synchronized(lock.readMutex) {
                 queue.size
             }
         }
@@ -42,7 +42,7 @@ public class CollectionBlockingQueue<E> <: Collection<E> {
      * @return 空返回true，不为空返回false。
      */
     public override func isEmpty(): Bool {
-        synchronized(lock.writeMutex) {
+        synchronized(lock.readMutex) {
             queue.size == 0
         }
     }

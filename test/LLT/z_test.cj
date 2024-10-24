@@ -11,6 +11,8 @@ internal import std.unittest.*
 internal import xmpp4cj.packet.*
 internal import xmpp4cj.jid.*
 internal import xmpp4cj.xml.*
+internal import xmpp4cj.sasl.*
+internal import xmpp4cj.connection.*
 internal import xmpp4cj.provider.*
 internal import xmpp4cj.util.*
 internal import xmpp4cj.compress.*

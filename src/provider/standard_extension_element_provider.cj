@@ -52,7 +52,7 @@ public class StandardExtensionElementProvider <: ExtensionElementProvider<Standa
             if (StringUtils.isNullOrEmpty(attributePrefix)) {
                 attributeKey = attributeName
             } else {
-                attributeKey = "${attributePrefix}${r':'.toString()}${attributeName}"
+                attributeKey = "${attributePrefix}:${attributeName}"
             }
             attributes.put(attributeKey, attributeValue)
         }

@@ -69,7 +69,7 @@ public class DelayQueue<T> where T <: Delayed & Comparable<T> & Object {
      * @return 头元素
      */
     public func peek(): Option<T> {
-        synchronized(lock.writeMutex) {
+        synchronized(lock.readMutex) {
             list.first
         }
     }

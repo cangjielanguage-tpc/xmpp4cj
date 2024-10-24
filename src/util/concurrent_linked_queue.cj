@@ -15,7 +15,7 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
      */
     public prop size: Int64 {
         get() {
-            synchronized(lock.writeMutex) {
+            synchronized(lock.readMutex) {
                 list.size
             }
         }
@@ -29,6 +29,12 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
     public func append(t: T): Unit {
         synchronized(lock.writeMutex) {
             list.append(t)
+        }
+    }
+
+    public func prepend(t: T): Unit {
+        synchronized(lock.writeMutex) {
+            list.prepend(t)
         }
     }
 
@@ -85,7 +91,7 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
      * @return true表示列表为空，false表示列表不为空。
      */
     public override func isEmpty(): Bool {
-        synchronized(lock.writeMutex) {
+        synchronized(lock.readMutex) {
             list.isEmpty()
         }
     }

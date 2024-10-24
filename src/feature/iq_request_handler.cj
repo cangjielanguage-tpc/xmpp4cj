@@ -5,7 +5,7 @@ package xmpp4cj.feature
 
 /**  
  * IQ 请求处理器负责处理传入的 IQ 请求。可以通过
- * {@link org.jivesoftware.smack.XMPPConnection#registerIQRequestHandler(IQRequestHandler)} 注册。
+ * {@link XMPPConnection#registerIQRequestHandler(IQRequestHandler)} 注册。
  *
  * @see AbstractIqRequestHandler
  */

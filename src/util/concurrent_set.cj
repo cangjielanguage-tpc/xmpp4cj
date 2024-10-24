@@ -16,7 +16,7 @@ public class ConcurrentSet<T> <: Collection<T> {
      */
     public prop size: Int64 {
         get() {
-            synchronized(lock.writeMutex) {
+            synchronized(lock.readMutex) {
                 list.size
             }
         }
@@ -28,7 +28,7 @@ public class ConcurrentSet<T> <: Collection<T> {
      * @return true表示为空，false表示不为空。
      */
     public override func isEmpty(): Bool {
-        synchronized(lock.writeMutex) {
+        synchronized(lock.readMutex) {
             list.isEmpty()
         }
     }

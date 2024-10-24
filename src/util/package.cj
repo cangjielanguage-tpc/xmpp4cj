@@ -113,3 +113,13 @@ public class AssertionError <: Exception {
 }
 
 public type CallbackHandler = (Any) -> Unit
+
+public interface OptionExt<T> {
+    operator func ()(): T
+}
+
+extend<T> Option<T> <: OptionExt<T> {
+    public operator func ()(): T {
+        this.getOrThrow()
+    }
+}

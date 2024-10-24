@@ -205,9 +205,9 @@ public class XmlSplitterTestUtil {
     static func getExpectedPartAndAssertType<P>(queue: LinkedList<SplittedPart>): P where P <: SplittedPart {
         let part: ?SplittedPart = queue.popFirst()
         assertNotNull(part)
-        assertTrue("The part ${part?.toString()} is not an instance of ${TypeInfo.of<P>()}", part() is P)
+        assertTrue("The part ${part?.toString()} is not an instance of ${TypeInfo.of<P>()}", part.getOrThrow() is P)
 
-        return (part() as P)()
+        return (part.getOrThrow() as P).getOrThrow()
     }
 
     public static func decl(declaration: String): Declaration {

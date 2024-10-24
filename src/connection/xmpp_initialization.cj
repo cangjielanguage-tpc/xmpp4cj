@@ -118,10 +118,6 @@ public class XmppInitialization {
         ProviderManager.addNonzaProvider(CompressedProvider.INSTANCE)
         ProviderManager.addNonzaProvider(FailureProvider.INSTANCE)
 
-        XmppConfiguration.addModule("Bind2ModuleDescriptor")
-        XmppConfiguration.addModule("CompressionModuleDescriptor")
-        XmppConfiguration.addModule("InstantStreamResumptionModuleDescriptor")
-
         XmppConfiguration.xmppInitialized = true
     }
 

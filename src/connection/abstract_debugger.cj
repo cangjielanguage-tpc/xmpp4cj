@@ -168,7 +168,7 @@ public abstract class AbstractDebugger <: XmppDebugger {
      * @param streamElement 传出的顶层流元素
      */
     public open override func onOutgoingStreamElement(streamElement: TopLevelStreamElement): Unit {
-        // Does nothing (yet).
+        // 什么都不做。
     }
 }
 

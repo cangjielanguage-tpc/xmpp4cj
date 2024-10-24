@@ -65,7 +65,7 @@ class Assert {
         if (message.isNone()) {
             throw Exception()
         } else {
-            throw Exception(message())
+            throw Exception(message.getOrThrow())
         }
     }
 }
