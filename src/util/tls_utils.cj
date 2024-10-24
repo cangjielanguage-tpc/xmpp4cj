@@ -66,7 +66,7 @@ public class TLSUtils {
     //     return builder
     // }
 
-    public static func setEnabledProtocolsAndCiphers(TlsSocket: TlsSocket, enabledProtocols: Array<String>,
+    public static func setEnabledProtocolsAndCiphers(tlsSocket: TlsSocket, enabledProtocols: Array<String>,
         enabledCiphers: Array<String>): Unit {
         // var tempenabledProtocols = enabledProtocols
         // var tempenabledCiphers = enabledCiphers

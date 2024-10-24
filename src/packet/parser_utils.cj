@@ -209,7 +209,7 @@ public class ParserUtils {
         match (booleanString) {
             case "true" | "1" => return true
             case "false" | "0" => return false
-            case _ => throw IllegalArgumentException((booleanString) + " is not a valid boolean string")
+            case _ => throw IllegalArgumentException("${booleanString} is not a valid boolean string")
         }
     }
 

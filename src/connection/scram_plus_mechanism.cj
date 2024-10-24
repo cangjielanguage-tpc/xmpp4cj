@@ -14,7 +14,7 @@ public abstract class ScramPlusMechanism <: ScramMechanism {
     }
 
     public open override func getName(): String {
-        return super.getName() + "-PLUS"
+        return "${super.getName()}-PLUS"
     }
 
     protected open override func getGs2CbindFlag(): String {

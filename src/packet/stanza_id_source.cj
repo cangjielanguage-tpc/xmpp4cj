@@ -119,7 +119,7 @@ public class StandardStanzaIdSource <: StanzaIdSource {
     /**
      * 前缀有助于确保ID在多个实例中是唯一的。
      */
-    private let prefix: String = StringUtils.randomString(5) + "-"
+    private let prefix: String = "${StringUtils.randomString(5)}-"
 
     /**
      * 跟踪当前增量，该增量将附加到论坛的前缀上一个唯一的ID。

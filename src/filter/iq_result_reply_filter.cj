@@ -38,7 +38,7 @@ public class IQResultReplyFilter <: IQReplyFilter {
     public override func toString(): String {
         let sb = StringBuilder()
         sb.append("IQResultReplyFilter")
-        sb.append(" (" + super.toString() + r')'.toString())
+        sb.append(" (${super.toString()}${r')'.toString()}")
         return sb.toString()
     }
 }

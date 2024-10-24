@@ -16,7 +16,7 @@ package xmpp4cj.packet
  *                        .setStatus("Online")
  *                        .setPriority(5)
  *                        .setMode(Presence.Mode.available)
- *                        .build();
+ *                        .build()
  * </pre>
  */
 public class PresenceBuilder <: MessageOrPresenceBuilder & PresenceView {

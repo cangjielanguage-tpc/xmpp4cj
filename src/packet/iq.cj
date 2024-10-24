@@ -273,16 +273,16 @@ public abstract class IQ <: Stanza & IqView {
      * {@code
      * // 构建器“xml”已经添加了子元素和“xmlns”属性
      * // 所以当前构建器状态是“<bar xmlns='example:bar'”
-     * xml.attribute("extraAttribute", "blaz");
-     * xml.rightAngleBracket();
-     * xml.element("extraElement", "elementText");
+     * xml.attribute("extraAttribute", "blaz")
+     * xml.rightAngleBracket()
+     * xml.element("extraElement", "elementText")
      * // 不要通过调用 xml.closeElement('bar') 关闭“bar”属性
      * }
      * </pre>
      * 如果你的 IQ 只包含属性而没有子元素，即它可以表示为空元素，那么你可以将其标记为这样。
      * <pre>
-     * xml.attribute("myAttribute", "myAttributeValue");
-     * xml.setEmptyElement();
+     * xml.attribute("myAttribute", "myAttributeValue")
+     * xml.setEmptyElement()
      * </pre>
      * 如果你的 IQ 不包含任何属性或子元素（除了 {@link ExtensionElement} 之外），考虑继承 {@link SimpleIQ} 代替。
      *

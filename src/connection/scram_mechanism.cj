@@ -59,8 +59,7 @@ public abstract class ScramMechanism <: SASLMechanism {
     }
 
     public open override func getName(): String {
-        let name: String = "SCRAM-" + scramHmac.getHmacName()
-        return name
+        return "SCRAM-${scramHmac.getHmacName()}"
     }
 
     public open override func checkIfSuccessfulOrThrow(): Unit {
@@ -198,7 +197,7 @@ public abstract class ScramMechanism <: SASLMechanism {
         // Check if we are using TLS and if a "-PLUS" variant of this mechanism is enabled. Assuming that the "-PLUS"
         // variants always have precedence before the non-"-PLUS" variants this means that the server did not announce
         // the "-PLUS" variant, as otherwise we would have tried it.
-        if (sslSession.isSome() && connectionConfiguration().isEnabledSaslMechanism(getName() + "-PLUS")) {
+        if (sslSession.isSome() && connectionConfiguration().isEnabledSaslMechanism("${getName()}-PLUS")) {
             // Announce that we support Channel Binding, i.e., the '-PLUS' flavor of this SASL mechanism, but that we
             // believe the server does not.
             return "y"
@@ -223,11 +222,11 @@ public abstract class ScramMechanism <: SASLMechanism {
         let res: Map<Byte, String> = HashMap(keyValuePairs.size)
         for (keyValuePair in keyValuePairs) {
             if (keyValuePair.size < 3) {
-                throw XmppSaslException("Invalid Key-Value pair: " + keyValuePair)
+                throw XmppSaslException("Invalid Key-Value pair: ${keyValuePair}")
             }
             let key = keyValuePair[0]
             if (keyValuePair[1] != b'=') {
-                throw XmppSaslException("Invalid Key-Value pair: " + keyValuePair)
+                throw XmppSaslException("Invalid Key-Value pair: ${keyValuePair}")
             }
             let value: String = keyValuePair[2..]
             res.put(key, value)
@@ -304,7 +303,7 @@ public abstract class ScramMechanism <: SASLMechanism {
         try {
             return scramHmac.hmac(key, str)
         } catch (e: CryptoException) {
-            throw XmppSaslException(getName() + " Exception", e)
+            throw XmppSaslException("${getName()} Exception", e)
         }
     }
 

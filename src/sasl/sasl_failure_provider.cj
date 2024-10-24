@@ -24,12 +24,12 @@ public class SaslFailureProvider <: NonzaProvider<SaslNonzaSASLFailure> {
      *
      * @param parser          用于解析的 XmlPullParser 实例
      * @param initialDepth    初始深度
-     * @param xmlEnvironment  XML 环境
+     * @param _  XML 环境
      * @return               返回一个 SASLFailure 对象
      * @throws XmlPullParserException  解析过程中可能发生的 XML 解析异常
      * @throws IOException             解析过程中可能发生的 IO 异常
      */
-    public override func parse(parser: XmlPullParser, initialDepth: Int, xmlEnvironment: ?XmlEnvironment): SaslNonzaSASLFailure {
+    public override func parse(parser: XmlPullParser, initialDepth: Int, _: ?XmlEnvironment): SaslNonzaSASLFailure {
         var condition: ?String = None
         var descriptiveTexts: ?Map<String, String> = None
 

@@ -311,8 +311,10 @@ class XmlReader {
         throw UnsupportedException()
     }
 
+    /* 当前不支持 仅作ignore */
     public func readDTD(): DocTypeDecl {
-        throw UnsupportedException()
+        let str = buf.readUntil(b'>')
+        DocTypeDecl("DOCTYPE", str)
     }
 
     public func readAttribute(): Attribute {
@@ -320,10 +322,10 @@ class XmlReader {
         buf.skip(1)
         let value = match (buf[0]) {
             case b'"' =>
-                buf.skip(1);
+                buf.skip(1)
                 buf.readUntil(b'"')
             case b'\'' =>
-                buf.skip(1);
+                buf.skip(1)
                 buf.readUntil(b'\'')
             case _ => throw XmlException("Failed to read Attribute ${qname.getFullName()}, `'` or `\"` was required.")
         }
@@ -345,10 +347,10 @@ class XmlReader {
         readByte(b'=')
         let uri = match (buf[0]) {
             case b'"' =>
-                buf.skip(1);
+                buf.skip(1)
                 buf.readUntil(b'"')
             case b'\'' =>
-                buf.skip(1);
+                buf.skip(1)
                 buf.readUntil(b'\'')
             case _ => throw XmlException("Failed to read namespace ${prefix}, `'` or `\"` was required.")
         }
@@ -399,10 +401,10 @@ class XmlReader {
 
         let value = match (buf[0]) {
             case b'"' =>
-                buf.skip(1);
+                buf.skip(1)
                 buf.readUntil(b'"')
             case b'\'' =>
-                buf.skip(1);
+                buf.skip(1)
                 buf.readUntil(b'\'')
             case _ => throw XmlException("Failed to read value of `${name}` from `${buf}`, `'` or `\"` was required.")
         }

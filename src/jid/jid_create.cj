@@ -72,7 +72,7 @@ public class JidCreate {
      */
     public static func froms(localpart: ?String, domainpart: String, resource: ?String, context: XmppContext): Jid { // Every JID must come with an domainpart.
         if (domainpart.isEmpty()) {
-            throw MissingDomainpart.froms(localpart, resource);
+            throw MissingDomainpart.froms(localpart, resource)
         }
         let jid: String = XmppStringUtils.completeJidFrom(localpart, domainpart, resource)
         return froms(localpart, domainpart, resource, jid, context)
