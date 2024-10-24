@@ -494,7 +494,7 @@ public open class XmppSaslException <: Xmpp4cjException {
      * @return 原始异常
      */
     public func getCause(): ?Exception {
-        return cause;
+        return cause
     }
 
     /**

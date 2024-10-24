@@ -92,7 +92,7 @@ public enum SASLError <: ToString {
             case "not_authorized" => not_authorized
             case "temporary_auth_failure" => temporary_auth_failure
             case v =>
-                SASLError_LOGGER.log(LogLevel.WARN, "Could not transform string '" + v + "' to SASLError");
+                SASLError_LOGGER.log(LogLevel.WARN, "Could not transform string '${v}' to SASLError")
                 None
         }
     }

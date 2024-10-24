@@ -10,7 +10,7 @@ public class ExceptionLoggingCallback <: ParsingExceptionCallback {
     private static let LOGGER = getGlobalLogger(("name", "ExceptionLoggingCallback"))
 
     public override func handleUnparsableStanza(unparsed: UnparseableStanza): Unit {
-        LOGGER.log(LogLevel.ERROR, "Xmpp message parsing exception. Content: \'" + (unparsed.getContent()) + "\'",
+        LOGGER.log(LogLevel.ERROR, "Xmpp message parsing exception. Content: \'${unparsed.getContent()}\'",
             ("Exception", unparsed.getParsingException()))
     }
 }

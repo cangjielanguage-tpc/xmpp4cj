@@ -10,8 +10,8 @@ package xmpp4cj.jid
  * </p>
  *
  * <pre>
- * let jid:Jid = JidCreate.froms("juliet@capulet.org/balcony");
- * let bareJid:EntityBareJid = JidCreate.entityBareFrom("romeo@montague.net");
+ * let jid:Jid = JidCreate.froms("juliet@capulet.org/balcony")
+ * let bareJid:EntityBareJid = JidCreate.entityBareFrom("romeo@montague.net")
  * </pre>
  * <p>
  * 这是所有 JID 类型的超接口，JID 由两个维度构建：裸（Bare）/ 全（Full）和 域（Domain）/ 实体（Entity）。

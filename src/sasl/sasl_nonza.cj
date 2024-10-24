@@ -386,10 +386,10 @@ public class SaslNonzaSASLFailure <: AbstractError & SaslNonza & ToString {
     /**  
      * 将 XmlEnvironment 转换为 XML 字符串。
      *
-     * @param xmlEnvironment XML 环境
+     * @param _ XML 环境
      * @return              返回表示该实例的 XML 字符串
      */
-    public override func toXML(enclosingNamespace: ?XmlEnvironment): XmlStringBuilder {
+    public override func toXML(_: ?XmlEnvironment): XmlStringBuilder {
         let xml = XmlStringBuilder()
         xml.halfOpenElement(ELEMENT)
         xml.xmlnsAttribute(NAMESPACE)

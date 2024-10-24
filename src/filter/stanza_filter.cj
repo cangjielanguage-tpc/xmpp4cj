@@ -16,11 +16,11 @@ package xmpp4cj.filter
  * // 使用匿名内部类定义一个返回所有具有 Stanza ID 为 &quot;RS145&quot; 的 Stanza 的过滤器。
  * StanzaFilter myFilter = new StanzaFilter() {
  *     public boolean accept(Stanza stanza) {
- *         return &quot;RS145&quot;.equals(stanza.getStanzaId());
+ *         return &quot;RS145&quot;.equals(stanza.getStanzaId())
  *     }
  * };
  * // 使用我们创建的过滤器创建一个新的 Stanza 收集器。
- * StanzaCollector myCollector = connection.createStanzaCollector(myFilter);
+ * StanzaCollector myCollector = connection.createStanzaCollector(myFilter)
  * </pre>
  * <p>
  * 作为经验法则：如果您有一个谓词方法，即一个以单个 Stanza 作为参数、无副作用（纯粹）并且仅返回布尔值

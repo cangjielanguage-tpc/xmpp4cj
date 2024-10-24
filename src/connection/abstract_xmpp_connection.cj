@@ -1412,7 +1412,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
                         listener.processStanza(packet)
                     } catch (e: NotConnectedException) {
                         LOGGER.warn("Got not connected exception, aborting", ("exception", e))
-                        break;
+                        break
                     } catch (e: Exception) {
                         LOGGER.error("Exception in packet listener", ("exception", e))
                     }

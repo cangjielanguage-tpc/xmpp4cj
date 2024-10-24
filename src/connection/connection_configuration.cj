@@ -572,7 +572,7 @@ public abstract class ConnectionConfigurationBuilder {
     public func setPort(port: Int64): ConnectionConfigurationBuilder {
         if (port < 0 || port > 65535) {
             throw IllegalArgumentException(
-                "Port must be a 16-bit unsigned integer (i.e. between 0-65535. Port was: " + port.toString())
+                "Port must be a 16-bit unsigned integer (i.e. between 0-65535. Port was: ${port.toString()}")
         }
         let portUint16 = UInt16(port)
         return setPort(portUint16)
@@ -750,8 +750,7 @@ public abstract class ConnectionConfigurationBuilder {
         let blacklistedMechanisms = SASLAuthentication.getBlacklistedSASLMechanisms()
         for (mechanism in saslMechanisms) {
             if (!SASLAuthentication.isSaslMechanismRegistered(mechanism)) {
-                throw IllegalArgumentException(
-                    "SASL ${mechanism}" + " is not available. Consider registering it with Xmpp")
+                throw IllegalArgumentException("SASL ${mechanism} is not available. Consider registering it with Xmpp")
             }
             if (blacklistedMechanisms.contains(mechanism)) {
                 throw IllegalArgumentException("SALS ${mechanism} is blacklisted.")
