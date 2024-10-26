@@ -4,19 +4,17 @@
 package xmpp4cj.connection
 
 /**
- * Represents the configuration of Xmpp. The configuration is used for:
+ * 表示Xmpp的配置。该配置用于：
  * <ul>
- *      <li> Initializing classes by loading them at start-up.
- *      <li> Getting the current Xmpp version.
- *      <li> Getting and setting global library behavior, such as the period of time
- *          to wait for replies to packets from the server. Note: setting these values
- *          via the API will override settings in the configuration file.
+ *      <li> 通过在启动时加载类来初始化类。
+ *      <li> 获取当前Xmpp版本。
+ *      <li>获取和设置全局库行为，如时间段等待服务器对数据包的回复。注意：设置这些值通过API将覆盖配置文件中的设置。
  * </ul>
  *
- * Configuration settings are stored in xmpp_config_xml.
+ * *配置设置存储在xmpp_config_xml中。
  */
-public class XmppConfiguration {
-    public static let XMPP_URL_STRING = "https://gitcode.com/Cangjie-TPC/xmpp4cj"
+public open class XmppConfiguration {
+    public static let XMPP_URL_STRING = "https://gitcode.com/Cangjie-TPC/xmpp4cj" // 将本项目的主页作为xmlns
 
     private static var defaultPacketReplyTimeout = Duration.millisecond * 5000
 
@@ -32,31 +30,26 @@ public class XmppConfiguration {
 
     public static var DEBUG = false
 
-    private static var DEFAULT_DEBUGGER_FACTORY: XmppDebuggerFactory = ReflectionDebuggerFactory.INSTANCE
+    private static var DEFAULT_DEBUGGER_FACTORY: XmppDebuggerFactory = LambdaDebuggerFactory.INSTANCE
 
     /**
-     * The default parsing exception callback is {@link ExceptionThrowingCallback} which will
-     * throw an exception and therefore disconnect the active connection.
+     * 默认的解析异常回调是{@link ExceptionThrowingCallback}，它将抛出异常，从而断开活动连接。
      */
     private static var defaultCallback: ParsingExceptionCallback = ExceptionThrowingCallbackWithHint()
 
     private static let defaultConcurrencyLevelLimit: Int = 0
 
     /**
-     * If enabled, causes {@link AbstractXMPPConnection} to create a thread for every asynchronous send operation. This
-     * is meant to work-around a shortcoming of Xmpp, where certain send operations are not asynchronous even if
-     * they should be. This is an expert setting, do not toggle if you do not understand the consequences or have been
-     * told to do so. Note that it is expected that this will not be needed in future Xmpp versions.
+     * 如果启用，将导致{@link AbstractXMPPConnection}为每个异步发送操作创建一个线程。
+     * 这是为了解决Xmpp的一个缺点，即某些发送操作即使应该异步，也不是异步的。
+     * 这是一个专家设置，如果您不了解后果或被告知要这样做，请不要切换。请注意，预计在未来的Xmpp版本中不会需要这样做。
      */
     public static var TRUELY_ASYNC_SENDS = false
 
-    static let mtx: Monitor = Monitor()
-
     /**
-     * Returns the number of milliseconds to wait for a response from
-     * the server. The default value is 5000 ms.
+     * 返回等待服务器响应的毫秒数。默认值为5000毫秒。
      *
-     * @return the milliseconds to wait for a response from the server
+     * @return 返回等待服务器响应的毫秒数
      */
     public static func getDefaultReplyTimeout(): Duration {
         if (defaultPacketReplyTimeout <= Duration.Zero) {
@@ -66,10 +59,9 @@ public class XmppConfiguration {
     }
 
     /**
-     * Sets the number of milliseconds to wait for a response from
-     * the server.
+     * 设置等待服务器响应的毫秒数。
      *
-     * @param timeout the milliseconds to wait for a response from the server
+     * @param timeout 超时等待服务器响应的毫秒数
      */
     public static func setDefaultReplyTimeout(timeout: Duration): Unit {
         if (timeout <= Duration.Zero) {
@@ -87,29 +79,27 @@ public class XmppConfiguration {
     }
 
     /**
-     * Gets the default max size of a stanza collector before it will delete
-     * the older packets.
+     * 获取节收集器在删除旧数据包之前的默认最大大小。
      *
-     * @return The number of packets to queue before deleting older packets.
+     * @return 删除旧数据包之前要排队的数据包数。
      */
     public static func getStanzaCollectorSize(): Int64 {
         return packetCollectorSize
     }
 
     /**
-     * Sets the default max size of a stanza collector before it will delete
-     * the older packets.
+     * 设置节收集器在删除旧数据包之前的默认最大大小。
      *
-     * @param collectorSize the number of packets to queue before deleting older packets.
+     * @param collectorSize 删除旧数据包之前要排队的数据包数量。
      */
     public static func setStanzaCollectorSize(collectorSize: Int64): Unit {
         packetCollectorSize = collectorSize
     }
 
     /**
-     * Add a SASL mechanism to the list to be used.
+     * 将SASL机制添加到要使用的列表中。
      *
-     * @param mech the SASL mechanism to be added
+     * @param mech 要添加的SASL机制
      */
     public static func addSaslMech(mech: String): Unit {
         if (!defaultMechs.contains(mech)) {
@@ -118,9 +108,9 @@ public class XmppConfiguration {
     }
 
     /**
-     * Add a Collection of SASL mechanisms to the list to be used.
+     * 将SASL机制的集合添加到要使用的列表中。
      *
-     * @param mechs the Collection of SASL mechanisms to be added
+     * @param mechs 要添加的SASL机制集合
      */
     public static func addSaslMechs(mechs: Collection<String>): Unit {
         for (mech in mechs) {
@@ -129,18 +119,18 @@ public class XmppConfiguration {
     }
 
     /**
-     * Remove a SASL mechanism from the list to be used.
+     * 从要使用的列表中删除SASL机制。
      *
-     * @param mech the SASL mechanism to be removed
+     * @param mech 要删除的SASL机制
      */
     public static func removeSaslMech(mech: String): Unit {
         defaultMechs.remove(mech)
     }
 
     /**
-     * Remove a Collection of SASL mechanisms to the list to be used.
+     * 将SASL机制集合删除到要使用的列表中。
      *
-     * @param mechs the Collection of SASL mechanisms to be removed
+     * @param mechs 要删除的SASL机制集合
      */
     public static func removeSaslMechs(mechs: Collection<String>): Unit {
         for (mech in mechs) {
@@ -149,20 +139,18 @@ public class XmppConfiguration {
     }
 
     /**
-     * Returns the list of SASL mechanisms to be used. If a SASL mechanism is
-     * listed here it does not guarantee it will be used. The server may not
-     * support it, or it may not be implemented.
+     * 返回要使用的SASL机制列表。如果此处列出了SASL机制，则不能保证它会被使用。服务器可能不支持它，或者它可能无法实现。
      *
-     * @return the list of SASL mechanisms to be used.
+     * @return 要使用的SASL机制列表。
      */
     public static func getSaslMechs(): ArrayList<String> {
         return defaultMechs
     }
 
     /**
-     * Set the default parsing exception callback for all newly created connections.
+     * 为所有新创建的连接设置默认的解析异常回调。
      *
-     * @param callback TODO javadoc me please
+     * @param callback 回调接口
      * @see ParsingExceptionCallback
      */
     public static func setDefaultParsingExceptionCallback(callback: ParsingExceptionCallback): Unit {
@@ -170,9 +158,9 @@ public class XmppConfiguration {
     }
 
     /**
-     * Returns the default parsing exception callback.
+     * 返回默认的解析异常回调。
      *
-     * @return the default parsing exception callback
+     * @return 默认解析异常回调
      * @see ParsingExceptionCallback
      */
     public static func getDefaultParsingExceptionCallback(): ParsingExceptionCallback {
@@ -184,9 +172,9 @@ public class XmppConfiguration {
     }
 
     /**
-     * Get compression handlers.
+     * 获取压缩处理程序。
      *
-     * @return a list of compression handlers.
+     * @return 压缩处理程序列表。
      */
     public static func getCompressionHandlers(): ArrayList<XMPPInputOutputStream> {
         let res = ArrayList<XMPPInputOutputStream>(compressionHandlers.size)
@@ -199,9 +187,9 @@ public class XmppConfiguration {
     }
 
     /**
-     * Convenience method for {@link #addDisabledXmppClass(String)}.
+     * 方便的方法{@link #addDisabledXmppClass(String)}.
      *
-     * @param clz the Xmpp class to disable
+     * @param clz 要禁用的Xmpp类
      */
     public static func addDisabledXmppClass(clz: ClassId): Unit {
         disabledXmppClasses.put(clz)
@@ -234,9 +222,9 @@ public class XmppConfiguration {
     }
 
     /**
-     * Check if Xmpp was successfully initialized.
+     * 检查Xmpp是否已成功初始化。
      *
-     * @return true if xmpp was initialized, false otherwise
+     * @return 如果xmpp已初始化，则为true，否则为false
      */
     public static func isXmppInitialized(): Bool {
         return xmppInitialized
@@ -257,27 +245,23 @@ public class XmppConfiguration {
     public static func getDefaultConcurrencyLevelLimit(): Int {
         return defaultConcurrencyLevelLimit
     }
-
-    private static let KNOWN_MODULES: Set<ClassId> = HashSet<ClassId>()
-
-    public static func addModule(moduleDescriptor: ClassId): Bool {
-        synchronized(mtx) {
-            return KNOWN_MODULES.put(moduleDescriptor)
-        }
-    }
-
-    // public static func addAllKnownModulesTo(builder: ModularXmppClientToServerConnectionConfigurationBuilder): Unit {
-    //         synchronized (getMonitorByObject((KNOWN_MODULES as Object))) {
-    //             for (moduleDescriptor in KNOWN_MODULES) {
-    //                 builder.addModule(moduleDescriptor)
-    //             }
-    //         }
-    // }
 }
 
+/**
+ * 表示对于未知的 IQ 请求的回复模式。
+ */
 public enum XmppConfigurationUnknownIqRequestReplyMode <: ToString & Equatable<XmppConfigurationUnknownIqRequestReplyMode> {
+    /**  
+     * 不做回复。
+     */
     | doNotReply
+    /**  
+     * 回复功能未实现。
+     */
     | replyFeatureNotImplemented
+    /**  
+     * 回复服务不可用。
+     */
     | replyServiceUnavailable
 
     public override func toString(): String {

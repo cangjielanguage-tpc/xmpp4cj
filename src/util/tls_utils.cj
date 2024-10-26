@@ -136,7 +136,7 @@ public class TLSUtils {
     //     try {
     //         return FileInputStream(DEFAULT_TRUSTSTORE_PATH)
     //     } catch (e: FileNotFoundException) {
-    //         LOGGER.log(Level.WARNING, "Could not open default truststore at " + stringValueOf(DEFAULT_TRUSTSTORE_PATH),
+    //         LOGGER.log(LogLevel.WARN, "Could not open default truststore at " + stringValueOf(DEFAULT_TRUSTSTORE_PATH),
     //             e)
     //         return None
     //     }
@@ -187,7 +187,7 @@ public class TLSUtils {
         // try {
         //     defaultTrustStoreType = getDefaultTruststoreType()
         // } catch (e: IOException) {
-        //     LOGGER.log(Level.WARNING, "Could not set keystore type to jks if required", e)
+        //     LOGGER.log(LogLevel.WARN, "Could not set keystore type to jks if required", e)
         //     return
         // }
         // if (defaultTrustStoreType == TLSUtils_DefaultTrustStoreType.jks) {

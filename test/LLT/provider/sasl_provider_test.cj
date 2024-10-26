@@ -1,10 +1,9 @@
 // DEPENDENCE: ../z_test.cj
 // DEPENDENCE: ../xml_test_utils.cj
 // DEPENDENCE: ../smack_test_util.cj
-/// EXEC: cjc %import-path %L %l %f xml_test_utils.cj smack_test_util.cj z_test.cj --test --error-count-limit all
-/// EXEC: ./main 
+// EXEC: cjc %import-path %L %l %f xml_test_utils.cj smack_test_util.cj z_test.cj --test --error-count-limit all
+// EXEC: ./main 
 //--filter=*.*
-/* TODO */
 
 @Test
 public class SaslProviderTest {

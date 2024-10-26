@@ -41,7 +41,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     protected static let XMPP_REACTOR: XmppReactor = unsafe { zeroValue<XmppReactor>() } // TODO XmppReactor.getInstance()
 
     /**
-     * Counter to uniquely identify connections that are created.
+     * 计数器，用于唯一标识创建的连接。
      */
     private static let connectionCounter = AtomicInt64(0)
 
@@ -52,58 +52,61 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     private let lock = Monitor()
 
     /**
-     * A collection of ConnectionListeners which listen for connection closing and reconnection events.
+     * ConnectionListeners的集合，用于监听连接关闭和重新连接事件。
      */
     protected let connectionListeners: ConcurrentSet<ConnectionListener> = ConcurrentSet<ConnectionListener>()
 
     /**
-     * A collection of StanzaCollectors which collects packets for a specified filter
-     * and perform blocking and polling operations on the result queue.
+     * StanzaCollectors的集合，用于收集指定筛选器的数据包，并对结果队列执行阻塞和轮询操作。
      * <p>
-     * We use a ConcurrentLinkedQueue here, because its Iterator is weakly
-     * consistent and we want {@link #invokeStanzaCollectorsAndNotifyRecvListeners(Stanza)} for-each
-     * loop to be lock free. As drawback, removing a StanzaCollector is O(n).
-     * The alternative would be a synchronized HashSet, but this would mean a
-     * synchronized block around every usage of <code>collectors</code>.
+     * 我们在这里使用ConcurrentLinkedQueue，因为它的迭代器是弱一致的，我们希望每个循环的{@link#invokeStanzaCollectorsAndNotifyRecvListeners（Stanza）}都是无锁的。
+     * 作为缺点，移除StanzaCollector的结果为O（n）。
+     * 另一种选择是同步哈希集，但这意味着每次使用<code>收集器</code>时都会有一个同步块。
      * </p>
      */
     private let collectors: ConcurrentLinkedQueue<StanzaCollector> = ConcurrentLinkedQueue()
 
     private let recvListeners: Map<StanzaListener, AbstractXMPPConnectionListenerWrapper> = LinkedHashMap()
+
     private let recvListenersLock = Monitor()
 
     /**
-     * List of PacketListeners that will be notified synchronously when a new stanza was received.
+     * 收到新节时将同步通知的PacketListeners列表。
      */
     let syncRecvListeners: Map<StanzaListener, AbstractXMPPConnectionListenerWrapper> = LinkedHashMap()
+
     private let syncRecvListenersLock = Monitor()
 
     /**
-     * List of PacketListeners that will be notified asynchronously when a new stanza was received.
+     * 收到新节时将异步通知的PacketListeners列表。
      */
     private let asyncRecvListeners: Map<StanzaListener, AbstractXMPPConnectionListenerWrapper> = LinkedHashMap()
+
     private let asyncRecvListenersLock = Monitor()
 
     /**
-     * List of PacketListeners that will be notified when a new stanza was sent.
+     * 发送新节时将收到通知的PacketListeners列表。
      */
     private let sendListeners: Map<StanzaListener, AbstractXMPPConnectionListenerWrapper> = HashMap()
+
     private let sendListenersLock = Monitor()
 
     /**
-     * List of PacketListeners that will be notified when a new stanza is about to be
-     * sent to the server. These interceptors may modify the stanza before it is being
-     * actually sent to the server.
+     * 当新节即将发送到服务器时将收到通知的PacketListeners列表。
+     * 这些拦截器可能会在节实际发送到服务器之前对其进行修改。
      */
     private let interceptors: Map<StanzaListener, AbstractXMPPConnectionInterceptorWrapper> = HashMap()
+
     private let interceptorsLock = Monitor()
 
     private let messageInterceptors: Map<HashableConsumer<MessageBuilder>, GenericInterceptorWrapper<MessageBuilder,
         Message>> = HashMap()
+
     private let messageInterceptorsLock = Monitor()
 
     private let presenceInterceptors: Map<HashableConsumer<PresenceBuilder>, GenericInterceptorWrapper<PresenceBuilder,
         Presence>> = HashMap()
+
     private let presenceInterceptorsLock = Monitor()
 
     private var incomingStreamXmlEnvironment: ?XmlEnvironment = None
@@ -117,11 +120,9 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     protected let streamFeatures: Map<QName, FullyQualifiedElement> = HashMap()
 
     /**
-     * The full JID of the authenticated user, as returned by the resource binding response of the server.
+     * 服务器的资源绑定响应返回的经过身份验证的用户的完整JID。
      * <p>
-     * It is important that we don't infer the user from the login() arguments and the configurations service name, as,
-     * for example, when SASL External is used, the username is not given to login but taken from the 'external'
-     * certificate.
+     * 重要的是，我们不要从login（）参数和配置服务名称推断用户，例如，当使用SASL External时，用户名不是用于登录的，而是从“外部”证书中获取的。
      * </p>
      */
     protected var user: ?EntityFullJid = None
@@ -129,73 +130,69 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     protected var connected = false
 
     /**
-     * The stream ID, see RFC 6120 § 4.7.3
+     * 流ID，见RFC 6120§4.7.3
      */
     protected var streamId: ?String = None
 
     /**
-     * The timeout to wait for a reply in milliseconds.
+     * 等待答复的超时时间（毫秒）。
      */
     private var replyTimeout = XmppConfiguration.getDefaultReplyTimeout()
 
     /**
-     * The XmppDebugger allows to log and debug XML traffic.
+     * XmppDebugger允许记录和调试XML流量。
      */
     protected var debugger: ?XmppDebugger = None
 
     /**
-     * The Reader which is used for the debugger.
+     * 用于调试器的读取器。
      */
     protected var reader: ?ObservableReader = None
 
     /**
-     * The Writer which is used for the debugger.
+     * 用于调试器的Writer。
      */
     protected var writer: ?ObservableWriter = None
 
     protected var currentXmpp4cjException: ?Xmpp4cjException = None
+
     protected var currentXmppException: ?XMPPException = None
 
     protected var tlsHandled: Bool = false
 
     /**
-     * Set to <code>true</code> if the last features stanza from the server has been parsed. A XMPP connection
-     * handshake can invoke multiple features stanzas, e.g. when TLS is activated a second feature
-     * stanza is send by the server. This is set to true once the last feature stanza has been
-     * parsed.
+     * 如果服务器的最后一个特征节已被解析，则设置为<code>true</code>。
+     * XMPP连接抖动可以调用多个功能节，例如，当TLS被激活时，服务器会发送第二个功能节。解析完最后一个特征节后，此设置为true。
      */
     protected var lastFeaturesReceived: Bool = false
 
     /**
-     * A synchronization point which is successful if this connection has received the closing
-     * stream element from the remote end-point, i.e. the server.
+     * 如果此连接已从远程端点（即服务器）接收到关闭流元素，则同步点成功。
      */
     protected var saslFeatureReceived: Bool = false
 
     /**
-     * A synchronization point which is successful if this connection has received the closing
-     * stream element from the remote end-point, i.e. the server.
+     * 如果此连接已从远程端点（即服务器）接收到关闭流元素，则同步点成功。
      */
     protected var closingStreamReceived: Bool = false
 
     /**
-     * The SASLAuthentication manager that is responsible for authenticating with the server.
+     * 负责与服务器进行身份验证的SASLA身份验证管理器。
      */
     protected var saslAuthentication: ?SASLAuthentication = None
 
     /**
-     * A number to uniquely identify connections that are created. This is distinct from the
-     * connection ID, which is a value sent by the server once a connection is made.
+     * 唯一标识所创建连接的数字。这与连接ID不同，连接ID是服务器在建立连接后发送的值。
      */
     protected let connectionCounterValue = connectionCounter.fetchAdd(1)
 
     /**
-     * Holds the initial configuration used while creating the connection.
+     * 保存创建连接时使用的初始配置。
      */
     protected let config: ConnectionConfiguration
 
     /**
-     * Defines how the from attribute of outgoing stanzas should be handled.
+     * 定义如何处理传出节的from属性。
      */
     private var fromMode: XMPPConnectionFromMode = XMPPConnectionFromMode.OMITTED
 
@@ -204,8 +201,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     private var parsingExceptionCallback = XmppConfiguration.getDefaultParsingExceptionCallback()
 
     /**
-     * A cached thread pool executor service with custom thread factory to set meaningful names on the threads and set
-     * them 'daemon'.
+     * 具有自定义线程工厂的缓存线程池执行器服务，用于在线程上设置有意义的名称并将其设置为“守护进程”。
      */
     private static let CACHED_EXECUTOR_SERVICE = {
         runnable: () -> Unit => spawn {
@@ -222,29 +218,29 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     protected static let ASYNC_BUT_ORDERED = AsyncButOrdered<AbstractXMPPConnection>()
 
     /**
-     * The used host to establish the connection to
+     * 用于建立连接的主机
      */
     protected var host: String = ""
 
     /**
-     * The used port to establish the connection to
+     * 用于建立连接的端口
      */
     protected var port: ?UInt16 = None
 
     /**
-     * Flag that indicates if the user is currently authenticated with the server.
+     * 指示用户当前是否已通过服务器身份验证的标志。
      */
     protected var authenticated = false
 
     protected var authenticatedConnectionInitiallyEstablishedTimestamp: Duration = Duration.Zero
 
     /**
-     * Flag that indicates if the user was authenticated with the server when the connection
-     * to the server was closed (abruptly or not).
+     * 当与服务器的连接关闭时（突然或不突然），指示用户是否已通过服务器身份验证的标志。
      */
     protected var wasAuthenticated = false
 
     private let setIqRequestHandler: ConcurrentHashMap<QName, IQRequestHandler> = ConcurrentHashMap()
+
     private let getIqRequestHandler: ConcurrentHashMap<QName, IQRequestHandler> = ConcurrentHashMap()
 
     private let stanzaFactory: StanzaFactory
@@ -255,14 +251,16 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
      * @param configuration The configuration which is used to establish the connection.
      */
     protected init(configuration: ConnectionConfiguration) {
-        // 属性加载顺序有变动
-
         config = configuration
 
         let stanzaIdSource = configuration.constructStanzaIdSource()
         stanzaFactory = StanzaFactory(stanzaIdSource)
     }
-    /*init后操作 init后必须调用*/
+    /* 
+     * open class 无法在构造函数中使用 this
+     * 部分属性依赖this构建 init后必须调用
+     * 影响: 属性加载顺序有变动
+     */
     protected open func postInit(): Unit {
         let auth = SASLAuthentication(this, config)
         saslAuthentication = auth
@@ -302,9 +300,9 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     /**
-     * Get the connection configuration used by this connection.
+     * 获取此连接使用的连接配置。
      *
-     * @return the connection configuration.
+     * @return 连接配置。
      */
     public open func getConfiguration(): ConnectionConfiguration {
         return config
@@ -363,17 +361,16 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     /**
-     * Establishes a connection to the XMPP server. It basically
-     * creates and maintains a connection to the server.
+     * 建立与XMPP服务器的连接。它基本上创建并维护与服务器的连接。
      * <p>
-     * Listeners will be preserved from a previous connection.
+     * 将保留以前连接的侦听器。
      * </p>
      *
-     * @throws XMPPException if an error occurs on the XMPP protocol level.
-     * @throws Xmpp4cjException if an error occurs somewhere else besides XMPP protocol level.
-     * @throws IOException if an I/O error occurred.
-     * @return a reference to this object, to chain <code>connect()</code> with <code>login()</code>.
-     * @throws InterruptedException if the calling thread was interrupted.
+     * @throws XMPPException 如果XMPP协议级别发生错误。
+     * @throws Xmpp4cjException 如果在XMPP协议级别之外的其他地方发生错误。
+     * @throws IOException 如果发生I/O错误
+     * @throws InterruptedException 如果调用线程被中断。
+     * @return 引用此对象，将<code>connect（）</code>与<code>login（）</code>链接起来。
      */
     public func connect(): AbstractXMPPConnection {
         synchronized(this.lock) {
@@ -735,7 +732,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
      * @throws NotConnectedException if the XMPP connection is not connected.
      * @throws NoResponseException if there was no response from the remote entity.
      * @throws XmppWrappedException in case of an exception.
-     * @see SASLAuthentication#authenticate(String, String, EntityBareJid, TlsSessionContext )
+     * @see SASLAuthentication#authenticate(String, String, EntityBareJid, TlsSession )
      */
     public func authenticate(username: String, password: String, authzid: ?EntityBareJid, sslSession: ?TlsSession): SASLMechanism {
         let saslMechanism = saslAuthentication().authenticate(username, password, authzid, sslSession)
@@ -1881,6 +1878,22 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
 
     public static func getClassId(): ClassId {
         "AbstractXmppConnection"
+    }
+    public open operator override func ==(that: XMPPConnection): Bool {
+        match (that) {
+            case v: AbstractXMPPConnection => refEq(this, v)
+            case _ => false
+        }
+    }
+    private var cachedHash: ?Int = None
+    public open override func hashCode(): Int {
+        if (let Some(cachedHash) <- cachedHash) {
+            cachedHash
+        } else {
+            let v = RandomUtil.nextSecureRandomInt()
+            cachedHash = v
+            v
+        }
     }
 }
 

@@ -111,7 +111,7 @@ public class JidCreateTest {
     public func jidResourcepartWithAtSignTest(): Unit {
         let jid = JidCreate.froms("a.example.com/b@example.net")
         Assert.assertEquals(Domainpart.froms("a.example.com"), jid.getDomain())
-        Assert.assertEquals(Resourcepart.froms("b@example.net"), jid.getResourceOrNull()())
+        Assert.assertEquals(Resourcepart.froms("b@example.net"), jid.getResourceOrNull().getOrThrow())
     }
 
     @TestCase

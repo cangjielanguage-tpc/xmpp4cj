@@ -4,9 +4,7 @@
 package xmpp4cj.connection
 
 /**
- * SCRAM-X-PLUS implementation. Due limitations of the Java API, this mechanism only supports the 'tls-server-end-point'
- * channel binding type. But on the other hand, the other relevant channel binding type 'tls-unique' has some flaws (see
- * 3SHAKE, RFC 7627).
+ * SCRAM-X-PLUS实施。由于API的限制，此机制仅支持“tls-server-end-point”通道绑定类型。但另一方面，另一种相关的通道绑定类型“tls-unique”存在一些缺陷（参见3SHAKE，RFC 7627）。
  */
 public abstract class ScramPlusMechanism <: ScramMechanism {
     protected init(scramHmac: ScramHmac) {

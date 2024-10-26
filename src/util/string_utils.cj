@@ -557,7 +557,7 @@ public class StringUtils {
      * @param heading 头部文本。
      * @return Appendable对象。
      */
-    public static func appendHeading(appendable: Appendable, heading: String): Appendable {
+    public static func appendHeading(appendable: StringBuilder, heading: String): StringBuilder {
         return appendHeading(appendable, heading, r'-')
     }
 
@@ -569,12 +569,14 @@ public class StringUtils {
      * @param underlineChar Char文本。
      * @return Appendable对象。
      */
-    public static func appendHeading(appendable: Appendable, heading: String, underlineChar: Rune): Appendable {
-        appendable.append(heading).append(r'\n')
-        for (_ in heading.toRuneArray()) {
+    public static func appendHeading(appendable: StringBuilder, heading: String, underlineChar: Rune): StringBuilder {
+        appendable.append(heading)
+        appendable.append(r'\n')
+        for (_ in heading) {
             appendable.append(underlineChar)
         }
-        return appendable.append(r'\n')
+        appendable.append(r'\n')
+        return appendable
     }
 
     /**

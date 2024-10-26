@@ -3,35 +3,38 @@
  */
 package xmpp4cj.connection
 
+/**  
+ * XMPPConnection注册表
+ */
 public class XMPPConnectionRegistry {
-    /**
-     * A set of listeners which will be invoked if a new connection is created.
+    /**  
+     * 一组监听器，当新连接被创建时将被调用。
      */
     private static let connectionEstablishedListeners: HashSet<ConnectionCreationListener> = HashSet()
 
-    /**
-     * Adds a new listener that will be notified when new Connections are created. Note
-     * that newly created connections will not be actually connected to the server.
+    /**  
+     * 添加一个新的监听器，当新连接被创建时，将通知该监听器。
+     * 注意：新创建的连接尚未实际连接到服务器。
      *
-     * @param connectionCreationListener a listener interested on new connections.
+     * @param connectionCreationListener 对新连接感兴趣的监听器。
      */
     public static func addConnectionCreationListener(connectionCreationListener: ConnectionCreationListener): Unit {
         connectionEstablishedListeners.put(connectionCreationListener)
     }
 
-    /**
-     * Removes a listener that was interested in connection creation events.
+    /**  
+     * 移除一个曾对连接创建事件感兴趣的监听器。
      *
-     * @param connectionCreationListener a listener interested on new connections.
+     * @param connectionCreationListener 对新连接感兴趣的监听器。
      */
     public static func removeConnectionCreationListener(connectionCreationListener: ConnectionCreationListener): Unit {
         connectionEstablishedListeners.remove(connectionCreationListener)
     }
 
-    /**
-     * Get the collection of listeners that are interested in connection creation events.
+    /**  
+     * 获取对连接创建事件感兴趣的监听器集合。
      *
-     * @return a collection of listeners interested on new connections.
+     * @return 一个对新连接感兴趣的监听器的不可修改集合。
      */
     protected static func getConnectionCreationListeners(): Collection<ConnectionCreationListener> {
         return connectionEstablishedListeners
