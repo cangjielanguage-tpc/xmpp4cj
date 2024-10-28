@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.feature
 
@@ -49,6 +49,10 @@ public class XmppTlsContext {
     ): TlsSocket {
         tcpSocket.connect(timeout: connectTimeout)
         TlsSocket.client(tcpSocket, clientConfig: tlsCfg, session: session)
+    }
+
+    public func createSSLEngine(peerHost: String, peerPort: UInt16): SSLEngine {
+        throw Exception("TODO")
     }
 }
 

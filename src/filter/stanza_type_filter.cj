@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
@@ -12,21 +12,21 @@ package xmpp4cj.filter
  *      <li><code>Presence.class</code></li>
  * </ul>
  */
-public class StanzaTypeFilter <: StanzaFilter {
+public class StanzaTypeFilter<S> <: StanzaFilter {
     /** 
      * 用于过滤 Presence 类型的过滤器
      */
-    public static let PRESENCE = StanzaTypeFilter("Presence")
+    public static let PRESENCE = StanzaTypeFilter<Presence>("Presence")
 
     /** 
      * 用于过滤 Message 类型的过滤器
      */
-    public static let MESSAGE = StanzaTypeFilter("Message")
+    public static let MESSAGE = StanzaTypeFilter<Message>("Message")
 
     /**
      * 用于过滤 IQ 类型的过滤器
      */
-    public static let IQ = StanzaTypeFilter("IQ")
+    public static let IQ = StanzaTypeFilter<IQ>("IQ")
 
     /**
      * 要过滤的 Stanza 类型
@@ -37,7 +37,7 @@ public class StanzaTypeFilter <: StanzaFilter {
      * 创建一个新的 Stanza 类型过滤器，该过滤器将过滤与 <code>packetType</code>
      * 相同类型的数据包。
      *
-     * @param packetType 要过滤的数据包的类类型。
+     * @param packetType 要过滤的数据包的类类型。必须和泛型类型一致
      */
     public init(packetType: ClassId) {
         this.packetType = packetType
@@ -49,10 +49,8 @@ public class StanzaTypeFilter <: StanzaFilter {
      * @param packet 要检查的数据包
      * @return 如果数据包是指定类型，则返回 true；否则返回 false。
      */
-    public override func accept(_: Stanza): Bool {
-        // TODO
-        return packetType == "Stanza"
-        // return packetType.isInstance(packet)
+    public override func accept(packet: Stanza): Bool {
+        return packet is S
     }
 
     /**  

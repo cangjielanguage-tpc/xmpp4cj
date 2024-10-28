@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
@@ -105,7 +105,7 @@ public class XmppReactor {
      * @throws ClosedChannelException 如果通道已关闭
      */
     public func registerWithSelector(channel: SelectableChannel, ops: Int, callback: XmppReactorChannelSelectedCallback): SelectionKey {
-        let selectionKeyAttachment = XmppReactorSelectionKeyAttachment(callback)
+        let selectionKeyAttachment = SelectionKeyAttachment(callback)
         registrationLock.lock()
         try {
             selector.wakeup()
@@ -162,7 +162,7 @@ public class XmppReactor {
     static func handleSelectedKeys(selectedKeys: Collection<SelectionKey>): Unit {
         for (selectionKey in selectedKeys) {
             let channel = selectionKey.channel()
-            let selectionKeyAttachment = selectionKey.attachment() as XmppReactorSelectionKeyAttachment
+            let selectionKeyAttachment = selectionKey.attachment() as SelectionKeyAttachment
             let channelSelectedCallback = selectionKeyAttachment?.channelSelectedCallback
             channelSelectedCallback?(channel, selectionKey)
         }
@@ -333,7 +333,7 @@ class ReactorThread {
             // timespan setRacing() is set.
             let selectedKeySet = this_0.selector.selectedKeys()
             for (selectionKey in selectedKeySet) {
-                let selectionKeyAttachment = selectionKey.attachment() as XmppReactorSelectionKeyAttachment
+                let selectionKeyAttachment = selectionKey.attachment() as SelectionKeyAttachment
                 selectionKeyAttachment?.setRacing()
             }
             for (selectionKey in selectedKeySet) {
@@ -425,7 +425,7 @@ public type XmppReactorChannelSelectedCallback = (SelectableChannel, SelectionKe
 /**  
  * 选择键附加信息，用于处理通道选择的回调和线程竞争状态。
  */
-public class XmppReactorSelectionKeyAttachment {
+public class SelectionKeyAttachment {
     /**  
      * 通道选择回调接口。
      */
@@ -475,6 +475,11 @@ public class XmppReactorSelectionKeyAttachment {
  * 一个令牌，表示将{@link SelectableChannel}注册到{@link Selector}。
  */
 public class SelectionKey <: ToString & Equatable<SelectionKey> {
+    public static let OP_READ: Int = 1 << 0
+    public static let OP_WRITE: Int = 1 << 2
+    public static let OP_CONNECT: Int = 1 << 3
+    public static let OP_ACCEPT: Int = 1 << 4
+
     public override func toString(): String {
         throw Exception("TODO")
     }
@@ -512,12 +517,19 @@ public class SelectionKey <: ToString & Equatable<SelectionKey> {
     public func attachment(): Any {
         throw Exception("TODO")
     }
+
+    /**  
+     * 中断
+     */
+    public func cancel(): Unit {
+        throw Exception("TODO")
+    }
 }
 
 /**  
  * 可以通过{@link Selector}进行多路复用的通道。
  */
-public class SelectableChannel {
+public open class SelectableChannel {
     /**  
      * 使用给定的选择器注册此通道，返回一个选择钥匙。
      *
@@ -526,7 +538,28 @@ public class SelectableChannel {
      * @param selectionKeyAttachment 生成密钥的附件；可以是<tt>None</tt>
      * @return 代表此频道注册的密钥给定的选择器
      */
-    func register(selector: Selector, ops: Int, selectionKeyAttachment: Any): SelectionKey {
+    public func register(selector: Selector, ops: Int, selectionKeyAttachment: Any): SelectionKey {
+        throw Exception("TODO")
+    }
+    public func write(buf: Array<ByteArrayStream>): Int64 {
+        throw Exception("TODO")
+    }
+    public func read(buf: Array<ByteArrayStream>): Int64 {
+        throw Exception("TODO")
+    }
+    public func close(): Unit {
+        throw Exception("TODO")
+    }
+}
+
+public class SocketChannel <: SelectableChannel {
+    public func connect(addr: IPSocketAddress): Bool {
+        throw Exception("TODO")
+    }
+    public func finishConnect(): Bool {
+        throw Exception("TODO")
+    }
+    public func socket(): TcpSocket {
         throw Exception("TODO")
     }
 }
@@ -569,3 +602,5 @@ public class Selector {
         throw Exception("TODO")
     }
 }
+
+public class ClosedChannelException <: Exception {}

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
@@ -1261,7 +1261,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
      * @param stanza the stanza to process.
      * @throws InterruptedException if the calling thread was interrupted.
      */
-    protected func processStanza(stanza: Stanza): Unit {
+    protected open func processStanza(stanza: Stanza): Unit {
         // assert (stanza.isSome())
         maybeNotifyDebuggerAboutIncoming(stanza)
         lastStanzaReceived = DateTime.now().toUnixTimeStamp()
@@ -1466,7 +1466,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         }
     }
 
-    func callConnectionClosedListener(): Unit {
+    public func callConnectionClosedListener(): Unit {
         for (listener in connectionListeners) {
             try {
                 listener.connectionClosed()

@@ -21,7 +21,8 @@ public func test_Compressed1(): Unit {
 @Test
 public func test_CompressedProvider1(): Unit {
     let compressedProvider: CompressedProvider = CompressedProvider.INSTANCE
-    let compressed: Compressed = compressedProvider.parse(StaxXmlPullParser(ByteArrayStream()), 0, None)
+    let staxXmlPullParserFactory:StaxXmlPullParserFactory = StaxXmlPullParserFactory()
+    let compressed: Compressed = compressedProvider.parse(staxXmlPullParserFactory.newXmlPullParser(ByteArrayStream()), 0, None)
     @Assert(compressed.getElementName(), "compressed")
     @Assert(compressed.getNamespace(), "http://jabber.org/protocol/compress")
     @Assert(compressed.toXML(None).toString(), "<compressed xmlns='http://jabber.org/protocol/compress'/>")
@@ -42,7 +43,8 @@ public func test_FailureCompressFailureError1(): Unit {
 
 @Test
 public func test_parseCompressionFeature1(): Unit {
-    let e0: Exception = @AssertThrows[Exception](parseCompressionFeature(StaxXmlPullParser(ByteArrayStream())))
+    let staxXmlPullParserFactory:StaxXmlPullParserFactory = StaxXmlPullParserFactory()
+    let e0: Exception = @AssertThrows[Exception](parseCompressionFeature(staxXmlPullParserFactory.newXmlPullParser(ByteArrayStream())))
     @Assert("Exception: AssertionError", e0.toString())
     let xmppXmlString: Array<Byte> = """
 <iq type='get'><query xmlns='jabber:iq:roster'/></iq>
@@ -52,7 +54,7 @@ public func test_parseCompressionFeature1(): Unit {
         toArray()
     let byteArrayStream: ByteArrayStream = ByteArrayStream()
     byteArrayStream.write(xmppXmlString)
-    let staxXmlPullParser: StaxXmlPullParser = StaxXmlPullParser(byteArrayStream)
+    let staxXmlPullParser: XmlPullParser = staxXmlPullParserFactory.newXmlPullParser(byteArrayStream)
     let e1: Exception = @AssertThrows[Exception](parseCompressionFeature(staxXmlPullParser))
     @Assert("Exception: AssertionError", e1.toString())
 }

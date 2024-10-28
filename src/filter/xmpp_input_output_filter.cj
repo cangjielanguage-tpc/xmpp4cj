@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
@@ -18,7 +18,7 @@ public interface XmppInputOutputFilter {
      * @return 一个OutputResult，指示过滤后的输出和任何待处理的数据。
      * @throws IOException 如果在输出处理过程中发生错误。
      */
-    func output(outputData: ByteArrayStream, isFinalDataOfElement: Bool, destinationAddressChanged: Bool,
+    func output(outputData: ?ByteArrayStream, isFinalDataOfElement: Bool, destinationAddressChanged: Bool,
         moreDataAvailable: Bool): XmppInputOutputFilterOutputResult
 
     /**  

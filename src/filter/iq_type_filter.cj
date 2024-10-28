@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
@@ -32,7 +32,7 @@ public class IQTypeFilter <: FlexibleStanzaTypeFilter<IQ> {
      */
     public static let GET_OR_SET: StanzaFilter = OrFilter([GET, SET])
 
-    private let iqType: IQType // 存储 IQ 类型  
+    private let iqType: IQType // 存储 IQ 类型
 
     /**  
      * 使用指定的 IQ 类型创建一个新的 IQ 类型过滤器。
@@ -44,6 +44,7 @@ public class IQTypeFilter <: FlexibleStanzaTypeFilter<IQ> {
         super("IQ")
         this.iqType = Objects.requireNonNull(iqType, "Type must not be null")
     }
+
     /**  
      * 检查指定的 IQ 数据包是否匹配当前的 IQ 类型。
      *

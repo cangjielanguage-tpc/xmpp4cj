@@ -30,7 +30,8 @@ let svg = """
 func xmltest1(): Unit {
     let buf = ByteArrayStream()
     buf.write(svg.toArray())
-    let parser = StaxXmlPullParser(buf)
+    let staxXmlPullParserFactory:StaxXmlPullParserFactory = StaxXmlPullParserFactory()
+    let parser = staxXmlPullParserFactory.newXmlPullParser(buf)
     while (parser.getEventType() != XmlPullParserEvent.END_DOCUMENT) {
         let event = parser.next()
         match (event) {
@@ -106,7 +107,8 @@ let svg1 = """
 func xmltest2(): Unit {
     let buf = ByteArrayStream()
     buf.write(svg1.toArray())
-    let parser = StaxXmlPullParser(buf)
+    let staxXmlPullParserFactory:StaxXmlPullParserFactory = StaxXmlPullParserFactory()
+    let parser = staxXmlPullParserFactory.newXmlPullParser(buf)
     while (true) {
         match (parser.getEventType()) {
             case START_ELEMENT =>
@@ -153,7 +155,8 @@ let svg3 = """
 func xmltest3(): Unit {
     let buf = ByteArrayStream()
     buf.write(svg3.toArray())
-    let parser = StaxXmlPullParser(buf)
+    let staxXmlPullParserFactory:StaxXmlPullParserFactory = StaxXmlPullParserFactory()
+    let parser = staxXmlPullParserFactory.newXmlPullParser(buf)
     while (true) {
         match (parser.getEventType()) {
             case START_ELEMENT =>

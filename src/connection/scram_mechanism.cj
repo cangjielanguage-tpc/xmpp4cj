@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
@@ -241,7 +241,7 @@ public abstract class ScramMechanism <: SASLMechanism {
      * </p>
      * @return A String of 32 random printable ASCII characters.
      */
-    func getRandomAscii(): String {
+    public open func getRandomAscii(): String {
         var count = 0
         let randomAscii = Array<Rune>(RANDOM_ASCII_BYTE_COUNT) {_ => r'\u{0000}'}
         let random = SECURE_RANDOM.get()()
