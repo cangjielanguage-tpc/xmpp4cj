@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
 
@@ -426,7 +426,7 @@ public enum StanzaErrorType <: ToString {
             case "MODIFY" => MODIFY
             case "AUTH" => AUTH
             case "CONTINUE" => CONTINUE
-            case _ => throw IllegalArgumentException("Not a valid typ: ${string}")
+            case _ => throw IllegalArgumentException("Not a valid type: ${string}")
         }
     }
 }

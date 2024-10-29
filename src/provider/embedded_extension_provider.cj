@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.provider
 
@@ -107,9 +107,3 @@ public abstract class EmbeddedExtensionProvider<PE> <: ExtensionElementProvider<
     protected func createReturnExtension(currentElement: String, currentNamespace: String,
         attributeMap: Map<String, String>, content: ArrayList<ExtensionElement>): PE
 }
-
-// extend<> EmbeddedExtensionProvider<> <: Equatable<EmbeddedExtensionProvider<PE>> {
-//     public operator func == (that: EmbeddedExtensionProvider<PE>): Bool {
-//         return refEq(this, that)
-//     }
-// }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
 
@@ -801,7 +801,7 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
      * @param enclosingXmlEnvironment 包含的 XML 环境
      * @return XML 内容的列表
      */
-    public func toList(enclosingXmlEnvironment: XmlEnvironment): ArrayList<ToString> {
+    public func toList(enclosingXmlEnvironment: ?XmlEnvironment): ArrayList<ToString> {
         let res = ArrayList<ToString>(sb.getAsList().size)
         appendXmlTo({csq => res.append(csq)}, enclosingXmlEnvironment)
         return res

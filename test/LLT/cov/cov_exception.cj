@@ -174,7 +174,8 @@ public func test_XmppSaslException1(): Unit {
 
 @Test
 public func test_XmppCertificateException1(): Unit {
-    let xmppCertificateException: XmppCertificateException = XmppCertificateException()
+    let certificateException: CertificateException = CertificateException("CertificateException")
+    let xmppCertificateException: XmppCertificateException = XmppCertificateException(certificateException)
     @Assert("XmppCertificateException", xmppCertificateException.toString())
 }
 

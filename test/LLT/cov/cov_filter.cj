@@ -346,8 +346,7 @@ public func test_FlexibleStanzaTypeFilter1(): Unit {
     let packet: Stanza = StanzaBuilder.buildMessage().build()
     let flexibleStanzaTypeFilter0: TestFlexibleStanzaTypeFilter = TestFlexibleStanzaTypeFilter()
     @Assert("FlexibleStanzaTypeFilter: Stanza", flexibleStanzaTypeFilter0.toString())
-    let e1: NoneValueException = @AssertThrows[NoneValueException](flexibleStanzaTypeFilter0.accept(packet))
-    @Assert("NoneValueException", e1.toString())
+    @Assert(false, flexibleStanzaTypeFilter0.accept(packet))
 }
 
 public class TestFlexibleStanzaTypeFilter <: FlexibleStanzaTypeFilter<IQ> {
@@ -673,13 +672,13 @@ public func test_StanzaIdFilter1(): Unit {
 @Test
 public func test_StanzaTypeFilter1(): Unit {
     let packet: Stanza = StanzaBuilder.buildMessage().build()
-    let stanzaTypeFilter0: StanzaTypeFilter = StanzaTypeFilter.PRESENCE
-    let stanzaTypeFilter1: StanzaTypeFilter = StanzaTypeFilter.MESSAGE
-    let stanzaTypeFilter2: StanzaTypeFilter = StanzaTypeFilter.IQ
+    let stanzaTypeFilter0: StanzaTypeFilter<Presence> = StanzaTypeFilter<Presence>.PRESENCE
+    let stanzaTypeFilter1: StanzaTypeFilter<Message> = StanzaTypeFilter<Message>.MESSAGE
+    let stanzaTypeFilter2: StanzaTypeFilter<IQ> = StanzaTypeFilter<IQ>.IQ
     @Assert("StanzaTypeFilter: Presence", stanzaTypeFilter0.toString())
     @Assert(false, stanzaTypeFilter0.accept(packet))
     @Assert("StanzaTypeFilter: Message", stanzaTypeFilter1.toString())
-    @Assert(false, stanzaTypeFilter1.accept(packet))
+    @Assert(true, stanzaTypeFilter1.accept(packet))
     @Assert("StanzaTypeFilter: IQ", stanzaTypeFilter2.toString())
     @Assert(false, stanzaTypeFilter2.accept(packet))
 }

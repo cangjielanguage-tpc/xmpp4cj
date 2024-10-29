@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
@@ -12,7 +12,7 @@ package xmpp4cj.connection
  * <p>服务器可能支持多种用于身份验证的 SASL 机制。默认情况下，Smack 提供几种 SASL 机制，但可以注册新的 SASL 机制。
  * 使用 {@link #registerSASLMechanism(SASLMechanism)} 注册新机制。</p>
  *
- * @see org.jivesoftware.smack.sasl.SASLMechanism
+ * @see SASLMechanism
  */
 public class SASLAuthentication {
     private static let LOGGER = getGlobalLogger("SASLAuthentication") // 日志记录器
@@ -76,7 +76,7 @@ public class SASLAuthentication {
 
     /**  
      * 根据其完整类名注销 SASLMechanism。例如：
-     * "org.jivesoftware.smack.sasl.javax.SASLCramMD5Mechanism"。
+     * "SASLCramMD5Mechanism"。
      *
      * @param clazz SASLMechanism 类名
      * @return 如果成功移除给定的 SASLMechanism，返回 true；否则返回 false

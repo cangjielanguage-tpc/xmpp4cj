@@ -10,7 +10,9 @@ public func t1(): Unit {
     println(xml)
     let buffer = ByteArrayStream()
     buffer.write(xml.toArray())
-    let parser: XmlPullParser = StaxXmlPullParser(buffer)
+    
+    let staxXmlPullParserFactory:StaxXmlPullParserFactory = StaxXmlPullParserFactory()
+    let parser: XmlPullParser = staxXmlPullParserFactory.newXmlPullParser(buffer)
     while (parser.getEventType() != XmlPullParserEvent.END_DOCUMENT) {
         match (parser.getEventType()) {
             case START_DOCUMENT | END_DOCUMENT | OTHER => println(parser.getEventType())

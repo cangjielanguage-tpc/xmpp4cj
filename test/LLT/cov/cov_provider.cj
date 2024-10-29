@@ -24,7 +24,8 @@ public func test_BindIQProvider1(): Unit {
     let oriIqData = StanzaBuilder.buildIqData(Some("IqData stanzaId"))
     let actSB: IqData = StanzaBuilder.buildResponse<IqData>(oriIqData, getIqData)
     let bindIQProvider: BindIQProvider = BindIQProvider()
-    let e0: IndexOutOfBoundsException = @AssertThrows[IndexOutOfBoundsException](bindIQProvider.parse(StaxXmlPullParser(ByteArrayStream()), 0, actSB, None))
+    let staxXmlPullParserFactory:StaxXmlPullParserFactory = StaxXmlPullParserFactory()
+    let e0: IndexOutOfBoundsException = @AssertThrows[IndexOutOfBoundsException](bindIQProvider.parse(staxXmlPullParserFactory.newXmlPullParser(ByteArrayStream()), 0, actSB, None))
     @Assert("IndexOutOfBoundsException", e0.toString())
 }
 
@@ -35,7 +36,8 @@ public func getIqData(stanzaId: ?String): IqData {
 @Test
 public func test_BodyElementProvider1(): Unit {
     let bodyElementProvider: BodyElementProvider = BodyElementProvider()
-    let e0: Exception = @AssertThrows[Exception](bodyElementProvider.parse(StaxXmlPullParser(ByteArrayStream()), 0, None))
+    let staxXmlPullParserFactory:StaxXmlPullParserFactory = StaxXmlPullParserFactory()
+    let e0: Exception = @AssertThrows[Exception](bodyElementProvider.parse(staxXmlPullParserFactory.newXmlPullParser(ByteArrayStream()), 0, None))
     @Assert("Exception: AssertionError", e0.toString())
 }
 
@@ -61,7 +63,9 @@ public func test_IntrospectionProvider1(): Unit {
 
 @Test
 public func test_TlsProceedProvider1(): Unit {
-    let staxXmlPullParser: StaxXmlPullParser = StaxXmlPullParser(ByteArrayStream())
+    let staxXmlPullParserFactory:StaxXmlPullParserFactory = StaxXmlPullParserFactory()
+    let byteArrayStream = ByteArrayStream()
+    let staxXmlPullParser: XmlPullParser = staxXmlPullParserFactory.newXmlPullParser(byteArrayStream)
     let tlsProceedProvider: TlsProceedProvider = TlsProceedProvider.INSTANCE
     @Assert("failure", tlsProceedProvider.parse(staxXmlPullParser, 0, None).getElementName())
 }

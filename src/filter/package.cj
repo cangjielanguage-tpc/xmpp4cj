@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 /**
  * Allows {@link xmpp4cj.StanzaCollector} and {@link xmpp4cj.StanzaListener} instances to filter for stanzas with particular attributes.

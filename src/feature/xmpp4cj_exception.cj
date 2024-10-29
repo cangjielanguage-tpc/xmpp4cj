@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.feature
 
@@ -508,16 +508,16 @@ public open class XmppSaslException <: Xmpp4cjException {
 }
 
 public class XmppCertificateException <: Xmpp4cjException {
-    //     private let certificateException: CertificateException
+    private let certificateException: CertificateException
 
-    //     public init(certificateException: CertificateException) {
-    //         super()
-    //         this.certificateException = certificateException
-    //     }
+    public init(certificateException: CertificateException) {
+        super()
+        this.certificateException = certificateException
+    }
 
-    //     public func getCertificateException(): CertificateException {
-    //         return certificateException
-    //     }
+    public func getCertificateException(): Exception {
+        return certificateException
+    }
 
     /**
      * 获得类名，用字符串表示。

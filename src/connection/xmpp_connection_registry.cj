@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
@@ -36,7 +36,7 @@ public class XMPPConnectionRegistry {
      *
      * @return 一个对新连接感兴趣的监听器的不可修改集合。
      */
-    protected static func getConnectionCreationListeners(): Collection<ConnectionCreationListener> {
+    public static func getConnectionCreationListeners(): Collection<ConnectionCreationListener> {
         return connectionEstablishedListeners
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.compress
 
@@ -67,6 +67,7 @@ public class FailureProvider <: NonzaProvider<Failure> {
                 case XmlPullParserEvent.END_ELEMENT => if (parser.getDepth() == initialDepth) {
                     break
                 }
+                case XmlPullParserEvent.END_DOCUMENT => break
                 case _ => ()
             }
         }

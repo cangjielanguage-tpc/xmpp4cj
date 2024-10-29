@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
@@ -67,7 +67,7 @@ class ZlibXmppInputOutputFilter <: XmppInputOutputFilter {
             compressLevel: compressionLevel)
     }
 
-    public override func output(outputData: ByteArrayStream, isFinalDataOfElement: Bool,
+    public override func output(outputData: ?ByteArrayStream, isFinalDataOfElement: Bool,
         destinationAddressChanged: Bool, moreDataAvailable: Bool): XmppInputOutputFilterOutputResult {
         if (destinationAddressChanged && XMPPInputOutputStream.getFlushMethod() == XMPPInputOutputStreamFlushMethod.
             FULL_FLUSH) {
@@ -76,10 +76,11 @@ class ZlibXmppInputOutputFilter <: XmppInputOutputFilter {
             maxBytesWrittenAfterFullFlush = max(bytesWritten, maxBytesWrittenAfterFullFlush)
             compressorOutBytes += bytesWritten
         }
-        if (outputBuffer.isNone()) { // TODO outputData.isNone() && outputBuffer.isNone()
+        if (outputData.isNone() && outputBuffer.isNone()) {
             return XmppInputOutputFilterOutputResult.NO_OUTPUT
         }
-        let bytesRemaining = outputData.remainLength
+        let outputData0 = outputData.getOrThrow()
+        let bytesRemaining = outputData0.remainLength
         if (outputBuffer.isNone()) {
             let outputBufferSize = if (bytesRemaining < MINIMUM_OUTPUT_BUFFER_INITIAL_SIZE) {
                 MINIMUM_OUTPUT_BUFFER_INITIAL_SIZE
@@ -91,8 +92,8 @@ class ZlibXmppInputOutputFilter <: XmppInputOutputFilter {
 
         // assert(compressor.needsInput()) // 无法获知compressor内部状态,忽略
 
-        let compressorInputBufferLength = outputData.remainLength
-        let compressorInputBuffer: Array<UInt8> = outputData.bytes()
+        let compressorInputBufferLength = outputData0.remainLength
+        let compressorInputBuffer: Array<UInt8> = outputData0.bytes()
 
         compressorInBytes += compressorInputBufferLength
         compressor.write(compressorInputBuffer)

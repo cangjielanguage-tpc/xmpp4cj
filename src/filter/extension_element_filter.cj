@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
@@ -28,7 +28,6 @@ public class ExtensionElementFilter<E> <: StanzaFilter where E <: ExtensionEleme
      * @return 如果数据包包含扩展元素并且符合过滤条件，则返回 true；否则返回 false。
      */
     public override func accept(stanza: Stanza): Bool {
-        // TODO
         let extensionElement: ?ExtensionElement = stanza.getExtension(extensionElementQName)
         if (let Some(v) <- extensionElement) {
             if (extensionElementClass != "ExtensionElement") {
@@ -37,8 +36,6 @@ public class ExtensionElementFilter<E> <: StanzaFilter where E <: ExtensionEleme
         } else {
             return false
         }
-        // let specificExtensionElement = extensionElementClass.cast(extensionElement)
-        // return accept(specificExtensionElement)
         return true
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 /**
  * Xmpp classes for compression.
@@ -15,3 +15,4 @@ internal import std.sync.*
 internal import xmpp4cj.compress.*
 internal import xmpp4cj.feature.*
 internal import xmpp4cj.filter.*
+// internal import xmpp4cj.modular.*

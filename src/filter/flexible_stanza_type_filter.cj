@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
@@ -25,8 +25,6 @@ public abstract class FlexibleStanzaTypeFilter<S> <: StanzaFilter where S <: Sta
      * 默认构造函数，使用反射获取泛型类型参数。
      */
     public init() {
-        //  TODO
-        // stanzaType = TypeInfo.of(this).getGenericSuperclass()).getActualTypeArguments()[0]
         stanzaType = "Stanza"
     }
 
@@ -37,13 +35,9 @@ public abstract class FlexibleStanzaTypeFilter<S> <: StanzaFilter where S <: Sta
      * @return 如果数据包符合过滤条件，则返回 true；否则返回 false。
      */
     public func accept(packet: Stanza): Bool {
-        // TODO
-        if (stanzaType == "Stanza") {
+        if (packet is S) {
             return acceptSpecific((packet as S).getOrThrow())
         }
-        // if (stanzaType.isInstance(packet)) {
-        //     return acceptSpecific(packet)
-        // }
         return false
     }
 

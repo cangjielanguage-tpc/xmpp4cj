@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights resvered.
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.jid
 
@@ -109,6 +109,20 @@ public open class XmlSplitter <: Resource {
     public func write(cbuf: Array<Rune>): Unit {
         xmlPrinter?.onChunkStart()
         for (c in cbuf) {
+            processChar(c)
+        }
+        xmlPrinter?.onChunkEnd()
+    }
+
+    /**
+     * 写入数据。
+     *
+     * @param str 数据。
+     */
+    public func append(str: ToString): Unit {
+        let iter = str.toString().runes()
+        xmlPrinter?.onChunkStart()
+        for (c in iter) {
             processChar(c)
         }
         xmlPrinter?.onChunkEnd()
