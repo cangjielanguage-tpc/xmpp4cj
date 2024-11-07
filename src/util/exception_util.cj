@@ -21,10 +21,35 @@ public class ExceptionUtil {
             sb.append(
                 """
 
-    at ${element.declaringClass}.${element.methodName}(${element.fileName}:${element.lineNumber}"""
+    at ${element.declaringClass}.${element.methodName} ${element.fileName}:${element.lineNumber}"""
             )
             sb
         }
         sb.toString()
+    }
+}
+
+/* 针对Exception无法继承cause堆栈 定义一个ExceptionExt作为需要cause信息的父类 */
+public abstract class ExceptionExt <: Exception {
+    protected var cause: ?Exception = None
+    protected init() {}
+    protected init(cause: ?Exception) {
+        this.cause = cause
+    }
+    protected init(message: String, cause: ?Exception) {
+        super(message)
+        this.cause = cause
+    }
+    /* 获取原始异常 */
+    public open func getCause(): ?Exception {
+        return this.cause
+    }
+    /* 获取原始异常的堆栈信息 */
+    public func getCauseStackTrace(): String {
+        if (let Some(e) <- cause) {
+            "cause by: " + ExceptionUtil.getStackTrace(e)
+        } else {
+            ""
+        }
     }
 }

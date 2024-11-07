@@ -23,7 +23,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
     /**
      * 锁。
      */
-    public let lock: ReentrantReadWriteMutex = ReentrantReadWriteMutex()
+    public let lock: Monitor = Monitor()
 
     /**
      * 构造一个初始容量为{@link#DEFAULT_MAP_SIZE}的新MultiMap。
@@ -180,7 +180,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
      */
     public func removeOne(key: K, value: V): Bool {
         if (let Some(list) <- map.get(key)) {
-            let res: Bool = list.remove(value)
+            let res: Bool = list.removeValue(value)
             if (list.size == 0) {
                 // 如果值集现在为空，也删除该键。
                 map.remove(key)

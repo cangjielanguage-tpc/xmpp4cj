@@ -226,7 +226,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
     public open func removeExtension(extension: ExtensionElement): StanzaBuilder {
         let key = extension.getQName()
         let list = extensionElements.getAll(key)
-        list.remove(extension)
+        list.removeValue(extension)
         return getThis()
     }
 
@@ -309,8 +309,13 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
     protected open func addStanzaSpecificAttributes(builder: ToStringUtilBuilder): Unit
 
     public override func toString(): String {
-        let builder = ToStringUtil.builderFor("StanzaBuilder").addValue("id", stanzaId).addValue("from", _from ?? None).
-            addValue("to", _to ?? None).addValue("language", language).addValue("error", stanzaError ?? None)
+        let builder = ToStringUtil
+            .builderFor("StanzaBuilder")
+            .addValue("id", stanzaId)
+            .addValue("from", _from ?? None)
+            .addValue("to", _to ?? None)
+            .addValue("language", language)
+            .addValue("error", stanzaError ?? None)
         addStanzaSpecificAttributes(builder)
         let iter: Iterator<ToString> = extensionElements.values() |> map {e => e.getQName()}
         builder.add("Extension Elements", iter)

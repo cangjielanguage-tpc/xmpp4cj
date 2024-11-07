@@ -37,14 +37,14 @@ class ZlibXmppInputOutputFilter <: XmppInputOutputFilter {
     private static let MINIMUM_OUTPUT_BUFFER_INITIAL_SIZE = 4
     private static let MINIMUM_OUTPUT_BUFFER_INCREASE = 480
 
-    private let compressorBuffer: ByteArrayStream
+    private let compressorBuffer: ByteBuffer
     private let compressor: CompressOutputStream
 
-    private let decompressorBuffer = ByteArrayStream()
+    private let decompressorBuffer = ByteBuffer()
     private let decompressor: DecompressOutputStream = DecompressOutputStream(decompressorBuffer,
         wrap: WrapType.DeflateFormat)
 
-    private var outputBuffer: ?ByteArrayStream = None
+    private var outputBuffer: ?ByteBuffer = None
 
     var compressorInBytes: Int = 0
     var compressorOutBytes: Int = 0
@@ -62,16 +62,16 @@ class ZlibXmppInputOutputFilter <: XmppInputOutputFilter {
     }
 
     private init(compressionLevel: CompressLevel) {
-        compressorBuffer = ByteArrayStream()
+        compressorBuffer = ByteBuffer()
         compressor = CompressOutputStream(compressorBuffer, wrap: WrapType.DeflateFormat,
             compressLevel: compressionLevel)
     }
 
-    public override func output(outputData: ?ByteArrayStream, isFinalDataOfElement: Bool,
-        destinationAddressChanged: Bool, moreDataAvailable: Bool): XmppInputOutputFilterOutputResult {
-        if (destinationAddressChanged && XMPPInputOutputStream.getFlushMethod() == XMPPInputOutputStreamFlushMethod.
-            FULL_FLUSH) {
-            outputBuffer = ByteArrayStream(256)
+    public override func output(outputData: ?ByteBuffer, isFinalDataOfElement: Bool, destinationAddressChanged: Bool,
+        moreDataAvailable: Bool): XmppInputOutputFilterOutputResult {
+        if (destinationAddressChanged && XMPPInputOutputStream.getFlushMethod() == XMPPInputOutputStreamFlushMethod
+            .FULL_FLUSH) {
+            outputBuffer = ByteBuffer(256)
             let bytesWritten = deflate(true)
             maxBytesWrittenAfterFullFlush = max(bytesWritten, maxBytesWrittenAfterFullFlush)
             compressorOutBytes += bytesWritten
@@ -87,7 +87,7 @@ class ZlibXmppInputOutputFilter <: XmppInputOutputFilter {
             } else {
                 bytesRemaining
             }
-            outputBuffer = ByteArrayStream(outputBufferSize)
+            outputBuffer = ByteBuffer(outputBufferSize)
         }
 
         // assert(compressor.needsInput()) // 无法获知compressor内部状态,忽略
@@ -117,14 +117,14 @@ class ZlibXmppInputOutputFilter <: XmppInputOutputFilter {
         // 控制flush时机
         if (needFlush) {
             let totalBytesWritten = compressorBuffer.remainLength
-            compressorBuffer.copyTo(outputBuffer)
+            copy(compressorBuffer, to: outputBuffer)
             return totalBytesWritten
         } else {
             return 0
         }
     }
 
-    public override func input(inputData: ByteArrayStream): ?ByteArrayStream {
+    public override func input(inputData: ByteBuffer): ?ByteBuffer {
         let bytesRemaining = inputData.remainLength
         let inputBytes: Array<UInt8> = inputData.bytes()
         let length: Int = bytesRemaining
@@ -140,8 +140,8 @@ class ZlibXmppInputOutputFilter <: XmppInputOutputFilter {
             return None
         }
 
-        let outputBuffer = ByteArrayStream(decompressorBuffer.remainLength)
-        decompressorBuffer.copyTo(outputBuffer)
+        let outputBuffer = ByteBuffer(decompressorBuffer.remainLength)
+        copy(decompressorBuffer, to: outputBuffer)
 
         maxInputOutput = max(outputBuffer.length, maxInputOutput)
         return outputBuffer

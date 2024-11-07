@@ -6,12 +6,7 @@ package xmpp4cj.feature
 /**
  * Xmpp对任何Xmpp规范都没有定义的错误使用Xmpp4cjExceptions。
  */
-public abstract class Xmpp4cjException <: Exception {
-    /**
-     * 异常。
-     */
-    public let cause: ?Exception
-
+public abstract class Xmpp4cjException <: ExceptionExt {
     /**
      * 使用作为异常根本原因的Throwable创建新的Xmpp4cjException。
      *
@@ -37,7 +32,7 @@ public abstract class Xmpp4cjException <: Exception {
      * @param wrappedThrowable 异常的根本原因 {@link Throwable}。
      */
     protected init(message: String, wrappedThrowable: ?Exception) {
-        super(message)
+        super(message, wrappedThrowable)
         this.cause = wrappedThrowable
     }
 

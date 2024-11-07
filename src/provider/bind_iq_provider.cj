@@ -44,9 +44,10 @@ public class BindIQProvider <: IqProvider<Bind> {
                             bind = Bind.newResult(fullJid)
                         case _ => ()
                     }
-                case XmlPullParserEvent.END_ELEMENT => if (parser.getDepth() == initialDepth) {
-                    break
-                }
+                case XmlPullParserEvent.END_ELEMENT =>
+                    if (parser.getDepth() == initialDepth) {
+                        break
+                    }
                 case _ => ()
             }
         }

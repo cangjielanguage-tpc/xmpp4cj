@@ -4,41 +4,52 @@
 package xmpp4cj.connection
 
 /**
- * This abstract class is commonly used as super class for XMPP connection mechanisms like TCP and BOSH. Hence it
- * provides the methods for connection state management, like {@link #connect()}, {@link #login()} and
- * {@link #disconnect()} (which are deliberately not provided by the {@link XMPPConnection} interface).
+ * 这个抽象类通常用作诸如TCP和BOSH等XMPP连接机制的超类。
+ * 它提供了用于连接状态管理的一系列方法，这些方法在连接的不同阶段发挥作用，具体如下：
+ * - {@link #connect()}：用于建立连接的相关操作。
+ * - {@link #login()}：处理登录相关的流程。
+ * - {@link #disconnect()}：负责断开连接的操作。
+ * 需要注意的是，这些方法特意未由{@link XMPPConnection}接口提供。
+ *
+ * <p><b>注意：</b> Xmpp文档的默认入口点是{@link XMPPConnection}。
+ * 如果您刚开始接触Xmpp，建议先查阅{@link XMPPConnection}相关内容，然后再回到此处深入了解本类的相关细节。</p>
+ *
+ * <h2>解析异常</h2>
  * <p>
- * <b>Note:</b> The default entry point to Xmpp's documentation is {@link XMPPConnection}. If you are getting started
- * with Xmpp, then head over to {@link XMPPConnection} and the come back here.
+ * 在Xmpp的运行过程中，如果一个Xmpp解析器（也可称为提供者）抛出异常，
+ * 这些异常会被传递给{@link ParsingExceptionCallback}进行处理。
+ * 解析器抛出异常的常见原因是接收到了非法输入，
+ * 例如，在程序逻辑中只允许输入整数的情况下，却接收到了非数字字符串。
+ * Xmpp的<em>默认行为</em>遵循< b >“默认严格失败”</b>原则，
+ * 这意味着一旦出现解析异常，将会导致连接直接终止。
+ * 之所以选择这样的默认行为，是为了让用户能够意识到他们需要自行配置回调机制，
+ * 并妥善处理这些异常情况，以避免连接意外断开。
+ * 处理解析异常的方式可以很简单，比如使用一个不抛出异常的空操作回调。
+ * 采用这种回调方式时，当遇到有问题的流元素，会将其从流中移除，
+ * 此时Xmpp的表现就如同从未接收到那个有问题的元素一样。
  * </p>
- * <h2>Parsing Exceptions</h2>
  * <p>
- * In case a Xmpp parser (Provider) throws those exceptions are handled over to the {@link ParsingExceptionCallback}. A
- * common cause for a provider throwing is illegal input, for example a non-numeric String where only Integers are
- * allowed. Xmpp's <em>default behavior</em> follows the <b>"fail-hard per default"</b> principle leading to a
- * termination of the connection on parsing exceptions. This default was chosen to make users eventually aware that they
- * should configure their own callback and handle those exceptions to prevent the disconnect. Handle a parsing exception
- * could be as simple as using a non-throwing no-op callback, which would cause the faulty stream element to be taken
- * out of the stream, i.e., Xmpp behaves like that element was never received.
+ * 如果解析异常是因为Xmpp接收到了非法输入而引发的，
+ * 那么请考虑将此情况告知源实体的作者，以便他们能够对输入数据进行检查和修正。
+ * 如果异常是由于Xmpp解析器自身存在漏洞而抛出的，
+ * 那么请考虑向Xmpp项目提交一个漏洞报告，帮助开发团队修复问题，提升软件质量。
  * </p>
+ *
+ * <h3>管理解析异常回调</h3>
  * <p>
- * If the parsing exception is because Xmpp received illegal input, then please consider informing the authors of the
- * originating entity about that. If it was thrown because of an bug in a Xmpp parser, then please consider filling a
- * bug with Xmpp.
- * </p>
- * <h3>Managing the parsing exception callback</h3>
- * <p>
- * The "fail-hard per default" behavior is achieved by using the
- * {@link xmpp4cj.parsing.ExceptionThrowingCallbackWithHint} as default parsing exception callback. You
- * can change the behavior using {@link #setParsingExceptionCallback(ParsingExceptionCallback)} to set a new callback.
- * Use {@link xmpp4cj.XmppConfiguration#setDefaultParsingExceptionCallback(ParsingExceptionCallback)} to
- * set the default callback.
+ * “默认严格失败”的行为是通过使用
+ * {@link xmpp4cj.parsing.ExceptionThrowingCallbackWithHint}作为默认解析异常回调来实现的。
+ * 如果您希望改变这种默认行为，可以使用
+ * {@link #setParsingExceptionCallback(ParsingExceptionCallback)}方法来设置一个新的回调。
+ * 另外，还可以通过
+ * {@link xmpp4cj.XmppConfiguration#setDefaultParsingExceptionCallback(ParsingExceptionCallback)}方法
+ * 来设置整个项目的默认回调。
  * </p>
  */
 public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     private static let LOGGER = getGlobalLogger(("name", "AbstractXMPPConnection"))
 
-    protected static let XMPP_REACTOR: XmppReactor = unsafe { zeroValue<XmppReactor>() } // TODO XmppReactor.getInstance()
+    protected static let XMPP_REACTOR: XmppReactor = XmppReactor.getInstance()
 
     /**
      * 计数器，用于唯一标识创建的连接。
@@ -246,9 +257,9 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     private let stanzaFactory: StanzaFactory
 
     /**
-     * Create a new XMPPConnection to an XMPP server.
+     * 创建到XMPP服务器的新XMPPConnection。
      *
-     * @param configuration The configuration which is used to establish the connection.
+     * @param configuration 用于建立连接的配置。
      */
     protected init(configuration: ConnectionConfiguration) {
         config = configuration
@@ -264,36 +275,41 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     protected open func postInit(): Unit {
         let auth = SASLAuthentication(this, config)
         saslAuthentication = auth
-        // Install the SASL Nonza callbacks.
-        buildNonzaCallback().listenFor(
-            "SaslNonzaChallenge",
-            {
-                c => try {
-                    let challenge = (c as SaslNonzaChallenge).getOrThrow()
-                    auth.challengeReceived(challenge)
-                } catch (e: Xmpp4cjException) {
-                    auth.authenticationFailed(e)
+        // 安装SASL（Simple Authentication and Security Layer，简单认证与安全层）Nonza回调。
+        // SASL是一种用于网络协议中进行身份验证和安全通信的框架，这里的Nonza可能是指与SASL相关的特定类型的回调处理机制，具体取决于上下文。
+        buildNonzaCallback()
+            .listenFor(
+                "SaslNonzaChallenge",
+                {
+                    c => try {
+                        let challenge = (c as SaslNonzaChallenge).getOrThrow()
+                        auth.challengeReceived(challenge)
+                    } catch (e: Xmpp4cjException) {
+                        auth.authenticationFailed(e)
+                    }
                 }
-            }
-        ).listenFor(
-            "SaslNonzaSuccess",
-            {
-                s => try {
-                    let success = (s as SaslNonzaSuccess).getOrThrow()
-                    auth.authenticated(success)
-                } catch (e: XmppSaslException | NotConnectedException) {
-                    auth.authenticationFailed(e)
+            )
+            .listenFor(
+                "SaslNonzaSuccess",
+                {
+                    s => try {
+                        let success = (s as SaslNonzaSuccess).getOrThrow()
+                        auth.authenticated(success)
+                    } catch (e: XmppSaslException | NotConnectedException) {
+                        auth.authenticationFailed(e)
+                    }
                 }
-            }
-        ).listenFor(
-            "SaslNonzaSASLFailure",
-            {f => auth.authenticationFailed((f as SaslNonzaSASLFailure).getOrThrow())}
-        ).install()
+            )
+            .listenFor(
+                "SaslNonzaSASLFailure",
+                {f => auth.authenticationFailed((f as SaslNonzaSASLFailure).getOrThrow())}
+            )
+            .install()
 
         let debuggerFactory = config.getDebuggerFactory()
         debugger = debuggerFactory?.create(this)
 
-        // Notify listeners that a new connection has been established
+        // 通知侦听器已建立新连接
         for (listener in XMPPConnectionRegistry.getConnectionCreationListeners()) {
             listener.connectionCreated(this)
         }
@@ -329,8 +345,8 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     protected func sendStanzaInternal(packet: Stanza): Unit
 
     public override func trySendStanza(stanza: Stanza): Bool {
-        // Default implementation which falls back to sendStanza() as mentioned in the methods doc.
-        // May be overwritten by subclasses.
+        //默认实现，如方法文档中所述，可以回退到sendStanza（）。
+        //可能被子类覆盖。
         try {
             sendStanza(stanza)
         } catch (e: Exception) {
@@ -342,8 +358,8 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     public override func trySendStanza(stanza: Stanza, timeout: Duration): Bool {
-        // Default implementation which falls back to sendStanza() as mentioned in the methods doc.
-        // May be overwritten by subclasses.
+        //默认实现，如方法文档中所述，可以回退到sendStanza（）。
+        //可能被子类覆盖。
         sendStanza(stanza)
         return true
     }
@@ -374,31 +390,31 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
      */
     public func connect(): AbstractXMPPConnection {
         synchronized(this.lock) {
-            // Check if not already connected
+            // 检查是否尚未连接
             throwAlreadyConnectedExceptionIfAppropriate()
-            // Notify connection listeners that we are trying to connect
+            // 通知连接侦听器我们正在尝试连接
             callConnectionConnectingListener()
-            // Reset the connection state
+            // 重置连接状态
             initState()
             closingStreamReceived = false
             streamId = None
 
             try {
-                // Perform the actual connection to the XMPP service
+                // 执行与XMPP服务的实际连接
                 connectInternal()
-                // If TLS is required but the server doesn't offer it, disconnect
-                // from the server and throw an error. First check if we've already negotiated TLS
-                // and are secure, however (features get parsed a second time after TLS is established).
-                if (!isSecureConnection() && getConfiguration().getSecurityMode() == ConnectionConfigurationSecurityMode.
-                    required) {
+                // 如果需要TLS但服务器不提供，请断开连接
+                // 从服务器发送并抛出错误。首先检查我们是否已经协商了TLS
+                // 并且是安全的（在建立TLS后第二次解析特征）。
+                if (!isSecureConnection() && getConfiguration().getSecurityMode() == ConnectionConfigurationSecurityMode
+                    .required) {
                     throw SecurityRequiredByClientException()
                 }
             } catch (e: Xmpp4cjException | IOException | XMPPException) {
-                LOGGER.log(LogLevel.DEBUG, "3.1 AbstractXMPPConnection.connect", e)
+                LOGGER.log(LogLevel.WARN, "AbstractXMPPConnection.connect", e)
                 instantShutdown()
                 throw e
             }
-            // If connectInternal() did not throw, then this connection must now be marked as connected.
+            // 如果connectInternal（）没有抛出，那么现在必须将此连接标记为已连接。
             assert(connected)
             callConnectionConnectedListener()
             return this
@@ -406,14 +422,13 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     /**
-     * Abstract method that concrete subclasses of XMPPConnection need to implement to perform their
-     * way of XMPP connection establishment. Implementations are required to perform an automatic
-     * login if the previous connection state was logged (authenticated).
+     * XMPPConnection的具体子类需要实现的抽象方法来执行它们的XMPP连接建立方式。
+     * 如果记录了之前的连接状态（经过身份验证），则需要实现自动登录。
      *
-     * @throws Xmpp4cjException if Xmpp detected an exceptional situation.
-     * @throws IOException if an I/O error occurred.
-     * @throws XMPPException if an XMPP protocol error was received.
-     * @throws InterruptedException if the calling thread was interrupted.
+     * @throws Xmpp4cjException 如果Xmpp检测到异常情况。
+     * @throws IOException 如果发生I/O错误。
+     * @throws XMPPException 如果收到XMPP协议错误。
+     * @throws InterruptedException 如果调用线程被中断。
      */
     protected func connectInternal(): Unit
 
@@ -421,36 +436,30 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     private var usedPassword: ?String = None
 
     /**
-     * The resourcepart used for this connection. May not be the resulting resourcepart if it's null or overridden by the XMPP service.
+     * 用于此连接的资源部分。如果它为None或被XMPP服务覆盖，则可能不是结果资源部分。
      */
     private var usedResource: ?Resourcepart = None
 
     /**
-     * Logs in to the server using the strongest SASL mechanism supported by
-     * the server. If more than the connection's default stanza timeout elapses in each step of the
-     * authentication process without a response from the server, a
-     * {@link Xmpp4cjException.NoResponseException} will be thrown.
+     * 使用服务器支持的最强SASL机制登录到服务器。
+     * 如果在身份验证过程的每一步中超过连接的默认节超时，而服务器没有响应，则将抛出{@link Xmpp4cjException.NoResponseException}。
      * <p>
-     * Before logging in (i.e. authenticate) to the server the connection must be connected
-     * by calling {@link #connect}.
-     * </p>
+     * 在登录（即身份验证）到服务器之前，必须通过调用{@link#connect}来连接连接。
      * <p>
-     * It is possible to log in without sending an initial available presence by using
-     * {@link ConnectionConfiguration.Builder#setSendPresence(boolean)}.
-     * Finally, if you want to not pass a password and instead use a more advanced mechanism
-     * while using SASL then you may be interested in using
-     * {@link ConnectionConfiguration.Builder#setCallbackHandler(CallbackHandler)}.
-     * For more advanced login settings see {@link ConnectionConfiguration}.
-     * </p>
+     * <p>
+     * 通过使用{@link ConnectionConfiguration.Builder#setSendPresence（boolean）}，可以在不发送初始可用状态的情况下登录。
+     * 最后，如果你想在使用SASL时不传递密码，而是使用更高级的机制，那么你可能会对使用{@link ConnectionConfiguration.Builder#setcallback Handler（callback Handler）}感兴趣。
+     * 有关更高级的登录设置，请参阅｛@link ConnectionConfiguration｝。
+     * <p>
      *
-     * @throws XMPPException if an error occurs on the XMPP protocol level.
-     * @throws Xmpp4cjException if an error occurs somewhere else besides XMPP protocol level.
-     * @throws IOException if an I/O error occurs during login.
-     * @throws InterruptedException if the calling thread was interrupted.
+     * @throws XMPPException 如果XMPP协议级别发生错误。
+     * @throws Xmpp4cjException 如果在XMPP协议级别之外的其他地方发生错误。
+     * @throws IOException 如果在登录过程中发生I/O错误。
+     * @throws InterruptedException 如果调用线程被中断。
      */
     public func login(): Unit {
-        // The previously used username, password and resource take over precedence over the
-        // ones from the connection configuration
+        // 以前使用的用户名、密码和资源优先于
+        // 连接配置中的
         synchronized(this.lock) {
             let username = usedUsername ?? config.getUsername()
             let password = usedPassword ?? config.getPassword()
@@ -464,15 +473,14 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     /**
-     * Same as {@link #login(CharSequence, String, Resourcepart)}, but takes the resource from the connection
-     * configuration.
+     * 与{@link#login(String, String, ?Resourcepart)}相同，但从连接配置中获取资源。
      *
-     * @param username username
-     * @param password password
-     * @throws XMPPException if an XMPP protocol error was received.
-     * @throws Xmpp4cjException if Xmpp detected an exceptional situation.
-     * @throws IOException if an I/O error occurred.
-     * @throws InterruptedException if the calling thread was interrupted.
+     * @param username 用户名
+     * @param password 密码
+     * @throws XMPPException 如果收到XMPP协议错误。
+     * @throws Xmpp4cjException 如果Xmpp检测到异常情况。
+     * @throws IOException 如果发生I/O错误。
+     * @throws InterruptedException 如果调用线程被中断。
      * @see #login
      */
     public func login(username: String, password: String): Unit {
@@ -482,16 +490,17 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     /**
-     * Login with the given username (authorization identity). You may omit the password if a callback handler is used.
-     * If resource is null, then the server will generate one.
+     * 使用给定的用户名（授权标识）登录。
+     * 如果使用回调处理程序，则可以省略密码。
+     * 如果资源为空，则服务器将生成一个。
      *
-     * @param username username
-     * @param password password
-     * @param resource resource
-     * @throws XMPPException if an XMPP protocol error was received.
-     * @throws Xmpp4cjException if Xmpp detected an exceptional situation.
-     * @throws IOException if an I/O error occurred.
-     * @throws InterruptedException if the calling thread was interrupted.
+     * @param username 用户名
+     * @param password 密码
+     * @param resource 资源
+     * @throws XMPPException 如果收到XMPP协议错误。
+     * @throws Xmpp4cjException 如果Xmpp检测到异常情况。
+     * @throws IOException 如果发生I/O错误。
+     * @throws InterruptedException 如果调用线程被中断。
      * @see #login
      */
     public func login(username: String, password: String, resource: ?Resourcepart): Unit {
@@ -543,22 +552,17 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     public func setCurrentConnectionExceptionAndNotify(exception: Exception): Unit {
-        if (let Some(v) <- exception as Xmpp4cjException) {
-            currentXmpp4cjException = v
-        } else if (let Some(v) <- exception as XMPPException) {
-            currentXmppException = v
-        } else {
-            currentXmpp4cjException = XmppWrappedException(exception)
+        match (exception) {
+            case v: Xmpp4cjException => currentXmpp4cjException = v
+            case v: XMPPException => currentXmppException = v
+            case _ => currentXmpp4cjException = XmppWrappedException(exception)
         }
         notifyWaitingThreads()
     }
 
     /**
-     * We use an extra object for {@link #notifyWaitingThreads()} and {@link #waitFor(Supplier)}, because all state
-     * changing methods of the connection are synchronized using the connection instance as monitor. If we now would
-     * also use the connection instance for the internal process to wait for a condition, the {@link Object#wait()}
-     * would leave the monitor when it waits, which would allow for another potential call to a state changing function
-     * to proceed.
+     * 我们为{@link#notifyWaitingThreads（）}和{@link#waitFor（Supplier）}使用了一个额外的对象，因为连接的所有状态更改方法都是使用连接实例作为监视器同步的。
+     * 如果我们现在也使用内部进程的连接实例来等待条件，那么{@link Object#wait（）}将在等待时离开监视器，这将允许对状态更改函数的另一个潜在调用继续进行。
      */
     private let internalMonitor = Monitor()
 
@@ -587,37 +591,33 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         if (hasCurrentConnectionException()) {
             throwCurrentConnectionException()
         }
-        // If there was no connection exception and we still did not successfully wait for the condition to hold, then
-        // we ran into a no-response timeout.
+        // 如果没有连接异常，并且我们仍然没有成功等待条件成立，那么我们遇到了无响应超时。
         if (!success) {
             throw NoResponseException.newWith(this, waitFor)
         }
-        // Otherwise we successfully awaited the condition.
+        // 否则，我们成功地等待了条件。
     }
 
     public func bindResourceAndEstablishSession(resource: ?Resourcepart): ?Resourcepart {
-        // Wait until either:
-        // - the servers last features stanza has been parsed
-        // - the timeout occurs
+        // 等待以下任一时间：
+        //- 服务器上一个特征节已被解析
+        //- 超时发生
         LOGGER.trace("Waiting for last features to be received before continuing with resource binding")
         waitForConditionOrThrowConnectionException({=> lastFeaturesReceived},
             "last stream features received from server")
 
         if (!hasFeature(Bind.ELEMENT, Bind.NAMESPACE)) {
-            // Server never offered resource binding, which is REQUIRED in XMPP client and
-            // server implementations as per RFC6120 7.2
+            // 服务器从未提供资源绑定，根据RFC6120 7.2，XMPP客户端和服务器实现中需要资源绑定。
             throw ResourceBindingNotOfferedException()
         }
-
-        // Resource binding, see RFC6120 7.
-        // Note that we can not use IQReplyFilter here, since the users full JID is not yet
-        // available. It will become available right after the resource has been successfully bound.
+        // 资源绑定，请参见RFC6120 7。
+        // 请注意，我们不能在这里使用IQReplyFilter，因为用户的完整JID还不可用。
+        // 成功绑定资源后，它将立即可用。
         let bindResource = Bind.newSet(resource)
         var packetCollector = createStanzaCollectorAndSend(StanzaIdFilter(bindResource), bindResource)
         let response: Bind = (packetCollector.nextResultOrThrow() as Bind).getOrThrow()
-        // Set the connections user to the result of resource binding. It is important that we don't infer the user
-        // from the login() arguments and the configurations service name, as, for example, when SASL External is used,
-        // the username is not given to login but taken from the 'external' certificate.
+        // 将连接用户设置为资源绑定的结果。
+        // 重要的是，我们不要从login（）参数和配置服务名称推断用户，例如，当使用SASL External时，用户名不是用于登录的，而是从“external”证书中获取的。
         user = response.getJid()
         xmppServiceDomain = user?.asDomainBareJid()
         let sessionFeature = getFeature("SessionFeature") as SessionFeature
@@ -633,20 +633,16 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         if (!resumed) {
             authenticatedConnectionInitiallyEstablishedTimestamp = DateTime.now().toUnixTimeStamp()
         }
-        // Indicate that we're now authenticated.
+        // 表示我们现在已通过身份验证。
         this.authenticated = true
 
-        // If debugging is enabled, change the the debug window title to include the
-        // name we are now logged-in as.
-        // If DEBUG was set to true AFTER the connection was created the debugger
-        // will be null
+        // 如果启用了调试，请更改调试窗口标题，以包含我们现在登录的名称。
+        // 如果在创建连接后将debug设置为true，则调试器将为None
         debugger?.userHasLogged(user.getOrThrow())
         callConnectionAuthenticatedListener(resumed)
 
-        // Set presence to online. It is important that this is done after
-        // callConnectionAuthenticatedListener(), as this call will also
-        // eventually load the roster. And we should load the roster before we
-        // send the initial presence.
+        // 将在线状态设置为在线。需要注意的是，这一步操作必须在调用callConnectionAuthenticatedListener()之后进行，
+        // 因为该调用最终也会加载联系人列表（roster）。并且我们应该在发送初始在线状态之前先加载联系人列表。
         if (config.isSendPresence() && !resumed) {
             let availablePresence = getStanzaFactory().buildPresenceStanza().ofType(PresenceType.available).build()
             sendStanza(availablePresence)
@@ -658,11 +654,10 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     /**
-     * Get the name of the SASL mechanism that was used to authenticate this connection. This returns the name of
-     * mechanism which was used the last time this connection was authenticated, and will return <code>null</code> if
-     * this connection was not authenticated before.
+     * 获取用于对此连接进行身份验证的SASL机制的名称。
+     * 这将返回上次对此连接进行身份验证时使用的机制的名称，如果此连接之前未经过身份验证，则将返回<code>None</code>。
      *
-     * @return the name of the used SASL mechanism.
+     * @return 所用SASL机制的名称。
      */
     public func getUsedSaslMechansism(): ?String {
         return saslAuthentication().getNameOfLastUsedSaslMechansism()
@@ -710,28 +705,27 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
             case XMPPConnectionFromMode.USER => stanza.setFrom(getUser().map {v => v})
             case XMPPConnectionFromMode.UNCHANGED => ()
         }
-        // Invoke interceptors for the new stanza that is about to be sent. Interceptors may modify
-        // the content of the stanza.
+        // 为即将发送的新节调用拦截器。拦截器可以修改节的内容。
         let stanzaAfterInterceptors = firePacketInterceptors(stanza)
         sendStanzaInternal(stanzaAfterInterceptors)
     }
 
     /**
-     * Authenticate a connection.
+     * 对连接进行身份验证。
      *
-     * @param username the username that is authenticating with the server.
-     * @param password the password to send to the server.
-     * @param authzid the authorization identifier (typically null).
-     * @param sslSession the optional SSL/TLS session (if one was established)
-     * @return the used SASLMechanism.
-     * @throws XMPPErrorException if there was an XMPP error returned.
-     * @throws SASLErrorException if a SASL protocol error was returned.
-     * @throws IOException if an I/O error occurred.
-     * @throws InterruptedException if the calling thread was interrupted.
-     * @throws XmppSaslException if a SASL specific error occurred.
-     * @throws NotConnectedException if the XMPP connection is not connected.
-     * @throws NoResponseException if there was no response from the remote entity.
-     * @throws XmppWrappedException in case of an exception.
+     * @param username 正在与服务器进行身份验证的用户名。
+     * @param password 发送到服务器的密码。
+     * @param authzid 授权标识符（通常为空）。
+     * @param sslSession 可选SSL/TLS会话（如果已建立）
+     * @return 使用过的SASL机制。
+     * @throws XMPPErrorException 如果返回XMPP错误。
+     * @throws SASLErrorException 如果返回SASL协议错误。
+     * @throws IOException 如果发生I/O错误。
+     * @throws InterruptedException 如果调用线程被中断。
+     * @throws XmppSaslException 如果发生特定于SASL的错误。
+     * @throws NotConnectedException 如果XMPP连接未连接。
+     * @throws NoResponseException 如果远程实体没有响应。
+     * @throws XmppWrappedException 在发生异常时。
      * @see SASLAuthentication#authenticate(String, String, EntityBareJid, TlsSession )
      */
     public func authenticate(username: String, password: String, authzid: ?EntityBareJid, sslSession: ?TlsSession): SASLMechanism {
@@ -741,16 +735,14 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     /**
-     * Hook for subclasses right after successful SASL authentication. RFC 6120 § 6.4.6. specifies a that the initiating
-     * entity, needs to initiate a new stream in this case. But some transports, like BOSH, requires a special handling.
+     * SASL身份验证成功后，立即为子类设置钩子。RFC 6120 § 6.4.6。指定在这种情况下发起实体需要发起新流的。但有些运输工具，如BOSH，需要特殊处理。
      * <p>
-     * Note that we can not reset XMPPTCPConnection's parser here, because this method is invoked by the thread calling
-     * {@link #login()}, but the parser reset has to be done within the reader thread.
-     * </p>
+     * 请注意，我们不能在这里重置XMPPTCPConnection的解析器，因为此方法是由调用{@link#login（）}的线程调用的，但解析器重置必须在读取器线程内完成。
+     * <p>
      *
-     * @throws NotConnectedException if the XMPP connection is not connected.
-     * @throws InterruptedException if the calling thread was interrupted.
-     * @throws XmppWrappedException in case of an exception.
+     * @throws NotConnectedException 如果XMPP连接未连接。
+     * @throws InterruptedException 如果调用线程被中断。
+     * @throws XmppWrappedException 在发生异常时抛出。
      */
     protected func afterSaslAuthenticationSuccess(): Unit {
         sendStreamOpen()
@@ -761,10 +753,8 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     /**
-     * Closes the connection by setting presence to unavailable then closing the connection to
-     * the XMPP server. The XMPPConnection can still be used for connecting to the server
-     * again.
-     *
+     * 通过将存在设置为不可用，然后关闭与XMPP服务器的连接来关闭连接。
+     * XMPPConnection仍然可以用于再次连接到服务器。
      */
     public func disconnect(): Unit {
         var unavailablePresence: ?Presence = None
@@ -779,15 +769,13 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     /**
-     * Closes the connection. A custom unavailable presence is sent to the server, followed
-     * by closing the stream. The XMPPConnection can still be used for connecting to the server
-     * again. A custom unavailable presence is useful for communicating offline presence
-     * information such as "On vacation". Typically, just the status text of the presence
-     * stanza is set with online information, but most XMPP servers will deliver the full
-     * presence stanza with whatever data is set.
+     * 关闭连接。向服务器发送自定义不可用状态，然后关闭流。
+     * XMPPConnection仍然可以用于再次连接到服务器。
+     * 自定义不可用状态对于传达离线状态信息（如“度假”）很有用。
+     * 通常，只有状态节的状态文本设置了在线信息，但大多数XMPP服务器将提供完整的状态节以及设置的任何数据。
      *
-     * @param unavailablePresence the optional presence stanza to send during shutdown.
-     * @throws NotConnectedException if the XMPP connection is not connected.
+     * @param unavailablePresence 是关机期间要发送的可选状态节。
+     * @throws NotConnectedException 如果XMPP连接未连接。
      */
     public func disconnect(unavailablePresence: ?Presence): Unit {
         synchronized(this.lock) {
@@ -809,10 +797,9 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     private let notifyConnectionErrorMonitor = Monitor()
 
     /**
-     * Sends out a notification that there was an error with the connection
-     * and closes the connection.
+     * 发送连接出错的通知并关闭连接。
      *
-     * @param exception the exception that causes the connection close event.
+     * @param exception 导致连接关闭事件的异常。
      */
     public func notifyConnectionError(exception: Exception): Unit {
         synchronized(notifyConnectionErrorMonitor) {
@@ -822,13 +809,11 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
                 return
             }
 
-            // Note that we first have to set the current connection exception and notify waiting threads, as one of them
-            // could hold the instance lock, which we also need later when calling instantShutdown().
+            // 注意，我们首先必须设置当前的连接异常并通知正在等待的线程，因为其中一个等待线程可能持有实例锁，
+            // 而我们在稍后调用instantShutdown()时也需要该实例锁。
             setCurrentConnectionExceptionAndNotify(exception)
 
-            // Closes the connection temporary. A if the connection supports stream management, then a reconnection is
-            // possible. Note that a connection listener of e.g. XMPPTCPConnection will drop the SM state in
-            // case the Exception is a StreamErrorException.
+            // 临时关闭连接。如果该连接支持流管理，那么就有可能重新建立连接。需要注意的是，例如XMPPTCPConnection的连接监听器在遇到异常是StreamErrorException的情况下，将会丢弃流管理（SM）状态。
             instantShutdown()
 
             for (collector in collectors) {
@@ -837,7 +822,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
             Async.go(
                 {
                     =>
-                    // Notify connection listeners of the error.
+                    // 将该错误通知给连接监听器。
                     callConnectionClosedOnErrorListener(exception)
                 },
                 "${this} callConnectionClosedOnErrorListener()"
@@ -846,12 +831,12 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     /**
-     * Performs an unclean disconnect and shutdown of the connection. Does not send a closing stream stanza.
+     * 执行连接的不干净断开和关闭。不发送结束流节。
      */
     public func instantShutdown(): Unit
 
     /**
-     * Shuts the current connection down.
+     * 关闭当前连接。
      */
     protected func shutdown(): Unit
 
@@ -883,17 +868,17 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
 
     public override func createStanzaCollectorAndSend(packet: IQ): StanzaCollector {
         let packetFilter: StanzaFilter = IQReplyFilter(packet, this.getUser(), this.getXMPPServiceDomain())
-        // Create the packet collector before sending the packet
+        // 在发送数据包之前创建数据包收集器。
         let packetCollector = createStanzaCollectorAndSend(packetFilter, packet)
         return packetCollector
     }
 
     public override func createStanzaCollectorAndSend(packetFilter: StanzaFilter, packet: Stanza): StanzaCollector {
         let configuration = StanzaCollector.newConfiguration().setStanzaFilter(packetFilter).setRequest(packet)
-        // Create the packet collector before sending the packet
+        // 在发送数据包之前创建数据包收集器。
         let packetCollector = createStanzaCollector(configuration)
         try {
-            // Now we can send the packet as the collector has been created
+            // 现在由于数据包收集器已经创建好，我们可以发送数据包了。
             sendStanza(packet)
         } catch (e: Exception) {
             packetCollector.cancel()
@@ -909,7 +894,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
 
     public override func createStanzaCollector(configuration: StanzaCollectorConfiguration): StanzaCollector {
         let collector = StanzaCollector(this, configuration)
-        // Add the collector to the list of active collectors.
+        // 将收集器添加到活动收集器列表中。
         collectors.append(collector)
         return collector
     }
@@ -931,7 +916,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         }
     }
 
-    public override func addSyncStanzaListener(packetListener: StanzaListener, packetFilter: StanzaFilter): Unit {
+    public override func addSyncStanzaListener(packetListener: StanzaListener, packetFilter: ?StanzaFilter): Unit {
         let wrapper = AbstractXMPPConnectionListenerWrapper(packetListener, packetFilter)
         synchronized(syncRecvListenersLock) {
             syncRecvListeners.put(packetListener, wrapper)
@@ -971,21 +956,17 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     /**
-     * Process all stanza listeners for sending stanzas.
+     * 处理所有节侦听器以发送节.
      * <p>
-     * Compared to {@link #firePacketInterceptors(Stanza)}, the listeners will be invoked in a new thread.
+     * 与{@link#firePacketInterceptors（Stanza）}相比，侦听器将在新线程中被调用
      * </p>
      *
-     * @param sendTopLevelStreamElement the top level stream element which just got send.
+     * @param sendTopLevelStreamElement 刚刚发送的TopLevelStreamElement
      */
     public func fireElementSendingListeners(sendTopLevelStreamElement: TopLevelStreamElement): Unit {
         debugger?.onOutgoingStreamElement(sendTopLevelStreamElement)
 
-        if (!(sendTopLevelStreamElement is TopLevelStreamElement)) {
-            return
-        }
-        let packet = (sendTopLevelStreamElement as Stanza).getOrThrow()
-
+        let packet = (sendTopLevelStreamElement as Stanza) ?? return
         let listenersToNotify = LinkedList<StanzaListener>()
         synchronized(sendListenersLock) {
             for (listenerWrapper in sendListeners.values()) {
@@ -997,7 +978,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         if (listenersToNotify.isEmpty()) {
             return
         }
-        // Notify in a new thread, because we can
+        // 在一个新线程中进行通知，因为我们可以（这么做）。
         asyncGo {
             => for (listener in listenersToNotify) {
                 try {
@@ -1009,23 +990,6 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
             }
         }
     }
-
-    // @Deprecated
-    // public func addStanzaInterceptor(@ packetInterceptor: StanzaListener, @ packetFilter: StanzaFilter): Unit {
-    //     if (packetInterceptor.isEmpty()) {
-    //         throw NoneValueException("Packet interceptor is null.")
-    //     }
-    //     let interceptorWrapper = AbstractXMPPConnectionInterceptorWrapper(packetInterceptor, packetFilter)
-    //     synchronized (interceptorsLock) {
-    //         interceptors.put(packetInterceptor, interceptorWrapper)
-    //     }
-    // }
-    // @Deprecated
-    // public override func removeStanzaInterceptor(@ packetInterceptor: StanzaListener): Unit {
-    //     synchronized (interceptorsLock) {
-    //         interceptors.remove(packetInterceptor)
-    //     }
-    // }
 
     private static func addInterceptor<MPB, MP>(
         interceptors: Map<HashableConsumer<MPB>, GenericInterceptorWrapper<MPB, MP>>,
@@ -1088,7 +1052,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
             }
         }
 
-        // Avoid transforming the stanza to a builder if there is no interceptor.
+        // 如果没有拦截器，就避免将节（stanza，在XMPP等协议中用于表示消息单元）转换为构建器。
         if (interceptorsToInvoke.isEmpty()) {
             return tempmessageOrPresence
         }
@@ -1097,19 +1061,18 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
             interceptor(builder)
         }
 
-        // Now that the interceptors have (probably) modified the stanza in its builder form, we need to re-assemble it.
+        // 既然拦截器（很可能）已经以构建器的形式修改了节（stanza，在类似XMPP等协议里表示消息单元的一种结构），我们就需要重新组装它。
         tempmessageOrPresence = (builder.build() as MP).getOrThrow()
         return tempmessageOrPresence
     }
 
     /**
-     * Process interceptors. Interceptors may modify the stanza that is about to be sent.
-     * Since the thread that requested to send the stanza will invoke all interceptors,
-     * it is important that interceptors perform their work as soon as possible so that
-     * the thread does not remain blocked for a long period.
+     * 处理拦截器相关操作。拦截器可能会修改即将要发送的节（stanza，在相关协议中表示消息单元）。
+     * 由于请求发送节的线程会调用所有拦截器，所以拦截器尽快完成其工作非常重要，
+     * 这样该线程才不会长时间处于阻塞状态。
      *
-     * @param packet the stanza that is going to be sent to the server.
-     * @return the, potentially modified stanza, after the interceptors are run.
+     * @param packet 将要发送到服务器的节。
+     * @return 在运行拦截器之后，可能已被修改过的节。
      */
     private func firePacketInterceptors(packet: Stanza): Stanza {
         let interceptorsToInvoke = LinkedList<StanzaListener>()
@@ -1127,35 +1090,32 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
                 LOGGER.error("Packet interceptor threw exception", ("exception", e))
             }
         }
-        let stanzaAfterInterceptors: Stanza
-        if (let Some(message) <- (packet as Message)) {
-            stanzaAfterInterceptors = fireMessageOrPresenceInterceptors(message, messageInterceptors,
+        let stanzaAfterInterceptors: Stanza = match (packet) {
+            case message: Message => fireMessageOrPresenceInterceptors(message, messageInterceptors,
                 messageInterceptorsLock)
-        } else if (let Some(presence) <- (packet as Presence)) {
-            stanzaAfterInterceptors = fireMessageOrPresenceInterceptors(presence, presenceInterceptors,
+            case presence: Presence => fireMessageOrPresenceInterceptors(presence, presenceInterceptors,
                 presenceInterceptorsLock)
-        } else {
-            // We do not (yet) support interceptors for IQ stanzas.
-            assert(packet is IQ)
-            stanzaAfterInterceptors = packet
+            case _ =>
+                // 我们（目前）还不支持针对IQ节（stanza，在相关协议里类似消息单元的一种结构，这里特指IQ类型的）的拦截器。
+                assert(packet is IQ)
+                packet
         }
         return stanzaAfterInterceptors
     }
 
     /**
-     * Initialize the {@link #debugger}. You can specify a customized {@link XmppDebugger}
-     * by setup the system property <code>xmpp.debuggerClass</code> to the implementation.
-     *
-     * @throws IllegalStateException if the reader or writer isn't yet initialized.
-     * @throws IllegalArgumentException if the XmppDebugger can't be loaded.
+     * 初始化{@link #debugger}。你可以通过将系统属性 <code>xmpp.debuggerClass</code> 设置为相应的实现类，来指定一个自定义的{@link XmppDebugger}。
+
+     * @throws IllegalStateException 如果读取器（reader）或写入器（writer）尚未初始化，则抛出此异常。
+     * @throws IllegalArgumentException 如果无法加载{@link XmppDebugger}，则抛出此异常。
      */
     protected func initDebugger(): Unit {
         if (reader.isNone() || writer.isNone()) {
             throw NoneValueException("Reader or writer isn't initialized.")
         }
-        // If debugging is enabled, we open a window and write out all network traffic.
+        // 如果调试功能已启用，我们将打开一个窗口并输出所有网络流量信息。
         if (let Some(debugger) <- debugger) {
-            // Obtain new reader and writer from the existing debugger
+            // 从现有的调试器中获取新的读取器和写入器。
             reader = debugger.newConnectionReader(reader())
             writer = debugger.newConnectionWriter(writer())
         }
@@ -1176,9 +1136,9 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     private var unknownIqRequestReplyMode = XmppConfiguration.getUnknownIqRequestReplyMode()
 
     /**
-     * Set how Xmpp behaves when an unknown IQ request has been received.
+     * 设置当接收到一个未知的IQ请求时，Xmpp的行为方式。
      *
-     * @param unknownIqRequestReplyMode reply mode.
+     * @param unknownIqRequestReplyMode 回复模式。
      */
     public func setUnknownIqRequestReplyMode(unknownIqRequestReplyMode: XmppConfigurationUnknownIqRequestReplyMode): Unit {
         this.unknownIqRequestReplyMode = Objects.requireNonNull(unknownIqRequestReplyMode, "Mode must not be null")
@@ -1220,7 +1180,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         }
 
         var nonzaCallbacks: ?ArrayList<NonzaCallback>
-        synchronized(nonzaCallbacksMap.lock.writeMutex) {
+        synchronized(nonzaCallbacksMap.lock) {
             nonzaCallbacks = ArrayList(nonzaCallbacksMap.getAll(key))
         }
         if (nonzaCallbacks.isNone()) {
@@ -1254,34 +1214,32 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     /**
-     * Processes a stanza after it's been fully parsed by looping through the installed
-     * stanza collectors and listeners and letting them examine the stanza to see if
-     * they are a match with the filter.
-     *
-     * @param stanza the stanza to process.
-     * @throws InterruptedException if the calling thread was interrupted.
+     * 在一个节（stanza，在相关协议中表示消息单元之类的结构）被完全解析之后对其进行处理，处理方式是通过遍历已安装的节收集器和监听器，
+     * 并让它们检查该节，以查看它们是否与过滤器匹配。
+
+     * @param stanza 要处理的节。
+     * @throws InterruptedException 如果调用线程被中断，则抛出此异常。
      */
     protected open func processStanza(stanza: Stanza): Unit {
-        // assert (stanza.isSome())
         maybeNotifyDebuggerAboutIncoming(stanza)
         lastStanzaReceived = DateTime.now().toUnixTimeStamp()
-        // Deliver the incoming packet to listeners.
+        // 将传入的数据包传递给监听器。
         invokeStanzaCollectorsAndNotifyRecvListeners(stanza)
     }
 
     /**
-     * Invoke {@link StanzaCollector#processStanza(Stanza)} for every
-     * StanzaCollector with the given packet. Also notify the receive listeners with a matching stanza filter about the packet.
+     * 针对每个节收集器（StanzaCollector），使用给定的数据包调用{@link StanzaCollector#processStanza(Stanza)}方法。
+     * 同时，使用匹配的节过滤器将该数据包通知给接收监听器。
      * <p>
-     * This method will be invoked by the connections incoming processing thread which may be shared across multiple connections and
-     * thus it is important that no user code, e.g. in form of a callback, is invoked by this method. For the same reason,
-     * this method must not block for an extended period of time.
+     * 此方法将由处理传入数据的连接线程调用，该线程可能会在多个连接之间共享，
+     * 因此，此方法不能调用任何用户代码（例如以回调的形式），这一点很重要。基于同样的原因，
+     * 此方法绝不能长时间阻塞。
      * </p>
      *
-     * @param packet the stanza to notify the StanzaCollectors and receive listeners about.
+     * @param packet 要通知给节收集器和接收监听器的节（stanza，在相关协议里类似消息单元的结构）。
      */
     protected func invokeStanzaCollectorsAndNotifyRecvListeners(packet: Stanza): Unit {
-        if (let Some(iq) <- packet as IQ) {
+        if (let Some(iq) <- (packet as IQ)) {
             if (iq.isRequestIQ()) {
                 let iqRequest = iq
                 let key = iqRequest.getChildElementQName()
@@ -1297,12 +1255,11 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
                         case replyFeatureNotImplemented => StanzaErrorCondition.feature_not_implemented
                         case replyServiceUnavailable => StanzaErrorCondition.service_unavailable
                     }
-
-                    // If the IQ stanza is of type "get" or "set" with no registered IQ request handler, then answer an
-                    // IQ of type 'error' with condition 'service-unavailable'.
+                    // 如果IQ节（stanza，在相关协议里类似消息单元的结构，这里特指IQ类型）的类型是“get”（获取）或“set”（设置），
+                    // 并且没有已注册的IQ请求处理程序，那么就用“service-unavailable”（服务不可用）的条件来回复一个类型为“error”（错误）的IQ。
                     let errorIQ = IQ.createErrorResponse(iq, StanzaError.getBuilder(replyCondition).build())
-                    // Use async sendStanza() here, since if sendStanza() would block, then some connections, e.g.
-                    // XmppNioTcpConnection, would deadlock, as this operation is performed in the same thread that is
+                    // 在此处使用异步的sendStanza()方法，因为如果sendStanza()方法会阻塞的话，那么某些连接（例如XmppNioTcpConnection）将会发生死锁，
+                    // 因为此操作是在（与其他相关操作）相同的线程中执行的。
                     asyncGo {
                         => try {
                             sendStanza(errorIQ)
@@ -1319,11 +1276,11 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
                     executorService(
                         {
                             =>
-                            // It is not ideal if the IQ request handler does not return an IQ response,
-                            // because RFC 6120 § 8.1.2 does specify that a response is mandatory.
-                            // But some APIs, mostly the file transfer one, does not always return a result, so we need to handle this case.
-                            // Also sometimes a request handler may decide that it's better to not send a response,
-                            // e.g. to avoid presence leaks.
+                            // 如果IQ请求处理程序不返回IQ响应，这并不是理想的情况，
+                            // 因为RFC 6120第8.1.2节明确规定了响应是必需的。
+                            // 但是一些API（主要是文件传输相关的API）并不总是返回结果，所以我们需要处理这种情况。
+                            // 而且有时候请求处理程序可能会判定不发送响应更好，
+                            // 例如，为了避免状态信息泄露。
                             let response: IQ = finalIqRequestHandler.handleIQRequest(iq) ?? return ()
 
                             assert(response.isResponseIQ())
@@ -1338,16 +1295,13 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
                         }
                     )
                 }
-                // The following returns makes it impossible for packet listeners and collectors to
-                // filter for IQ request stanzas, i.e. IQs of type 'set' or 'get'. This is the
-                // desired behavior.
+                // 以下的返回情况使得数据包监听器和收集器无法针对IQ请求节（stanza，在相关协议里类似消息单元的结构，这里特指IQ类型的‘set’或‘get’请求）进行过滤。这正是我们所期望的行为。
                 return
             }
         }
 
-        // First handle the async recv listeners. Note that this code is very similar to what follows a few lines below,
-        // the only difference is that asyncRecvListeners is used here and that the packet listeners are started in
-        // their own thread.
+        // 首先处理异步接收监听器。请注意，这段代码与下面几行的代码非常相似，
+        // 唯一的区别在于这里使用了asyncRecvListeners，并且数据包监听器是在它们自己的线程中启动的。
         let listenersToNotify: LinkedList<StanzaListener> = LinkedList<StanzaListener>()
         extractMatchingListeners(packet, asyncRecvListeners, asyncRecvListenersLock, listenersToNotify)
         for (listener in listenersToNotify) {
@@ -1361,7 +1315,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
             })
         }
 
-        // Loop through all collectors and notify the appropriate ones.
+        // 遍历所有收集器，并通知相应的收集器。
         for (collector in collectors) {
             collector.processStanza(packet)
         }
@@ -1385,22 +1339,19 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         }
         listenerSemaphore.acquire()
 
-        // Notify the receive listeners interested in the packet
+        // 通知对该数据包感兴趣的接收监听器。
         listenersToNotify.clear()
         extractMatchingListeners(packet, syncRecvListeners, syncRecvListenersLock, listenersToNotify)
-        // Decouple incoming stanza processing from listener invocation. Unlike async listeners, this uses a single
-        // threaded executor service and therefore keeps the order.
+        // 将传入节（stanza，在相关协议里类似消息单元的结构）的处理与监听器调用分离开来。与异步监听器不同的是，这里使用了单线程的执行器服务，因此能够保持处理顺序。
         ASYNC_BUT_ORDERED.performAsyncButOrdered(
             this,
             {
                 =>
-                // As listeners are able to remove themselves and because the timepoint where it is decided to invoke a
-                // listener is a different timepoint where the listener is actually invoked (here), we have to check
-                // again if the listener is still active.
+                // 由于监听器能够自行移除自身，并且因为决定调用监听器的时间点与实际调用监听器的时间点（此处）是不同的，所以我们必须再次检查该监听器是否仍然处于活动状态。
                 synchronized(syncRecvListenersLock) {
                     listenersToNotify.removeIf {
                         v =>
-                        // The listener was removed from syncRecvListener, also remove him from listenersToNotify.
+                        // 该监听器已从同步接收监听器（syncRecvListener）中移除，也要将其从待通知监听器（listenersToNotify）中移除。
                         !syncRecvListeners.contains(v)
                     }
                 }
@@ -1431,12 +1382,11 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     /**
-     * Sets whether the connection has already logged in the server. This method assures that the
-     * {@link #wasAuthenticated} flag is never reset once it has ever been set.
-     *
+     * 设置连接是否已登录服务器。
+     * 此方法确保一旦设置了{@link#wasAuthenticated}标志，它就永远不会重置。
      */
     protected func setWasAuthenticated(): Unit {
-        // Never reset the flag if the connection has ever been authenticated
+        // 如果连接曾经已经通过认证，就绝不要重置该标志。
         if (!wasAuthenticated) {
             wasAuthenticated = authenticated
         }
@@ -1459,8 +1409,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
             try {
                 listener.authenticated(this, resumed)
             } catch (e: Exception) {
-                // Catch and print any exception so we can recover
-                // from a faulty listener and finish the shutdown process
+                // 捕获并打印任何异常，这样我们就能从出现故障的监听器中恢复过来，并完成关闭进程。
                 LOGGER.error("Exception in authenticated listener", ("exception", e))
             }
         }
@@ -1478,7 +1427,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
 
     private func callConnectionClosedOnErrorListener(e: Exception): Unit {
         var logWarning = true
-        if (let Some(see) <- e as StreamErrorException) {
+        if (let Some(see) <- (e as StreamErrorException)) {
             if (see.getStreamError().getCondition() == StreamErrorCondition.not_authorized && wasAuthenticated) {
                 logWarning = false
                 LOGGER.trace(
@@ -1493,8 +1442,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
             try {
                 listener.connectionClosedOnError(e)
             } catch (e2: Exception) {
-                // Catch and print any exception so we can recover
-                // from a faulty listener
+                // 捕获并打印任何异常，以便我们能从出现故障的监听器中恢复过来。
                 LOGGER.error("Error in listener while closing connection", ("exception", e2))
             }
         }
@@ -1534,8 +1482,8 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
                             streamFeature = provider.parse(parser, incomingStreamXmlEnvironment)
                         }
                 }
-                if (streamFeature.isSome()) {
-                    addStreamFeature(streamFeature.getOrThrow())
+                if (let Some(v) <- streamFeature) {
+                    addStreamFeature(v)
                 }
             } else if (eventType == XmlPullParserEvent.END_ELEMENT && parser.getDepth() == initialDepth) {
                 break
@@ -1547,21 +1495,20 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         parseFeatures(parser)
 
         if (hasFeature(Mechanisms.ELEMENT, Mechanisms.NAMESPACE)) {
-            // Only proceed with SASL auth if TLS is disabled or if the server doesn't announce it
-            if (!hasFeature(StartTls.ELEMENT, StartTls.NAMESPACE) || config.getSecurityMode() ==
-                ConnectionConfigurationSecurityMode.disabled) {
+            // 只有在TLS（传输层安全协议）被禁用或者服务器未声明启用TLS的情况下，才继续进行SASL（简单认证与安全层）认证。
+            if (!hasFeature(StartTls.ELEMENT, StartTls.NAMESPACE) || config.getSecurityMode() == ConnectionConfigurationSecurityMode
+                .disabled) {
                 saslFeatureReceived = true
                 tlsHandled = true
                 notifyWaitingThreads()
             }
         }
 
-        // If the server reported the bind feature then we are that that we did SASL and maybe
-        // STARTTLS. We can then report that the last 'stream:features' have been parsed
+        // 如果服务器报告了绑定功能，那么我们可以确定我们已经完成了SASL（简单认证与安全层）认证，并且可能也完成了STARTTLS（启动TLS协议）操作。然后我们就可以报告说最后的“stream:features”（流特性）已经被解析完成了。
         if (hasFeature(Bind.ELEMENT, Bind.NAMESPACE)) {
             if (!hasFeature(CompressFeature.ELEMENT, Compress.NAMESPACE) || !config.isCompressionEnabled()) {
-                // This where the last stream features from the server,
-                // either it did not contain compression or we disabled it.
+                // 这里是服务器发送的最后一组流特性（stream features），
+                // 要么它（指流特性）不包含压缩功能，要么是我们已经禁用了压缩功能。
                 lastFeaturesReceived = true
                 notifyWaitingThreads()
             }
@@ -1570,7 +1517,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     protected open func afterFeaturesReceived(): Unit {
-        // Default implementation does nothing
+        // 默认实现不执行任何操作。
     }
 
     public override func getFeature(qname: QName): ?FullyQualifiedElement {
@@ -1613,8 +1560,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         timeout: Duration
     ): XmppFuture<S, Exception> where S <: Stanza {
         Objects.requireNonNull(stanza, "stanza must not be null")
-        // While Xmpp allows to add PacketListeners with a PacketFilter value of 'null', we
-        // disallow it here in the async API as it makes no sense
+        // 虽然XMPP（可扩展消息处理现场协议）允许添加PacketFilter（数据包过滤器）值为“null”（空）的PacketListeners（数据包监听器），但我们在异步API中在此处禁止这种做法，因为这毫无意义。
         Objects.requireNonNull(replyFilter, "replyFilter must not be null")
 
         let future = InternalXmppFuture<S, Exception>()
@@ -1622,8 +1568,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
             stanza, stanzaListener =>
             let removed = removeAsyncStanzaListener(stanzaListener)
             if (!removed) {
-                // We lost a race against the "no response" handling runnable. Avoid calling the callback, as the
-                // exception callback will be invoked (if any).
+                // 我们在与“无响应”处理可运行对象的竞争中失败了。避免调用回调函数，因为异常回调（如果有的话）将会被调用。
                 return
             }
             try {
@@ -1639,15 +1584,14 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
                 =>
                 let removed = removeAsyncStanzaListener(stanzaListener)
                 if (!removed) {
-                    // We lost a race against the stanza listener, he already removed itself because he received a
-                    // reply. There is nothing more to do here.
+                    // 我们在与节（stanza，在相关协议里类似消息单元的结构）监听器的竞争中落败了，它已经因为接收到了一个回复而将自身移除了。在这里已经没有其他事情可做了。
                     return
                 }
 
-                // If the packetListener got removed, then it was never run and
-                // we never received a response, inform the exception callback
+                // 如果数据包监听器已被移除，那么它从未被运行过，
+                // 并且我们也从未收到过回复，此时要通知异常回调（函数）。
                 let exception: Exception = if (!isConnected()) {
-                    // If the connection is no longer connected, throw a not connected exception.
+                    // 如果连接不再处于连接状态，抛出一个未连接异常。
                     NotConnectedException(this, replyFilter)
                 } else {
                     NoResponseException.newWith(this, replyFilter)
@@ -1715,30 +1659,29 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     /**
-     * Get the timestamp when the connection was the first time authenticated, i.e., when the first successful login was
-     * performed. Note that this value is not reset on disconnect, so it represents the timestamp from the last
-     * authenticated connection. The value is also not reset on stream resumption.
+     * 获取连接首次通过身份验证的时间戳，即首次成功登录的时间。
+     * 请注意，此值在断开连接时不会重置，因此它表示上次经过身份验证的连接的时间戳。
+     * 该值在流恢复时也不会重置。
      *
-     * @return the timestamp or {@code null}.
+     * @return 时间戳。
      */
     public func getAuthenticatedConnectionInitiallyEstablishedTimestamp(): Duration {
         return authenticatedConnectionInitiallyEstablishedTimestamp
     }
 
     /**
-     * Install a parsing exception callback, which will be invoked once an exception is encountered while parsing a
-     * stanza.
+     * 安装一个解析异常回调，在解析节时遇到异常时将调用该回调。
      *
-     * @param callback the callback to install
+     * @param callback 回调以进行安装
      */
     public func setParsingExceptionCallback(callback: ParsingExceptionCallback): Unit {
         parsingExceptionCallback = callback
     }
 
     /**
-     * Get the current active parsing exception callback.
+     * 获取当前活动的解析异常回调。
      *
-     * @return the active exception callback or null if there is none
+     * @return 活动异常回调。
      */
     public func getParsingExceptionCallback(): ParsingExceptionCallback {
         return parsingExceptionCallback
@@ -1751,11 +1694,11 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     /**
-     * A queue of deferred runnables that where not executed immediately because {@link #currentAsyncRunnables} reached
-     * {@link #maxAsyncRunnables}. Note that we use a {@code LinkedList} in order to avoid space blowups in case the
-     * list ever becomes very big and shrinks again.
+     * 一个延迟可运行对象（deferred runnables）的队列，这些可运行对象未能立即执行，是因为{@link #currentAsyncRunnables}（当前异步可运行对象数量）达到了{@link #maxAsyncRunnables}（最大异步可运行对象数量）。
+     * 请注意，我们使用{@code LinkedList}（链表）是为了避免在列表变得非常大然后又缩小时出现空间膨胀的情况。
      */
     private let deferredAsyncRunnables: LinkedList<() -> Unit> = LinkedList()
+
     private let deferredAsyncRunnablesLock = Monitor()
 
     private var deferredAsyncRunnablesCount: Int = 0
@@ -1827,12 +1770,11 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     public func onStreamOpen(parser: XmlPullParser): Unit {
-        // We found an opening stream.
+        // 我们发现了一个开启的流。
         if (parser.getNamespace(None) == "jabber:client") {
             streamId = parser.getAttributeValue("", "id")
             incomingStreamXmlEnvironment = XmlEnvironment.froms(parser)
-            // RFC 6120 § 4.7.1. makes no explicit statement whether or not 'from' in the stream
-            // open from the server in c2s connections is required or not.
+            // RFC 6120（可扩展消息处理现场协议相关的标准文档）第4.7.1节并未明确说明在客户端到服务器（c2s）连接中，服务器发起的流打开操作里的“from”（发送方信息）是必需的还是非必需的。
             let reportedServerDomainString = parser.getAttributeValue("", "from") ?? return ()
             try {
                 let reportedServerDomain = JidCreate.domainBareFrom(reportedServerDomainString)
@@ -1852,10 +1794,9 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     protected func sendStreamOpen(): Unit {
-        // If possible, provide the receiving entity of the stream open tag, i.e. the server, as much information as
-        // possible. The 'to' attribute is *always* available. The 'from' attribute if set by the user and no external
-        // mechanism is used to determine the local entity (user). And the 'id' attribute is available after the first
-        // response from the server (see e.g. RFC 6120 § 9.1.1 Step 2.)
+        // 如果可能的话，要为流打开标签的接收实体（也就是服务器）提供尽可能多的信息。“to”（接收方）属性是“始终”可用的。
+        // “from”（发送方）属性，如果由用户设置且没有使用外部机制来确定本地实体（用户）时是可用的。
+        // 而“id”（标识）属性在收到服务器的第一次响应之后可用（例如，参见RFC 6120第9.1.1节步骤2）。
         let to = getXMPPServiceDomain().toString()
         var comefrom: ?String = None
         let localpart = config.getUsername()
@@ -1879,13 +1820,16 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     public static func getClassId(): ClassId {
         "AbstractXmppConnection"
     }
+
     public open operator override func ==(that: XMPPConnection): Bool {
         match (that) {
             case v: AbstractXMPPConnection => refEq(this, v)
             case _ => false
         }
     }
+
     private var cachedHash: ?Int = None
+
     public open override func hashCode(): Int {
         if (let Some(cachedHash) <- cachedHash) {
             cachedHash
@@ -1897,9 +1841,21 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 }
 
+/**  
+ * 表示同步点不同状态的枚举。
+ */
 public enum SyncPointState <: Equatable<SyncPointState> {
+    /**  
+     * 同步点的初始状态。
+     */
     | initial
+    /**  
+     * 发送请求。
+     */
     | request_sent
+    /**  
+     * 同步点已成功完成的状态。
+     */
     | successful
 
     public operator override func ==(other: SyncPointState): Bool {
@@ -1913,17 +1869,18 @@ public enum SyncPointState <: Equatable<SyncPointState> {
 }
 
 /**
- * A wrapper class to associate a stanza filter with a listener.
+ * 一个包装类，用于将节过滤器与监听器相关联。
  */
 public class AbstractXMPPConnectionListenerWrapper {
     private let packetListener: StanzaListener
+
     private let packetFilter: ?StanzaFilter
 
     /**
-     * Create a class which associates a stanza filter with a listener.
+     * 创建一个类，将节过滤器与监听器相关联。
      *
-     * @param packetListener the stanza listener.
-     * @param packetFilter the associated filter or null if it listen for all packets.
+     * @param packetListener 节侦听器。
+     * @param packetFilter 关联的过滤器，如果它监听所有数据包，则为None。
      */
     public init(packetListener: StanzaListener, packetFilter: ?StanzaFilter) {
         this.packetListener = packetListener
@@ -1940,14 +1897,14 @@ public class AbstractXMPPConnectionListenerWrapper {
 }
 
 /**
- * A wrapper class to associate a stanza filter with an interceptor.
+ * 一个包装类，用于将节过滤器与拦截器相关联。
  */
 class AbstractXMPPConnectionInterceptorWrapper {
     /**
-     * Create a class which associates a stanza filter with an interceptor.
+     * 创建一个类，将节过滤器与拦截器相关联。
      *
-     * @param packetInterceptor the interceptor.
-     * @param packetFilter the associated filter or null if it intercepts all packets.
+     * @param packetInterceptor 拦截器。
+     * @param packetFilter 关联的过滤器，如果它拦截了所有数据包，则为None。
      */
     public AbstractXMPPConnectionInterceptorWrapper(
         let packetInterceptor: StanzaListener,
@@ -1965,6 +1922,7 @@ class AbstractXMPPConnectionInterceptorWrapper {
 
 class GenericInterceptorWrapper<MPB, MP> where MPB <: MessageOrPresenceBuilder, MP <: MessageOrPresence {
     private let stanzaInterceptor: Consumer<MPB>
+
     private let stanzaFilter: ?Predicate<MP>
 
     init(stanzaInterceptor: Consumer<MPB>, stanzaFilter: ?Predicate<MP>) {

@@ -277,7 +277,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
     }
 
     /**  
-     * 从结果创建 SmackFuture 实例。
+     * 从结果创建 XmppFuture 实例。
      *
      * @param result 结果
      * @return XmppFuture 实例
@@ -289,9 +289,9 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
     }
 
     /**  
-     * 等待一组 SmackFuture 完成。
+     * 等待一组 XmppFuture 完成。
      *
-     * @param futures需要等待的 SmackFuture 集合
+     * @param futures需要等待的 XmppFuture 集合
      * @param timeout 等待的最大时间
      * @param unit 时间单位
      * @return 如果所有任务在指定时间内完成，则返回 <code>true</code>；否则返回 <code>false</code>
@@ -311,7 +311,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
 }
 
 /**
- * InternalSmackFuture 是一个内部类，扩展了 SmackFuture，用于处理异步操作的结果。
+ * InternalXmppFuture 是一个内部类，扩展了 XmppFuture，用于处理异步操作的结果。
  * <p>
  * 该类提供了设置结果或异常的功能，并在这些状态变化时通知所有等待的线程。
  * </p>
@@ -354,7 +354,7 @@ public open class InternalXmppFuture<V, E> <: XmppFuture<V, E> where E <: Except
 }
 
 /**  
- * SocketFuture 类扩展了 InternalSmackFuture，用于处理异步 Socket连接的结果。
+ * SocketFuture 类扩展了 InternalXmppFuture，用于处理异步 Socket连接的结果。
  * <p>
  * 此类负责创建 Socket，并提供异步连接的功能，同时处理连接过程中的中断和异常。
  * </p>
@@ -450,10 +450,10 @@ public class SocketFuture <: InternalXmppFuture<TcpSocket, Exception> {
 }
 
 /**
- * InternalProcessStanzaSmackFuture 是一个抽象类，扩展了 InternalSmackFuture，
+ * InternalProcessStanzaXmppFuture 是一个抽象类，扩展了 InternalXmppFuture，
  * 同时实现了 StanzaListener 和 ExceptionCallback 接口。
  * <p>
- * 该类用于处理 Smack相关的异步操作结果，并在出现异常时进行处理。
+ * 该类用于处理 Xmpp相关的异步操作结果，并在出现异常时进行处理。
  * </p>
  *
  * @param <V>结果的类型 * @param <E> 异常的类型，必须是 Exception 的子类
@@ -511,7 +511,7 @@ public abstract class InternalProcessStanzaXmppFuture<V, E> <: InternalXmppFutur
 }
 
 /**
- * SimpleInternalProcessStanzaSmackFuture 类是 InternalProcessStanzaSmackFuture 的简单实现，
+ * SimpleInternalProcessStanzaXmppFuture 类是 InternalProcessStanzaXmppFuture 的简单实现，
  * 其 isNonFatalException(E) 方法始终返回 <code>false</code>。
  * <p>
  * 该类的实例在处理异常时将始终视所有异常为致命异常。
@@ -531,14 +531,14 @@ public abstract class SimpleInternalProcessStanzaXmppFuture<V, E> <: InternalPro
     }
 }
 
-public class ExecutionException <: Exception {
+public class ExecutionException <: ExceptionExt {
     /**
      * 通过Exception初始化ExecutionException。
      *
      * @param cause Exception
      */
-    public ExecutionException(public let cause: Exception) {
-        super(cause.message)
+    public init(cause: Exception) {
+        super(cause)
     }
 
     /**

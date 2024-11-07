@@ -6,12 +6,11 @@ package xmpp4cj.jid
 internal import encoding.url.{URL, Form}
 internal import std.collection.*
 internal import std.convert.Parsable
-internal import std.io.{ByteArrayStream, IOException, OutputStream, StringReader}
+internal import std.io.{ByteBuffer, IOException, OutputStream, StringReader}
 internal import std.regex.{Regex}
 internal import std.sort.stableSort
 internal import std.sync.{AtomicInt64, ReentrantMutex}
 internal import std.time.{DateTime, DateTimeFormat, TimeParseException, TimeZone}
-// internal import std.unicode.{UnicodeExtension}
 
 type CharSequence = ToString
 

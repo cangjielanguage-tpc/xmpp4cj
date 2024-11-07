@@ -23,7 +23,7 @@ package xmpp4cj.connection
  * Interrupting the reconnection thread will abort the reconnection mechanism.
  * </p>
  */
-public open class ReconnectionManager {
+public class ReconnectionManager {
     static let LOGGER = getGlobalLogger("ReconnectionManager")
 
     private static let INSTANCES: SimpleHashMap<AbstractXMPPConnection, ReconnectionManager> = SimpleHashMap()
@@ -126,7 +126,7 @@ public open class ReconnectionManager {
      * @param listener the listener to add
      * @return <code>true</code> if the listener was not already added
      */
-    public open func addReconnectionListener(listener: ReconnectionListener): Bool {
+    public func addReconnectionListener(listener: ReconnectionListener): Bool {
         return reconnectionListeners.put(listener)
     }
 
@@ -135,7 +135,7 @@ public open class ReconnectionManager {
      * @param listener the listener to remove
      * @return <code>true</code> if the listener was active and got removed.
      */
-    public open func removeReconnectionListener(listener: ReconnectionListener): Bool {
+    public func removeReconnectionListener(listener: ReconnectionListener): Bool {
         return reconnectionListeners.remove(listener)
     }
 
@@ -145,7 +145,7 @@ public open class ReconnectionManager {
      *
      * @param fixedDelay Delay expressed in seconds
      */
-    public open func setFixedDelay(fixedDelay: Duration): Unit {
+    public func setFixedDelay(fixedDelay: Duration): Unit {
         this.fixedDelay = fixedDelay
         setReconnectionPolicy(ReconnectionPolicy.FIXED_DELAY)
     }
@@ -155,7 +155,7 @@ public open class ReconnectionManager {
      *
      * @param reconnectionPolicy TODO javadoc me please
      */
-    public open func setReconnectionPolicy(reconnectionPolicy: ReconnectionPolicy): Unit {
+    public func setReconnectionPolicy(reconnectionPolicy: ReconnectionPolicy): Unit {
         this.reconnectionPolicy = reconnectionPolicy
     }
 
@@ -170,12 +170,13 @@ public open class ReconnectionManager {
 
     private init(connection: AbstractXMPPConnection) {
         weakRefConnection = connection
+        connectionListener = RCMConnectionListener(this)
     }
 
     /**
      * Enable the automatic reconnection mechanism. Does nothing if already enabled.
      */
-    public open func enableAutomaticReconnection(): Unit {
+    public func enableAutomaticReconnection(): Unit {
         synchronized(lock) {
             if (automaticReconnectEnabled) {
                 return
@@ -189,7 +190,7 @@ public open class ReconnectionManager {
     /**
      * Disable the automatic reconnection mechanism. Does nothing if already disabled.
      */
-    public open func disableAutomaticReconnection(): Unit {
+    public func disableAutomaticReconnection(): Unit {
         synchronized(lock) {
             if (!automaticReconnectEnabled) {
                 return
@@ -209,7 +210,7 @@ public open class ReconnectionManager {
      *
      * @return true, if the reconnection mechanism is enabled.
      */
-    public open func isAutomaticReconnectEnabled(): Bool {
+    public func isAutomaticReconnectEnabled(): Bool {
         synchronized(lock) {
             return automaticReconnectEnabled
         }
@@ -220,7 +221,7 @@ public open class ReconnectionManager {
      *
      * @return true if automatic reconnection is allowed.
      */
-    public open func isReconnectionPossible(connection: XMPPConnection): Bool {
+    public func isReconnectionPossible(connection: XMPPConnection): Bool {
         return !done && !connection.isConnected() && isAutomaticReconnectEnabled()
     }
 
@@ -228,7 +229,7 @@ public open class ReconnectionManager {
      * Starts a reconnection mechanism if it was configured to do that.
      * The algorithm is been executed when the first connection error is detected.
      */
-    public open func reconnect(): Unit {
+    public func reconnect(): Unit {
         synchronized(lock) {
             let connection = this.weakRefConnection as AbstractXMPPConnection
             if (connection.isNone()) {
@@ -248,7 +249,7 @@ public open class ReconnectionManager {
     /**
      * Abort a possibly running reconnection mechanism.
      */
-    public open func abortPossiblyRunningReconnection(): Unit {
+    public func abortPossiblyRunningReconnection(): Unit {
         synchronized(lock) {
             if (reconnectionThread.isNone()) {
                 return
@@ -258,10 +259,10 @@ public open class ReconnectionManager {
         }
     }
 
-    private var connectionListener: ConnectionListener = unsafe { zeroValue<ConnectionListener>() }
+    private var connectionListener: ConnectionListener = unsafe { zeroValue<ConnectionListener>() } // 占位 已在init中初始化
 }
 
-open class ReconnectionRunnable {
+class ReconnectionRunnable {
     let this_0: ReconnectionManager
     init(this_0: ReconnectionManager) {
         this.this_0 = this_0
@@ -281,13 +282,14 @@ open class ReconnectionRunnable {
         attempts++
         let delay: Duration = match (this_0.reconnectionPolicy) {
             case FIXED_DELAY => this_0.fixedDelay
-            case RANDOM_INCREASING_DELAY => if (attempts > 13) {
-                this_0.randomBase * 6 * 5 // between 2.5 and 7.5 minutes (~5 minutes)
-            } else if (attempts > 7) {
-                this_0.randomBase * 6 // between 30 and 90 seconds (~1 minutes)
-            } else {
-                this_0.randomBase // 10 seconds
-            }
+            case RANDOM_INCREASING_DELAY =>
+                if (attempts > 13) {
+                    this_0.randomBase * 6 * 5 // between 2.5 and 7.5 minutes (~5 minutes)
+                } else if (attempts > 7) {
+                    this_0.randomBase * 6 // between 30 and 90 seconds (~1 minutes)
+                } else {
+                    this_0.randomBase // 10 seconds
+                }
         }
 
         return delay
@@ -312,8 +314,9 @@ open class ReconnectionRunnable {
                         listener.reconnectingIn(remainingSeconds)
                     }
                 } catch (e: Exception) {
-                    ReconnectionManager.LOGGER.log(LogLevel.TRACE,
-                        "Reconnection Thread was interrupted, aborting reconnection mechanism", e)
+                    ReconnectionManager
+                        .LOGGER
+                        .log(LogLevel.TRACE, "Reconnection Thread was interrupted, aborting reconnection mechanism", e)
                     return
                 }
             }
@@ -327,8 +330,9 @@ open class ReconnectionRunnable {
                 try {
                     connection.connect()
                 } catch (e: AlreadyConnectedException) {
-                    ReconnectionManager.LOGGER.log(LogLevel.TRACE,
-                        "Connection was already connected on reconnection attempt", e)
+                    ReconnectionManager
+                        .LOGGER
+                        .log(LogLevel.TRACE, "Connection was already connected on reconnection attempt", e)
                 }
                 connection.login()
             } catch (e: AlreadyLoggedInException) {
@@ -339,8 +343,9 @@ open class ReconnectionRunnable {
                 }
                 continue
             } catch (e: Exception) {
-                ReconnectionManager.LOGGER.log(LogLevel.TRACE,
-                    "Reconnection Thread was interrupted, aborting reconnection mechanism", e)
+                ReconnectionManager
+                    .LOGGER
+                    .log(LogLevel.TRACE, "Reconnection Thread was interrupted, aborting reconnection mechanism", e)
                 return
             }
             return

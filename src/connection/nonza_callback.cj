@@ -24,7 +24,7 @@ public open class NonzaCallback {
 
     public func cancel(): Unit {
         for ((filterKey, _) in filterAndListeners) {
-            synchronized(connection.nonzaCallbacksMap.lock.writeMutex) {
+            synchronized(connection.nonzaCallbacksMap.lock) {
                 connection.nonzaCallbacksMap.removeOne(filterKey, this)
             }
         }
@@ -35,7 +35,7 @@ public open class NonzaCallback {
             return
         }
         for ((key, _) in filterAndListeners) {
-            synchronized(connection.nonzaCallbacksMap.lock.writeMutex) {
+            synchronized(connection.nonzaCallbacksMap.lock) {
                 connection.nonzaCallbacksMap.put(key, this)
             }
         }

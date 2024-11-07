@@ -37,9 +37,10 @@ public class IntrospectionProvider {
                     let name = parser.getName()
                     let stringValue = parser.nextText()
                     ePropertySetter(object, name, stringValue)
-                case XmlPullParserEvent.END_ELEMENT => if (parser.getDepth() == initialDepth) {
-                    break
-                }
+                case XmlPullParserEvent.END_ELEMENT =>
+                    if (parser.getDepth() == initialDepth) {
+                        break
+                    }
                 case _ => ()
             }
         }

@@ -7,7 +7,7 @@ package xmpp4cj.util
  * 线程安全的LinkedList
  */
 public class ConcurrentLinkedQueue<T> <: Collection<T> {
-    private let lock: ReentrantReadWriteMutex = ReentrantReadWriteMutex()
+    private let lock: Monitor = Monitor()
     private let list = LinkedList<T>()
 
     /**
@@ -15,7 +15,7 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
      */
     public prop size: Int64 {
         get() {
-            synchronized(lock.readMutex) {
+            synchronized(lock) {
                 list.size
             }
         }
@@ -27,13 +27,13 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
      * @param t 数据。
      */
     public func append(t: T): Unit {
-        synchronized(lock.writeMutex) {
+        synchronized(lock) {
             list.append(t)
         }
     }
 
     public func prepend(t: T): Unit {
-        synchronized(lock.writeMutex) {
+        synchronized(lock) {
             list.prepend(t)
         }
     }
@@ -45,7 +45,7 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
      * @return true 删除成功，false 未找到。
      */
     public func remove(t: T): Bool {
-        synchronized(lock.writeMutex) {
+        synchronized(lock) {
             let res = [false]
             list.removeIf {
                 item =>
@@ -66,7 +66,7 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
      * @return index旧数据
      */
     public func remove(index: Int): ?T {
-        synchronized(lock.writeMutex) {
+        synchronized(lock) {
             var node = list.nodeAt(index)
             if (let Some(n) <- node) {
                 list.remove(n)
@@ -80,7 +80,7 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
      * 清空列表。
      */
     public func clear(): Unit {
-        synchronized(lock.writeMutex) {
+        synchronized(lock) {
             list.clear()
         }
     }
@@ -91,7 +91,7 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
      * @return true表示列表为空，false表示列表不为空。
      */
     public override func isEmpty(): Bool {
-        synchronized(lock.readMutex) {
+        synchronized(lock) {
             list.isEmpty()
         }
     }
@@ -102,8 +102,26 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
      * @return 迭代器。
      */
     public override func iterator(): Iterator<T> {
-        synchronized(lock.writeMutex) {
+        synchronized(lock) {
             list.iterator()
         }
+    }
+
+    /**
+     * 返回倒序迭代器
+     *
+     * @return 迭代器。
+     */
+    public func reverseIterator(): Iterator<T> {
+        ReverseIterator(list.lastNode())
+    }
+}
+
+class ReverseIterator<T> <: Iterator<T> {
+    ReverseIterator(var begin: ?LinkedListNode<T>) {}
+    public override func next(): ?T {
+        let current = begin?.value
+        begin = (begin?.prev).flatten()
+        current
     }
 }

@@ -6,14 +6,14 @@ package xmpp4cj.packet
 /**
  * xmpp异常类。
  */
-public open class XmppParsingException <: Exception {
+public open class XmppParsingException <: ExceptionExt {
     /**
      * 通过异常类构造当前对象。
      *
      * @param exception Exception。
      */
     protected init(exception: Exception) {
-        super(exception.toString())
+        super(exception.toString(), exception)
     }
 
     /**
@@ -22,7 +22,7 @@ public open class XmppParsingException <: Exception {
      * @param message 异常信息。
      */
     public init(message: String) {
-        super(message)
+        super(message, None)
     }
 
     /**  

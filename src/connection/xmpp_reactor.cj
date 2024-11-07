@@ -104,7 +104,8 @@ public class XmppReactor {
      * @return 注册的选择键
      * @throws ClosedChannelException 如果通道已关闭
      */
-    public func registerWithSelector(channel: SelectableChannel, ops: Int, callback: XmppReactorChannelSelectedCallback): SelectionKey {
+    public func registerWithSelector(channel: SelectableChannel, ops: Int64,
+        callback: XmppReactorChannelSelectedCallback): SelectionKey {
         let selectionKeyAttachment = SelectionKeyAttachment(callback)
         registrationLock.lock()
         try {
@@ -164,6 +165,7 @@ public class XmppReactor {
             let channel = selectionKey.channel()
             let selectionKeyAttachment = selectionKey.attachment() as SelectionKeyAttachment
             let channelSelectedCallback = selectionKeyAttachment?.channelSelectedCallback
+            DEBUGER
             channelSelectedCallback?(channel, selectionKey)
         }
     }
@@ -179,7 +181,8 @@ public class XmppReactor {
                 "Must have at least two reactor threads, but you requested ${reactorThreadCount}")
         }
         synchronized(reactorThreadsLock) {
-            var deltaThreads = reactorThreadCount - reactorThreads.size
+            // var deltaThreads = reactorThreadCount - reactorThreads.size
+            var deltaThreads = 1
             if (deltaThreads > 0) {
                 // Start new reactor thread. Note that we start the threads before we increase the permits of the
                 // actionsSemaphore.
@@ -220,9 +223,9 @@ class XmppReactorSetInterestOps {
 }
 
 class ReactorThread {
-    let this_0: XmppReactor
-    init(this_0: XmppReactor) {
-        this.this_0 = this_0
+    let reactor: XmppReactor
+    init(reactor: XmppReactor) {
+        this.reactor = reactor
     }
 
     var threadName: String = ""
@@ -236,19 +239,19 @@ class ReactorThread {
         }
     }
 
-    private var shutdownRequestTimestamp = Duration.Zero
+    private var shutdownRequestTimestamp = Duration.second * -1
     public func run(): Unit {
         try {
             reactorLoop()
         } finally {
             if (shutdownRequestTimestamp > Duration.Zero) {
                 let shutDownDelay = DateTime.now().toUnixTimeStamp() - shutdownRequestTimestamp
-                XmppReactor.LOGGER.info(
-                    "XmppReactorReactor:${threadName} shut down after ${shutDownDelay.toMilliseconds()}ms")
+                XmppReactor
+                    .LOGGER
+                    .info("XmppReactorThread:${threadName} shut down after ${shutDownDelay.toMilliseconds()}ms")
             } else {
-                let contained = [false]
-                this_0.reactorThreads.remove(this)
-                assert(contained[0])
+                let contained = reactor.reactorThreads.remove(this)
+                assert(contained)
             }
         }
     }
@@ -262,12 +265,12 @@ class ReactorThread {
 
     private func handleScheduledActionsOrPerformSelect(): Unit {
         var dueScheduledAction: ?ScheduledAction = None
-        let permitToHandleScheduledActions = this_0.actionsSemaphore.tryAcquire()
+        let permitToHandleScheduledActions = reactor.actionsSemaphore.tryAcquire()
         if (permitToHandleScheduledActions) {
             try {
-                dueScheduledAction = this_0.scheduledActions.poll()
+                dueScheduledAction = reactor.scheduledActions.poll()
             } finally {
-                this_0.actionsSemaphore.release()
+                reactor.actionsSemaphore.release()
             }
         }
         if (let Some(v) <- dueScheduledAction) {
@@ -276,8 +279,8 @@ class ReactorThread {
         }
         var newSelectedKeysCount = 0
         let selectedKeys: ArrayList<SelectionKey>
-        synchronized(this_0.selectorLock) {
-            let nextScheduledAction: ?ScheduledAction = this_0.scheduledActions.peek()
+        synchronized(reactor.selectorLock) {
+            let nextScheduledAction: ?ScheduledAction = reactor.scheduledActions.peek()
             let selectWait: Duration = if (let Some(nextScheduledAction) <- nextScheduledAction) {
                 let dur = nextScheduledAction.getTimeToDueMillis()
                 if (dur <= Duration.Zero) {
@@ -298,14 +301,14 @@ class ReactorThread {
             // It may cause more synchronization but allows for more parallelism.
             // Hopefully that assumption is right.
             var myHandledPendingSetInterestOps = 0
-            while (let Some(setInterestOps) <- this_0.pendingSetInterestOps.dequeue()) {
+            while (let Some(setInterestOps) <- reactor.pendingSetInterestOps.dequeue()) {
                 setInterestOpsCancelledKeySafe(setInterestOps.selectionKey, setInterestOps.interestOps)
                 let flag = myHandledPendingSetInterestOps >= XmppReactor.PENDING_SET_INTEREST_OPS_MAX_BATCH_SIZE
                 myHandledPendingSetInterestOps++
                 if (flag) {
                     // This thread has handled enough "set pending interest ops" requests. Wakeup another one to
                     // handle the remaining (if any).
-                    this_0.selector.wakeup()
+                    reactor.selector.wakeup()
                     break
                 }
             }
@@ -314,11 +317,11 @@ class ReactorThread {
             // register() in the same method the chance to actually register the channel.
             // In other words: This construct ensures that there is never another select()
             // between a corresponding wakeup() and register() calls.
-            this_0.registrationLock.lock()
-            this_0.registrationLock.unlock()
+            reactor.registrationLock.lock()
+            reactor.registrationLock.unlock()
 
             try {
-                newSelectedKeysCount = this_0.selector.select(selectWait)
+                newSelectedKeysCount = reactor.selector.select(selectWait)
             } catch (e: IOException) {
                 XmppReactor.LOGGER.log(LogLevel.ERROR, "IOException while using select()", e)
                 return
@@ -331,7 +334,7 @@ class ReactorThread {
             // selected key set and loose interest of the key OPs for the time being.
             // Note that we perform this operation in two steps in order to maximize the
             // timespan setRacing() is set.
-            let selectedKeySet = this_0.selector.selectedKeys()
+            let selectedKeySet = reactor.selector.selectedKeys()
             for (selectionKey in selectedKeySet) {
                 let selectionKeyAttachment = selectionKey.attachment() as SelectionKeyAttachment
                 selectionKeyAttachment?.setRacing()
@@ -346,7 +349,7 @@ class ReactorThread {
         }
 
         let selectedKeysCount = selectedKeys.size
-        let currentReactorThreadCount = this_0.reactorThreads.size
+        let currentReactorThreadCount = reactor.reactorThreads.size
         let myKeyCount: Int = if (selectedKeysCount > currentReactorThreadCount) {
             selectedKeysCount / currentReactorThreadCount
         } else {
@@ -355,10 +358,12 @@ class ReactorThread {
 
         let reactorSelectStatsLogLevel = LogLevel.TRACE
         if (XmppReactor.LOGGER.isLoggable(reactorSelectStatsLogLevel)) {
-            XmppReactor.LOGGER.log(
-                reactorSelectStatsLogLevel,
-                "New selected key count: ${newSelectedKeysCount}. Total selected key count ${selectedKeysCount}. My key count: ${myKeyCount}. Current reactor thread count: ${currentReactorThreadCount}"
-            )
+            XmppReactor
+                .LOGGER
+                .log(
+                    reactorSelectStatsLogLevel,
+                    "New selected key count: ${newSelectedKeysCount}. Total selected key count ${selectedKeysCount}. My key count: ${myKeyCount}. Current reactor thread count: ${currentReactorThreadCount} Reactor: ${threadName}"
+                )
         }
 
         let mySelectedKeys = ArrayList<SelectionKey>(myKeyCount)
@@ -371,22 +376,22 @@ class ReactorThread {
         }
         while (let Some(selectionKey) <- it.next()) {
             // Drain to pendingSelectionKeys.
-            this_0.pendingSelectionKeys.enqueue(selectionKey)
+            reactor.pendingSelectionKeys.enqueue(selectionKey)
         }
 
         if (selectedKeysCount - myKeyCount > 0) {
             // There where pending selection keys: Wakeup another reactor thread to handle them.
-            this_0.selector.wakeup()
+            reactor.selector.wakeup()
         }
         XmppReactor.handleSelectedKeys(mySelectedKeys)
     }
 
     private func handlePendingSelectionKeys(): Unit {
-        let pendingSelectionKeysSize = this_0.pendingSelectionKeys.size
+        let pendingSelectionKeysSize = reactor.pendingSelectionKeys.size
         if (pendingSelectionKeysSize == 0) {
             return
         }
-        let currentReactorThreadCount = this_0.reactorThreads.size
+        let currentReactorThreadCount = reactor.reactorThreads.size
         var myKeyCount = pendingSelectionKeysSize / currentReactorThreadCount
         if (myKeyCount == 0) {
             myKeyCount = 1
@@ -394,12 +399,12 @@ class ReactorThread {
         let selectedKeys: ArrayList<SelectionKey> = ArrayList<SelectionKey>(myKeyCount)
         var i = 0
         while (i < myKeyCount) {
-            let selectionKey = this_0.pendingSelectionKeys.dequeue() ?? break
+            let selectionKey = reactor.pendingSelectionKeys.dequeue() ?? break
             selectedKeys.append(selectionKey)
             i++
         }
-        if (this_0.pendingSelectionKeys.size != 0) {
-            this_0.selector.wakeup()
+        if (reactor.pendingSelectionKeys.size != 0) {
+            reactor.selector.wakeup()
         }
         XmppReactor.handleSelectedKeys(selectedKeys)
     }
@@ -447,10 +452,8 @@ public class SelectionKeyAttachment {
 
     /**  
      * 设置反应线程竞争状态为真。
-     * 使用 lazySet 是因为只要值不立即可见就足够了。
      */
     public func setRacing(): Unit {
-        // We use lazySet here since it is sufficient if the value does not become visible immediately.
         reactorThreadRacing.store(true)
     }
 
@@ -470,137 +473,3 @@ public class SelectionKeyAttachment {
         return reactorThreadRacing.load()
     }
 }
-
-/**  
- * 一个令牌，表示将{@link SelectableChannel}注册到{@link Selector}。
- */
-public class SelectionKey <: ToString & Equatable<SelectionKey> {
-    public static let OP_READ: Int = 1 << 0
-    public static let OP_WRITE: Int = 1 << 2
-    public static let OP_CONNECT: Int = 1 << 3
-    public static let OP_ACCEPT: Int = 1 << 4
-
-    public override func toString(): String {
-        throw Exception("TODO")
-    }
-
-    public operator override func ==(that: SelectionKey): Bool {
-        refEq(this, that)
-    }
-
-    /**  
-     * 将此键的兴趣集设置为给定值。
-     * <p>此方法可以随时调用。无论它是否阻塞，
-     * 以及多长时间取决于实施</p
-     *
-     * @param interestOps 新兴趣集
-     * @return 选择键
-     */
-    func interestOps(interestOps: Int): Int {
-        throw Exception("TODO")
-    }
-
-    /**  
-     * 返回创建此密钥的频道。这种方法将即使在取消按键后，也要继续返回频道。
-     *
-     * @return 此键的频道
-     */
-    public func channel(): SelectableChannel {
-        throw Exception("TODO")
-    }
-
-    /**  
-     * 检索当前附件。
-     *
-     * @return 当前附加到此密钥的对象，如果没有附件，则<tt>None</tt>
-     */
-    public func attachment(): Any {
-        throw Exception("TODO")
-    }
-
-    /**  
-     * 中断
-     */
-    public func cancel(): Unit {
-        throw Exception("TODO")
-    }
-}
-
-/**  
- * 可以通过{@link Selector}进行多路复用的通道。
- */
-public open class SelectableChannel {
-    /**  
-     * 使用给定的选择器注册此通道，返回一个选择钥匙。
-     *
-     * @param selector 用于注册此频道的选择器
-     * @param ops 为生成的密钥设置的兴趣
-     * @param selectionKeyAttachment 生成密钥的附件；可以是<tt>None</tt>
-     * @return 代表此频道注册的密钥给定的选择器
-     */
-    public func register(selector: Selector, ops: Int, selectionKeyAttachment: Any): SelectionKey {
-        throw Exception("TODO")
-    }
-    public func write(buf: Array<ByteArrayStream>): Int64 {
-        throw Exception("TODO")
-    }
-    public func read(buf: Array<ByteArrayStream>): Int64 {
-        throw Exception("TODO")
-    }
-    public func close(): Unit {
-        throw Exception("TODO")
-    }
-}
-
-public class SocketChannel <: SelectableChannel {
-    public func connect(addr: IPSocketAddress): Bool {
-        throw Exception("TODO")
-    }
-    public func finishConnect(): Bool {
-        throw Exception("TODO")
-    }
-    public func socket(): TcpSocket {
-        throw Exception("TODO")
-    }
-}
-
-/**  
- * {@link SelectableChannel}对象的多路复用器。
- */
-public class Selector {
-    /**  
-     * 打开选择器。
-     *
-     * @return 一个新的选择器
-     */
-    static func open(): Selector {
-        Selector()
-    }
-
-    /**  
-     * 使尚未返回的第一个选择操作立即返回。
-     */
-    func wakeup() {
-        throw Exception("TODO")
-    }
-
-    /**  
-     * 选择一组键，其相应的通道已准备好进行I/O操作。
-     *
-     * @param dur 超时时间
-     */
-    func select(dur: Duration) {
-        throw Exception("TODO")
-    }
-
-    /**  
-     * 返回此选择器的选定密钥集。
-     *
-     * @return 此选择器的选定密钥集
-     */
-    func selectedKeys(): Set<SelectionKey> {
-        throw Exception("TODO")
-    }
-}
-
-public class ClosedChannelException <: Exception {}

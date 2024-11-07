@@ -138,9 +138,10 @@ public class XmlPrettyPrinter <: XmlPrinter {
                 case XmlSplitterState.IN_TAG_NAME =>
                     indent = getElementIndent(depth)
                     deferredLeftAngle = true
-                case XmlSplitterState.IN_ATTRIBUTE_NAME => if (attributeIndent > 0) {
-                    indent = getAttributeIndent(depth)
-                }
+                case XmlSplitterState.IN_ATTRIBUTE_NAME =>
+                    if (attributeIndent > 0) {
+                        indent = getAttributeIndent(depth)
+                    }
                 case XmlSplitterState.START => indent = getElementIndent(depth)
                 case _ => ()
             }

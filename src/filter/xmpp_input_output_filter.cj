@@ -18,7 +18,7 @@ public interface XmppInputOutputFilter {
      * @return 一个OutputResult，指示过滤后的输出和任何待处理的数据。
      * @throws IOException 如果在输出处理过程中发生错误。
      */
-    func output(outputData: ?ByteArrayStream, isFinalDataOfElement: Bool, destinationAddressChanged: Bool,
+    func output(outputData: ?ByteBuffer, isFinalDataOfElement: Bool, destinationAddressChanged: Bool,
         moreDataAvailable: Bool): XmppInputOutputFilterOutputResult
 
     /**  
@@ -28,7 +28,7 @@ public interface XmppInputOutputFilter {
      * @return 过滤后的输入数据作为ByteBuffer。
      * @throws IOException 如果在输入处理过程中发生错误。
      */
-    func input(inputData: ByteArrayStream): ?ByteArrayStream
+    func input(inputData: ByteBuffer): ?ByteBuffer
 
     /**  
      * 关闭输入输出过滤器，释放所有相关资源。
@@ -79,14 +79,14 @@ public class XmppInputOutputFilterOutputResult {
     /**
      * 过滤后的输出数据。
      */
-    public let filteredOutputData: ?ByteArrayStream
+    public let filteredOutputData: ?ByteBuffer
 
     /**  
      * 使用指定的筛选数据构造OutputResult。
      *
      * @param filteredOutputData 过滤后的输出数据为ByteBuffer。
      */
-    public init(filteredOutputData: ByteArrayStream) {
+    public init(filteredOutputData: ByteBuffer) {
         this(false, filteredOutputData)
     }
 
@@ -96,7 +96,7 @@ public class XmppInputOutputFilterOutputResult {
      * @param pendingFilterData 指示是否存在待处理的筛选器数据。
      * @param filteredOutputData 过滤后的输出数据为ByteBuffer。
      */
-    public init(pendingFilterData: Bool, filteredOutputData: ?ByteArrayStream) {
+    public init(pendingFilterData: Bool, filteredOutputData: ?ByteBuffer) {
         this.pendingFilterData = pendingFilterData
         this.filteredOutputData = filteredOutputData
     }

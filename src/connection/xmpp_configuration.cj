@@ -124,7 +124,7 @@ public open class XmppConfiguration {
      * @param mech 要删除的SASL机制
      */
     public static func removeSaslMech(mech: String): Unit {
-        defaultMechs.remove(mech)
+        defaultMechs.removeValue(mech)
     }
 
     /**
@@ -134,7 +134,7 @@ public open class XmppConfiguration {
      */
     public static func removeSaslMechs(mechs: Collection<String>): Unit {
         for (mech in mechs) {
-            defaultMechs.remove(mech)
+            defaultMechs.removeValue(mech)
         }
     }
 
@@ -230,8 +230,8 @@ public open class XmppConfiguration {
         return xmppInitialized
     }
 
-    private static var unknownIqRequestReplyMode: XmppConfigurationUnknownIqRequestReplyMode = XmppConfigurationUnknownIqRequestReplyMode.
-        replyFeatureNotImplemented
+    private static var unknownIqRequestReplyMode: XmppConfigurationUnknownIqRequestReplyMode = XmppConfigurationUnknownIqRequestReplyMode
+        .replyFeatureNotImplemented
 
     public static func getUnknownIqRequestReplyMode(): XmppConfigurationUnknownIqRequestReplyMode {
         return unknownIqRequestReplyMode

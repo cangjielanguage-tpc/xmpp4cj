@@ -10,7 +10,7 @@ public type DnsName = String
 
 /**  
  * 确定请求的 DNSSEC 安全模式。
- * <b>注意：Smack 对 DNSSEC/DANE 的支持仍然处于实验阶段！</b>
+ * <b>注意：Xmpp 对 DNSSEC/DANE 的支持仍然处于实验阶段！</b>
  * <p>
  * 默认选项 '{@link #disabled}' 表示不进行任何 DNSSEC 或 DANE 验证。如果使用 '{@link #needsDnssec}'，
  * 则如果用于连接 XMPP 服务的资源记录未通过 DNSSEC 认证，则无法建立连接。此外，如果使用
@@ -184,7 +184,7 @@ public abstract class DNSResolver {
  * @author Florian Schmaus
  */
 public class DNSUtil {
-    private static var dnsResolver: ?DNSResolver = None // 当前使用的 DNS 解析器  
+    private static var dnsResolver: ?DNSResolver = StdDnsResolver() // 当前使用的 DNS 解析器  
 
     private static var _daneProvider: ?XmppDaneProvider = None // 当前使用的 DANE 提供者 
 
@@ -233,3 +233,19 @@ public let DEFAULT_TLS_CFG = {
     cfg.verifyMode = CertificateVerifyMode.TrustAll
     cfg
 }()
+
+/* 
+ * 默认的 DNS 解析器, 忽略 DNSSEC 校验
+ */
+public class StdDnsResolver <: DNSResolver {
+    public init() {
+        super(true)
+    }
+    public override func lookupHostAddress0(
+        name: DnsName,
+        lookupFailures: ArrayList<RemoteConnectionEndpointLookupFailure>,
+        dnssecMode: DnssecMode
+    ): ?Collection<IPAddress> {
+        IPAddress.resolve(name)
+    }
+}

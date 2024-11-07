@@ -64,9 +64,10 @@ public class FailureProvider <: NonzaProvider<Failure> {
                             LOGGER.warn("Unknown element in ${namespace}: ${name}")
                         }
                     }
-                case XmlPullParserEvent.END_ELEMENT => if (parser.getDepth() == initialDepth) {
-                    break
-                }
+                case XmlPullParserEvent.END_ELEMENT =>
+                    if (parser.getDepth() == initialDepth) {
+                        break
+                    }
                 case XmlPullParserEvent.END_DOCUMENT => break
                 case _ => ()
             }

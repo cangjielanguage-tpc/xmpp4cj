@@ -38,6 +38,7 @@ public class EqualsUtil {
      * @throws UnsupportedException a b 类型不正确的时候抛UnsupportedException异常。
      */
     public static func equals<T>(a: T, b: T): Bool {
+        // 不能在==方法里面调用本方法
         match ((a, b)) {
             case (a: Equatable<T>, _: Equatable<T>) => a == b
             case (a: Object, b: Object) => refEq(a, b)

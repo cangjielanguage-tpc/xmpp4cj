@@ -4,49 +4,67 @@
 package xmpp4cj.connection
 
 /**
- * The connection configuration used for XMPP client-to-server connections. A well configured XMPP service will
- * typically only require you to provide two parameters: The XMPP address, also known as the JID, of the user and the
- * password. All other configuration parameters could ideally be determined automatically by Xmpp. Hence it is often
- * enough to call {@link Builder#setXmppAddressAndPassword(CharSequence, String)}.
+ * 用于XMPP客户端到服务器连接的连接配置。
+ * 配置良好的XMPP服务通常只需要您提供两个参数：用户的XMPP地址（也称为JID）和密码。理想情况下，所有其他配置参数都可以由Xmpp自动确定。
+ * 因此，调用{@link Builder#setXmppAddressAndPassword（CharSequence，String）}就足够了。
  * <p>
- * Technically there are typically at least two parameters required: Some kind of credentials for authentication. And
- * the XMPP service domain. The credentials often consists of a username and password use for the SASL authentication.
- * But there are also other authentication mechanisms, like client side certificates, which do not require a particular
- * username and password.
+ * 从技术上讲，通常至少需要两个参数：用于身份验证的某种凭据。
+ * 以及XMPP服务域。凭证通常由用于SASL身份验证的用户名和密码组成。
+ * 但也有其他身份验证机制，如客户端证书，不需要特定的用户名和密码。
  * </p>
  * <p>
- * There are some misconceptions about XMPP client-to-server parameters: The first is that the username used for
- * authentication will be equal to the localpart of the bound XMPP address after authentication. While this is usually
- * true, it is not required. Technically the username used for authentication and the resulting XMPP address are
- * completely independent from each other. The second common misconception steers from the terms "XMPP host" and "XMPP
- * service domain": An XMPP service host is a system which hosts one or multiple XMPP domains. The "XMPP service domain"
- * will be usually the domainpart of the bound JID. This domain is used to verify the remote endpoint, typically using
- * TLS. This third misconception is that the XMPP service domain is required to become the domainpart of the bound JID.
- * Again, while this is very common to be true, it is not strictly required.
+ * 关于XMPP客户端到服务器的参数存在一些误解：首先，用于身份验证的用户名在身份验证后将等于绑定XMPP地址的本地部分。
+ * 虽然这通常是正确的，但不是必需的。
+ * 从技术上讲，用于身份验证的用户名和由此产生的XMPP地址完全相互独立。
+ * 第二个常见的误解来自“XMPP主机”和“XMPP服务域”这两个术语：XMPP服务主机是托管一个或多个XMPP域的系统。
+ * “XMPP服务域”通常是绑定JID的域部分。此域用于验证远程端点，通常使用TLS。
+ * 第三个误解是，XMPP服务域需要成为绑定JID的域部分。
+ * 同样，虽然这很常见，但并不是严格要求的。
  * </p>
  */
 public abstract class ConnectionConfiguration {
     static init() {
         // Xmpp.ensureInitialized() // TODO
     }
+
     private static let LOGGER = getGlobalLogger(("name", "ConnectionConfiguration"))
 
     /**
-     * The XMPP domain of the XMPP Service.
-     * Usually servers use the same service name as the name of the server.
-     * However, there are some servers like google where host would be talk/google/com and the serviceName would be gmail/com.
+     * XMPP服务的XMPP域。
+     * 通常服务器使用与服务器名称相同的服务名称。
+     * 然而，有些服务器，比如谷歌，主机是talk/google.com，服务名是gmail.com。
      */
     protected let xmppServiceDomain: DomainBareJid
 
+    /**
+     * XMPP 服务域对应的 DNS 名称
+     */
     protected let xmppServiceDomainDnsName: ?DnsName
 
+    /**
+     * 主机地址
+     */
     protected let hostAddress: ?IPAddress
+
+    /**
+     * 主机名或者主机地址。
+     */
     protected let host: ?DnsName
+
+    /**
+     * 端口号
+     */
     protected let port: UInt16
+
+    /**
+     * 用于获取user信息 基本上这是为了不直接提供用户敏感信息的设计
+     * 如果有专门sasl扩展实现 CallbackHandler可作为设计支持
+     */
+    private let callbackHandler: ?CallbackHandler
 
     private let debuggerFactory: ?XmppDebuggerFactory
 
-    // Holds the socket factory that is used to generate the socket in the connection
+    // 保存用于在连接中生成套接字的套接字工厂
     private let socketFactory: ?SocketFactory
 
     private let username: String
@@ -58,12 +76,12 @@ public abstract class ConnectionConfiguration {
     private var language: ?String
 
     /**
-     * The optional SASL authorization identity (see RFC 6120 § 6.3.8).
+     * 可选的SASL授权标识 (see RFC 6120 § 6.3.8).
      */
     private let authzid: ?EntityBareJid
 
     /**
-     * Initial presence as of RFC 6121 § 4.2
+     * 初始存在日期 RFC 6121 § 4.2
      * @see <a href="xmpp/org/rfcs/rfc6121.html#presence-initial">RFC 6121 § 4.2 Initial Presence</a>
      */
     private let sendPresence: Bool
@@ -77,9 +95,10 @@ public abstract class ConnectionConfiguration {
     // tls配置统一到TlsClientConfig
     private let tlsClientConfig: ?TlsClientConfig
 
-    // Holds the proxy information (such as proxyhost, proxyport, username, password etc)
+    // 保存代理信息（如代理主机、代理端口、用户名、密码等）
     protected let proxy: ?ProxyInfo
 
+    // 允许空用户名
     protected let allowNullOrEmptyUsername: Bool
 
     private let enabledSaslMechanisms: ?Set<String>
@@ -88,6 +107,11 @@ public abstract class ConnectionConfiguration {
 
     private let stanzaIdSourceFactory: StanzaIdSourceFactory
 
+    /**
+     * 初始化方法。
+     *
+     * @param builder ConnectionConfigurationBuilder。
+     */
     protected init(builder: ConnectionConfigurationBuilder) {
         try {
             this.xmppTlsContext = getXmppTlsContext(builder.dnssecMode, builder.tlsClientConfig)
@@ -98,8 +122,9 @@ public abstract class ConnectionConfiguration {
         this.authzid = builder.authzid
         this.username = builder.username
         this.password = builder.password
+        this.callbackHandler = builder.callbackHandler
 
-        // Resource can be null, this means that the server must provide one
+        // 资源可以为空，这意味着服务器必须提供一个
         this.resource = builder.resource
         this.language = builder.language
 
@@ -134,7 +159,7 @@ public abstract class ConnectionConfiguration {
         this.compressionEnabled = builder.compressionEnabled
         this.stanzaIdSourceFactory = builder.stanzaIdSourceFactory
 
-        // If the enabledSaslmechanisms are set, then they must not be empty
+        // 如果设置了enabledSaslmechanism，则它们不能为空
         assert(enabledSaslMechanisms.isNone() || enabledSaslMechanisms?.isEmpty() == false)
     }
 
@@ -151,12 +176,17 @@ public abstract class ConnectionConfiguration {
             daneVerifier = daneProvider().getOrThrow {
                 => IllegalStateException("DANE requested but DANE provider did not return a DANE verifier")
             }
-            // User requested DANE verification.
+            // 用户请求DANE验证。
             daneVerifier?.initself(cfg)
         }
         return XmppTlsContext(cfg, daneVerifier)
     }
 
+    /**
+     * 返回主机名。
+     *
+     * @return 主机名。
+     */
     public func getHostString(): String {
         if (let Some(v) <- hostAddress) {
             return v.toString()
@@ -167,186 +197,193 @@ public abstract class ConnectionConfiguration {
         return xmppServiceDomain.toString()
     }
 
+    /**
+     * 返回主机名或者主机地址。
+     *
+     * @return 主机名或者主机地址。
+     */
     public func getHost(): ?DnsName {
         return host
     }
 
+    /**
+     * 返回主机地址。
+     *
+     * @return 主机地址。
+     */
     public func getHostAddress(): ?IPAddress {
         return hostAddress
     }
 
+    /**
+     * 返回端口号。
+     *
+     * @return 端口号。
+     */
     public func getPort(): UInt16 {
         return port
     }
 
     /**
-     * Returns the XMPP domain used by this configuration.
+     * 返回此配置使用的XMPP域。
      *
-     * @return the XMPP domain.
+     * @return XMPP域。
      */
     public func getXMPPServiceDomain(): DomainBareJid {
         return xmppServiceDomain
     }
 
     /**
-     * Returns the XMPP service domain as DNS name if possible. Note that since not every XMPP address domainpart is a
-     * valid DNS name, this method may return <code>null</code>.
+     * 如果可能的话，以DNS名称的形式返回XMPP服务域。需要注意的是，由于并非每个XMPP地址的域部分都是有效的DNS名称，所以此方法可能会返回 `None`。
      *
-     * @return the XMPP service domain as DNS name or <code>null</code>.
+     * @return 以DNS名称形式表示的XMPP服务域，或者 `None`。
      */
     public func getXmppServiceDomainAsDnsNameIfPossible(): ?DnsName {
         return xmppServiceDomainDnsName
     }
 
     /**
-     * Returns the TLS security mode used when making the connection. By default,
-     * the mode is {@link SecurityMode#required}.
+     * 返回建立连接时所使用的TLS安全模式。默认情况下，该模式为 `{@link SecurityMode#required}`。
      *
-     * @return the security mode.
+     * @return 安全模式。
      */
     public func getSecurityMode(): ConnectionConfigurationSecurityMode {
         return securityMode
     }
 
+    /**  
+     * 返回 DNSSEC 模式
+     * @return 返回 DNSSEC 模式
+     */
     public func getDnssecMode(): DnssecMode {
         return dnssecMode
     }
 
     /**
-     * Return the TlsClientConfig.
+     * 返回TlsClientConfig。
      *
-     * @return the TlsClientConfig
+     * @return TlsClientConfig
      */
     public func getTlsClientConfig(): ?TlsClientConfig {
         return tlsClientConfig
     }
 
     /**
-     * Returns the Xmpp debugger factory.
+     * 返回XMPP调试器工厂。
      *
-     * @return the Xmpp debugger factory or <code>null</code>
+     * @return XMPP调试器工厂或者 `None`。
      */
     public func getDebuggerFactory(): ?XmppDebuggerFactory {
         return debuggerFactory
     }
 
     /**
-     * Returns the socket factory used to create new xmppConnection sockets.
-     * This is useful when connecting through SOCKS5 proxies.
+     * 返回用于创建新的XMPP连接套接字的套接字工厂。在通过SOCKS5代理进行连接时，此功能很有用。
      *
-     * @return socketFactory used to create new sockets.
+     * @return 用于创建新套接字的套接字工厂。
      */
     public func getSocketFactory(): ?SocketFactory {
         return socketFactory
     }
 
     /**
-     * Returns a CallbackHandler to obtain information, such as the password or
-     * principal information during the SASL authentication. A CallbackHandler
-     * will be used <b>ONLY</b> if no password was specified during the login while
-     * using SASL authentication.
+     * 返回一个回调处理器，用于在SASL身份验证过程中获取诸如密码或主体信息等信息。只有在使用SASL身份验证登录时未指定密码的情况下，才会使用此回调处理器。
      *
-     * @return a CallbackHandler to obtain information, such as the password or
-     * principal information during the SASL authentication.
+     * @return 一个用于在SASL身份验证期间获取诸如密码或主体信息等信息的回调处理器。
      */
     public func getCallbackHandler(): ?CallbackHandler {
-        return None // TODO
+        return callbackHandler
     }
 
     /**
-     * Get the configured proxy information (if any).
+     * 获取已配置的代理信息（如果有的话）。
      *
-     * @return the configured proxy information or <code>null</code>.
+     * @return 已配置的代理信息或者 `None`。
      */
     public func getProxyInfo(): ?ProxyInfo {
         return proxy
     }
 
     /**
-     * Returns the username to use when trying to reconnect to the server.
+     * 返回尝试重新连接到服务器时要使用的用户名。
      *
-     * @return the username to use when trying to reconnect to the server.
+     * @return 尝试重新连接到服务器时要使用的用户名。
      */
     public func getUsername(): String {
         return username
     }
 
     /**
-     * Returns the password to use when trying to reconnect to the server.
+     * 返回尝试重新连接到服务器时要使用的密码。
      *
-     * @return the password to use when trying to reconnect to the server.
+     * @return 尝试重新连接到服务器时要使用的密码。
      */
     public func getPassword(): String {
         return password
     }
 
     /**
-     * Returns the resource to use when trying to reconnect to the server.
+     * 返回尝试重新连接到服务器时要使用的资源。
      *
-     * @return the resource to use when trying to reconnect to the server.
+     * @return 尝试重新连接到服务器时要使用的资源，可能为None。
      */
     public func getResource(): ?Resourcepart {
         return resource
     }
 
     /**
-     * Returns the stream language to use when connecting to the server.
+     * 返回连接到服务器时要使用的流语言。
      *
-     * @return the stream language to use when connecting to the server.
+     * @return 连接到服务器时要使用的流语言，可能为None。
      */
     public func getLanguage(): ?String {
         return language
     }
 
     /**
-     * Returns the xml:lang string of the stream language to use when connecting to the server.
+     * 返回连接到服务器时要使用的流语言的 `xml:lang` 字符串。
      *
-     * <p>If the developer sets the language to null, this will also return null, leading to
-     * the removal of the xml:lang tag from the stream. If a Locale("") is configured, this will
-     * return "", which can be used as an override.</p>
+     * <p>如果开发者将语言设置为 `None`，那么此方法也会返回 `None`，这将导致从流中移除 `xml:lang` 标签。如果配置了 `Locale("")`，则会返回 `""`，它可作为一种覆盖设置。</p>
      *
-     * @return the stream language to use when connecting to the server.
+     * @return 连接到服务器时要使用的流语言。
      */
     public func getXmlLang(): ?String {
         language?.replace("_", "-")
     }
 
     /**
-     * Returns the optional XMPP address to be requested as the SASL authorization identity.
+     * 返回作为SASL授权标识要请求的可选XMPP地址。
      *
-     * @return the authorization identifier.
-     * @see <a href="http/tools/ietf/org/html/rfc6120#section-6.3.8">RFC 6120 § 6.3.8. Authorization Identity</a>
+     * @return 授权标识符。
+     * @see <a href="http/tools/ietf/org/html/rfc6120#section-6.3.8">RFC 6120 § 6.3.8. 授权标识</a>
      */
     public func getAuthzid(): ?EntityBareJid {
         return authzid
     }
 
     /**
-     * Returns true if an available presence should be sent when logging in while reconnecting.
+     * 如果在重新连接登录时应该发送可用状态，则返回 `true`。
      *
-     * @return true if an available presence should be sent when logging in while reconnecting
+     * @return 如果在重新连接登录时应该发送可用状态，则返回 `true`。
      */
     public func isSendPresence(): Bool {
         return sendPresence
     }
 
     /**
-     * Returns true if the connection is going to use stream compression. Stream compression
-     * will be requested after TLS was established (if TLS was enabled) and only if the server
-     * offered stream compression. With stream compression network traffic can be reduced
-     * up to 90%. By default compression is disabled.
+     * 如果连接将使用流压缩，则返回 `true`。流压缩将在TLS建立之后（如果启用了TLS）且仅当服务器提供流压缩时才会被请求。通过流压缩，网络流量最多可减少90%。默认情况下，压缩是禁用的。
      *
-     * @return true if the connection is going to use stream compression.
+     * @return 如果连接将使用流压缩，则返回 `true`。
      */
     public func isCompressionEnabled(): Bool {
         return compressionEnabled
     }
 
     /**
-     * Check if the given SASL mechansism is enabled in this connection configuration.
+     * 检查给定的SASL机制在此次连接配置中是否已启用。
      *
      * @param saslMechanism TODO javadoc me please
-     * @return true if the given SASL mechanism is enabled, false otherwise.
+     * @return 如果给定的SASL机制已启用，则返回 `true`，否则返回 `false`。
      */
     public func isEnabledSaslMechanism(saslMechanism: String): Bool {
         if (let Some(v) <- enabledSaslMechanisms) {
@@ -357,10 +394,9 @@ public abstract class ConnectionConfiguration {
     }
 
     /**
-     * Return the explicitly enabled SASL mechanisms. May return <code>null</code> if no SASL mechanisms where
-     * explicitly enabled, i.e. all SALS mechanisms supported and announced by the service will be considered.
+     * 返回显式启用的SASL机制。如果没有显式启用任何SASL机制，即所有由服务支持并公布的SALS机制都将被考虑在内，那么可能会返回 `None`。
      *
-     * @return the enabled SASL mechanisms or <code>null</code>.
+     * @return 已启用的SASL机制或者 `None`。
      */
     public func getEnabledSaslMechanisms(): ?Set<String> {
         if (let Some(v) <- enabledSaslMechanisms) {
@@ -370,6 +406,11 @@ public abstract class ConnectionConfiguration {
         }
     }
 
+    /**
+     * 构造并返回一个 StanzaIdSource 类型的对象。
+     *
+     * @return StanzaIdSource。
+     */
     public func constructStanzaIdSource(): StanzaIdSource {
         return stanzaIdSourceFactory.constructStanzaIdSource()
     }
@@ -377,49 +418,32 @@ public abstract class ConnectionConfiguration {
 
 public abstract class ConnectionConfigurationBuilder {
     var securityMode: ConnectionConfigurationSecurityMode = ConnectionConfigurationSecurityMode.required
-
     var dnssecMode: DnssecMode = DnssecMode.disabled
-
     var tlsClientConfig: ?TlsClientConfig = None
-
     var authzid: ?EntityBareJid = None
-
     var username: String = ""
-
     var password: String = ""
-
     var resource: ?Resourcepart = None
-
     var language: String = "zh_CN"
-
     var sendPresence = true
-
     var proxy: ?ProxyInfo = None
-
+    var callbackHandler: ?CallbackHandler = None
     var debuggerFactory: ?XmppDebuggerFactory = None
-
     var socketFactory: ?SocketFactory = None
-
     var xmppServiceDomain: ?DomainBareJid = None
-
     var hostAddress: ?IPAddress = None
-
     var host: ?DnsName = None
-
     var port: UInt16 = 5222
-
     var allowEmptyOrNullUsername = false
-
-    private var saslMechanismsSealed: Bool = false
-
+    var saslMechanismsSealed: Bool = false
     var enabledSaslMechanisms: ?Set<String> = None
-
     var customX509TrustManager: ?TlsClientConfig = None
-
     var compressionEnabled = false
-
     var stanzaIdSourceFactory: StanzaIdSourceFactory = StandardStanzaIdSourceFactory()
 
+    /**
+     * 初始化ConnectionConfigurationBuilder。
+     */
     public ConnectionConfigurationBuilder() {
         if (XmppConfiguration.DEBUG) {
             this.debuggerFactory = XmppConfiguration.getDefaultXmppDebuggerFactory()
@@ -428,139 +452,132 @@ public abstract class ConnectionConfigurationBuilder {
     }
 
     /**
-     * Convenience method to configure the username, password and XMPP service domain.
+     * 配置用户名、密码和XMPP服务域的便捷方法。
      *
-     * @param jid the XMPP address of the user.
-     * @param password the password of the user.
-     * @return a reference to this builder.
-     * @throws XmppStringprepException in case the XMPP address is not valid.
+     * @param jid 用户的XMPP地址。
+     * @param password 用户的密码。
+     * @return ConnectionConfigurationBuilder
+     * @throws XmppStringprepException 以防XMPP地址无效。
      * @see #setXmppAddressAndPassword(EntityBareJid, String)
      */
-    public func setXmppAddressAndPassword(jid: String, password: String): ConnectionConfigurationBuilder {
+    public open func setXmppAddressAndPassword(jid: String, password: String): ConnectionConfigurationBuilder {
         return setXmppAddressAndPassword(JidCreate.entityBareFrom(jid), password)
     }
 
     /**
-     * Convenience method to configure the username, password and XMPP service domain. The localpart of the provided
-     * JID is used as username and the domanipart is used as XMPP service domain.
+     * 配置用户名、密码和XMPP服务域的便捷方法。提供的JID的localpart用作用户名，domanipart用作XMPP服务域。
      * <p>
-     * Please note that this does and can not configure the client XMPP address. XMPP services are not required to
-     * assign bound JIDs where the localpart matches the username and the domainpart matches the verified domainpart.
-     * Although most services will follow that pattern.
+     * 请注意，这可以配置也不能配置客户端XMPP地址。XMPP服务不需要分配绑定的JID，其中localpart与用户名匹配，domainpart与验证的domainpart匹配。尽管大多数服务将遵循这种模式。
      * </p>
      *
-     * @param jid TODO javadoc me please
-     * @param password TODO javadoc me please
-     * @return a reference to this builder.
+     * @param jid EntityBareJid
+     * @param password 密码
+     * @return ConnectionConfigurationBuilder
      */
-    public func setXmppAddressAndPassword(jid: EntityBareJid, password: String): ConnectionConfigurationBuilder {
+    public open func setXmppAddressAndPassword(jid: EntityBareJid, password: String): ConnectionConfigurationBuilder {
         setUsernameAndPassword(jid.getLocalpart().toString(), password)
         return setXmppDomain(jid.asDomainBareJid())
     }
 
     /**
-     * Set the XMPP entities username and password.
+     * 设置XMPP实体的用户名和密码。
      * <p>
-     * The username is usually the localpart of the clients JID. But some SASL mechanisms or services may require a different
-     * format (e.g. the full JID) as used authorization identity.
+     * 用户名通常是客户端JID的本地部分。但是，一些SASL机制或服务可能需要不同的格式（例如完整的JID）作为使用的授权标识。
      * </p>
      *
-     * @param username the username or authorization identity
-     * @param password the password or token used to authenticate
-     * @return a reference to this builder.
+     * @param username 用户名或授权标识
+     * @param password 用于身份验证的密码或令牌
+     * @return ConnectionConfigurationBuilder
      */
-    public func setUsernameAndPassword(username: String, password: String): ConnectionConfigurationBuilder {
+    public open func setUsernameAndPassword(username: String, password: String): ConnectionConfigurationBuilder {
         this.username = username
         this.password = password
         return getThis()
     }
 
     /**
-     * Set the XMPP domain. The XMPP domain is what follows after the '@' sign in XMPP addresses (JIDs).
+     * 设置XMPP域。XMPP域是XMPP地址（JID）中“@”符号之后的内容。
      *
-     * @param xmppDomain the XMPP domain.
-     * @return a reference to this builder.
+     * @param xmppDomain XMPP域。
+     * @return ConnectionConfigurationBuilder
      */
-    public func setXmppDomain(xmppDomain: DomainBareJid): ConnectionConfigurationBuilder {
+    public open func setXmppDomain(xmppDomain: DomainBareJid): ConnectionConfigurationBuilder {
         this.xmppServiceDomain = xmppDomain
         return getThis()
     }
 
     /**
-     * Set the XMPP domain. The XMPP domain is what follows after the '@' sign in XMPP addresses (JIDs).
+     * 设置XMPP域。XMPP域是XMPP地址（JID）中“@”符号之后的内容。
      *
-     * @param xmppServiceDomain the XMPP domain.
-     * @return a reference to this builder.
-     * @throws XmppStringprepException if the given string is not a domain bare JID.
+     * @param xmppServiceDomain XMPP域。
+     * @return ConnectionConfigurationBuilder
+     * @throws XmppStringprepException 如果给定的字符串不是域裸JID。
      */
-    public func setXmppDomain(xmppServiceDomain: String): ConnectionConfigurationBuilder {
+    public open func setXmppDomain(xmppServiceDomain: String): ConnectionConfigurationBuilder {
         this.xmppServiceDomain = JidCreate.domainBareFrom(xmppServiceDomain)
         return getThis()
     }
 
     /**
-     * Set the resource we are requesting from the server.
+     * 设置我们从服务器请求的资源。
      * <p>
-     * If <code>resource</code> is <code>null</code>, the default, then the server will automatically create a
-     * resource for the client. Note that XMPP clients only suggest this resource to the server. XMPP servers are
-     * allowed to ignore the client suggested resource and instead assign a completely different
-     * resource (see RFC 6120 § 7.7.1).
+     * 如果<code>资源</code>为<code>空</code>-默认值，则服务器将自动为客户端创建资源。
+     * 请注意，XMPP客户端仅向服务器建议此资源。
+     * XMPP服务器可以忽略客户端建议的资源，而是分配一个完全不同的资源（见RFC 6120§7.7.1）。
      * </p>
      *
-     * @param resource the resource to use.
-     * @return a reference to this builder.
+     * @param resource 要使用的资源。
+     * @return ConnectionConfigurationBuilder
      * @see <a href="https/tools/ietf/org/html/rfc6120#section-7.7.1">RFC 6120 § 7.7.1</a>
      */
-    public func setResource(resource: Resourcepart): ConnectionConfigurationBuilder {
+    public open func setResource(resource: Resourcepart): ConnectionConfigurationBuilder {
         this.resource = resource
         return getThis()
     }
 
     /**
-     * Set the stream language.
+     * 设置语言。
      *
-     * @param language the language to use.
-     * @return a reference to this builder.
+     * @param language 语言
+     * @return ConnectionConfigurationBuilder
      * @see <a href="https/tools/ietf/org/html/rfc6120#section-4.7.4">RFC 6120 § 4.7.4</a>
      * @see <a href="https/www/w3/org/TR/xml/#sec-lang-tag">XML 1.0 § 2.12 Language Identification</a>
      */
-    public func setLanguage(language: String): ConnectionConfigurationBuilder {
+    public open func setLanguage(language: String): ConnectionConfigurationBuilder {
         this.language = language
         return getThis()
     }
 
     /**
-     * Set the resource we are requesting from the server.
+     * 设置我们从服务器请求的资源。
      *
-     * @param resource the non-null CharSequence to use a resource.
-     * @return a reference ot this builder.
-     * @throws XmppStringprepException if the CharSequence is not a valid resourcepart.
+     * @param resource 使用非空的String来使用资源。
+     * @return ConnectionConfigurationBuilder
+     * @throws XmppStringprepException 如果String不是有效的资源部分。
      * @see #setResource(Resourcepart)
      */
-    public func setResource(resource: String): ConnectionConfigurationBuilder {
+    public open func setResource(resource: String): ConnectionConfigurationBuilder {
         return setResource(Resourcepart.froms(resource))
     }
 
     /**
-     * Set the Internet address of the host providing the XMPP service. If set, then this will overwrite anything
-     * set via {@link #setHost(CharSequence)}.
+     * 设置提供XMPP服务的主机的Internet地址。如果设置了，那么这将覆盖通过{@link#setHost（CharSequence）}设置的任何内容。
      *
-     * @param address the Internet address of the host providing the XMPP service.
-     * @return a reference to this builder.
+     * @param address 提供XMPP服务的主机的互联网地址。
+     * @return ConnectionConfigurationBuilder
      */
-    public func setHostAddress(address: IPAddress): ConnectionConfigurationBuilder {
+    public open func setHostAddress(address: IPAddress): ConnectionConfigurationBuilder {
         this.hostAddress = address
         return getThis()
     }
 
     /**
-     * Set the name of the host providing the XMPP service. This method takes DNS names and
-     * IP addresses.
+     * 设置提供XMPP服务的主机的名称。此方法接受DNS名称和IP地址。
      *
-     * @param host the DNS name of the host providing the XMPP service.
-     * @return a reference to this builder.
+     * @param host 提供XMPP服务的主机的DNS名称。
+     * @return ConnectionConfigurationBuilder
      */
-    public func setHost(host: String): ConnectionConfigurationBuilder {
+    public open func setHost(host: String): ConnectionConfigurationBuilder {
         if (let Some(ip) <- IPAddress.tryParse(host)) {
             setHostAddress(ip)
         } else {
@@ -569,7 +586,14 @@ public abstract class ConnectionConfigurationBuilder {
         return getThis()
     }
 
-    public func setPort(port: Int64): ConnectionConfigurationBuilder {
+
+    /**
+     * 设置端口号。
+     *
+     * @param port 端口号。
+     * @return ConnectionConfigurationBuilder
+     */
+    public open func setPort(port: Int64): ConnectionConfigurationBuilder {
         if (port < 0 || port > 65535) {
             throw IllegalArgumentException(
                 "Port must be a 16-bit unsigned integer (i.e. between 0-65535. Port was: ${port.toString()}")
@@ -578,113 +602,145 @@ public abstract class ConnectionConfigurationBuilder {
         return setPort(portUint16)
     }
 
-    public func setPort(port: UInt16): ConnectionConfigurationBuilder {
+
+    /**
+     * 设置端口号。
+     *
+     * @param port 端口号。
+     * @return ConnectionConfigurationBuilder
+     */
+    public open func setPort(port: UInt16): ConnectionConfigurationBuilder {
         this.port = Objects.requireNonNull(port)
         return getThis()
     }
 
-    public func setDnssecMode(dnssecMode: DnssecMode): ConnectionConfigurationBuilder {
-        this.dnssecMode = Objects.requireNonNull(dnssecMode, "DNSSEC mode must not be null")
+    /**
+     * CallbackHandler只在使用SASL验证并且无password时使用
+     *
+     * @param callbackHandler CallbackHandler。
+     * @return ConnectionConfigurationBuilder
+     */
+    public open func setCallbackHandler(callbackHandler: CallbackHandler): ConnectionConfigurationBuilder {
+        this.callbackHandler = callbackHandler
+        return getThis()
+    }
+
+    /**  
+     * 设置 DNSSEC 模式
+     *
+     * @param dnssecMode 要设置的 DNSSEC 模式
+     * @return 返回当前实例
+     * @throws NullPointerException 如果传入的 dnssecMode 为 None
+     */
+    public open func setDnssecMode(dnssecMode: DnssecMode): ConnectionConfigurationBuilder {
+        this.dnssecMode = Objects.requireNonNull(dnssecMode, "DNSSEC mode must not be None")
         return getThis()
     }
 
     /**
-     * Sets the TLS security mode used when making the connection. By default,
-     * the mode is {@link SecurityMode#required}.
+     * 设置建立连接时使用的TLS安全模式。默认情况下，模式为{@link SecurityMode#required}。
      *
-     * @param securityMode the security mode.
-     * @return a reference to this builder.
+     * @param securityMode 安全模式。
+     * @return ConnectionConfigurationBuilder
      */
-    public func setSecurityMode(securityMode: ConnectionConfigurationSecurityMode): ConnectionConfigurationBuilder {
+    public open func setSecurityMode(securityMode: ConnectionConfigurationSecurityMode): ConnectionConfigurationBuilder {
         this.securityMode = securityMode
         return getThis()
     }
 
     /**
-     * Set the TlsClientConfig.
+     * 设置TlsClientConfig。
      *
-     * @param TlsClientConfig
-     * @return a reference to this builder.
+     * @param tlsClientConfig TlsClientConfig
+     * @return ConnectionConfigurationBuilder
      */
-    public func setTlsClientConfig(tlsClientConfig: ?TlsClientConfig): ConnectionConfigurationBuilder {
+    public open func setTlsClientConfig(tlsClientConfig: ?TlsClientConfig): ConnectionConfigurationBuilder {
         this.tlsClientConfig = tlsClientConfig
         return getThis()
     }
 
     /**
-     * Sets if an initial available presence will be sent to the server. By default
-     * an available presence will be sent to the server indicating that this presence
-     * is not online and available to receive messages. If you want to log in without
-     * being 'noticed' then pass a <code>false</code> value.
+     * 设置是否将初始可用状态发送到服务器。
+     * 默认情况下，将向服务器发送一个可用状态，指示此状态不在线，无法接收消息。
+     * 如果你想在不被“注意”的情况下登录，那么传递一个<code>false</code>值。
      *
-     * @param sendPresence true if an initial available presence will be sent while logging in.
-     * @return a reference to this builder.
+     * @param sendPresence 如果登录时将发送初始可用状态，则为true。
+     * @return ConnectionConfigurationBuilder
      */
-    public func setSendPresence(sendPresence: Bool): ConnectionConfigurationBuilder {
+    public open func setSendPresence(sendPresence: Bool): ConnectionConfigurationBuilder {
         this.sendPresence = sendPresence
         return getThis()
     }
 
-    public func enableDefaultDebugger(): ConnectionConfigurationBuilder {
+    /**  
+     * 启用默认调试器。
+     *
+     * 该方法从 Smack 配置中获取默认调试器工厂，并将其分配给 debuggerFactory
+     * 字段。方法确保 debuggerFactory 不为 null，从而保证在返回当前实例之前
+     * 设置了有效的调试器。
+     *
+     * @return 返回当前实例以支持链式调用。
+     * @throws IllegalStateException 如果默认调试器工厂为 None。
+     */
+    public open func enableDefaultDebugger(): ConnectionConfigurationBuilder {
         this.debuggerFactory = XmppConfiguration.getDefaultXmppDebuggerFactory()
         assert(this.debuggerFactory.isSome())
         return getThis()
     }
 
     /**
-     * Set the Xmpp debugger factory used to construct Xmpp debuggers.
+     * 设置用于构造Xmpp调试器的Xmpp调试工厂。
      *
-     * @param debuggerFactory the Xmpp debugger factory.
-     * @return a reference to this builder.
+     * @param debuggerFactory Xmpp调试器工厂。
+     * @return ConnectionConfigurationBuilder
      */
-    public func setDebuggerFactory(debuggerFactory: XmppDebuggerFactory): ConnectionConfigurationBuilder {
+    public open func setDebuggerFactory(debuggerFactory: XmppDebuggerFactory): ConnectionConfigurationBuilder {
         this.debuggerFactory = debuggerFactory
         return getThis()
     }
 
     /**
-     * Sets the socket factory used to create new xmppConnection sockets.
-     * This is useful when connecting through SOCKS5 proxies.
+     * 设置用于创建新xmppConnection套接字的套接字工厂。
+     * 这在通过SOCKS5代理连接时非常有用。
      *
-     * @param socketFactory used to create new sockets.
-     * @return a reference to this builder.
+     * @param socketFactory 用于创建新套接字。
+     * @return ConnectionConfigurationBuilder
      */
-    public func setSocketFactory(socketFactory: SocketFactory): ConnectionConfigurationBuilder {
+    public open func setSocketFactory(socketFactory: SocketFactory): ConnectionConfigurationBuilder {
         this.socketFactory = socketFactory
         return getThis()
     }
 
     /**
-     * Set the information about the Proxy used for the connection.
+     * 设置有关用于连接的代理的信息。
      *
-     * @param proxyInfo the Proxy information.
-     * @return a reference to this builder.
+     * @param proxyInfo 代理信息。
+     * @return ConnectionConfigurationBuilder
      */
-    public func setProxyInfo(proxyInfo: ProxyInfo): ConnectionConfigurationBuilder {
+    public open func setProxyInfo(proxyInfo: ProxyInfo): ConnectionConfigurationBuilder {
         this.proxy = proxyInfo
         return getThis()
     }
 
     /**
-     * Allow <code>null</code> or the empty String as username.
+     * 允许<code>None</code>或空字符串作为用户名。
      *
-     * Some SASL mechanisms (e.g. SASL External) may also signal the username (as "authorization identity"), in
-     * which case Xmpp should not throw an IllegalArgumentException when the username is not set.
+     * 一些SASL机制（例如SASL外部）也可能发出用户名信号（作为“授权身份”），在这种情况下，当用户名未设置时，Xmpp不应抛出IllegalArgumentException。
      *
-     * @return a reference to this builder.
+     * @return ConnectionConfigurationBuilder
      */
-    public func allowEmptyOrNullUsernames(): ConnectionConfigurationBuilder {
+    public open func allowEmptyOrNullUsernames(): ConnectionConfigurationBuilder {
         allowEmptyOrNullUsername = true
         return getThis()
     }
 
     /**
-     * Perform anonymous authentication using SASL ANONYMOUS. Your XMPP service must support this authentication
-     * mechanism. This method also calls {@link #addEnabledSaslMechanism(String)} with "ANONYMOUS" as argument.
+     * 使用SASL anonymous执行匿名身份验证。您的XMPP服务必须支持此身份验证机制。
+     * 此方法还调用{@link#addEnabledSaslMechanism（String）}，参数为“ANONYMOUS”。
      *
-     * @return a reference to this builder.
+     * @return ConnectionConfigurationBuilder
      */
-    public func performSaslAnonymousAuthentication(): ConnectionConfigurationBuilder {
+    public open func performSaslAnonymousAuthentication(): ConnectionConfigurationBuilder {
         if (!SASLAuthentication.isSaslMechanismRegistered(SASLAnonymous.NAME)) {
             throw IllegalArgumentException("SASL ${SASLAnonymous.NAME} is not registered")
         }
@@ -696,15 +752,14 @@ public abstract class ConnectionConfigurationBuilder {
     }
 
     /**
-     * Perform authentication using SASL EXTERNAL. Your XMPP service must support this
-     * authentication mechanism. This method also calls {@link #addEnabledSaslMechanism(String)} with "EXTERNAL" as
-     * argument. It also calls {@link #allowEmptyOrNullUsernames()} and {@link #setSecurityMode(ConnectionConfiguration.SecurityMode)} to
-     * {@link SecurityMode#required}.
+     * 使用SASL EXTERNAL执行身份验证。您的XMPP服务必须支持此身份验证机制。
+     * 此方法还调用{@link#addEnabledSaslMechanism（String）}，参数为“EXTERNAL”。
+     * 它还调用{@link#allowEmptyOrNullUsernames（）}和{@link#setSecurityMode（ConnectionConfiguration.SecurityMode）}
      *
-     * @param sslContext custom SSLContext to be used.
-     * @return a reference to this builder.
+     * @param sslContext 要使用的自定义SSLContext。
+     * @return ConnectionConfigurationBuilder
      */
-    public func performSaslExternalAuthentication(sslContext: TlsClientConfig): ConnectionConfigurationBuilder {
+    public open func performSaslExternalAuthentication(sslContext: TlsClientConfig): ConnectionConfigurationBuilder {
         if (!SASLAuthentication.isSaslMechanismRegistered(SASLMechanism.EXTERNAL)) {
             throw IllegalArgumentException("SASL ${SASLMechanism.EXTERNAL} is not registered")
         }
@@ -724,25 +779,25 @@ public abstract class ConnectionConfigurationBuilder {
     }
 
     /**
-     * Add the given mechanism to the enabled ones. See {@link #addEnabledSaslMechanism(Collection)} for a discussion about enabled SASL mechanisms.
+     * 将给定的机制添加到已启用的机制中。有关启用的SASL机制的讨论，请参阅{@link#addEnabledSaslMechanism（Collection）}。
      *
-     * @param saslMechanism the name of the mechanism to enable.
-     * @return a reference to this builder.
+     * @param saslMechanism 要启用的机制的名称。
+     * @return ConnectionConfigurationBuilder
      */
-    public func addEnabledSaslMechanism(saslMechanism: String): ConnectionConfigurationBuilder {
+    public open func addEnabledSaslMechanism(saslMechanism: String): ConnectionConfigurationBuilder {
         return addEnabledSaslMechanism(
             [StringUtils.requireNotNullNorEmpty(saslMechanism, "saslMechanism must not be null nor empty")])
     }
 
     /**
-     * Enable the given SASL mechanisms. If you never add a mechanism to the set of enabled ones, <b>all mechanisms
-     * known to Xmpp</b> will be enabled. Only explicitly enable particular SASL mechanisms if you want to limit
-     * the used mechanisms to the enabled ones.
+     * 启用给定的SASL机制。
+     * 如果您从未将机制添加到已启用的机制集中，则Xmpp已知的所有机制都将被启用。
+     * 只有当您想将使用的机制限制为已启用的机制时，才显式启用特定的SASL机制。
      *
-     * @param saslMechanisms a collection of names of mechanisms to enable.
-     * @return a reference to this builder.
+     * @param saslMechanisms 一组要启用的机制名称。
+     * @return ConnectionConfigurationBuilder
      */
-    public func addEnabledSaslMechanism(saslMechanisms: Collection<String>): ConnectionConfigurationBuilder {
+    public open func addEnabledSaslMechanism(saslMechanisms: Collection<String>): ConnectionConfigurationBuilder {
         if (saslMechanismsSealed) {
             throw IllegalStateException("The enabled SASL mechanisms are sealed, you can not add new ones")
         }
@@ -764,74 +819,76 @@ public abstract class ConnectionConfigurationBuilder {
     }
 
     /**
-     * Set the XMPP address to be used as authorization identity.
+     * 设置用作授权标识的XMPP地址。
      * <p>
-     * In XMPP, authorization identities are bare jids. In general, callers should allow the server to select the
-     * authorization identifier automatically, and not call this. Note that setting the authzid does not set the XMPP
-     * service domain, which should typically match.
-     * Calling this will also SASL CRAM, since this mechanism does not support authzid.
+     * 在XMPP中，授权身份是赤裸裸的。
+     * 一般来说，调用者应该允许服务器自动选择授权标识符，而不是调用它。
+     * 请注意，设置authzid不会设置XMPP服务域，通常应该匹配。
+     * 调用此命令也将是SASL CRAM，因为此机制不支持authzid。
      * </p>
      *
-     * @param authzid The BareJid to be requested as the authorization identifier.
-     * @return a reference to this builder.
+     * @param authzid 请求BareJid作为授权标识符。
+     * @return ConnectionConfigurationBuilder
      * @see <a href="http/tools/ietf/org/html/rfc6120#section-6.3.8">RFC 6120 § 6.3.8. Authorization Identity</a>
      */
-    public func setAuthzid(authzid: EntityBareJid): ConnectionConfigurationBuilder {
+    public open func setAuthzid(authzid: EntityBareJid): ConnectionConfigurationBuilder {
         this.authzid = authzid
         return getThis()
     }
 
     /**
-     * Sets if the connection is going to use compression (default false).
+     * 设置连接是否将使用压缩（默认为false）。
      *
-     * Compression is only activated if the server offers compression. With compression network
-     * traffic can be reduced up to 90%. By default compression is disabled.
+     * 仅当服务器提供压缩时，才会激活压缩。通过压缩，网络流量可以减少高达90%。默认情况下，压缩是禁用的。
      *
-     * @param compressionEnabled if the connection is going to use compression on the HTTP level.
-     * @return a reference to this object.
+     * @param compressionEnabled 如果连接将在HTTP级别使用压缩。
+     * @return ConnectionConfigurationBuilder
      */
-    public func setCompressionEnabled(compressionEnabled: Bool): ConnectionConfigurationBuilder {
+    public open func setCompressionEnabled(compressionEnabled: Bool): ConnectionConfigurationBuilder {
         this.compressionEnabled = compressionEnabled
         return getThis()
     }
 
     /**
-     * Set the factory for stanza ID sources to use.
+     * 设置要使用的节ID源的工厂。
      *
-     * @param stanzaIdSourceFactory the factory for stanza ID sources to use.
-     * @return a reference to this builder.
+     * @param stanzaIdSourceFactory 节ID源使用的工厂。
+     * @return ConnectionConfigurationBuilder
      */
-    public func setStanzaIdSourceFactory(stanzaIdSourceFactory: StanzaIdSourceFactory): ConnectionConfigurationBuilder {
+    public open func setStanzaIdSourceFactory(stanzaIdSourceFactory: StanzaIdSourceFactory): ConnectionConfigurationBuilder {
         this.stanzaIdSourceFactory = Objects.requireNonNull(stanzaIdSourceFactory)
         return getThis()
     }
 
+    /**
+     * 返回ConnectionConfiguration。
+     *
+     * @return 返回ConnectionConfiguration。
+     */
     public func build(): ConnectionConfiguration
 
+    /**
+     * 返回ConnectionConfigurationBuilder。
+     *
+     * @return 返回ConnectionConfigurationBuilder。
+     */
     protected func getThis(): ConnectionConfigurationBuilder
 }
 
 public enum ConnectionConfigurationSecurityMode <: ToString & Equatable<ConnectionConfigurationSecurityMode> {
     /**
-     * Security via TLS encryption is required in order to connect. If the server
-     * does not offer TLS or if the TLS negotiation fails, the connection to the server
-     * will fail.
+     * 需要通过TLS加密进行安全保护才能连接。如果服务器不提供TLS或TLS协商失败，则与服务器的连接将失败。
      */
     | required
     /**
-     * Security via TLS encryption is used whenever it's available. This is the
-     * default setting.
+     * 只要可用，就会使用TLS加密的安全性。这是默认设置。
      * <p>
-     * <b>Do not use this setting</b> unless you can't use {@link #required}. An attacker could easily perform a
-     * Man-in-the-middle attack and prevent TLS from being used, leaving you with an unencrypted (and
-     * unauthenticated) connection.
+     * <b>除非不能使用{@link#required}，否则不要使用此设置</b>。攻击者可以轻松地执行中间人攻击并阻止TLS的使用，从而为您留下未加密（且未经验证）的连接。
      * </p>
      */
     | ifpossible
     /**
-     * Security via TLS encryption is disabled and only un-encrypted connections will
-     * be used. If only TLS encryption is available from the server, the connection
-     * will fail.
+     * 通过TLS加密的安全性被禁用，只会使用未加密的连接。如果服务器只提供TLS加密，则连接将失败。
      */
     | disabled
 

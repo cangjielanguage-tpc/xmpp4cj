@@ -7,7 +7,7 @@ package xmpp4cj.util
  * 可前进后退的迭代器
  */
 public class ListIterator<T> <: Iterator<T> {
-    let data: Array<T>
+    public let data: Array<T>
     var nextIndex = 0
     /*
      * @param iter 源迭代器
