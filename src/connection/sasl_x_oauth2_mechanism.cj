@@ -11,7 +11,7 @@ package xmpp4cj.connection
  * 提供的密码将用作 OAUTH 令牌。
  * </p>
  * <p>
- * 注意，X-OAUTH2 在 Smack 中是实验性的。这是因为 Google 除了
+ * 注意，X-OAUTH2 在 Xmpp 中是实验性的。这是因为 Google 除了
  * 定义了不良实践（XEP-134）之外，还为 'auth' stanza 添加了自定义属性，如下所示。
  * </p>
  *
@@ -38,7 +38,7 @@ package xmpp4cj.connection
  *
  * 来自 https/developers/google/com/talk/jep_extensions/oauth
  * <p>
- * 这些属性扩展当前不受 Smack 支持，且尚不清楚它们如何影响授权以及它们的普及程度。
+ * 这些属性扩展当前不受 Xmpp 支持，且尚不清楚它们如何影响授权以及它们的普及程度。
  * </p>
  */
 public open class SASLXOauth2Mechanism <: SASLMechanism {

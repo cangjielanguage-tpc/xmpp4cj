@@ -7,7 +7,7 @@ package xmpp4cj.util
  * 提供可迭代的BlockingQueue。
  */
 public class CollectionBlockingQueue<E> <: Collection<E> {
-    private let lock: ReentrantReadWriteMutex = ReentrantReadWriteMutex() // 所有方法都应该是synchronized
+    private let lock: Monitor = Monitor() // 所有方法都应该是synchronized
 
     private var queue: ArrayBlockingQueue<E>
 
@@ -30,7 +30,7 @@ public class CollectionBlockingQueue<E> <: Collection<E> {
      */
     public override prop size: Int64 {
         get() {
-            synchronized(lock.readMutex) {
+            synchronized(lock) {
                 queue.size
             }
         }
@@ -42,7 +42,7 @@ public class CollectionBlockingQueue<E> <: Collection<E> {
      * @return 空返回true，不为空返回false。
      */
     public override func isEmpty(): Bool {
-        synchronized(lock.readMutex) {
+        synchronized(lock) {
             queue.size == 0
         }
     }
@@ -53,7 +53,7 @@ public class CollectionBlockingQueue<E> <: Collection<E> {
      * @return 迭代器。
      */
     public override func iterator(): Iterator<E> {
-        synchronized(lock.writeMutex) {
+        synchronized(lock) {
             let old = queue
             let arr: ArrayList<E> = ArrayList<E>(old.capacity)
             queue = ArrayBlockingQueue<E>(old.capacity)

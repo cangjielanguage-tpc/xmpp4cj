@@ -13,7 +13,7 @@ public class ScheduledAction <: Comparable<ScheduledAction> & Delayed {
 
     let releaseTime: DateTime //动作的释放时间
 
-    let xmppReactor: XmppReactor //关联的 SmackReactor 实例
+    let xmppReactor: XmppReactor //关联的 XmppReactor 实例
 
     let kind: ScheduledActionKind //动作的类型（非阻塞或阻塞）
 
@@ -22,7 +22,7 @@ public class ScheduledAction <: Comparable<ScheduledAction> & Delayed {
      *
      * @param action 要执行的任务
      * @param releaseTime 动作释放的时间
-     * @param xmppReactor 关联的 SmackReactor 实例
+     * @param xmppReactor 关联的 XmppReactor 实例
      * @param kind 动作的类型（非阻塞或阻塞）
      */
     init(action: Runnable, releaseTime: DateTime, xmppReactor: XmppReactor, kind: ScheduledActionKind) {

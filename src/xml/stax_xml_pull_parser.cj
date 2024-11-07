@@ -3,6 +3,9 @@
  */
 package xmpp4cj.xml
 
+import xmpp4cj.util.MultiMap
+import std.collection.Set
+
 /**
  * 使用Stax接口的XML拉取解析器。
  */
@@ -36,19 +39,30 @@ public class StaxXmlPullParser <: XmlPullParser {
     }
 
     public override func getNamespaceCount(): Int64 {
-        nss.size
+        tagNss.size
     }
 
     public override func getNamespacePrefix(pos: Int64): String {
-        nss[pos][0]
+        let keys = tagNss.keySet().toArray()
+        if (pos < keys.size) {
+            keys[pos]
+        } else {
+            ""
+        }
     }
 
     public override func getNamespaceUri(pos: Int64): String {
-        nss[pos][1]
+        let values = tagNss.values()
+        values[pos].namespace
     }
 
     public override func getNamespace(prefix: ?String): ?String {
-        nss.get(prefix ?? "")
+        let values = tagNss.getAll(prefix ?? "")
+        if (prefix != "" && values.size > 0) {
+            values[values.size - 1].namespace
+        } else {
+            None
+        }
     }
 
     public override func getDepth(): Int64 {
@@ -122,8 +136,9 @@ public class StaxXmlPullParser <: XmlPullParser {
 
     public override func getAttributeNamespace(index: Int64): String {
         let prefix = attrs[index].qname.prefix
-        if (prefix != "") {
-            nss.get(prefix) ?? ""
+        let values = tagNss.getAll(prefix)
+        if (prefix != "" && values.size > 0) {
+            values[values.size - 1].namespace
         } else {
             ""
         }
@@ -175,10 +190,10 @@ public class StaxXmlPullParser <: XmlPullParser {
 
     var eventType: XmlPullParserEvent = XmlPullParserEvent.START_DOCUMENT
     var qname: ?QName = None
-    var nss: LinkedHashMap<String, String> = LinkedHashMap<String, String>()
     var attrs: ArrayList<Attribute> = ArrayList<Attribute>()
     var text: String = ""
     var depth: Int = 0
+    var tagNss: MultiMap<String, ValueType> = MultiMap<String, ValueType>()
 
     public override func next(): XmlPullParserEvent {
         if (eventType == XmlPullParserEvent.END_ELEMENT) {
@@ -189,32 +204,32 @@ public class StaxXmlPullParser <: XmlPullParser {
                 case ElementStart =>
                     attrs.clear()
                     text = ""
+                    depth++
 
-                    let qnameTask = HashMap<String, (String) -> Unit>()
                     this.qname = reader.readElementStart()
                     while (let Some(e) <- reader.peek()) {
                         match (e) {
                             case XmlEvent.Namespace =>
                                 let (prefix, uri) = reader.readNamespace()
-                                nss.put(prefix, uri)
+                                tagNss.put(prefix, ValueType(depth, uri))
                             case XmlEvent.Attribute =>
                                 let attr = reader.readAttribute()
                                 attrs.append(attr)
                             case _ => break
                         }
                     }
-
-                    // set namespace of qname
-                    if (let Some(uri) <- nss.get(qname.getOrThrow().prefix)) {
-                        qname.getOrThrow().namespace = uri
+                    let values: ArrayList<ValueType> = tagNss.getAll(qname.getOrThrow().prefix)
+                    if (values.size > 0) {
+                        let value: ValueType = values[values.size - 1]
+                        qname.getOrThrow().namespace = value.namespace
                     }
                     for (attr in attrs where attr.qname.prefix.size > 0 && attr.qname.namespace.size == 0) {
-                        ifSome(nss.get(attr.qname.prefix)) {
-                            uri => attr.qname.namespace = uri
+                        let values: ArrayList<ValueType> = tagNss.getAll(attr.qname.prefix)
+                        if (values.size >= 0) {
+                            let value: ValueType = values[values.size - 1]
+                            attr.qname.namespace = value.namespace
                         }
                     }
-
-                    depth++
                     this.eventType = XmlPullParserEvent.START_ELEMENT
                 case Text | CData | EntityRef =>
                     let str = StringBuilder()
@@ -229,6 +244,13 @@ public class StaxXmlPullParser <: XmlPullParser {
                     this.eventType = XmlPullParserEvent.TEXT_CHARACTERS
                 case ElementEnd =>
                     this.qname = reader.readElementEnd()
+                    let values: ArrayList<ValueType> = tagNss.getAll(qname.getOrThrow().prefix)
+                    if (values.size > 0) {
+                        let value: ValueType = values[values.size - 1]
+                        if (depth == value.depth) {
+                            tagNss.removeOne(qname.getOrThrow().prefix, value)
+                        }
+                    }
                     this.eventType = XmlPullParserEvent.END_ELEMENT
                 case _ =>
                     reader.skip()
@@ -246,10 +268,11 @@ public class StaxXmlPullParser <: XmlPullParser {
         }
         next()
         match (eventType) {
-            case XmlPullParserEvent.TEXT_CHARACTERS => if (next() != XmlPullParserEvent.END_ELEMENT) {
-                throw XmlPullParserException(
-                    "elementGetText() function expects text only elment but START_ELEMENT was encountered.")
-            }
+            case XmlPullParserEvent.TEXT_CHARACTERS =>
+                if (next() != XmlPullParserEvent.END_ELEMENT) {
+                    throw XmlPullParserException(
+                        "elementGetText() function expects text only elment but START_ELEMENT was encountered.")
+                }
             case XmlPullParserEvent.END_ELEMENT => return text
             case _ => throw XmlPullParserException("Unexpected event type ${eventType}")
         }
@@ -291,5 +314,25 @@ public class StaxXmlPullParserFactory <: XmlPullParserFactory {
      */
     public func newXmlPullParser(reader: InputStream): XmlPullParser {
         return StaxXmlPullParser(reader)
+    }
+}
+
+class ValueType <: Equatable<ValueType> {
+    var depth: Int64
+    var namespace: String
+
+    init(depth: Int64, namespace: String) {
+        this.depth = depth
+        this.namespace = namespace
+    }
+
+    public operator override func ==(that: ValueType): Bool {
+        if (refEq(this, that)) {
+            return true
+        }
+        if (depth == that.depth && namespace == that.namespace) {
+            return true
+        }
+        return false
     }
 }

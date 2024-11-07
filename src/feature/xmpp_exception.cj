@@ -14,12 +14,7 @@ package xmpp4cj.feature
  *
  * @see StanzaError
  */
-public abstract class XMPPException <: Exception {
-    /**
-     * 异常。
-     */
-    public let cause: ?Exception
-
+public abstract class XMPPException <: ExceptionExt {
     /**
      * 创建新的XMPPException。
      */
@@ -43,7 +38,7 @@ public abstract class XMPPException <: Exception {
      * @param wrappedThrowable 异常的根本原因。
      */
     protected init(message: String, wrappedThrowable: ?Exception) {
-        super(message)
+        super(message, wrappedThrowable)
         this.cause = wrappedThrowable
     }
 

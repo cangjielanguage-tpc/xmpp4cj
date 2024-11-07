@@ -128,8 +128,11 @@ public abstract class RemoteConnectionEndpointLookupFailure <: ToString {
 
     public override func toString(): String {
         if (toStringCache.isEmpty()) {
-            toStringCache = ToStringUtil.builderFor("RemoteConnectionEndpointLookupFailure").addValue("description",
-                description).addValue("exception", exception).build()
+            toStringCache = ToStringUtil
+                .builderFor("RemoteConnectionEndpointLookupFailure")
+                .addValue("description", description)
+                .addValue("exception", exception)
+                .build()
         }
         return toStringCache
     }
@@ -225,8 +228,11 @@ public class RemoteConnectionException<RCE> <: ToString where RCE <: RemoteConne
 
     public override func toString(): String {
         if (toStringCache.isEmpty()) {
-            toStringCache = ToStringUtil.builderFor("RemoteConnectionException<Any>").addValue("address", address).
-                addValue("exception", exception).build()
+            toStringCache = ToStringUtil
+                .builderFor("RemoteConnectionException<Any>")
+                .addValue("address", address)
+                .addValue("exception", exception)
+                .build()
         }
         return toStringCache
     }

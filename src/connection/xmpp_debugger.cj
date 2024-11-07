@@ -65,8 +65,10 @@ public abstract class XmppDebugger {
      * @return 包装新的连接读取器的特殊 Reader
      */
     public func newConnectionReader(reader: ObservableReader): ObservableReader {
-        let xmlPrettyPrinter = XmlPrettyPrinter.builder().setPrettyWriter(
-            PrettyPrintedXmlChunkSink {sb => incomingStreamSink(sb)}).build()
+        let xmlPrettyPrinter = XmlPrettyPrinter
+            .builder()
+            .setPrettyWriter(PrettyPrintedXmlChunkSink {sb => incomingStreamSink(sb)})
+            .build()
         incomingStreamSplitterForPrettyPrinting = XmppXmlSplitter(xmlPrettyPrinter)
 
         let observableReader = ObservableReader(reader)
@@ -90,8 +92,10 @@ public abstract class XmppDebugger {
      * @return 包装新的连接写入器的特殊 Writer
      */
     public func newConnectionWriter(writer: ObservableWriter): ObservableWriter {
-        let xmlPrettyPrinter = XmlPrettyPrinter.builder().setPrettyWriter(
-            PrettyPrintedXmlChunkSink {sb => outgoingStreamSink(sb)}).build()
+        let xmlPrettyPrinter = XmlPrettyPrinter
+            .builder()
+            .setPrettyWriter(PrettyPrintedXmlChunkSink {sb => outgoingStreamSink(sb)})
+            .build()
         outgoingStreamSplitterForPrettyPrinting = XmppXmlSplitter(xmlPrettyPrinter)
 
         let observableWriter = ObservableWriter(writer)

@@ -8,7 +8,7 @@ package xmpp4cj.connection
  * 使用此调试器时请谨慎，因为打印到控制台是一项昂贵的操作，可能会阻塞线程，
  * 因为一次只能有一个线程进行打印。
  * <p>
- * 可以打印原始的发送和接收 Stanza，也可以打印 Smack 解释的包。
+ * 可以打印原始的发送和接收 Stanza，也可以打印 Xmpp 解释的包。
  * 默认情况下，不会打印解释后的包。要启用此功能，只需将静态变量
  * <code>printInterpreted</code> 更改为 <code>true</code>。
  * </p>

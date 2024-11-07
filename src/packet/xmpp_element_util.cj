@@ -7,7 +7,7 @@ package xmpp4cj.packet
  * XmppElementUtil 类提供了一些用于处理 XMPP 元素的实用方法。
  * 这个类主要用于获取 XMPP 元素的 QName，以及从存储的元素中提取特定类型的扩展元素。
  */
-public open class XmppElementUtil {
+public class XmppElementUtil {
     private static let CLASS_TO_QNAME_CACHE = LruCache<ClassId, QName>(512) // 用于缓存类与 QName 映射的 LRU 缓存
 
     /**

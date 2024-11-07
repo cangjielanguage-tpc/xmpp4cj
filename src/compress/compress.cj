@@ -89,6 +89,11 @@ public class CompressFeature <: ExtensionElement {
      */
     public static let QNAME: QName = QName(Compress.NAMESPACE, ELEMENT)
 
+    static init() {
+        ELEMENT_MAPPING.put("CompressFeature", ELEMENT)
+        QNAME_MAPPING.put("CompressFeature", QNAME)
+    }
+
     /**  
      * 支持的压缩方法列表。
      */

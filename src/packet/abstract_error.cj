@@ -118,8 +118,13 @@ public open class AbstractError {
      */
     protected func addDescriptiveTextsAndExtensions(xml: XmlStringBuilder) {
         for ((xmllang, text) in descriptiveTexts) {
-            xml.halfOpenElement("text").xmlnsAttribute(textNamespace).optXmlLangAttribute(xmllang).rightAngleBracket().
-                escape(text).closeElement("text")
+            xml
+                .halfOpenElement("text")
+                .xmlnsAttribute(textNamespace)
+                .optXmlLangAttribute(xmllang)
+                .rightAngleBracket()
+                .escape(text)
+                .closeElement("text")
         }
         xml.append(extensions)
     }

@@ -268,7 +268,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      * @param stanzaListener Stanza 监听器
      * @param stanzaFilter Stanza 过滤器
      */
-    func addSyncStanzaListener(stanzaListener: StanzaListener, stanzaFilter: StanzaFilter): Unit
+    func addSyncStanzaListener(stanzaListener: StanzaListener, stanzaFilter: ?StanzaFilter): Unit
 
     /**  
      * 移除同步 Stanza 监听器。
@@ -422,7 +422,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      * 异步发送 IQ 请求并返回一个未来对象以处理响应。
      *
      * @param request 要发送的 IQ 请求
-     * @return 一个 SmackFuture 对象，表示异步操作的结果
+     * @return 一个 XmppFuture 对象，表示异步操作的结果
      */
     func sendIqRequestAsync(request: IQ): XmppFuture<IQ, Exception>
 
@@ -431,7 +431,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      *
      * @param request 要发送的 IQ 请求
      * @param timeout 超时时间（毫秒）
-     * @return 一个 SmackFuture 对象，表示异步操作的结果
+     * @return 一个 XmppFuture 对象，表示异步操作的结果
      */
     func sendIqRequestAsync(request: IQ, timeout: Duration): XmppFuture<IQ, Exception>
 
@@ -441,7 +441,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      * @param stanza 要发送的 Stanza
      * @param replyFilter 回复过滤器
      * @param <S> Stanza 的类型
-     * @return 一个 SmackFuture 对象，表示异步操作的结果
+     * @return 一个 XmppFuture 对象，表示异步操作的结果
      */
     func sendAsync(stanza: Stanza, replyFilter: StanzaFilter): XmppFuture<Stanza, Exception>
 
@@ -452,7 +452,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      * @param replyFilter 回复过滤器
      * @param timeout 超时时间（毫秒）
      * @param <S> Stanza 的类型
-     * @return 一个 SmackFuture 对象，表示异步操作的结果
+     * @return 一个 XmppFuture 对象，表示异步操作的结果
      */
     func sendAsync(stanza: Stanza, replyFilter: StanzaFilter, timeout: Duration): XmppFuture<Stanza, Exception>
 

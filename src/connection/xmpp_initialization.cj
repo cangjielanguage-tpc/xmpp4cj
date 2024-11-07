@@ -3,7 +3,7 @@
  */
 package xmpp4cj.connection
 
-import std.os.getEnv
+import std.process.Process
 
 public type StartUp = (String, () -> Object)
 
@@ -38,7 +38,7 @@ public let XMPP_CONFIG_OPTIONAL_STARTUP_CLASSES: ArrayList<StartUp> = ArrayList(
  * 初始化过程涉及以下几个步骤：
  * <ol>
  * <li>加载一组类以执行其静态初始化块</li>
- * <li>检索并设置当前 Smack版本</li>
+ * <li>检索并设置当前 Xmpp版本</li>
  * <li>设置调试模式</li>
  * </ol>
  */
@@ -69,7 +69,7 @@ public class XmppInitialization {
         // 此处写死 表示客户端版本
         XMPP_VERSION = "0.0.1"
 
-        let disabledClasses = getEnv("xmpp.disabledClasses")
+        let disabledClasses = Process.current.getEnv("xmpp.disabledClasses")
         if (let Some(v) <- disabledClasses) {
             let splitDisabledClasses = v.split(",")
             for (s in splitDisabledClasses) {
@@ -90,7 +90,7 @@ public class XmppInitialization {
         XmppCompressionManager.registerXmppCompressionFactory(ZlibXmppCompressionFactory.INSTANCE)
 
         try {
-            let debugEnabled = getEnv("xmpp.debugEnabled")?.toAsciiLower() ?? ""
+            let debugEnabled = Process.current.getEnv("xmpp.debugEnabled")?.toAsciiLower() ?? ""
             if (debugEnabled == "true") {
                 XmppConfiguration.DEBUG = true
             }

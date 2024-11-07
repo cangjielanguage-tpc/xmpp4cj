@@ -19,7 +19,7 @@ public class PacketParserUtils {
      * @throws IOException 如果读取输入时发生 I/O 错误。
      */
     public static func getParserFor(stanza: String): XmlPullParser {
-        let input = ByteArrayStream()
+        let input = ByteBuffer()
         input.write(stanza.toArray())
         return getParserFor(input)
     }
@@ -137,9 +137,10 @@ public class PacketParserUtils {
                                 messageXmlEnvironment)
                             message.addExtension(extensionElement)
                     }
-                case XmlPullParserEvent.END_ELEMENT => if (parser.getDepth() == initialDepth) {
-                    break
-                }
+                case XmlPullParserEvent.END_ELEMENT =>
+                    if (parser.getDepth() == initialDepth) {
+                        break
+                    }
                 case _ => ()
             }
         }
@@ -393,9 +394,10 @@ public class PacketParserUtils {
                             )
                         }
                     }
-                case XmlPullParserEvent.END_ELEMENT => if (parser.getDepth() == initialDepth) {
-                    break
-                }
+                case XmlPullParserEvent.END_ELEMENT =>
+                    if (parser.getDepth() == initialDepth) {
+                        break
+                    }
                 case _ => ()
             }
         }
@@ -468,9 +470,10 @@ public class PacketParserUtils {
                                 iqPacket = UnparsedIQ(elementName, namespace, parseElement(parser))
                             }
                     }
-                case XmlPullParserEvent.END_ELEMENT => if (parser.getDepth() == initialDepth) {
-                    break
-                }
+                case XmlPullParserEvent.END_ELEMENT =>
+                    if (parser.getDepth() == initialDepth) {
+                        break
+                    }
                 case _ => ()
             }
         }
@@ -589,9 +592,10 @@ public class PacketParserUtils {
                         case _ => PacketParserUtils.addExtensionElement(extensions, parser, name, namespace,
                             streamErrorXmlEnvironment)
                     }
-                case XmlPullParserEvent.END_ELEMENT => if (parser.getDepth() == initialDepth) {
-                    break
-                }
+                case XmlPullParserEvent.END_ELEMENT =>
+                    if (parser.getDepth() == initialDepth) {
+                        break
+                    }
                 case _ => ()
             }
         }
@@ -649,9 +653,10 @@ public class PacketParserUtils {
                         case _ => PacketParserUtils.addExtensionElement(extensions, parser, name, namespace,
                             stanzaErrorXmlEnvironment)
                     }
-                case XmlPullParserEvent.END_ELEMENT => if (parser.getDepth() == initialDepth) {
-                    break
-                }
+                case XmlPullParserEvent.END_ELEMENT =>
+                    if (parser.getDepth() == initialDepth) {
+                        break
+                    }
                 case _ => ()
             }
         }
@@ -706,9 +711,10 @@ public class PacketParserUtils {
                         case "required" => required = true
                         case _ => ()
                     }
-                case XmlPullParserEvent.END_ELEMENT => if (parser.getDepth() == initalDepth) {
-                    break
-                }
+                case XmlPullParserEvent.END_ELEMENT =>
+                    if (parser.getDepth() == initalDepth) {
+                        break
+                    }
                 case _ => ()
             }
         }
@@ -737,9 +743,10 @@ public class PacketParserUtils {
                     if (name == SessionFeature.OPTIONAL_ELEMENT) {
                         optional = true
                     }
-                case XmlPullParserEvent.END_ELEMENT => if (parser.getDepth() == initialDepth) {
-                    break
-                }
+                case XmlPullParserEvent.END_ELEMENT =>
+                    if (parser.getDepth() == initialDepth) {
+                        break
+                    }
                 case _ => ()
             }
         }

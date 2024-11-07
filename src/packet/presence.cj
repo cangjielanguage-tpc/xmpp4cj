@@ -92,8 +92,8 @@ public class Presence <: MessageOrPresence & PresenceView & ToString {
      * @return 如果存在类型可用，并且存在模式为away、xa或dnd，则返回true。
      */
     public func isAway(): Bool {
-        return typ == PresenceType.available && (mode == PresenceMode.away || mode == PresenceMode.xa || mode ==
-            PresenceMode.dnd)
+        return typ == PresenceType.available && (mode == PresenceMode.away || mode == PresenceMode.xa || mode == PresenceMode
+            .dnd)
     }
 
     public override func getType(): PresenceType {

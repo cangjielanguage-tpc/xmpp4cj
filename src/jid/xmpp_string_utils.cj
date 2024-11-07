@@ -124,11 +124,12 @@ public class XmppStringUtils {
                 case b'>' => buf.appendAll("\\3e".toArray())
                 case b'@' => buf.appendAll("\\40".toArray())
                 case b'\\' => buf.appendAll("\\5c".toArray())
-                case _ => if ((0x9 <= c && c <= 0xd) || c == 0x20) {
-                    buf.appendAll("\\20".toArray())
-                } else {
-                    buf.append(c)
-                }
+                case _ =>
+                    if ((0x9 <= c && c <= 0xd) || c == 0x20) {
+                        buf.appendAll("\\20".toArray())
+                    } else {
+                        buf.append(c)
+                    }
             }
         }
         let res = unsafe { String.fromUtf8Unchecked(buf.getRawArray()[..buf.size]) }
@@ -219,16 +220,18 @@ public class XmppStringUtils {
                             doAppendC = false
                         case _ => ()
                     }
-                    case b'4' => if (c3 == b'0') {
-                        buf.append(b'@')
-                        i += 2
-                        doAppendC = false
-                    }
-                    case b'5' => if (c3 == b'c') {
-                        buf.append(b'\\')
-                        i += 2
-                        doAppendC = false
-                    }
+                    case b'4' =>
+                        if (c3 == b'0') {
+                            buf.append(b'@')
+                            i += 2
+                            doAppendC = false
+                        }
+                    case b'5' =>
+                        if (c3 == b'c') {
+                            buf.append(b'\\')
+                            i += 2
+                            doAppendC = false
+                        }
                     case _ => ()
                 }
             }

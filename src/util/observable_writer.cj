@@ -107,7 +107,7 @@ public open class ObservableWriter <: OutputStream & Resource {
      */
     public open func removeWriterListener(writerListener: WriterListener): Unit {
         synchronized(listenersLock) {
-            listeners.remove(writerListener)
+            listeners.removeValue(writerListener)
         }
     }
 }

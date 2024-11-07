@@ -26,7 +26,7 @@ public interface ArrayListExt<T> {
      * @param v 需要匹配的数据。
      * @return 是否删除成功。
      */
-    func remove(v: T): Bool
+    func removeValue(v: T): Bool
 }
 
 /*
@@ -39,7 +39,7 @@ extend<T> ArrayList<T> <: ArrayListExt<T> {
      * @param v 需要匹配的数据。
      * @return 是否删除成功。
      */
-    public func remove(v: T): Bool {
+    public func removeValue(v: T): Bool {
         for (i in 0..this.size) {
             if (EqualsUtil.equals(this[i], v)) {
                 this.remove(i)
@@ -93,14 +93,14 @@ public func assert(exp: Bool): Unit {
 /*
  * 继承Exception的异常类。
  */
-public class AssertionError <: Exception {
+public class AssertionError <: ExceptionExt {
     public init() {
     }
     public init(msg: String) {
-        super(msg)
+        super(msg, None)
     }
     public init(e: Exception) {
-        super(e.toString())
+        super(e.toString(), e)
     }
     /**  
      * 获得类名，用字符串表示。

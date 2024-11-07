@@ -5,7 +5,7 @@ package xmpp4cj.feature
 
 // TODO
 /**  
- * 表示 Smack 的 TLS 上下文配置。
+ * 表示 Xmpp 的 TLS 上下文配置。
  * 此类封装了 SSL 上下文和 DANE 验证器的实例，
  * 用于处理安全的 XMPP 连接。
  */
@@ -47,8 +47,8 @@ public class XmppTlsContext {
         connectTimeout!: ?Duration = None,
         session!: ?TlsSession = None
     ): TlsSocket {
-        tcpSocket.connect(timeout: connectTimeout)
-        TlsSocket.client(tcpSocket, clientConfig: tlsCfg, session: session)
+        let tls = TlsSocket.client(tcpSocket, clientConfig: tlsCfg, session: session)
+        tls
     }
 
     public func createSSLEngine(peerHost: String, peerPort: UInt16): SSLEngine {

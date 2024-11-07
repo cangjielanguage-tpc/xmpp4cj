@@ -7,9 +7,9 @@ package xmpp4cj.connection
  * <p>该类负责使用 SASL 验证用户，绑定资源到连接并与服务器建立会话。</p>
  *
  * <p>一旦 TLS 已成功协商（即连接已加密），便可以向服务器注册或使用 SASL 进行身份验证。
- * 如果服务器支持 SASL，则 Smack 将尝试使用 SASL 进行身份验证。</p>
+ * 如果服务器支持 SASL，则 Xmpp 将尝试使用 SASL 进行身份验证。</p>
  *
- * <p>服务器可能支持多种用于身份验证的 SASL 机制。默认情况下，Smack 提供几种 SASL 机制，但可以注册新的 SASL 机制。
+ * <p>服务器可能支持多种用于身份验证的 SASL 机制。默认情况下，Xmpp 提供几种 SASL 机制，但可以注册新的 SASL 机制。
  * 使用 {@link #registerSASLMechanism(SASLMechanism)} 注册新机制。</p>
  *
  * @see SASLMechanism
@@ -197,7 +197,7 @@ public class SASLAuthentication {
      * <code>finalChallenge</code> 设置为 <code>false</code>。
      *
      * @param challenge 来自服务器的挑战 Nonza
-     * @throws SmackException 如果 Smack 检测到异常情况
+     * @throws XmppException 如果 Xmpp 检测到异常情况
      * @throws InterruptedException 如果调用线程被中断
      */
     func challengeReceived(challenge: SaslNonzaChallenge): Unit {
@@ -292,7 +292,7 @@ public class SASLAuthentication {
      * @param authzid 授权标识符（通常为 null）
      * @param password 用户的密码
      * @return 选择的 SASL 机制
-     * @throws SmackException.SmackSaslException 如果选择机制时发生错误
+     * @throws XmppException.XmppSaslException 如果选择机制时发生错误
      */
     private func selectMechanism(authzid: ?EntityBareJid, password: String): SASLMechanism {
         let passwordAvailable = StringUtils.isNotEmpty(password)
@@ -344,10 +344,9 @@ public class SASLAuthentication {
      */
     private func getServerMechanisms(): ArrayList<String> {
         let mechanisms = connection.getFeature("Mechanisms")
-        if (let Some(v: Mechanisms) <- mechanisms) {
-            ArrayList(v.getMechanisms())
-        } else {
-            ArrayList()
+        match (mechanisms) {
+            case Some(v: Mechanisms) => ArrayList(v.getMechanisms())
+            case _ => ArrayList()
         }
     }
 }

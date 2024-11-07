@@ -204,7 +204,7 @@ class BytesInputStream <: ToString {
         return done
     }
 
-    private func tryFill(minSize: Int64): Bool {
+    func tryFill(minSize: Int64): Bool {
         if (window.size > 0) { // align window to buffer start
             let dataSize = window.size
             for (i in 0..dataSize) { // as window is a slice of buffer, we should copy one by one here

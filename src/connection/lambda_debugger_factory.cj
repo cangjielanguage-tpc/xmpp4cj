@@ -3,7 +3,7 @@
  */
 package xmpp4cj.connection
 
-import std.os.{getEnv, setEnv, removeEnv}
+import std.process.Process
 
 public type DebuggerSupplier = (XMPPConnection) -> XmppDebugger
 
@@ -28,9 +28,9 @@ public class LambdaDebuggerFactory <: XmppDebuggerFactory {
      */
     public static func setDebuggerClass(debuggerClass: ?ClassId): Unit {
         if (let Some(v) <- debuggerClass) {
-            setEnv(DEBUGGER_CLASS_PROPERTY_NAME, v)
+            Process.current.setEnv(DEBUGGER_CLASS_PROPERTY_NAME, v)
         } else {
-            removeEnv(DEBUGGER_CLASS_PROPERTY_NAME)
+            Process.current.removeEnv(DEBUGGER_CLASS_PROPERTY_NAME)
         }
     }
 
@@ -57,7 +57,7 @@ public class LambdaDebuggerFactory <: XmppDebuggerFactory {
     }
 
     private static func getCustomDebuggerClassName(): ?ClassId {
-        return getEnv(DEBUGGER_CLASS_PROPERTY_NAME)
+        return Process.current.getEnv(DEBUGGER_CLASS_PROPERTY_NAME)
     }
 
     private static func getOneOfDefaultDebuggerClasses(): ?ClassId {

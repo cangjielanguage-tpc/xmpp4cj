@@ -79,7 +79,7 @@ public open class ObservableReader <: InputStream & Resource {
      */
     public open func removeReaderListener(readerListener: ReaderListener): Unit {
         synchronized(listenersLock) {
-            listeners.remove(readerListener)
+            listeners.removeValue(readerListener)
         }
     }
 }

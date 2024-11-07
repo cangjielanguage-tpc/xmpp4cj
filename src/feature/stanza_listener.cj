@@ -36,7 +36,10 @@ public interface StanzaListener <: Hashable & Equatable<StanzaListener> {
     }
 
     operator func ==(that: StanzaListener): Bool {
-        EqualsUtil.equals(this, that)
+        match ((this, that)) {
+            case (a: Object, b: Object) => refEq(a, b)
+            case _ => throw UnsupportedException("StanzaListener must be an Object")
+        }
     }
 }
 

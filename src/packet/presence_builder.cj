@@ -88,8 +88,11 @@ public class PresenceBuilder <: MessageOrPresenceBuilder & PresenceView {
      * @param builder 用于构建字符串的构建器。
      */
     protected override func addStanzaSpecificAttributes(builder: ToStringUtilBuilder): Unit {
-        builder.addValue("type", typ).addValue("mode", mode ?? None).addValue("priority", priority ?? None).addValue(
-            "status", status)
+        builder
+            .addValue("type", typ)
+            .addValue("mode", mode ?? None)
+            .addValue("priority", priority ?? None)
+            .addValue("status", status)
     }
 
     /**  

@@ -3,6 +3,8 @@
  */
 package xmpp4cj.jid
 
+import std.io.copy
+
 /**
  * 一个能够将 XML 拆分为顶级元素的 XML 拆分器。
  * <p>
@@ -244,12 +246,13 @@ public open class XmlSplitter <: Resource {
                     state = XmlSplitterState.IN_ATTRIBUTE_VALUE
                 case _ => throw InvalidAttributeDeclarationException.create(c, splittedPartBuffer.toString())
             }
-            case XmlSplitterState.IN_ATTRIBUTE_VALUE => if (c == attributeValueQuotes.c) {
-                attributes.put(attributeName, getToken())
-                state = XmlSplitterState.AFTER_START_NAME
-            } else {
-                tokenBuffer.append(c)
-            }
+            case XmlSplitterState.IN_ATTRIBUTE_VALUE =>
+                if (c == attributeValueQuotes.c) {
+                    attributes.put(attributeName, getToken())
+                    state = XmlSplitterState.AFTER_START_NAME
+                } else {
+                    tokenBuffer.append(c)
+                }
             case XmlSplitterState.IN_EMPTY_TAG => match (c) {
                 case r'>' =>
                     endTagFinished = true
@@ -266,17 +269,18 @@ public open class XmlSplitter <: Resource {
                 case r'?' => state = XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION_QUESTION_MARK
                 case _ => ()
             }
-            case XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION_PSEUDO_ATTRIBUTE_VALUE => if (c ==
-                attributeValueQuotes.c) {
-                state = XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION
-            }
-            case XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION_QUESTION_MARK => if (c == r'>') {
-                let processingInstructionOrDeclaration: String = splittedPartBuffer.toString()
-                onProcessingInstructionOrDeclaration(processingInstructionOrDeclaration)
-                newSplittedPart()
-            } else {
-                state = XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION
-            }
+            case XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION_PSEUDO_ATTRIBUTE_VALUE =>
+                if (c == attributeValueQuotes.c) {
+                    state = XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION
+                }
+            case XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION_QUESTION_MARK =>
+                if (c == r'>') {
+                    let processingInstructionOrDeclaration: String = splittedPartBuffer.toString()
+                    onProcessingInstructionOrDeclaration(processingInstructionOrDeclaration)
+                    newSplittedPart()
+                } else {
+                    state = XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION
+                }
             case AFTER_COMMENT_BANG | AFTER_COMMENT_DASH1 | AFTER_COMMENT_DASH2 | AFTER_COMMENT | AFTER_COMMENT_CLOSING_DASH1 | AFTER_COMMENT_CLOSING_DASH2 => throw Exception(
                 "XML comments are not supported by XmlSplitter (yet). They are also not allowed in XMPP streams (cf. RFC 6120 \u{00a7} 11.1)."
             )
@@ -640,7 +644,7 @@ public class XmppXmlSplitter <: XmlSplitter {
 }
 
 /**
- * {@link XmppXmlSplitter}的扩展版本，允许输入为字节或表示 UTF-8 编码的 XMPP XML 字符串的{@link ByteArrayStream}，就像它们来自网络套接字一样。
+ * {@link XmppXmlSplitter}的扩展版本，允许输入为字节或表示 UTF-8 编码的 XMPP XML 字符串的{@link ByteBuffer}，就像它们来自网络套接字一样。
  * <p>
  * 这个类遵循 RFC 6120 11.6 的字节顺序标记（BOM）要求，并将 BOM 视为零宽度不间断空格，而不是字节顺序标记。
  * </p>
@@ -666,9 +670,9 @@ public class Utf8ByteXmppXmlSplitter <: OutputStream {
         this.xmppXmlSplitter = xmppXmlSplitter
     }
 
-    private let buffer = ByteArrayStream()
+    private let buffer = ByteBuffer()
 
-    private let reader: StringReader<ByteArrayStream> = StringReader<ByteArrayStream>(buffer)
+    private let reader: StringReader<ByteBuffer> = StringReader<ByteBuffer>(buffer)
 
     /**
      * 写入一个字节。该字节必须是 UTF-8 字符串的一部分。
@@ -687,22 +691,18 @@ public class Utf8ByteXmppXmlSplitter <: OutputStream {
      * @param byteBuffers 字节缓冲区集合。
      * @throws IOException 如果发生错误。
      */
-    public func write(byteBuffers: Array<ByteArrayStream>): Unit {
+    public func write(byteBuffers: Array<ByteBuffer>): Unit {
         for (byteBuffer in byteBuffers) {
-            byteBuffer.copyTo(buffer)
+            copy(byteBuffer, to: buffer)
         }
         flush()
     }
-
-    private let tmp: Array<Rune> = [r'\0']
 
     /**
      * 释放数据。
      */
     public override func flush(): Unit {
-        for (r in reader.runes()) {
-            tmp[0] = r
-            xmppXmlSplitter.write(tmp)
-        }
+        let runes = reader.readToEnd().toRuneArray() // TODO 优化
+        xmppXmlSplitter.write(runes)
     }
 }

@@ -46,9 +46,10 @@ public class SaslFailureProvider <: NonzaProvider<SaslNonzaSASLFailure> {
                         }
                         condition = parser.getName()
                     }
-                case XmlPullParserTagEvent.END_ELEMENT => if (parser.getDepth() == initialDepth) {
-                    break
-                }
+                case XmlPullParserTagEvent.END_ELEMENT =>
+                    if (parser.getDepth() == initialDepth) {
+                        break
+                    }
             }
         }
         return SaslNonzaSASLFailure(condition.getOrThrow(), descriptiveTexts)

@@ -79,8 +79,12 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
             }
         }
 
-        effectiveXmlEnvironment = XmlEnvironment.builder().withNamespace(xmlNs).withLanguage(xmlLang).withNext(
-            enclosingXmlEnvironment).build()
+        effectiveXmlEnvironment = XmlEnvironment
+            .builder()
+            .withNamespace(xmlNs)
+            .withLanguage(xmlLang)
+            .withNext(enclosingXmlEnvironment)
+            .build()
     }
 
     /**

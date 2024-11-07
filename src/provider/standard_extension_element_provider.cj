@@ -64,9 +64,10 @@ public class StandardExtensionElementProvider <: ExtensionElementProvider<Standa
                 case XmlPullParserEvent.START_ELEMENT => builder.addElement(
                     parse(parser, parser.getDepth(), xmlEnvironment))
                 case XmlPullParserEvent.TEXT_CHARACTERS => builder.setText(parser.getText())
-                case XmlPullParserEvent.END_ELEMENT => if (initialDepth == parser.getDepth()) {
-                    break
-                }
+                case XmlPullParserEvent.END_ELEMENT =>
+                    if (initialDepth == parser.getDepth()) {
+                        break
+                    }
                 case _ => ()
             }
         }
