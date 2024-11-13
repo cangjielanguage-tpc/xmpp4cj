@@ -170,7 +170,6 @@ public class StanzaCollector <: Resource & ToString {
      * @throws InterruptedException if the calling thread was interrupted.
      */
     public func nextResult(timeout: Duration): ?Stanza {
-        // TODO
         throwIfCancelled()
         var res: ?Stanza = None
         var remainingWait: Duration = timeout
@@ -246,7 +245,6 @@ public class StanzaCollector <: Resource & ToString {
      * @throws NotConnectedException if there was no response and the connection got disconnected.
      */
     public func nextResultOrThrow(timeout: Duration): Stanza {
-        // TODO
         var result: ?Stanza = None
         try {
             result = nextResult(timeout)
@@ -255,14 +253,14 @@ public class StanzaCollector <: Resource & ToString {
         }
         if (result.isNone()) {
             if (let Some(v) <- connectionException) {
-                // throw NotConnectedException(connection, packetFilter, v)
+                throw NotConnectedException(connection, packetFilter(), v)
             }
             if (!connection.isConnected()) {
-                // throw NotConnectedException(connection, packetFilter)
+                throw NotConnectedException(connection, packetFilter())
             }
-            // throw NoResponseException.newWith(timeout, this, cancelled)
+            throw NoResponseException.newWith(timeout, this, cancelled.load())
         }
-        // XMPPExceptionXMPPErrorException.ifHasErrorThenThrow(result)
+        XMPPErrorException.ifHasErrorThenThrow(result())
         return result.getOrThrow()
     }
 

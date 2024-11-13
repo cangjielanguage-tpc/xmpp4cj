@@ -586,7 +586,6 @@ public abstract class ConnectionConfigurationBuilder {
         return getThis()
     }
 
-
     /**
      * 设置端口号。
      *
@@ -601,7 +600,6 @@ public abstract class ConnectionConfigurationBuilder {
         let portUint16 = UInt16(port)
         return setPort(portUint16)
     }
-
 
     /**
      * 设置端口号。

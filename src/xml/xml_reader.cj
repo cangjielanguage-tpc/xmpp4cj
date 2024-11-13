@@ -376,8 +376,8 @@ class XmlReader {
         if (buf[0] == b'>') {
             status = Status.MarkupClose
             buf.skip(1) // skip '>'
-            skipWhitespace()
         }
+        skipWhitespace()
     }
 
     private func skipWhitespace(): Unit {

@@ -222,9 +222,15 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
         // assert(lock.isHeldByCurrentThread()) // do not support
         while (isFull()) {
             try {
-                lock.wait(notFull)
+                while (isFull() && !lock.wait(notFull, timeout: Duration.second)) {
+                    if (Thread.currentThread.hasPendingCancellation) {
+                        throw IllegalStateException("interrupted")
+                    }
+                    checkNotShutdown()
+                }
                 checkNotShutdown()
-            } catch (ie: IllegalStateException) {
+                break
+            } catch (ie: Exception) {
                 lock.notify(notFull)
                 throw ie
             }

@@ -34,7 +34,8 @@ public class ProxyInfo {
         this.proxyPort = pPort
         this.proxyUsername = pUser
         this.proxyPassword = pPass
-        this.proxySocketConnection = ProxySocketConnection.forProxyType(proxyType)
+        this.proxySocketConnection = ProxySocketConnection.forProxyType(proxyType, proxyAddress, proxyPort,
+            proxyUsername, proxyPassword)
     }
 
     /**  
