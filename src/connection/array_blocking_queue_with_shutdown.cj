@@ -221,19 +221,8 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
     private func putInternal(e: E, signalNotEmpty: Bool): Unit {
         // assert(lock.isHeldByCurrentThread()) // do not support
         while (isFull()) {
-            try {
-                while (isFull() && !lock.wait(notFull, timeout: Duration.second)) {
-                    if (Thread.currentThread.hasPendingCancellation) {
-                        throw IllegalStateException("interrupted")
-                    }
-                    checkNotShutdown()
-                }
-                checkNotShutdown()
-                break
-            } catch (ie: Exception) {
-                lock.notify(notFull)
-                throw ie
-            }
+            lock.wait(notFull)
+            checkNotShutdown()
         }
         insert(e, signalNotEmpty)
     }

@@ -53,3 +53,16 @@ public abstract class ExceptionExt <: Exception {
         }
     }
 }
+
+public class InterruptedException <: ExceptionExt {
+    public init() {}
+    public init(cause: ?Exception) {
+        super(cause)
+    }
+    public init(message: String, cause: ?Exception) {
+        super(message, cause)
+    }
+    public override func getClassName(): String {
+        "InterruptedException"
+    }
+}
