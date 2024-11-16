@@ -256,7 +256,7 @@ public class StreamErrorException <: XMPPException {
      */
     public init(streamError: StreamError) {
         super(
-            "${streamError.getCondition().toString()} You can read more about the meaning of this stream error at http://xmpp.org/rfcs/rfc6120.html#streams-error-conditions\n${streamError.toString()}"
+            "${anyToString(streamError.getCondition())} You can read more about the meaning of this stream error at http://xmpp.org/rfcs/rfc6120.html#streams-error-conditions\n${streamError.toString()}"
         )
         this.streamError = streamError
     }

@@ -20,7 +20,7 @@ public class C2sConnectionConfiguration <: ConnectionConfiguration {
             initialStateDescriptorVertex = StateDescriptorGraph.constructStateDescriptorGraph(
                 backwardEdgeStateDescriptors)
         } catch (e: Exception) {
-            DEBUGER.log(LogLevel.DEBUG, "1.1", e)
+            DEBUGER.log(LogLevel.TRACE, "C2sConnectionConfiguration#init", e)
             throw IllegalStateException(e.toString())
         }
     }

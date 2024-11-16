@@ -7,12 +7,5 @@
  */
 package xmpp4cj.compression
 
-internal import compress.zlib.*
-internal import std.collection.*
 internal import std.io.*
-internal import std.sort.*
-internal import std.sync.*
-internal import xmpp4cj.compress.*
 internal import xmpp4cj.feature.*
-internal import xmpp4cj.filter.*
-// internal import xmpp4cj.modular.*

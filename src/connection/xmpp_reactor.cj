@@ -165,7 +165,6 @@ public class XmppReactor {
             let channel = selectionKey.channel()
             let selectionKeyAttachment = selectionKey.attachment() as SelectionKeyAttachment
             let channelSelectedCallback = selectionKeyAttachment?.channelSelectedCallback
-            DEBUGER
             channelSelectedCallback?(channel, selectionKey)
         }
     }

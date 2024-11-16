@@ -16,7 +16,7 @@ public interface ProxySocketConnection {
      * @param timeout 超时时间（以毫秒为单位）。
      * @throws IOException 如果发生 I/O 错误。
      */
-    func connect(socket: StreamingSocket, host: String, port: UInt16, timeout: Duration): Unit
+    func connect(socket: StreamingSocket, host: String, port: UInt16, timeout: Duration): StreamingSocket
 
     /**  
      * 根据代理类型返回对应的 ProxySocketConnection 实例的工厂方法。
@@ -25,12 +25,11 @@ public interface ProxySocketConnection {
      * @return 返回一个 Function，用于创建 ProxyInfo 实例
      * @throws AssertionError 如果代理类型未知。
      */
-    static func forProxyType(proxyType: ProxyInfoProxyType): ProxySocketConnection {
-        // TODO
+    static func forProxyType(proxyType: ProxyInfoProxyType, pHost: String, pPort: UInt16, pUser: String, pPass: String): ProxySocketConnection {
         match (proxyType) {
-            case ProxyInfoProxyType.HTTP => throw Exception("TODO")
-            case ProxyInfoProxyType.SOCKS4 => throw Exception("TODO")
-            case ProxyInfoProxyType.SOCKS5 => throw Exception("TODO")
+            case ProxyInfoProxyType.HTTP => HTTPProxySocketConnection(pHost, pPort, pUser, pPass)
+            case ProxyInfoProxyType.SOCKS4 => Socks4ProxySocketConnection(pHost, pPort, pUser, pPass)
+            case ProxyInfoProxyType.SOCKS5 => Socks5ProxySocketConnection(pHost, pPort, pUser, pPass)
         }
     }
 }
