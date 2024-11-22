@@ -1373,7 +1373,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         listeners: Map<StanzaListener, AbstractXMPPConnectionListenerWrapper>, listenersLock: Monitor,
         listenersToNotify: LinkedList<StanzaListener>): Unit {
         synchronized(listenersLock) {
-            for (listenerWrapper in listeners.values()) {
+            for ((_, listenerWrapper) in listeners) {
                 if (listenerWrapper.filterMatches(stanza)) {
                     listenersToNotify.append(listenerWrapper.getListener())
                 }

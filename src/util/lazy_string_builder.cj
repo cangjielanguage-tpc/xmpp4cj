@@ -42,7 +42,7 @@ public open class LazyStringBuilder <: CharSequence & Appendable {
      * @return 当前对象。
      */
     public override func append(csq: CharSequence): LazyStringBuilder {
-        list.append(csq.toString())
+        list.append(csq)
         invalidateCache()
         return this
     }

@@ -264,9 +264,9 @@ class BytesInputStream <: ToString {
             (rune, runeSize) = peekRune(readLen)
         }
 
-        let readData = window.slice(0, readLen)
-        window = window.slice(readLen, window.size - readLen)
-        return (String.fromUtf8(readData), true)
+        let readData = unsafe { String.fromUtf8Unchecked(window[..readLen]) }
+        window = window[readLen..]
+        return (readData, true)
     }
 
     /**

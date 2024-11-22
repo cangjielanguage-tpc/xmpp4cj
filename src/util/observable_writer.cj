@@ -57,7 +57,7 @@ public open class ObservableWriter <: OutputStream & Resource {
 
     public open func write(str: String): Unit {
         wrappedWriter?.write(str)
-        wrappedOutput?.write(str.toArray())
+        wrappedOutput?.write(unsafe { str.rawData() })
         maybeNotifyListeners(str)
     }
 

@@ -32,6 +32,14 @@ public class Selector {
      */
     public func select(timeout: Duration): Int {
         synchronized(lock) {
+            if (this.keys.size == 0) {
+                let timeout0 = if (timeout > Duration.Zero) {
+                    timeout
+                } else {
+                    Duration.Max
+                }
+                lock.wait(timeout: timeout0)
+            }
             for (key in this.keys) {
                 if (key.checkOps()) {
                     publicKeys.put(key)
@@ -55,7 +63,10 @@ public class Selector {
     let keys = HashSet<SelectionKey>()
     protected func register(channel: SelectableChannel, ops: Int, attachment: Object): SelectionKey {
         let key = SelectionKey(this, channel, ops, attachment)
-        keys.put(key)
+        synchronized(lock) {
+            keys.put(key)
+            lock.notify()
+        }
         key
     }
 }

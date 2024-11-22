@@ -204,11 +204,11 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
         } else {
             return ArrayList<V>()
         }
-        let resultSize = max(values.size, num)
+        let resultSize = min(values.size, num)
         let result = ArrayList<V>(resultSize)
         var i = 0
         while (i < resultSize) {
-            result.append(values[0])
+            result.append(values[i])
             i++
         }
         if (values.isEmpty()) {
@@ -265,9 +265,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
     public func clone(): MultiMap<K, V> {
         let newMap = HashMap<K, ArrayList<V>>(map.size)
         for ((k, list) in map) {
-            let newList = ArrayList<V>(ENTRY_LIST_SIZE)
-            newList.appendAll(list)
-            newMap.put(k, newList)
+            newMap.put(k, list.clone())
         }
         return MultiMap<K, V>(newMap)
     }
