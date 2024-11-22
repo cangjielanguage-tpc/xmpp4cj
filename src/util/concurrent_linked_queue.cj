@@ -69,8 +69,9 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
         synchronized(lock) {
             var node = list.nodeAt(index)
             if (let Some(n) <- node) {
+                let v = n.value
                 list.remove(n)
-                return n.value
+                return v
             }
             return None
         }

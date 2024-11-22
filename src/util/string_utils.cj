@@ -111,46 +111,45 @@ public class StringUtils {
      * @return 带有适当转义字符的字符串。
      */
     private static func escapeForXml(input: String, xmlEscapeMode: StringUtilsXmlEscapeMode): String {
-        let inputer = input.toRuneArray()
-        let len: Int64 = inputer.size
+        let len: Int64 = input.size
         let out: StringBuilder = StringBuilder(Int64(Float64(len) * 1.3) + 1)
         var toAppend: ?String
         var last: Int64 = 0
         var i: Int64 = 0
         while (i < len) {
             toAppend = None
-            let ch = inputer[i]
+            let ch = input[i]
             match (xmlEscapeMode) {
                 case safe => match (ch) {
-                    case r'<' => toAppend = LT_ENCODE
-                    case r'>' => toAppend = GT_ENCODE
-                    case r'&' => toAppend = AMP_ENCODE
-                    case r'"' => toAppend = QUOTE_ENCODE
-                    case r'\'' => toAppend = APOS_ENCODE
+                    case b'<' => toAppend = LT_ENCODE
+                    case b'>' => toAppend = GT_ENCODE
+                    case b'&' => toAppend = AMP_ENCODE
+                    case b'"' => toAppend = QUOTE_ENCODE
+                    case b'\'' => toAppend = APOS_ENCODE
                     case _ => ()
                 }
                 case forAttribute => match (ch) { // No need to escape '>' for attributes.
-                    case r'<' => toAppend = LT_ENCODE
-                    case r'&' => toAppend = AMP_ENCODE
-                    case r'"' => toAppend = QUOTE_ENCODE
-                    case r'\'' => toAppend = APOS_ENCODE
+                    case b'<' => toAppend = LT_ENCODE
+                    case b'&' => toAppend = AMP_ENCODE
+                    case b'"' => toAppend = QUOTE_ENCODE
+                    case b'\'' => toAppend = APOS_ENCODE
                     case _ => ()
                 }
                 case forAttributeApos => match (ch) { // No need to escape '>' and '"' for attributes using '\'' as quote.
-                    case r'<' => toAppend = LT_ENCODE
-                    case r'&' => toAppend = AMP_ENCODE
-                    case r'\'' => toAppend = APOS_ENCODE
+                    case b'<' => toAppend = LT_ENCODE
+                    case b'&' => toAppend = AMP_ENCODE
+                    case b'\'' => toAppend = APOS_ENCODE
                     case _ => ()
                 }
                 case forText => match (ch) { // No need to escape '"', '\'', and '>' for text.
-                    case r'<' => toAppend = LT_ENCODE
-                    case r'&' => toAppend = AMP_ENCODE
+                    case b'<' => toAppend = LT_ENCODE
+                    case b'&' => toAppend = AMP_ENCODE
                     case _ => ()
                 }
             }
             if (let Some(toAppend) <- toAppend) {
                 if (i > last) {
-                    out.append(inputer[last..i])
+                    out.append(input[last..i])
                 }
                 out.append(toAppend)
                 i++
@@ -163,7 +162,7 @@ public class StringUtils {
             return input
         }
         if (i > last) {
-            out.append(inputer[last..i])
+            out.append(input[last..i])
         }
         return out.toString()
     }

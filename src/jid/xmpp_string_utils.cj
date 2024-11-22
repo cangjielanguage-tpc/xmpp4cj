@@ -115,18 +115,18 @@ public class XmppStringUtils {
         let buf: ArrayList<Byte> = ArrayList<Byte>(localpart.size + 8)
         for (c in localpart) {
             match (c) {
-                case b'"' => buf.appendAll("\\22".toArray())
-                case b'&' => buf.appendAll("\\26".toArray())
-                case b'\'' => buf.appendAll("\\27".toArray())
-                case b'/' => buf.appendAll("\\2f".toArray())
-                case b':' => buf.appendAll("\\3a".toArray())
-                case b'<' => buf.appendAll("\\3c".toArray())
-                case b'>' => buf.appendAll("\\3e".toArray())
-                case b'@' => buf.appendAll("\\40".toArray())
-                case b'\\' => buf.appendAll("\\5c".toArray())
+                case b'"' => buf.appendAll(unsafe { "\\22".rawData() })
+                case b'&' => buf.appendAll(unsafe { "\\26".rawData() })
+                case b'\'' => buf.appendAll(unsafe { "\\27".rawData() })
+                case b'/' => buf.appendAll(unsafe { "\\2f".rawData() })
+                case b':' => buf.appendAll(unsafe { "\\3a".rawData() })
+                case b'<' => buf.appendAll(unsafe { "\\3c".rawData() })
+                case b'>' => buf.appendAll(unsafe { "\\3e".rawData() })
+                case b'@' => buf.appendAll(unsafe { "\\40".rawData() })
+                case b'\\' => buf.appendAll(unsafe { "\\5c".rawData() })
                 case _ =>
                     if ((0x9 <= c && c <= 0xd) || c == 0x20) {
-                        buf.appendAll("\\20".toArray())
+                        buf.appendAll(unsafe { "\\20".rawData() })
                     } else {
                         buf.append(c)
                     }
@@ -265,9 +265,9 @@ public class XmppStringUtils {
      * @return 构建的JID字符串。
      */
     public static func completeJidFrom(localpart: ?String, domainpart: String, resource: ?String): String {
-        var maxResLength = domainpart.size
-        maxResLength += localpart?.size ?? -1 + 1
-        maxResLength += resource?.size ?? -1 + 1
+        var maxResLength = domainpart.size + 2
+        maxResLength += localpart?.size ?? 0
+        maxResLength += resource?.size ?? 0
 
         let sb = StringBuilder(maxResLength)
         if (let Some(v) <- localpart) {

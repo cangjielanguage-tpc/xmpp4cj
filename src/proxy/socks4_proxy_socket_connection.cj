@@ -42,7 +42,7 @@ public class Socks4ProxySocketConnection <: ProxySocketConnection {
         // 接收代理服务器发送的数据
         let arr: Array<Byte> = Array<Byte>(6, repeat: 0)
         tcpSocket.read(arr)
-        if(arr[0] != 0){
+        if (arr[0] != 0) {
             throw ProxyException(ProxyInfoProxyType.SOCKS4, "server returns VN ${arr[0]}")
         }
         if (arr[1] != 90) {

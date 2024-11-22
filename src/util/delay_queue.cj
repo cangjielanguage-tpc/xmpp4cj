@@ -4,11 +4,11 @@
 package xmpp4cj.util
 
 /*
- * 获取延迟时间
+ * 可延迟的对象
  */
 public interface Delayed {
     /**
-     * 获取延迟时间。
+     * 获取延迟时间, 表示当前还需多少延迟, 即此返回值非固定, 每次获取时应刷新
      *
      * @return 延迟时间
      */
@@ -35,6 +35,7 @@ public class DelayQueue<T> where T <: Delayed & Comparable<T> & Object {
         synchronized(lock) {
             var node = list.firstNode()
             while (let Some(n) <- node) {
+                node = n.next
                 if (t.getDelay() < n.value.getDelay()) {
                     list.insertBefore(n, t)
                     return
@@ -54,6 +55,7 @@ public class DelayQueue<T> where T <: Delayed & Comparable<T> & Object {
         synchronized(lock) {
             var node = list.firstNode()
             while (let Some(n) <- node) {
+                node = n.next
                 if (refEq(n.value, t)) {
                     list.remove(n)
                     return true

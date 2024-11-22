@@ -10,5 +10,4 @@ internal import std.io.*
 internal import std.collection.*
 internal import std.convert.*
 internal import encoding.base64.*
-
 internal import xmpp4cj.util.*

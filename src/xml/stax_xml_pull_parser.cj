@@ -12,8 +12,6 @@ import std.collection.Set
 public class StaxXmlPullParser <: XmlPullParser {
     let reader: XmlReader
 
-    private var xmlNode: ?XmlNode = None
-
     /**
      * 初始化对象。
      *
