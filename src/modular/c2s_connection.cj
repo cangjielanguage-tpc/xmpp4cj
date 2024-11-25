@@ -121,7 +121,7 @@ public class C2sConnection <: AbstractXMPPConnection {
             outgoingStateEdges)
         if (let Some(vertex) <- mandatoryIntermediateStateVertex) {
             let reason = attemptEnterState(vertex, walkStateGraphContext)
-            if (reason is StateTransitionResultSuccess) {
+            if (let Some(_: StateTransitionResultSuccess) <- reason) {
                 walkStateGraph(walkStateGraphContext)
                 return
             }
@@ -256,6 +256,7 @@ public class C2sConnection <: AbstractXMPPConnection {
         try {
             walkStateGraph(context)
         } catch (e: Exception) {
+            DEBUGER.log(LogLevel.ERROR, "Ignored exception during shutdown: ${e}", e)
             throw IllegalStateException("A walk to disconnected state should never throw ${e}")
         }
     }
@@ -346,7 +347,7 @@ public class C2sConnection <: AbstractXMPPConnection {
             this,
             {
                 => for (connectionStateMachineListener in connectionStateMachineListeners) {
-                    connectionStateMachineListener(connectionStateEvent, this)
+                    connectionStateMachineListener.onConnectionStateEvent(connectionStateEvent, this)
                 }
             }
         )

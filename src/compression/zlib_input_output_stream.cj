@@ -24,10 +24,10 @@ public class ZlibInputOutputStream <: XMPPInputOutputStream {
     }
 
     /**  
-     * 获取解压缩的输入流。
+     * 获取解压的输入流。
      *
      * @param inputStream 原始输入流
-     * @return 解压缩后的输入流
+     * @return 可读取解压后数据的输入流
      */
     public override func getInputStream(inputStream: InputStream): InputStream {
         DeCompressInWrapper(inputStream)
@@ -37,7 +37,7 @@ public class ZlibInputOutputStream <: XMPPInputOutputStream {
      * 获取压缩的输出流。
      *
      * @param outputStream 原始输出流
-     * @return 压缩后的输出流
+     * @return 可输出压缩后数据的输出流
      */
     public override func getOutputStream(outputStream: OutputStream): OutputStream {
         CompressOutWrapper(outputStream)
