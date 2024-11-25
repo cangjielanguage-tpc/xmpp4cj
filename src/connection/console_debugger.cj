@@ -13,7 +13,7 @@ package xmpp4cj.connection
  * <code>printInterpreted</code> 更改为 <code>true</code>。
  * </p>
  */
-public open class ConsoleDebugger <: AbstractDebugger {
+public class ConsoleDebugger <: AbstractDebugger {
     private let dateFormatter = DateTimeFormat.of("HH:mm:ss")
 
     private let dateFormatterLock = Monitor()
@@ -25,6 +25,7 @@ public open class ConsoleDebugger <: AbstractDebugger {
      */
     public init(connection: XMPPConnection) {
         super(connection)
+        super.postInit()
     }
 
     /**  
@@ -32,7 +33,7 @@ public open class ConsoleDebugger <: AbstractDebugger {
      *
      * @param logMessage 要记录的日志消息
      */
-    protected open override func log(logMessage: String): Unit {
+    protected override func log(logMessage: String): Unit {
         let formatedDate: String = synchronized(dateFormatterLock) {
             DateTime.now().toString(dateFormatter)
         }
@@ -45,7 +46,7 @@ public open class ConsoleDebugger <: AbstractDebugger {
      * @param logMessage 要记录的日志消息
      * @param throwable 相关的异常
      */
-    protected open override func log(logMessage: String, throwable: Exception): Unit {
+    protected override func log(logMessage: String, throwable: Exception): Unit {
         let stacktrace = ExceptionUtil.getStackTrace(throwable)
         log('${logMessage}\n${stacktrace}')
     }

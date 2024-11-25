@@ -20,63 +20,18 @@ public abstract class AbstractDebugger <: XmppDebugger {
         get() {
             _connListener ?? {
                 =>
-                let v = AbstractDebugger_3(this, connection)
+                let v = AbstractDebugger_ConnectionListener(this, connection)
                 _connListener = v
                 v
             }()
         }
     }
 
-    private var _reconnectionListener: ?ReconnectionListener = None
+    private var reconnectionListener: ?ReconnectionListener = None
 
-    private prop reconnectionListener: ReconnectionListener {
-        get() {
-            _reconnectionListener ??
-                {
-                =>
-                let v = AbstractDebugger_4(this, connection)
-                if (let Some(abstractXmppConnection) <- (connection as AbstractXMPPConnection)) {
-                    ReconnectionManager.getInstanceFor(abstractXmppConnection).addReconnectionListener(v)
-                } else {
-                    LOGGER.info(
-                        "The connection instance connection is not an instance of AbstractXMPPConnection, thus we can not install the ReconnectionListener"
-                    )
-                }
-                _reconnectionListener = v
-                v
-            }()
-        }
-    }
+    private var readerListener: ?ReaderListener = None
 
-    private var _readerListener: ?ReaderListener = None
-
-    private prop readerListener: ReaderListener {
-        get() {
-            _readerListener ??
-                {
-                =>
-                let v = ReaderListener {str => log("RECV (${connection.getConnectionCounter()}): ${str}")}
-                reader.addReaderListener(readerListener)
-                _readerListener = v
-                v
-            }()
-        }
-    }
-
-    private var _writerListener: ?WriterListener = None
-
-    private prop writerListener: WriterListener {
-        get() {
-            _writerListener ??
-                {
-                =>
-                let v = WriterListener {str => log("SENT (${connection.getConnectionCounter()}): ${str}")}
-                writer.addWriterListener(v)
-                _writerListener = v
-                v
-            }()
-        }
-    }
+    private var writerListener: ?WriterListener = None
 
     private var writer: ObservableWriter
 
@@ -92,6 +47,31 @@ public abstract class AbstractDebugger <: XmppDebugger {
 
         this.reader = ObservableReader()
         this.writer = ObservableWriter()
+    }
+    /*
+     * 开放类的构造函数无法引用this, 资源延迟加载, 子类需手动调用postInit
+     */
+    public open func postInit(): Unit {
+        let rl = ReaderListener {str => log("RECV (${connection.getConnectionCounter()}): ${str}")}
+        reader.addReaderListener(rl)
+        readerListener = rl
+
+        let wl = WriterListener {str => log("SENT (${connection.getConnectionCounter()}): ${str}")}
+        writer.addWriterListener(wl)
+        writerListener = wl
+
+        // connListener可以真延迟加载
+
+        let rel = AbstractDebugger_ReconnectionListener(this, connection)
+        match (connection) {
+            case abstractXmppConnection: AbstractXMPPConnection => ReconnectionManager
+                .getInstanceFor(abstractXmppConnection)
+                .addReconnectionListener(rel)
+            case _ => LOGGER.info(
+                "The connection instance connection is not an instance of AbstractXMPPConnection, thus we can not install the ReconnectionListener"
+            )
+        }
+        reconnectionListener = rel
     }
 
     /**
@@ -172,7 +152,7 @@ public abstract class AbstractDebugger <: XmppDebugger {
     }
 }
 
-class AbstractDebugger_3 <: ConnectionListener {
+class AbstractDebugger_ConnectionListener <: ConnectionListener {
     let this_0: AbstractDebugger
 
     let val_connection: XMPPConnection
@@ -203,7 +183,7 @@ class AbstractDebugger_3 <: ConnectionListener {
     }
 }
 
-class AbstractDebugger_4 <: ReconnectionListener {
+class AbstractDebugger_ReconnectionListener <: ReconnectionListener {
     let this_0: AbstractDebugger
 
     let val_connection: XMPPConnection

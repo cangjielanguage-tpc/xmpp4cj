@@ -3,4 +3,9 @@
  */
 package xmpp4cj.modular
 
-public type ConnectionStateMachineListener = (ConnectionStateEvent, C2sConnection) -> Unit
+public open class ConnectionStateMachineListener {
+    public ConnectionStateMachineListener(let f: (ConnectionStateEvent, C2sConnection) -> Unit) {}
+    public func onConnectionStateEvent(connectionStateEvent: ConnectionStateEvent, connection: C2sConnection): Unit {
+        f(connectionStateEvent, connection)
+    }
+}

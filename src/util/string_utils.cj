@@ -619,11 +619,10 @@ enum StringUtilsXmlEscapeMode {
 /**
  * any对象转换成String对象
  */
-public func anyToString(any: Any): String {
-    var str = if (any is ToString) {
-        (any as ToString).getOrThrow().toString()
-    } else {
-        "None"
+public func anyToString<T>(any: T): String {
+    var str = match (any) {
+        case v: ToString => v.toString()
+        case _ => "None"
     }
     while (str.startsWith("Some(")) {
         str = str[5..str.size - 1]

@@ -3,8 +3,6 @@
  */
 package xmpp4cj.connection
 
-import compress.zlib.*
-
 /**  
  * ZlibXMPP 压缩工厂类，用于创建 Zlib 压缩的 XMPP 输入输出过滤器。
  * 该类实现了 XmppCompressionFactory，并提供了对 Zlib 压缩的支持。
@@ -37,12 +35,11 @@ class ZlibXmppInputOutputFilter <: XmppInputOutputFilter {
     private static let MINIMUM_OUTPUT_BUFFER_INITIAL_SIZE = 4
     private static let MINIMUM_OUTPUT_BUFFER_INCREASE = 480
 
-    private let compressorBuffer: ByteBuffer
-    private let compressor: CompressOutputStream
+    private let compressorBuffer: ByteBuffer = ByteBuffer()
+    private let compressor: OutputStream
 
     private let decompressorBuffer = ByteBuffer()
-    private let decompressor: DecompressOutputStream = DecompressOutputStream(decompressorBuffer,
-        wrap: WrapType.DeflateFormat)
+    private let decompressor: InputStream
 
     private var outputBuffer: ?ByteBuffer = None
 
@@ -58,13 +55,9 @@ class ZlibXmppInputOutputFilter <: XmppInputOutputFilter {
     var maxBytesWrittenAfterFullFlush = -1
 
     init() {
-        this(CompressLevel.DefaultCompression)
-    }
-
-    private init(compressionLevel: CompressLevel) {
-        compressorBuffer = ByteBuffer()
-        compressor = CompressOutputStream(compressorBuffer, wrap: WrapType.DeflateFormat,
-            compressLevel: compressionLevel)
+        let zlib = ZlibInputOutputStream()
+        compressor = zlib.getOutputStream(compressorBuffer)
+        decompressor = zlib.getInputStream(decompressorBuffer)
     }
 
     public override func output(outputData: ?ByteBuffer, isFinalDataOfElement: Bool, destinationAddressChanged: Bool,
@@ -110,12 +103,8 @@ class ZlibXmppInputOutputFilter <: XmppInputOutputFilter {
 
     private func deflate(needFlush: Bool): Int {
         let outputBuffer = this.outputBuffer.getOrThrow()
-
-        // 每次都将压缩结果flush到compressorBuffer
-        compressor.flush()
-
-        // 控制flush时机
         if (needFlush) {
+            compressor.flush()
             let totalBytesWritten = compressorBuffer.remainLength
             copy(compressorBuffer, to: outputBuffer)
             return totalBytesWritten
@@ -130,18 +119,17 @@ class ZlibXmppInputOutputFilter <: XmppInputOutputFilter {
         let length: Int = bytesRemaining
 
         decompressorInBytes += length
-        decompressor.write(inputBytes)
+        decompressorBuffer.write(inputBytes)
 
-        decompressor.flush()
         decompressorOutBytes += decompressorBuffer.remainLength
 
-        if (decompressorBuffer.remainLength == 0) {
+        let outputBuffer = ByteBuffer(length * 2)
+        copy(decompressor, to: outputBuffer)
+
+        if (outputBuffer.remainLength == 0) {
             // 如果decompressor没有解压输出 
             return None
         }
-
-        let outputBuffer = ByteBuffer(decompressorBuffer.remainLength)
-        copy(decompressorBuffer, to: outputBuffer)
 
         maxInputOutput = max(outputBuffer.length, maxInputOutput)
         return outputBuffer
