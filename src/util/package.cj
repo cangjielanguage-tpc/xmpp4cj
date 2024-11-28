@@ -79,14 +79,13 @@ public class Objects {
 }
 
 /*
- * 判断是否为true。不为true抛异常。
+ * 断言 默认只记录 不抛异常
  *
  * @param exp 判断true false的值。
- * @throws Exception 不为true的时候抛异常。
  */
 public func assert(exp: Bool): Unit {
     if (!exp) {
-        throw Exception("assert failed")
+        DEBUGER.log(LogLevel.WARN, "assertion failed", AssertionError())
     }
 }
 

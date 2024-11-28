@@ -28,5 +28,3 @@ internal import xmpp4cj.proxy.*
 internal import xmpp4cj.sasl.*
 internal import xmpp4cj.util.*
 internal import xmpp4cj.xml.*
-
-public let XMPP_URL_STRING = "https://igniterealtime.org/projects/xmpp"

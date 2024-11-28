@@ -3,6 +3,8 @@
  */
 package xmpp4cj.connection
 
+import std.runtime
+
 /**
  * 表示Xmpp的配置。该配置用于：
  * <ul>
@@ -37,7 +39,7 @@ public open class XmppConfiguration {
      */
     private static var defaultCallback: ParsingExceptionCallback = ExceptionThrowingCallbackWithHint()
 
-    private static let defaultConcurrencyLevelLimit: Int = 0
+    private static var defaultConcurrencyLevelLimit: Int = 0
 
     /**
      * 如果启用，将导致{@link AbstractXMPPConnection}为每个异步发送操作创建一个线程。
@@ -244,6 +246,15 @@ public open class XmppConfiguration {
 
     public static func getDefaultConcurrencyLevelLimit(): Int {
         return defaultConcurrencyLevelLimit
+    }
+
+    static init() {
+        let availableProcessors = runtime.ProcessorInfo.processorCount
+        if (availableProcessors < 8) {
+            defaultConcurrencyLevelLimit = 8
+        } else {
+            defaultConcurrencyLevelLimit = Int64(Float64(availableProcessors) * 1.1)
+        }
     }
 }
 

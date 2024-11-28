@@ -460,7 +460,7 @@ public abstract class ConnectionConfigurationBuilder {
      * @throws XmppStringprepException 以防XMPP地址无效。
      * @see #setXmppAddressAndPassword(EntityBareJid, String)
      */
-    public open func setXmppAddressAndPassword(jid: String, password: String): ConnectionConfigurationBuilder {
+    public open func setXmppAddressAndPassword(jid: String, password: String): This {
         return setXmppAddressAndPassword(JidCreate.entityBareFrom(jid), password)
     }
 
@@ -474,7 +474,7 @@ public abstract class ConnectionConfigurationBuilder {
      * @param password 密码
      * @return ConnectionConfigurationBuilder
      */
-    public open func setXmppAddressAndPassword(jid: EntityBareJid, password: String): ConnectionConfigurationBuilder {
+    public open func setXmppAddressAndPassword(jid: EntityBareJid, password: String): This {
         setUsernameAndPassword(jid.getLocalpart().toString(), password)
         return setXmppDomain(jid.asDomainBareJid())
     }
@@ -489,10 +489,10 @@ public abstract class ConnectionConfigurationBuilder {
      * @param password 用于身份验证的密码或令牌
      * @return ConnectionConfigurationBuilder
      */
-    public open func setUsernameAndPassword(username: String, password: String): ConnectionConfigurationBuilder {
+    public open func setUsernameAndPassword(username: String, password: String): This {
         this.username = username
         this.password = password
-        return getThis()
+        return this
     }
 
     /**
@@ -501,9 +501,9 @@ public abstract class ConnectionConfigurationBuilder {
      * @param xmppDomain XMPP域。
      * @return ConnectionConfigurationBuilder
      */
-    public open func setXmppDomain(xmppDomain: DomainBareJid): ConnectionConfigurationBuilder {
+    public open func setXmppDomain(xmppDomain: DomainBareJid): This {
         this.xmppServiceDomain = xmppDomain
-        return getThis()
+        return this
     }
 
     /**
@@ -513,9 +513,9 @@ public abstract class ConnectionConfigurationBuilder {
      * @return ConnectionConfigurationBuilder
      * @throws XmppStringprepException 如果给定的字符串不是域裸JID。
      */
-    public open func setXmppDomain(xmppServiceDomain: String): ConnectionConfigurationBuilder {
+    public open func setXmppDomain(xmppServiceDomain: String): This {
         this.xmppServiceDomain = JidCreate.domainBareFrom(xmppServiceDomain)
-        return getThis()
+        return this
     }
 
     /**
@@ -530,9 +530,9 @@ public abstract class ConnectionConfigurationBuilder {
      * @return ConnectionConfigurationBuilder
      * @see <a href="https/tools/ietf/org/html/rfc6120#section-7.7.1">RFC 6120 § 7.7.1</a>
      */
-    public open func setResource(resource: Resourcepart): ConnectionConfigurationBuilder {
+    public open func setResource(resource: Resourcepart): This {
         this.resource = resource
-        return getThis()
+        return this
     }
 
     /**
@@ -543,9 +543,9 @@ public abstract class ConnectionConfigurationBuilder {
      * @see <a href="https/tools/ietf/org/html/rfc6120#section-4.7.4">RFC 6120 § 4.7.4</a>
      * @see <a href="https/www/w3/org/TR/xml/#sec-lang-tag">XML 1.0 § 2.12 Language Identification</a>
      */
-    public open func setLanguage(language: String): ConnectionConfigurationBuilder {
+    public open func setLanguage(language: String): This {
         this.language = language
-        return getThis()
+        return this
     }
 
     /**
@@ -556,7 +556,7 @@ public abstract class ConnectionConfigurationBuilder {
      * @throws XmppStringprepException 如果String不是有效的资源部分。
      * @see #setResource(Resourcepart)
      */
-    public open func setResource(resource: String): ConnectionConfigurationBuilder {
+    public open func setResource(resource: String): This {
         return setResource(Resourcepart.froms(resource))
     }
 
@@ -566,9 +566,9 @@ public abstract class ConnectionConfigurationBuilder {
      * @param address 提供XMPP服务的主机的互联网地址。
      * @return ConnectionConfigurationBuilder
      */
-    public open func setHostAddress(address: IPAddress): ConnectionConfigurationBuilder {
+    public open func setHostAddress(address: IPAddress): This {
         this.hostAddress = address
-        return getThis()
+        return this
     }
 
     /**
@@ -577,13 +577,13 @@ public abstract class ConnectionConfigurationBuilder {
      * @param host 提供XMPP服务的主机的DNS名称。
      * @return ConnectionConfigurationBuilder
      */
-    public open func setHost(host: String): ConnectionConfigurationBuilder {
+    public open func setHost(host: String): This {
         if (let Some(ip) <- IPAddress.tryParse(host)) {
             setHostAddress(ip)
         } else {
             this.host = host
         }
-        return getThis()
+        return this
     }
 
     /**
@@ -592,7 +592,7 @@ public abstract class ConnectionConfigurationBuilder {
      * @param port 端口号。
      * @return ConnectionConfigurationBuilder
      */
-    public open func setPort(port: Int64): ConnectionConfigurationBuilder {
+    public open func setPort(port: Int64): This {
         if (port < 0 || port > 65535) {
             throw IllegalArgumentException(
                 "Port must be a 16-bit unsigned integer (i.e. between 0-65535. Port was: ${port.toString()}")
@@ -607,9 +607,9 @@ public abstract class ConnectionConfigurationBuilder {
      * @param port 端口号。
      * @return ConnectionConfigurationBuilder
      */
-    public open func setPort(port: UInt16): ConnectionConfigurationBuilder {
+    public open func setPort(port: UInt16): This {
         this.port = Objects.requireNonNull(port)
-        return getThis()
+        return this
     }
 
     /**
@@ -618,9 +618,9 @@ public abstract class ConnectionConfigurationBuilder {
      * @param callbackHandler CallbackHandler。
      * @return ConnectionConfigurationBuilder
      */
-    public open func setCallbackHandler(callbackHandler: CallbackHandler): ConnectionConfigurationBuilder {
+    public open func setCallbackHandler(callbackHandler: CallbackHandler): This {
         this.callbackHandler = callbackHandler
-        return getThis()
+        return this
     }
 
     /**  
@@ -630,9 +630,9 @@ public abstract class ConnectionConfigurationBuilder {
      * @return 返回当前实例
      * @throws NullPointerException 如果传入的 dnssecMode 为 None
      */
-    public open func setDnssecMode(dnssecMode: DnssecMode): ConnectionConfigurationBuilder {
+    public open func setDnssecMode(dnssecMode: DnssecMode): This {
         this.dnssecMode = Objects.requireNonNull(dnssecMode, "DNSSEC mode must not be None")
-        return getThis()
+        return this
     }
 
     /**
@@ -641,9 +641,9 @@ public abstract class ConnectionConfigurationBuilder {
      * @param securityMode 安全模式。
      * @return ConnectionConfigurationBuilder
      */
-    public open func setSecurityMode(securityMode: ConnectionConfigurationSecurityMode): ConnectionConfigurationBuilder {
+    public open func setSecurityMode(securityMode: ConnectionConfigurationSecurityMode): This {
         this.securityMode = securityMode
-        return getThis()
+        return this
     }
 
     /**
@@ -652,9 +652,9 @@ public abstract class ConnectionConfigurationBuilder {
      * @param tlsClientConfig TlsClientConfig
      * @return ConnectionConfigurationBuilder
      */
-    public open func setTlsClientConfig(tlsClientConfig: ?TlsClientConfig): ConnectionConfigurationBuilder {
+    public open func setTlsClientConfig(tlsClientConfig: ?TlsClientConfig): This {
         this.tlsClientConfig = tlsClientConfig
-        return getThis()
+        return this
     }
 
     /**
@@ -665,9 +665,9 @@ public abstract class ConnectionConfigurationBuilder {
      * @param sendPresence 如果登录时将发送初始可用状态，则为true。
      * @return ConnectionConfigurationBuilder
      */
-    public open func setSendPresence(sendPresence: Bool): ConnectionConfigurationBuilder {
+    public open func setSendPresence(sendPresence: Bool): This {
         this.sendPresence = sendPresence
-        return getThis()
+        return this
     }
 
     /**  
@@ -680,10 +680,10 @@ public abstract class ConnectionConfigurationBuilder {
      * @return 返回当前实例以支持链式调用。
      * @throws IllegalStateException 如果默认调试器工厂为 None。
      */
-    public open func enableDefaultDebugger(): ConnectionConfigurationBuilder {
+    public open func enableDefaultDebugger(): This {
         this.debuggerFactory = XmppConfiguration.getDefaultXmppDebuggerFactory()
         assert(this.debuggerFactory.isSome())
-        return getThis()
+        return this
     }
 
     /**
@@ -692,9 +692,9 @@ public abstract class ConnectionConfigurationBuilder {
      * @param debuggerFactory Xmpp调试器工厂。
      * @return ConnectionConfigurationBuilder
      */
-    public open func setDebuggerFactory(debuggerFactory: XmppDebuggerFactory): ConnectionConfigurationBuilder {
+    public open func setDebuggerFactory(debuggerFactory: XmppDebuggerFactory): This {
         this.debuggerFactory = debuggerFactory
-        return getThis()
+        return this
     }
 
     /**
@@ -704,9 +704,9 @@ public abstract class ConnectionConfigurationBuilder {
      * @param socketFactory 用于创建新套接字。
      * @return ConnectionConfigurationBuilder
      */
-    public open func setSocketFactory(socketFactory: SocketFactory): ConnectionConfigurationBuilder {
+    public open func setSocketFactory(socketFactory: SocketFactory): This {
         this.socketFactory = socketFactory
-        return getThis()
+        return this
     }
 
     /**
@@ -715,9 +715,9 @@ public abstract class ConnectionConfigurationBuilder {
      * @param proxyInfo 代理信息。
      * @return ConnectionConfigurationBuilder
      */
-    public open func setProxyInfo(proxyInfo: ProxyInfo): ConnectionConfigurationBuilder {
+    public open func setProxyInfo(proxyInfo: ProxyInfo): This {
         this.proxy = proxyInfo
-        return getThis()
+        return this
     }
 
     /**
@@ -727,9 +727,9 @@ public abstract class ConnectionConfigurationBuilder {
      *
      * @return ConnectionConfigurationBuilder
      */
-    public open func allowEmptyOrNullUsernames(): ConnectionConfigurationBuilder {
+    public open func allowEmptyOrNullUsernames(): This {
         allowEmptyOrNullUsername = true
-        return getThis()
+        return this
     }
 
     /**
@@ -738,7 +738,7 @@ public abstract class ConnectionConfigurationBuilder {
      *
      * @return ConnectionConfigurationBuilder
      */
-    public open func performSaslAnonymousAuthentication(): ConnectionConfigurationBuilder {
+    public open func performSaslAnonymousAuthentication(): This {
         if (!SASLAuthentication.isSaslMechanismRegistered(SASLAnonymous.NAME)) {
             throw IllegalArgumentException("SASL ${SASLAnonymous.NAME} is not registered")
         }
@@ -746,7 +746,7 @@ public abstract class ConnectionConfigurationBuilder {
         allowEmptyOrNullUsernames()
         addEnabledSaslMechanism(SASLAnonymous.NAME)
         saslMechanismsSealed = true
-        return getThis()
+        return this
     }
 
     /**
@@ -757,7 +757,7 @@ public abstract class ConnectionConfigurationBuilder {
      * @param sslContext 要使用的自定义SSLContext。
      * @return ConnectionConfigurationBuilder
      */
-    public open func performSaslExternalAuthentication(sslContext: TlsClientConfig): ConnectionConfigurationBuilder {
+    public open func performSaslExternalAuthentication(sslContext: TlsClientConfig): This {
         if (!SASLAuthentication.isSaslMechanismRegistered(SASLMechanism.EXTERNAL)) {
             throw IllegalArgumentException("SASL ${SASLMechanism.EXTERNAL} is not registered")
         }
@@ -767,7 +767,7 @@ public abstract class ConnectionConfigurationBuilder {
         setSecurityMode(ConnectionConfigurationSecurityMode.required)
         addEnabledSaslMechanism(SASLMechanism.EXTERNAL)
         saslMechanismsSealed = true
-        return getThis()
+        return this
     }
 
     private func throwIfEnabledSaslMechanismsSet(): Unit {
@@ -782,7 +782,7 @@ public abstract class ConnectionConfigurationBuilder {
      * @param saslMechanism 要启用的机制的名称。
      * @return ConnectionConfigurationBuilder
      */
-    public open func addEnabledSaslMechanism(saslMechanism: String): ConnectionConfigurationBuilder {
+    public open func addEnabledSaslMechanism(saslMechanism: String): This {
         return addEnabledSaslMechanism(
             [StringUtils.requireNotNullNorEmpty(saslMechanism, "saslMechanism must not be null nor empty")])
     }
@@ -795,7 +795,7 @@ public abstract class ConnectionConfigurationBuilder {
      * @param saslMechanisms 一组要启用的机制名称。
      * @return ConnectionConfigurationBuilder
      */
-    public open func addEnabledSaslMechanism(saslMechanisms: Collection<String>): ConnectionConfigurationBuilder {
+    public open func addEnabledSaslMechanism(saslMechanisms: Collection<String>): This {
         if (saslMechanismsSealed) {
             throw IllegalStateException("The enabled SASL mechanisms are sealed, you can not add new ones")
         }
@@ -813,7 +813,7 @@ public abstract class ConnectionConfigurationBuilder {
             enabledSaslMechanisms = HashSet<String>(saslMechanisms.size)
         }
         enabledSaslMechanisms?.putAll(saslMechanisms)
-        return getThis()
+        return this
     }
 
     /**
@@ -829,9 +829,9 @@ public abstract class ConnectionConfigurationBuilder {
      * @return ConnectionConfigurationBuilder
      * @see <a href="http/tools/ietf/org/html/rfc6120#section-6.3.8">RFC 6120 § 6.3.8. Authorization Identity</a>
      */
-    public open func setAuthzid(authzid: EntityBareJid): ConnectionConfigurationBuilder {
+    public open func setAuthzid(authzid: EntityBareJid): This {
         this.authzid = authzid
-        return getThis()
+        return this
     }
 
     /**
@@ -842,9 +842,9 @@ public abstract class ConnectionConfigurationBuilder {
      * @param compressionEnabled 如果连接将在HTTP级别使用压缩。
      * @return ConnectionConfigurationBuilder
      */
-    public open func setCompressionEnabled(compressionEnabled: Bool): ConnectionConfigurationBuilder {
+    public open func setCompressionEnabled(compressionEnabled: Bool): This {
         this.compressionEnabled = compressionEnabled
-        return getThis()
+        return this
     }
 
     /**
@@ -853,9 +853,9 @@ public abstract class ConnectionConfigurationBuilder {
      * @param stanzaIdSourceFactory 节ID源使用的工厂。
      * @return ConnectionConfigurationBuilder
      */
-    public open func setStanzaIdSourceFactory(stanzaIdSourceFactory: StanzaIdSourceFactory): ConnectionConfigurationBuilder {
+    public open func setStanzaIdSourceFactory(stanzaIdSourceFactory: StanzaIdSourceFactory): This {
         this.stanzaIdSourceFactory = Objects.requireNonNull(stanzaIdSourceFactory)
-        return getThis()
+        return this
     }
 
     /**
@@ -864,13 +864,6 @@ public abstract class ConnectionConfigurationBuilder {
      * @return 返回ConnectionConfiguration。
      */
     public func build(): ConnectionConfiguration
-
-    /**
-     * 返回ConnectionConfigurationBuilder。
-     *
-     * @return 返回ConnectionConfigurationBuilder。
-     */
-    protected func getThis(): ConnectionConfigurationBuilder
 }
 
 public enum ConnectionConfigurationSecurityMode <: ToString & Equatable<ConnectionConfigurationSecurityMode> {

@@ -64,17 +64,13 @@ public class C2sConnectionConfigurationBuilder <: ConnectionConfigurationBuilder
         return moduleDescriptorBuilderCosntructor(this).buildModule()
     }
 
-    public func removeModule(moduleClass: ClassId): C2sConnectionConfigurationBuilder {
+    public func removeModule(moduleClass: ClassId): This {
         modulesDescriptors.remove(moduleClass)
-        return getThis()
+        return this
     }
 
-    public func removeAllModules(): C2sConnectionConfigurationBuilder {
+    public func removeAllModules(): This {
         modulesDescriptors.clear()
-        return getThis()
-    }
-
-    protected override func getThis(): C2sConnectionConfigurationBuilder {
         return this
     }
 }

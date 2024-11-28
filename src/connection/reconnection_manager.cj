@@ -171,6 +171,10 @@ public class ReconnectionManager {
     private init(connection: AbstractXMPPConnection) {
         weakRefConnection = connection
         connectionListener = RCMConnectionListener(this)
+        // If the reconnection mechanism is enable per default, enable it for this ReconnectionManager instance
+        if (getEnabledPerDefault()) {
+            enableAutomaticReconnection()
+        }
     }
 
     /**

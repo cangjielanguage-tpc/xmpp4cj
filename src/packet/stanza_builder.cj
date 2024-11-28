@@ -94,7 +94,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @throws XmppStringprepException 如果提供的字符序列不是有效的 XMPP 地址。
      * @see #to(Jid)
      */
-    public open func to(to: String): StanzaBuilder {
+    public open func to(to: String): This {
         return this.to(JidCreate.froms(to))
     }
 
@@ -105,9 +105,9 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @param to 节要发送给谁。
      * @return 对这个构建器的引用。
      */
-    public open func to(to: ?Jid): StanzaBuilder {
+    public open func to(to: ?Jid): This {
         this._to = to
-        return getThis()
+        return this
     }
 
     /**
@@ -118,7 +118,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @throws XmppStringprepException 如果提供的字符序列不是有效的 XMPP 地址。
      * @see #froms(Jid)
      */
-    public open func froms(froms: String): StanzaBuilder {
+    public open func froms(froms: String): This {
         return this.froms(JidCreate.froms(froms))
     }
 
@@ -129,9 +129,9 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @param froms 节从谁那里发送。
      * @return 对这个构建器的引用。
      */
-    public open func froms(froms: ?Jid): StanzaBuilder {
+    public open func froms(froms: ?Jid): This {
         this._from = froms
-        return getThis()
+        return this
     }
 
     /**
@@ -140,9 +140,9 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @param stanzaError 要与这个节关联的错误。
      * @return 对这个构建器的引用。
      */
-    public open func setError(stanzaError: ?StanzaError): StanzaBuilder {
+    public open func setError(stanzaError: ?StanzaError): This {
         this.stanzaError = stanzaError
-        return getThis()
+        return this
     }
 
     /**
@@ -151,9 +151,9 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @param language 这个节的 xml:lang。
      * @return 对这个构建器的引用。
      */
-    public open func setLanguage(language: ?String): StanzaBuilder {
+    public open func setLanguage(language: ?String): This {
         this.language = language
-        return getThis()
+        return this
     }
 
     /**  
@@ -162,10 +162,10 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @param extensionElement 要添加的子元素（不能为 null）
      * @return 当前的构建器实例，以便进行方法链调用
      */
-    public open func addExtension(extensionElement: ExtensionElement): StanzaBuilder {
+    public open func addExtension(extensionElement: ExtensionElement): This {
         let key = extensionElement.getQName()
         extensionElements.put(key, extensionElement)
-        return getThis()
+        return this
     }
 
     /**  
@@ -174,8 +174,8 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @param extensionElements 要添加的子元素集（可以为空，但不能为 null）
      * @return 当前的构建器实例，以便进行方法链调用
      */
-    public open func addOptExtensions(extensionElements: ?Collection<ExtensionElement>): StanzaBuilder {
-        return addExtensions(extensionElements ?? return getThis())
+    public open func addOptExtensions(extensionElements: ?Collection<ExtensionElement>): This {
+        return addExtensions(extensionElements ?? return this)
     }
 
     /**  
@@ -184,11 +184,11 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @param extensionElements 要添加的子元素集（不能为 null）
      * @return 当前的构建器实例，以便进行方法链调用
      */
-    public open func addExtensions(extensionElements: Collection<ExtensionElement>): StanzaBuilder {
+    public open func addExtensions(extensionElements: Collection<ExtensionElement>): This {
         for (extensionElement in extensionElements) {
             addExtension(extensionElement)
         }
-        return getThis()
+        return this
     }
 
     /**  
@@ -197,11 +197,11 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @param extensionElement 要替换的子元素（不能为 null）
      * @return 当前的构建器实例，以便进行方法链调用
      */
-    public open func overrideExtension(extensionElement: ExtensionElement): StanzaBuilder {
+    public open func overrideExtension(extensionElement: ExtensionElement): This {
         let key = extensionElement.getQName()
         extensionElements.remove(key)
         extensionElements.put(key, extensionElement)
-        return getThis()
+        return this
     }
 
     /**  
@@ -211,10 +211,10 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @param namespace 该元素的命名空间
      * @return 当前的构建器实例，以便进行方法链调用
      */
-    public open func removeExtension(elementName: String, namespace: String): StanzaBuilder {
+    public open func removeExtension(elementName: String, namespace: String): This {
         let key = QName(namespace, elementName)
         extensionElements.remove(key)
-        return getThis()
+        return this
     }
 
     /**  
@@ -223,11 +223,11 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @param extension 要移除的子元素（不能为 null）
      * @return 当前的构建器实例，以便进行方法链调用
      */
-    public open func removeExtension(extension: ExtensionElement): StanzaBuilder {
+    public open func removeExtension(extension: ExtensionElement): This {
         let key = extension.getQName()
         let list = extensionElements.getAll(key)
         list.removeValue(extension)
-        return getThis()
+        return this
     }
 
     /**  
@@ -236,13 +236,6 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
      * @return 新建的 Stanza 实例
      */
     public open func build(): Stanza
-
-    /**  
-     * 获取当前类的实例。
-     *
-     * @return 当前类实例
-     */
-    public open func getThis(): StanzaBuilder
 
     public override func getStanzaId(): ?String {
         return stanzaId
