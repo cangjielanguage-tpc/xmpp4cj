@@ -102,14 +102,6 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
 
     private let sendListenersLock = Monitor()
 
-    /**
-     * 当新节即将发送到服务器时将收到通知的PacketListeners列表。
-     * 这些拦截器可能会在节实际发送到服务器之前对其进行修改。
-     */
-    private let interceptors: Map<StanzaListener, AbstractXMPPConnectionInterceptorWrapper> = HashMap()
-
-    private let interceptorsLock = Monitor()
-
     private let messageInterceptors: Map<HashableConsumer<MessageBuilder>, GenericInterceptorWrapper<MessageBuilder,
         Message>> = HashMap()
 
@@ -903,7 +895,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         collectors.remove(collector)
     }
 
-    public override func addStanzaListener(stanzaListener: StanzaListener, stanzaFilter: StanzaFilter): Unit {
+    public override func addStanzaListener(stanzaListener: StanzaListener, stanzaFilter: ?StanzaFilter): Unit {
         let wrapper = AbstractXMPPConnectionListenerWrapper(stanzaListener, stanzaFilter)
         synchronized(recvListenersLock) {
             recvListeners.put(stanzaListener, wrapper)
@@ -929,7 +921,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         }
     }
 
-    public override func addAsyncStanzaListener(packetListener: StanzaListener, packetFilter: StanzaFilter): Unit {
+    public override func addAsyncStanzaListener(packetListener: StanzaListener, packetFilter: ?StanzaFilter): Unit {
         let wrapper = AbstractXMPPConnectionListenerWrapper(packetListener, packetFilter)
         synchronized(asyncRecvListenersLock) {
             asyncRecvListeners.put(packetListener, wrapper)
@@ -942,7 +934,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         }
     }
 
-    public override func addStanzaSendingListener(packetListener: StanzaListener, packetFilter: StanzaFilter): Unit {
+    public override func addStanzaSendingListener(packetListener: StanzaListener, packetFilter: ?StanzaFilter): Unit {
         let wrapper = AbstractXMPPConnectionListenerWrapper(packetListener, packetFilter)
         synchronized(sendListenersLock) {
             sendListeners.put(packetListener, wrapper)
@@ -995,7 +987,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         interceptors: Map<HashableConsumer<MPB>, GenericInterceptorWrapper<MPB, MP>>,
         interceptorsLock: Monitor,
         interceptor: HashableConsumer<MPB>,
-        filter: Predicate<MP>
+        filter: ?Predicate<MP>
     ): Unit where MPB <: MessageOrPresenceBuilder, MP <: MessageOrPresence {
         Objects.requireNonNull(interceptor, "Interceptor must not be null")
         let interceptorWrapper = GenericInterceptorWrapper<MPB, MP>(interceptor._accept, filter)
@@ -1016,7 +1008,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
 
     public override func addMessageInterceptor(
         messageInterceptor: HashableConsumer<MessageBuilder>,
-        messageFilter: Predicate<Message>
+        messageFilter: ?Predicate<Message>
     ): Unit {
         addInterceptor(messageInterceptors, messageInterceptorsLock, messageInterceptor, messageFilter)
     }
@@ -1027,7 +1019,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
 
     public override func addPresenceInterceptor(
         presenceInterceptor: HashableConsumer<PresenceBuilder>,
-        presenceFilter: Predicate<Presence>
+        presenceFilter: ?Predicate<Presence>
     ): Unit {
         addInterceptor(presenceInterceptors, presenceInterceptorsLock, presenceInterceptor, presenceFilter)
     }
@@ -1075,21 +1067,6 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
      * @return 在运行拦截器之后，可能已被修改过的节。
      */
     private func firePacketInterceptors(packet: Stanza): Stanza {
-        let interceptorsToInvoke = LinkedList<StanzaListener>()
-        synchronized(interceptorsLock) {
-            for (interceptorWrapper in interceptors.values()) {
-                if (interceptorWrapper.filterMatches(packet)) {
-                    interceptorsToInvoke.append(interceptorWrapper.getInterceptor())
-                }
-            }
-        }
-        for (interceptor in interceptorsToInvoke) {
-            try {
-                interceptor.processStanza(packet)
-            } catch (e: Exception) {
-                LOGGER.error("Packet interceptor threw exception", ("exception", e))
-            }
-        }
         let stanzaAfterInterceptors: Stanza = match (packet) {
             case message: Message => fireMessageOrPresenceInterceptors(message, messageInterceptors,
                 messageInterceptorsLock)
@@ -1617,7 +1594,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         return future
     }
 
-    public override func addOneTimeSyncCallback(callback: StanzaListener, packetFilter: StanzaFilter): Unit {
+    public override func addOneTimeSyncCallback(callback: StanzaListener, packetFilter: ?StanzaFilter): Unit {
         let packetListener: StanzaListener = SimpleStanzaListener {
             packet, stanzaListener => try {
                 callback.processStanza(packet)
@@ -1896,30 +1873,6 @@ public class AbstractXMPPConnectionListenerWrapper {
     }
 }
 
-/**
- * 一个包装类，用于将节过滤器与拦截器相关联。
- */
-class AbstractXMPPConnectionInterceptorWrapper {
-    /**
-     * 创建一个类，将节过滤器与拦截器相关联。
-     *
-     * @param packetInterceptor 拦截器。
-     * @param packetFilter 关联的过滤器，如果它拦截了所有数据包，则为None。
-     */
-    public AbstractXMPPConnectionInterceptorWrapper(
-        let packetInterceptor: StanzaListener,
-        let packetFilter: ?StanzaFilter
-    ) {}
-
-    public func filterMatches(packet: Stanza): Bool {
-        return packetFilter?.accept(packet) ?? true
-    }
-
-    public func getInterceptor(): StanzaListener {
-        return packetInterceptor
-    }
-}
-
 class GenericInterceptorWrapper<MPB, MP> where MPB <: MessageOrPresenceBuilder, MP <: MessageOrPresence {
     private let stanzaInterceptor: Consumer<MPB>
 
@@ -1954,9 +1907,5 @@ public class HashableConsumer<T> <: Hashable & Equatable<HashableConsumer<T>> {
 
     public operator override func ==(that: HashableConsumer<T>): Bool {
         refEq(this, that)
-    }
-
-    func getConcumer(): Consumer<T> {
-        _accept
     }
 }

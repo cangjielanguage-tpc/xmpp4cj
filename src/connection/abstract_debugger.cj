@@ -153,17 +153,17 @@ public abstract class AbstractDebugger <: XmppDebugger {
 }
 
 class AbstractDebugger_ConnectionListener <: ConnectionListener {
-    let this_0: AbstractDebugger
+    let absDebuger: AbstractDebugger
 
-    let val_connection: XMPPConnection
+    let conn: XMPPConnection
 
-    init(this_0: AbstractDebugger, val_connection: XMPPConnection) {
-        this.this_0 = this_0
-        this.val_connection = val_connection
+    init(absDebuger: AbstractDebugger, conn: XMPPConnection) {
+        this.absDebuger = absDebuger
+        this.conn = conn
     }
 
     public override func connected(connection: XMPPConnection): Unit {
-        this_0.log("XMPPConnection connected (${connection})")
+        absDebuger.log("XMPPConnection connected (${connection})")
     }
 
     public override func authenticated(connection: XMPPConnection, resumed: Bool): Unit {
@@ -171,33 +171,33 @@ class AbstractDebugger_ConnectionListener <: ConnectionListener {
         if (resumed) {
             logString += " and resumed"
         }
-        this_0.log(logString)
+        absDebuger.log(logString)
     }
 
     public override func connectionClosed(): Unit {
-        this_0.log("XMPPConnection closed (${val_connection})")
+        absDebuger.log("XMPPConnection closed (${conn})")
     }
 
     public override func connectionClosedOnError(e: Exception): Unit {
-        this_0.log("XMPPConnection closed due to an exception (${val_connection})", e)
+        absDebuger.log("XMPPConnection closed due to an exception (${conn})", e)
     }
 }
 
 class AbstractDebugger_ReconnectionListener <: ReconnectionListener {
-    let this_0: AbstractDebugger
+    let absDebuger: AbstractDebugger
 
-    let val_connection: XMPPConnection
+    let conn: XMPPConnection
 
-    init(this_0: AbstractDebugger, val_connection: XMPPConnection) {
-        this.this_0 = this_0
-        this.val_connection = val_connection
+    init(absDebuger: AbstractDebugger, conn: XMPPConnection) {
+        this.absDebuger = absDebuger
+        this.conn = conn
     }
 
     public override func reconnectionFailed(e: Exception): Unit {
-        this_0.log("Reconnection failed due to an exception (${val_connection})", e)
+        absDebuger.log("Reconnection failed due to an exception (${conn})", e)
     }
 
     public override func reconnectingIn(seconds: Duration): Unit {
-        this_0.log("XMPPConnection (${val_connection}) will reconnect in ${seconds}")
+        absDebuger.log("XMPPConnection (${conn}) will reconnect in ${seconds}")
     }
 }

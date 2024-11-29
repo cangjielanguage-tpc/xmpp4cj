@@ -9,8 +9,8 @@ package xmpp4cj.connection
  * 要创建与 XMPP 服务器的连接，简单的使用示例如下：
  *
  * <pre>
- * // 创建与 igniterealtime.org XMPP 服务器的连接。
- * let con: XMPPTCPConnection = XMPPTCPConnection("igniterealtime.org")
+ * // 创建与 XMPP 服务器的连接。
+ * let con: XMPPTCPConnection = XMPPTCPConnection("user","password","xmpptestserver")
  * // 连接到服务器
  * con.connect()
  * // 大多数服务器要求您在执行其他任务之前登录。
@@ -23,7 +23,7 @@ package xmpp4cj.connection
  *         println("Received message: ${message}")
  *     }
  * })
- * let chat: Chat = chatManager.chatWith("jdoe@igniterealtime.org")
+ * let chat: Chat = chatManager.chatWith("jdoe@xmpptestserver")
  * chat.send("Howdy!")
  * // 从服务器断开连接
  * con.disconnect()
@@ -252,7 +252,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      * @param stanzaListener Stanza 监听器
      * @param stanzaFilter Stanza 过滤器
      */
-    func addStanzaListener(stanzaListener: StanzaListener, stanzaFilter: StanzaFilter): Unit
+    func addStanzaListener(stanzaListener: StanzaListener, stanzaFilter: ?StanzaFilter): Unit
 
     /**  
      * 移除 Stanza 监听器。
@@ -284,7 +284,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      * @param stanzaListener Stanza 监听器
      * @param stanzaFilter Stanza 过滤器
      */
-    func addAsyncStanzaListener(stanzaListener: StanzaListener, stanzaFilter: StanzaFilter): Unit
+    func addAsyncStanzaListener(stanzaListener: StanzaListener, stanzaFilter: ?StanzaFilter): Unit
 
     /**  
      * 移除异步 Stanza 监听器。
@@ -300,7 +300,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      * @param stanzaListener Stanza 监听器
      * @param stanzaFilter Stanza 过滤器
      */
-    func addStanzaSendingListener(stanzaListener: StanzaListener, stanzaFilter: StanzaFilter): Unit
+    func addStanzaSendingListener(stanzaListener: StanzaListener, stanzaFilter: ?StanzaFilter): Unit
 
     /**  
      * 移除 Stanza 发送监听器。
@@ -315,7 +315,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      * @param messageInterceptor 消息拦截器
      * @param messageFilter 消息过滤器
      */
-    func addMessageInterceptor(messageInterceptor: HashableConsumer<MessageBuilder>, messageFilter: Predicate<Message>): Unit
+    func addMessageInterceptor(messageInterceptor: HashableConsumer<MessageBuilder>, messageFilter: ?Predicate<Message>): Unit
 
     /**  
      * 移除消息拦截器。
@@ -332,7 +332,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func addPresenceInterceptor(
         presenceInterceptor: HashableConsumer<PresenceBuilder>,
-        presenceFilter: Predicate<Presence>
+        presenceFilter: ?Predicate<Presence>
     ): Unit
 
     /**  
@@ -462,7 +462,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      * @param callback 要添加的 Stanza 监听器
      * @param stanzaFilter Stanza 过滤器
      */
-    func addOneTimeSyncCallback(callback: StanzaListener, stanzaFilter: StanzaFilter): Unit
+    func addOneTimeSyncCallback(callback: StanzaListener, stanzaFilter: ?StanzaFilter): Unit
 
     /**  
      * 注册 IQ 请求处理器。

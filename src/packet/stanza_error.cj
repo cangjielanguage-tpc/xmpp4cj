@@ -277,7 +277,7 @@ public class StanzaError <: AbstractError & ExtensionElement & ToString {
     }
 }
 
-public class StanzaErrorBuilder <: AbstractErrorBuilder<StanzaErrorBuilder> {
+public class StanzaErrorBuilder <: AbstractErrorBuilder {
     private var condition: ?StanzaErrorCondition = None // 错误条件
     private var conditionText: ?String = None // 条件文本
     private var errorGenerator: ?String = None // 错误生成器
@@ -358,15 +358,6 @@ public class StanzaErrorBuilder <: AbstractErrorBuilder<StanzaErrorBuilder> {
             None
         }
         return StanzaError(condition.getOrThrow(), conditionText, errorGenerator, typ, descriptiveTexts, exts)
-    }
-
-    /**  
-     * 获取StanzaErrorBuilder实例。
-     *
-     * @return StanzaErrorBuilder实例
-     */
-    protected override func getThis(): StanzaErrorBuilder {
-        return this
     }
 }
 

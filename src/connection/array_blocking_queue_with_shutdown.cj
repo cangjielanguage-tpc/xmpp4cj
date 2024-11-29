@@ -314,8 +314,10 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
                     return false
                 }
                 try {
+                    let dt0 = DateTime.now()
                     lock.wait(notFull, timeout: nanos)
-                    nanos = Duration.Zero
+                    let dur = DateTime.now() - dt0
+                    nanos -= dur
                     checkNotShutdown()
                 } catch (ie: Exception) {
                     lock.notify(notFull)
@@ -384,8 +386,10 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
                     return None
                 }
                 try {
+                    let dt0 = DateTime.now()
                     lock.wait(notEmpty, timeout: nanos)
-                    nanos = Duration.Zero
+                    let dur = DateTime.now() - dt0
+                    nanos -= dur
                     checkNotShutdown()
                 } catch (ie: Exception) {
                     lock.notify(notEmpty)
@@ -630,35 +634,14 @@ class ArrayBlockingQueueWithShutdownIterator<E> <: Iterator<E> {
     public override func next(): ?E {
         abqs.lock.lock()
         try {
-            if (nextIndex < 0) {
-                throw NoSuchElementException()
+            if (!hasNext()) {
+                return None
             }
             lastRet = nextIndex
             let e = nextItem
             nextIndex = abqs.inc(nextIndex)
             checkNext()
             return e
-        } finally {
-            abqs.lock.unlock()
-        }
-    }
-
-    public func remove(): Unit {
-        abqs.lock.lock()
-        try {
-            let i = lastRet
-            if (i < 0) {
-                throw IllegalStateException()
-            }
-            lastRet = -1
-            let ti = abqs.takeIndex
-            abqs.removeAt(i)
-            nextIndex = if (i == ti) {
-                abqs.takeIndex
-            } else {
-                i
-            }
-            checkNext()
         } finally {
             abqs.lock.unlock()
         }
