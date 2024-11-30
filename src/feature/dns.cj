@@ -230,7 +230,7 @@ public class DNSUtil {
 public let DEFAULT_TLS_CFG = {
     =>
     var cfg = TlsClientConfig()
-    cfg.verifyMode = CertificateVerifyMode.TrustAll
+    // cfg.verifyMode = CertificateVerifyMode.TrustAll
     cfg
 }()
 
@@ -246,6 +246,11 @@ public class StdDnsResolver <: DNSResolver {
         lookupFailures: ArrayList<RemoteConnectionEndpointLookupFailure>,
         dnssecMode: DnssecMode
     ): ?Collection<IPAddress> {
-        IPAddress.resolve(name)
+        let arr = super.lookupHostAddress0(name, lookupFailures, DnssecMode.disabled)
+        match (arr) {
+            case Some(arr) where arr.isEmpty() => lookupFailures.append(DnsLookupFailure(name, None))
+            case _ => ()
+        }
+        arr
     }
 }

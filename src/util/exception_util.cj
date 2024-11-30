@@ -37,8 +37,8 @@ public class ExceptionUtil {
 public abstract class ExceptionExt <: Exception {
     protected var cause: ?Exception = None
     protected init() {}
-    protected init(cause: ?Exception) {
-        this.cause = cause
+    protected init(cause: Exception) {
+        this(cause.message, cause)
     }
     protected init(message: String, cause: ?Exception) {
         super(message)
@@ -60,7 +60,7 @@ public abstract class ExceptionExt <: Exception {
 
 public class InterruptedException <: ExceptionExt {
     public init() {}
-    public init(cause: ?Exception) {
+    public init(cause: Exception) {
         super(cause)
     }
     public init(message: String, cause: ?Exception) {

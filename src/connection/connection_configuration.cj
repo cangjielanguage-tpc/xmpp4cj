@@ -592,21 +592,6 @@ public abstract class ConnectionConfigurationBuilder {
      * @param port 端口号。
      * @return ConnectionConfigurationBuilder
      */
-    public open func setPort(port: Int64): This {
-        if (port < 0 || port > 65535) {
-            throw IllegalArgumentException(
-                "Port must be a 16-bit unsigned integer (i.e. between 0-65535. Port was: ${port.toString()}")
-        }
-        let portUint16 = UInt16(port)
-        return setPort(portUint16)
-    }
-
-    /**
-     * 设置端口号。
-     *
-     * @param port 端口号。
-     * @return ConnectionConfigurationBuilder
-     */
     public open func setPort(port: UInt16): This {
         this.port = Objects.requireNonNull(port)
         return this

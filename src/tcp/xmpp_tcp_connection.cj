@@ -443,7 +443,7 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
                     socketFuture.connectAsync(inetSocketAddress, timeout)
                     try {
                         socket = socketFuture.getOrThrow()
-                    } catch (e: IOException) {
+                    } catch (e: Exception) {
                         let rce = RemoteConnectionException<RemoteConnectionEndpoint>(
                             endpoint,
                             inetAddress,
@@ -1275,11 +1275,6 @@ public class XMPPTCPConnectionPacketReader {
                 ignoreReasonThread = "writer"
             } else if (done) {
                 ignoreReasonThread = "reader"
-            }
-            e.printStackTrace()
-            try {
-            } catch (e: Exception) {
-                e.printStackTrace()
             }
             if (ignoreReasonThread.size > 0) {
                 XMPPTCPConnection
