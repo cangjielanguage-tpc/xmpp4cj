@@ -67,9 +67,9 @@ public abstract class ConnectionConfiguration {
     // 保存用于在连接中生成套接字的套接字工厂
     private let socketFactory: ?SocketFactory
 
-    private let username: String
+    private let username: ?String
 
-    private let password: String
+    private let password: ?String
 
     private let resource: ?Resourcepart
 
@@ -309,7 +309,7 @@ public abstract class ConnectionConfiguration {
      *
      * @return 尝试重新连接到服务器时要使用的用户名。
      */
-    public func getUsername(): String {
+    public func getUsername(): ?String {
         return username
     }
 
@@ -318,7 +318,7 @@ public abstract class ConnectionConfiguration {
      *
      * @return 尝试重新连接到服务器时要使用的密码。
      */
-    public func getPassword(): String {
+    public func getPassword(): ?String {
         return password
     }
 
@@ -343,7 +343,7 @@ public abstract class ConnectionConfiguration {
     /**
      * 返回连接到服务器时要使用的流语言的 `xml:lang` 字符串。
      *
-     * <p>如果开发者将语言设置为 `None`，那么此方法也会返回 `None`，这将导致从流中移除 `xml:lang` 标签。如果配置了 `Locale("")`，则会返回 `""`，它可作为一种覆盖设置。</p>
+     * <p>如果开发者将语言设置为 `None`，那么此方法也会返回 `None`，这将导致从流中移除 `xml:lang` 标签。</p>
      *
      * @return 连接到服务器时要使用的流语言。
      */
@@ -421,8 +421,8 @@ public abstract class ConnectionConfigurationBuilder {
     var dnssecMode: DnssecMode = DnssecMode.disabled
     var tlsClientConfig: ?TlsClientConfig = None
     var authzid: ?EntityBareJid = None
-    var username: String = ""
-    var password: String = ""
+    var username: ?String = None
+    var password: ?String = None
     var resource: ?Resourcepart = None
     var language: String = "zh_CN"
     var sendPresence = true

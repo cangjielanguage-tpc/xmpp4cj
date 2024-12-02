@@ -453,8 +453,8 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         // 以前使用的用户名、密码和资源优先于
         // 连接配置中的
         synchronized(this.lock) {
-            let username = usedUsername ?? config.getUsername()
-            let password = usedPassword ?? config.getPassword()
+            let username: ?String = usedUsername ?? config.getUsername()
+            let password: ?String = usedPassword ?? config.getPassword()
             let resource = if (let Some(v) <- usedResource) {
                 v
             } else {
@@ -475,7 +475,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
      * @throws InterruptedException 如果调用线程被中断。
      * @see #login
      */
-    public func login(username: String, password: String): Unit {
+    public func login(username: ?String, password: ?String): Unit {
         synchronized(this.lock) {
             login(username, password, config.getResource())
         }
@@ -495,7 +495,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
      * @throws InterruptedException 如果调用线程被中断。
      * @see #login
      */
-    public func login(username: String, password: String, resource: ?Resourcepart): Unit {
+    public func login(username: ?String, password: ?String, resource: ?Resourcepart): Unit {
         synchronized(this.lock) {
             if (!config.allowNullOrEmptyUsername) {
                 StringUtils.requireNotNullNorEmpty(username, "Username must not be null nor empty")
@@ -720,7 +720,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
      * @throws XmppWrappedException 在发生异常时。
      * @see SASLAuthentication#authenticate(String, String, EntityBareJid, TlsSession )
      */
-    public func authenticate(username: String, password: String, authzid: ?EntityBareJid, sslSession: ?TlsSession): SASLMechanism {
+    public func authenticate(username: ?String, password: ?String, authzid: ?EntityBareJid, sslSession: ?TlsSession): SASLMechanism {
         let saslMechanism = saslAuthentication().authenticate(username, password, authzid, sslSession)
         afterSaslAuthenticationSuccess()
         return saslMechanism
@@ -895,7 +895,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         collectors.remove(collector)
     }
 
-    public override func addStanzaListener(stanzaListener: StanzaListener, stanzaFilter: ?StanzaFilter): Unit {
+    public override func addStanzaListener(stanzaListener: StanzaListener, stanzaFilter: StanzaFilter): Unit {
         let wrapper = AbstractXMPPConnectionListenerWrapper(stanzaListener, stanzaFilter)
         synchronized(recvListenersLock) {
             recvListeners.put(stanzaListener, wrapper)
@@ -908,7 +908,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         }
     }
 
-    public override func addSyncStanzaListener(packetListener: StanzaListener, packetFilter: ?StanzaFilter): Unit {
+    public override func addSyncStanzaListener(packetListener: StanzaListener, packetFilter: StanzaFilter): Unit {
         let wrapper = AbstractXMPPConnectionListenerWrapper(packetListener, packetFilter)
         synchronized(syncRecvListenersLock) {
             syncRecvListeners.put(packetListener, wrapper)
@@ -921,7 +921,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         }
     }
 
-    public override func addAsyncStanzaListener(packetListener: StanzaListener, packetFilter: ?StanzaFilter): Unit {
+    public override func addAsyncStanzaListener(packetListener: StanzaListener, packetFilter: StanzaFilter): Unit {
         let wrapper = AbstractXMPPConnectionListenerWrapper(packetListener, packetFilter)
         synchronized(asyncRecvListenersLock) {
             asyncRecvListeners.put(packetListener, wrapper)
@@ -934,7 +934,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         }
     }
 
-    public override func addStanzaSendingListener(packetListener: StanzaListener, packetFilter: ?StanzaFilter): Unit {
+    public override func addStanzaSendingListener(packetListener: StanzaListener, packetFilter: StanzaFilter): Unit {
         let wrapper = AbstractXMPPConnectionListenerWrapper(packetListener, packetFilter)
         synchronized(sendListenersLock) {
             sendListeners.put(packetListener, wrapper)
@@ -1594,7 +1594,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         return future
     }
 
-    public override func addOneTimeSyncCallback(callback: StanzaListener, packetFilter: ?StanzaFilter): Unit {
+    public override func addOneTimeSyncCallback(callback: StanzaListener, packetFilter: StanzaFilter): Unit {
         let packetListener: StanzaListener = SimpleStanzaListener {
             packet, stanzaListener => try {
                 callback.processStanza(packet)
@@ -1776,7 +1776,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         // 而“id”（标识）属性在收到服务器的第一次响应之后可用（例如，参见RFC 6120第9.1.1节步骤2）。
         let to = getXMPPServiceDomain().toString()
         var comefrom: ?String = None
-        let localpart = config.getUsername()
+        let localpart = config.getUsername() ?? ""
         if (localpart.size > 0) {
             comefrom = XmppStringUtils.completeJidFrom(localpart, to)
         }
@@ -1851,7 +1851,7 @@ public enum SyncPointState <: Equatable<SyncPointState> {
 public class AbstractXMPPConnectionListenerWrapper {
     private let packetListener: StanzaListener
 
-    private let packetFilter: ?StanzaFilter
+    private let packetFilter: StanzaFilter
 
     /**
      * 创建一个类，将节过滤器与监听器相关联。
@@ -1859,13 +1859,13 @@ public class AbstractXMPPConnectionListenerWrapper {
      * @param packetListener 节侦听器。
      * @param packetFilter 关联的过滤器，如果它监听所有数据包，则为None。
      */
-    public init(packetListener: StanzaListener, packetFilter: ?StanzaFilter) {
+    public init(packetListener: StanzaListener, packetFilter: StanzaFilter) {
         this.packetListener = packetListener
         this.packetFilter = packetFilter
     }
 
     public func filterMatches(packet: Stanza): Bool {
-        return packetFilter?.accept(packet) ?? true
+        return packetFilter.accept(packet)
     }
 
     public func getListener(): StanzaListener {

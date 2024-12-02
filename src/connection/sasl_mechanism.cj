@@ -120,10 +120,10 @@ public abstract class SASLMechanism <: Comparable<SASLMechanism> & ToString {
      * @throws InterruptedException if the calling thread was interrupted.
      */
     public func authenticate(
-        username: String,
+        username: ?String,
         host: String,
         serviceName: DomainBareJid,
-        password: String,
+        password: ?String,
         authzid: ?EntityBareJid,
         sslSession: ?TlsSession
     ): Unit {

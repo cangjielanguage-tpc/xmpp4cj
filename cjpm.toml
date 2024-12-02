@@ -2,7 +2,8 @@
 
 [package]
   cjc-version = "0.56.4"
-  compile-option = "-O2"
+  compile-option = ""
+  override-compile-option = "-O2"
   description = "xmpp client"
   link-option = ""
   name = "xmpp4cj"
