@@ -13,7 +13,7 @@ public abstract class Xmpp4cjException <: ExceptionExt {
      * @param wrappedThrowable 异常的根本原因。
      */
     protected init(wrappedThrowable: Exception) {
-        this("", wrappedThrowable)
+        this(wrappedThrowable.message, wrappedThrowable)
     }
 
     /**  
@@ -263,9 +263,7 @@ public class EndpointConnectionException <: ConnectionException {
         connectionExceptions: Collection<RemoteConnectionException<RemoteConnectionEndpoint>>) {
         super(message)
         // At least one list must contain an entry.
-        if (lookupFailures.isEmpty() && connectionExceptions.isEmpty()) {
-            throw Exception("AssertionError")
-        }
+        assert(!lookupFailures.isEmpty() || !connectionExceptions.isEmpty())
         this.lookupFailures = lookupFailures
         this.connectionExceptions = connectionExceptions
     }
@@ -282,11 +280,11 @@ public class EndpointConnectionException <: ConnectionException {
         connectionExceptions: Collection<RemoteConnectionException<RemoteConnectionEndpoint>>
     ): EndpointConnectionException {
         let sb = StringBuilder()
-        if (lookupFailures.isEmpty()) {
+        if (!lookupFailures.isEmpty()) {
             sb.append("Could not lookup the following endpoints: ")
             StringUtils.appendTo(lookupFailures, sb)
         }
-        if (connectionExceptions.isEmpty()) {
+        if (!connectionExceptions.isEmpty()) {
             sb.append("The following addresses failed: ")
             StringUtils.appendTo(connectionExceptions, sb, {rce => sb.append(rce.getErrorMessage())})
         }

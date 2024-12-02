@@ -84,7 +84,7 @@ public class InetSocketAddressCoupling<RCE> <: ToString where RCE <: RemoteConne
 public abstract class RemoteConnectionEndpointLookupFailure <: ToString {
     private let description: String // 描述信息
 
-    private let exception: Exception // 产生的异常  
+    private let exception: ?Exception // 产生的异常  
 
     /**  
      * 构造一个新的远程连接端点查找失败的实例。
@@ -92,7 +92,7 @@ public abstract class RemoteConnectionEndpointLookupFailure <: ToString {
      * @param description 错误描述
      * @param exception 发生的异常
      */
-    public init(description: String, exception: Exception) {
+    public init(description: String, exception: ?Exception) {
         this.description = description
         this.exception = exception
     }
@@ -111,7 +111,7 @@ public abstract class RemoteConnectionEndpointLookupFailure <: ToString {
      *
      * @return 发生的异常
      */
-    public func getException(): Exception {
+    public func getException(): ?Exception {
         return exception
     }
 
@@ -150,7 +150,7 @@ public class DnsLookupFailure <: RemoteConnectionEndpointLookupFailure {
      * @param dnsName 导致失败的 DNS 名称
      * @param exception 发生的异常
      */
-    public init(dnsName: DnsName, exception: Exception) {
+    public init(dnsName: DnsName, exception: ?Exception) {
         super("DNS lookup exception for ${dnsName}", exception)
         this.dnsName = dnsName
     }
