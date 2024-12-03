@@ -263,7 +263,7 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
             let sslSession: ?TlsSession = (secureSocket?.session).flatten()
 
             streamFeaturesAfterAuthenticationReceived = false
-            authenticate(username(), password(), tcpConfig.getAuthzid(), sslSession)
+            authenticate(username, password, tcpConfig.getAuthzid(), sslSession)
 
             waitForConditionOrThrowConnectionException({=> streamFeaturesAfterAuthenticationReceived},
                 "compress features from server")
