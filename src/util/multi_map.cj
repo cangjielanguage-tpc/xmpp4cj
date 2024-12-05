@@ -18,7 +18,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
 
     private static let ENTRY_LIST_SIZE = 3
 
-    private let map: Map<K, ArrayList<V>>
+    private let _map: Map<K, ArrayList<V>>
 
     /**
      * 锁。
@@ -47,7 +47,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
      * @param map Map对象。
      */
     private init(map: Map<K, ArrayList<V>>) {
-        this.map = map
+        this._map = map
     }
 
     /**
@@ -56,7 +56,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
     public prop size: Int {
         get() {
             var size = 0
-            for (list in map.values()) {
+            for (list in _map.values()) {
                 size += list.size
             }
             return size
@@ -69,7 +69,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
      * @return 空返回true，不为空返回false。
      */
     public func isEmpty(): Bool {
-        return map.isEmpty()
+        return _map.isEmpty()
     }
 
     /**
@@ -79,7 +79,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
      * @return 包含返回true，不包含返回false。
      */
     public func containsKey(key: K): Bool {
-        return map.contains(key)
+        return _map.contains(key)
     }
 
     /**
@@ -105,7 +105,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
      * @return 给定键的所有值。
      */
     public func getAll(key: K): ArrayList<V> {
-        return if (let Some(res) <- map.get(key)) {
+        return if (let Some(res) <- _map.get(key)) {
             res
         } else {
             ArrayList<V>()
@@ -143,12 +143,12 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
      */
     private func putInternal(key: K, valueListConsumer: (ArrayList<V>) -> Unit): Bool {
         let keyExisted: Bool
-        let list = if (let Some(list) <- map.get(key)) {
+        let list = if (let Some(list) <- _map.get(key)) {
             keyExisted = true
             list
         } else {
             let list = ArrayList<V>(ENTRY_LIST_SIZE)
-            map.put(key, list)
+            _map.put(key, list)
             keyExisted = false
             list
         }
@@ -163,7 +163,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
      * @return 给定键的第一个值或None。
      */
     public func remove(key: K): ?V {
-        return if (let Some(res) <- map.remove(key)) {
+        return if (let Some(res) <- _map.remove(key)) {
             res[0]
         } else {
             None
@@ -179,11 +179,11 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
      * @return 如果映射被删除，则返回true，否则返回false。
      */
     public func removeOne(key: K, value: V): Bool {
-        if (let Some(list) <- map.get(key)) {
+        if (let Some(list) <- _map.get(key)) {
             let res: Bool = list.removeValue(value)
             if (list.size == 0) {
                 // 如果值集现在为空，也删除该键。
-                map.remove(key)
+                _map.remove(key)
             }
             return res
         } else {
@@ -199,7 +199,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
      * @return 已删除值的列表。
      */
     public func remove(key: K, num: Int): ?ArrayList<V> {
-        let values = if (let Some(values) <- map.get(key)) {
+        let values = if (let Some(values) <- _map.get(key)) {
             values
         } else {
             return ArrayList<V>()
@@ -212,7 +212,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
             i++
         }
         if (values.isEmpty()) {
-            map.remove(key)
+            _map.remove(key)
         }
         return result
     }
@@ -232,7 +232,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
      * 清除Map数据。
      */
     public func clear(): Unit {
-        map.clear()
+        _map.clear()
     }
 
     /**
@@ -241,7 +241,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
      * @return key列表。
      */
     public func keySet(): Set<K> {
-        return HashSet<K>(map.keys())
+        return HashSet<K>(_map.keys())
     }
 
     /**
@@ -251,7 +251,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
      */
     public func values(): ArrayList<V> {
         let values = ArrayList<V>(size)
-        for (list in map.values()) {
+        for (list in _map.values()) {
             values.appendAll(list)
         }
         return values
@@ -263,10 +263,14 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
      * @return 新的Map对象。
      */
     public func clone(): MultiMap<K, V> {
-        let newMap = HashMap<K, ArrayList<V>>(map.size)
-        for ((k, list) in map) {
+        let newMap = HashMap<K, ArrayList<V>>(_map.size)
+        for ((k, list) in _map) {
             newMap.put(k, list.clone())
         }
         return MultiMap<K, V>(newMap)
+    }
+
+    public func kvIter(): Iterator<(K, V)> {
+        _map |> flatMap {kv: (K, ArrayList<V>) => kv[1] |> map {v: V => (kv[0], v)}}
     }
 }
