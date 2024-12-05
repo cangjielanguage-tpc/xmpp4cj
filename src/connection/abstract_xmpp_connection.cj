@@ -1299,7 +1299,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
 
         listenersToNotify.clear()
         extractMatchingListeners(packet, recvListeners, recvListenersLock, listenersToNotify)
-        let listenerSemaphore = Semaphore(1 - listenersToNotify.size)
+        let listenerCounter = SyncCounter(listenersToNotify.size)
         for (stanzaListener in listenersToNotify) {
             asyncGoLimited(
                 {
@@ -1310,11 +1310,11 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
                 } catch (e: Exception) {
                     LOGGER.error("Exception in packet listener", ("exception", e))
                 } finally {
-                    listenerSemaphore.release()
+                    listenerCounter.dec()
                 }
             })
         }
-        listenerSemaphore.acquire()
+        listenerCounter.waitUntilZero()
 
         // 通知对该数据包感兴趣的接收监听器。
         listenersToNotify.clear()

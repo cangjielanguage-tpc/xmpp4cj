@@ -79,16 +79,19 @@ class DeCompressInWrapper <: InputStream {
         inflate.inflateInit(wrap: ZLIB_TYPE)
     }
     public override func read(buffer: Array<UInt8>): Int {
-        while (let Some(len) <- Some(ins.read(buffer))) {
-            buf.write(buffer[..len])
-            if (len < buffer.size) {
-                break
+        if (inflate.isInbufEmpty()) {
+            buf.clear()
+            while (let Some(len) <- Some(ins.read(buffer))) {
+                buf.write(buffer[..len])
+                if (len < buffer.size) {
+                    break
+                }
             }
+            inflate.setInBuf(buf.bytes())
         }
-        inflate.setInBuf(buf.bytes())
+
         inflate.setOutBuf(buffer)
-        inflate.inflate(Z_FULL_FLUSH)
-        buf.clear()
+        inflate.inflate(Z_SYNC_FLUSH)
         inflate.getOutDataLength()
     }
 }
