@@ -143,6 +143,10 @@ public class XmlPrettyPrinter <: XmlPrinter {
                         indent = getAttributeIndent(depth)
                     }
                 case XmlSplitterState.START => indent = getElementIndent(depth)
+                case XmlSplitterState.IN_PROCESSING_INSTRUCTION_OR_DECLARATION =>
+                    if (initialState == XmlSplitterState.TAG_LEFT_ANGLE_BRACKET) {
+                        deferredLeftAngle = true
+                    }
                 case _ => ()
             }
             if (indent > 0 || deferredLeftAngle) {

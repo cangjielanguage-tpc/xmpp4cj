@@ -94,7 +94,7 @@ public abstract class AbstractDebugger <: XmppDebugger {
      *
      * @param outgoingCharSequence 出站字符序列
      */
-    public override func outgoingStreamSink(outgoingCharSequence: ToString): Unit {
+    public override open func outgoingStreamSink(outgoingCharSequence: ToString): Unit {
         log("SENT (${connection.getConnectionCounter()}): ${outgoingCharSequence}")
     }
 
@@ -103,7 +103,7 @@ public abstract class AbstractDebugger <: XmppDebugger {
      *
      * @param incomingCharSequence 入站字符序列
      */
-    public override func incomingStreamSink(incomingCharSequence: ToString): Unit {
+    public override open func incomingStreamSink(incomingCharSequence: ToString): Unit {
         log("RECV (${connection.getConnectionCounter()}): ${incomingCharSequence}")
     }
 
