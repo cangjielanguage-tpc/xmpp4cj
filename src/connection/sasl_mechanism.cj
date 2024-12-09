@@ -121,7 +121,7 @@ public abstract class SASLMechanism <: Comparable<SASLMechanism> & ToString {
      */
     public func authenticate(
         username: ?String,
-        host: String,
+        host: ?String,
         serviceName: DomainBareJid,
         password: ?String,
         authzid: ?EntityBareJid,
@@ -154,7 +154,7 @@ public abstract class SASLMechanism <: Comparable<SASLMechanism> & ToString {
      * @throws InterruptedException if the calling thread was interrupted.
      */
     public open func authenticate(
-        host: String,
+        host: ?String,
         serviceName: DomainBareJid,
         cbh: ?CallbackHandler,
         authzid: ?EntityBareJid,

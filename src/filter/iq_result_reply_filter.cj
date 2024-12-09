@@ -18,8 +18,8 @@ public class IQResultReplyFilter <: IQReplyFilter {
      * @param user 连接对象。
      * @param xmppServiceDomain DomainBareJid
      */
-    public init(iqPacket: IQ, user: ?EntityFullJid, xmppServiceDomain: DomainBareJid) {
-        super(iqPacket, user, xmppServiceDomain)
+    public init(iqPacket: IQ, connUser: ?EntityFullJid, connXmppServiceDomain: DomainBareJid) {
+        super(iqPacket, connUser, connXmppServiceDomain)
     }
 
     /**  

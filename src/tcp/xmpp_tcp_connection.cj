@@ -251,7 +251,7 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
         }
     }
 
-    public override func afterSuccessfulLogin(resumed: Bool): Unit {
+    protected override func afterSuccessfulLogin(resumed: Bool): Unit {
         // Reset the flag in case it was set
         disconnectedButResumeable = false
         super.afterSuccessfulLogin(resumed)

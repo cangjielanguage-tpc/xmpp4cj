@@ -161,8 +161,10 @@ public class NotConnectedException <: Xmpp4cjException {
      * @param connection 表示当前连接的 {@link XMPPConnection} 实例
      * @param stanzaFilter 用于等待响应的 {@link StanzaFilter}
      */
-    public init(connection: XMPPConnection, stanzaFilter: StanzaFilter) {
-        super("The connection ${connection} is no longer connected while waiting for response with ${stanzaFilter}")
+    public init(connection: XMPPConnection, stanzaFilter: ?StanzaFilter) {
+        super(
+            "The connection ${connection} is no longer connected while waiting for response with ${anyToString(stanzaFilter)}"
+        )
     }
 
     /**  
@@ -172,9 +174,9 @@ public class NotConnectedException <: Xmpp4cjException {
      * @param stanzaFilter 用于等待响应的 {@link StanzaFilter}
      * @param connectionException发生的连接异常
      */
-    public init(connection: XMPPConnection, stanzaFilter: StanzaFilter, connectionException: Exception) {
+    public init(connection: XMPPConnection, stanzaFilter: ?StanzaFilter, connectionException: Exception) {
         super(
-            "The connection ${connection} is no longer connected while waiting for response with ${stanzaFilter} because of ${connectionException}",
+            "The connection ${connection} is no longer connected while waiting for response with ${anyToString(stanzaFilter)} because of ${connectionException}",
             connectionException
         )
     }

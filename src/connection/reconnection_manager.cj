@@ -225,7 +225,7 @@ public class ReconnectionManager {
      *
      * @return true if automatic reconnection is allowed.
      */
-    public func isReconnectionPossible(connection: XMPPConnection): Bool {
+    func isReconnectionPossible(connection: XMPPConnection): Bool {
         return !done && !connection.isConnected() && isAutomaticReconnectEnabled()
     }
 
@@ -233,7 +233,7 @@ public class ReconnectionManager {
      * Starts a reconnection mechanism if it was configured to do that.
      * The algorithm is been executed when the first connection error is detected.
      */
-    public func reconnect(): Unit {
+    func reconnect(): Unit {
         synchronized(lock) {
             let connection = this.weakRefConnection as AbstractXMPPConnection
             if (connection.isNone()) {

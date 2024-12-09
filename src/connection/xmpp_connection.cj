@@ -71,7 +71,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      *
      * @return 连接的主机名
      */
-    func getHost(): String
+    func getHost(): ?String
 
     /**  
      * 获取连接的端口号。

@@ -54,13 +54,15 @@ public open class IQReplyFilter <: StanzaFilter {
      * @param iqPacket 需要过滤回复的 IQ 请求。
      * @param conn 连接对象。
      */
-    public init(iqPacket: IQ, user: ?EntityFullJid, xmppServiceDomain: DomainBareJid) {
+    public init(iqPacket: IQ, connUser: ?EntityFullJid, connXmppServiceDomain: DomainBareJid) {
         if (!iqPacket.isRequestIQ()) {
-            throw IllegalArgumentException("IQ must be a request IQ, i.e. of type \'get\' or \'set\'.")
+            throw IllegalArgumentException("IQ must be a request IQ, i.e. of type 'get' or 'set'.")
         }
         to = iqPacket.getTo()
-        local = user
-        server = xmppServiceDomain
+        local = connUser ?? throw IllegalArgumentException(
+            "Must have a local (user) JID set. Either you didn't configure one or you where not connected at least once"
+        )
+        server = connXmppServiceDomain
         packetId = iqPacket.getStanzaId()
         let iqFilter: StanzaFilter = OrFilter([IQTypeFilter.ERROR, IQTypeFilter.RESULT])
         let idFilter: StanzaFilter = StanzaIdFilter(iqPacket)
