@@ -165,7 +165,7 @@ public class SASLAuthentication {
      * @throws NotConnectedException 如果 XMPP 连接未连接
      * @throws NoResponseException 如果远程实体没有响应
      */
-    public func authenticate(username: ?String, password: ?String, authzid: ?EntityBareJid, sslSession: ?TlsSession): SASLMechanism {
+    func authenticate(username: ?String, password: ?String, authzid: ?EntityBareJid, sslSession: ?TlsSession): SASLMechanism {
         let mechanism = selectMechanism(authzid, password)
         let callbackHandler = configuration.getCallbackHandler()
         let host = connection.getHost()

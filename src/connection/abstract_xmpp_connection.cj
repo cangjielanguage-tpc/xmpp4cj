@@ -223,7 +223,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     /**
      * 用于建立连接的主机
      */
-    protected var host: String = ""
+    protected var host: ?String = None
 
     /**
      * 用于建立连接的端口
@@ -320,7 +320,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         return xmppServiceDomain ?? config.getXMPPServiceDomain()
     }
 
-    public override func getHost(): String {
+    public override func getHost(): ?String {
         return host
     }
 
@@ -621,7 +621,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         return user?.getResourcepart()
     }
 
-    public open func afterSuccessfulLogin(resumed: Bool): Unit {
+    protected open func afterSuccessfulLogin(resumed: Bool): Unit {
         if (!resumed) {
             authenticatedConnectionInitiallyEstablishedTimestamp = DateTime.now().toUnixTimeStamp()
         }
@@ -793,7 +793,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
      *
      * @param exception 导致连接关闭事件的异常。
      */
-    public func notifyConnectionError(exception: Exception): Unit {
+    protected func notifyConnectionError(exception: Exception): Unit {
         synchronized(notifyConnectionErrorMonitor) {
             if (!isConnected()) {
                 LOGGER.info("Connection was already disconnected when attempting to handle ${exception}",
@@ -843,7 +843,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     public override func addConnectionListener(connectionListener: ConnectionListener): Unit {
-        let v = connectionListener //?? return
+        let v = connectionListener
         connectionListeners.put(v)
     }
 
@@ -958,7 +958,8 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     public func fireElementSendingListeners(sendTopLevelStreamElement: TopLevelStreamElement): Unit {
         debugger?.onOutgoingStreamElement(sendTopLevelStreamElement)
 
-        let packet = (sendTopLevelStreamElement as Stanza) ?? return
+        let packet: Stanza = (sendTopLevelStreamElement as Stanza) ?? return;;
+
         let listenersToNotify = LinkedList<StanzaListener>()
         synchronized(sendListenersLock) {
             for (listenerWrapper in sendListeners.values()) {

@@ -12,7 +12,7 @@ package xmpp4cj.filter
  *      <li><code>Presence.class</code></li>
  * </ul>
  */
-public class StanzaTypeFilter<S> <: StanzaFilter {
+public class StanzaTypeFilter<S> <: StanzaFilter where S <: Stanza {
     /** 
      * 用于过滤 Presence 类型的过滤器
      */

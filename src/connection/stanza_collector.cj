@@ -253,10 +253,10 @@ public class StanzaCollector <: Resource & ToString {
         }
         if (result.isNone()) {
             if (let Some(v) <- connectionException) {
-                throw NotConnectedException(connection, packetFilter(), v)
+                throw NotConnectedException(connection, packetFilter, v)
             }
             if (!connection.isConnected()) {
-                throw NotConnectedException(connection, packetFilter())
+                throw NotConnectedException(connection, packetFilter)
             }
             throw NoResponseException.newWith(timeout, this, cancelled.load())
         }
@@ -271,7 +271,7 @@ public class StanzaCollector <: Resource & ToString {
      */
     public func getCollectedStanzasAfterCancelled(): ArrayList<Stanza> {
         if (!cancelled.load()) {
-            throw Exception("Stanza collector was not yet cancelled")
+            throw IllegalStateException("Stanza collector was not yet cancelled")
         }
         if (collectedCache.isNone()) {
             collectedCache = ArrayList<Stanza>(getCollectedCount())
@@ -307,7 +307,7 @@ public class StanzaCollector <: Resource & ToString {
         return stringCache()
     }
 
-    public func notifyConnectionError(exception: Exception): Unit {
+    func notifyConnectionError(exception: Exception): Unit {
         synchronized(mtx) {
             connectionException = exception
             mtx.notifyAll()
