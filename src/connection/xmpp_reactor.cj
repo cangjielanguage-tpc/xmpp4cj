@@ -133,7 +133,6 @@ public class XmppReactor {
      *
      * @param runnable 要调度的任务
      * @param delay 延迟时间
-     * @param unit 时间单位
      * @param scheduledActionKind 调度动作的类型
      * @return 调度的动作
      */

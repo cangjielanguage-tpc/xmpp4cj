@@ -193,7 +193,6 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
      * 获取结果，带有超时功能。
      *
      * @param timeout 超时时间
-     * @param unit 时间单位
      * @return 结果
      * @throws InterruptedException 如果当前线程被中断
      * @throws ExecutionException 如果执行过程中出现异常
@@ -202,17 +201,16 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
     public func get(timeout: Duration): V {
         synchronized(lock) {
             let deadline = DateTime.now() + timeout
-            while (result.isSome() && exception.isSome()) {
+            while (result.isNone() && exception.isNone()) {
                 let waitTimeRemaining = deadline - DateTime.now()
                 if (waitTimeRemaining > Duration.Zero) {
                     futureWait(waitTimeRemaining)
+                } else {
+                    throw TimeoutException()
                 }
             }
             if (cancelled) {
                 throw CancellationException()
-            }
-            if (result.isNone() || exception.isNone()) {
-                throw TimeoutException()
             }
             return getOrThrowExecutionException()
         }
@@ -293,7 +291,6 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
      *
      * @param futures需要等待的 XmppFuture 集合
      * @param timeout 等待的最大时间
-     * @param unit 时间单位
      * @return 如果所有任务在指定时间内完成，则返回 <code>true</code>；否则返回 <code>false</code>
      * @throws InterruptedException 如果当前线程被中断
      */
@@ -383,7 +380,9 @@ public class SocketFuture <: InternalXmppFuture<TcpSocket, Exception> {
     /**  
      * 构造函数，使用指定的 SocketFactory 创建 Socket。
      *
-     * @param socketFactory 用于创建 Socket 的工厂 * @throws IOException 如果创建 Socket过程中发生错误 */
+     * @param socketFactory 用于创建 Socket 的工厂
+     * @throws IOException 如果创建 Socket过程中发生错误
+     */
     public init(socketFactory: SocketFactory, addr: IPSocketAddress) {
         this.socket = socketFactory.createSocket(addr)
     }
@@ -395,7 +394,8 @@ public class SocketFuture <: InternalXmppFuture<TcpSocket, Exception> {
      * </p>
      *
      * @param timeout 等待的超时时间（毫秒）
-     * @throws InterruptedException 如果当前线程在等待过程中被中断 */
+     * @throws InterruptedException 如果当前线程在等待过程中被中断
+     */
     protected override func futureWait(timeout: ?Duration): Unit {
         try {
             super.futureWait(timeout)

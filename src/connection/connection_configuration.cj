@@ -757,7 +757,7 @@ public abstract class ConnectionConfigurationBuilder {
 
     private func throwIfEnabledSaslMechanismsSet(): Unit {
         if (enabledSaslMechanisms.isSome()) {
-            throw Exception("Enabled SASL mechanisms found")
+            throw IllegalStateException("Enabled SASL mechanisms found")
         }
     }
 

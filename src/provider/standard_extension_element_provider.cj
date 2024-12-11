@@ -38,9 +38,7 @@ public class StandardExtensionElementProvider <: ExtensionElementProvider<Standa
             if (nsprefix.size == 0) {
                 continue
             }
-            if (!StringUtils.isNotEmpty(nsprefix)) {
-                throw Exception("AssertionError")
-            }
+            assert(StringUtils.isNotEmpty(nsprefix))
             let nsuri = parser.getNamespaceUri(i)
             attributes.put("xmlns:${nsprefix}", nsuri)
         }

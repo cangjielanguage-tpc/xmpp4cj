@@ -118,7 +118,7 @@ class NonzaCallbackNonzaResponseCallback<SN, FN> <: NonzaCallback where SN <: No
             throw FailedNonzaException(failedNonza)
         }
 
-        return successNonza.getOrThrow {=> Exception("AssertionError")}
+        return successNonza.getOrThrow {=> AssertionError()}
     }
 }
 

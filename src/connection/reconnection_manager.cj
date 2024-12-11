@@ -311,17 +311,16 @@ class ReconnectionRunnable {
                 if (!this_0.isReconnectionPossible(connection)) {
                     return
                 }
-                try {
-                    sleep(Duration.millisecond * 1000)
-                    remainingSeconds -= Duration.second
-                    for (listener in this_0.reconnectionListeners) {
-                        listener.reconnectingIn(remainingSeconds)
-                    }
-                } catch (e: Exception) {
+                if (Thread.currentThread.hasPendingCancellation) {
                     ReconnectionManager
                         .LOGGER
-                        .log(LogLevel.TRACE, "Reconnection Thread was interrupted, aborting reconnection mechanism", e)
+                        .log(LogLevel.TRACE, "Reconnection Thread was interrupted, aborting reconnection mechanism")
                     return
+                }
+                sleep(Duration.second)
+                remainingSeconds -= Duration.second
+                for (listener in this_0.reconnectionListeners) {
+                    listener.reconnectingIn(remainingSeconds)
                 }
             }
             for (listener in this_0.reconnectionListeners) {

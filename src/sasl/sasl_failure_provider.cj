@@ -41,9 +41,7 @@ public class SaslFailureProvider <: NonzaProvider<SaslNonzaSASLFailure> {
                     if (name == "text") {
                         descriptiveTexts = PacketParserUtils.parseDescriptiveTexts(parser, descriptiveTexts)
                     } else {
-                        if (condition.isSome()) {
-                            throw Exception("AssertionError")
-                        }
+                        assert(condition.isNone())
                         condition = parser.getName()
                     }
                 case XmlPullParserTagEvent.END_ELEMENT =>

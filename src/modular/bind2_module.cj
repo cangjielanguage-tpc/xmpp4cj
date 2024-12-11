@@ -49,6 +49,6 @@ public class Bind2State <: State {
     }
 
     public override func transitionInto(walkStateGraphContext: WalkStateGraphContext): AttemptResult {
-        throw Exception("Bind2 not implemented")
+        throw IllegalStateException("Bind2 not implemented")
     }
 }

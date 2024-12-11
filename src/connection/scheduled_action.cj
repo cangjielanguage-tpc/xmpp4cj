@@ -79,7 +79,6 @@ public class ScheduledAction <: Comparable<ScheduledAction> & Delayed {
     /**  
      * 获取此调度动作的延迟时间。
      *
-     * @param unit 返回的时间单位
      * @return 此调度动作的延迟时间，单位为指定的时间单位。
      */
     public override func getDelay(): Duration {
