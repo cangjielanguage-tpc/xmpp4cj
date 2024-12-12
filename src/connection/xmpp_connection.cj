@@ -160,7 +160,6 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      *
      * @param stanza 要发送的 Stanza
      * @param timeout 超时时间
-     * @param unit 超时时间单位
      * @return 如果成功发送则返回 true
      * @throws NotConnectedException 如果连接未建立
      * @throws InterruptedException 如果发送过程中被中断

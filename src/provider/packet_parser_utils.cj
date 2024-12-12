@@ -112,9 +112,7 @@ public class PacketParserUtils {
      */
     public static func parseMessage(parser: XmlPullParser, outerXmlEnvironment: XmlEnvironment): Message {
         ParserUtils.assertAtStartTag(parser)
-        if (parser.getName() != Message.ELEMENT) {
-            throw Exception("AssertionError")
-        }
+        assert(parser.getName() == Message.ELEMENT)
         let messageXmlEnvironment = XmlEnvironment.froms(parser, outerXmlEnvironment)
         let initialDepth = parser.getDepth()
         let message: MessageBuilder = parseCommonStanzaAttributes({id => StanzaBuilder.buildMessage(id)}, parser,
@@ -156,9 +154,7 @@ public class PacketParserUtils {
      * @throws IOException 如果在解析过程中出现 I/O 异常。
      */
     public static func parseElementText(parser: XmlPullParser): String {
-        if (parser.getEventType() != XmlPullParserEvent.START_ELEMENT) {
-            throw Exception("AssertionError")
-        }
+        assert(parser.getEventType() == XmlPullParserEvent.START_ELEMENT)
         let res: String
         var event = parser.next()
         if (event != XmlPullParserEvent.TEXT_CHARACTERS) {
@@ -200,9 +196,7 @@ public class PacketParserUtils {
      * @throws IOException 如果在解析过程中出现 I/O 异常。
      */
     public static func parseElement(parser: XmlPullParser, fullNamespaces: Bool): String {
-        if (parser.getEventType() != XmlPullParserEvent.START_ELEMENT) {
-            throw Exception("AssertionError")
-        }
+        assert(parser.getEventType() == XmlPullParserEvent.START_ELEMENT)
         return parseContentDepth(parser, parser.getDepth(), fullNamespaces)
     }
 
@@ -536,9 +530,7 @@ public class PacketParserUtils {
         var xmllang = ParserUtils.getXmlLang(parser) ?? ""
         let text = parser.nextText()
         let previousValue = tempdescriptiveTexts.put(xmllang, text)
-        if (previousValue.isSome()) {
-            throw Exception("AssertionError")
-        }
+        assert(previousValue.isNone())
         return tempdescriptiveTexts
     }
 
@@ -696,9 +688,7 @@ public class PacketParserUtils {
      */
     public static func parseStartTlsFeature(parser: XmlPullParser): StartTls {
         ParserUtils.assertAtStartTag(parser)
-        if (parser.getNamespace() != StartTls.NAMESPACE) {
-            throw Exception("AssertionError")
-        }
+        assert(parser.getNamespace() == StartTls.NAMESPACE)
         let initalDepth = parser.getDepth()
         var required = false
 
@@ -875,9 +865,7 @@ public class PacketParserUtils {
         var xmllang = ParserUtils.getXmlLang(parser) ?? ""
         let text = parser.nextText()
         let previousValue = tempdescriptiveTexts.put(xmllang, text)
-        if (previousValue.isSome()) {
-            throw Exception("AssertionError")
-        }
+        assert(previousValue.isNone())
         return tempdescriptiveTexts
     }
 

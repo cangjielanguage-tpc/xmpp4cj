@@ -143,7 +143,7 @@ public class StanzaCollector <: Resource & ToString {
                 }
                 mtx.wait()
             }
-            throw Exception()
+            throw IllegalStateException()
         }
     }
 
@@ -349,7 +349,7 @@ public class StanzaCollector <: Resource & ToString {
 
     private func throwIfCancelled(): Unit {
         if (cancelled.load()) {
-            throw Exception("Stanza collector already cancelled")
+            throw IllegalStateException("Stanza collector already cancelled")
         }
     }
 

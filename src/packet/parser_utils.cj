@@ -33,9 +33,7 @@ public class ParserUtils {
      */
     public static func assertAtStartTag(parser: XmlPullParser, name: String): Unit {
         assertAtStartTag(parser)
-        if (name != parser.getName()) {
-            throw Exception("AssertionError")
-        }
+        assert(name == parser.getName())
     }
 
     /**  
@@ -45,9 +43,7 @@ public class ParserUtils {
      * @throws XmlPullParserException 如果当前事件类型不是结束标签。
      */
     public static func assertAtEndTag(parser: XmlPullParser): Unit {
-        if (parser.getEventType() != XmlPullParserEvent.END_ELEMENT) {
-            throw Exception("AssertionError")
-        }
+        assert(parser.getEventType() == XmlPullParserEvent.END_ELEMENT)
     }
 
     /**  

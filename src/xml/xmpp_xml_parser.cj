@@ -16,7 +16,7 @@ public class XmppXmlParser {
      * @throws Exception xmlPullParserFactory为Non的时候为空抛Exception异常。
      */
     public static func getXmlPullParserFactory(): XmlPullParserFactory {
-        return xmlPullParserFactory ?? throw Exception("No XmlPullParserFactory registered")
+        return xmlPullParserFactory ?? throw IllegalStateException("No XmlPullParserFactory registered")
     }
 
     /**

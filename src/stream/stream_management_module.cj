@@ -137,6 +137,6 @@ public class ResumeStreamState <: State {
     }
 
     public override func transitionInto(walkStateGraphContext: WalkStateGraphContext): AttemptResult {
-        throw Exception("Stream resumption not implemented")
+        throw IllegalStateException("Stream resumption not implemented")
     }
 }

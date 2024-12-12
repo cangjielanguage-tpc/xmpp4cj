@@ -24,9 +24,7 @@ internal import xmpp4cj.util.*
  * @throws XmlPullParserException 如果在解析节时发生异常，会抛出XmlPullParserException。
  */
 public func parseCompressionFeature(parser: XmlPullParser): CompressFeature {
-    if (parser.getEventType() != XmlPullParserEvent.START_ELEMENT) {
-        throw Exception("AssertionError")
-    }
+    assert(parser.getEventType() == XmlPullParserEvent.START_ELEMENT)
     var name: String
     let initialDepth = parser.getDepth()
     let methods = ArrayList<String>()
@@ -49,11 +47,7 @@ public func parseCompressionFeature(parser: XmlPullParser): CompressFeature {
             case _ => ()
         }
     }
-    if (parser.getEventType() != XmlPullParserEvent.END_ELEMENT) {
-        throw Exception("AssertionError")
-    }
-    if (parser.getDepth() != initialDepth) {
-        throw Exception("AssertionError")
-    }
+    assert(parser.getEventType() == XmlPullParserEvent.END_ELEMENT)
+    assert(parser.getDepth() == initialDepth)
     return CompressFeature(methods)
 }

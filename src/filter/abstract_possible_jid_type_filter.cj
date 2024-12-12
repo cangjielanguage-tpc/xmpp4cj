@@ -31,7 +31,7 @@ public abstract class AbstractPossibleJidTypeFilter <: AbstractJidTypeFilter {
                 case Some(AbstractJidTypeFilterJidType.entityBare) => return v.asEntityBareJidIfPossible().isSome()
                 case Some(AbstractJidTypeFilterJidType.domainFull) => return v.asDomainFullJidIfPossible().isSome()
                 case Some(AbstractJidTypeFilterJidType.domainBare) | Some(AbstractJidTypeFilterJidType.any) => return true
-                case _ => throw Exception()
+                case _ => throw AssertionError()
             }
         } else {
             return false

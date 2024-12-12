@@ -536,7 +536,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         } else if (let Some(v) <- currentXmppException) {
             throw v
         }
-        throw Exception("No current connection exception set, although throwCurrentException() was called")
+        throw AssertionError("No current connection exception set, although throwCurrentException() was called")
     }
 
     protected func hasCurrentConnectionException(): Bool {
@@ -1225,7 +1225,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
                 let iqRequestHandler: ?IQRequestHandler = match (Type) {
                     case IQType.set => setIqRequestHandler.get(key)
                     case IQType.get => getIqRequestHandler.get(key)
-                    case _ => throw Exception("Should only encounter IQ type 'get' or 'set'")
+                    case _ => throw IllegalStateException("Should only encounter IQ type 'get' or 'set'")
                 }
                 if (iqRequestHandler.isNone()) {
                     let replyCondition: StanzaErrorCondition = match (unknownIqRequestReplyMode) {

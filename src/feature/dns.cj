@@ -45,7 +45,7 @@ public enum DnssecMode <: ToString & Equatable<DnssecMode> {
         return match ((this, that)) {
             case (disabled, disabled) => true
             case (needsDnssec, needsDnssec) => true
-            case (needsDnssecAndDane, MILLneedsDnssecAndDaneISECONDS) => true
+            case (needsDnssecAndDane, needsDnssecAndDane) => true
             case _ => false
         }
     }
@@ -149,11 +149,11 @@ public abstract class DNSResolver {
      * @param hostAddresses   主机地址列表
      * @return 如果应继续，则返回 true；否则返回 false
      */
-    protected static func shouldContinue(name: String, hostname: String, hostAddresses: Collection<IPAddress>): Bool {
-        if (hostAddresses.isEmpty()) {
+    protected static func shouldContinue(name: String, hostname: String, hostAddresses: ?Collection<IPAddress>): Bool {
+        if (hostAddresses.isNone()) {
             return true
         }
-        if (hostAddresses.isEmpty()) {
+        if (hostAddresses.getOrThrow().isEmpty()) {
             LOGGER.log(
                 LogLevel.INFO,
                 "The DNS name ${name}, points to a hostname (${hostname}) which has neither A or AAAA resource records. This is an indication of a broken DNS setup."

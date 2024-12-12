@@ -75,6 +75,6 @@ public class InstantStreamResumptionState <: State {
     }
 
     public override func transitionInto(walkStateGraphContext: WalkStateGraphContext): AttemptResult {
-        throw Exception("Instant stream resumption not implemented")
+        throw IllegalStateException("Instant stream resumption not implemented")
     }
 }
