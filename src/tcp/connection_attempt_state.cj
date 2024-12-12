@@ -69,7 +69,7 @@ public class ConnectionAttemptState {
             return
         }
         if (connected) {
-            let connectedToHostEvent = TcpHostEventConnectedToHostEvent(establishingTcpConnectionState, address, true)
+            let connectedToHostEvent = ConnectedToHostEvent(establishingTcpConnectionState, address, true)
             connectionInternal.invokeConnectionStateMachineListener(connectedToHostEvent)
             synchronized(lock) {
                 lock.notifyAll()
@@ -105,7 +105,7 @@ public class ConnectionAttemptState {
             failedAddress.getInetSocketAddress())
         let rce = RemoteConnectionException<RemoteConnectionEndpoint>(coup, exception)
         connectionExceptions.append(rce)
-        let connectionToHostFailedEvent = TcpHostEventConnectionToHostFailedEvent(establishingTcpConnectionState,
+        let connectionToHostFailedEvent = ConnectionToHostFailedEvent(establishingTcpConnectionState,
             nextInetSocketAddress, exception)
         connectionInternal.invokeConnectionStateMachineListener(connectionToHostFailedEvent)
         establishTcpConnection(nextInetSocketAddress)

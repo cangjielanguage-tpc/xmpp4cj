@@ -28,7 +28,7 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
     public static let ITEM = "item"
 
     /**
-     * TODO 默认语言。
+     * 默认语言。
      */
     protected static let DEFAULT_LANGUAGE = "en"
 

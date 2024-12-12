@@ -220,9 +220,9 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
      * you can get fine-grained control over connection settings using the
      * {@link #XMPPTCPConnection(XMPPTCPConnectionConfiguration)} constructor.
      * </p>
-     * @param username TODO javadoc me please
-     * @param password TODO javadoc me please
-     * @param serviceName TODO javadoc me please
+     * @param username
+     * @param password
+     * @param serviceName xmpp domain
      * @throws XmppStringprepException if the provided string is invalid.
      */
     public init(username: String, password: String, serviceName: String) {

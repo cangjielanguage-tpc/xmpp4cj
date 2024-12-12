@@ -275,7 +275,7 @@ public abstract class ScramMechanism <: SASLMechanism {
      * "The characters ',' or '=' in usernames are sent as '=2C' and '=3D' respectively."
      * </p>
      *
-     * @param string TODO javadoc me please
+     * @param string
      * @return the escaped string
      */
     private static func escape(string: String): String {
@@ -294,8 +294,8 @@ public abstract class ScramMechanism <: SASLMechanism {
     /**
      * RFC 5802 § 2.2 HMAC(key, str)
      *
-     * @param key TODO javadoc me please
-     * @param str TODO javadoc me please
+     * @param key
+     * @param str
      * @return the HMAC-SHA1 value of the input.
      * @throws XmppException if Xmpp detected an exceptional situation.
      */
@@ -315,8 +315,8 @@ public abstract class ScramMechanism <: SASLMechanism {
      * </p>
      *
      * @param normalizedPassword the normalized password.
-     * @param salt TODO javadoc me please
-     * @param iterations TODO javadoc me please
+     * @param salt
+     * @param iterations
      * @return the result of the Hi function.
      * @throws XmppSaslException if a SASL related error occurs.
      */

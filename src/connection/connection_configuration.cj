@@ -382,7 +382,7 @@ public abstract class ConnectionConfiguration {
     /**
      * 检查给定的SASL机制在此次连接配置中是否已启用。
      *
-     * @param saslMechanism TODO javadoc me please
+     * @param saslMechanism SASL机制
      * @return 如果给定的SASL机制已启用，则返回 `true`，否则返回 `false`。
      */
     public func isEnabledSaslMechanism(saslMechanism: String): Bool {
@@ -400,7 +400,7 @@ public abstract class ConnectionConfiguration {
      */
     public func getEnabledSaslMechanisms(): ?Set<String> {
         if (let Some(v) <- enabledSaslMechanisms) {
-            return v // TODO Collections.unmodifiableSet(enabledSaslMechanisms)
+            return v // Collections.unmodifiableSet(enabledSaslMechanisms)
         } else {
             return None
         }
@@ -658,8 +658,8 @@ public abstract class ConnectionConfigurationBuilder {
     /**  
      * 启用默认调试器。
      *
-     * 该方法从 Smack 配置中获取默认调试器工厂，并将其分配给 debuggerFactory
-     * 字段。方法确保 debuggerFactory 不为 null，从而保证在返回当前实例之前
+     * 该方法从 xmpp 配置中获取默认调试器工厂，并将其分配给 debuggerFactory
+     * 字段。方法确保 debuggerFactory 不为 None，从而保证在返回当前实例之前
      * 设置了有效的调试器。
      *
      * @return 返回当前实例以支持链式调用。
