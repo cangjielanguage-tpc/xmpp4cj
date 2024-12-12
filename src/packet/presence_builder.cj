@@ -11,11 +11,11 @@ package xmpp4cj.packet
  *
  * <p>使用示例：</p>
  * <pre>
- * Presence presence = new PresenceBuilder()
- *                        .ofType(Presence.Type.available)
+ * let presence:Presence = PresenceBuilder()
+ *                        .ofType(PresenceType.available)
  *                        .setStatus("Online")
  *                        .setPriority(5)
- *                        .setMode(Presence.Mode.available)
+ *                        .setMode(PresenceMode.available)
  *                        .build()
  * </pre>
  */

@@ -22,7 +22,7 @@ public class TcpHostEventConnectingToHostEvent <: TcpHostEvent {
     }
 }
 
-public class TcpHostEventConnectedToHostEvent <: TcpHostEvent {
+public class ConnectedToHostEvent <: TcpHostEvent {
     private let connectionEstablishedImmediately: Bool
 
     init(state: State, address: InetSocketAddressCoupling<Rfc6120TcpRemoteConnectionEndpoint>, immediately: Bool) {
@@ -39,7 +39,7 @@ public class TcpHostEventConnectedToHostEvent <: TcpHostEvent {
     }
 }
 
-public class TcpHostEventConnectionToHostFailedEvent <: TcpHostEvent {
+public class ConnectionToHostFailedEvent <: TcpHostEvent {
     private let ioException: Exception
 
     init(state: State, address: InetSocketAddressCoupling<Rfc6120TcpRemoteConnectionEndpoint>, ioException: Exception) {

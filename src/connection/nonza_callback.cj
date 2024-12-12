@@ -157,7 +157,7 @@ public class NonzaCallbackClassAndConsumer {
     }
 
     public func accept(object: Nonza): Unit {
-        let nonza = object // TODO maybe null
+        let nonza = object
         consumer(nonza)
     }
 }

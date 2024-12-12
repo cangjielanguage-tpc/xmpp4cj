@@ -114,7 +114,7 @@ public class CompressFeature <: ExtensionElement {
      * @return 支持的压缩方法列表。
      */
     public func getMethods(): Collection<String> {
-        return methods // TODO
+        return methods // Collections.unmodifiableList(methods)
     }
 
     /**

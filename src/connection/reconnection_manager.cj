@@ -42,7 +42,7 @@ public class ReconnectionManager {
     /**
      * Get a instance of ReconnectionManager for the given connection.
      *
-     * @param connection TODO javadoc me please
+     * @param connection XMPP connection
      * @return a ReconnectionManager for the connection.
      */
     public static func getInstanceFor(connection: AbstractXMPPConnection): ReconnectionManager {
@@ -73,7 +73,7 @@ public class ReconnectionManager {
      * Set if the automatic reconnection mechanism will be enabled per default for new XMPP connections.
      * The default is 'false'.
      *
-     * @param enabled TODO javadoc me please
+     * @param enabled 是否启用
      */
     public static func setEnabledPerDefault(enabled: Bool): Unit {
         enabledPerDefault = enabled
@@ -114,7 +114,7 @@ public class ReconnectionManager {
     /**
      * Set the default Reconnection Policy to use.
      *
-     * @param reconnectionPolicy TODO javadoc me please
+     * @param reconnectionPolicy 重连的延迟时间策略
      */
     public static func setDefaultReconnectionPolicy(reconnectionPolicy: ReconnectionPolicy): Unit {
         defaultReconnectionPolicy = reconnectionPolicy
@@ -153,7 +153,7 @@ public class ReconnectionManager {
     /**
      * Set the Reconnection Policy to use.
      *
-     * @param reconnectionPolicy TODO javadoc me please
+     * @param reconnectionPolicy 重连的延迟时间策略
      */
     public func setReconnectionPolicy(reconnectionPolicy: ReconnectionPolicy): Unit {
         this.reconnectionPolicy = reconnectionPolicy

@@ -57,7 +57,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     private static let connectionCounter = AtomicInt64(0)
 
     static init() {
-        // Xmpp4cj.ensureInitialized() // TODO
+        // Xmpp4cj.ensureInitialized()
     }
 
     private let lock = Monitor()

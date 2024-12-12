@@ -387,7 +387,7 @@ public class StanzaCollectorConfiguration {
      * Set the stanza filter used by this collector. If <code>null</code>, then all stanzas will
      * get collected by this collector.
      *
-     * @param stanzaFilter TODO javadoc me please
+     * @param stanzaFilter
      * @return a reference to this configuration.
      */
     public func setStanzaFilter(stanzaFilter: StanzaFilter): StanzaCollectorConfiguration {
@@ -399,7 +399,7 @@ public class StanzaCollectorConfiguration {
      * Set the maximum size of this collector, i.e. how many stanzas this collector will collect
      * before dropping old ones.
      *
-     * @param size TODO javadoc me please
+     * @param size
      * @return a reference to this configuration.
      */
     public func setSize(size: Int64): StanzaCollectorConfiguration {
@@ -411,7 +411,7 @@ public class StanzaCollectorConfiguration {
      * Set the collector which timeout for the next result is reset once this collector collects
      * a packet.
      *
-     * @param collector TODO javadoc me please
+     * @param collector
      * @return a reference to this configuration.
      */
     public func setCollectorToReset(collector: StanzaCollector): StanzaCollectorConfiguration {

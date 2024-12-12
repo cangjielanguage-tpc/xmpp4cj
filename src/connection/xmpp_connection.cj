@@ -499,7 +499,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
 
 public enum XMPPConnectionFromMode <: ToString & Equatable<XMPPConnectionFromMode> {
     /**
-     *  保持 'from' 属性不变。这是 Xmmp < 4.0 的行为。
+     *  保持 'from' 属性不变。
      */
     | UNCHANGED
     /**

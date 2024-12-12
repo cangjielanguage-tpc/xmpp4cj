@@ -20,12 +20,6 @@ public abstract class ScramPlusMechanism <: ScramMechanism {
     }
 
     protected open override func getChannelBindingData(): ?Array<UInt8> {
-        let cbData: Array<UInt8>
-        try {
-            cbData = TLSUtils.getChannelBindingTlsServerEndPoint(sslSession())
-        } catch (e: Exception) {
-            throw XmppSaslException(e)
-        }
-        return cbData
+        throw XmppSaslException("not supported")
     }
 }

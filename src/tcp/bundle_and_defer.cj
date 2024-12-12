@@ -4,7 +4,7 @@
 package xmpp4cj.tcp
 
 public class BundleAndDefer {
-    static let mtx: Monitor = Monitor()
+    static let isStoppedLock: Monitor = Monitor()
 
     private let isStopped: AtomicBool
 
@@ -21,14 +21,12 @@ public class BundleAndDefer {
      * </p>
      */
     public func stopCurrentBundleAndDefer(): Unit {
-        // TODO
-        synchronized(mtx) {
+        synchronized(isStoppedLock) {
             if (isStopped.load()) {
                 return
             }
             isStopped.store(true)
-            mtx.notify()
-            // isStopped.notify()
+            isStoppedLock.notify()
         }
     }
 }

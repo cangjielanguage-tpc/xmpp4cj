@@ -78,18 +78,6 @@ public class ProxyInfo {
     }
 
     /**  
-     * 获取 Java 代理类型。
-     *
-     * @return Java 的代理类型
-     */
-    public func getJavaProxyType(): ProxyType {
-        match (proxyType) {
-            case ProxyInfoProxyType.HTTP => return ProxyType.HTTP
-            case ProxyInfoProxyType.SOCKS4 | ProxyInfoProxyType.SOCKS5 => return ProxyType.SOCKS
-        }
-    }
-
-    /**  
      * 获取代理类型。
      *
      * @return 代理类型
@@ -141,19 +129,6 @@ public class ProxyInfo {
      */
     public func getProxySocketConnection(): ProxySocketConnection {
         return proxySocketConnection
-    }
-
-    /**  
-     * 将 ProxyInfo 转换为 Java 的 Proxy 对象。
-     *
-     * @return Java 的 Proxy 对象
-     */
-    public func toJavaProxy(): String {
-        let proxySocketAddress: IPSocketAddress = IPSocketAddress(proxyAddress, proxyPort)
-        let Type = getJavaProxyType()
-        // TODO
-        // return Proxy(Type, proxySocketAddress)
-        return ""
     }
 }
 

@@ -16,28 +16,23 @@ public class OnceForThisStanza <: StanzaFilter {
     }
 
     public static func setup(connection: XMPPTCPConnection, packet: Stanza): Unit {
-        // TODO
-        var packetFilter: StanzaFilter = OnceForThisStanza(connection, packet)
-        // connection.addRequestAckPredicate(packetFilter)
+        let packetFilter: StanzaFilter = OnceForThisStanza(connection, packet)
+        connection.addRequestAckPredicate(packetFilter)
     }
 
     public override func accept(packet: Stanza): Bool {
-        // TODO
         var otherId: ?String = packet.getStanzaId()
         if (StringUtils.isNullOrEmpty(otherId)) {
             return false
         }
-        if (let Some(v) <- otherId) {
-            if (id == v) {
-                // connection.removeRequestAckPredicate(this)
-                return true
-            }
+        if (id.toString() == otherId.toString()) {
+            connection.removeRequestAckPredicate(this)
+            return true
         }
         return false
     }
 
     public override func toString(): String {
-        // TODO
-        return ""
+        return "OnceForThisStanza ${id}"
     }
 }

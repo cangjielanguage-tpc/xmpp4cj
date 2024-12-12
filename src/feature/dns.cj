@@ -23,12 +23,10 @@ public enum DnssecMode <: ToString & Equatable<DnssecMode> {
      */
     | disabled
     /**  
-     * <b>实验性!</b>
      * 要求所有 DNS 信息都需通过 DNSSEC 认证。
      */
     | needsDnssec
     /**  
-     * <b>实验性!</b>
      * 要求所有 DNS 信息都需通过 DNSSEC 认证，并要求使用 DANE 验证 XMPP 服务的 TLS 证书。
      */
     | needsDnssecAndDane
