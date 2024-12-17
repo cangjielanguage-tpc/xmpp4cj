@@ -26,7 +26,7 @@ public class ExceptionUtil {
             sb
         }
         match (throwable) {
-            case e: ExceptionExt => sb.append(e.getCauseStackTrace())
+            case e: ExceptionExt => sb.append("\n${e.getCauseStackTrace()}")
             case _ => ()
         }
         sb.toString()

@@ -42,7 +42,7 @@ public class XMPPTCPConnectionConfiguration <: ConnectionConfiguration {
     }
 
     /**
-     * 套接字将等待多长时间才能建立TCP连接（以毫秒为单位）。默认为{@link#DEFAULT_CONNECT_TIMEOUT}。
+     * 建立TCP连接的超时时间。默认为{@link#DEFAULT_CONNECT_TIMEOUT}。
      *
      * @return 超时值
      */
@@ -70,11 +70,17 @@ public class XMPPTCPConnectionConfigurationBuilder <: ConnectionConfigurationBui
         super()
     }
 
+    /*
+     * 设置建立TCP连接的超时时间。
+     */
     public func setConnectTimeout(connectTimeout: Duration): XMPPTCPConnectionConfigurationBuilder {
         this.connectTimeout = connectTimeout
         return this
     }
 
+    /*
+     * 建立一个新的XMPPTCPConnectionConfiguration实例。
+     */
     public override func build(): XMPPTCPConnectionConfiguration {
         return XMPPTCPConnectionConfiguration(this)
     }

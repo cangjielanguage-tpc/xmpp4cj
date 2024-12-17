@@ -1329,7 +1329,7 @@ public class XMPPTCPConnectionPacketWriter {
      * Initializes the writer in order to be used. It is called at the first connection and also
      * is invoked if the connection is disconnected by an error.
      */
-    public func initself(): Unit {
+    func initself(): Unit {
         shutdownTimestamp = None
         if (conn.unacknowledgedStanzas.isSome()) {
             // It's possible that there are new stanzas in the writer queue that
@@ -1428,7 +1428,7 @@ public class XMPPTCPConnectionPacketWriter {
         return packet
     }
 
-    public func writePackets(): Unit {
+    func writePackets(): Unit {
         try {
             // Write out packets from the queue.
             while (!done()) {

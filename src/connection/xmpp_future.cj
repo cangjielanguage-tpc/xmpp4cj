@@ -561,14 +561,3 @@ public class CancellationException <: Exception {
         "CancellationException"
     }
 }
-
-public class TimeoutException <: Exception {
-    /**
-     * 获得类名，用字符串表示。
-     *
-     * @return 类名。
-     */
-    protected override func getClassName(): String {
-        "TimeoutException"
-    }
-}

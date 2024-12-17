@@ -543,7 +543,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         return currentXmpp4cjException.isSome() || currentXmppException.isSome()
     }
 
-    public func setCurrentConnectionExceptionAndNotify(exception: Exception): Unit {
+    protected func setCurrentConnectionExceptionAndNotify(exception: Exception): Unit {
         match (exception) {
             case v: Xmpp4cjException => currentXmpp4cjException = v
             case v: XMPPException => currentXmppException = v
@@ -558,7 +558,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
      */
     private let internalMonitor = Monitor()
 
-    public func notifyWaitingThreads(): Unit {
+    protected func notifyWaitingThreads(): Unit {
         synchronized(internalMonitor) {
             internalMonitor.notifyAll()
         }
@@ -590,7 +590,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         // 否则，我们成功地等待了条件。
     }
 
-    public func bindResourceAndEstablishSession(resource: ?Resourcepart): ?Resourcepart {
+    protected func bindResourceAndEstablishSession(resource: ?Resourcepart): ?Resourcepart {
         // 等待以下任一时间：
         //- 服务器上一个特征节已被解析
         //- 超时发生
@@ -832,7 +832,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
      */
     protected func shutdown(): Unit
 
-    public func waitForClosingStreamTagFromServer(): Bool {
+    protected func waitForClosingStreamTagFromServer(): Bool {
         try {
             waitForConditionOrThrowConnectionException({=> closingStreamReceived}, "closing stream tag from the server")
         } catch (e: Xmpp4cjException | XMPPException) {
@@ -895,7 +895,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         collectors.remove(collector)
     }
 
-    public override func addStanzaListener(stanzaListener: StanzaListener, stanzaFilter: StanzaFilter): Unit {
+    public override func addStanzaListener(stanzaListener: StanzaListener, stanzaFilter: ?StanzaFilter): Unit {
         let wrapper = AbstractXMPPConnectionListenerWrapper(stanzaListener, stanzaFilter)
         synchronized(recvListenersLock) {
             recvListeners.put(stanzaListener, wrapper)
@@ -908,7 +908,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         }
     }
 
-    public override func addSyncStanzaListener(packetListener: StanzaListener, packetFilter: StanzaFilter): Unit {
+    public override func addSyncStanzaListener(packetListener: StanzaListener, packetFilter: ?StanzaFilter): Unit {
         let wrapper = AbstractXMPPConnectionListenerWrapper(packetListener, packetFilter)
         synchronized(syncRecvListenersLock) {
             syncRecvListeners.put(packetListener, wrapper)
@@ -921,7 +921,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         }
     }
 
-    public override func addAsyncStanzaListener(packetListener: StanzaListener, packetFilter: StanzaFilter): Unit {
+    public override func addAsyncStanzaListener(packetListener: StanzaListener, packetFilter: ?StanzaFilter): Unit {
         let wrapper = AbstractXMPPConnectionListenerWrapper(packetListener, packetFilter)
         synchronized(asyncRecvListenersLock) {
             asyncRecvListeners.put(packetListener, wrapper)
@@ -934,7 +934,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         }
     }
 
-    public override func addStanzaSendingListener(packetListener: StanzaListener, packetFilter: StanzaFilter): Unit {
+    public override func addStanzaSendingListener(packetListener: StanzaListener, packetFilter: ?StanzaFilter): Unit {
         let wrapper = AbstractXMPPConnectionListenerWrapper(packetListener, packetFilter)
         synchronized(sendListenersLock) {
             sendListeners.put(packetListener, wrapper)
@@ -955,7 +955,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
      *
      * @param sendTopLevelStreamElement 刚刚发送的TopLevelStreamElement
      */
-    public func fireElementSendingListeners(sendTopLevelStreamElement: TopLevelStreamElement): Unit {
+    protected func fireElementSendingListeners(sendTopLevelStreamElement: TopLevelStreamElement): Unit {
         debugger?.onOutgoingStreamElement(sendTopLevelStreamElement)
 
         let packet: Stanza = (sendTopLevelStreamElement as Stanza) ?? return;;
@@ -1141,7 +1141,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         }
     }
 
-    public func parseAndProcessNonza(parser: XmlPullParser): Unit {
+    protected func parseAndProcessNonza(parser: XmlPullParser): Unit {
         ParserUtils.assertAtStartTag(parser)
 
         let initialDepth = parser.getDepth()
@@ -1393,7 +1393,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         }
     }
 
-    public func callConnectionClosedListener(): Unit {
+    func callConnectionClosedListener(): Unit {
         for (listener in connectionListeners) {
             try {
                 listener.connectionClosed()
@@ -1469,7 +1469,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         }
     }
 
-    public func parseFeaturesAndNotify(parser: XmlPullParser): Unit {
+    protected func parseFeaturesAndNotify(parser: XmlPullParser): Unit {
         parseFeatures(parser)
 
         if (hasFeature(Mechanisms.ELEMENT, Mechanisms.NAMESPACE)) {
@@ -1532,7 +1532,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         sendAsyncGeneric(stanza, replyFilter, timeout)
     }
 
-    public func sendAsyncGeneric<S>(
+    func sendAsyncGeneric<S>(
         stanza: Stanza,
         replyFilter: StanzaFilter,
         timeout: Duration
@@ -1735,7 +1735,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         }
     }
 
-    public static func asyncGo(runnable: Runnable): Unit {
+    protected static func asyncGo(runnable: Runnable): Unit {
         CACHED_EXECUTOR_SERVICE(runnable)
     }
 
@@ -1747,7 +1747,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         return XMPP_REACTOR.schedule(runnable, delay, ScheduledActionKind.NonBlocking)
     }
 
-    public func onStreamOpen(parser: XmlPullParser): Unit {
+    protected func onStreamOpen(parser: XmlPullParser): Unit {
         // 我们发现了一个开启的流。
         if (parser.getNamespace(None) == "jabber:client") {
             streamId = parser.getAttributeValue("", "id")
@@ -1852,7 +1852,7 @@ public enum SyncPointState <: Equatable<SyncPointState> {
 public class AbstractXMPPConnectionListenerWrapper {
     private let packetListener: StanzaListener
 
-    private let packetFilter: StanzaFilter
+    private let packetFilter: ?StanzaFilter
 
     /**
      * 创建一个类，将节过滤器与监听器相关联。
@@ -1860,13 +1860,13 @@ public class AbstractXMPPConnectionListenerWrapper {
      * @param packetListener 节侦听器。
      * @param packetFilter 关联的过滤器，如果它监听所有数据包，则为None。
      */
-    public init(packetListener: StanzaListener, packetFilter: StanzaFilter) {
+    public init(packetListener: StanzaListener, packetFilter: ?StanzaFilter) {
         this.packetListener = packetListener
         this.packetFilter = packetFilter
     }
 
     public func filterMatches(packet: Stanza): Bool {
-        return packetFilter.accept(packet)
+        return packetFilter?.accept(packet) ?? true
     }
 
     public func getListener(): StanzaListener {

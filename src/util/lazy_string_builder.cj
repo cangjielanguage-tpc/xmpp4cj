@@ -72,8 +72,9 @@ public open class LazyStringBuilder <: CharSequence & Appendable {
             for (csq in list) {
                 sb.append(csq)
             }
-            cache = sb.toString()
-            return sb.toString()
+            let str = sb.toString()
+            cache = str
+            return str
         }
     }
 
@@ -105,7 +106,7 @@ public open class LazyStringBuilder <: CharSequence & Appendable {
         } else {
             let arr: ArrayList<CharSequence> = ArrayList<CharSequence>(list.size)
             for (csq in list) {
-                arr.append(csq.toString())
+                arr.append(csq)
             }
             arr
         }
