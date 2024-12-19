@@ -11,11 +11,18 @@ public abstract class StreamManagementException <: Xmpp4cjException {
     }
 }
 
-public class StreamManagementNotEnabledException <: StreamManagementException {}
+public class StreamManagementNotEnabledException <: StreamManagementException {
+    public override func getClassName(): String {
+        "StreamManagementNotEnabledException"
+    }
+}
 
 public class StreamIdDoesNotMatchException <: StreamManagementException {
     public init(expected: String, got: String) {
         super("Stream IDs do not match. Expected '${expected}', but got '${got}'")
+    }
+    public override func getClassName(): String {
+        "StreamIdDoesNotMatchException"
     }
 }
 
@@ -57,6 +64,10 @@ public class StreamManagementCounterError <: StreamManagementException {
     public func getAckedStanzas(): Collection<Stanza> {
         return ackedStanzas
     }
+
+    public override func getClassName(): String {
+        "StreamManagementCounterError"
+    }
 }
 
 public class StreamManagementUnacknowledgedQueueFullException <: StreamManagementException {
@@ -89,6 +100,10 @@ public class StreamManagementUnacknowledgedQueueFullException <: StreamManagemen
 
     public func getUnacknowledgesStanzas(): ArrayList<Stanza> {
         return unacknowledgesStanzas
+    }
+
+    public override func getClassName(): String {
+        "StreamManagementUnacknowledgedQueueFullException"
     }
 
     public static func newWith(

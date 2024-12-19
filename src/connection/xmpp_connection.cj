@@ -251,7 +251,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      * @param stanzaListener Stanza 监听器
      * @param stanzaFilter Stanza 过滤器
      */
-    func addStanzaListener(stanzaListener: StanzaListener, stanzaFilter: StanzaFilter): Unit
+    func addStanzaListener(stanzaListener: StanzaListener, stanzaFilter: ?StanzaFilter): Unit
 
     /**  
      * 移除 Stanza 监听器。
@@ -267,7 +267,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      * @param stanzaListener Stanza 监听器
      * @param stanzaFilter Stanza 过滤器
      */
-    func addSyncStanzaListener(stanzaListener: StanzaListener, stanzaFilter: StanzaFilter): Unit
+    func addSyncStanzaListener(stanzaListener: StanzaListener, stanzaFilter: ?StanzaFilter): Unit
 
     /**  
      * 移除同步 Stanza 监听器。
@@ -283,7 +283,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      * @param stanzaListener Stanza 监听器
      * @param stanzaFilter Stanza 过滤器
      */
-    func addAsyncStanzaListener(stanzaListener: StanzaListener, stanzaFilter: StanzaFilter): Unit
+    func addAsyncStanzaListener(stanzaListener: StanzaListener, stanzaFilter: ?StanzaFilter): Unit
 
     /**  
      * 移除异步 Stanza 监听器。
@@ -299,7 +299,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      * @param stanzaListener Stanza 监听器
      * @param stanzaFilter Stanza 过滤器
      */
-    func addStanzaSendingListener(stanzaListener: StanzaListener, stanzaFilter: StanzaFilter): Unit
+    func addStanzaSendingListener(stanzaListener: StanzaListener, stanzaFilter: ?StanzaFilter): Unit
 
     /**  
      * 移除 Stanza 发送监听器。
