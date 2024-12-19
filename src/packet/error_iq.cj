@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
@@ -16,7 +16,7 @@ public class ErrorIQ <: IQ {
 
     private let request: ?IQ // 原请求的 IQ 
 
-    /**  
+    /**
      * 使用 Builder 创建 ErrorIQ 实例。
      *
      * @param builder 用于构建 ErrorIQ 的 Builder。
@@ -29,7 +29,7 @@ public class ErrorIQ <: IQ {
         this.request = builder.request
     }
 
-    /**  
+    /**
      * 创建一个错误响应，返回一个 ErrorIQ 实例。
      *
      * @param request 原请求的 IQ。
@@ -42,7 +42,7 @@ public class ErrorIQ <: IQ {
         return builder.build()
     }
 
-    /**  
+    /**
      * 获取该 IQ 的子元素 XML 字符串生成器。
      *
      * @param xml XML 字符串生成器。
@@ -52,7 +52,7 @@ public class ErrorIQ <: IQ {
         return request?.getIQChildElementBuilder(xml) ?? None
     }
 
-    /**  
+    /**
      * 创建一个 Builder 实例以构建 ErrorIQ。
      *
      * @param error 要设置的错误。
@@ -62,7 +62,7 @@ public class ErrorIQ <: IQ {
         return ErrorIQBuilder(error, IqData.EMPTY.ofType(IQType.error))
     }
 
-    /**  
+    /**
      * 创建一个 Builder 实例以构建 ErrorIQ，并提供 IQ 数据。
      *
      * @param error 要设置的错误。
@@ -74,13 +74,13 @@ public class ErrorIQ <: IQ {
     }
 }
 
-/**  
+/**
  * 用于构建 ErrorIQ 的 Builder 类。
  */
 public class ErrorIQBuilder <: IqBuilder {
     var request: ?IQ = None // 原请求的 IQ  
 
-    /**  
+    /**
      * 使用错误和 IQ 数据构建 Builder 实例。
      *
      * @param error 要设置的错误。
@@ -96,7 +96,7 @@ public class ErrorIQBuilder <: IqBuilder {
         setError(error)
     }
 
-    /**  
+    /**
      * 使用错误和原请求构建 Builder 实例。
      *
      * @param error 要设置的错误。
@@ -107,7 +107,7 @@ public class ErrorIQBuilder <: IqBuilder {
         this.request = request
     }
 
-    /**  
+    /**
      * 构建并返回一个 ErrorIQ 实例。
      *
      * @return 构造的 ErrorIQ 实例。

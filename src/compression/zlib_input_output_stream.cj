@@ -1,20 +1,20 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.compression
 
-/**  
+/**
  * 该类提供XMPP的"zlib"压缩功能
  */
 public class ZlibInputOutputStream <: XMPPInputOutputStream {
-    /**  
+    /**
      * 初始化 ZlibInputOutputStream
      */
     public init() {
         super("zlib")
     }
 
-    /**  
+    /**
      * 检查此压缩格式是否被支持。
      *
      * @return 如果支持则返回true，否则返回false。
@@ -23,7 +23,7 @@ public class ZlibInputOutputStream <: XMPPInputOutputStream {
         true
     }
 
-    /**  
+    /**
      * 获取解压的输入流。
      *
      * @param inputStream 原始输入流

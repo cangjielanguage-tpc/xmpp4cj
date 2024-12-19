@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
@@ -262,15 +262,15 @@ public open class XmppConfiguration {
  * 表示对于未知的 IQ 请求的回复模式。
  */
 public enum XmppConfigurationUnknownIqRequestReplyMode <: ToString & Equatable<XmppConfigurationUnknownIqRequestReplyMode> {
-    /**  
+    /**
      * 不做回复。
      */
     | doNotReply
-    /**  
+    /**
      * 回复功能未实现。
      */
     | replyFeatureNotImplemented
-    /**  
+    /**
      * 回复服务不可用。
      */
     | replyServiceUnavailable

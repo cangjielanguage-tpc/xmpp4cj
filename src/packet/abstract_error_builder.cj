@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
 
 /**
+ * public abstract class AbstractErrorBuilder
+ *
  * Builder 类用于构建 AbstractError 实例
  *
  * @param <B> Builder 类型的子类
@@ -24,7 +26,7 @@ public abstract class AbstractErrorBuilder {
      */
     protected var extensions: ?ArrayList<ExtensionElement> = None
 
-    /**  
+    /**
      * 设置描述性文本
      *
      * @param descriptiveTexts 描述性文本映射
@@ -43,7 +45,7 @@ public abstract class AbstractErrorBuilder {
         return this
     }
 
-    /**  
+    /**
      * 设置英语的描述性文本。
      *
      * @param descriptiveEnText 英语描述性文本
@@ -57,7 +59,7 @@ public abstract class AbstractErrorBuilder {
         return this
     }
 
-    /**  
+    /**
      * 设置英语的描述性文本，并附加异常堆栈信息。
      *
      * @param descriptiveEnText 英语描述性文本
@@ -73,7 +75,7 @@ public abstract class AbstractErrorBuilder {
         return setDescriptiveEnText(sb.toString())
     }
 
-    /**  
+    /**
      * 设置文本命名空间。
      *
      * @param textNamespace 文本命名空间
@@ -84,7 +86,7 @@ public abstract class AbstractErrorBuilder {
         return this
     }
 
-    /**  
+    /**
      * 设置扩展元素列表。
      *
      * @param extensions 扩展元素列表
@@ -99,7 +101,7 @@ public abstract class AbstractErrorBuilder {
         return this
     }
 
-    /**  
+    /**
      * 添加扩展元素。
      *
      * @param extensions 扩展元素

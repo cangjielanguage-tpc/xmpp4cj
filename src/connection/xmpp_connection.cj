@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
-/**  
+/**
  * XMPPConnection 接口提供了与 XMPP 服务器连接的接口，并实现了不同类型连接（例如
  * <code>XMPPTCPConnection</code> 或 <code>XMPPBOSHConnection</code>）使用的共享方法。
  * 要创建与 XMPP 服务器的连接，简单的使用示例如下：
@@ -59,35 +59,35 @@ package xmpp4cj.connection
  * </p>
  */
 public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnection> {
-    /**  
+    /**
      * 获取 XMPP 服务的域名（不带资源）。
      *
      * @return XMPP 服务的域名（不带资源）
      */
     func getXMPPServiceDomain(): DomainBareJid
 
-    /**  
+    /**
      * 获取连接的主机名。
      *
      * @return 连接的主机名
      */
     func getHost(): ?String
 
-    /**  
+    /**
      * 获取连接的端口号。
      *
      * @return 连接的端口号
      */
     func getPort(): Int
 
-    /**  
+    /**
      * 获取用户的完整 JID。
      *
      * @return 用户的完整 JID。
      */
     func getUser(): ?EntityFullJid
 
-    /**  
+    /**
      * 获取当前流的 ID。
      *
      * @return 当前流的 ID。
@@ -95,49 +95,49 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func getStreamId(): ?String
 
-    /**  
+    /**
      * 检查连接是否已建立。
      *
      * @return 连接是否已建立
      */
     func isConnected(): Bool
 
-    /**  
+    /**
      * 检查用户是否已通过身份验证。
      *
      * @return 用户是否已通过身份验证。
      */
     func isAuthenticated(): Bool
 
-    /**  
+    /**
      * 检查当前连接是否为匿名连接。
      *
      * @return 当前连接是否为匿名连接。
      */
     func isAnonymous(): Bool
 
-    /**  
+    /**
      * 检查连接是否为安全连接。
      *
      * @return 连接是否为安全连接。
      */
     func isSecureConnection(): Bool
 
-    /**  
+    /**
      * 检查是否正在使用压缩。
      *
      * @return 是否正在使用压缩。
      */
     func isUsingCompression(): Bool
 
-    /**  
+    /**
      * 获取用于创建 Stanza 的工厂。
      *
      * @return 创建 Stanza 的工厂。
      */
     func getStanzaFactory(): StanzaFactory
 
-    /**  
+    /**
      * 发送 Stanza。
      *
      * @param stanza 要发送的 Stanza
@@ -146,7 +146,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func sendStanza(stanza: Stanza): Unit
 
-    /**  
+    /**
      * 尝试发送 Stanza。
      *
      * @param stanza 要发送的 Stanza
@@ -155,7 +155,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func trySendStanza(stanza: Stanza): Bool
 
-    /**  
+    /**
      * 尝试发送 Stanza，并指定超时时间。
      *
      * @param stanza 要发送的 Stanza
@@ -166,7 +166,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func trySendStanza(stanza: Stanza, timeout: Duration): Bool
 
-    /**  
+    /**
      * 发送 Nonza。
      *
      * @param nonza 要发送的 Nonza
@@ -175,21 +175,21 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func sendNonza(nonza: Nonza): Unit
 
-    /**  
+    /**
      * 添加连接监听器。
      *
      * @param connectionListener 连接监听器
      */
     func addConnectionListener(connectionListener: ConnectionListener): Unit
 
-    /**  
+    /**
      * 移除连接监听器。
      *
      * @param connectionListener 要移除的连接监听器
      */
     func removeConnectionListener(connectionListener: ConnectionListener): Unit
 
-    /**  
+    /**
      * 发送 IQ 请求并等待响应。
      *
      * @param request 要发送的 IQ 请求
@@ -201,7 +201,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func sendIqRequestAndWaitForResponse(request: IQ): IQ
 
-    /**  
+    /**
      * 创建 Stanza 收集器并发送 IQ 请求。
      *
      * @param request 要发送的 IQ 请求
@@ -211,7 +211,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func createStanzaCollectorAndSend(request: IQ): StanzaCollector
 
-    /**  
+    /**
      * 创建 Stanza 收集器并发送 Stanza。
      *
      * @param stanzaFilter Stanza 过滤器
@@ -222,7 +222,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func createStanzaCollectorAndSend(stanzaFilter: StanzaFilter, stanza: Stanza): StanzaCollector
 
-    /**  
+    /**
      * 创建 Stanza 收集器。
      *
      * @param stanzaFilter Stanza 过滤器
@@ -230,7 +230,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func createStanzaCollector(stanzaFilter: StanzaFilter): StanzaCollector
 
-    /**  
+    /**
      * 创建 Stanza 收集器，使用指定的配置。
      *
      * @param configuration 收集器配置
@@ -238,14 +238,14 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func createStanzaCollector(configuration: StanzaCollectorConfiguration): StanzaCollector
 
-    /**  
+    /**
      * 移除 Stanza 收集器。
      *
      * @param collector 要移除的 Stanza 收集器
      */
     func removeStanzaCollector(collector: StanzaCollector): Unit
 
-    /**  
+    /**
      * 添加 Stanza 监听器。
      *
      * @param stanzaListener Stanza 监听器
@@ -253,7 +253,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func addStanzaListener(stanzaListener: StanzaListener, stanzaFilter: ?StanzaFilter): Unit
 
-    /**  
+    /**
      * 移除 Stanza 监听器。
      *
      * @param stanzaListener 要移除的 Stanza 监听器
@@ -261,7 +261,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func removeStanzaListener(stanzaListener: StanzaListener): Bool
 
-    /**  
+    /**
      * 添加同步 Stanza 监听器。
      *
      * @param stanzaListener Stanza 监听器
@@ -269,7 +269,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func addSyncStanzaListener(stanzaListener: StanzaListener, stanzaFilter: ?StanzaFilter): Unit
 
-    /**  
+    /**
      * 移除同步 Stanza 监听器。
      *
      * @param stanzaListener 要移除的 Stanza 监听器
@@ -277,7 +277,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func removeSyncStanzaListener(stanzaListener: StanzaListener): Bool
 
-    /**  
+    /**
      * 添加异步 Stanza 监听器。
      *
      * @param stanzaListener Stanza 监听器
@@ -285,7 +285,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func addAsyncStanzaListener(stanzaListener: StanzaListener, stanzaFilter: ?StanzaFilter): Unit
 
-    /**  
+    /**
      * 移除异步 Stanza 监听器。
      *
      * @param stanzaListener 要移除的 Stanza 监听器
@@ -293,7 +293,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func removeAsyncStanzaListener(stanzaListener: StanzaListener): Bool
 
-    /**  
+    /**
      * 添加 Stanza 发送监听器。
      *
      * @param stanzaListener Stanza 监听器
@@ -301,14 +301,14 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func addStanzaSendingListener(stanzaListener: StanzaListener, stanzaFilter: ?StanzaFilter): Unit
 
-    /**  
+    /**
      * 移除 Stanza 发送监听器。
      *
      * @param stanzaListener 要移除的 Stanza 监听器
      */
     func removeStanzaSendingListener(stanzaListener: StanzaListener): Unit
 
-    /**  
+    /**
      * 添加消息拦截器。
      *
      * @param messageInterceptor 消息拦截器
@@ -316,14 +316,14 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func addMessageInterceptor(messageInterceptor: HashableConsumer<MessageBuilder>, messageFilter: ?Predicate<Message>): Unit
 
-    /**  
+    /**
      * 移除消息拦截器。
      *
      * @param messageInterceptor 要移除的消息拦截器
      */
     func removeMessageInterceptor(messageInterceptor: HashableConsumer<MessageBuilder>): Unit
 
-    /**  
+    /**
      * 添加状态拦截器。
      *
      * @param presenceInterceptor 状态拦截器
@@ -334,49 +334,49 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
         presenceFilter: ?Predicate<Presence>
     ): Unit
 
-    /**  
+    /**
      * 移除状态拦截器。
      *
      * @param presenceInterceptor 要移除的状态拦截器
      */
     func removePresenceInterceptor(presenceInterceptor: HashableConsumer<PresenceBuilder>): Unit
 
-    /**  
+    /**
      * 获取回复超时时间。
      *
      * @return 回复超时时间（毫秒）
      */
     func getReplyTimeout(): Duration
 
-    /**  
+    /**
      * 设置回复超时时间。
      *
      * @param timeout 超时时间（毫秒）
      */
     func setReplyTimeout(timeout: Duration): Unit
 
-    /**  
+    /**
      * 获取连接计数器。
      *
      * @return 连接计数器
      */
     func getConnectionCounter(): Int
 
-    /**  
+    /**
      * 设置发件人模式。
      *
      * @param fromMode 发件人模式
      */
     func setFromMode(fromMode: XMPPConnectionFromMode): Unit
 
-    /**  
+    /**
      * 获取发件人模式。
      *
      * @return 发件人模式
      */
     func getFromMode(): XMPPConnectionFromMode
 
-    /**  
+    /**
      * 获取指定特性的元素。
      *
      * @param qname 特性的 QName
@@ -385,7 +385,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func getFeature(qname: QName): ?FullyQualifiedElement
 
-    /**  
+    /**
      * 根据特性类获取特性的元素。
      *
      * @param featureClass 特性类
@@ -397,7 +397,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
         return getFeature(qname)
     }
 
-    /**  
+    /**
      * 检查是否具有指定的特性。
      *
      * @param element 特性元素名称
@@ -409,7 +409,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
         return hasFeature(qname)
     }
 
-    /**  
+    /**
      * 检查是否具有指定的特性。
      *
      * @param qname 特性的 QName
@@ -417,7 +417,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func hasFeature(qname: QName): Bool
 
-    /**  
+    /**
      * 异步发送 IQ 请求并返回一个未来对象以处理响应。
      *
      * @param request 要发送的 IQ 请求
@@ -425,7 +425,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func sendIqRequestAsync(request: IQ): XmppFuture<IQ, Exception>
 
-    /**  
+    /**
      * 异步发送 IQ 请求并返回一个未来对象以处理响应，指定超时时间。
      *
      * @param request 要发送的 IQ 请求
@@ -434,7 +434,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func sendIqRequestAsync(request: IQ, timeout: Duration): XmppFuture<IQ, Exception>
 
-    /**  
+    /**
      * 异步发送 Stanza，并指定回复过滤器。
      *
      * @param stanza 要发送的 Stanza
@@ -444,7 +444,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func sendAsync(stanza: Stanza, replyFilter: StanzaFilter): XmppFuture<Stanza, Exception>
 
-    /**  
+    /**
      * 异步发送 Stanza，并指定回复过滤器和超时时间。
      *
      * @param stanza 要发送的 Stanza
@@ -455,7 +455,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func sendAsync(stanza: Stanza, replyFilter: StanzaFilter, timeout: Duration): XmppFuture<Stanza, Exception>
 
-    /**  
+    /**
      * 添加一次性同步回调。
      *
      * @param callback 要添加的 Stanza 监听器
@@ -463,7 +463,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func addOneTimeSyncCallback(callback: StanzaListener, stanzaFilter: StanzaFilter): Unit
 
-    /**  
+    /**
      * 注册 IQ 请求处理器。
      *
      * @param iqRequestHandler 要注册的 IQ 请求处理器
@@ -471,7 +471,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func registerIQRequestHandler(iqRequestHandler: IQRequestHandler): ?IQRequestHandler
 
-    /**  
+    /**
      * 注销 IQ 请求处理器。
      *
      * @param iqRequestHandler 要注销的 IQ 请求处理器
@@ -479,7 +479,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func unregisterIQRequestHandler(iqRequestHandler: IQRequestHandler): ?IQRequestHandler
 
-    /**  
+    /**
      * 根据元素名称、命名空间和类型注销 IQ 请求处理器。
      *
      * @param element 元素名称
@@ -489,7 +489,7 @@ public interface XMPPConnection <: ToString & Hashable & Equatable<XMPPConnectio
      */
     func unregisterIQRequestHandler(element: String, namespace: String, Type: IQType): ?IQRequestHandler
 
-    /**  
+    /**
      * 获取最后接收的 Stanza 的时间戳。
      *
      * @return 最后接收的 Stanza 的时间戳（毫秒）

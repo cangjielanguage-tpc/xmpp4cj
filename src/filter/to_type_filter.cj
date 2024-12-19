@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
-/**  
+/**
  * ToTypeFilter 是一个用于过滤不同类型 JID（Jabber ID）的筛选器。
  * 该类扩展了 AbstractExactJidTypeFilter，并提供了几种预定义的 JID 类型过滤器。
  */
@@ -38,7 +38,7 @@ public class ToTypeFilter <: AbstractExactJidTypeFilter {
      */
     public static let ENTITY_FULL_OR_BARE_JID: StanzaFilter = OrFilter([ENTITY_FULL_JID, ENTITY_BARE_JID])
 
-    /**  
+    /**
      * 构造一个 ToTypeFilter 实例。
      *
      * @param jidType 要过滤的 JID 类型
@@ -47,7 +47,7 @@ public class ToTypeFilter <: AbstractExactJidTypeFilter {
         super(jidType)
     }
 
-    /**  
+    /**
      * 获取要检查的 JID。
      *
      * @param stanza 要检查的 Stanza

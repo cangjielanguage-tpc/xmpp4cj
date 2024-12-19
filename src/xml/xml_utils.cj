@@ -315,9 +315,6 @@ class BytesInputStream <: ToString {
     }
 }
 
-/**
- * 对String进行扩展。
- */
 extend String {
     /**
      * 不区分大小写的比较String的Ascii是否一致。
@@ -325,7 +322,7 @@ extend String {
      * @param asciiLower 比较的String。
      * @return 是否一致。true 表示相同。false 表示不相同。
      */
-    public func toAsciiLowerCompare(asciiLower: String): Bool {
+    func toAsciiLowerCompare(asciiLower: String): Bool {
         let src = unsafe { this.rawData() }
         let dst = unsafe { asciiLower.rawData() }
         if (src.size != dst.size) {

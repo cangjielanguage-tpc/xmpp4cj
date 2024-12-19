@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
 
-/**  
+/**
  * PresenceBuilder 是用于构建 XMPP Presence（状态）报文的类。
  * 该类支持设置多个状态属性，如类型、状态消息、优先级和模式。
  *
@@ -30,7 +30,7 @@ public class PresenceBuilder <: MessageOrPresenceBuilder & PresenceView {
 
     var mode: ?PresenceMode = None // Presence 模式 
 
-    /**  
+    /**
      * 构造一个 PresenceBuilder 实例，基于给定的 Presence 和 stanzid。
      *
      * @param presence   基于的 Presence 对象
@@ -41,7 +41,7 @@ public class PresenceBuilder <: MessageOrPresenceBuilder & PresenceView {
         copyFromPresence(presence)
     }
 
-    /**  
+    /**
      * 构造一个 PresenceBuilder 实例，基于给定的 Presence 和 StanzaIdSource。
      *
      * @param presence        基于的 Presence 对象
@@ -52,7 +52,7 @@ public class PresenceBuilder <: MessageOrPresenceBuilder & PresenceView {
         copyFromPresence(presence)
     }
 
-    /**  
+    /**
      * 构造一个 PresenceBuilder 实例，仅使用 StanzaIdSource。
      *
      * @param stanzaIdSource  Stanza ID 来源
@@ -61,7 +61,7 @@ public class PresenceBuilder <: MessageOrPresenceBuilder & PresenceView {
         super(stanzaIdSource)
     }
 
-    /**  
+    /**
      * 构造一个 PresenceBuilder 实例，仅使用 stanzaId。
      *
      * @param stanzaId  Stanza ID
@@ -70,7 +70,7 @@ public class PresenceBuilder <: MessageOrPresenceBuilder & PresenceView {
         super(stanzaId)
     }
 
-    /**  
+    /**
      * 从已存在的 Presence 对象中复制属性值。
      *
      * @param presence  源 Presence 对象
@@ -82,7 +82,7 @@ public class PresenceBuilder <: MessageOrPresenceBuilder & PresenceView {
         mode = presence.getMode()
     }
 
-    /**  
+    /**
      * 添加特定于 Stanza 的属性。
      *
      * @param builder 用于构建字符串的构建器。
@@ -95,7 +95,7 @@ public class PresenceBuilder <: MessageOrPresenceBuilder & PresenceView {
             .addValue("status", status)
     }
 
-    /**  
+    /**
      * 设置 Presence 类型。
      *
      * @param type  Presence 类型
@@ -107,7 +107,7 @@ public class PresenceBuilder <: MessageOrPresenceBuilder & PresenceView {
         return this
     }
 
-    /**  
+    /**
      * 设置状态消息。
      *
      * @param status  状态消息
@@ -118,7 +118,7 @@ public class PresenceBuilder <: MessageOrPresenceBuilder & PresenceView {
         return this
     }
 
-    /**  
+    /**
      * 设置优先级值。
      *
      * @param priority  优先级值
@@ -130,7 +130,7 @@ public class PresenceBuilder <: MessageOrPresenceBuilder & PresenceView {
         return this
     }
 
-    /**  
+    /**
      * 设置 Presence 模式。
      *
      * @param mode  Presence 模式
@@ -141,7 +141,7 @@ public class PresenceBuilder <: MessageOrPresenceBuilder & PresenceView {
         return this
     }
 
-    /**  
+    /**
      * 构建并返回一个新的 Stanza 实例。
      *
      * @return 新建的 Stanza 实例

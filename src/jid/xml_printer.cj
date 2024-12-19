@@ -1,23 +1,25 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.jid
 
-/**  
+/**
+ * public abstract class XmlPrinter
+ *
  * 抽象类，表示 XML 打印机的接口
  */
 public abstract class XmlPrinter {
-    /**  
+    /**
      * 当一个块开始时调用
      */
     public func onChunkStart(): Unit
 
-    /**  
+    /**
      * 当一个块结束时调用
      */
     public func onChunkEnd(): Unit
 
-    /**  
+    /**
      * 当下一个字符到达时调用
      *
      * @param c               当前字符
@@ -27,7 +29,7 @@ public abstract class XmlPrinter {
      */
     public func onNextChar(c: Rune, depth: Int64, initialState: XmlSplitterState, currentState: XmlSplitterState): Unit
 
-    /**  
+    /**
      * 当完成一个元素时调用
      */
     public func onCompleteElement(): Unit
@@ -80,7 +82,7 @@ public class XmlPrettyPrinter <: XmlPrinter {
         this.prettyWriter = builder.prettyWriter
     }
 
-    /**  
+    /**
      * 当一个新的 XML 片段开始时被调用。
      * <p>
      * 用户需要在实现中定义如何处理片段开始的逻辑。
@@ -97,7 +99,7 @@ public class XmlPrettyPrinter <: XmlPrinter {
         }
     }
 
-    /**  
+    /**
      * 当一个 XML 片段结束时被调用。
      * <p>
      * 用户需要在实现中定义如何处理片段结束的逻辑。
@@ -115,7 +117,7 @@ public class XmlPrettyPrinter <: XmlPrinter {
         }
     }
 
-    /**  
+    /**
      * 当处理下一个字符时被调用。
      *
      * @param c 当前字符
@@ -172,7 +174,7 @@ public class XmlPrettyPrinter <: XmlPrinter {
         }
     }
 
-    /**  
+    /**
      * 当完成一个完整的 XML 元素时被调用。
      * <p>
      * 用户需要在实现中定义如何处理完整元素的逻辑。
@@ -223,12 +225,12 @@ public class XmlPrettyPrinter <: XmlPrinter {
     }
 }
 
-/**  
+/**
  * PrettyPrintedXmlChunkWithCurrentPartCallback 接口用于定义一个回调，
  * 该回调在接收到美观格式打印的 XML 片段时被调用。
  */
 public interface PrettyPrintedXmlChunkWithCurrentPartCallback {
-    /**  
+    /**
      * 当接收到一个美观格式打印的 XML 片段时调用此方法。
      *
      * @param chunk 包含 XML 片段的字符串构建器
@@ -236,13 +238,13 @@ public interface PrettyPrintedXmlChunkWithCurrentPartCallback {
     func onPrettyPrintedXmlChunk(chunk: StringBuilder): Unit
 }
 
-/**  
+/**
  * PrettyPrintedXmlPartCallback 接口用于定义一个回调，
  * 该回调在接收到美观格式打印的 XML 部分时被调用。
  */
 public open class PrettyPrintedXmlPartCallback {
     public PrettyPrintedXmlPartCallback(let callback: (StringBuilder) -> Unit) {}
-    /**  
+    /**
      * 当接收到一个美观格式打印的 XML 部分时调用此方法。
      *
      * @param part 包含 XML 部分的字符串构建器
@@ -252,13 +254,13 @@ public open class PrettyPrintedXmlPartCallback {
     }
 }
 
-/**  
+/**
  * PrettyPrintedXmlChunkSink 接口用于定义一个接收器，
  * 该接收器接受以美观格式打印的 XML 片段。
  */
 public open class PrettyPrintedXmlChunkSink {
     public PrettyPrintedXmlChunkSink(let callback: (StringBuilder) -> Unit) {}
-    /**  
+    /**
      * 接收一个字符串构建器，其中包含要处理的 XML 字符串。
      *
      * @param stringBuilder 包含 XML 片段的字符串构建器

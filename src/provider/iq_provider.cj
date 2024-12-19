@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.provider
 
-/**  
+/**
+ * public abstract class IqProvider<I> <: AbstractProvider<I> where I <: IQ
+ *
  * IqProvider 是一个抽象类，用于解析 IQ（信息查询）相关的 XML 数据。
  *
  * @param <I> 解析的 IQ 类型，必须是 IQ 的子类
@@ -12,7 +14,7 @@ public abstract class IqProvider<I> <: AbstractProvider<I> where I <: IQ {
     public init(elementClass: ClassId) {
         super(elementClass)
     }
-    /**  
+    /**
      * 解析给定的 XML Pull 解析器中的 IQ 数据。
      *
      * @param parser XmlPullParser 实例，用于解析 XML 数据
@@ -26,7 +28,7 @@ public abstract class IqProvider<I> <: AbstractProvider<I> where I <: IQ {
         return parse(parser, iqCommon, None)
     }
 
-    /**  
+    /**
      * 解析给定的 XML Pull 解析器中的 IQ 数据，支持外部 XML 环境设置。
      *
      * @param parser XmlPullParser 实例，用于解析 XML 数据
@@ -44,7 +46,7 @@ public abstract class IqProvider<I> <: AbstractProvider<I> where I <: IQ {
         return parse(parser, initialDepth, iqData, xmlEnvironment)
     }
 
-    /**  
+    /**
      * 抽象方法，解析 IQ 数据。
      * 实际解析逻辑由子类实现。
      *

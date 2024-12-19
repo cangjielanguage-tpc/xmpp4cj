@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.feature
 
-/**  
+/**
  * 提供一个机制，用于监听通过指定过滤器的消息包（stanza）。
  * 这允许事件风格的编程——每当发现一个新的消息包时，
  * {@link #processStanza(Stanza)} 方法将被调用。这与 {@link StanzaCollector}
@@ -17,7 +17,7 @@ package xmpp4cj.feature
  * @see XMPPConnection#addAsyncStanzaListener(StanzaListener, xmpp4cj.filter.StanzaFilter)
  */
 public interface StanzaListener <: Hashable & Equatable<StanzaListener> {
-    /**  
+    /**
      * 处理发送到此消息包监听器的下一个消息包。
      * <p>
      * 如果此监听器是同步的，则由单个线程负责调用所有监听器，因此
@@ -43,18 +43,18 @@ public interface StanzaListener <: Hashable & Equatable<StanzaListener> {
     }
 }
 
-/**  
+/**
  * 简单的StanzaListener
  */
 public class SimpleStanzaListener <: StanzaListener {
-    /**  
+    /**
      * 初始化 SimpleStanzaListener
      *
      * @param processor 回调接口
      */
     public SimpleStanzaListener(let processor: (Stanza, StanzaListener) -> Unit) {}
 
-    /**  
+    /**
      * 处理发送到此消息包监听器的下一个消息包。
      * <p>
      * 如果此监听器是同步的，则由单个线程负责调用所有监听器，因此

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
@@ -43,7 +43,7 @@ public class Presence <: MessageOrPresence & PresenceView & ToString {
 
     private var mode: ?PresenceMode = None
 
-    /**  
+    /**
      * 构造一个 Presence 实例，基于给定的 PresenceBuilder。
      *
      * @param presenceBuilder   基于的 PresenceBuilder 对象
@@ -127,7 +127,7 @@ public class Presence <: MessageOrPresence & PresenceView & ToString {
         return ELEMENT
     }
 
-    /**  
+    /**
      * 返回一个构造器来构建当前的消息或存在状态。
      *
      * @return 当前消息或存在状态的构造器。
@@ -136,7 +136,7 @@ public class Presence <: MessageOrPresence & PresenceView & ToString {
         return StanzaBuilder.buildPresenceFrom(this, getStanzaId())
     }
 
-    /**  
+    /**
      * 使用指定的标识符返回一个构造器来构建当前的消息或存在状态。
      *
      * @param id 消息或存在状态的标识符。

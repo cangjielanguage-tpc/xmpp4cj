@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
@@ -18,7 +18,7 @@ public class Session <: SimpleIQ {
      */
     public static let NAMESPACE = "urn:ietf:params:xml:ns:xmpp-session"
 
-    /**  
+    /**
      * 使用指定的元素名称和命名空间构造新的Session实例。
      * IQ节的类型设置为{@link IQ.type#set}。
      */
@@ -28,24 +28,24 @@ public class Session <: SimpleIQ {
     }
 }
 
-/**  
+/**
  * 表示可在XMPP中使用的会话功能元素。
  * 此类可以指示会话功能是否是可选的。
  */
 public class SessionFeature <: ExtensionElement {
-    /**  
+    /**
      * 会话元素的限定名称。
      */
     public static let QNAME = QName(Session.NAMESPACE, Session.ELEMENT)
 
-    /**  
+    /**
      * 表示可选性的元素。
      */
     public static let OPTIONAL_ELEMENT = "optional"
 
     private let optional: Bool // 指示该功能是否可选的标志。
 
-    /**  
+    /**
      * Feature类的构造函数。
      *
      * @param optional 指示此功能是否可选。
@@ -54,7 +54,7 @@ public class SessionFeature <: ExtensionElement {
         this.optional = optional
     }
 
-    /**  
+    /**
      * 检查会话功能是否可选。
      *
      * @return 如果该功能是可选的，则返回true，否则返回false。
@@ -71,7 +71,7 @@ public class SessionFeature <: ExtensionElement {
         return Session.NAMESPACE
     }
 
-    public override func toXML(_: ?XmlEnvironment): XmlStringBuilder {
+    public override func toXML(xmlEnvironment: ?XmlEnvironment): XmlStringBuilder {
         let xml = XmlStringBuilder(this)
         if (optional) {
             xml.rightAngleBracket()

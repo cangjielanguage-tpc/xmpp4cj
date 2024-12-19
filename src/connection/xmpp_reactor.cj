@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
@@ -63,7 +63,7 @@ public class XmppReactor {
      */
     let registrationLock = Monitor()
 
-    /**  
+    /**
      * 保护动作处理的信号量。注意，它初始化为 -1，这意味着 * 一直会有一个线程使用 select()进行 I/O 操作。
      */
     let actionsSemaphore = {
@@ -84,7 +84,7 @@ public class XmppReactor {
      */
     let pendingSetInterestOps: NonBlockingQueue<XmppReactorSetInterestOps> = NonBlockingQueue()
 
-    /**  
+    /**
      * 构造函数，初始化反应器名称并打开选择器。
      *
      * @param reactorName反应器的名称
@@ -95,7 +95,7 @@ public class XmppReactor {
         setReactorThreadCount(DEFAULT_REACTOR_THREAD_COUNT)
     }
 
-    /**  
+    /**
      * 将通道注册到选择器。
      *
      * @param channel 可选择的通道
@@ -116,7 +116,7 @@ public class XmppReactor {
         }
     }
 
-    /**  
+    /**
      * 设置选择键的兴趣操作。
      *
      * @param selectionKey选择键
@@ -128,7 +128,7 @@ public class XmppReactor {
         selector.wakeup()
     }
 
-    /**  
+    /**
      * 调度一个可运行的任务。
      *
      * @param runnable 要调度的任务
@@ -144,7 +144,7 @@ public class XmppReactor {
         return scheduledAction
     }
 
-    /**  
+    /**
      * 取消调度的动作。
      *
      * @param scheduledAction 要取消的调度动作
@@ -154,7 +154,7 @@ public class XmppReactor {
         return scheduledActions.remove(scheduledAction)
     }
 
-    /**  
+    /**
      * 处理已选择的键。
      *
      * @param selectedKeys 已选择的键集合
@@ -168,7 +168,7 @@ public class XmppReactor {
         }
     }
 
-    /**  
+    /**
      * 设置反应线程的数量。
      *
      * @param reactorThreadCount反应线程的数量
@@ -423,23 +423,26 @@ class ReactorThread {
     }
 }
 
+/**
+ * public type XmppReactorChannelSelectedCallback = (SelectableChannel, SelectionKey) -> Unit
+ */
 public type XmppReactorChannelSelectedCallback = (SelectableChannel, SelectionKey) -> Unit
 
-/**  
+/**
  * 选择键附加信息，用于处理通道选择的回调和线程竞争状态。
  */
 public class SelectionKeyAttachment {
-    /**  
+    /**
      * 通道选择回调接口。
      */
     let channelSelectedCallback: XmppReactorChannelSelectedCallback
 
-    /**  
+    /**
      * 原子布尔值，用于跟踪反应线程的竞争状态。
      */
     private let reactorThreadRacing = AtomicBool(false)
 
-    /**  
+    /**
      * 构造函数，初始化通道选择回调。
      *
      * @param channelSelectedCallback 通道选择回调实例
@@ -448,21 +451,21 @@ public class SelectionKeyAttachment {
         this.channelSelectedCallback = channelSelectedCallback
     }
 
-    /**  
+    /**
      * 设置反应线程竞争状态为真。
      */
     public func setRacing(): Unit {
         reactorThreadRacing.store(true)
     }
 
-    /**  
+    /**
      * 重置反应线程竞争状态为假。
      */
     public func resetReactorThreadRacing(): Unit {
         reactorThreadRacing.store(false)
     }
 
-    /**  
+    /**
      * 检查反应线程是否处于竞争状态。
      *
      * @return 如果反应线程处于竞争状态，返回 <code>true</code>；否则返回 <code>false</code>。

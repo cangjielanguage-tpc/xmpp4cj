@@ -1,8 +1,12 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.modular
 
+/**
+ * public abstract class C2sConnectionModule
+ *
+ */
 public abstract class C2sConnectionModule {
     public let moduleDescriptor: ModuleDescriptor
 

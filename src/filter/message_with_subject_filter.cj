@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
-/**  
+/**
  * 过滤拥有至少一个主题的消息 Stanza。
  */
 public class MessageWithSubjectFilter <: FlexibleStanzaTypeFilter<Message> {
@@ -19,7 +19,7 @@ public class MessageWithSubjectFilter <: FlexibleStanzaTypeFilter<Message> {
         super("Message")
     }
 
-    /**  
+    /**
      * 检查指定的消息是否具有主题信息。
      *
      * @param message 要检查的消息对象。

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.proxy
@@ -7,7 +7,7 @@ package xmpp4cj.proxy
  * 处理由代理引发的异常的异常类。
  */
 public class ProxyException <: Exception {
-    /**  
+    /**
      * 根据代理类型和异常信息构造 ProxyException。
      *
      * @param type 代理类型
@@ -17,7 +17,7 @@ public class ProxyException <: Exception {
         super("Proxy Exception ${proxyInfoProxyType.toString()} : ${ex}")
     }
 
-    /**  
+    /**
      * 根据代理类型构造 ProxyException，使用默认的未知错误信息。
      *
      * @param type 代理类型

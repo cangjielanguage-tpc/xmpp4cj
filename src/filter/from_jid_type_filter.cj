@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
-/**  
+/**
  * 基于 'from' XMPP 地址类型的过滤器。
  */
 public class FromJidTypeFilter <: JidTypeAbstractJidTypeFilter {
@@ -12,7 +12,7 @@ public class FromJidTypeFilter <: JidTypeAbstractJidTypeFilter {
      */
     public static let ENTITY_BARE_JID = FromJidTypeFilter(JidTypeAbstractJidTypeFilterJidType.EntityBareJid)
 
-    /**  
+    /**
      * 构造函数，用于创建一个基于指定 JID 类型的过滤器。
      *
      * @param jidType 要匹配的 JID 类型。
@@ -21,7 +21,7 @@ public class FromJidTypeFilter <: JidTypeAbstractJidTypeFilter {
         super(jidType) // 调用父类构造函数  
     }
 
-    /**  
+    /**
      * 从数据包中获取要匹配的 JID，这里是 “from” 字段的地址。
      *
      * @param stanza 要检查的 STANZA 数据包。

@@ -1,32 +1,32 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
-/**  
+/**
  * ZlibXMPP 压缩工厂类，用于创建 Zlib 压缩的 XMPP 输入输出过滤器。
  * 该类实现了 XmppCompressionFactory，并提供了对 Zlib 压缩的支持。
  */
 public class ZlibXmppCompressionFactory <: XmppCompressionFactory {
-    /**  
+    /**
      * 单例实例。
      */
     public static let INSTANCE = ZlibXmppCompressionFactory()
 
-    /**  
+    /**
      * 私有构造函数，初始化工厂，设置压缩类型和级别 。
      */
     private init() {
         super("zlib", 100)
     }
 
-    /**  
+    /**
      * 创建并返回一个新的 Zlib 输入输出过滤器。
      *
-     * @param _ 连接配置
+     * @param config 连接配置
      * @return 返回一个 ZlibXmppInputOutputFilter 实例
      */
-    public override func fabricate(_: ConnectionConfiguration): XmppInputOutputFilter {
+    public override func fabricate(config: ConnectionConfiguration): XmppInputOutputFilter {
         return ZlibXmppInputOutputFilter()
     }
 }
@@ -193,7 +193,7 @@ public class ZlibXmppCompressionFactoryStats <: ToString & Equatable<ZlibXmppCom
      */
     public let maxBytesWrittenAfterFullFlush: Int
 
-    /**  
+    /**
      * 私有构造函数，用于从给定的过滤器初始化统计信息。
      *
      * @param filter 要从中获取统计信息的 ZlibXmppInputOutputFilter
@@ -215,7 +215,7 @@ public class ZlibXmppCompressionFactoryStats <: ToString & Equatable<ZlibXmppCom
      */
     private var toStringCache: ?String = None
 
-    /**  
+    /**
      * 返回压缩和解压缩统计信息的字符串表示。
      *
      * @return 概述统计信息的字符串。

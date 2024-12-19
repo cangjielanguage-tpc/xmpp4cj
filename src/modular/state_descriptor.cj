@@ -1,8 +1,12 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.modular
 
+/**
+ * public abstract class StateDescriptor <: ToString & Hashable & Equatable<StateDescriptor> & ClassIdentify
+ *
+ */
 public abstract class StateDescriptor <: ToString & Hashable & Equatable<StateDescriptor> & ClassIdentify {
     private static let LOGGER = getGlobalLogger(("name", "StateDescriptor"))
 

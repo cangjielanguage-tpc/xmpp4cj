@@ -1,26 +1,26 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.compress
 
-/**  
+/**
  * FailureProvider 类是一个解析器，用于解析 XMPP 协议中的失败（Failure）非自定义数据（Nonza）元素。
  * <p>
  * 该类实现了 NonzaProvider 接口，专门用于创建和处理 Failure 实例。
  * </p>
  */
 public class FailureProvider <: NonzaProvider<Failure> {
-    /**  
+    /**
      * Logger 实例，用于记录日志信息。
      */
     private static let LOGGER = getGlobalLogger(("name", "FailureProvider"))
 
-    /**  
+    /**
      * FailureProvider 的单例实例。
      */
     public static let INSTANCE = FailureProvider()
 
-    /**  
+    /**
      * 私有构造函数，防止外部创建实例。
      * <p>
      * 由于采用单例模式，只允许创建一个 FailureProvider 实例。
@@ -30,7 +30,7 @@ public class FailureProvider <: NonzaProvider<Failure> {
         super("Failure")
     }
 
-    /**  
+    /**
      * 解析给定的 XML 拉解析器中的失败元素。
      *
      * @param parser        用于读取 XML 内容的 XmlPullParser。

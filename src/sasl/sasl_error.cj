@@ -1,11 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.sasl
 
 let SASLError_LOGGER = getGlobalLogger(("name", "SASLError"))
 
-/**  
+/**
  * SASL 错误条件枚举。
  *
  * @see <a href="tools/ietf/org/html/rfc6120#section-6.5">RFC 6120 § 6.5, SASL Errors</a>
@@ -72,7 +72,7 @@ public enum SASLError <: ToString {
         }
     }
 
-    /**  
+    /**
      * 从字符串转换为相应的 SASLError 枚举值。
      *
      * @param string 要转换的字符串

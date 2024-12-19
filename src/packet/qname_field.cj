@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
@@ -54,7 +54,7 @@ extend MessageSubject <: XmlField {
         }
     }
 
-    /**  
+    /**
      * 获取ClassId。
      *
      * @return ClassId。
@@ -63,7 +63,7 @@ extend MessageSubject <: XmlField {
         getClassId()
     }
 
-    /**  
+    /**
      * 获取ClassId。
      *
      * @return ClassId。
@@ -92,7 +92,7 @@ extend MessageThread <: XmlField {
         }
     }
 
-    /**  
+    /**
      * 获取ClassId。
      *
      * @return ClassId。
@@ -101,7 +101,7 @@ extend MessageThread <: XmlField {
         getClassId()
     }
 
-    /**  
+    /**
      * 获取ClassId。
      *
      * @return ClassId。
@@ -130,7 +130,7 @@ extend MessageBody <: XmlField {
         }
     }
 
-    /**  
+    /**
      * 获取ClassId。
      *
      * @return ClassId。
@@ -139,7 +139,7 @@ extend MessageBody <: XmlField {
         getClassId()
     }
 
-    /**  
+    /**
      * 获取ClassId。
      *
      * @return ClassId。
@@ -149,7 +149,7 @@ extend MessageBody <: XmlField {
     }
 }
 
-/* 
+/**
  * 定义所有QName映射 因为不能用反射
  * 扩展的Element应在此注册
  */
@@ -166,7 +166,7 @@ public let QNAME_MAPPING = HashMap<String, QName>(
         ("TlsProceed", TlsProceed.QNAME)
     ]
 )
-/* 
+/**
  * 定义所有ELEMENT映射 因为不能用反射
  * 扩展的Element应在此注册
  */
@@ -188,7 +188,7 @@ public let ELEMENT_MAPPING = HashMap<String, String>(
         ("TlsProceed", TlsProceed.ELEMENT)
     ]
 )
-/* 
+/**
  * 定义所有NAMESPACE映射 因为不能用反射
  * 扩展的Element应在此注册
  */

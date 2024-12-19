@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.util
@@ -16,7 +16,7 @@ public interface Predicate<T> {
     func test(t: T): Bool
 }
 
-/* 
+/**
  * 定义一个泛型类 LambdaPredicate，它实现了 Predicate 接口。
  * 使用lambda构建判定式
  * e.g. let p: Predicate<String> = LambdaPredicate<String>{ x: String => x.size > 0 }
@@ -40,11 +40,24 @@ public class LambdaPredicate<S> <: Predicate<S> {
     }
 }
 
+/**
+ * public type Consumer<T> = (T) -> Unit
+ */
 public type Consumer<T> = (T) -> Unit
 
+/**
+ * public type Supplier<T> = () -> T
+ */
 public type Supplier<T> = () -> T
 
+/**
+ * public type Runnable = () -> Unit
+ */
 public type Runnable = () -> Unit
 
-/* 将Runnable在spawn中执行 */
+/**
+ * public type Executor = (Runnable) -> Unit
+ *
+ * 将Runnable在spawn中执行
+ */
 public type Executor = (Runnable) -> Unit

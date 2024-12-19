@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.util
 
-/*
+/**
  * 可前进后退的迭代器
  */
 public class ListIterator<T> <: Iterator<T> {

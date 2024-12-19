@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
 
-/**  
+/**
+ * public abstract class StanzaBuilder <: StanzaView & ToString
+ *
  * 抽象类 StanzaBuilder，用于构建 XMPP 的 Stanza（消息、存在状态和 IQ 数据）。
  */
 public abstract class StanzaBuilder <: StanzaView & ToString {
@@ -21,7 +23,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
 
     var extensionElements: MultiMap<QName, ExtensionElement> = MultiMap<QName, ExtensionElement>() // 扩展元素  
 
-    /**  
+    /**
      * 通过另一个StanzaBuilder对象构造当前对象。
      *
      * @param other 其他StanzaBuilder对象。
@@ -36,7 +38,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         extensionElements = other.extensionElements.clone()
     }
 
-    /**  
+    /**
      * 通过StanzaIdSource对象构造当前对象。
      *
      * @param stanzaIdSource StanzaIdSource对象。
@@ -46,7 +48,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         this.stanzaId = None
     }
 
-    /**  
+    /**
      * 通过ID构造当前对象。
      *
      * @param stanzaId 消息ID。
@@ -56,7 +58,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         this.stanzaId = StringUtils.requireNullOrNotEmpty(stanzaId, "Stanza ID must not be the empty String")
     }
 
-    /**  
+    /**
      * 通过Stanza对象和ID构造当前对象。
      *
      * @param message Stanza对象。
@@ -71,7 +73,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         extensionElements = message.cloneExtensionsMap()
     }
 
-    /**  
+    /**
      * 通过Stanza对象和StanzaIdSource对象构造当前对象。
      *
      * @param message Stanza对象。
@@ -156,7 +158,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return this
     }
 
-    /**  
+    /**
      * 添加子元素到构建器中。
      *
      * @param extensionElement 要添加的子元素（不能为 null）
@@ -168,7 +170,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return this
     }
 
-    /**  
+    /**
      * 添加可选的多个子元素。
      *
      * @param extensionElements 要添加的子元素集（可以为空，但不能为 null）
@@ -178,7 +180,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return addExtensions(extensionElements ?? return this)
     }
 
-    /**  
+    /**
      * 添加多个子元素。
      *
      * @param extensionElements 要添加的子元素集（不能为 null）
@@ -191,7 +193,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return this
     }
 
-    /**  
+    /**
      * 替换现有的子元素。
      *
      * @param extensionElement 要替换的子元素（不能为 null）
@@ -204,7 +206,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return this
     }
 
-    /**  
+    /**
      * 移除指定的子元素。
      *
      * @param elementName 要移除的元素名称
@@ -217,7 +219,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return this
     }
 
-    /**  
+    /**
      * 移除指定的子元素。
      *
      * @param extension 要移除的子元素（不能为 null）
@@ -230,7 +232,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return this
     }
 
-    /**  
+    /**
      * 构建并返回一个新的 Stanza 实例。
      *
      * @return 新建的 Stanza 实例
@@ -273,7 +275,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return XmppElementUtil.getElementsFrom(extensionElements, extensionElementClass)
     }
 
-    /**  
+    /**
      * 判断是否将构建的 Stanza 设置 ID。
      *
      * @return 如果设置了 ID 返回 true，否则返回 false
@@ -282,7 +284,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return stanzaIdSource.isSome() || StringUtils.isNotEmpty(stanzaId)
     }
 
-    /**  
+    /**
      * 如果没有设置 Stanza ID 则抛出异常。
      *
      * @throws IllegalArgumentException 如果没有设置 Stanza ID
@@ -294,7 +296,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         throw IllegalArgumentException("The builder will not build a stanza with an ID set, although it is required")
     }
 
-    /**  
+    /**
      * 添加特定于 Stanza 的属性。
      *
      * @param builder 用于构建字符串的构建器。
@@ -315,7 +317,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return builder.build()
     }
 
-    /**  
+    /**
      * 创建一个空的MessageBuilder对象。
      *
      * @return MessageBuilder对象。
@@ -324,7 +326,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return buildMessage(None)
     }
 
-    /**  
+    /**
      * 通过入参ID创建一个MessageBuilder对象。
      *
      * @param stanzaId ID。
@@ -334,7 +336,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return MessageBuilder(stanzaId)
     }
 
-    /**  
+    /**
      * 通过ID和内容创建一个MessageBuilder对象。
      *
      * @param message 内容。
@@ -345,7 +347,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return MessageBuilder(message, stanzaId)
     }
 
-    /**  
+    /**
      * 通过ID资源和内容创建一个MessageBuilder对象。
      *
      * @param message 内容。
@@ -356,7 +358,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return MessageBuilder(message, stanzaIdSource)
     }
 
-    /**  
+    /**
      * 创建一个空的PresenceBuilder对象。
      *
      * @return PresenceBuilder对象。
@@ -365,7 +367,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return buildPresence(None)
     }
 
-    /**  
+    /**
      * 通过入参ID创建一个PresenceBuilder对象。
      *
      * @param stanzaId ID。
@@ -375,7 +377,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return PresenceBuilder(stanzaId)
     }
 
-    /**  
+    /**
      * 通过ID和Presence对象创建一个PresenceBuilder对象。
      *
      * @param presence Presence对象。
@@ -386,7 +388,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return PresenceBuilder(presence, stanzaId)
     }
 
-    /**  
+    /**
      * 通过ID资源和Presence对象创建一个PresenceBuilder对象。
      *
      * @param presence Presence对象。
@@ -397,7 +399,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return PresenceBuilder(presence, stanzaIdSource)
     }
 
-    /**  
+    /**
      * 通过入参ID创建一个IqData对象。
      *
      * @param stanzaId ID资源。。
@@ -407,7 +409,7 @@ public abstract class StanzaBuilder <: StanzaView & ToString {
         return IqData(stanzaId)
     }
 
-    /**  
+    /**
      * 通过入参创建一个泛型对象，泛型对象是StanzaBuilder的子类。
      *
      * @param request StanzaView对象

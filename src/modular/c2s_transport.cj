@@ -1,8 +1,12 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.modular
 
+/**
+ * public abstract class C2sTransport <: Hashable & Equatable<C2sTransport>
+ *
+ */
 public abstract class C2sTransport <: Hashable & Equatable<C2sTransport> {
     protected let connectionInternal: C2sConnectionInternal
 
@@ -54,6 +58,10 @@ public abstract class C2sTransport <: Hashable & Equatable<C2sTransport> {
     }
 }
 
+/**
+ * public abstract class C2sTransportStats
+ *
+ */
 public abstract class C2sTransportStats {}
 
 public interface LookupConnectionEndpointsResult {}

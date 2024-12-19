@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
@@ -62,7 +62,7 @@ public class Message <: MessageOrPresence & MessageView & ToString {
         return ELEMENT
     }
 
-    /**  
+    /**
      * 返回一个构造器来构建当前的消息或存在状态。
      *
      * @return 当前消息或存在状态的构造器。
@@ -71,7 +71,7 @@ public class Message <: MessageOrPresence & MessageView & ToString {
         return StanzaBuilder.buildMessageFrom(this, getStanzaId())
     }
 
-    /**  
+    /**
      * 使用指定的标识符返回一个构造器来构建当前的消息或存在状态。
      *
      * @param id 消息或存在状态的标识符。
@@ -404,7 +404,7 @@ public class MessageThread <: ExtensionElement {
 
     private let parent: ?String
 
-    /**  
+    /**
      * 通过线程名称构造当前对象。
      *
      * @param thread 线程名称。
@@ -413,7 +413,7 @@ public class MessageThread <: ExtensionElement {
         this(thread, None)
     }
 
-    /**  
+    /**
      * 通过线程名称和父类名称构造当前对象。
      *
      * @param thread 线程名称。
@@ -424,7 +424,7 @@ public class MessageThread <: ExtensionElement {
         this.parent = StringUtils.requireNullOrNotEmpty(parent, "parent must be None or not empty")
     }
 
-    /**  
+    /**
      * 获取线程名称。
      *
      * @return 线程名称。
@@ -433,7 +433,7 @@ public class MessageThread <: ExtensionElement {
         return thread
     }
 
-    /**  
+    /**
      * 获取父类名称。
      *
      * @return 父类名称。

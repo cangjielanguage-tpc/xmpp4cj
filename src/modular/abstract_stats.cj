@@ -1,8 +1,12 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.modular
 
+/**
+ * public abstract class AbstractStats <: ToString
+ *
+ */
 public abstract class AbstractStats <: ToString {
     public func appendStatsTo(appendable: StringBuilder): Unit
 

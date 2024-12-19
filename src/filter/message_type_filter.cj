@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
-/**  
+/**
  * 过滤特定类型的消息数据包（例如：CHAT）。
  *
  * @see MessageType
@@ -51,7 +51,7 @@ public class MessageTypeFilter <: FlexibleStanzaTypeFilter<Message> {
 
     private let messageType: MessageType // 存储消息类型  
 
-    /**  
+    /**
      * 使用指定的消息类型创建一个新的消息类型过滤器。
      *
      * @param type 消息类型。
@@ -61,7 +61,7 @@ public class MessageTypeFilter <: FlexibleStanzaTypeFilter<Message> {
         this.messageType = messageType
     }
 
-    /**  
+    /**
      * 检查指定的消息是否匹配当前的消息类型。
      *
      * @param message 要检查的消息对象。

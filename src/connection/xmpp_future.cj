@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
-/**  
+/**
+ * public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exception
+ *
  * XmppFuture 是一个抽象类，实现了  CallbackRecipient 接口。
  * <p>
  * 该类用于处理异步操作的结果，包括成功结果和异常处理。
@@ -57,7 +59,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
      */
     private var completionCallback: ?Consumer<XmppFuture<V, E>> = None
 
-    /**  
+    /**
      * 取消当前任务。
      *
      * @param mayInterruptIfRunning 如果为 <code>true</code>，则在任务正在运行时中断任务
@@ -76,7 +78,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
         }
     }
 
-    /**  
+    /**
      * 检查当前任务是否已被取消。
      *
      * @return 如果任务已取消，则返回 <code>true</code>
@@ -87,7 +89,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
         }
     }
 
-    /**  
+    /**
      * 检查当前任务是否已完成。
      *
      * @return 如果任务已完成，则返回 <code>true</code>
@@ -98,7 +100,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
         }
     }
 
-    /**  
+    /**
      * 设置成功回调。
      *
      * @param successCallback 成功回调
@@ -110,7 +112,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
         return this
     }
 
-    /**  
+    /**
      * 设置异常回调。
      *
      * @param exceptionCallback 异常回调
@@ -122,7 +124,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
         return this
     }
 
-    /**  
+    /**
      * 设置完成回调。
      *
      * @param completionCallback 完成回调
@@ -132,7 +134,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
         maybeInvokeCallbacks()
     }
 
-    /**  
+    /**
      * 获取结果或抛出执行异常。
      *
      * @return结果
@@ -150,7 +152,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
         throw CancellationException()
     }
 
-    /**  
+    /**
      * 获取结果，阻塞直到结果可用。
      *
      * @return结果
@@ -166,7 +168,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
         }
     }
 
-    /**  
+    /**
      * 获取结果，抛出异常。
      *
      * @return结果
@@ -189,7 +191,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
         }
     }
 
-    /**  
+    /**
      * 获取结果，带有超时功能。
      *
      * @param timeout 超时时间
@@ -216,7 +218,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
         }
     }
 
-    /**  
+    /**
      * 获取当前可用的结果。
      *
      * @return 当前可用的结果，如果没有可用结果则返回 <code>null</code>
@@ -225,7 +227,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
         return result
     }
 
-    /**  
+    /**
      * 可能调用回调函数。
      * <p>
      * 如果任务已取消或回调已被调用，则不再调用回调。
@@ -250,7 +252,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
         }
     }
 
-    /**  
+    /**
      * 等待直到结果可用。
      *
      * @throws InterruptedException 如果当前线程被中断
@@ -259,7 +261,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
         futureWait(None)
     }
 
-    /**  
+    /**
      * 等待直到结果可用，带有超时功能。
      *
      * @param timeout 超时时间（毫秒）
@@ -274,7 +276,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
         }
     }
 
-    /**  
+    /**
      * 从结果创建 XmppFuture 实例。
      *
      * @param result 结果
@@ -286,7 +288,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
         return future
     }
 
-    /**  
+    /**
      * 等待一组 XmppFuture 完成。
      *
      * @param futures需要等待的 XmppFuture 集合
@@ -317,7 +319,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
  * @param <E> 异常的类型，必须是 Exception 的子类
  */
 public open class InternalXmppFuture<V, E> <: XmppFuture<V, E> where E <: Exception {
-    /**  
+    /**
      * 设置异步操作的结果。
      * <p>
      * 在设置结果后，通知所有等待的线程，并可能调用注册的回调函数。
@@ -333,7 +335,7 @@ public open class InternalXmppFuture<V, E> <: XmppFuture<V, E> where E <: Except
         }
     }
 
-    /**  
+    /**
      * 设置异步操作出现的异常。
      * <p>
      * 在设置异常后，通知所有等待的线程，并可能调用注册的回调函数。
@@ -350,7 +352,7 @@ public open class InternalXmppFuture<V, E> <: XmppFuture<V, E> where E <: Except
     }
 }
 
-/**  
+/**
  * SocketFuture 类扩展了 InternalXmppFuture，用于处理异步 Socket连接的结果。
  * <p>
  * 此类负责创建 Socket，并提供异步连接的功能，同时处理连接过程中的中断和异常。
@@ -377,7 +379,7 @@ public class SocketFuture <: InternalXmppFuture<TcpSocket, Exception> {
      */
     private var wasInterrupted: Bool = false
 
-    /**  
+    /**
      * 构造函数，使用指定的 SocketFactory 创建 Socket。
      *
      * @param socketFactory 用于创建 Socket 的工厂
@@ -387,7 +389,7 @@ public class SocketFuture <: InternalXmppFuture<TcpSocket, Exception> {
         this.socket = socketFactory.createSocket(addr)
     }
 
-    /**  
+    /**
      * 等待异步操作的结果，带有超时功能。
      * <p>
      * 如果在等待过程中被中断，则关闭 Socket（如果尚未关闭），并抛出 InterruptedException。
@@ -408,7 +410,7 @@ public class SocketFuture <: InternalXmppFuture<TcpSocket, Exception> {
         }
     }
 
-    /**  
+    /**
      * 异步连接到指定的 Socket 地址。
      *
      * @param socketAddress目标 Socket 地址 * @param timeout连接超时时间（毫秒）
@@ -434,7 +436,7 @@ public class SocketFuture <: InternalXmppFuture<TcpSocket, Exception> {
         )
     }
 
-    /**  
+    /**
      * 关闭 Socket连接。
      * <p>
      * 如果关闭过程中发生 IOException，将记录警告日志。
@@ -450,6 +452,8 @@ public class SocketFuture <: InternalXmppFuture<TcpSocket, Exception> {
 }
 
 /**
+ * public abstract class InternalProcessStanzaXmppFuture<V, E> <: InternalXmppFuture<V, E> & StanzaListener & ExceptionCallback<E> where E <: Exception
+ *
  * InternalProcessStanzaXmppFuture 是一个抽象类，扩展了 InternalXmppFuture，
  * 同时实现了 StanzaListener 和 ExceptionCallback 接口。
  * <p>
@@ -459,7 +463,7 @@ public class SocketFuture <: InternalXmppFuture<TcpSocket, Exception> {
  * @param <V>结果的类型 * @param <E> 异常的类型，必须是 Exception 的子类
  */
 public abstract class InternalProcessStanzaXmppFuture<V, E> <: InternalXmppFuture<V, E> & StanzaListener & ExceptionCallback<E> where E <: Exception {
-    /**  
+    /**
      * 检查给定的异常是否为非致命异常。
      * <p>
      * 如果此方法返回 <code>false</code>，则将自动将给定的异常设置为失败原因，并通知所有等待的线程。
@@ -470,14 +474,14 @@ public abstract class InternalProcessStanzaXmppFuture<V, E> <: InternalXmppFutur
      */
     protected func isNonFatalException(exception: E): Bool
 
-    /**  
+    /**
      * 处理接收到的 Stanza。
      *
      * @param stanza 接收到的 Stanza 对象
      */
     protected func handleStanza(stanza: Stanza): Unit
 
-    /**  
+    /**
      * 处理异常的方法。
      * <p>
      * 如果捕获到的异常不是非致命异常，则设置此异常并通知所有等待的线程。
@@ -495,7 +499,7 @@ public abstract class InternalProcessStanzaXmppFuture<V, E> <: InternalXmppFutur
         }
     }
 
-    /**  
+    /**
      * 处理 Stanza 的封装方法。
      * <p>
      * 请注意，此方法是 <code>synchronized</code> 的。
@@ -511,6 +515,8 @@ public abstract class InternalProcessStanzaXmppFuture<V, E> <: InternalXmppFutur
 }
 
 /**
+ * public abstract class SimpleInternalProcessStanzaXmppFuture<V, E> <: InternalProcessStanzaXmppFuture<V, E> where E <: Exception
+ *
  * SimpleInternalProcessStanzaXmppFuture 类是 InternalProcessStanzaXmppFuture 的简单实现，
  * 其 isNonFatalException(E) 方法始终返回 <code>false</code>。
  * <p>
@@ -520,7 +526,7 @@ public abstract class InternalProcessStanzaXmppFuture<V, E> <: InternalXmppFutur
  * @param <V> future 返回值的类型
  * @param <E> 异常的类型，必须是 Exception 的子类 */
 public abstract class SimpleInternalProcessStanzaXmppFuture<V, E> <: InternalProcessStanzaXmppFuture<V, E> where E <: Exception {
-    /**  
+    /**
      * 始终返回 <code>false</code>，表示捕获到的异常被视为致命异常。
      *
      * @param exception 要检查的异常

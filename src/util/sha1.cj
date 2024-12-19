@@ -1,25 +1,25 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.util
 
 import crypto.digest.SHA1
 
-/**  
+/**
  * SHA1工具类
  */
 public class SHA1Util {
-    /**  
+    /**
      * 用于 hash 方法的 MessageDigest 实例
      */
     private static let SHA1_DIGEST: SHA1 = SHA1()
 
-    /**  
+    /**
      * 锁
      */
     private static let lock = Monitor()
 
-    /**  
+    /**
      * 计算给定字节数组的 SHA1 哈希值
      *
      * @param bytes 输入的字节数组
@@ -34,7 +34,7 @@ public class SHA1Util {
         }
     }
 
-    /**  
+    /**
      * 计算给定字符串的 SHA1 哈希值
      *
      * @param string 输入的字符串
@@ -44,7 +44,7 @@ public class SHA1Util {
         return bytes(StringUtils.toUtf8Bytes(string))
     }
 
-    /**  
+    /**
      * 将字节数组转换为十六进制字符串
      *
      * @param bytes 输入的字节数组
@@ -54,7 +54,7 @@ public class SHA1Util {
         return StringUtils.encodeHex(SHA1Util.bytes(bytes))
     }
 
-    /**  
+    /**
      * 将字符串转换为十六进制字符串
      *
      * @param string 输入的字符串

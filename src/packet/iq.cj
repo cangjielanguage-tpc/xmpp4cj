@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
@@ -32,6 +32,8 @@ public interface IqView <: StanzaView & ToString {
 }
 
 /**
+ * public abstract class IQ <: Stanza & IqView
+ *
  * 基础 IQ（信息/查询）包。IQ 包用于在服务器上获取和设置信息，包括认证、通讯录操作和创建账户。每个 IQ 节都有一个特定的类型，指示正在采取的操作类型：“get”、“set”、“result”或“error”。<p>
  *
  * IQ 包可以包含一个存在于特定 XML 命名空间中的子元素。元素名称和命名空间的组合决定了它是哪种类型的 IQ 节。一些 IQ 子包片段的示例：<ul>
@@ -63,7 +65,7 @@ public abstract class IQ <: Stanza & IqView {
      */
     protected var typ: IQType = IQType.get
 
-    /**  
+    /**
      * 使用现有 IQ 对象初始化新 IQ 对象。
      *
      * @param iq 现有的 IQ 对象。
@@ -76,7 +78,7 @@ public abstract class IQ <: Stanza & IqView {
         this.childElementQName = iq.childElementQName
     }
 
-    /**  
+    /**
      * 使用子元素名称和命名空间初始化 IQ 对象。
      * <p>
      * 该构造函数将被弃用，待数据包构造器准备就绪后。
@@ -89,7 +91,7 @@ public abstract class IQ <: Stanza & IqView {
         this(IqData.EMPTY, childElementName, childElementNamespace)
     }
 
-    /**  
+    /**
      * 使用 IQ Builder 和子元素名称及命名空间初始化 IQ 对象。
      *
      * @param iqBuilder IQ 的 Builder 对象
@@ -107,7 +109,7 @@ public abstract class IQ <: Stanza & IqView {
         )
     }
 
-    /**  
+    /**
      * 使用 IQ Builder 和子元素的 QName 初始化 IQ 对象。
      *
      * @param iqBuilder IQ 的 Builder 对象
@@ -127,7 +129,7 @@ public abstract class IQ <: Stanza & IqView {
         }
     }
 
-    /**  
+    /**
      * 获取 IQ 数据包的类型。
      *
      * @return IQ 的类型。
@@ -148,7 +150,7 @@ public abstract class IQ <: Stanza & IqView {
         this.typ = typ
     }
 
-    /**  
+    /**
      * 获取子元素的QName。
      *
      * @return 子元素的QName。
@@ -157,7 +159,7 @@ public abstract class IQ <: Stanza & IqView {
         return childElementQName
     }
 
-    /**  
+    /**
      * 获取子元素的名称。
      *
      * @return 子元素的名称。
@@ -166,7 +168,7 @@ public abstract class IQ <: Stanza & IqView {
         return childElementName
     }
 
-    /**  
+    /**
      * 获取子元素的命名空间。
      *
      * @return 子元素的命名空间。
@@ -175,7 +177,7 @@ public abstract class IQ <: Stanza & IqView {
         return childElementNamespace
     }
 
-    /**  
+    /**
      * 获取当前元素的标识。
      *
      * @return 当前元素的标识。
@@ -234,13 +236,9 @@ public abstract class IQ <: Stanza & IqView {
         }
 
         // Add the query section if there is one.
-        let iqChildElement = if (let Some(v) <- getIQChildElementBuilder(
+        let iqChildElement = getIQChildElementBuilder(
             IQChildElementXmlStringBuilder(getChildElementName(), getChildElementNamespace(), None,
-            xml.getXmlEnvironment()))) {
-            v
-        } else {
-            return
-        }
+            xml.getXmlEnvironment())) ?? return;;
         xml.append(iqChildElement)
         let extensionsXml = getExtensions()
         if (iqChildElement.isEmptyElement) {
@@ -438,7 +436,7 @@ public enum IQResponseType <: ToString & Equatable<IQResponseType> {
     }
 }
 
-/**  
+/**
  * {@code IQChildElementXmlStringBuilder} 是一个用于构建 IQ 数据包子元素的 XML 字符串构造器。
  * <p>
  * 此类扩展了 {@link XmlStringBuilder}，用于生成特定于 IQ 数据包的 XML 子元素的字符串表示。
@@ -450,7 +448,7 @@ public class IQChildElementXmlStringBuilder <: XmlStringBuilder {
 
     var isEmptyElement: Bool = false // 指示当前构建器是否应生成一个空元素  
 
-    /**  
+    /**
      * 使用给定的扩展元素和 XML 环境初始化 {@code IQChildElementXmlStringBuilder}。
      *
      * @param extensionElement 要构建的扩展元素。
@@ -465,7 +463,7 @@ public class IQChildElementXmlStringBuilder <: XmlStringBuilder {
         )
     }
 
-    /**  
+    /**
      * 使用指定的元素名称、命名空间、语言和 XML 环境初始化 {@code IQChildElementXmlStringBuilder} 实例。
      *
      * @param elementName 元素的名称。
@@ -478,7 +476,7 @@ public class IQChildElementXmlStringBuilder <: XmlStringBuilder {
         this.elementName = elementName
     }
 
-    /**  
+    /**
      * 设置构建器为生成一个空元素。
      * <p>
      * 该方法被调用后，在构建 XML 时，将生成自闭合的 XML 元素。

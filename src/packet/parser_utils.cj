@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
 
-/**  
+/**
  * {@code ParserUtils} 提供了一些实用工具方法，用于处理和解析 XML 数据，特别是在 XMPP 环境中。
  * <p>
  * 此类包含多种方法，用于解析 XML 属性及其中的内容，以便处理 XMPP 相关的 JID、日期、数量等数据类型。
@@ -15,7 +15,7 @@ public class ParserUtils {
      */
     public static let JID = "jid"
 
-    /**  
+    /**
      * 检查解析器当前位置是否在起始标签上。
      *
      * @param parser XML 解析器实例。
@@ -25,7 +25,7 @@ public class ParserUtils {
         assert(parser.getEventType() == XmlPullParserEvent.START_ELEMENT)
     }
 
-    /**  
+    /**
      * 检查解析器当前位置是否在起始标签上。
      *
      * @param parser XML 解析器实例。
@@ -36,7 +36,7 @@ public class ParserUtils {
         assert(name == parser.getName())
     }
 
-    /**  
+    /**
      * 检查解析器当前位置是否在结束标签上。
      *
      * @param parser XML 解析器实例。
@@ -46,7 +46,7 @@ public class ParserUtils {
         assert(parser.getEventType() == XmlPullParserEvent.END_ELEMENT)
     }
 
-    /**  
+    /**
      * 将解析器向前移动到第一个起始标签。
      *
      * @param parser XML 解析器实例。
@@ -64,7 +64,7 @@ public class ParserUtils {
         }
     }
 
-    /**  
+    /**
      * 将解析器向前移动到指定深度的结束标签。
      *
      * @param parser XML 解析器实例。
@@ -80,7 +80,7 @@ public class ParserUtils {
         }
     }
 
-    /**  
+    /**
      * 获取解析器的 JID 属性值。
      *
      * @param parser XML 解析器实例。
@@ -91,7 +91,7 @@ public class ParserUtils {
         return getJidAttribute(parser, JID)
     }
 
-    /**  
+    /**
      * 获取指定名称的 JID 属性值。
      *
      * @param parser XML 解析器实例。
@@ -100,15 +100,11 @@ public class ParserUtils {
      * @throws XmppStringprepException 如果 JID 格式不正确。
      */
     public static func getJidAttribute(parser: XmlPullParser, name: String): ?Jid {
-        let jidString = if (let Some(v) <- parser.getAttributeValue("", name)) {
-            v
-        } else {
-            return None
-        }
+        let jidString = parser.getAttributeValue("", name) ?? return None
         return JidCreate.froms(jidString)
     }
 
-    /**  
+    /**
      * 获取解析器的裸 JID 属性值。
      *
      * @param parser XML 解析器实例。
@@ -118,7 +114,7 @@ public class ParserUtils {
         return getBareJidAttribute(parser, JID)
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取指定名称的 EntityBareJid 属性。
      *
      * @param parser XML 解析器实例
@@ -127,15 +123,11 @@ public class ParserUtils {
      * @throws XmppStringprepException 如果 JID 格式不正确
      */
     public static func getBareJidAttribute(parser: XmlPullParser, name: String): ?EntityBareJid {
-        let jidString = if (let Some(v) <- parser.getAttributeValue("", name)) {
-            v
-        } else {
-            return None
-        }
+        let jidString = parser.getAttributeValue("", name) ?? return None
         return JidCreate.entityBareFrom(jidString)
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取 JID 的完整地址。
      *
      * @param parser XML 解析器实例
@@ -146,7 +138,7 @@ public class ParserUtils {
         return getFullJidAttribute(parser, JID)
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取指定名称的完整 JID 属性。
      *
      * @param parser XML 解析器实例
@@ -159,7 +151,7 @@ public class ParserUtils {
         return JidCreate.entityFullFrom(jidString)
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取指定名称的 JID 属性。
      *
      * @param parser XML 解析器实例
@@ -181,7 +173,7 @@ public class ParserUtils {
         return bareJid ?? None
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取指定名称的 Resourcepart 属性。
      *
      * @param parser XML 解析器实例
@@ -194,7 +186,7 @@ public class ParserUtils {
         return Resourcepart.froms(resourcepartString)
     }
 
-    /**  
+    /**
      * 解析代表布尔值的字符串。
      *
      * @param booleanString 布尔字符串，应该是 "true", "false", "1", 或 "0"
@@ -209,7 +201,7 @@ public class ParserUtils {
         }
     }
 
-    /**  
+    /**
      * 获取指定名称的布尔属性值。
      *
      * @param parser XML 解析器实例
@@ -222,7 +214,7 @@ public class ParserUtils {
         return parseXmlBool(valueString)
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取指定名称的布尔值属性。
      *
      * @param parser      XML 解析器实例
@@ -239,7 +231,7 @@ public class ParserUtils {
         }
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取下一个文本并将其解析为 Byte。
      *
      * @param parser XML 解析器实例
@@ -252,7 +244,7 @@ public class ParserUtils {
         return UInt8.parse(nextText)
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取指定名称的整数属性，如果未找到则抛出异常。
      *
      * @param parser      XML 解析器实例
@@ -266,7 +258,7 @@ public class ParserUtils {
         return res.getOrThrow({=> IOException(throwMessage)})
     }
 
-    /**  
+    /**
      * 获取指定名称的整数属性值。
      *
      * @param parser XML 解析器实例
@@ -278,7 +270,7 @@ public class ParserUtils {
         return Int.parse(valueString)
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取指定名称的整数属性值，若未找到则返回默认值。
      *
      * @param parser      XML 解析器实例
@@ -295,7 +287,7 @@ public class ParserUtils {
         }
     }
 
-    /**  
+    /**
      * 获取指定名称的无符号 16 位整数属性值。
      *
      * @param parser XML 解析器实例
@@ -307,7 +299,7 @@ public class ParserUtils {
         return UInt16.parse(integer)
     }
 
-    /**  
+    /**
      * 获取指定名称的必需的无符号 16 位整数属性值。
      *
      * @param parser XML 解析器实例
@@ -320,7 +312,7 @@ public class ParserUtils {
         return uint16.getOrThrow({=> XmppRequiredAttributeMissingException(name)})
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取下一个文本并将其解析为整数。
      *
      * @param parser XML 解析器实例
@@ -333,7 +325,7 @@ public class ParserUtils {
         return Int.parse(intString)
     }
 
-    /**  
+    /**
      * 获取指定名称的长整型属性值。
      *
      * @param parser XML 解析器实例
@@ -345,7 +337,7 @@ public class ParserUtils {
         return Int64.parse(valueString)
     }
 
-    /**  
+    /**
      * 获取指定名称的长整型属性值，若未找到则返回默认值。
      *
      * @param parser      XML 解析器实例
@@ -358,7 +350,7 @@ public class ParserUtils {
         l ?? defaultValue
     }
 
-    /**  
+    /**
      * 获取指定名称的无符号 32 位整数属性值。
      *
      * @param parser XML 解析器实例
@@ -370,7 +362,7 @@ public class ParserUtils {
         return UInt64(l)
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取下一个文本并将其解析为 double 类型。
      *
      * @param parser XML 解析器实例
@@ -383,7 +375,7 @@ public class ParserUtils {
         return Float64.parse(doubleString)
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取指定名称的双精度浮点数属性值。
      *
      * @param parser XML 解析器实例
@@ -395,7 +387,7 @@ public class ParserUtils {
         return Float64.parse(valueString)
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取指定名称的双精度浮点数属性值，如果未找到则返回默认值。
      *
      * @param parser      XML 解析器实例
@@ -408,7 +400,7 @@ public class ParserUtils {
         return d ?? Float64(defaultValue)
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取指定名称的短整型属性值。
      *
      * @param parser XML 解析器实例
@@ -420,7 +412,7 @@ public class ParserUtils {
         return Int16.parse(valueString)
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取指定名称的短整型属性值，如果未找到则返回默认值。
      *
      * @param parser      XML 解析器实例
@@ -433,7 +425,7 @@ public class ParserUtils {
         return s ?? defaultValue
     }
 
-    /**  
+    /**
      * 从 XEP-0082 格式的字符串中获取日期，如果字符串为 null，则返回 null。
      *
      * @param dateString 日期字符串
@@ -445,7 +437,7 @@ public class ParserUtils {
         return getDateFromXep82String(str)
     }
 
-    /**  
+    /**
      * 从 XEP-0082 格式的字符串中获取日期。
      *
      * @param dateString 日期字符串
@@ -460,7 +452,7 @@ public class ParserUtils {
         }
     }
 
-    /**  
+    /**
      * 从标准日期字符串中获取日期。
      *
      * @param dateString 日期字符串
@@ -475,7 +467,7 @@ public class ParserUtils {
         }
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取下一个文本并将其解析为日期。
      *
      * @param parser XML 解析器实例
@@ -489,7 +481,7 @@ public class ParserUtils {
         return getDateFromString(dateString)
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取下一个文本并将其解析为 URI。
      *
      * @param parser XML 解析器实例
@@ -507,7 +499,7 @@ public class ParserUtils {
         }
     }
 
-    /**  
+    /**
      * 获取 XML 解析器中的必需属性值。如果属性不存在或为空则抛出异常。
      *
      * @param parser XML 解析器实例
@@ -523,7 +515,7 @@ public class ParserUtils {
         return value.getOrThrow()
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取下一个文本并返回该文本。如果文本为空，则抛出异常。
      *
      * @param parser XML 解析器实例
@@ -539,7 +531,7 @@ public class ParserUtils {
         return text
     }
 
-    /**  
+    /**
      * 获取当前 XML 语言属性的值，若未找到则返回 XML 环境中定义的有效语言。
      *
      * @param parser XML 解析器实例
@@ -554,7 +546,7 @@ public class ParserUtils {
         return xmlEnvironment.getEffectiveLanguage()
     }
 
-    /**  
+    /**
      * 从 XML 解析器中获取指定属性的 Internet 地址，忽略区域 ID 属性。
      *
      * @param parser XML 解析器实例
@@ -566,7 +558,7 @@ public class ParserUtils {
         return IPSocketAddress.tryParse(inetAddressString)
     }
 
-    /**  
+    /**
      * 获取 XML 中定义的语言属性值。
      *
      * @param parser XML 解析器实例

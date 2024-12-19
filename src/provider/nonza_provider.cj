@@ -1,8 +1,12 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.provider
 
+/**
+ * public abstract class NonzaProvider<N> <: Provider<N> where N <: Element
+ *
+ */
 public abstract class NonzaProvider<N> <: Provider<N> where N <: Element {
     public init(elementClass: ClassId) {
         super(elementClass)

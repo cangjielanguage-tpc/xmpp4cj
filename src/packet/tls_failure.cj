@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
@@ -59,7 +59,7 @@ public class TlsFailure <: Nonza {
      * @param enclosingNamespace 包含的命名空间
      * @return XML 字符串
      */
-    public override func toXML(_: ?XmlEnvironment): ToString {
+    public override func toXML(xmlEnvironment: ?XmlEnvironment): ToString {
         return "<${ELEMENT} xmlns='${NAMESPACE}'/>"
     }
 }

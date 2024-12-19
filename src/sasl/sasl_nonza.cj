@@ -1,16 +1,16 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.sasl
 
-/**  
+/**
  * SASL 接口，扩展了 Nonza 接口。
  * <p>
  * 此接口定义了 SASL 的命名空间常量，并提供了获取命名空间的方法。
  * </p>
  */
 public interface SaslNonza <: Nonza {
-    /**  
+    /**
      * 定义 SASL 的 XML 命名空间
      */
     static prop NAMESPACE: String {
@@ -19,7 +19,7 @@ public interface SaslNonza <: Nonza {
         }
     }
 
-    /**  
+    /**
      * 获取命名空间。
      *
      * @return 返回 SASL 的命名空间字符串
@@ -33,12 +33,12 @@ public interface SaslNonza <: Nonza {
  * 启动 SASL 认证，通过选择认证机制。
  */
 public class SaslNonzaAuthMechanism <: SaslNonza {
-    /**  
+    /**
      *  定义 XML 元素名称
      */
     public static let ELEMENT = "auth"
 
-    /**  
+    /**
      * 定义 QName，用于指定命名空间和元素名称
      */
     public static let QNAME = QName(NAMESPACE, ELEMENT)
@@ -49,17 +49,17 @@ public class SaslNonzaAuthMechanism <: SaslNonza {
         NAMESPACE_MAPPING.put("SaslNonzaAuthMechanism", NAMESPACE)
     }
 
-    /**  
+    /**
      * 认证机制
      */
     private let mechanism: String
 
-    /**  
+    /**
      * 认证文本
      */
     private let authenticationText: String
 
-    /**  
+    /**
      * 构造函数，用于初始化 AuthMechanism 实例。
      *
      * @param mechanism         SASL 认证机制
@@ -72,7 +72,7 @@ public class SaslNonzaAuthMechanism <: SaslNonza {
             "SASL authenticationText must not be null nor empty (RFC6120 6.4.2)")
     }
 
-    /**  
+    /**
      * 将 XmlEnvironment 转换为 XML 字符串。
      *
      * @param xmlEnvironment XML 环境
@@ -86,7 +86,7 @@ public class SaslNonzaAuthMechanism <: SaslNonza {
         return xml
     }
 
-    /**  
+    /**
      * 获取 SASL 认证机制。
      *
      * @return 返回 SASL 认证机制
@@ -95,7 +95,7 @@ public class SaslNonzaAuthMechanism <: SaslNonza {
         return mechanism
     }
 
-    /**  
+    /**
      * 获取 SASL 认证文本。
      *
      * @return 返回 SASL 认证文本
@@ -104,7 +104,7 @@ public class SaslNonzaAuthMechanism <: SaslNonza {
         return authenticationText
     }
 
-    /**  
+    /**
      * 获取元素名称。
      *
      * @return 返回元素名称
@@ -139,7 +139,7 @@ public class SaslNonzaChallenge <: SaslNonza {
      */
     private let data: ?String
 
-    /**  
+    /**
      * 构造函数，用于初始化 Challenge 实例。
      *
      * @param data 挑战数据
@@ -148,7 +148,7 @@ public class SaslNonzaChallenge <: SaslNonza {
         this.data = StringUtils.returnIfNotEmptyTrimmed(data)
     }
 
-    /**  
+    /**
      * 获取数据。
      *
      * @return 返回数据
@@ -157,7 +157,7 @@ public class SaslNonzaChallenge <: SaslNonza {
         return data
     }
 
-    /**  
+    /**
      * 将 XmlEnvironment 转换为 XML 字符串。
      *
      * @param xmlEnvironment XML 环境
@@ -169,7 +169,7 @@ public class SaslNonzaChallenge <: SaslNonza {
         return xml
     }
 
-    /**  
+    /**
      * 获取元素名称。
      *
      * @return 返回元素名称
@@ -204,7 +204,7 @@ public class SaslNonzaResponse <: SaslNonza {
      */
     private let authenticationText: ?String
 
-    /**  
+    /**
      * 无参构造函数，初始化 Response 实例。
      * 认证文本将设为 None
      */
@@ -212,7 +212,7 @@ public class SaslNonzaResponse <: SaslNonza {
         authenticationText = None
     }
 
-    /**  
+    /**
      * 带参数的构造函数，用于初始化 Response 实例。
      *
      * @param authenticationText SASL 认证文本
@@ -221,7 +221,7 @@ public class SaslNonzaResponse <: SaslNonza {
         this.authenticationText = StringUtils.returnIfNotEmptyTrimmed(authenticationText)
     }
 
-    /**  
+    /**
      * 将 XmlEnvironment 转换为 XML 字符串。
      *
      * @param xmlEnvironment XML 环境
@@ -233,7 +233,7 @@ public class SaslNonzaResponse <: SaslNonza {
         return xml
     }
 
-    /**  
+    /**
      * 获取 SASL 认证文本。
      *
      * @return 返回 SASL 认证文本
@@ -242,7 +242,7 @@ public class SaslNonzaResponse <: SaslNonza {
         return authenticationText
     }
 
-    /**  
+    /**
      * 获取元素名称。
      *
      * @return 返回元素名称
@@ -277,7 +277,7 @@ public class SaslNonzaSuccess <: SaslNonza {
      */
     private let data: ?String
 
-    /**  
+    /**
      * 构造一个新的 SASL 成功流元素，可以包含 SASL 层的可选附加数据。(RFC6120 6.3.10)
      *
      * @param data SASL 层的附加数据，或 <code>None</code>
@@ -286,7 +286,7 @@ public class SaslNonzaSuccess <: SaslNonza {
         this.data = StringUtils.returnIfNotEmptyTrimmed(data)
     }
 
-    /**  
+    /**
      * 返回 SASL 层的附加数据或 <code>None</code>。
      *
      * @return 附加数据或 <code>None</code>
@@ -295,7 +295,7 @@ public class SaslNonzaSuccess <: SaslNonza {
         return data
     }
 
-    /**  
+    /**
      * 将 XmlEnvironment 转换为 XML 字符串。
      *
      * @param xmlEnvironment XML 环境
@@ -307,7 +307,7 @@ public class SaslNonzaSuccess <: SaslNonza {
         return xml
     }
 
-    /**  
+    /**
      * 获取元素名称。
      *
      * @return 返回元素名称
@@ -317,7 +317,7 @@ public class SaslNonzaSuccess <: SaslNonza {
     }
 }
 
-/**  
+/**
  * 表示 SASL 失败的流元素，也称为 "SASL 错误"。
  *
  * @see <a href="xmpp/org/rfcs/rfc6120.html#sasl-errors">RFC 6120 6.5 SASL Errors</a>
@@ -343,7 +343,7 @@ public class SaslNonzaSASLFailure <: AbstractError & SaslNonza & ToString {
 
     private let saslErrorString: String // SASL 错误的字符串表示  
 
-    /**  
+    /**
      * 根据给定的 SASL 错误字符串构造 SASLFailure 对象。
      *
      * @param saslError SASL 错误字符串
@@ -352,7 +352,7 @@ public class SaslNonzaSASLFailure <: AbstractError & SaslNonza & ToString {
         this(saslError, None)
     }
 
-    /**  
+    /**
      * 根据给定的 SASL 错误字符串及描述性文本构造 SASLFailure 对象。
      *
      * @param saslError SASL 错误字符串
@@ -365,7 +365,7 @@ public class SaslNonzaSASLFailure <: AbstractError & SaslNonza & ToString {
         this.saslErrorString = saslError
     }
 
-    /**  
+    /**
      * 获取与 SASL 相关的错误条件。
      *
      * @return 与 SASL 相关的错误条件
@@ -374,7 +374,7 @@ public class SaslNonzaSASLFailure <: AbstractError & SaslNonza & ToString {
         return saslError
     }
 
-    /**  
+    /**
      * 获取 SASL 错误的字符串表示。
      *
      * @return SASL 错误的字符串
@@ -383,13 +383,13 @@ public class SaslNonzaSASLFailure <: AbstractError & SaslNonza & ToString {
         return saslErrorString
     }
 
-    /**  
+    /**
      * 将 XmlEnvironment 转换为 XML 字符串。
      *
-     * @param _ XML 环境
+     * @param xmlEnvironment XML 环境
      * @return              返回表示该实例的 XML 字符串
      */
-    public override func toXML(_: ?XmlEnvironment): XmlStringBuilder {
+    public override func toXML(xmlEnvironment: ?XmlEnvironment): XmlStringBuilder {
         let xml = XmlStringBuilder()
         xml.halfOpenElement(ELEMENT)
         xml.xmlnsAttribute(NAMESPACE)
@@ -404,7 +404,7 @@ public class SaslNonzaSASLFailure <: AbstractError & SaslNonza & ToString {
         return toXML().toString()
     }
 
-    /**  
+    /**
      * 获取元素名称。
      *
      * @return 返回元素名称

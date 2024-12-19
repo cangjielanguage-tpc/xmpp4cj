@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
 /**
+ * public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify
+ *
  * 这个抽象类通常用作诸如TCP和BOSH等XMPP连接机制的超类。
  * 它提供了用于连接状态管理的一系列方法，这些方法在连接的不同阶段发挥作用，具体如下：
  * - {@link #connect()}：用于建立连接的相关操作。
@@ -1819,19 +1821,19 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 }
 
-/**  
+/**
  * 表示同步点不同状态的枚举。
  */
 public enum SyncPointState <: Equatable<SyncPointState> {
-    /**  
+    /**
      * 同步点的初始状态。
      */
     | initial
-    /**  
+    /**
      * 发送请求。
      */
     | request_sent
-    /**  
+    /**
      * 同步点已成功完成的状态。
      */
     | successful

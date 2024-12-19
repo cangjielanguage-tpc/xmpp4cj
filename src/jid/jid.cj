@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.jid
@@ -496,8 +496,9 @@ public interface DomainBareJid <: Jid & BareJid & DomainJid {
 }
 
 /**
- * Jid抽象类。
+ * public abstract class AbstractJid <: Jid
  *
+ * Jid抽象类。
  * @see Jid
  */
 public abstract class AbstractJid <: Jid {
@@ -707,30 +708,30 @@ public class DomainAndResourcepartJid <: AbstractJid & DomainFullJid {
     /**
      * 参见 {@link #isParentOf(Jid)}。
      *
-     * @param _ 完整 JID。
+     * @param entityBareJid 完整 JID。
      * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
      */
-    public override func isParentOf(_: EntityBareJid): Bool {
+    public override func isParentOf(entityBareJid: EntityBareJid): Bool {
         return false
     }
 
     /**
      * 参见 {@link #isParentOf(Jid)}。
      *
-     * @param _ 域裸 JID。
+     * @param entityFullJid 域裸 JID。
      * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
      */
-    public override func isParentOf(_: EntityFullJid): Bool {
+    public override func isParentOf(entityFullJid: EntityFullJid): Bool {
         return false
     }
 
     /**
      * 参见 {@link #isParentOf(Jid)}。
      *
-     * @param _ 域完整 JID。
+     * @param domainBareJid 域完整 JID。
      * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
      */
-    public override func isParentOf(_: DomainBareJid): Bool {
+    public override func isParentOf(domainBareJid: DomainBareJid): Bool {
         return false
     }
 
@@ -927,20 +928,20 @@ public class LocalAndDomainpartJid <: AbstractJid & EntityBareJid {
     /**
      * 参见 {@link #isParentOf(Jid)}。
      *
-     * @param _ 域裸 JID。
+     * @param domainBareJid 域裸 JID。
      * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
      */
-    public override func isParentOf(_: DomainBareJid): Bool {
+    public override func isParentOf(domainBareJid: DomainBareJid): Bool {
         return false
     }
 
     /**
      * 参见 {@link #isParentOf(Jid)}。
      *
-     * @param _ 域完整 JID。
+     * @param domainFullJid 域完整 JID。
      * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
      */
-    public override func isParentOf(_: DomainFullJid): Bool {
+    public override func isParentOf(domainFullJid: DomainFullJid): Bool {
         return false
     }
 
@@ -1060,7 +1061,7 @@ public class LocalDomainAndResourcepartJid <: AbstractJid & EntityFullJid {
      * @param bareJid 裸 JID。
      * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
      */
-    public override func isParentOf(_: EntityBareJid): Bool {
+    public override func isParentOf(bareJid: EntityBareJid): Bool {
         return false
     }
 
@@ -1071,20 +1072,20 @@ public class LocalDomainAndResourcepartJid <: AbstractJid & EntityFullJid {
     /**
      * 参见 {@link #isParentOf(Jid)}。
      *
-     * @param _ 域裸 JID。
+     * @param domainBareJid 域裸 JID。
      * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
      */
-    public override func isParentOf(_: DomainBareJid): Bool {
+    public override func isParentOf(domainBareJid: DomainBareJid): Bool {
         return false
     }
 
     /**
      * 参见 {@link #isParentOf(Jid)}。
      *
-     * @param _ 域完整 JID。
+     * @param domainFullJid 域完整 JID。
      * @return 如果这个 JID 是给定 JID 的父级，则返回 true。
      */
-    public override func isParentOf(_: DomainFullJid): Bool {
+    public override func isParentOf(domainFullJid: DomainFullJid): Bool {
         return false
     }
 

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.provider
@@ -10,7 +10,7 @@ package xmpp4cj.provider
 public class PacketParserUtils {
     private static let LOGGER = getGlobalLogger(("name", "PacketParserUtils"))
 
-    /**  
+    /**
      * 从给定的字符串获取 XMLPullParser 实例。
      *
      * @param stanza 要解析的 stanzas（数据包）的字符串表示。
@@ -24,7 +24,7 @@ public class PacketParserUtils {
         return getParserFor(input)
     }
 
-    /**  
+    /**
      * 从输入流获取 XMLPullParser 实例。
      *
      * @param inputStream 输入流。
@@ -37,7 +37,7 @@ public class PacketParserUtils {
         return parser
     }
 
-    /**  
+    /**
      * 解析给定的 stanzas 字符串为 {@link Stanza} 对象。
      *
      * @param stanza XML 格式的 stanzas 字符串。
@@ -51,7 +51,7 @@ public class PacketParserUtils {
         return (parseStanza(getParserFor(stanza), XmlEnvironment.EMPTY) as S).getOrThrow()
     }
 
-    /**  
+    /**
      * 解析 XMLPullParser 中的 Stanza。
      *
      * @param parser XMLPullParser 实例。
@@ -87,7 +87,7 @@ public class PacketParserUtils {
         return stanzaBuilder
     }
 
-    /**  
+    /**
      * 解析给定的 XMLPullParser 中的消息。
      *
      * @param parser XMLPullParser 实例，用于解析消息。
@@ -100,7 +100,7 @@ public class PacketParserUtils {
         return parseMessage(parser, XmlEnvironment.EMPTY)
     }
 
-    /**  
+    /**
      * 解析给定的 XMLPullParser 中的消息，并考虑外部 XML 环境。
      *
      * @param parser XMLPullParser 实例，用于解析消息。
@@ -145,7 +145,7 @@ public class PacketParserUtils {
         return message.build()
     }
 
-    /**  
+    /**
      * 解析给定元素的文本内容。
      *
      * @param parser XMLPullParser 实例，并处于开始标签位置。
@@ -174,7 +174,7 @@ public class PacketParserUtils {
         return res
     }
 
-    /**  
+    /**
      * 解析指定的 XML 元素，返回其内容。
      *
      * @param parser XMLPullParser 实例，并处于开始标签位置。
@@ -186,7 +186,7 @@ public class PacketParserUtils {
         return parseElement(parser, false)
     }
 
-    /**  
+    /**
      * 解析指定的 XML 元素，返回其内容，可以选择解析完整命名空间。
      *
      * @param parser XMLPullParser 实例，并处于开始标签位置。
@@ -200,7 +200,7 @@ public class PacketParserUtils {
         return parseContentDepth(parser, parser.getDepth(), fullNamespaces)
     }
 
-    /**  
+    /**
      * 解析在指定深度开始的内容。
      *
      * @param parser XMLPullParser 实例，用于解析内容。
@@ -213,7 +213,7 @@ public class PacketParserUtils {
         return parseContentDepth(parser, depth, false)
     }
 
-    /**  
+    /**
      * 解析在指定深度开始的内容，支持完全命名空间的解析选择。
      *
      * @param parser XMLPullParser 实例，用于解析内容。
@@ -319,7 +319,7 @@ public class PacketParserUtils {
         return sb
     }
 
-    /**  
+    /**
      * 解析 Presence 数据包。
      *
      * @param parser XMLPullParser 实例，用于解析 Presence 数据包。
@@ -332,7 +332,7 @@ public class PacketParserUtils {
         return parsePresence(parser, XmlEnvironment.EMPTY)
     }
 
-    /**  
+    /**
      * 解析 Presence 数据包，并考虑外部 XML 环境。
      *
      * @param parser XMLPullParser 实例，用于解析 Presence 数据包。
@@ -398,7 +398,7 @@ public class PacketParserUtils {
         return presence.build()
     }
 
-    /**  
+    /**
      * 解析 IQ 数据包。
      *
      * @param parser XMLPullParser 实例，用于解析 IQ 数据包。
@@ -409,7 +409,7 @@ public class PacketParserUtils {
         return parseIQ(parser, None)
     }
 
-    /**  
+    /**
      * 解析 IQ 数据的详细信息。
      *
      * @param parser XMLPullParser 实例，用于解析 IQ 数据。
@@ -429,7 +429,7 @@ public class PacketParserUtils {
         return iqData
     }
 
-    /**  
+    /**
      * 解析 IQ 数据包。
      *
      * @param parser XMLPullParser 实例，用于解析 IQ 数据包。
@@ -488,7 +488,7 @@ public class PacketParserUtils {
         return iqPacket.getOrThrow()
     }
 
-    /**  
+    /**
      * 解析 SASL 机制。
      *
      * @param parser XMLPullParser 实例，用于解析 SASL 机制。
@@ -515,7 +515,7 @@ public class PacketParserUtils {
         return mechanisms
     }
 
-    /**  
+    /**
      * 解析描述性文本。
      *
      * @param parser 用于解析的 XMLPullParser 实例。
@@ -534,7 +534,7 @@ public class PacketParserUtils {
         return tempdescriptiveTexts
     }
 
-    /**  
+    /**
      * 解析流错误。
      *
      * @param parser 用于解析的 XMLPullParser 实例。
@@ -547,7 +547,7 @@ public class PacketParserUtils {
         return parseStreamError(parser, None)
     }
 
-    /**  
+    /**
      * 解析带有外部 XML 环境的流错误。
      *
      * @param parser 用于解析的 XMLPullParser 实例。
@@ -594,7 +594,7 @@ public class PacketParserUtils {
         return StreamError(condition, conditionText, descriptiveTexts, extensions)
     }
 
-    /**  
+    /**
      * 解析 XMPP 数据包中的错误。
      *
      * @param parser 用于解析错误的 XMLPullParser 实例。
@@ -607,7 +607,7 @@ public class PacketParserUtils {
         return parseError(parser, None)
     }
 
-    /**  
+    /**
      * 解析 XMPP 数据包中的错误，并考虑外部 XML 环境。
      *
      * @param parser 用于解析错误的 XMLPullParser 实例。
@@ -656,7 +656,7 @@ public class PacketParserUtils {
         return builder.build()
     }
 
-    /**  
+    /**
      * 解析扩展元素。
      *
      * @param elementName 元素名称。
@@ -678,7 +678,7 @@ public class PacketParserUtils {
         return StandardExtensionElementProvider.INSTANCE.parse(parser, outerXmlEnvironment)
     }
 
-    /**  
+    /**
      * 解析 StartTLS 特性。
      *
      * @param parser 用于解析 StartTLS 特性的 XMLPullParser 实例。
@@ -712,7 +712,7 @@ public class PacketParserUtils {
         return StartTls(required)
     }
 
-    /**  
+    /**
      * 解析会话特性。
      *
      * @param parser 用于解析会话特性的 XMLPullParser 实例。
@@ -743,7 +743,7 @@ public class PacketParserUtils {
         return SessionFeature(optional)
     }
 
-    /**  
+    /**
      * 向 StanzaBuilder 添加扩展元素。
      *
      * @param stanzaBuilder 被添加扩展的 StanzaBuilder 实例。
@@ -759,10 +759,10 @@ public class PacketParserUtils {
         addExtensionElement(stanzaBuilder, parser, parser.getName(), parser.getNamespace(), outerXmlEnvironment)
     }
 
-    /**  
+    /**
      * 向给定的 StanzaBuilder 添加扩展元素。
      *
-     * @param _ 要添加扩展的 StanzaBuilder 实例
+     * @param stanzaBuilder 要添加扩展的 StanzaBuilder 实例
      * @param parser 用于解析扩展元素的 XMLPullParser 实例
      * @param elementName XML 元素的名称
      * @param namespace XML 元素的命名空间
@@ -771,12 +771,12 @@ public class PacketParserUtils {
      * @throws IOException 如果在解析过程中发生 I/O 异常
      * @throws XmppParsingException 如果解析失败或遇到其他问题
      */
-    public static func addExtensionElement(_: StanzaBuilder, parser: XmlPullParser, elementName: String,
+    public static func addExtensionElement(stanzaBuilder: StanzaBuilder, parser: XmlPullParser, elementName: String,
         namespace: String, outerXmlEnvironment: ?XmlEnvironment): Unit {
         let extensionElement = parseExtensionElement(elementName, namespace, parser, outerXmlEnvironment)
     }
 
-    /**  
+    /**
      * 向给定的数据包添加扩展元素，自动提取元素名称和命名空间。
      *
      * @param packet 要添加扩展的 Stanza 实例
@@ -791,7 +791,7 @@ public class PacketParserUtils {
         addExtensionElement(packet, parser, parser.getName(), parser.getNamespace(), outerXmlEnvironment)
     }
 
-    /**  
+    /**
      * 向给定的数据包添加扩展元素，指定元素名称和命名空间。
      *
      * @param packet 要添加扩展的 Stanza 实例
@@ -809,7 +809,7 @@ public class PacketParserUtils {
         packet.addExtension(packetExtension)
     }
 
-    /**  
+    /**
      * 向给定的集合添加扩展元素，自动提取元素名称和命名空间。
      *
      * @param collection 要添加扩展的集合
@@ -824,7 +824,7 @@ public class PacketParserUtils {
         addExtensionElement(collection, parser, parser.getName(), parser.getNamespace(), outerXmlEnvironment)
     }
 
-    /**  
+    /**
      * 向给定的集合添加扩展元素，指定元素名称和命名空间。
      *
      * @param collection 要添加扩展的集合
@@ -842,7 +842,7 @@ public class PacketParserUtils {
         collection.append(packetExtension)
     }
 
-    /**  
+    /**
      * 解析扩展元素。
      *
      * @param elementName XML 元素的名称
@@ -869,7 +869,7 @@ public class PacketParserUtils {
         return tempdescriptiveTexts
     }
 
-    /**  
+    /**
      * 解析扩展元素。
      *
      * @param elementName 元素名称。
@@ -891,7 +891,7 @@ public class PacketParserUtils {
         return StandardExtensionElementProvider.INSTANCE.parse(parser, outerXmlEnvironment)
     }
 
-    /**  
+    /**
      * 向 StanzaBuilder 添加扩展元素。
      *
      * @param stanzaBuilder 被添加扩展的 StanzaBuilder 实例。
@@ -907,10 +907,10 @@ public class PacketParserUtils {
         addExtensionElement(stanzaBuilder, parser, parser.getName(), parser.getNamespace(), outerXmlEnvironment)
     }
 
-    /**  
+    /**
      * 向给定的 StanzaBuilder 添加扩展元素。
      *
-     * @param _ 要添加扩展的 StanzaBuilder 实例
+     * @param stanzaBuilder 要添加扩展的 StanzaBuilder 实例
      * @param parser 用于解析扩展元素的 XMLPullParser 实例
      * @param elementName XML 元素的名称
      * @param namespace XML 元素的命名空间
@@ -919,12 +919,12 @@ public class PacketParserUtils {
      * @throws IOException 如果在解析过程中发生 I/O 异常
      * @throws XmppParsingException 如果解析失败或遇到其他问题
      */
-    public static func addExtensionElement(_: StanzaBuilder, parser: XmlPullParser, elementName: String,
+    public static func addExtensionElement(stanzaBuilder: StanzaBuilder, parser: XmlPullParser, elementName: String,
         namespace: String, outerXmlEnvironment: XmlEnvironment): Unit {
         let extensionElement = parseExtensionElement(elementName, namespace, parser, outerXmlEnvironment)
     }
 
-    /**  
+    /**
      * 向给定的数据包添加扩展元素，自动提取元素名称和命名空间。
      *
      * @param packet 要添加扩展的 Stanza 实例
@@ -939,7 +939,7 @@ public class PacketParserUtils {
         addExtensionElement(packet, parser, parser.getName(), parser.getNamespace(), outerXmlEnvironment)
     }
 
-    /**  
+    /**
      * 向给定的数据包添加扩展元素，指定元素名称和命名空间。
      *
      * @param packet 要添加扩展的 Stanza 实例
@@ -957,7 +957,7 @@ public class PacketParserUtils {
         packet.addExtension(packetExtension)
     }
 
-    /**  
+    /**
      * 向给定的集合添加扩展元素，自动提取元素名称和命名空间。
      *
      * @param collection 要添加扩展的集合
@@ -972,7 +972,7 @@ public class PacketParserUtils {
         addExtensionElement(collection, parser, parser.getName(), parser.getNamespace(), outerXmlEnvironment)
     }
 
-    /**  
+    /**
      * 向给定的集合添加扩展元素，指定元素名称和命名空间。
      *
      * @param collection 要添加扩展的集合

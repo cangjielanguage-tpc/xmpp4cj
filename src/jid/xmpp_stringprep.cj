@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.jid
@@ -239,7 +239,7 @@ public open class XmppStringprepException <: Exception {
         return causingString
     }
 
-    /**  
+    /**
      * 获得类名，用字符串表示。
      *
      * @return 类名。
@@ -277,7 +277,7 @@ public class MissingDomainpart <: XmppStringprepException {
         return MissingDomainpart(causingString.toString())
     }
 
-    /**  
+    /**
      * 获得类名，用字符串表示。
      *
      * @return 类名。

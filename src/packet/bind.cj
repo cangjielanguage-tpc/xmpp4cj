@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
@@ -128,10 +128,10 @@ public class BindFeature <: ExtensionElement {
     /**
      * 返回xml文本信息。
      *
-     * @param _ xml标签节点。
+     * @param xmlEnvironment 环境信息
      * @return xml文本信息。
      */
-    public override func toXML(_: ?XmlEnvironment): ToString {
+    public override func toXML(xmlEnvironment: ?XmlEnvironment): ToString {
         return "<${Bind.ELEMENT} xmlns='${Bind.NAMESPACE}'/>"
     }
 }

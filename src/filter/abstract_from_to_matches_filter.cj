@@ -1,8 +1,12 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
+/**
+ * public abstract class AbstractFromToMatchesFilter <: StanzaFilter
+ *
+ */
 public abstract class AbstractFromToMatchesFilter <: StanzaFilter {
     /**
      * 过滤器所匹配的 JID 地址
@@ -29,7 +33,7 @@ public abstract class AbstractFromToMatchesFilter <: StanzaFilter {
         this.ignoreResourcepart = ignoreResourcepart
     }
 
-    /**  
+    /**
      * 测试指定的 Stanza 是否应该通过过滤器。
      *
      * @param stanza 要测试的 Stanza。

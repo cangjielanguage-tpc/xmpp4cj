@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
 /**
+ * public abstract class ConnectionConfiguration
+ *
  * 用于XMPP客户端到服务器连接的连接配置。
  * 配置良好的XMPP服务通常只需要您提供两个参数：用户的XMPP地址（也称为JID）和密码。理想情况下，所有其他配置参数都可以由Xmpp自动确定。
  * 因此，调用{@link Builder#setXmppAddressAndPassword（CharSequence，String）}就足够了。
@@ -251,7 +253,7 @@ public abstract class ConnectionConfiguration {
         return securityMode
     }
 
-    /**  
+    /**
      * 返回 DNSSEC 模式
      * @return 返回 DNSSEC 模式
      */
@@ -415,7 +417,11 @@ public abstract class ConnectionConfiguration {
         return stanzaIdSourceFactory.constructStanzaIdSource()
     }
 }
-
+/**
+ * public abstract class ConnectionConfigurationBuilder
+ *
+ * ConnectionConfiguration构造器
+ */
 public abstract class ConnectionConfigurationBuilder {
     var securityMode: ConnectionConfigurationSecurityMode = ConnectionConfigurationSecurityMode.required
     var dnssecMode: DnssecMode = DnssecMode.disabled
@@ -608,7 +614,7 @@ public abstract class ConnectionConfigurationBuilder {
         return this
     }
 
-    /**  
+    /**
      * 设置 DNSSEC 模式
      *
      * @param dnssecMode 要设置的 DNSSEC 模式
@@ -655,7 +661,7 @@ public abstract class ConnectionConfigurationBuilder {
         return this
     }
 
-    /**  
+    /**
      * 启用默认调试器。
      *
      * 该方法从 xmpp 配置中获取默认调试器工厂，并将其分配给 debuggerFactory

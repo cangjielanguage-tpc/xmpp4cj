@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
-/**  
+/**
  * 实现 SASL X-OAUTH2 机制，如<a
  * href="https/developers/google/com/talk/jep_extensions/oauth">https/developers.google
  * .com/talk/jep_extensions/oauth</a> 中所述。
@@ -47,7 +47,7 @@ public open class SASLXOauth2Mechanism <: SASLMechanism {
      */
     public static let NAME = "X-OAUTH2"
 
-    /**  
+    /**
      * 执行内部身份验证。当前不支持 CallbackHandler，抛出 {@link UnsupportedOperationException}。
      *
      * @param _ 回调处理程序，用于处理身份验证过程中的回调
@@ -56,7 +56,7 @@ public open class SASLXOauth2Mechanism <: SASLMechanism {
         throw UnsupportedException("CallbackHandler not (yet) supported")
     }
 
-    /**  
+    /**
      * 获取身份验证文本。返回的字节序列将使用 BASE64 编码。
      *
      * @return 作为身份验证文本的字节数组
@@ -65,7 +65,7 @@ public open class SASLXOauth2Mechanism <: SASLMechanism {
         return toBytes("\u{0000}${authenticationId}\u{0000}${password}")
     }
 
-    /**  
+    /**
      * 获取此机制的名称。
      *
      * @return 此 SASL 机制的名称，即 "X-OAUTH2"
@@ -74,7 +74,7 @@ public open class SASLXOauth2Mechanism <: SASLMechanism {
         return NAME
     }
 
-    /**  
+    /**
      * 获取此机制的优先级。X-OAUTH2 的优先级与 SASL PLAIN 相同。
      *
      * @return 此机制的优先级
@@ -84,7 +84,7 @@ public open class SASLXOauth2Mechanism <: SASLMechanism {
         return 410
     }
 
-    /**  
+    /**
      * 创建并返回此机制的新实例。
      *
      * @return SASLXOauth2Mechanism 的新实例
@@ -93,7 +93,7 @@ public open class SASLXOauth2Mechanism <: SASLMechanism {
         return SASLXOauth2Mechanism()
     }
 
-    /**  
+    /**
      * 检查身份验证是否成功或抛出异常。此机制不执行任何检查。
      */
     public open override func checkIfSuccessfulOrThrow(): Unit {

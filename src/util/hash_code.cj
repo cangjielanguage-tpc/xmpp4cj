@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.util
@@ -44,6 +44,9 @@ public class HashCodeCache {
     }
 }
 
+/**
+ * public type HashCodeCalculator = (HashCodeBuilder) -> Unit
+ */
 public type HashCodeCalculator = (HashCodeBuilder) -> Unit
 
 /**

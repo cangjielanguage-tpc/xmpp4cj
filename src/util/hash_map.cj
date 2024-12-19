@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.util
 
-/* 
+/**
  * 可以使用任意K的HashMap
  * - K.hashCode()优先级:
  *  1. K.hashCode()

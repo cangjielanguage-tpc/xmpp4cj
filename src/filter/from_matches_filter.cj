@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
-/**  
+/**
  * 用于过滤 “from” 字段与指定 JID 完全匹配的数据包的过滤器。
  * 如果指定的地址是裸 JID，则过滤器将匹配任何裸 JID 与指定 JID 匹配的地址。
  * 如果指定的地址是完整 JID，则过滤器仅在数据包的发件人与指定资源匹配时才匹配。
@@ -14,7 +14,7 @@ public class FromMatchesFilter <: AbstractFromToMatchesFilter {
      */
     public static let MATCH_NO_FROM_SET = create(None)
 
-    /**  
+    /**
      * 创建一个基于 “from” 字段的过滤器。发件人地址必须与过滤器地址相同。
      * 第二个参数指定比较是完整地址还是裸地址。
      *
@@ -25,7 +25,7 @@ public class FromMatchesFilter <: AbstractFromToMatchesFilter {
         super(address, ignoreResourcepart)
     }
 
-    /**  
+    /**
      * 创建一个基于 “from” 字段的过滤器。如果过滤器地址是裸地址，则将
      * 过滤器地址与裸的 “from” 地址进行比较。否则，将过滤器地址与完整的 “from” 地址进行比较。
      *
@@ -41,7 +41,7 @@ public class FromMatchesFilter <: AbstractFromToMatchesFilter {
         return FromMatchesFilter(address, isBool)
     }
 
-    /**  
+    /**
      * 创建一个基于 “from” 字段的过滤器。比较过滤器地址与 “from” 地址的裸版本。
      *
      * @param address 要过滤的地址。如果给定 <code>null</code>，则数据包不得有 “from” 地址。
@@ -51,7 +51,7 @@ public class FromMatchesFilter <: AbstractFromToMatchesFilter {
         return FromMatchesFilter(address, true)
     }
 
-    /**  
+    /**
      * 创建一个基于 “from” 字段的过滤器。比较过滤器地址与 “from” 地址的完整版本（如果可用）。
      *
      * @param address 要过滤的地址。如果给定 <code>null</code>，则数据包不得有 “from” 地址。
@@ -61,7 +61,7 @@ public class FromMatchesFilter <: AbstractFromToMatchesFilter {
         return FromMatchesFilter(address, false)
     }
 
-    /**  
+    /**
      * 从数据包中获取要比较的地址，这里是 “from” 字段的地址。
      *
      * @param stanza 要检查的 STANZA 数据包。

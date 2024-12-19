@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
-/**  
+/**
+ * public abstract class FlexibleStanzaTypeFilter<S> <: StanzaFilter where S <: Stanza
+ *
  * 过滤特定类型的 STANZA，并允许自定义方法进一步过滤数据包。
  */
 public abstract class FlexibleStanzaTypeFilter<S> <: StanzaFilter where S <: Stanza {
@@ -12,7 +14,7 @@ public abstract class FlexibleStanzaTypeFilter<S> <: StanzaFilter where S <: Sta
      */
     protected let stanzaType: ClassId
 
-    /**  
+    /**
      * 构造函数，根据给定的 STANZA 类型创建过滤器。
      *
      * @param packetType 要过滤的 STANZA 类型。不能为空。
@@ -21,14 +23,14 @@ public abstract class FlexibleStanzaTypeFilter<S> <: StanzaFilter where S <: Sta
         this.stanzaType = Objects.requireNonNull(packetType, "Type must not be null")
     }
 
-    /**  
+    /**
      * 默认构造函数，使用反射获取泛型类型参数。
      */
     public init() {
         stanzaType = "Stanza"
     }
 
-    /**  
+    /**
      * 检查给定的 STANZA 数据包是否被接受。
      *
      * @param packet 要检查的 STANZA 数据包。
@@ -41,7 +43,7 @@ public abstract class FlexibleStanzaTypeFilter<S> <: StanzaFilter where S <: Sta
         return false
     }
 
-    /**  
+    /**
      * 子类需要实现的具体接受方法，根据特定条件进一步过滤数据包。
      *
      * @param packet 数据包
@@ -49,7 +51,7 @@ public abstract class FlexibleStanzaTypeFilter<S> <: StanzaFilter where S <: Sta
      */
     protected func acceptSpecific(packet: S): Bool
 
-    /**  
+    /**
      * 返回过滤器的字符串表示，包括类名和 STANZA 类型。
      *
      * @return 过滤器的描述信息

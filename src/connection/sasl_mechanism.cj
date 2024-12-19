@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
 /**
+ * public abstract class SASLMechanism <: Comparable<SASLMechanism> & ToString
+ *
  * Base class for SASL mechanisms.
  * Subclasses will likely want to implement their own versions of these methods:
  * <ul>
