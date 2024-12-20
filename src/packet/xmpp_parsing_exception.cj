@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
@@ -25,7 +25,7 @@ public open class XmppParsingException <: ExceptionExt {
         super(message, None)
     }
 
-    /**  
+    /**
      * 获得类名，用字符串表示。
      *
      * @return 类名。
@@ -48,7 +48,7 @@ public class XmppTextParseException <: XmppParsingException {
         super(parsingException)
     }
 
-    /**  
+    /**
      * 获得类名，用字符串表示。
      *
      * @return 类名。
@@ -71,7 +71,7 @@ public class XmppUriSyntaxParsingException <: XmppParsingException {
         super(uriSyntaxException)
     }
 
-    /**  
+    /**
      * 获得类名，用字符串表示。
      *
      * @return 类名。
@@ -94,7 +94,7 @@ public open class XmppRequiredValueMissingException <: XmppParsingException {
         super(message)
     }
 
-    /**  
+    /**
      * 获得类名，用字符串表示。
      *
      * @return 类名。
@@ -117,7 +117,7 @@ public class XmppRequiredAttributeMissingException <: XmppRequiredValueMissingEx
         super("The required attribute \'${attributeName}" + "\' is missing (or has the empty String as value)")
     }
 
-    /**  
+    /**
      * 获得类名，用字符串表示。
      *
      * @return 类名。

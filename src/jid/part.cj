@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.jid
 
 /**
+ * public abstract class Part <: ToString & Hashable & Equatable<Part>
+ *
  * JID资源实体。
  */
 public abstract class Part <: ToString & Hashable & Equatable<Part> {

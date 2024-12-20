@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
@@ -10,7 +10,7 @@ package xmpp4cj.connection
 public class NoResponseException <: Xmpp4cjException {
     private let filter: ?StanzaFilter //用于收集响应的过滤器
 
-    /**  
+    /**
      * 私有构造函数，仅接受消息。
      *
      * @param message 异常消息
@@ -19,7 +19,7 @@ public class NoResponseException <: Xmpp4cjException {
         this(message, None)
     }
 
-    /**  
+    /**
      * 私有构造函数，接受消息和过滤器。
      *
      * @param message 异常消息
@@ -30,7 +30,7 @@ public class NoResponseException <: Xmpp4cjException {
         this.filter = filter
     }
 
-    /**  
+    /**
      * 获取用于收集响应的过滤器。
      *
      * @return 使用的过滤器，如果没有过滤器则返回 <code>null</code>
@@ -39,7 +39,7 @@ public class NoResponseException <: Xmpp4cjException {
         return filter
     }
 
-    /**  
+    /**
      * 根据给定的连接实例和等待的内容创建 NoResponseException。
      *
      * @param connection XMPP连接实例
@@ -52,7 +52,7 @@ public class NoResponseException <: Xmpp4cjException {
         return NoResponseException(sb.toString())
     }
 
-    /**  
+    /**
      * 根据给定的超时、收集器以及是否取消收集器创建 NoResponseException。
      *
      * @param timeout 超时时间
@@ -64,7 +64,7 @@ public class NoResponseException <: Xmpp4cjException {
         return newWith(timeout, collector.getStanzaFilter(), stanzaCollectorCancelled)
     }
 
-    /**  
+    /**
      * 根据给定的连接实例和过滤器创建 NoResponseException。
      *
      * @param connection XMPP连接实例
@@ -75,7 +75,7 @@ public class NoResponseException <: Xmpp4cjException {
         return newWith(connection.getReplyTimeout(), filter, false)
     }
 
-    /**  
+    /**
      * 根据给定的超时、过滤器及是否取消收集器创建 NoResponseException。
      *
      * @param timeout 超时时间
@@ -98,7 +98,7 @@ public class NoResponseException <: Xmpp4cjException {
         return NoResponseException(sb.toString(), filter)
     }
 
-    /**  
+    /**
      * 根据给定的连接实例获取等待响应的描述信息。
      *
      * @param connection XMPP连接实例
@@ -108,7 +108,7 @@ public class NoResponseException <: Xmpp4cjException {
         return getWaitingFor(connection.getReplyTimeout())
     }
 
-    /**  
+    /**
      * 根据给定的回复超时时间获取等待响应的描述信息。
      *
      * @param replyTimeout 回复超时时间
@@ -121,18 +121,18 @@ public class NoResponseException <: Xmpp4cjException {
     }
 }
 
-/**  
+/**
  * 表示客户端未连接或已不再连接的异常，用于处理与 XMPP连接相关的错误。
  */
 public class NotConnectedException <: Xmpp4cjException {
-    /**  
+    /**
      * 默认构造函数。
      */
     public init() {
         this(None)
     }
 
-    /**  
+    /**
      * 带有可选提示的构造函数。
      *
      * @param optionalHint 可选的提示信息
@@ -145,7 +145,7 @@ public class NotConnectedException <: Xmpp4cjException {
         }))
     }
 
-    /**  
+    /**
      * 指定连接和详细信息的构造函数。
      *
      * @param connection 表示当前连接的 {@link XMPPConnection} 实例
@@ -155,7 +155,7 @@ public class NotConnectedException <: Xmpp4cjException {
         super("The connection ${connection} is no longer connected. ${details}")
     }
 
-    /**  
+    /**
      * 指定连接和过滤器的构造函数。
      *
      * @param connection 表示当前连接的 {@link XMPPConnection} 实例
@@ -167,7 +167,7 @@ public class NotConnectedException <: Xmpp4cjException {
         )
     }
 
-    /**  
+    /**
      * 指定连接、过滤器和连接异常的构造函数。
      *
      * @param connection 表示当前连接的 {@link XMPPConnection} 实例

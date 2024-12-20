@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.jid
@@ -365,7 +365,7 @@ public open class XmlSplitter <: Resource {
     public open override func close(): Unit {}
 }
 
-/**  
+/**
  * 定义 XML 解析的状态。
  */
 public enum XmlSplitterState <: Equatable<XmlSplitterState> & ToString {

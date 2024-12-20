@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
 /**
+ * public abstract class JidTypeAbstractJidTypeFilter <: StanzaFilter
+ *
  * XMPP 地址类型过滤器的基类。
  */
 public abstract class JidTypeAbstractJidTypeFilter <: StanzaFilter {
@@ -21,7 +23,7 @@ public abstract class JidTypeAbstractJidTypeFilter <: StanzaFilter {
         this.jidType = Objects.requireNonNull(jidType, "jidType must not be null")
     }
 
-    /**  
+    /**
      * 测试指定的 Stanza 是否应该通过过滤器。
      *
      * @param stanza 要测试的 Stanza。

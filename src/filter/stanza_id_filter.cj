@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
-/**  
+/**
  * 用于过滤具有特定 Stanza ID 的 Stanzas 的过滤器。
  */
 public class StanzaIdFilter <: StanzaFilter {
@@ -12,7 +12,7 @@ public class StanzaIdFilter <: StanzaFilter {
      */
     private let stanzaId: ?String
 
-    /**  
+    /**
      * 使用指定 Stanza 的 ID 创建一个新的 Stanza ID 过滤器。
      *
      * @param stanza 要从中获取 ID 的 Stanza。
@@ -21,7 +21,7 @@ public class StanzaIdFilter <: StanzaFilter {
         this(stanza.getStanzaId())
     }
 
-    /**  
+    /**
      * 使用指定的 Stanza ID 创建一个新的 Stanza ID 过滤器。
      *
      * @param stanzaId 要过滤的 Stanza ID。
@@ -30,7 +30,7 @@ public class StanzaIdFilter <: StanzaFilter {
         this.stanzaId = StringUtils.requireNotNullNorEmpty(stanzaId, "Stanza ID must not be null nor empty.")
     }
 
-    /**  
+    /**
      * 检查给定 Stanza 是否被该过滤器接受。
      *
      * @param stanza 要检查的 Stanza
@@ -40,7 +40,7 @@ public class StanzaIdFilter <: StanzaFilter {
         return stanzaId == stanza.getStanzaId()
     }
 
-    /**  
+    /**
      * 返回过滤器的字符串表示形式。
      *
      * @return 过滤器的字符串表示，包含类名和 Stanza ID。

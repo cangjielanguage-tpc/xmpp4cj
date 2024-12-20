@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
@@ -6,6 +6,10 @@ package xmpp4cj.connection
 import crypto.crypto.SecureRandom
 import crypto.digest.CryptoException
 
+/**
+ * public abstract class ScramMechanism <: SASLMechanism
+ *
+ */
 public abstract class ScramMechanism <: SASLMechanism {
     private static let RANDOM_ASCII_BYTE_COUNT = 32
     private static let CLIENT_KEY_BYTES = toBytes("Client Key")

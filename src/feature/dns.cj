@@ -1,14 +1,16 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.feature
 
-/*
+/**
+ * public type DnsName = String
+ *
  * 用于dns解析
  */
 public type DnsName = String
 
-/**  
+/**
  * 确定请求的 DNSSEC 安全模式。
  * <b>注意：Xmpp 对 DNSSEC/DANE 的支持仍然处于实验阶段！</b>
  * <p>
@@ -18,15 +20,15 @@ public type DnsName = String
  * </p>
  */
 public enum DnssecMode <: ToString & Equatable<DnssecMode> {
-    /**  
+    /**
      * 不进行任何 DNSSEC 认证或 DANE 验证。
      */
     | disabled
-    /**  
+    /**
      * 要求所有 DNS 信息都需通过 DNSSEC 认证。
      */
     | needsDnssec
-    /**  
+    /**
      * 要求所有 DNS 信息都需通过 DNSSEC 认证，并要求使用 DANE 验证 XMPP 服务的 TLS 证书。
      */
     | needsDnssecAndDane
@@ -49,7 +51,7 @@ public enum DnssecMode <: ToString & Equatable<DnssecMode> {
     }
 }
 
-/**  
+/**
  * 该接口的实现定义了一个能够在连接上启用 DANE 的类。
  * <p>
  * DANE（DNS-based Authentication of Named Entities）是一种可以使用 DNSSEC（DNS Security Extensions）来验证证书的机制。
@@ -57,7 +59,7 @@ public enum DnssecMode <: ToString & Equatable<DnssecMode> {
  * </p>
  */
 public interface XmppDaneVerifier {
-    /**  
+    /**
      * 初始化 DANE 验证器。
      *
      * @param context SSL 上下文
@@ -65,7 +67,7 @@ public interface XmppDaneVerifier {
      */
     func initself(context: TlsClientConfig): Unit
 
-    /**  
+    /**
      * 完成 DANE 验证过程。
      *
      * @param sslSession SSL 会话
@@ -74,9 +76,14 @@ public interface XmppDaneVerifier {
     func finish(sslSession: ?TlsSession): Unit
 }
 
+/**
+ * public type XmppDaneProvider = () -> ?XmppDaneVerifier
+ */
 public type XmppDaneProvider = () -> ?XmppDaneVerifier
 
-/**  
+/**
+ * public abstract class DNSResolver
+ *
  * 该接口的实现定义了一个能够解析 DNS 地址的类。
  * <p>
  * 此抽象类提供了查找服务记录和主机地址的基本功能，并提供对 DNSSEC 的支持。
@@ -87,7 +94,7 @@ public abstract class DNSResolver {
 
     private let supportsDnssec: Bool
 
-    /**  
+    /**
      * 构造函数，初始化 DNSResolver 实例。
      *
      * @param supportsDnssec 表示是否支持 DNSSEC 的布尔值
@@ -96,7 +103,7 @@ public abstract class DNSResolver {
         this.supportsDnssec = supportsDnssec
     }
 
-    /**  
+    /**
      * 查找给定 DNS 名称的 IP 地址列表。
      *
      * @param name              要查找的 DNS 名称
@@ -110,7 +117,7 @@ public abstract class DNSResolver {
         return lookupHostAddress0(name, lookupFailures, dnssecMode)
     }
 
-    /**  
+    /**
      * 在给定主机名称上查找 IP 地址。
      * <p>
      * 如果发生错误，将返回 <code>null</code>，并且错误原因将以 <code>HostAddress</code> 的形式添加到 <code>failedAddresses</code>。
@@ -139,7 +146,7 @@ public abstract class DNSResolver {
         }
     }
 
-    /**  
+    /**
      * 判断是否应继续查询。
      *
      * @param name            DNS 名称
@@ -161,7 +168,7 @@ public abstract class DNSResolver {
         return false
     }
 
-    /**  
+    /**
      * 检查是否请求并支持 DNSSEC。
      *
      * @param dnssecMode DNSSEC 模式
@@ -174,7 +181,7 @@ public abstract class DNSResolver {
     }
 }
 
-/**  
+/**
  * 用于执行 XMPP 服务的 DNS 查找的工具类。
  * <p>
  * 此类提供了一些静态方法来设置和获取 DNS 解析器和 DANE 提供者。
@@ -186,7 +193,7 @@ public class DNSUtil {
 
     private static var _daneProvider: ?XmppDaneProvider = None // 当前使用的 DANE 提供者 
 
-    /**  
+    /**
      * 设置用于执行 DNS 查找的 DNS 解析器。
      *
      * @param resolver 要设置的 DNS 解析器
@@ -196,7 +203,7 @@ public class DNSUtil {
         dnsResolver = resolver
     }
 
-    /**  
+    /**
      * 返回当前用于执行 DNS 查找的 DNS 解析器。
      *
      * @return 当前活动的 DNSResolver
@@ -205,7 +212,7 @@ public class DNSUtil {
         return dnsResolver
     }
 
-    /**  
+    /**
      * 设置在启用 DANE 时应使用的 DANE 提供者。
      *
      * @param daneProvider 要设置的 DANE 提供者
@@ -215,7 +222,7 @@ public class DNSUtil {
         _daneProvider = daneProvider
     }
 
-    /**  
+    /**
      * 返回当前启用 DANE 时使用的活动 DANE 提供者。
      *
      * @return 当前活动的 DANE 提供者
@@ -232,7 +239,7 @@ public let DEFAULT_TLS_CFG = {
     cfg
 }()
 
-/* 
+/**
  * 默认的 DNS 解析器, 忽略 DNSSEC 校验
  */
 public class StdDnsResolver <: DNSResolver {

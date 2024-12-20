@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.sasl
 
-/**  
+/**
  * 表示 SASL 错误的异常类，继承自 XMPPException。
  */
 public class SASLErrorException <: XMPPException {
@@ -11,7 +11,7 @@ public class SASLErrorException <: XMPPException {
     private let mechanism: String // 使用的 SASL 机制 
     private let texts: Map<String, String> // 额外的文本信息  
 
-    /**  
+    /**
      * 使用给定的机制和 SASL 失败信息构造 SASLErrorException。
      *
      * @param mechanism 使用的 SASL 机制
@@ -21,7 +21,7 @@ public class SASLErrorException <: XMPPException {
         this(mechanism, saslFailure, HashMap<String, String>())
     }
 
-    /**  
+    /**
      * 使用给定的机制、SASL 失败信息和额外的文本信息构造 SASLErrorException。
      *
      * @param mechanism 使用的 SASL 机制
@@ -35,7 +35,7 @@ public class SASLErrorException <: XMPPException {
         this.texts = texts
     }
 
-    /**  
+    /**
      * 获取 SASL 失败信息。
      *
      * @return 返回 SASLFailure 对象
@@ -44,7 +44,7 @@ public class SASLErrorException <: XMPPException {
         return saslFailure
     }
 
-    /**  
+    /**
      * 获取使用的 SASL 机制。
      *
      * @return 返回 SASL 机制的名称
@@ -53,7 +53,7 @@ public class SASLErrorException <: XMPPException {
         return mechanism
     }
 
-    /**  
+    /**
      * 获取额外的文本信息。
      *
      * @return 返回包含额外文本信息的 Map

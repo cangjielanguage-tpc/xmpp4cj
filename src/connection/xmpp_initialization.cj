@@ -1,10 +1,13 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
 import std.process.Process
 
+/**
+ * public type StartUp = (String, () -> Object)
+ */
 public type StartUp = (String, () -> Object)
 
 /**
@@ -30,7 +33,7 @@ public let XMPP_CONFIG_OPTIONAL_STARTUP_CLASSES: ArrayList<StartUp> = ArrayList(
     // ("OpenPgpInitializer",{=>}) // OpenPgpInitializer未实现
     ])
 
-/**  
+/**
  * Xmpp 初始化类，用于加载 Xmpp 的配置和类。
  * <p>
  * 该类负责从配置文件中读取设置，并根据需要初始化相关的类和属性。
@@ -58,7 +61,7 @@ public class XmppInitialization {
      */
     private static let LOGGER = getGlobalLogger("XmppInitialization")
 
-    /**  
+    /**
      * 静态初始化块，加载配置并执行初始化操作。
      * <p>
      * 该块将在类加载时运行，执行必要的静态初始化逻辑。
@@ -121,7 +124,7 @@ public class XmppInitialization {
         XmppConfiguration.xmppInitialized = true
     }
 
-    /**  
+    /**
      * 处理配置文件，读取并执行所需的配置。
      *
      * @param cfgFileStream 配置文件的输入流
@@ -137,7 +140,7 @@ public class XmppInitialization {
         }
     }
 
-    /**  
+    /**
      * 处理配置文件，读取并执行所需的配置。
      *
      * @param cfgFileStream 配置文件的输入流
@@ -161,7 +164,7 @@ public class XmppInitialization {
         }
     }
 
-    /**  
+    /**
      * 解析要加载的类。
      *
      * @param parser XML解析器

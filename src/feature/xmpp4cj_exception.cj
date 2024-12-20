@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.feature
 
 /**
+ * public abstract class Xmpp4cjException <: ExceptionExt
+ *
  * Xmpp对任何Xmpp规范都没有定义的错误使用Xmpp4cjExceptions。
  */
 public abstract class Xmpp4cjException <: ExceptionExt {
@@ -16,7 +18,7 @@ public abstract class Xmpp4cjException <: ExceptionExt {
         this(wrappedThrowable.message, wrappedThrowable)
     }
 
-    /**  
+    /**
      * 使用指定的消息创建新的 Xmpp4cjException，不带原始异常。
      *
      * @param message 异常消息。
@@ -25,7 +27,7 @@ public abstract class Xmpp4cjException <: ExceptionExt {
         this(message, None)
     }
 
-    /**  
+    /**
      * 使用指定的消息和作为异常根本原因的 Throwable 创建新的 Xmpp4cjException。
      *
      * @param message 异常消息。
@@ -36,7 +38,7 @@ public abstract class Xmpp4cjException <: ExceptionExt {
         this.cause = wrappedThrowable
     }
 
-    /**  
+    /**
      * 使用默认消息创建新的 Xmpp4cjException，不带原始异常。
      */
     protected init() {
@@ -54,7 +56,7 @@ public abstract class Xmpp4cjException <: ExceptionExt {
 }
 
 public class NotLoggedInException <: Xmpp4cjException {
-    /**  
+    /**
      * 使用默认消息创建新的 NotLoggedInException。
      */
     public init() {
@@ -72,7 +74,7 @@ public class NotLoggedInException <: Xmpp4cjException {
 }
 
 public class AlreadyLoggedInException <: Xmpp4cjException {
-    /**  
+    /**
      * 使用默认消息创建新的 AlreadyLoggedInException。
      */
     public init() {
@@ -90,7 +92,7 @@ public class AlreadyLoggedInException <: Xmpp4cjException {
 }
 
 public class AlreadyConnectedException <: Xmpp4cjException {
-    /**  
+    /**
      * 使用默认消息创建新的 AlreadyConnectedException。
      */
     public init() {
@@ -118,8 +120,12 @@ public class IllegalStateChangeException <: Xmpp4cjException {
     }
 }
 
+/**
+ * public abstract class SecurityRequiredException <: Xmpp4cjException
+ *
+ */
 public abstract class SecurityRequiredException <: Xmpp4cjException {
-    /**  
+    /**
      * 使用指定的消息创建新的 SecurityRequiredException。
      *
      * @param message 异常消息。
@@ -139,7 +145,7 @@ public abstract class SecurityRequiredException <: Xmpp4cjException {
 }
 
 public class SecurityRequiredByClientException <: SecurityRequiredException {
-    /**  
+    /**
      * 使用默认消息创建新的 SecurityRequiredByClientException。
      */
     public init() {
@@ -157,7 +163,7 @@ public class SecurityRequiredByClientException <: SecurityRequiredException {
 }
 
 public class SecurityRequiredByServerException <: SecurityRequiredException {
-    /**  
+    /**
      * 使用默认消息创建新的 SecurityRequiredByServerException。
      */
     public init() {
@@ -175,7 +181,7 @@ public class SecurityRequiredByServerException <: SecurityRequiredException {
 }
 
 public class SecurityNotPossibleException <: Xmpp4cjException {
-    /**  
+    /**
      * 使用指定的消息创建新的 SecurityNotPossibleException。
      *
      * @param message 异常消息。
@@ -194,6 +200,10 @@ public class SecurityNotPossibleException <: Xmpp4cjException {
     }
 }
 
+/**
+ * public abstract class ConnectionException <: Xmpp4cjException
+ *
+ */
 public abstract class ConnectionException <: Xmpp4cjException {
     /**
      * 使用作为异常根本原因的Throwable创建新的Xmpp4cjException。
@@ -204,7 +214,7 @@ public abstract class ConnectionException <: Xmpp4cjException {
         super(wrappedThrowable)
     }
 
-    /**  
+    /**
      * 使用指定的消息创建新的 SecurityNotPossibleException。
      *
      * @param message 异常消息。
@@ -251,7 +261,7 @@ public class EndpointConnectionException <: ConnectionException {
     private let lookupFailures: Collection<RemoteConnectionEndpointLookupFailure>
 
     private let connectionExceptions: Collection<RemoteConnectionException<RemoteConnectionEndpoint>>
-    /**  
+    /**
      * 创建一个新的 EndpointConnectionException 实例。
      *
      * @param message                异常消息。
@@ -268,7 +278,7 @@ public class EndpointConnectionException <: ConnectionException {
         this.connectionExceptions = connectionExceptions
     }
 
-    /**  
+    /**
      * 从给定的查找失败和连接异常列表创建 EndpointConnectionException。
      *
      * @param lookupFailures         发生的查找失败列表。
@@ -291,7 +301,7 @@ public class EndpointConnectionException <: ConnectionException {
         return EndpointConnectionException(sb.toString(), lookupFailures, connectionExceptions)
     }
 
-    /**  
+    /**
      * 获取与远程连接终端查找失败相关的错误列表。
      *
      * @return 远程连接终端查找失败的列表。
@@ -300,7 +310,7 @@ public class EndpointConnectionException <: ConnectionException {
         return lookupFailures
     }
 
-    /**  
+    /**
      * 获取连接异常的列表，表示在连接时遇到的错误。
      *
      * @return 连接异常的列表。
@@ -324,7 +334,7 @@ public class FeatureNotSupportedException <: Xmpp4cjException {
 
     private let jid: ?Jid
 
-    /**  
+    /**
      * 使用指定的消息创建新的 XmppMessageException。
      *
      * @param message 异常消息。
@@ -333,7 +343,7 @@ public class FeatureNotSupportedException <: Xmpp4cjException {
         this(feature, None)
     }
 
-    /**  
+    /**
      * 使用指定的消息和Jid创建新的 XmppMessageException。
      *
      * @param message 异常消息。
@@ -378,7 +388,7 @@ public class FeatureNotSupportedException <: Xmpp4cjException {
 }
 
 public class ResourceBindingNotOfferedException <: Xmpp4cjException {
-    /**  
+    /**
      * 使用默认消息创建新的 ResourceBindingNotOfferedException。
      */
     public init() {
@@ -405,7 +415,7 @@ public class XmppWrappedException <: Xmpp4cjException {
         super(exception)
     }
 
-    /**  
+    /**
      * 使用指定的消息和作为异常根本原因的 Throwable 创建新的 Xmpp4cjException。
      *
      * @param message 异常消息。
@@ -430,7 +440,7 @@ public class XmppWrappedException <: Xmpp4cjException {
  * will eventually be marked deprecated and removed.
  */
 public class XmppMessageException <: Xmpp4cjException {
-    /**  
+    /**
      * 使用指定的消息创建新的 XmppMessageException。
      *
      * @param message 异常消息。
@@ -462,7 +472,7 @@ public open class XmppSaslException <: Xmpp4cjException {
         super(exception)
     }
 
-    /**  
+    /**
      * 使用指定的消息创建新的 XmppSaslException。
      *
      * @param message 异常消息。
@@ -471,7 +481,7 @@ public open class XmppSaslException <: Xmpp4cjException {
         super(message)
     }
 
-    /**  
+    /**
      * 使用指定的消息和作为异常根本原因的 Throwable 创建新的 Xmpp4cjException。
      *
      * @param message 异常消息。

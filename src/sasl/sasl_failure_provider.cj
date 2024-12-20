@@ -1,35 +1,35 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.sasl
 
-/**  
+/**
  * 公共最终类 SaslFailureProvider 继承自 NonzaProvider，专门处理 SASL 失败数据。
  */
 public class SaslFailureProvider <: NonzaProvider<SaslNonzaSASLFailure> {
-    /**  
+    /**
      * 单例实例
      */
     public static let INSTANCE = SaslFailureProvider()
 
-    /**  
+    /**
      * 私有构造函数，防止外部实例化
      */
     private init() {
         super("SaslNonzaSASLFailure")
     }
 
-    /**  
+    /**
      * 解析 XML 拉取解析器中的 SASL 失败数据。
      *
      * @param parser          用于解析的 XmlPullParser 实例
      * @param initialDepth    初始深度
-     * @param _  XML 环境
+     * @param xmlEnvironment  XML 环境
      * @return               返回一个 SASLFailure 对象
      * @throws XmlPullParserException  解析过程中可能发生的 XML 解析异常
      * @throws IOException             解析过程中可能发生的 IO 异常
      */
-    public override func parse(parser: XmlPullParser, initialDepth: Int, _: ?XmlEnvironment): SaslNonzaSASLFailure {
+    public override func parse(parser: XmlPullParser, initialDepth: Int, xmlEnvironment: ?XmlEnvironment): SaslNonzaSASLFailure {
         var condition: ?String = None
         var descriptiveTexts: ?Map<String, String> = None
 

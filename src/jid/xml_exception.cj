@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.jid
 
-/**  
+/**
+ * public abstract class InvalidXmlException <: Exception
+ *
  * 抽象类，表示无效的 XML 异常，继承自 Exception
  */
 public abstract class InvalidXmlException <: Exception {
@@ -11,7 +13,7 @@ public abstract class InvalidXmlException <: Exception {
 
     private let xml: String // 解析到目前为止的 XML 内容  
 
-    /**  
+    /**
      * 构造函数
      *
      * @param message        异常消息
@@ -24,7 +26,7 @@ public abstract class InvalidXmlException <: Exception {
         this.xml = xml
     }
 
-    /**  
+    /**
      * 获取意外字符
      *
      * @return 意外字符
@@ -33,7 +35,7 @@ public abstract class InvalidXmlException <: Exception {
         return unexpectedChar
     }
 
-    /**  
+    /**
      * 获取解析到目前为止的 XML 内容
      *
      * @return 解析到目前为止的 XML
@@ -42,7 +44,7 @@ public abstract class InvalidXmlException <: Exception {
         return xml
     }
 
-    /**  
+    /**
      * 获得类名，用字符串表示。
      *
      * @return 类名。
@@ -52,11 +54,11 @@ public abstract class InvalidXmlException <: Exception {
     }
 }
 
-/**  
+/**
  * 表示无效的空标签异常，继承自 InvalidXmlException
  */
 public class InvalidEmptyTagException <: InvalidXmlException {
-    /**  
+    /**
      * 构造函数
      *
      * @param message 异常消息
@@ -67,7 +69,7 @@ public class InvalidEmptyTagException <: InvalidXmlException {
         super(message, c, xml)
     }
 
-    /**  
+    /**
      * 静态工厂方法，用于创建 InvalidEmptyTagException 的实例
      *
      * @param c   意外字符
@@ -79,7 +81,7 @@ public class InvalidEmptyTagException <: InvalidXmlException {
         return InvalidEmptyTagException(message, c, xml)
     }
 
-    /**  
+    /**
      * 获得类名，用字符串表示。
      *
      * @return 类名。
@@ -89,11 +91,11 @@ public class InvalidEmptyTagException <: InvalidXmlException {
     }
 }
 
-/**  
+/**
  * 表示无效的属性声明异常，继承自 InvalidXmlException
  */
 public class InvalidAttributeDeclarationException <: InvalidXmlException {
-    /**  
+    /**
      * 构造函数
      *
      * @param message 异常消息
@@ -104,7 +106,7 @@ public class InvalidAttributeDeclarationException <: InvalidXmlException {
         super(message, c, xml)
     }
 
-    /**  
+    /**
      * 静态工厂方法，用于创建 InvalidAttributeDeclarationException 的实例
      *
      * @param c   意外字符
@@ -116,7 +118,7 @@ public class InvalidAttributeDeclarationException <: InvalidXmlException {
         return InvalidAttributeDeclarationException(message, c, xml)
     }
 
-    /**  
+    /**
      * 获得类名，用字符串表示。
      *
      * @return 类名。

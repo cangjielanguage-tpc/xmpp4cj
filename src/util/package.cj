@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 /**
@@ -16,7 +16,7 @@ internal import std.random.*
 internal import std.regex.*
 internal import std.sync.*
 
-/*
+/**
  * ArrayList工具类
  */
 public interface ArrayListExt<T> {
@@ -29,7 +29,7 @@ public interface ArrayListExt<T> {
     func removeValue(v: T): Bool
 }
 
-/*
+/**
  * 扩展ArrayList
  */
 extend<T> ArrayList<T> <: ArrayListExt<T> {
@@ -50,7 +50,7 @@ extend<T> ArrayList<T> <: ArrayListExt<T> {
     }
 }
 
-/*
+/**
  * Objects工具类
  */
 public class Objects {
@@ -78,7 +78,7 @@ public class Objects {
     }
 }
 
-/*
+/**
  * 断言 默认只记录 不抛异常
  *
  * @param exp 判断true false的值。
@@ -89,7 +89,7 @@ public func assert(exp: Bool): Unit {
     }
 }
 
-/*
+/**
  * 继承Exception的异常类。
  */
 public class AssertionError <: ExceptionExt {
@@ -101,7 +101,7 @@ public class AssertionError <: ExceptionExt {
     public init(e: Exception) {
         super(e.toString(), e)
     }
-    /**  
+    /**
      * 获得类名，用字符串表示。
      *
      * @return 类名。
@@ -111,6 +111,9 @@ public class AssertionError <: ExceptionExt {
     }
 }
 
+/**
+ * public type CallbackHandler = (Any) -> Unit
+ */
 public type CallbackHandler = (Any) -> Unit
 
 public interface OptionExt<T> {

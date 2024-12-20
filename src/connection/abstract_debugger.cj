@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
 /**
+ * public abstract class AbstractDebugger <: XmppDebugger
+ *
  * Debug抽象类
  */
 public abstract class AbstractDebugger <: XmppDebugger {
@@ -89,7 +91,7 @@ public abstract class AbstractDebugger <: XmppDebugger {
      */
     protected open func log(logMessage: String, throwable: Exception): Unit
 
-    /**  
+    /**
      * 注意字符序列可能会被格式化为可读的形式。
      *
      * @param outgoingCharSequence 出站字符序列
@@ -98,7 +100,7 @@ public abstract class AbstractDebugger <: XmppDebugger {
         log("SENT (${connection.getConnectionCounter()}): ${outgoingCharSequence}")
     }
 
-    /**  
+    /**
      * 处理入站字符序列。
      *
      * @param incomingCharSequence 入站字符序列
@@ -107,7 +109,7 @@ public abstract class AbstractDebugger <: XmppDebugger {
         log("RECV (${connection.getConnectionCounter()}): ${incomingCharSequence}")
     }
 
-    /**  
+    /**
      * 当用户登录到服务器时调用。用户可以是匿名用户，即用户的形式为 host/resource，而不是 user@host/resource。
      *
      * @param user 登录的用户 @ host/resource
@@ -125,7 +127,7 @@ public abstract class AbstractDebugger <: XmppDebugger {
         connection.addConnectionListener(connListener)
     }
 
-    /**  
+    /**
      * 由连接用于通知关于传入的顶层流元素。
      * <p>
      * 此方法在解析入站流后立即调用。
@@ -139,7 +141,7 @@ public abstract class AbstractDebugger <: XmppDebugger {
         }
     }
 
-    /**  
+    /**
      * 由连接用于通知关于传出的顶层流元素。
      * <p>
      * 此方法在元素被序列化为 XML 并放入出站流之前调用。

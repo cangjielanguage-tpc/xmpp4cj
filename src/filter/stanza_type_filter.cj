@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
-/**  
+/**
  * 用于过滤特定类型的 Stanzas 的过滤器。类型以 Class 对象的形式提供，
  * 例如类型可以是：
  * <ul>
@@ -33,7 +33,7 @@ public class StanzaTypeFilter<S> <: StanzaFilter where S <: Stanza {
      */
     private let packetType: ClassId
 
-    /**  
+    /**
      * 创建一个新的 Stanza 类型过滤器，该过滤器将过滤与 <code>packetType</code>
      * 相同类型的数据包。
      *
@@ -43,7 +43,7 @@ public class StanzaTypeFilter<S> <: StanzaFilter where S <: Stanza {
         this.packetType = packetType
     }
 
-    /**  
+    /**
      * 检查给定数据包是否被该过滤器接受。
      *
      * @param packet 要检查的数据包
@@ -53,7 +53,7 @@ public class StanzaTypeFilter<S> <: StanzaFilter where S <: Stanza {
         return packet is S
     }
 
-    /**  
+    /**
      * 返回过滤器的字符串表示形式。
      *
      * @return 过滤器的字符串表示，包含类名和数据包类型。

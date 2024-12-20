@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.xml
@@ -24,11 +24,11 @@ public class StaxXmlPullParser <: XmlPullParser {
     /**
      * 获取指定名称的属性。(不支持)
      *
-     * @param _ 属性名称。
+     * @param name 属性名称。
      * @return 属性值对象。
      * @throws UnsupportedException 不支持的接口抛UnsupportedException异常。
      */
-    public override func getProperty(_: String): Object {
+    public override func getProperty(name: String): Object {
         throw UnsupportedException()
     }
 
@@ -316,7 +316,7 @@ public class StaxXmlPullParserFactory <: XmlPullParserFactory {
      * @param reader 数据流。
      * @return XmlPullParser对象。
      */
-    public func newXmlPullParser(reader: InputStream): XmlPullParser {
+    public override func newXmlPullParser(reader: InputStream): XmlPullParser {
         return StaxXmlPullParser(reader)
     }
 }

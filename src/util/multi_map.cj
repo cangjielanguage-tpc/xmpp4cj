@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.util
@@ -199,11 +199,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
      * @return 已删除值的列表。
      */
     public func remove(key: K, num: Int): ?ArrayList<V> {
-        let values = if (let Some(values) <- _map.get(key)) {
-            values
-        } else {
-            return ArrayList<V>()
-        }
+        let values = _map.get(key) ?? return ArrayList<V>()
         let resultSize = min(values.size, num)
         let result = ArrayList<V>(resultSize)
         var i = 0

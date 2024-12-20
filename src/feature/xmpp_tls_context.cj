@@ -1,26 +1,26 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.feature
 
 // TODO
-/**  
+/**
  * 表示 Xmpp 的 TLS 上下文配置。
  * 此类封装了 SSL 上下文和 DANE 验证器的实例，
  * 用于处理安全的 XMPP 连接。
  */
 public class XmppTlsContext {
-    /**   
+    /** 
      * Config。
      */
     public let tlsCfg: TlsClientConfig
 
-    /**   
+    /** 
      * DANE 验证器，用于进行 DANE（DNS-Based Authentication of Named Entities）验证。
      */
     public let daneVerifier: ?XmppDaneVerifier
 
-    /**  
+    /**
      * 构造一个 XmppTlsContext 实例。
      *
      * @param tlsCfg Config
@@ -32,7 +32,7 @@ public class XmppTlsContext {
         this.daneVerifier = daneVerifier
     }
 
-    /**  
+    /**
      * 设置TlsSocket参数。
      *
      * @param tcpSocket TcpSocket
@@ -56,11 +56,11 @@ public class XmppTlsContext {
     }
 }
 
-/**  
+/**
  * 此异常表示各种证书问题之一。
  */
 public class CertificateException <: Exception {
-    /**  
+    /**
      * 构造一个 CertificateException 实例。
      *
      * @param msg 异常信息

@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
 
-/**  
+/**
  * {@code MessageBuilder} 类用于构建 XMPP 消息（Message）对象的方便构建器。
  * <p>
  * 该类为 {@link Message} 对象提供了灵活的构建选项，包括设置消息类型、主体和主题等属性。
@@ -11,14 +11,14 @@ package xmpp4cj.packet
  * </p>
  */
 public class MessageBuilder <: MessageOrPresenceBuilder & MessageView {
-    /**  
+    /**
      * 表示一个空的 {@code MessageBuilder} 实例。
      */
     static let EMPTY = MessageBuilder(RandomStringStanzaIdSource {=> None})
 
     var typ: ?MessageType = None // 消息类型  
 
-    /**  
+    /**
      * 使用现有的消息和指定的 stanza ID 初始化 {@code MessageBuilder} 实例。
      *
      * @param message 要复制属性的 {@code Message} 实例。
@@ -29,7 +29,7 @@ public class MessageBuilder <: MessageOrPresenceBuilder & MessageView {
         copyFromMessage(message)
     }
 
-    /**  
+    /**
      * 使用现有的消息和指定的 stanza ID 源初始化 {@code MessageBuilder} 实例。
      *
      * @param message 要复制属性的 {@code Message} 实例。
@@ -40,7 +40,7 @@ public class MessageBuilder <: MessageOrPresenceBuilder & MessageView {
         copyFromMessage(message)
     }
 
-    /**  
+    /**
      * 使用指定的 stanza ID 源初始化 {@code MessageBuilder} 实例。
      *
      * @param stanzaIdSource 指定的 stanza ID 源。
@@ -49,7 +49,7 @@ public class MessageBuilder <: MessageOrPresenceBuilder & MessageView {
         super(stanzaIdSource)
     }
 
-    /**  
+    /**
      * 使用指定的 stanza ID 初始化 {@code MessageBuilder} 实例。
      *
      * @param stanzaId 指定的 stanza ID。
@@ -58,7 +58,7 @@ public class MessageBuilder <: MessageOrPresenceBuilder & MessageView {
         super(stanzaId)
     }
 
-    /**  
+    /**
      * 从现有的消息中复制属性。
      *
      * @param message 要复制属性的 {@code Message} 实例。
@@ -67,7 +67,7 @@ public class MessageBuilder <: MessageOrPresenceBuilder & MessageView {
         typ = message.getType()
     }
 
-    /**  
+    /**
      * 添加特定于 Stanza 的属性。
      *
      * @param builder 用于构建字符串的构建器。
@@ -76,7 +76,7 @@ public class MessageBuilder <: MessageOrPresenceBuilder & MessageView {
         builder.addValue("type", typ?.toString())
     }
 
-    /**  
+    /**
      * 设置消息类型。
      *
      * @param type 要设置的 {@code Message.Type} 类型。
@@ -87,7 +87,7 @@ public class MessageBuilder <: MessageOrPresenceBuilder & MessageView {
         return this
     }
 
-    /**  
+    /**
      * 设置消息线程 ID。
      *
      * @param thread 消息线程 ID。
@@ -97,7 +97,7 @@ public class MessageBuilder <: MessageOrPresenceBuilder & MessageView {
         return setThread(thread, None)
     }
 
-    /**  
+    /**
      * 设置消息线程和父线程 ID。
      *
      * @param thread 消息线程 ID。
@@ -109,7 +109,7 @@ public class MessageBuilder <: MessageOrPresenceBuilder & MessageView {
         return this
     }
 
-    /**  
+    /**
      * 设置消息的主题。主题是消息内容的简短描述。
      *
      * @param subject 消息的主题。
@@ -119,7 +119,7 @@ public class MessageBuilder <: MessageOrPresenceBuilder & MessageView {
         return addSubject(None, subject)
     }
 
-    /**  
+    /**
      * 添加带有对应语言的主题。
      *
      * @param language 主题的语言。
@@ -139,7 +139,7 @@ public class MessageBuilder <: MessageOrPresenceBuilder & MessageView {
         return this
     }
 
-    /**  
+    /**
      * 设置消息正文。
      *
      * @param body 消息正文。
@@ -150,7 +150,7 @@ public class MessageBuilder <: MessageOrPresenceBuilder & MessageView {
         return addBody(None, body)
     }
 
-    /**  
+    /**
      * 添加带有对应语言的消息正文。
      *
      * @param language 正文的语言。
@@ -169,7 +169,7 @@ public class MessageBuilder <: MessageOrPresenceBuilder & MessageView {
         return this
     }
 
-    /**  
+    /**
      * 构建并返回一个新的 {@code Message} 实例。
      *
      * @return 构建的 {@code Message} 对象。

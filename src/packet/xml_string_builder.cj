@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
@@ -475,11 +475,7 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
      * @return 当前 XmlStringBuilder 实例
      */
     public func xmlnsAttribute(value: ?String): XmlStringBuilder {
-        let v = if (let Some(v) <- value) {
-            v
-        } else {
-            return this
-        }
+        let v = value ?? return this
         if (effectiveXmlEnvironment?.effectiveNamespaceEquals(v) ?? false) {
             return this
         }

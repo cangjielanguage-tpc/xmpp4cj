@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2022-2024. All rights reserved.
  */
 
@@ -37,7 +37,7 @@ let INIT_STATE: UInt32 = 101
 let BUSY_STATE: UInt32 = 107
 let FINISH_STATE: UInt32 = 108
 
-/*
+/**
  * Compressed Block Status
  * return value of the deflateStored deflateFast deflateSlow function
  */
@@ -107,7 +107,7 @@ let static_ltree: Array<CTData> = [CTData(12, 8), CTData(140, 8), CTData(76, 8),
     CTData(52, 7), CTData(116, 7), CTData(3, 8), CTData(131, 8), CTData(67, 8), CTData(195, 8), CTData(35, 8),
     CTData(163, 8), CTData(99, 8), CTData(227, 8)]
 
-/*
+/**
  * Compressed code table of the distance interval number in the static huffman policy
  * Fixed 5 bits indicate the range number from 0 to 29. The code value is in reverse order.
  */

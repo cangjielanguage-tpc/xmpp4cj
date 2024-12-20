@@ -1,16 +1,16 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
-/**  
+/**
  * 接口，允许实现类监听连接关闭和重新连接事件。监听器与 XMPPConnection 对象注册。
  *
  * @see XMPPConnection#addConnectionListener
  * @see XMPPConnection#removeConnectionListener
  */
 public interface ConnectionListener {
-    /**  
+    /**
      * 通知连接正在进行中。
      * 当执行 {@link AbstractXMPPConnection#connect()} 时调用此方法。
      *
@@ -18,7 +18,7 @@ public interface ConnectionListener {
      */
     func connecting(_: XMPPConnection): Unit {}
 
-    /**  
+    /**
      * 通知连接已成功连接到远程端点（例如 XMPP 服务器）。
      * <p>
      * 注意，连接可能尚未经过身份验证，因此可能仅能进行有限的操作，例如注册账户。
@@ -28,7 +28,7 @@ public interface ConnectionListener {
      */
     func connected(_: XMPPConnection): Unit {}
 
-    /**  
+    /**
      * 通知连接已通过身份验证。
      *
      * @param _ 成功通过身份验证的 XMPPConnection 对象
@@ -36,12 +36,12 @@ public interface ConnectionListener {
      */
     func authenticated(_: XMPPConnection, _: Bool): Unit {}
 
-    /**  
+    /**
      * 通知连接正常关闭。
      */
     func connectionClosed(): Unit {}
 
-    /**  
+    /**
      * 通知连接因异常而关闭。当连接被突然断开时，连接可能会尝试重新连接到服务器。
      *
      * @param _ 关闭连接时抛出的异常
@@ -60,7 +60,7 @@ public class ConnectionListenerBuilder {
 
     var _connectionClosedOnError: (Exception) -> Unit = {_ =>}
 
-    /**  
+    /**
      * 通知连接正在进行中。
      *
      * @param connecting 接口处理的回调
@@ -70,7 +70,7 @@ public class ConnectionListenerBuilder {
         this
     }
 
-    /**  
+    /**
      * 通知连接已成功连接到远程端点（例如 XMPP 服务器）。
      *
      * @param connected 接口处理的回调
@@ -80,7 +80,7 @@ public class ConnectionListenerBuilder {
         this
     }
 
-    /**  
+    /**
      * 通知连接已通过身份验证。
      *
      * @param authenticated 接口处理的回调
@@ -90,7 +90,7 @@ public class ConnectionListenerBuilder {
         this
     }
 
-    /**  
+    /**
      * 通知连接正常关闭。
      *
      * @param connectionClosed 接口处理的回调
@@ -100,7 +100,7 @@ public class ConnectionListenerBuilder {
         this
     }
 
-    /**  
+    /**
      * 通知连接因异常而关闭。当连接被突然断开时，连接可能会尝试重新连接到服务器。
      *
      * @param connectionClosedOnError 接口处理的回调
@@ -110,7 +110,7 @@ public class ConnectionListenerBuilder {
         this
     }
 
-    /**  
+    /**
      * 返回ConnectionListener对象。
      *
      * @return ConnectionListener
@@ -144,7 +144,7 @@ class SimpleConnectionListener <: ConnectionListener {
     }
 }
 
-/**  
+/**
  * 实现此接口的类将在新的 {@link XMPPConnection} 被创建时收到通知。
  * 新创建的连接尚未实际连接到服务器。使用
  * {@link XMPPConnectionRegistry#addConnectionCreationListener(ConnectionCreationListener)}
@@ -153,7 +153,7 @@ class SimpleConnectionListener <: ConnectionListener {
 public open class ConnectionCreationListener <: Hashable & Equatable<ConnectionCreationListener> {
     private let hash: Int
 
-    /**  
+    /**
      * 通过func构建ConnectionCreationListener。
      *
      * @param callback 回调方法
@@ -162,7 +162,7 @@ public open class ConnectionCreationListener <: Hashable & Equatable<ConnectionC
         hash = DateTime.now().hashCode()
     }
 
-    /**  
+    /**
      * 通知新连接已创建。新连接尚未连接到服务器。
      *
      * @param connection 新创建的 XMPPConnection 对象

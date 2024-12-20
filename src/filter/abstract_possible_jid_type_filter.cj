@@ -1,14 +1,16 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
-/**  
+/**
+ * public abstract class AbstractPossibleJidTypeFilter <: AbstractJidTypeFilter
+ *
  * 抽象类，表示可能的 JID 类型过滤器，继承自 AbstractJidTypeFilter。
  * 该类用于过滤 STANZA 数据包中 JID 的类型。
  */
 public abstract class AbstractPossibleJidTypeFilter <: AbstractJidTypeFilter {
-    /**  
+    /**
      * 构造函数，初始化 JID 类型。
      *
      * @param jidType 要检查的 JID 类型。
@@ -17,7 +19,7 @@ public abstract class AbstractPossibleJidTypeFilter <: AbstractJidTypeFilter {
         super(jidType)
     }
 
-    /**  
+    /**
      * 检查给定的 STANZA 是否被接受。基于 JID 的类型判断其是否符合要求。
      *
      * @param stanza 要检查的 STANZA 数据包。

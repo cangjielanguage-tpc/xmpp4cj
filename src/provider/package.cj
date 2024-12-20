@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 /**
@@ -18,7 +18,7 @@ internal import xmpp4cj.util.*
 internal import xmpp4cj.xml.*
 
 extend<K, V> ConcurrentHashMap<K, V> where K <: Hashable & Equatable<K> {
-    /**  
+    /**
      * 返回一个迭代器，用于遍历 ConcurrentHashMap 中的所有值。
      *
      * @return 值的迭代器

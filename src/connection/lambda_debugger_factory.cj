@@ -1,13 +1,16 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
 import std.process.Process
 
+/**
+ * public type DebuggerSupplier = (XMPPConnection) -> XmppDebugger
+ */
 public type DebuggerSupplier = (XMPPConnection) -> XmppDebugger
 
-/* 
+/**
  * 通过{@code type DebuggerSupplier = (XMPPConnection) -> XmppDebugger}构造XmppDebugger
  * 支持xmpp.debuggerClass环境变量指定默认
  * 支持{@link XmppConfiguration#addDisabledXmppClasses}排除规则

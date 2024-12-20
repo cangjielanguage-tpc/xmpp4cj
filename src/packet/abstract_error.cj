@@ -1,29 +1,29 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
 
-/**  
+/**
  * AbstractError 类是表示包含描述性文本和扩展元素的错误的抽象基类。
  * 该类提供了获取描述性文本和扩展的功能。
  */
 public open class AbstractError {
-    /**  
+    /**
      * 描述性文本的命名空间。
      */
     protected let textNamespace: ?String
 
-    /**  
+    /**
      * 存储描述性文本的映射，键为语言代码，值为相应的文本。
      */
     protected let descriptiveTexts: Map<String, String>
 
-    /**  
+    /**
      * 存储扩展元素的列表。
      */
     protected let extensions: Collection<ExtensionElement>
 
-    /**  
+    /**
      * 通过描述性文本映射构造AbstractError
      *
      * @param descriptiveTexts 描述性文本映射
@@ -32,7 +32,7 @@ public open class AbstractError {
         this(descriptiveTexts, None)
     }
 
-    /**  
+    /**
      * 通过描述性文本映射和扩展元素列表构造AbstractError
      *
      * @param descriptiveTexts 描述性文本映射
@@ -42,7 +42,7 @@ public open class AbstractError {
         this(descriptiveTexts, None, extensions)
     }
 
-    /**  
+    /**
      * 通过描述性文本映射和命名空间和扩展元素列表构造AbstractError
      *
      * @param descriptiveTexts 描述性文本映射
@@ -111,7 +111,7 @@ public open class AbstractError {
         return PacketUtil.extensionElementFrom(extensions, elementName, namespace)
     }
 
-    /**  
+    /**
      * 将描述性文本和扩展内容添加到给定的 XmlStringBuilder 中。
      *
      * @param xml XmlStringBuilder 实例

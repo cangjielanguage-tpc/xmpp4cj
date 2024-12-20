@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
@@ -121,7 +121,7 @@ public class StreamError <: AbstractError & Nonza & ToString {
         return toXML().toString()
     }
 
-    public override func toXML(_: ?XmlEnvironment): XmlStringBuilder {
+    public override func toXML(xmlEnvironment: ?XmlEnvironment): XmlStringBuilder {
         let xml = XmlStringBuilder()
         xml.openElement(ELEMENT)
         xml.halfOpenElement(condition.toString()).xmlnsAttribute(NAMESPACE).closeEmptyElement()

@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
-/**  
+/**
  * 用于过滤有效的 IQ 请求回复的数据包。
  * <p>
  * 这样的数据包必须具有相同的 stanza id，并且必须是类型为
@@ -36,7 +36,7 @@ public open class IQReplyFilter <: StanzaFilter {
 
     private let packetId: ?String
 
-    /**  
+    /**
      * 构造一个过滤器用于处理 IQ 请求的有效回复。
      * <p>
      * 这样的数据包必须具有相同的 stanza id，并且必须是类型为
@@ -80,7 +80,7 @@ public open class IQReplyFilter <: StanzaFilter {
         }
     }
 
-    /**  
+    /**
      * 测试指定的 Stanza 是否应该通过过滤器。
      *
      * @param stanza 要测试的 Stanza。

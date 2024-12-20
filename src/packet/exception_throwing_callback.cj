@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
@@ -11,10 +11,10 @@ public open class ExceptionThrowingCallback <: ParsingExceptionCallback {
     /**
      * 当解析一个节导致异常时调用。
      *
-     * @param _ 导致异常的原始节数据
+     * @param unparseableStanza 导致异常的原始节数据
      * @throws IOException 如果发生I/O错误，会抛出IOException。
      */
-    public open override func handleUnparsableStanza(_: UnparseableStanza): Unit {
+    public open override func handleUnparsableStanza(unparseableStanza: UnparseableStanza): Unit {
         throw IOException()
     }
 }

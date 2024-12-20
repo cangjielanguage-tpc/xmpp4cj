@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.feature
 
 /**
+ * public abstract class XMPPException <: ExceptionExt
+ *
  * 执行XMPP操作时发生错误时引发的通用异常。
  * XMPP服务器可以用错误代码和问题的文本描述来响应错误情况，这些代码和描述封装在XMPPError类中。
  * 在适当的时候，XMPPError实例是此异常的附加实例
@@ -146,7 +148,7 @@ public class XMPPErrorException <: XMPPException {
         return sb.toString()
     }
 
-    /**  
+    /**
      * 检查给定的 Stanza 是否包含错误，如果包含错误则抛出 XMPPErrorException。
      *
      * @param packet 要检查的 Stanza 对象。
@@ -156,7 +158,7 @@ public class XMPPErrorException <: XMPPException {
         ifHasErrorThenThrow(packet, None)
     }
 
-    /**  
+    /**
      * 检查给定的 Stanza 是否包含错误，如果包含错误则抛出 XMPPErrorException。
      * 此方法允许提供一个请求的 Stanza 作为上下文。
      *
@@ -181,22 +183,22 @@ public class XMPPErrorException <: XMPPException {
     }
 }
 
-/**  
+/**
  * FailedNonzaException 是一个自定义异常，表示处理 Nonza 时发生的错误。
  * 该异常扩展自 XMPPException，包含有关失败的 Nonza 和错误条件的信息。
  */
 public class FailedNonzaException <: XMPPException {
-    /**  
+    /**
      * 失败的 Nonza 所对应的错误条件。
      */
     private let condition: ?StanzaErrorCondition
 
-    /**  
+    /**
      * 导致异常的 Nonza。
      */
     private let nonza: Nonza
 
-    /**  
+    /**
      * 创建一个 FailedNonzaException，指定失败的 Nonza。
      * 错误条件将被设置为 null。
      *
@@ -206,7 +208,7 @@ public class FailedNonzaException <: XMPPException {
         this(failedNonza, None)
     }
 
-    /**  
+    /**
      * 创建一个 FailedNonzaException，指定失败的 Nonza 和相应的错误条件。
      *
      * @param nonza 发生错误的 Nonza。
@@ -218,7 +220,7 @@ public class FailedNonzaException <: XMPPException {
         this.nonza = nonza
     }
 
-    /**  
+    /**
      * 获取错误条件。
      *
      * @return 关联的错误条件，如果没有则返回 null。
@@ -227,7 +229,7 @@ public class FailedNonzaException <: XMPPException {
         return condition
     }
 
-    /**  
+    /**
      * 获取导致异常的 Nonza。
      *
      * @return 发生错误的 Nonza。

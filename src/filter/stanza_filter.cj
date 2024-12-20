@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
-/**  
+/**
+ * public abstract class StanzaFilter <: Predicate<Stanza> & ToString
+ *
  * 定义了一种根据特定属性过滤 Stanza 的方法。Stanza 过滤器用于构建 Stanza 监听器或收集器，
  * 过滤器定义哪些 Stanza 匹配收集器或监听器的标准，以便进行进一步的 Stanza 处理。
  * <p>
@@ -32,7 +34,7 @@ package xmpp4cj.filter
  * @see xmpp4cj.feature.StanzaListener
  */
 public abstract class StanzaFilter <: Predicate<Stanza> & ToString {
-    /**  
+    /**
      * 测试指定的 Stanza 是否应该通过过滤器。
      *
      * @param stanza 要测试的 Stanza。
@@ -50,7 +52,7 @@ public abstract class StanzaFilter <: Predicate<Stanza> & ToString {
         return accept(stanza)
     }
 
-    /**  
+    /**
      * 将当前过滤器转换为适用于特定 Stanza 类的谓词。
      *
      * @param stanzaClass 要匹配的 Stanza 类。

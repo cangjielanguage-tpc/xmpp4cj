@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
@@ -422,7 +422,7 @@ public enum StanzaErrorType <: ToString {
     }
 }
 
-/**  
+/**
  * 枚举类 Condition，表示 XMPP 错误条件。
  */
 public enum StanzaErrorCondition <: ToString & Equatable<StanzaErrorCondition> & Hashable {
@@ -515,7 +515,7 @@ public enum StanzaErrorCondition <: ToString & Equatable<StanzaErrorCondition> &
      */
     | unexpected_request
 
-    /**  
+    /**
      * 从字符串创建对应的 Condition 枚举常量。
      *
      * @param string 要转换的字符串，使用连字符

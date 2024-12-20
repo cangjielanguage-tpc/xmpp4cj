@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.proxy
 
-/**  
+/**
  * 存储代理信息的类，例如代理类型、主机、端口、身份验证等。
  */
 public class ProxyInfo {
@@ -19,7 +19,7 @@ public class ProxyInfo {
 
     private let proxySocketConnection: ProxySocketConnection // 代理 socket 连接
 
-    /**  
+    /**
      * 构造 ProxyInfo 对象。
      *
      * @param pType 代理类型
@@ -38,7 +38,7 @@ public class ProxyInfo {
             proxyUsername, proxyPassword)
     }
 
-    /**  
+    /**
      * 创建一个 HTTP 代理的 ProxyInfo 实例。
      *
      * @param pHost 代理主机
@@ -51,7 +51,7 @@ public class ProxyInfo {
         return ProxyInfo(ProxyInfoProxyType.HTTP, pHost, pPort, pUser, pPass)
     }
 
-    /**  
+    /**
      * 创建一个 SOCKS4 代理的 ProxyInfo 实例。
      *
      * @param pHost 代理主机
@@ -64,7 +64,7 @@ public class ProxyInfo {
         return ProxyInfo(ProxyInfoProxyType.SOCKS4, pHost, pPort, pUser, pPass)
     }
 
-    /**  
+    /**
      * 创建一个 SOCKS5 代理的 ProxyInfo 实例。
      *
      * @param pHost 代理主机
@@ -77,7 +77,7 @@ public class ProxyInfo {
         return ProxyInfo(ProxyInfoProxyType.SOCKS5, pHost, pPort, pUser, pPass)
     }
 
-    /**  
+    /**
      * 获取代理类型。
      *
      * @return 代理类型
@@ -86,7 +86,7 @@ public class ProxyInfo {
         return proxyType
     }
 
-    /**  
+    /**
      * 获取代理地址。
      *
      * @return 代理地址
@@ -95,7 +95,7 @@ public class ProxyInfo {
         return proxyAddress
     }
 
-    /**  
+    /**
      *  获取代理端口。
      *
      * @return 代理端口
@@ -104,7 +104,7 @@ public class ProxyInfo {
         return proxyPort
     }
 
-    /**  
+    /**
      * 获取代理用户名。
      *
      * @return 代理用户名
@@ -113,7 +113,7 @@ public class ProxyInfo {
         return proxyUsername
     }
 
-    /**  
+    /**
      * 获取代理密码。
      *
      * @return 代理密码
@@ -122,7 +122,7 @@ public class ProxyInfo {
         return proxyPassword
     }
 
-    /**  
+    /**
      * 获取代理 socket 连接。
      *
      * @return 代理 socket 连接
@@ -132,19 +132,19 @@ public class ProxyInfo {
     }
 }
 
-/**  
+/**
  * 代理类型的枚举类。
  */
 public enum ProxyInfoProxyType <: ToString & Equatable<ProxyInfoProxyType> {
-    /**  
+    /**
      * HTTP 代理类型。
      */
     | HTTP
-    /**  
+    /**
      * SOCKS4 代理类型。
      */
     | SOCKS4
-    /**  
+    /**
      * SOCKS5 代理类型。
      */
     | SOCKS5

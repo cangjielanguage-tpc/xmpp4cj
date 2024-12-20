@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.provider
 
 /**
+ * public abstract class ExtensionElementProvider<EE> <: Provider<EE> where EE <: Element
+ *
  * 一个用于解析自定义扩展元素的抽象类。每个 ExtensionElementProvider 都必须在 ProviderManager 类中注册才能被使用。
  * 这个抽象类的每个实现<b>必须</b>有一个公共的无参构造函数。
  */

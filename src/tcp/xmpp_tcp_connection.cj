@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.tcp
@@ -188,7 +188,7 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
             .build())
         // Re-init the reader and writer in case of SASL <success/>.
         // This is done to reset the parser since a new stream is initiated.
-        buildNonzaCallback().listenFor("SaslNonzaSuccess", {s => resetParser()}).install()
+        buildNonzaCallback().listenFor("SaslNonzaSuccess", {_ => resetParser()}).install()
     }
 
     /**

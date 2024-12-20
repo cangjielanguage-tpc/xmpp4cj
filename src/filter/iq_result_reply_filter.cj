@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
-/**  
+/**
  * 用于过滤有效的 IQ 请求的结果回复的数据包。
  * <p>
  * 这个类扩展了 {@link IQReplyFilter} 类，并重写了接受方法，确保只接受
@@ -11,7 +11,7 @@ package xmpp4cj.filter
  * </p>
  */
 public class IQResultReplyFilter <: IQReplyFilter {
-    /**  
+    /**
      * 构造一个 IQ 结果回复过滤器。
      *
      * @param iqPacket 需要过滤回复的 IQ 请求。
@@ -22,7 +22,7 @@ public class IQResultReplyFilter <: IQReplyFilter {
         super(iqPacket, connUser, connXmppServiceDomain)
     }
 
-    /**  
+    /**
      * 测试指定的 Stanza 是否应该通过过滤器。
      *
      * @param stanza 要测试的 Stanza。

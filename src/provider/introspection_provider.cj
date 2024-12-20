@@ -1,14 +1,14 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.provider
 
-/**  
+/**
  * IntrospectionProvider 类用于提供 XML 的解析功能。
  * 它包含了用于解析 IQ 和 ExtensionElement 的两个抽象类。
  */
 public class IntrospectionProvider {
-    /**  
+    /**
      * 解析 XML 元素并返回相应的对象。
      *
      * @param parser XmlPullParser 实例
@@ -49,13 +49,15 @@ public class IntrospectionProvider {
     }
 }
 
-/**  
+/**
+ * public abstract class IQIntrospectionProvider<I> <: IqProvider<I> where I <: IQ
+ *
  * IQIntrospectionProvider 是一个抽象类，用于解析 IQ 元素。
  *
  * @param <I> 具体的 IQ 类型
  */
 public abstract class IQIntrospectionProvider<I> <: IqProvider<I> where I <: IQ {
-    /**  
+    /**
      * 构造函数，初始化 IQIntrospectionProvider。
      *
      * @param elementClass 泛型I的ClassId
@@ -70,18 +72,18 @@ public abstract class IQIntrospectionProvider<I> <: IqProvider<I> where I <: IQ 
         super(elementClass)
     }
 
-    /**  
+    /**
      * 解析 XML pull 解析器中的 IQ 元素。
      *
      * @param parser XmlPullParser 实例，用于解析 XML 数据
      * @param initialDepth 解析时的初始深度
-     * @param _ IqData
-     * @param _ XML 环境设置
+     * @param iqData IqData
+     * @param xmlEnvironment XML 环境设置
      * @return 解析得到的 IQ 元素
      * @throws XmlPullParserException 解析 XML 时抛出的异常
      * @throws IOException 读写过程中的异常
      */
-    public override func parse(parser: XmlPullParser, initialDepth: Int, _: IqData, _: ?XmlEnvironment): I {
+    public override func parse(parser: XmlPullParser, initialDepth: Int, iqData: IqData, xmlEnvironment: ?XmlEnvironment): I {
         try {
             return IntrospectionProvider.parseWithIntrospection(parser, initialDepth, iqInit, iqPropertySetter)
         } catch (e: Exception) {
@@ -90,13 +92,15 @@ public abstract class IQIntrospectionProvider<I> <: IqProvider<I> where I <: IQ 
     }
 }
 
-/**  
+/**
+ * public abstract class PacketExtensionIntrospectionProvider<PE> <: ExtensionElementProvider<PE> where PE <: ExtensionElement
+ *
  * PacketExtensionIntrospectionProvider 是一个抽象类，用于解析 Packet 扩展元素。
  *
  * @param <PE> 具体的扩展元素类型
  */
 public abstract class PacketExtensionIntrospectionProvider<PE> <: ExtensionElementProvider<PE> where PE <: ExtensionElement {
-    /**  
+    /**
      * 构造函数，初始化 PacketExtensionIntrospectionProvider。
      *
      * @param elementClass 扩展元素类型的ClassId
@@ -111,17 +115,17 @@ public abstract class PacketExtensionIntrospectionProvider<PE> <: ExtensionEleme
         super(elementClass)
     }
 
-    /**  
+    /**
      * 解析 XML pull 解析器中的扩展元素。
      *
      * @param parser XmlPullParser 实例，用于解析 XML 数据
      * @param initialDepth 解析时的初始深度
-     * @param _ XML 环境设置
+     * @param xmlEnvironment XML 环境设置
      * @return 解析得到的扩展元素
      * @throws XmlPullParserException 解析 XML 时抛出的异常
      * @throws IOException 读写过程中的异常
      */
-    public override func parse(parser: XmlPullParser, initialDepth: Int, _: ?XmlEnvironment): PE {
+    public override func parse(parser: XmlPullParser, initialDepth: Int, xmlEnvironment: ?XmlEnvironment): PE {
         try {
             return IntrospectionProvider.parseWithIntrospection(parser, initialDepth, peInit, pePropertySetter)
         } catch (e: Exception) {

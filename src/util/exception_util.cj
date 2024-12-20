@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.util
@@ -33,7 +33,11 @@ public class ExceptionUtil {
     }
 }
 
-/* 针对Exception无法继承cause堆栈 定义一个ExceptionExt作为需要cause信息的父类 */
+/**
+ * public abstract class ExceptionExt <: Exception
+ *
+ * 针对Exception无法继承cause堆栈 定义一个ExceptionExt作为需要cause信息的父类
+ */
 public abstract class ExceptionExt <: Exception {
     protected var cause: ?Exception = None
     protected init() {}

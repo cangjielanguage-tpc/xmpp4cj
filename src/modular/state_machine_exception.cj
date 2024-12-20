@@ -1,8 +1,12 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.modular
 
+/**
+ * public abstract class StateMachineException <: Xmpp4cjException
+ *
+ */
 public abstract class StateMachineException <: Xmpp4cjException {
     protected init(message: String) {
         super(message)

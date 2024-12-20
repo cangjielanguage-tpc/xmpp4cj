@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
-/**  
+/**
  * <p>该类负责使用 SASL 验证用户，绑定资源到连接并与服务器建立会话。</p>
  *
  * <p>一旦 TLS 已成功协商（即连接已加密），便可以向服务器注册或使用 SASL 进行身份验证。
@@ -30,7 +30,7 @@ public class SASLAuthentication {
         blacklistSASLMechanism(ScramSha1PlusMechanism.NAME)
     }
 
-    /**  
+    /**
      * 注册新的 SASL 机制。
      *
      * @param mechanism 一个 SASLMechanism 子类的实例。
@@ -42,7 +42,7 @@ public class SASLAuthentication {
         }
     }
 
-    /**  
+    /**
      * 返回已注册的 SASLMechanism，按优先级排序。
      *
      * @return 已注册的 SASLMechanism 对象，按优先级排序
@@ -57,7 +57,7 @@ public class SASLAuthentication {
         return answer
     }
 
-    /**  
+    /**
      * 检查指定的 SASL 机制是否已注册。
      *
      * @param saslMechanism 要检查的 SASL 机制名称
@@ -74,7 +74,7 @@ public class SASLAuthentication {
         return false
     }
 
-    /**  
+    /**
      * 根据其完整类名注销 SASLMechanism。例如：
      * "SASLCramMD5Mechanism"。
      *
@@ -94,7 +94,7 @@ public class SASLAuthentication {
         return false
     }
 
-    /**  
+    /**
      * 将指定的 SASL 机制列入黑名单。
      *
      * @param mechanism 要加入黑名单的机制名称
@@ -106,7 +106,7 @@ public class SASLAuthentication {
         }
     }
 
-    /**  
+    /**
      * 将指定的 SASL 机制移除黑名单。
      *
      * @param mechanism 要移除黑名单的机制名称
@@ -118,7 +118,7 @@ public class SASLAuthentication {
         }
     }
 
-    /**  
+    /**
      * 以不可更改的方式返回已被列入黑名单的 SASL 机制集合。
      *
      * @return 不可更改的 SASL 机制黑名单集合
@@ -135,7 +135,7 @@ public class SASLAuthentication {
 
     private var currentMechanism: ?SASLMechanism = None //当前使用的 SASL 机制
 
-    /**  
+    /**
      * 构造函数，初始化 SASLAuthentication 类的实例。
      *
      * @param connection 与此身份验证相关的 XMPP 连接
@@ -146,7 +146,7 @@ public class SASLAuthentication {
         this.connection = connection
     }
 
-    /**  
+    /**
      * 执行指定用户的 SASL 身份验证。如果 SASL 身份验证成功，则执行资源绑定和会话建立。
      * 此方法将返回绑定资源时服务器提供的完整 JID。
      *
@@ -192,7 +192,7 @@ public class SASLAuthentication {
         return mechanism
     }
 
-    /**  
+    /**
      * 处理接收到的挑战消息，包装 {@link #challengeReceived(String, boolean)} 方法，并将
      * <code>finalChallenge</code> 设置为 <code>false</code>。
      *
@@ -204,7 +204,7 @@ public class SASLAuthentication {
         challengeReceived(challenge.getData(), false)
     }
 
-    /**  
+    /**
      * 当前正挑战 SASL 身份验证，转发挑战给当前使用的 SASLMechanism。
      * SASLMechanism 将最终向服务器发送响应。挑战-响应序列的长度根据使用的 SASLMechanism 而变化。
      *
@@ -221,7 +221,7 @@ public class SASLAuthentication {
         mechanism?.challengeReceived(challenge, finalChallenge)
     }
 
-    /**  
+    /**
      * 接收通知，表示 SASL 身份验证成功。下一步将是绑定资源。
      *
      * @param success 身份验证的结果
@@ -240,7 +240,7 @@ public class SASLAuthentication {
         }
     }
 
-    /**  
+    /**
      * 处理 SASL 身份验证失败的通知消息。服务器可能会根据可重试的次数关闭连接。
      *
      * @param saslFailure 服务器报告的 SASL 失败
@@ -254,7 +254,7 @@ public class SASLAuthentication {
         authenticationFailed(saslErrorException)
     }
 
-    /**  
+    /**
      * 处理 SASL 身份验证失败的通知。此方法将唤醒在 #authenticate 方法中等待的线程。
      *
      * @param exception 发生的异常，表示身份验证失败
@@ -266,7 +266,7 @@ public class SASLAuthentication {
         }
     }
 
-    /**  
+    /**
      * 检查当前的 SASL 身份验证是否成功。
      *
      * @return 如果身份验证成功，则返回 true；否则返回 false
@@ -277,7 +277,7 @@ public class SASLAuthentication {
         }
     }
 
-    /**  
+    /**
      * 获取最后使用的 SASL 机制的名称。
      *
      * @return 最后使用的 SASL 机制的名称，如果没有使用过机制，则返回 null
@@ -286,7 +286,7 @@ public class SASLAuthentication {
         return currentMechanism?.getName()
     }
 
-    /**  
+    /**
      * 根据授权标识符和密码选择合适的 SASL 机制。
      *
      * @param authzid 授权标识符（通常为 null）
@@ -337,7 +337,7 @@ public class SASLAuthentication {
         }
     }
 
-    /**  
+    /**
      * 获取服务器支持的 SASL 机制列表。
      *
      * @return 服务器支持的 SASL 机制名称列表

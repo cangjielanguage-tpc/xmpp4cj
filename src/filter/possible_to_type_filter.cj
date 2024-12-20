@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
-/**  
+/**
  * 过滤器，用于检查 Stanza 的目标 JID 类型是否符合特定条件。
  * 该过滤器继承自 AbstractPossibleJidTypeFilter。
  */
@@ -38,7 +38,7 @@ public class PossibleToTypeFilter <: AbstractPossibleJidTypeFilter {
      */
     public static let ENTITY_FULL_OR_BARE_JID: StanzaFilter = OrFilter([ENTITY_FULL_JID, ENTITY_BARE_JID])
 
-    /**  
+    /**
      * 私有构造函数，用于创建一个新的可能目标 JID 类型过滤器。
      *
      * @param jidType 需要匹配的 JID 类型。
@@ -47,7 +47,7 @@ public class PossibleToTypeFilter <: AbstractPossibleJidTypeFilter {
         super(jidType)
     }
 
-    /**  
+    /**
      * 获取 Stanza 中待检查的目标 JID。
      *
      * @param stanza 要检查的 Stanza 对象。

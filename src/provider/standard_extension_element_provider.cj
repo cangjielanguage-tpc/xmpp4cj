@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.provider
@@ -11,12 +11,12 @@ public class StandardExtensionElementProvider <: ExtensionElementProvider<Standa
         super("StandardExtensionElement")
     }
 
-    /**  
+    /**
      * 单例实例，用于访问 {@link StandardExtensionElementProvider}
      */
     public static var INSTANCE: StandardExtensionElementProvider = StandardExtensionElementProvider()
 
-    /**  
+    /**
      * 解析 XML 中的标准扩展元素并返回 {@link StandardExtensionElement} 的实例。
      *
      * @param parser 用于解析 XML 的 {@link XmlPullParser}

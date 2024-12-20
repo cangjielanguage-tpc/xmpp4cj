@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.provider
 
 /**
+ * public abstract class Provider<E> <: AbstractProvider<E> where E <: Element
+ *
  * XMPP 提供者是用于将原始 XMPP 反序列化为相应的 {@link Element} 的解析器。
  * <p>
  * 在任何时候调用 {@link #parse(XmlPullParser, int, XmlEnvironment)} 时都可能抛出任何类型的异常。
@@ -18,7 +20,7 @@ public abstract class Provider<E> <: AbstractProvider<E> where E <: Element {
         super(elementClass)
     }
 
-    /**  
+    /**
      * 使用给定的 XML Pull 解析器解析元素。
      *
      * @param parser XmlPullParser 实例，用于解析 XML 数据
@@ -31,7 +33,7 @@ public abstract class Provider<E> <: AbstractProvider<E> where E <: Element {
         return parse(parser, None)
     }
 
-    /**  
+    /**
      * 使用给定的 XML Pull 解析器和外部 XML 环境设置解析元素。
      *
      * @param parser XmlPullParser 实例，用于解析 XML 数据
@@ -55,7 +57,7 @@ public abstract class Provider<E> <: AbstractProvider<E> where E <: Element {
         return e
     }
 
-    /**  
+    /**
      * 抽象方法，用于解析元素。
      * 实际解析逻辑由子类实现。
      *

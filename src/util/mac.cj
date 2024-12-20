@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.util
@@ -7,7 +7,7 @@ import crypto.digest.HMAC
 import crypto.digest.HashType
 
 public class MAC {
-    /**  
+    /**
      * 使用字节数组形式的密钥和输入字节数组计算 HMAC-SHA1
      *
      * @param keyBytes 用于 HMAC 的密钥字节数组

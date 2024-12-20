@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.filter
 
-/**  
+/**
  * 用于过滤具有特定类型 Stanza 扩展的 Stanzas。
  */
 public class StanzaExtensionFilter <: StanzaFilter {
@@ -17,7 +17,7 @@ public class StanzaExtensionFilter <: StanzaFilter {
      */
     private let namespace: String
 
-    /**  
+    /**
      * 创建一个新的 Stanza 扩展过滤器。只有当 Stanza 的扩展与指定的元素名称和命名空间匹配时，
      * 才会通过过滤器。
      *
@@ -30,7 +30,7 @@ public class StanzaExtensionFilter <: StanzaFilter {
         this.namespace = namespace
     }
 
-    /**  
+    /**
      * 创建一个新的 Stanza 扩展过滤器。只有当 Stanza 的扩展与指定的命名空间匹配时，
      * 才会通过过滤器。
      *
@@ -40,7 +40,7 @@ public class StanzaExtensionFilter <: StanzaFilter {
         this(None, namespace)
     }
 
-    /**  
+    /**
      * 根据给定的 Stanza 扩展创建一个新的 Stanza 扩展过滤器。
      *
      * @param packetExtension Stanza 扩展对象。
@@ -49,7 +49,7 @@ public class StanzaExtensionFilter <: StanzaFilter {
         this(packetExtension.getElementName(), packetExtension.getNamespace())
     }
 
-    /**  
+    /**
      * 检查指定的 Stanza 是否通过该过滤器。
      *
      * @param packet 要检查的 Stanza。
@@ -59,7 +59,7 @@ public class StanzaExtensionFilter <: StanzaFilter {
         return packet.hasExtension(elementName, namespace)
     }
 
-    /**  
+    /**
      * 返回过滤器的字符串表示形式，包含元素名称和命名空间信息。
      *
      * @return 过滤器的字符串表示。

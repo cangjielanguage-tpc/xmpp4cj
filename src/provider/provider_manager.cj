@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.provider
@@ -54,7 +54,7 @@ package xmpp4cj.provider
  * 如果多个提供程序条目试图注册以处理相同的元素名称和命名空间，则从类路径加载的第一个条目将具有优先权。每当在数据包中找到节扩展时，解析将传递给正确的提供程序。每个提供程序都可以实现 PacketExtensionProvider 接口。在前一种情况下，每个扩展提供程序负责解析原始 XML 流以构造一个对象。在后一种情况下，使用 bean 内省来尝试使用在节扩展子元素中的值自动设置类的属性。当没有为元素名称和命名空间组合注册扩展提供程序时，将把子包的所有顶级元素存储在 DefaultPacketExtension 对象中，然后将其附加到数据包上。<p>
  */
 public class ProviderManager {
-    /**  
+    /**
      * 构造函数，初始化 ProviderManager 实例。
      */
     public init() {}
@@ -71,7 +71,7 @@ public class ProviderManager {
         // Xmpp.ensureInitialized() // TODO
     }
 
-    /**  
+    /**
      * 添加提供程序加载器，允许注册多个 IQ 提供程序和扩展提供程序。
      *
      * @param loader 要添加的 {@link ProviderLoader} 实例。
@@ -177,7 +177,7 @@ public class ProviderManager {
         return getExtensionProvider(key)
     }
 
-    /**  
+    /**
      * 根据给定的 QName 获取注册的扩展元素提供程序。
      *
      * @param qname 对应于扩展元素的 QName。
@@ -228,7 +228,7 @@ public class ProviderManager {
         return providers
     }
 
-    /**  
+    /**
      * 根据元素名称和命名空间获取流特性提供程序。
      *
      * @param elementName 流特性元素的名称。
@@ -240,7 +240,7 @@ public class ProviderManager {
         return streamFeatureProviders.get(key)
     }
 
-    /**  
+    /**
      * 添加流特性提供程序。该提供程序将与指定的元素名称和命名空间相关联。
      *
      * @param elementName 流特性元素的名称。
@@ -257,7 +257,7 @@ public class ProviderManager {
         streamFeatureProviders.put(key, ExtensionElementProviderWrapper(provider.getElementClass(), provider.parse))
     }
 
-    /**  
+    /**
      * 移除指定元素名称和命名空间的流特性提供程序。
      *
      * @param elementName 流特性元素的名称。
@@ -268,7 +268,7 @@ public class ProviderManager {
         streamFeatureProviders.remove(key)
     }
 
-    /**  
+    /**
      * 根据指定的元素名称和命名空间获取 Nonza 提供程序。
      *
      * @param elementName Nonza 元素的名称。
@@ -280,7 +280,7 @@ public class ProviderManager {
         return getNonzaProvider(key)
     }
 
-    /**  
+    /**
      * 根据 QName 获取 Nonza 提供程序。
      *
      * @param key 对应于 Nonza 元素的 QName。
@@ -290,7 +290,7 @@ public class ProviderManager {
         return nonzaProviders.get(key)
     }
 
-    /**  
+    /**
      * 添加 Nonza 提供程序。
      *
      * @param nonzaProvider 要添加的 Nonza 提供程序。
@@ -302,7 +302,7 @@ public class ProviderManager {
         nonzaProviders.put(key, wrapper)
     }
 
-    /**  
+    /**
      * 根据 Nonza 类移除相应的 Nonza 提供程序。
      *
      * @param nonzaClass 需要移除的 Nonza 类。
@@ -312,7 +312,7 @@ public class ProviderManager {
         nonzaProviders.remove(key)
     }
 
-    /**  
+    /**
      * 根据元素名称和命名空间移除 Nonza 提供程序。
      *
      * @param elementName Nonza 元素的名称。
@@ -323,7 +323,7 @@ public class ProviderManager {
         nonzaProviders.remove(key)
     }
 
-    /**  
+    /**
      * 根据元素名称和命名空间创建 QName。
      *
      * @param elementName XML 元素名称。
@@ -334,7 +334,7 @@ public class ProviderManager {
         return QName(namespace, elementName)
     }
 
-    /**  
+    /**
      * 验证元素名称和命名空间是否有效。
      *
      * @param elementName XML 元素名称。

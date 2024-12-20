@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.modular
@@ -104,6 +104,10 @@ public class ConnectionStateEventSuccessfullyTransitionedInto <: ConnectionState
     }
 }
 
+/**
+ * public abstract class ConnectionStateEventDetailedTransitionIntoInformation <: ConnectionStateEvent
+ *
+ */
 public abstract class ConnectionStateEventDetailedTransitionIntoInformation <: ConnectionStateEvent {
     protected init(state: State) {
         super(state.getStateDescriptor())

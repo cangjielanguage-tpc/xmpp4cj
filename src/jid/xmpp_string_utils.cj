@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.jid
@@ -104,11 +104,7 @@ public class XmppStringUtils {
      * @see XEP-106: JID Escaping
      */
     public static func escapeLocalpart(localpartOption: ?String): ?String {
-        let localpart = if (let Some(v) <- localpartOption) {
-            v
-        } else {
-            return None
-        }
+        let localpart = localpartOption ?? return None
         if (let Some(res) <- LOCALPART_ESCAPE_CACHE.lookup(localpart)) {
             return res
         }

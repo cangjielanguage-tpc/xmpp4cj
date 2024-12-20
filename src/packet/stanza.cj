@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
 
 /**
+ * public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString
+ *
  * XMPP 节的基类。
  * <p>
  * 每个节都有一个唯一的 ID（自动生成，但可以被覆盖）。IQ 节需要节 ID，对于存在和消息节则建议使用。可选地，可以设置“to”和“from”字段。
@@ -283,11 +285,7 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
      * @return 扩展，或者如果不存在则返回<code>None</code>。
      */
     public func getExtensionElement(elementName: String, namespace: ?String): ?ExtensionElement {
-        let ns = if (let Some(ns) <- namespace) {
-            ns
-        } else {
-            return None
-        }
+        let ns = namespace ?? return None
         let key = QName(ns, elementName)
         let packetExtension = getExtension(key)
         return packetExtension
@@ -308,11 +306,7 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
      * @param extension 节扩展。
      */
     public func addExtension(extension: ?ExtensionElement): Unit {
-        let ext = if (let Some(v) <- extension) {
-            v
-        } else {
-            return
-        }
+        let ext = extension ?? return
         let key = ext.getQName()
         synchronized(extensionElements.lock) {
             extensionElements.put(key, ext)
@@ -329,11 +323,7 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
      * @return 被移除的扩展之一，或者如果没有则返回<code>None</code>。
      */
     public func overrideExtension(extensionElement: ?ExtensionElement): ?ExtensionElement {
-        let extension = if (let Some(v) <- extensionElement) {
-            v
-        } else {
-            return None
-        }
+        let extension = extensionElement ?? return None
         synchronized(extensionElements.lock) {
             let removedExtension = removeExtension(extension.getElementName(), extension.getNamespace())
             addExtension(extension)
@@ -363,11 +353,7 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
      * @return 如果节扩展存在则为 true，否则为 false。
      */
     public func hasExtension(elementNameStr: ?String, namespace: String): Bool {
-        let elementName = if (let Some(v) <- elementNameStr) {
-            v
-        } else {
-            return hasExtension(namespace)
-        }
+        let elementName = elementNameStr ?? return hasExtension(namespace)
         let key = QName(namespace, elementName)
         synchronized(extensionElements.lock) {
             return extensionElements.containsKey(key)

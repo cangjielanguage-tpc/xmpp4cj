@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
@@ -196,7 +196,7 @@ public open class StandardExtensionElementBuilder {
 
     private var elements: ?MultiMap<QName, StandardExtensionElement> = None // 子元素。
 
-    /**  
+    /**
      * 使用指定的名称和命名空间构造新的Builder实例。
      *
      * @param name 要构建的元素的名称
@@ -207,7 +207,7 @@ public open class StandardExtensionElementBuilder {
         this.namespace = namespace
     }
 
-    /**  
+    /**
      * 为正在构建的元素添加属性。
      *
      * @param name 属性的名称（不能为null或空）
@@ -224,7 +224,7 @@ public open class StandardExtensionElementBuilder {
         return this
     }
 
-    /**  
+    /**
      * 为正在构建的元素添加多个属性。
      *
      * @param attributes 要添加的属性映射（可以为空，但不能为null）
@@ -238,7 +238,7 @@ public open class StandardExtensionElementBuilder {
         return this
     }
 
-    /**  
+    /**
      * 设置正在构建的元素的文本内容。
      *
      * @param text 文本内容（不能为空）
@@ -250,7 +250,7 @@ public open class StandardExtensionElementBuilder {
         return this
     }
 
-    /**  
+    /**
      * 将子元素添加到正在构建的元素中。
      *
      * @param element 要添加的子元素（不能为null）
@@ -266,7 +266,7 @@ public open class StandardExtensionElementBuilder {
         return this
     }
 
-    /**  
+    /**
      * 将具有指定名称和文本内容的子元素添加到正在构建的元素中。
      *
      * @param name 子元素的名称。
@@ -278,7 +278,7 @@ public open class StandardExtensionElementBuilder {
         return addElement(element)
     }
 
-    /**  
+    /**
      * 根据生成器的当前配置构建并返回{@link StandardExtensionElement}的新实例。
      *
      * @return 一个新的StandardExtensionElement实例。

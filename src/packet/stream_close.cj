@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
@@ -17,7 +17,7 @@ public class StreamClose <: Nonza {
      */
     private init() {}
 
-    public override func toXML(_: ?XmlEnvironment): ToString {
+    public override func toXML(xmlEnvironment: ?XmlEnvironment): ToString {
         return "</${getElementName()}>"
     }
 

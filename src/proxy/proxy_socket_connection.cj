@@ -1,13 +1,13 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.proxy
 
-/**  
+/**
  * 代理 socket 连接的接口。
  */
 public interface ProxySocketConnection {
-    /**  
+    /**
      * 初始化与给定主机和端口的连接。请注意，调用者需要负责在此方法抛出异常的情况下关闭 socket。
      *
      * @param socket 用于与代理建立连接的 socket。
@@ -18,7 +18,7 @@ public interface ProxySocketConnection {
      */
     func connect(socket: StreamingSocket, host: String, port: UInt16, timeout: Duration): StreamingSocket
 
-    /**  
+    /**
      * 根据代理类型返回对应的 ProxySocketConnection 实例的工厂方法。
      *
      * @param proxyType 代理类型

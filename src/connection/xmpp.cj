@@ -1,10 +1,10 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
 public class Xmpp {
-    /**  
+    /**
      * Logger 实例，用于记录日志信息。
      */
     private static let LOGGER = getGlobalLogger(("name", "Xmpp"))

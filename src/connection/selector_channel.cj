@@ -1,14 +1,14 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
-/**  
+/**
  * {@link SelectableChannel}对象的多路复用器。
  */
 public class Selector {
     private let lock = Monitor()
-    /**  
+    /**
      * 打开选择器。
      *
      * @return 一个新的选择器
@@ -17,14 +17,14 @@ public class Selector {
         Selector()
     }
 
-    /**  
+    /**
      * 通知其他阻塞的select操作立即返回
      */
     public func wakeup(): Unit {
         // 忽略
     }
 
-    /**  
+    /**
      * 选择一组SelectionKey，其相应的channel已准备好进行I/O操作。
      *
      * @param timeout 超时时间
@@ -50,7 +50,7 @@ public class Selector {
     }
 
     let publicKeys = HashSet<SelectionKey>()
-    /**  
+    /**
      * @return 已就绪的SelectionKey
      */
     public func selectedKeys(): Set<SelectionKey> {
@@ -71,7 +71,9 @@ public class Selector {
     }
 }
 
-/**  
+/**
+ * public abstract class SelectableChannel
+ *
  * 抽象Channel对象
  */
 public abstract class SelectableChannel {
@@ -83,7 +85,7 @@ public abstract class SelectableChannel {
         key
     }
     public func close(): Unit
-    /**  
+    /**
      * 检查兴趣集是否就绪
      *
      * @param interestOps 新兴趣集
@@ -203,7 +205,7 @@ public class SocketChannel <: SelectableChannel {
     public func socket(): TcpSocket {
         tcpSocket.getOrThrow()
     }
-    /**  
+    /**
      * 检查兴趣集是否就绪
      *
      * @param interestOps 新兴趣集
@@ -218,7 +220,7 @@ public class SocketChannel <: SelectableChannel {
     }
 }
 
-/**  
+/**
  * 一个令牌，表示将{@link SelectableChannel}注册到{@link Selector}。
  */
 public class SelectionKey <: ToString & Equatable<SelectionKey> & Hashable {
@@ -246,7 +248,7 @@ public class SelectionKey <: ToString & Equatable<SelectionKey> & Hashable {
     public override func hashCode(): Int {
         hash
     }
-    /**  
+    /**
      * 检查兴趣集是否就绪
      *
      * @param interestOps 新兴趣集
@@ -256,7 +258,7 @@ public class SelectionKey <: ToString & Equatable<SelectionKey> & Hashable {
         let ops = _channel.checkOps(_interestOps)
         ops > 0
     }
-    /**  
+    /**
      * 设置此键的兴趣集
      *
      * @param interestOps 新兴趣集
@@ -266,14 +268,14 @@ public class SelectionKey <: ToString & Equatable<SelectionKey> & Hashable {
         this._interestOps = interestOps
         return this
     }
-    /**  
+    /**
      * @return 获取此键的当前兴趣集
      */
     public func interestOps(): Int {
         this._interestOps
     }
 
-    /**  
+    /**
      * 返回创建此密钥的频道。这种方法将即使在取消按键后，也要继续返回频道。
      *
      * @return 此键的频道
@@ -282,7 +284,7 @@ public class SelectionKey <: ToString & Equatable<SelectionKey> & Hashable {
         _channel
     }
 
-    /**  
+    /**
      * 检索当前附件。
      *
      * @return 当前附加到此密钥的对象，如果没有附件，则<tt>None</tt>
@@ -291,7 +293,7 @@ public class SelectionKey <: ToString & Equatable<SelectionKey> & Hashable {
         _attachment
     }
 
-    /**  
+    /**
      * 中断
      */
     public func cancel(): Unit {

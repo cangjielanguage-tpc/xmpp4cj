@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.connection
 
 /**
+ * public abstract class ScramPlusMechanism <: ScramMechanism
+ *
  * SCRAM-X-PLUS实施。由于API的限制，此机制仅支持“tls-server-end-point”通道绑定类型。但另一方面，另一种相关的通道绑定类型“tls-unique”存在一些缺陷（参见3SHAKE，RFC 7627）。
  */
 public abstract class ScramPlusMechanism <: ScramMechanism {

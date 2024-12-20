@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.packet
 
-/*
+/**
  * Tls Proceed。
  */
 public class TlsProceed <: Nonza {
@@ -37,7 +37,7 @@ public class TlsProceed <: Nonza {
         return NAMESPACE
     }
 
-    public override func toXML(_: ?XmlEnvironment): ToString {
+    public override func toXML(xmlEnvironment: ?XmlEnvironment): ToString {
         return "<${ELEMENT} xmlns='${NAMESPACE}'/>"
     }
 }

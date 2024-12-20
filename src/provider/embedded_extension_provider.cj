@@ -1,9 +1,10 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.provider
 
 /**
+ * public abstract class EmbeddedExtensionProvider<PE> <: ExtensionElementProvider<PE> where PE <: ExtensionElement
  *
  * This class simplifies parsing of embedded elements by using the
  * <a href="http/en/wikipedia/org/wiki/Template_method_pattern">Template Method Pattern</a>.
@@ -55,14 +56,14 @@ package xmpp4cj.provider
  * </pre>
  */
 public abstract class EmbeddedExtensionProvider<PE> <: ExtensionElementProvider<PE> where PE <: ExtensionElement {
-    /**  
+    /**
      * 构造函数，初始化 EmbeddedExtensionProvider 实例。
      */
     public init(elementClass: ClassId) {
         super(elementClass)
     }
 
-    /**  
+    /**
      * 解析 XML pull 解析器中的嵌入式扩展元素。
      *
      * @param parser XmlPullParser 实例，用于解析 XML 数据
@@ -94,7 +95,7 @@ public abstract class EmbeddedExtensionProvider<PE> <: ExtensionElementProvider<
         return createReturnExtension(name, namespace, attMap, extensions)
     }
 
-    /**  
+    /**
      * 创建返回的扩展元素。
      * 这个方法应由子类实现，根据解析的内容创建具体的扩展元素实例。
      *

@@ -1,9 +1,11 @@
-/*
+/**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 package xmpp4cj.feature
 
-/**  
+/**
+ * public abstract class AbstractIqRequestHandler <: IQRequestHandler
+ *
  * 抽象类，用于创建 IQ 请求处理器的便利类。
  * <p>
  * 该类用于处理 XMPP 中的 IQ 请求。只允许处理类型为“get”和“set”的请求。
@@ -18,7 +20,7 @@ public abstract class AbstractIqRequestHandler <: IQRequestHandler {
 
     private let mode: IQRequestHandlerMode // IQ 请求的模式 
 
-    /**  
+    /**
      * 构造函数，初始化 IQ 请求处理器的基本参数。
      *
      * @param element   IQ 请求的元素名称
@@ -38,7 +40,7 @@ public abstract class AbstractIqRequestHandler <: IQRequestHandler {
         this.mode = mode
     }
 
-    /**  
+    /**
      * 处理 IQ 请求的抽象方法。
      *
      * @param iqRequest 要处理的 IQ 请求
@@ -46,7 +48,7 @@ public abstract class AbstractIqRequestHandler <: IQRequestHandler {
      */
     public override func handleIQRequest(iqRequest: IQ): ?IQ
 
-    /**  
+    /**
      * 获取请求的模式。
      *
      * @return IQ 请求的模式
@@ -55,7 +57,7 @@ public abstract class AbstractIqRequestHandler <: IQRequestHandler {
         return mode
     }
 
-    /**  
+    /**
      * 获取请求的类型。
      *
      * @return IQ 请求的类型
@@ -64,7 +66,7 @@ public abstract class AbstractIqRequestHandler <: IQRequestHandler {
         return Type
     }
 
-    /**  
+    /**
      * 获取请求的元素名称。
      *
      * @return IQ 请求的元素名称
@@ -73,7 +75,7 @@ public abstract class AbstractIqRequestHandler <: IQRequestHandler {
         return element
     }
 
-    /**  
+    /**
      * 获取请求的命名空间。
      *
      * @return IQ 请求的命名空间
