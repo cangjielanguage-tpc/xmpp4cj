@@ -316,7 +316,7 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
      * @return 当前 XmlStringBuilder 实例
      */
     public func attribute(name: String, bool: Bool): XmlStringBuilder {
-        return attribute(name, bool)
+        return attribute(name, bool.toString())
     }
 
     /**
