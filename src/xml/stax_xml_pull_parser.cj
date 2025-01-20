@@ -218,7 +218,7 @@ public class StaxXmlPullParser <: XmlPullParser {
                                 tagNss.put(prefix, ValueType(depth, uri))
                             case XmlEvent.Attribute =>
                                 let attr = reader.readAttribute()
-                                attrs.append(attr)
+                                attrs.add(attr)
                             case _ => break
                         }
                     }

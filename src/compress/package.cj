@@ -35,7 +35,7 @@ public func parseCompressionFeature(parser: XmlPullParser): CompressFeature {
             case XmlPullParserEvent.START_ELEMENT =>
                 name = parser.getName()
                 if (name == "method") {
-                    methods.append(parser.nextText())
+                    methods.add(parser.nextText())
                 }
             case XmlPullParserEvent.END_ELEMENT =>
                 name = parser.getName()

@@ -81,7 +81,7 @@ public abstract class EmbeddedExtensionProvider<PE> <: ExtensionElementProvider<
         let attMap: Map<String, String> = HashMap<String, String>(Int64(attributeCount))
         var i = 0
         while (i < attributeCount) {
-            attMap.put(parser.getAttributeName(i), parser.getAttributeValue(i))
+            attMap.add(parser.getAttributeName(i), parser.getAttributeValue(i))
             i++
         }
         let extensions = ArrayList<ExtensionElement>()

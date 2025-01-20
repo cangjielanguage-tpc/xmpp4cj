@@ -34,7 +34,7 @@ class XmppTcpNioTransport <: C2sTransport {
                 tcpEndpointsLookupFuture.setResult(endpointsResult)
             }
         )
-        futures.append(tcpEndpointsLookupFuture)
+        futures.add(tcpEndpointsLookupFuture)
         if (tcpMod.tcpModDescriptor.isDirectTlsEnabled()) {
             throw IllegalArgumentException("DirectTLS is not implemented yet")
         }

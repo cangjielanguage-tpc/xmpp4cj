@@ -157,7 +157,7 @@ public class XmppInitialization {
             loadXmppClass(startup, optional)
         } catch (e: Exception) {
             if (exceptions.isSome()) {
-                exceptions?.append(e)
+                exceptions?.add(e)
             } else {
                 throw e
             }

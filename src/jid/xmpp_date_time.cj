@@ -196,7 +196,7 @@ public class XmppDateTime {
         for (date in dates) {
             if (let Some(date) <- date) {
                 if (date < now) {
-                    result.append(date)
+                    result.add(date)
                 }
             }
         }

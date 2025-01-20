@@ -342,7 +342,7 @@ class ReactorThread {
             }
 
             selectedKeys = ArrayList<SelectionKey>(selectedKeySet.size)
-            selectedKeys.appendAll(selectedKeySet)
+            selectedKeys.add(all: selectedKeySet)
             selectedKeySet.clear()
         }
 
@@ -369,7 +369,7 @@ class ReactorThread {
         var i = 0
         while (i < myKeyCount) {
             let selectionKey = it.next().getOrThrow()
-            mySelectedKeys.append(selectionKey)
+            mySelectedKeys.add(selectionKey)
             i++
         }
         while (let Some(selectionKey) <- it.next()) {
@@ -398,7 +398,7 @@ class ReactorThread {
         var i = 0
         while (i < myKeyCount) {
             let selectionKey = reactor.pendingSelectionKeys.dequeue() ?? break
-            selectedKeys.append(selectionKey)
+            selectedKeys.add(selectionKey)
             i++
         }
         if (reactor.pendingSelectionKeys.size != 0) {

@@ -67,7 +67,7 @@ public open class ObservableReader <: InputStream & Resource {
     public open func addReaderListener(readerListener: ReaderListener): Unit {
         synchronized(listenersLock) {
             if (!listeners.contains(readerListener)) {
-                listeners.append(readerListener)
+                listeners.add(readerListener)
             }
         }
     }

@@ -44,9 +44,9 @@ public class SaslNonzaAuthMechanism <: SaslNonza {
     public static let QNAME = QName(NAMESPACE, ELEMENT)
 
     static init() {
-        QNAME_MAPPING.put("SaslNonzaAuthMechanism", QNAME)
-        ELEMENT_MAPPING.put("SaslNonzaAuthMechanism", ELEMENT)
-        NAMESPACE_MAPPING.put("SaslNonzaAuthMechanism", NAMESPACE)
+        QNAME_MAPPING.add("SaslNonzaAuthMechanism", QNAME)
+        ELEMENT_MAPPING.add("SaslNonzaAuthMechanism", ELEMENT)
+        NAMESPACE_MAPPING.add("SaslNonzaAuthMechanism", NAMESPACE)
     }
 
     /**
@@ -129,9 +129,9 @@ public class SaslNonzaChallenge <: SaslNonza {
     public static let QNAME = QName(NAMESPACE, ELEMENT)
 
     static init() {
-        QNAME_MAPPING.put("SaslNonzaChallenge", QNAME)
-        ELEMENT_MAPPING.put("SaslNonzaChallenge", ELEMENT)
-        NAMESPACE_MAPPING.put("SaslNonzaChallenge", NAMESPACE)
+        QNAME_MAPPING.add("SaslNonzaChallenge", QNAME)
+        ELEMENT_MAPPING.add("SaslNonzaChallenge", ELEMENT)
+        NAMESPACE_MAPPING.add("SaslNonzaChallenge", NAMESPACE)
     }
 
     /**
@@ -194,9 +194,9 @@ public class SaslNonzaResponse <: SaslNonza {
     public static let QNAME = QName(NAMESPACE, ELEMENT)
 
     static init() {
-        QNAME_MAPPING.put("SaslNonzaResponse", QNAME)
-        ELEMENT_MAPPING.put("SaslNonzaResponse", ELEMENT)
-        NAMESPACE_MAPPING.put("SaslNonzaResponse", NAMESPACE)
+        QNAME_MAPPING.add("SaslNonzaResponse", QNAME)
+        ELEMENT_MAPPING.add("SaslNonzaResponse", ELEMENT)
+        NAMESPACE_MAPPING.add("SaslNonzaResponse", NAMESPACE)
     }
 
     /**
@@ -267,9 +267,9 @@ public class SaslNonzaSuccess <: SaslNonza {
     public static let QNAME = QName(NAMESPACE, ELEMENT)
 
     static init() {
-        QNAME_MAPPING.put("SaslNonzaSuccess", QNAME)
-        ELEMENT_MAPPING.put("SaslNonzaSuccess", ELEMENT)
-        NAMESPACE_MAPPING.put("SaslNonzaSuccess", NAMESPACE)
+        QNAME_MAPPING.add("SaslNonzaSuccess", QNAME)
+        ELEMENT_MAPPING.add("SaslNonzaSuccess", ELEMENT)
+        NAMESPACE_MAPPING.add("SaslNonzaSuccess", NAMESPACE)
     }
 
     /**
@@ -334,9 +334,9 @@ public class SaslNonzaSASLFailure <: AbstractError & SaslNonza & ToString {
     public static let QNAME = QName(NAMESPACE, ELEMENT)
 
     static init() {
-        QNAME_MAPPING.put("SaslNonzaSASLFailure", QNAME)
-        ELEMENT_MAPPING.put("SaslNonzaSASLFailure", ELEMENT)
-        NAMESPACE_MAPPING.put("SaslNonzaSASLFailure", NAMESPACE)
+        QNAME_MAPPING.add("SaslNonzaSASLFailure", QNAME)
+        ELEMENT_MAPPING.add("SaslNonzaSASLFailure", ELEMENT)
+        NAMESPACE_MAPPING.add("SaslNonzaSASLFailure", NAMESPACE)
     }
 
     private let saslError: SASLError // SASL 错误类型

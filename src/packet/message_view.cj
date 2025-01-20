@@ -57,7 +57,7 @@ public interface MessageView <: StanzaView {
     func getSubjects(): Set<MessageSubject> {
         let subjectList = StanzaView.castExt<MessageSubject>(getExtensionsByType(MessageSubject.getClassId()))
         let subjects: Set<MessageSubject> = HashSet<MessageSubject>(subjectList.size)
-        subjects.putAll(subjectList)
+        subjects.add(all: subjectList)
         return subjects
     }
 
@@ -71,7 +71,7 @@ public interface MessageView <: StanzaView {
         let languages = ArrayList<String>()
         for (subject in StanzaView.castExt<MessageSubject>(getExtensionsByType(MessageSubject.getClassId()))) {
             if (defaultSubject != subject) {
-                languages.append(subject.getLanguage() ?? "null")
+                languages.add(subject.getLanguage() ?? "null")
             }
         }
         return languages
@@ -126,7 +126,7 @@ public interface MessageView <: StanzaView {
         let resultSet: Set<MessageBody> = HashSet<MessageBody>(bodiesList.size)
         for (extensionElement in bodiesList) {
             let body = (extensionElement as MessageBody).getOrThrow()
-            resultSet.put(body)
+            resultSet.add(body)
         }
         return resultSet
     }
@@ -141,7 +141,7 @@ public interface MessageView <: StanzaView {
         let languages = ArrayList<?String>()
         for (body in getBodies()) {
             if (defaultBody != body) {
-                languages.append(body.getLanguage())
+                languages.add(body.getLanguage())
             }
         }
         return languages // TODO

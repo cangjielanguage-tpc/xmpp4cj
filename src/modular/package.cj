@@ -13,7 +13,7 @@ package xmpp4cj.modular
 internal import log.*
 internal import net.tls.{TlsSession}
 internal import std.collection.*
-internal import std.format.{Formatter}
+internal import std.convert.*
 internal import std.sync.*
 internal import std.time.{DateTime}
 internal import xmpp4cj.connection.*

@@ -31,10 +31,10 @@ public class ReconnectionManager {
     static init() {
         XMPPConnectionRegistry.addConnectionCreationListener(
             ConnectionCreationListener {
-            connection => if (let Some(connection) <- (connection as AbstractXMPPConnection)) {
-                ReconnectionManager.getInstanceFor(connection)
-            }
-        })
+                connection => if (let Some(connection) <- (connection as AbstractXMPPConnection)) {
+                    ReconnectionManager.getInstanceFor(connection)
+                }
+            })
     }
 
     private let lock = Monitor()

@@ -233,7 +233,7 @@ public abstract class ScramMechanism <: SASLMechanism {
                 throw XmppSaslException("Invalid Key-Value pair: ${keyValuePair}")
             }
             let value: String = keyValuePair[2..]
-            res.put(key, value)
+            res.add(key, value)
         }
         return res
     }
@@ -287,9 +287,9 @@ public abstract class ScramMechanism <: SASLMechanism {
         for (i in 0..string.size) {
             let c = string[i]
             match (c) {
-                case b',' => sb.appendAll("=2C")
-                case b'=' => sb.appendAll("=3D")
-                case _ => sb.append(c)
+                case b',' => sb.add(all: unsafe { "=2C".rawData() })
+                case b'=' => sb.add(all: unsafe { "=3D".rawData() })
+                case _ => sb.add(c)
             }
         }
         return byteList2String(sb)

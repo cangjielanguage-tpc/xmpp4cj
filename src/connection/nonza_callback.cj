@@ -85,8 +85,8 @@ class NonzaCallbackNonzaResponseCallback<SN, FN> <: NonzaCallback where SN <: No
         }
         let failedClassAndConsumer = NonzaCallbackClassAndConsumer(failedNonzaClass, failedListener)
 
-        filterAndListeners.put(successNonzaKey, successClassAndConsumer)
-        filterAndListeners.put(failedNonzaKey, failedClassAndConsumer)
+        filterAndListeners.add(successNonzaKey, successClassAndConsumer)
+        filterAndListeners.add(failedNonzaKey, failedClassAndConsumer)
         install()
     }
 
@@ -134,7 +134,7 @@ public class NonzaCallbackBuilder {
     public func listenFor(nonza: ClassId, nonzaListener: NonzaCallbackNonzaListener): NonzaCallbackBuilder {
         let key = XmppElementUtil.getQNameFor(nonza)
         let classAndConsumer = NonzaCallbackClassAndConsumer(nonza, nonzaListener)
-        filterAndListeners.put(key, classAndConsumer)
+        filterAndListeners.add(key, classAndConsumer)
         return this
     }
 

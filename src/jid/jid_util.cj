@@ -120,7 +120,7 @@ public class JidUtil {
      */
     public static func filterEntityBareJidSet(input: Collection<Jid>): Set<EntityBareJid> {
         let res = HashSet<EntityBareJid>(input.size)
-        filterEntityBareJid(input, {r => res.put(r)})
+        filterEntityBareJid(input, {r => res.add(r)})
         return res
     }
 
@@ -132,7 +132,7 @@ public class JidUtil {
      */
     public static func filterEntityBareJidList(input: Collection<Jid>): ArrayList<EntityBareJid> {
         let res = ArrayList<EntityBareJid>(input.size)
-        filterEntityBareJid(input, res.append)
+        filterEntityBareJid(input, res.add)
         return res
     }
 
@@ -159,7 +159,7 @@ public class JidUtil {
      */
     public static func filterEntityFullJidSet(input: Collection<Jid>): Set<EntityFullJid> {
         let res = HashSet<EntityFullJid>(input.size)
-        filterEntityFullJid(input, {r => res.put(r)})
+        filterEntityFullJid(input, {r => res.add(r)})
         return res
     }
 
@@ -171,7 +171,7 @@ public class JidUtil {
      */
     public static func filterEntityFullJidList(input: Collection<Jid>): ArrayList<EntityFullJid> {
         let res = ArrayList<EntityFullJid>(input.size)
-        filterEntityFullJid(input, res.append)
+        filterEntityFullJid(input, res.add)
         return res
     }
 
@@ -198,7 +198,7 @@ public class JidUtil {
      */
     public static func filterDomainFullJidSet(input: Collection<Jid>): Set<DomainFullJid> {
         let res = HashSet<DomainFullJid>(input.size)
-        filterDomainFullJid(input, {r => res.put(r)})
+        filterDomainFullJid(input, {r => res.add(r)})
         return res
     }
 
@@ -210,7 +210,7 @@ public class JidUtil {
      */
     public static func filterDomainFullJidList(input: Collection<Jid>): ArrayList<DomainFullJid> {
         let res = ArrayList<DomainFullJid>(input.size)
-        filterDomainFullJid(input, res.append)
+        filterDomainFullJid(input, res.add)
         return res
     }
 
@@ -222,7 +222,7 @@ public class JidUtil {
      */
     public static func entityBareJidSetFrom(jidStrings: Collection<String>): Set<EntityBareJid> {
         let res = HashSet<EntityBareJid>(jidStrings.size)
-        entityBareJidsFrom(jidStrings, {r => res.put(r)}, None)
+        entityBareJidsFrom(jidStrings, {r => res.add(r)}, None)
         return res
     }
 
@@ -244,7 +244,7 @@ public class JidUtil {
                 appendFunc(bareJid)
             } catch (e: XmppStringprepException) {
                 if (exceptions.isSome()) {
-                    exceptions?.append(e)
+                    exceptions?.add(e)
                 } else {
                     throw Exception("AssertionError ${e}")
                 }
@@ -274,7 +274,7 @@ public class JidUtil {
      */
     public static func jidSetFrom(jidStrings: Collection<String>): Set<Jid> {
         let res: HashSet<Jid> = HashSet<Jid>(jidStrings.size)
-        jidsFrom(jidStrings, {r => res.put(r)}, None)
+        jidsFrom(jidStrings, {r => res.add(r)}, None)
         return res
     }
 
@@ -296,7 +296,7 @@ public class JidUtil {
                 appendFunc(jid)
             } catch (e: XmppStringprepException) {
                 if (exceptions.isSome()) {
-                    exceptions?.append(e)
+                    exceptions?.add(e)
                 } else {
                     throw Exception("AssertionError ${e}")
                 }
@@ -312,7 +312,7 @@ public class JidUtil {
      */
     public static func toStringList(jids: Collection<Jid>): ArrayList<String> {
         let res = ArrayList<String>(jids.size)
-        toStrings(jids, res.append)
+        toStrings(jids, res.add)
         return res
     }
 
@@ -324,7 +324,7 @@ public class JidUtil {
      */
     public static func toStringSet(jids: Collection<Jid>): Set<String> {
         let res: Set<String> = HashSet<String>(jids.size)
-        toStrings(jids, {r => res.put(r)})
+        toStrings(jids, {r => res.add(r)})
         return res
     }
 

@@ -504,7 +504,7 @@ public class PacketParserUtils {
             if (eventType == XmlPullParserEvent.START_ELEMENT) {
                 let elementName = parser.getName()
                 if (elementName == "mechanism") {
-                    mechanisms.append(parser.nextText())
+                    mechanisms.add(parser.nextText())
                 }
             } else if (eventType == XmlPullParserEvent.END_ELEMENT) {
                 if (parser.getName() == "mechanisms") {
@@ -529,7 +529,7 @@ public class PacketParserUtils {
         let tempdescriptiveTexts = descriptiveTexts ?? HashMap<String, String>()
         var xmllang = ParserUtils.getXmlLang(parser) ?? ""
         let text = parser.nextText()
-        let previousValue = tempdescriptiveTexts.put(xmllang, text)
+        let previousValue = tempdescriptiveTexts.add(xmllang, text)
         assert(previousValue.isNone())
         return tempdescriptiveTexts
     }
@@ -839,6 +839,6 @@ public class PacketParserUtils {
     public static func addExtensionElement(collection: ArrayList<ExtensionElement>, parser: XmlPullParser,
         elementName: String, namespace: String, outerXmlEnvironment: ?XmlEnvironment): Unit {
         let packetExtension = parseExtensionElement(elementName, namespace, parser, outerXmlEnvironment)
-        collection.append(packetExtension)
+        collection.add(packetExtension)
     }
 }

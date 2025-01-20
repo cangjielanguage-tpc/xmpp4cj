@@ -121,7 +121,7 @@ public class XmppTcpTransportModule <: C2sConnectionModule {
                 let moreDataAvailable = !isLastPartOfElement || !connectionInternal.outgoingElementsQueue.isEmpty()
                 if (filteredOutgoingBuffer.isSome() || !networkOutgoingBuffers.isEmpty()) {
                     if (let Some(out) <- filteredOutgoingBuffer) {
-                        networkOutgoingBuffers.append(out)
+                        networkOutgoingBuffers.add(out)
                         networkOutgoingBuffersBytes += out.remainLength
                         filteredOutgoingBuffer = None
                         if (moreDataAvailable && networkOutgoingBuffersBytes < 8096) {
@@ -160,7 +160,7 @@ public class XmppTcpTransportModule <: C2sConnectionModule {
                         totalBytesWrittenBeforeFilter += out.remainLength
                         if (isLastPartOfElement) {
                             assert(currentlyOutgonigTopLevelStreamElement.isSome())
-                            currentlyOutgoingElements.append(currentlyOutgonigTopLevelStreamElement())
+                            currentlyOutgoingElements.add(currentlyOutgonigTopLevelStreamElement())
                         }
                     }
                     var outputFilterInputData = outgoingBuffer
@@ -193,7 +193,7 @@ public class XmppTcpTransportModule <: C2sConnectionModule {
                         pendingWriteInterestAfterRead = true
                     }
                     if (filteredOutgoingBuffer.isSome() && isLastPartOfElement) {
-                        bufferToElementMap.put(ByteArrayStreamHashKey(filteredOutgoingBuffer()),
+                        bufferToElementMap.add(ByteArrayStreamHashKey(filteredOutgoingBuffer()),
                             ArrayList<TopLevelStreamElement>(currentlyOutgoingElements))
                         currentlyOutgoingElements.clear()
                     }
@@ -441,7 +441,7 @@ public class XmppTcpTransportModule <: C2sConnectionModule {
             if (b.remainLength > 0) {
                 break
             }
-            collector.append(b)
+            collector.add(b)
             i++
         }
         buffers.remove(0..i)

@@ -120,7 +120,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
      * @return 是否插入成功。true标识插入成功，false标识插入失败。
      */
     public func put(key: K, value: V): Bool {
-        return putInternal(key, {list => list.append(value)})
+        return putInternal(key, {list => list.add(value)})
     }
 
     /**
@@ -131,7 +131,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
      * @return 是否插入成功。true标识插入成功，false标识插入失败。
      */
     public func putFirst(key: K, value: V): Bool {
-        return putInternal(key, {list => list.prepend(value)})
+        return putInternal(key, {list => list.add(value, at: 0)})
     }
 
     /**
@@ -148,7 +148,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
             list
         } else {
             let list = ArrayList<V>(ENTRY_LIST_SIZE)
-            _map.put(key, list)
+            _map.add(key, list)
             keyExisted = false
             list
         }
@@ -204,7 +204,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
         let result = ArrayList<V>(resultSize)
         var i = 0
         while (i < resultSize) {
-            result.append(values[i])
+            result.add(values[i])
             i++
         }
         if (values.isEmpty()) {
@@ -248,7 +248,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
     public func values(): ArrayList<V> {
         let values = ArrayList<V>(size)
         for (list in _map.values()) {
-            values.appendAll(list)
+            values.add(all: list)
         }
         return values
     }
@@ -261,7 +261,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
     public func clone(): MultiMap<K, V> {
         let newMap = HashMap<K, ArrayList<V>>(_map.size)
         for ((k, list) in _map) {
-            newMap.put(k, list.clone())
+            newMap.add(k, list.clone())
         }
         return MultiMap<K, V>(newMap)
     }

@@ -21,8 +21,8 @@ public class Compress <: Nonza {
     public static let NAMESPACE: String = "http://jabber.org/protocol/compress"
 
     static init() {
-        ELEMENT_MAPPING.put("Compress", ELEMENT)
-        NAMESPACE_MAPPING.put("Compress", NAMESPACE)
+        ELEMENT_MAPPING.add("Compress", ELEMENT)
+        NAMESPACE_MAPPING.add("Compress", NAMESPACE)
     }
 
     /**
@@ -90,8 +90,8 @@ public class CompressFeature <: ExtensionElement {
     public static let QNAME: QName = QName(Compress.NAMESPACE, ELEMENT)
 
     static init() {
-        ELEMENT_MAPPING.put("CompressFeature", ELEMENT)
-        QNAME_MAPPING.put("CompressFeature", QNAME)
+        ELEMENT_MAPPING.add("CompressFeature", ELEMENT)
+        QNAME_MAPPING.add("CompressFeature", QNAME)
     }
 
     /**

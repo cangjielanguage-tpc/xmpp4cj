@@ -130,9 +130,11 @@ public abstract class ConnectionConfiguration {
         this.resource = builder.resource
         this.language = builder.language
 
-        this.xmppServiceDomain = builder.xmppServiceDomain.getOrThrow {
-            => IllegalArgumentException("Must define the XMPP domain")
-        }
+        this.xmppServiceDomain = builder
+            .xmppServiceDomain
+            .getOrThrow {
+                => IllegalArgumentException("Must define the XMPP domain")
+            }
         this.xmppServiceDomainDnsName = try {
             xmppServiceDomain.getDomain().toString() // 取jid.Domain部分
         } catch (e: Exception) {
@@ -172,9 +174,11 @@ public abstract class ConnectionConfiguration {
         let cfg = tlsCfg ?? DEFAULT_TLS_CFG
         var daneVerifier: ?XmppDaneVerifier = None
         if (dnssecMode == DnssecMode.needsDnssecAndDane) {
-            let daneProvider = DNSUtil.getDaneProvider().getOrThrow {
-                => UnsupportedException("DANE enabled but no XmppDaneProvider configured")
-            }
+            let daneProvider = DNSUtil
+                .getDaneProvider()
+                .getOrThrow {
+                    => UnsupportedException("DANE enabled but no XmppDaneProvider configured")
+                }
             daneVerifier = daneProvider().getOrThrow {
                 => IllegalStateException("DANE requested but DANE provider did not return a DANE verifier")
             }
@@ -803,7 +807,7 @@ public abstract class ConnectionConfigurationBuilder {
         if (enabledSaslMechanisms.isNone()) {
             enabledSaslMechanisms = HashSet<String>(saslMechanisms.size)
         }
-        enabledSaslMechanisms?.putAll(saslMechanisms)
+        enabledSaslMechanisms?.add(all: saslMechanisms)
         return this
     }
 

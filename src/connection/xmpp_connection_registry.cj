@@ -19,7 +19,7 @@ public class XMPPConnectionRegistry {
      * @param connectionCreationListener 对新连接感兴趣的监听器。
      */
     public static func addConnectionCreationListener(connectionCreationListener: ConnectionCreationListener): Unit {
-        connectionEstablishedListeners.put(connectionCreationListener)
+        connectionEstablishedListeners.add(connectionCreationListener)
     }
 
     /**

@@ -8,8 +8,8 @@ public class StreamManagementModuleDescriptor <: ModuleDescriptor {
 
     protected override func getStateDescriptors(): Set<StateDescriptor> {
         let res: Set<StateDescriptor> = HashSet<StateDescriptor>()
-        res.put(EnableStreamManagementStateDescriptor())
-        res.put(ResumeStreamStateDescriptor())
+        res.add(EnableStreamManagementStateDescriptor())
+        res.add(ResumeStreamStateDescriptor())
         return res
     }
 

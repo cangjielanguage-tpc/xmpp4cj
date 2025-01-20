@@ -37,7 +37,7 @@ public class Mechanisms <: ExtensionElement {
      * @param mechanism 要添加的单个 SASL 机制名称。
      */
     public init(mechanism: String) {
-        mechanisms.append(mechanism)
+        mechanisms.addLast(mechanism)
     }
 
     /**
@@ -47,7 +47,7 @@ public class Mechanisms <: ExtensionElement {
      */
     public init(mechanisms: Iterable<String>) {
         for (v in mechanisms) {
-            this.mechanisms.append(v)
+            this.mechanisms.addLast(v)
         }
     }
 

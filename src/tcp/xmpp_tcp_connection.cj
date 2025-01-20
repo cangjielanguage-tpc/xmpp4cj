@@ -180,12 +180,12 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
         postInit()
         addConnectionListener(
             ConnectionListenerBuilder()
-            .connectionClosedOnError {
-                e => if (e is StreamErrorException || e is StreamManagementException) {
-                    dropSmState()
+                .connectionClosedOnError {
+                    e => if (e is StreamErrorException || e is StreamManagementException) {
+                        dropSmState()
+                    }
                 }
-            }
-            .build())
+                .build())
         // Re-init the reader and writer in case of SASL <success/>.
         // This is done to reset the parser since a new stream is initiated.
         buildNonzaCallback().listenFor("SaslNonzaSuccess", {_ => resetParser()}).install()
@@ -206,11 +206,11 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
     public init(jid: String, password: String) {
         this(
             {
-            =>
-            let builder = XMPPTCPConnectionConfiguration.builder()
-            builder.setXmppAddressAndPassword(jid, password)
-            return builder.build()
-        }())
+                =>
+                let builder = XMPPTCPConnectionConfiguration.builder()
+                builder.setXmppAddressAndPassword(jid, password)
+                return builder.build()
+            }())
     }
 
     /**
@@ -228,11 +228,11 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
     public init(username: String, password: String, serviceName: String) {
         this(
             {
-            =>
-            let builder = XMPPTCPConnectionConfiguration.builder()
-            builder.setUsernameAndPassword(username, password).setXmppDomain(JidCreate.domainBareFrom(serviceName))
-            return builder.build()
-        }())
+                =>
+                let builder = XMPPTCPConnectionConfiguration.builder()
+                builder.setUsernameAndPassword(username, password).setXmppDomain(JidCreate.domainBareFrom(serviceName))
+                return builder.build()
+            }())
     }
 
     protected override func throwNotConnectedExceptionIfAppropriate(): Unit {
@@ -449,7 +449,7 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
                             inetAddress,
                             e
                         )
-                        connectionExceptions.append(rce)
+                        connectionExceptions.add(rce)
                         continue
                     }
                     LOGGER.trace("Established TCP connection to ${inetSocketAddress}")
@@ -468,7 +468,7 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
                 } catch (e: IOException) {
                     CloseableUtil.maybeClose(socket, LOGGER)
                     let rce = RemoteConnectionException<RemoteConnectionEndpoint>(endpoint, None, e)
-                    connectionExceptions.append(rce)
+                    connectionExceptions.add(rce)
                     continue
                 }
                 LOGGER.trace("Established TCP connection to ${hostAndPort}")
@@ -1021,15 +1021,15 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
         let ackedStanzasCount = SMUtils.calculateDelta(handledCount, serverHandledStanzasCount)
         let ackedStanzas = ArrayList<Stanza>(
             if (ackedStanzasCount <= Int64(Int.Max)) {
-            ackedStanzasCount
-        } else {
-            Int64(Int.Max)
-        })
+                ackedStanzasCount
+            } else {
+                Int64(Int.Max)
+            })
         var i = 0
         while (i < ackedStanzasCount) {
             let ackedStanza = (unacknowledgedStanzas?.tryDequeue()).flatten() ?? throw StreamManagementCounterError(
                 handledCount, serverHandledStanzasCount, ackedStanzasCount, ackedStanzas)
-            ackedStanzas.append(ackedStanza)
+            ackedStanzas.add(ackedStanza)
             i++
         }
         var atLeastOneStanzaAcknowledgedListener = false
@@ -1047,26 +1047,26 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
         if (atLeastOneStanzaAcknowledgedListener) {
             asyncGo(
                 {
-                => for (ackedStanza in ackedStanzas) {
-                    for (listener in stanzaAcknowledgedListeners) {
+                    => for (ackedStanza in ackedStanzas) {
+                        for (listener in stanzaAcknowledgedListeners) {
+                            try {
+                                listener.processStanza(ackedStanza)
+                            } catch (e: NotConnectedException | NotLoggedInException) {
+                                XMPPTCPConnection.LOGGER.log(LogLevel.TRACE, "Received exception", e)
+                            }
+                        }
+                        let id = ackedStanza.getStanzaId()
+                        if (StringUtils.isNullOrEmpty(id)) {
+                            continue
+                        }
+                        let listener = stanzaIdAcknowledgedListeners.remove(id()) ?? continue
                         try {
                             listener.processStanza(ackedStanza)
                         } catch (e: NotConnectedException | NotLoggedInException) {
                             XMPPTCPConnection.LOGGER.log(LogLevel.TRACE, "Received exception", e)
                         }
                     }
-                    let id = ackedStanza.getStanzaId()
-                    if (StringUtils.isNullOrEmpty(id)) {
-                        continue
-                    }
-                    let listener = stanzaIdAcknowledgedListeners.remove(id()) ?? continue
-                    try {
-                        listener.processStanza(ackedStanza)
-                    } catch (e: NotConnectedException | NotLoggedInException) {
-                        XMPPTCPConnection.LOGGER.log(LogLevel.TRACE, "Received exception", e)
-                    }
-                }
-            })
+                })
         }
         serverHandledStanzasCount = handledCount
     }
@@ -1584,12 +1584,12 @@ public class XMPPTCPConnectionPacketWriter {
 extend<T> ArrayBlockingQueue<T> {
     func drainTo(list: ArrayList<T>): Unit {
         while (let Some(v) <- this.tryDequeue()) {
-            list.append(v)
+            list.add(v)
         }
     }
     func drainTo(list: LinkedList<T>): Unit {
         while (let Some(v) <- this.tryDequeue()) {
-            list.append(v)
+            list.addLast(v)
         }
     }
 }

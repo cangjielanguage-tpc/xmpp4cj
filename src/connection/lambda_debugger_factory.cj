@@ -22,8 +22,12 @@ public class LambdaDebuggerFactory <: XmppDebuggerFactory {
 
     public static let INSTANCE = LambdaDebuggerFactory()
 
-    private static let DEFAULT_DEBUGGERS: HashMap<ClassId, DebuggerSupplier> = HashMap(
-        [("ConsoleDebugger", {cfg => ConsoleDebugger(cfg)})])
+    private static let DEFAULT_DEBUGGERS: HashMap<ClassId, DebuggerSupplier> = HashMap<ClassId, DebuggerSupplier>(
+        [("ConsoleDebugger", {
+                cfg =>
+                let v: XmppDebugger = ConsoleDebugger(cfg)
+                v
+            })])
 
     /**
      * Sets custom debugger class to be created by this factory.

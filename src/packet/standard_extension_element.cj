@@ -220,7 +220,7 @@ public open class StandardExtensionElementBuilder {
         if (attributes.isNone()) {
             attributes = HashMap<String, String>()
         }
-        attributes?.put(name, value)
+        attributes?.add(name, value)
         return this
     }
 
@@ -234,7 +234,7 @@ public open class StandardExtensionElementBuilder {
         if (this.attributes.isNone()) {
             this.attributes = HashMap<String, String>(attributes.size)
         }
-        this.attributes?.putAll(attributes)
+        this.attributes?.add(all: attributes)
         return this
     }
 

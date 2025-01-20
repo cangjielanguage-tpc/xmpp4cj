@@ -61,7 +61,7 @@ public class SimpleHashMap<K, V> <: Collection<(K, V)> {
      * @return 值。
      */
     public func put(k: K, v: V): ?V {
-        inner.put(HashMapKey(k), v)
+        inner.add(HashMapKey(k), v)
     }
 
     // override
@@ -72,7 +72,7 @@ public class SimpleHashMap<K, V> <: Collection<(K, V)> {
      */
     public func putAll(kv: Collection<(K, V)>): Unit {
         for ((k, v) in kv) {
-            inner.put(HashMapKey(k), v)
+            inner.add(HashMapKey(k), v)
         }
     }
 

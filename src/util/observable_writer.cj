@@ -95,7 +95,7 @@ public open class ObservableWriter <: OutputStream & Resource {
     public open func addWriterListener(writerListener: WriterListener): Unit {
         synchronized(listenersLock) {
             if (!listeners.contains(writerListener)) {
-                listeners.append(writerListener)
+                listeners.add(writerListener)
             }
         }
     }
