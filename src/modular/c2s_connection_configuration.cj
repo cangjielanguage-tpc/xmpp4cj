@@ -14,7 +14,7 @@ public class C2sConnectionConfiguration <: ConnectionConfiguration {
         let backwardEdgeStateDescriptors: Set<StateDescriptor> = HashSet()
         for (moduleDescriptor in moduleDescriptors) {
             let moduleStateDescriptors = moduleDescriptor.getStateDescriptors()
-            backwardEdgeStateDescriptors.putAll(moduleStateDescriptors)
+            backwardEdgeStateDescriptors.add(all: moduleStateDescriptors)
         }
         try {
             initialStateDescriptorVertex = StateDescriptorGraph.constructStateDescriptorGraph(
@@ -56,7 +56,7 @@ public class C2sConnectionConfigurationBuilder <: ConnectionConfigurationBuilder
         if (modulesDescriptors.contains(moduleDescriptorClass)) {
             throw IllegalArgumentException("A connection module for ${moduleDescriptorClass} is already configured")
         }
-        modulesDescriptors.put(moduleDescriptorClass, connectionModule)
+        modulesDescriptors.add(moduleDescriptorClass, connectionModule)
     }
 
     public func addModule(

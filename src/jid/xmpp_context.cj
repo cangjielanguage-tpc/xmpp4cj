@@ -43,9 +43,11 @@ public class XmppContext {
 
     XmppContext(builder: XmppContextBuilder) {
         cachingEnabled = builder.cachingEnabled
-        xmppStringprep = builder.xmppStringprep.getOrThrow {
-            => IllegalArgumentException("Argument 'xmppStringprep' must not be None")
-        }
+        xmppStringprep = builder
+            .xmppStringprep
+            .getOrThrow {
+                => IllegalArgumentException("Argument 'xmppStringprep' must not be None")
+            }
     }
 
     /**

@@ -417,7 +417,7 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
             var i = takeIndex
             var n = 0
             while (n < count) {
-                c.append(items[i].getOrThrow())
+                c.add(items[i].getOrThrow())
                 items[i] = None
                 i = inc(i)
                 n++
@@ -448,7 +448,7 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
                 count
             }
             while (n < max) {
-                c.append(items[i].getOrThrow())
+                c.add(items[i].getOrThrow())
                 items[i] = None
                 i = inc(i)
                 n++

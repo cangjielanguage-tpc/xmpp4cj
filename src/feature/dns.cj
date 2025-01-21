@@ -141,7 +141,7 @@ public abstract class DNSResolver {
         try {
             IPAddress.resolve(name)
         } catch (e: Exception) {
-            lookupFailures.append(DnsLookupFailure(name, e))
+            lookupFailures.add(DnsLookupFailure(name, e))
             None
         }
     }
@@ -253,7 +253,7 @@ public class StdDnsResolver <: DNSResolver {
     ): ?Collection<IPAddress> {
         let arr = super.lookupHostAddress0(name, lookupFailures, DnssecMode.disabled)
         match (arr) {
-            case Some(arr) where arr.isEmpty() => lookupFailures.append(DnsLookupFailure(name, None))
+            case Some(arr) where arr.isEmpty() => lookupFailures.add(DnsLookupFailure(name, None))
             case _ => ()
         }
         arr

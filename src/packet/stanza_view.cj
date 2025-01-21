@@ -120,7 +120,7 @@ public interface StanzaView <: XmlLangElement {
         let res = ArrayList<E>(iter.size)
         for (extensionElement in iter) {
             let e = XmppElementUtil.castOrThrow<E>(extensionElement)
-            res.append(e)
+            res.add(e)
         }
         return res
     }

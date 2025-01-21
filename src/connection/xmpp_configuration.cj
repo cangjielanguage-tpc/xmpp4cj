@@ -105,7 +105,7 @@ public open class XmppConfiguration {
      */
     public static func addSaslMech(mech: String): Unit {
         if (!defaultMechs.contains(mech)) {
-            defaultMechs.append(mech)
+            defaultMechs.add(mech)
         }
     }
 
@@ -170,7 +170,7 @@ public open class XmppConfiguration {
     }
 
     public static func addCompressionHandler(xmppInputOutputStream: XMPPInputOutputStream): Unit {
-        compressionHandlers.append(xmppInputOutputStream)
+        compressionHandlers.add(xmppInputOutputStream)
     }
 
     /**
@@ -182,7 +182,7 @@ public open class XmppConfiguration {
         let res = ArrayList<XMPPInputOutputStream>(compressionHandlers.size)
         for (ios in compressionHandlers) {
             if (ios.isSupported()) {
-                res.append(ios)
+                res.add(ios)
             }
         }
         return res
@@ -194,7 +194,7 @@ public open class XmppConfiguration {
      * @param clz 要禁用的Xmpp类
      */
     public static func addDisabledXmppClass(clz: ClassId): Unit {
-        disabledXmppClasses.put(clz)
+        disabledXmppClasses.add(clz)
     }
 
     public static func addDisabledXmppClasses(classNames: Array<String>): Unit {

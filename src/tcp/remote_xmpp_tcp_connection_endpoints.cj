@@ -30,7 +30,7 @@ public class RemoteXmppTcpConnectionEndpoints {
             let connectionEndpoint = IpTcpRemoteConnectionEndpoint.comefrom(hostAddress.toString(), config.getPort(),
                 hostAddress)
             discoveredRemoteConnectionEndpoints = ArrayList(1)
-            discoveredRemoteConnectionEndpoints.append(connectionEndpoint)
+            discoveredRemoteConnectionEndpoints.add(connectionEndpoint)
         } else if (let Some(host) <- host) {
             lookupFailures = ArrayList<RemoteConnectionEndpointLookupFailure>(1)
             let hostAddresses = DNSUtil.getDNSResolver()?.lookupHostAddress(host, lookupFailures, config.getDnssecMode()
@@ -40,7 +40,7 @@ public class RemoteXmppTcpConnectionEndpoints {
                 let port = config.getPort()
                 for (inetAddress in hostAddresses) {
                     let connectionEndpoint = IpTcpRemoteConnectionEndpoint.comefrom(host.toString(), port, inetAddress)
-                    discoveredRemoteConnectionEndpoints.append(connectionEndpoint)
+                    discoveredRemoteConnectionEndpoints.add(connectionEndpoint)
                 }
             } else {
                 discoveredRemoteConnectionEndpoints = ArrayList(0)
@@ -129,7 +129,7 @@ public class RemoteXmppTcpConnectionEndpoints {
                     defaultPort,
                     inetAddress
                 )
-                endpoints.append(endpoint)
+                endpoints.add(endpoint)
             }
         }
         return endpoints

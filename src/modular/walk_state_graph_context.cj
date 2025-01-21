@@ -23,7 +23,7 @@ public class WalkStateGraphContext {
     }
 
     public func recordWalkTo(state: State): Unit {
-        walkedStateGraphPath.append(state)
+        walkedStateGraphPath.add(state)
     }
 
     public func isWalksFinalState(stateDescriptor: StateDescriptor): Bool {
@@ -53,7 +53,7 @@ public class WalkStateGraphContext {
     }
 
     public func appendWalkTo(walk: ArrayList<State>): Unit {
-        walk.appendAll(walkedStateGraphPath)
+        walk.add(all: walkedStateGraphPath)
     }
 
     public func getLoginContext(): ?LoginContext {
@@ -65,7 +65,7 @@ public class WalkStateGraphContext {
     }
 
     public func recordFailedState(state: State, stateTransitionResult: StateTransitionResult): Unit {
-        failedStates.put(state, stateTransitionResult)
+        failedStates.add(state, stateTransitionResult)
     }
 
     public func getFailedStates(): Map<State, StateTransitionResult> {
@@ -92,7 +92,7 @@ public class WalkStateGraphContext {
         if (finalStateClass == stateVertexClass || visited.contains(stateVertexClass)) {
             return false
         }
-        visited.put(stateVertexClass)
+        visited.add(stateVertexClass)
         for (successorStateVertex in stateVertex.getOutgoingEdges()) {
             let cycle = wouldCycleRecursive(successorStateVertex, visited)
             if (cycle) {

@@ -315,9 +315,9 @@ class Inflate <: Stream {
         var initin: Int64 = avail_in
         initout = avail_out
         var inflateFuncTable: Array<() -> ReturnValue> = [HEADFunc, FLAGSFunc, TIMEFunc, OSFunc, EXLENFunc, EXTRAFunc,
-            NAMEFunc, COMMENTFunc, HCRCFunc, DICTIDFunc, DICTFunc, TYPEFunc, TYPEDOFunc, STOREDFunc, COPY_Func,
-            COPYFunc, TABLEFunc, LENLENSFunc, CODELENSFunc, LEN_Func, LENFunc, LENEXTFunc, DISTFunc, DISTEXTFunc,
-            MATCHFunc, LITFunc, CHECKFunc, LENGTHFunc, DONEFunc, BADFunc, MEMFunc, SYNCFunc]
+            NAMEFunc, COMMENTFunc, HCRCFunc, DICTIDFunc, DICTFunc, TYPEFunc, TYPEDOFunc, STOREDFunc, COPY_Func, COPYFunc,
+            TABLEFunc, LENLENSFunc, CODELENSFunc, LEN_Func, LENFunc, LENEXTFunc, DISTFunc, DISTEXTFunc, MATCHFunc,
+            LITFunc, CHECKFunc, LENGTHFunc, DONEFunc, BADFunc, MEMFunc, SYNCFunc]
         var returnValue = ReturnValue(rtype: OTHER, value: 0)
         while (true) {
             returnValue = inflateFuncTable[Int64(mode)]()

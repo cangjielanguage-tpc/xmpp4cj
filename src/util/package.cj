@@ -42,7 +42,7 @@ extend<T> ArrayList<T> <: ArrayListExt<T> {
     public func removeValue(v: T): Bool {
         for (i in 0..this.size) {
             if (EqualsUtil.equals(this[i], v)) {
-                this.remove(i)
+                this.remove(at: i)
                 return true
             }
         }

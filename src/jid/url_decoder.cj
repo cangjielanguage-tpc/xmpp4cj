@@ -21,16 +21,16 @@ class URLDecoder {
             while (i < arrByte.size) {
                 let c: Byte = arrByte[i]
                 if (c == b'+') {
-                    out.append(b' ')
+                    out.add(b' ')
                     i++
                 } else if (c == b'%') {
                     let c1: Byte = arrByte[i + 1]
                     let c2: Byte = arrByte[i + 2]
                     let b: Byte = hex2Dec(c1) * 16 + hex2Dec(c2)
-                    out.append(b)
+                    out.add(b)
                     i = i + 3
                 } else {
-                    out.append(c)
+                    out.add(c)
                     i++
                 }
             }

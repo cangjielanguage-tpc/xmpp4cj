@@ -803,7 +803,7 @@ public open class XmlStringBuilder <: Appendable & CharSequence & Element {
      */
     public func toList(enclosingXmlEnvironment: ?XmlEnvironment): ArrayList<ToString> {
         let res = ArrayList<ToString>(sb.getAsList().size)
-        appendXmlTo({csq => res.append(csq)}, enclosingXmlEnvironment)
+        appendXmlTo({csq => res.add(csq)}, enclosingXmlEnvironment)
         return res
     }
 

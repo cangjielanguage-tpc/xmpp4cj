@@ -92,7 +92,7 @@ public class StanzaCollector <: Resource & ToString {
         synchronized(mtx) {
             let stanza: ?Stanza = resultQueue.get(0)
             if (stanza.isSome()) {
-                resultQueue.remove(0)
+                resultQueue.remove(at: 0)
             }
             return stanza
         }
@@ -133,7 +133,7 @@ public class StanzaCollector <: Resource & ToString {
             while (true) {
                 let res: ?Stanza = resultQueue.get(0)
                 if (res.isSome()) {
-                    resultQueue.remove(0)
+                    resultQueue.remove(at: 0)
                 }
                 if (let Some(v) <- res) {
                     return v
@@ -180,7 +180,7 @@ public class StanzaCollector <: Resource & ToString {
             synchronized(mtx) {
                 res = resultQueue.get(0)
                 if (res.isSome()) {
-                    resultQueue.remove(0)
+                    resultQueue.remove(at: 0)
                 }
                 if (let Some(v) <- res) {
                     return v
@@ -275,7 +275,7 @@ public class StanzaCollector <: Resource & ToString {
         }
         if (collectedCache.isNone()) {
             collectedCache = ArrayList<Stanza>(getCollectedCount())
-            collectedCache?.appendAll(resultQueue)
+            collectedCache?.add(all: resultQueue)
         }
         return collectedCache()
     }
@@ -335,11 +335,11 @@ public class StanzaCollector <: Resource & ToString {
             if (resultQueue.size == maxQueueSize) {
                 let rolledOverStanza: ?Stanza = resultQueue.get(0)
                 if (rolledOverStanza.isSome()) {
-                    resultQueue.remove(0)
+                    resultQueue.remove(at: 0)
                 }
                 assert(rolledOverStanza.isSome())
             }
-            resultQueue.append(packet)
+            resultQueue.add(packet)
             mtx.notifyAll()
         }
         if (let Some(v) <- collectorToReset) {

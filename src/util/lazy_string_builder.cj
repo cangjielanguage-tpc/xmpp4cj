@@ -30,7 +30,7 @@ public open class LazyStringBuilder <: CharSequence & Appendable {
      * @return 当前对象。
      */
     public func append(lsb: LazyStringBuilder): LazyStringBuilder {
-        list.appendAll(lsb.list)
+        list.add(all: lsb.list)
         invalidateCache()
         return this
     }
@@ -42,7 +42,7 @@ public open class LazyStringBuilder <: CharSequence & Appendable {
      * @return 当前对象。
      */
     public override func append(csq: CharSequence): LazyStringBuilder {
-        list.append(csq)
+        list.add(csq)
         invalidateCache()
         return this
     }
@@ -102,11 +102,11 @@ public open class LazyStringBuilder <: CharSequence & Appendable {
      */
     public func getAsList(): ArrayList<CharSequence> {
         return if (let Some(v) <- cache) {
-            ArrayList<CharSequence>(v)
+            ArrayList<CharSequence>([v])
         } else {
             let arr: ArrayList<CharSequence> = ArrayList<CharSequence>(list.size)
             for (csq in list) {
-                arr.append(csq)
+                arr.add(csq)
             }
             arr
         }

@@ -13,7 +13,7 @@ public class StreamManagementFeature <: ExtensionElement {
     public static let INSTANCE = StreamManagementFeature()
 
     static init() {
-        ELEMENT_MAPPING.put("StreamManagementFeature", ELEMENT)
+        ELEMENT_MAPPING.add("StreamManagementFeature", ELEMENT)
     }
 
     public override func getElementName(): String {
@@ -71,7 +71,7 @@ public class StreamManagementEnable <: StreamManagementAbstractEnable {
     public static let INSTANCE = StreamManagementEnable()
 
     static init() {
-        ELEMENT_MAPPING.put("StreamManagementEnable", ELEMENT)
+        ELEMENT_MAPPING.add("StreamManagementEnable", ELEMENT)
     }
 
     private init() {
@@ -119,7 +119,7 @@ public class StreamManagementEnabled <: StreamManagementAbstractEnable {
     public static let ELEMENT = "enabled"
 
     static init() {
-        ELEMENT_MAPPING.put("StreamManagementEnabled", ELEMENT)
+        ELEMENT_MAPPING.add("StreamManagementEnabled", ELEMENT)
     }
 
     /**
@@ -171,7 +171,7 @@ public class StreamManagementFailed <: Nonza {
     public static let ELEMENT = "failed"
 
     static init() {
-        ELEMENT_MAPPING.put("StreamManagementFailed", ELEMENT)
+        ELEMENT_MAPPING.add("StreamManagementFailed", ELEMENT)
     }
 
     private let condition: ?StanzaErrorCondition
@@ -256,7 +256,7 @@ public class StreamManagementResume <: StreamManagementAbstractResume {
     public static let ELEMENT = "resume"
 
     static init() {
-        ELEMENT_MAPPING.put("StreamManagementResume", ELEMENT)
+        ELEMENT_MAPPING.add("StreamManagementResume", ELEMENT)
     }
 
     public init(handledCount: Int64, previd: String) {
@@ -272,7 +272,7 @@ public class StreamManagementResumed <: StreamManagementAbstractResume {
     public static let ELEMENT = "resumed"
 
     static init() {
-        ELEMENT_MAPPING.put("StreamManagementResumed", ELEMENT)
+        ELEMENT_MAPPING.add("StreamManagementResumed", ELEMENT)
     }
 
     public init(handledCount: Int64, previd: String) {
@@ -288,7 +288,7 @@ public class StreamManagementAckAnswer <: Nonza {
     public static let ELEMENT = "a"
 
     static init() {
-        ELEMENT_MAPPING.put("StreamManagementAckAnswer", ELEMENT)
+        ELEMENT_MAPPING.add("StreamManagementAckAnswer", ELEMENT)
     }
 
     private let handledCount: Int64
@@ -321,7 +321,7 @@ public class StreamManagementAckRequest <: Nonza {
     public static let ELEMENT = "r"
 
     static init() {
-        ELEMENT_MAPPING.put("StreamManagementAckRequest", ELEMENT)
+        ELEMENT_MAPPING.add("StreamManagementAckRequest", ELEMENT)
     }
 
     public static let INSTANCE = StreamManagementAckRequest()

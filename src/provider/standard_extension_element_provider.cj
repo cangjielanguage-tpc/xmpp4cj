@@ -40,7 +40,7 @@ public class StandardExtensionElementProvider <: ExtensionElementProvider<Standa
             }
             assert(StringUtils.isNotEmpty(nsprefix))
             let nsuri = parser.getNamespaceUri(i)
-            attributes.put("xmlns:${nsprefix}", nsuri)
+            attributes.add("xmlns:${nsprefix}", nsuri)
         }
         for (i in 0..attributeCount) {
             let attributePrefix = parser.getAttributePrefix(i)
@@ -52,7 +52,7 @@ public class StandardExtensionElementProvider <: ExtensionElementProvider<Standa
             } else {
                 attributeKey = "${attributePrefix}:${attributeName}"
             }
-            attributes.put(attributeKey, attributeValue)
+            attributes.add(attributeKey, attributeValue)
         }
         builder.addAttributes(attributes)
 

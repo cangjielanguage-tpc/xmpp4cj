@@ -32,7 +32,7 @@ public class ParseStreamManagement {
                             let lang = ParserUtils.getXmlLang(parser)
                             let text = parser.nextText()
                             let stanzaErrorTextElement = StanzaErrorTextElement(text, lang)
-                            textElements.append(stanzaErrorTextElement)
+                            textElements.add(stanzaErrorTextElement)
                         } else {
                             condition = StanzaErrorCondition.fromString(name)
                         }

@@ -104,7 +104,7 @@ public class ConnectionAttemptState {
         let coup = InetSocketAddressCoupling<RemoteConnectionEndpoint>(failedAddress.getRemoteConnectionEndpoint(),
             failedAddress.getInetSocketAddress())
         let rce = RemoteConnectionException<RemoteConnectionEndpoint>(coup, exception)
-        connectionExceptions.append(rce)
+        connectionExceptions.add(rce)
         let connectionToHostFailedEvent = ConnectionToHostFailedEvent(establishingTcpConnectionState,
             nextInetSocketAddress, exception)
         connectionInternal.invokeConnectionStateMachineListener(connectionToHostFailedEvent)

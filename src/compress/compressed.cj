@@ -31,9 +31,9 @@ public class Compressed <: Nonza {
     public static let INSTANCE = Compressed()
 
     static init() {
-        QNAME_MAPPING.put("Compressed", QNAME)
-        ELEMENT_MAPPING.put("Compressed", ELEMENT)
-        NAMESPACE_MAPPING.put("Compressed", NAMESPACE)
+        QNAME_MAPPING.add("Compressed", QNAME)
+        ELEMENT_MAPPING.add("Compressed", ELEMENT)
+        NAMESPACE_MAPPING.add("Compressed", NAMESPACE)
     }
 
     /**

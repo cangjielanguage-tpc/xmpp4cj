@@ -230,10 +230,10 @@ public class LruCache<K, V> <: Cache<K, V> where K <: Hashable & Equatable<K> {
 
     public override func put(key: K, value: V): ?V {
         synchronized(lock) {
-            let oldValue: ?V = map.put(key, value)
-            arr.append(key)
+            let oldValue: ?V = map.add(key, value)
+            arr.addLast(key)
             while (map.size > maxCacheSize) {
-                if (let Some(k) <- arr.popFirst()) {
+                if (let Some(k) <- arr.removeFirst()) {
                     map.remove(k)
                 }
             }

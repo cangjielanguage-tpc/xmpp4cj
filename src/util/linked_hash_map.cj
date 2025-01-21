@@ -56,8 +56,8 @@ public class LinkedHashMap<K, V> <: Map<K, V> where K <: Hashable & Equatable<K>
      * @param keys key列表。
      * @return true表示包含key，false表示不包含。
      */
-    public override func containsAll(keys: Collection<K>): Bool {
-        map.containsAll(keys)
+    public override func contains(all!: Collection<K>): Bool {
+        map.contains(all: all)
     }
 
     /**
@@ -67,12 +67,12 @@ public class LinkedHashMap<K, V> <: Map<K, V> where K <: Hashable & Equatable<K>
      * @param value 值。
      * @return 替换值的话返回是之前的值，添加新的数据返回None。
      */
-    public override func put(key: K, value: V): ?V {
-        if (let Some(old) <- map.put(key, value)) {
+    public override func add(key: K, value: V): ?V {
+        if (let Some(old) <- map.add(key, value)) {
             set(key, value)
             old
         } else {
-            arr.append((key, value))
+            arr.add((key, value))
             None
         }
     }
@@ -82,9 +82,9 @@ public class LinkedHashMap<K, V> <: Map<K, V> where K <: Hashable & Equatable<K>
      *
      * @param kvs 键值对列表。
      */
-    public override func putAll(kvs: Collection<(K, V)>): Unit {
-        for (kv in kvs) {
-            put(kv[0], kv[1])
+    public override func add(all!: Collection<(K, V)>): Unit {
+        for (kv in all) {
+            add(kv[0], kv[1])
         }
     }
 
@@ -108,8 +108,8 @@ public class LinkedHashMap<K, V> <: Map<K, V> where K <: Hashable & Equatable<K>
      *
      * @param keys key列表。
      */
-    public override func removeAll(keys: Collection<K>): Unit {
-        for (key in keys) {
+    public override func remove(all!: Collection<K>): Unit {
+        for (key in all) {
             remove(key)
         }
     }
@@ -130,15 +130,6 @@ public class LinkedHashMap<K, V> <: Map<K, V> where K <: Hashable & Equatable<K>
     public override func clear() {
         arr.clear()
         map.clear()
-    }
-
-    /**
-     * 克隆一个Map对象。
-     *
-     * @return Map对象。
-     */
-    public override func clone(): Map<K, V> {
-        throw UnsupportedException("UnsupportedOperation")
     }
 
     /**
@@ -205,5 +196,9 @@ public class LinkedHashMap<K, V> <: Map<K, V> where K <: Hashable & Equatable<K>
      */
     public override func iterator(): Iterator<(K, V)> {
         arr.iterator()
+    }
+
+    public override func entryView(k: K): MapEntryView<K, V> {
+        map.entryView(k)
     }
 }

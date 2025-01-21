@@ -33,15 +33,15 @@ public class DelayQueue<T> where T <: Delayed & Comparable<T> & Object {
      */
     public func append(t: T): Unit {
         synchronized(lock) {
-            var node = list.firstNode()
+            var node = list.firstNode
             while (let Some(n) <- node) {
                 node = n.next
                 if (t.getDelay() < n.value.getDelay()) {
-                    list.insertBefore(n, t)
+                    list.addBefore(n, t)
                     return
                 }
             }
-            list.append(t)
+            list.addLast(t)
         }
     }
 
@@ -53,7 +53,7 @@ public class DelayQueue<T> where T <: Delayed & Comparable<T> & Object {
      */
     public func remove(t: T): Bool {
         synchronized(lock) {
-            var node = list.firstNode()
+            var node = list.firstNode
             while (let Some(n) <- node) {
                 node = n.next
                 if (refEq(n.value, t)) {
@@ -89,7 +89,7 @@ public class DelayQueue<T> where T <: Delayed & Comparable<T> & Object {
             if (node.getDelay() > Duration.Zero) {
                 return None
             }
-            return list.popFirst()
+            return list.removeFirst()
         }
     }
 
@@ -107,7 +107,7 @@ public class DelayQueue<T> where T <: Delayed & Comparable<T> & Object {
             if (delay > Duration.Zero) {
                 sleep(delay)
             }
-            return list.popFirst()
+            return list.removeFirst()
         }
     }
 }

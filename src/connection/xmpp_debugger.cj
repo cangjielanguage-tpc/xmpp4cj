@@ -76,12 +76,12 @@ public abstract class XmppDebugger {
         let observableReader = ObservableReader(reader)
         observableReader.addReaderListener(
             ReaderListener {
-            readString => try {
-                incomingStreamSplitterForPrettyPrinting?.write(readString.toString().toRuneArray())
-            } catch (e: IOException) {
-                throw AssertionError(e)
-            }
-        })
+                readString => try {
+                    incomingStreamSplitterForPrettyPrinting?.write(readString.toString().toRuneArray())
+                } catch (e: IOException) {
+                    throw AssertionError(e)
+                }
+            })
 
         return observableReader
     }
@@ -103,12 +103,12 @@ public abstract class XmppDebugger {
         let observableWriter = ObservableWriter(writer)
         observableWriter.addWriterListener(
             WriterListener {
-            writtenString => try {
-                outgoingStreamSplitterForPrettyPrinting?.write(writtenString.toString().toRuneArray())
-            } catch (e: IOException) {
-                throw AssertionError(e)
-            }
-        })
+                writtenString => try {
+                    outgoingStreamSplitterForPrettyPrinting?.write(writtenString.toString().toRuneArray())
+                } catch (e: IOException) {
+                    throw AssertionError(e)
+                }
+            })
         return observableWriter
     }
 

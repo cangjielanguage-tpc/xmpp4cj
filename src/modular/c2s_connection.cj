@@ -50,11 +50,11 @@ public class C2sConnection <: AbstractXMPPConnection {
         for (moduleDescriptor in configuration.moduleDescriptors) {
             let moduleDescriptorClass = moduleDescriptor.getClass()
             let connectionModule = moduleDescriptor.constructXmppConnectionModule(connectionInternal)
-            connectionModules.put(moduleDescriptorClass, connectionModule)
+            connectionModules.add(moduleDescriptorClass, connectionModule)
 
             let transport = connectionModule.getTransport()
             if (let Some(v) <- transport) {
-                transports.put(moduleDescriptorClass, v)
+                transports.add(moduleDescriptorClass, v)
             }
         }
 
@@ -179,7 +179,7 @@ public class C2sConnection <: AbstractXMPPConnection {
                 successorStateDescriptor)
             invokeConnectionStateMachineListener(
                 ConnectionStateEventTransitionNotPossible(initialState, successorState,
-                transtionImpossibleBecauseNotImplemented))
+                    transtionImpossibleBecauseNotImplemented))
             return transtionImpossibleBecauseNotImplemented
         }
 
@@ -379,7 +379,7 @@ public class C2sConnection <: AbstractXMPPConnection {
         for (xmppInputOutputFilter in filters) {
             let stats = xmppInputOutputFilter.getStats()
             let filterName = xmppInputOutputFilter.getFilterName()
-            filterStats.put(filterName, stats)
+            filterStats.add(filterName, stats)
         }
         return filterStats
     }
@@ -388,7 +388,7 @@ public class C2sConnection <: AbstractXMPPConnection {
         let transportsStats: Map<ClassId, C2sTransportStats> = HashMap(transports.size)
         for ((key, value) in transports) {
             let transportStats = value.getStats()
-            transportsStats.put(key, transportStats)
+            transportsStats.add(key, transportStats)
         }
         let filterStats = getFilterStats()
         return Stats(transportsStats, filterStats)
@@ -576,8 +576,8 @@ class LookupRemoteConnectionEndpointsState <: State {
         for (transport in c2sconn.transports.values()) {
             transport.resetDiscoveredConnectionEndpoints()
             let transportFutures = transport.lookupConnectionEndpoints()
-            lookupFutures.put(transport, transportFutures)
-            allFutures.appendAll(transportFutures)
+            lookupFutures.add(transport, transportFutures)
+            allFutures.add(all: transportFutures)
         }
         let numberOfFutures: Int = allFutures.size
         let list: Collection<XmppFuture<LookupConnectionEndpointsResult, Exception>> = allFutures
@@ -590,7 +590,7 @@ class LookupRemoteConnectionEndpointsState <: State {
                 let result = future.getIfAvailable() ?? continue
 
                 if (let Some(lookupFailure) <- (result as LookupConnectionEndpointsFailed)) {
-                    lookupFailures.append(lookupFailure)
+                    lookupFailures.add(lookupFailure)
                     continue
                 }
                 let successResult = (result as LookupConnectionEndpointsSuccess).getOrThrow()
@@ -846,7 +846,7 @@ class AuthenticatedAndResourceBoundState <: State {
             c2sconn.walkFromDisconnectToAuthenticated = list
             walkStateGraphContext.appendWalkTo(list)
         }
-        c2sconn.walkFromDisconnectToAuthenticated?.append(this)
+        c2sconn.walkFromDisconnectToAuthenticated?.add(this)
         c2sconn.afterSuccessfulLogin(c2sconn.streamResumed)
         return StateTransitionResultSuccess.EMPTY_INSTANCE
     }

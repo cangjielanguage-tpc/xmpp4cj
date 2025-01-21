@@ -111,20 +111,20 @@ public class XmppStringUtils {
         let buf: ArrayList<Byte> = ArrayList<Byte>(localpart.size + 8)
         for (c in localpart) {
             match (c) {
-                case b'"' => buf.appendAll(unsafe { "\\22".rawData() })
-                case b'&' => buf.appendAll(unsafe { "\\26".rawData() })
-                case b'\'' => buf.appendAll(unsafe { "\\27".rawData() })
-                case b'/' => buf.appendAll(unsafe { "\\2f".rawData() })
-                case b':' => buf.appendAll(unsafe { "\\3a".rawData() })
-                case b'<' => buf.appendAll(unsafe { "\\3c".rawData() })
-                case b'>' => buf.appendAll(unsafe { "\\3e".rawData() })
-                case b'@' => buf.appendAll(unsafe { "\\40".rawData() })
-                case b'\\' => buf.appendAll(unsafe { "\\5c".rawData() })
+                case b'"' => buf.add(all: unsafe { "\\22".rawData() })
+                case b'&' => buf.add(all: unsafe { "\\26".rawData() })
+                case b'\'' => buf.add(all: unsafe { "\\27".rawData() })
+                case b'/' => buf.add(all: unsafe { "\\2f".rawData() })
+                case b':' => buf.add(all: unsafe { "\\3a".rawData() })
+                case b'<' => buf.add(all: unsafe { "\\3c".rawData() })
+                case b'>' => buf.add(all: unsafe { "\\3e".rawData() })
+                case b'@' => buf.add(all: unsafe { "\\40".rawData() })
+                case b'\\' => buf.add(all: unsafe { "\\5c".rawData() })
                 case _ =>
                     if ((0x9 <= c && c <= 0xd) || c == 0x20) {
-                        buf.appendAll(unsafe { "\\20".rawData() })
+                        buf.add(all: unsafe { "\\20".rawData() })
                     } else {
-                        buf.append(c)
+                        buf.add(c)
                     }
             }
         }
@@ -180,51 +180,51 @@ public class XmppStringUtils {
                 match (c2) {
                     case b'2' => match (c3) {
                         case b'0' =>
-                            buf.append(b' ')
+                            buf.add(b' ')
                             i += 2
                             doAppendC = false
                         case b'2' =>
-                            buf.append(b'"')
+                            buf.add(b'"')
                             i += 2
                             doAppendC = false
                         case b'6' =>
-                            buf.append(b'&')
+                            buf.add(b'&')
                             i += 2
                             doAppendC = false
                         case b'7' =>
-                            buf.append(b'\'')
+                            buf.add(b'\'')
                             i += 2
                             doAppendC = false
                         case b'f' =>
-                            buf.append(b'/')
+                            buf.add(b'/')
                             i += 2
                             doAppendC = false
                         case _ => ()
                     }
                     case b'3' => match (c3) {
                         case b'a' =>
-                            buf.append(b':')
+                            buf.add(b':')
                             i += 2
                             doAppendC = false
                         case b'c' =>
-                            buf.append(b'<')
+                            buf.add(b'<')
                             i += 2
                             doAppendC = false
                         case b'e' =>
-                            buf.append(b'>')
+                            buf.add(b'>')
                             i += 2
                             doAppendC = false
                         case _ => ()
                     }
                     case b'4' =>
                         if (c3 == b'0') {
-                            buf.append(b'@')
+                            buf.add(b'@')
                             i += 2
                             doAppendC = false
                         }
                     case b'5' =>
                         if (c3 == b'c') {
-                            buf.append(b'\\')
+                            buf.add(b'\\')
                             i += 2
                             doAppendC = false
                         }
@@ -232,7 +232,7 @@ public class XmppStringUtils {
                 }
             }
             if (doAppendC) {
-                buf.append(c)
+                buf.add(c)
             }
             i++
         }

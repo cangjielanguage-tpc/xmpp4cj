@@ -13,7 +13,7 @@ public class C2sXmppConfiguration <: XmppConfiguration {
 
     public static func addModule(moduleDescriptor: ModuleDescriptor): Bool {
         synchronized(KNOWN_MODULES_LOCK) {
-            return KNOWN_MODULES.put(moduleDescriptor)
+            return KNOWN_MODULES.add(moduleDescriptor)
         }
     }
 

@@ -73,14 +73,14 @@ public class ConcurrentSet<T> <: Collection<T> {
      */
     public func put(t: T): Bool {
         synchronized(lock) {
-            var node: ?LinkedListNode<T> = list.firstNode()
+            var node: ?LinkedListNode<T> = list.firstNode
             while (let Some(n) <- node) {
                 node = n.next
                 if (EqualsUtil.equals(n.value, t)) {
                     return false
                 }
             }
-            list.append(t)
+            list.addLast(t)
             return true
         }
     }

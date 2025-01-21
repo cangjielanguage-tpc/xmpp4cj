@@ -42,7 +42,7 @@ public class Selector {
             }
             for (key in this.keys) {
                 if (key.checkOps()) {
-                    publicKeys.put(key)
+                    publicKeys.add(key)
                 }
             }
             publicKeys.size
@@ -64,7 +64,7 @@ public class Selector {
     protected func register(channel: SelectableChannel, ops: Int, attachment: Object): SelectionKey {
         let key = SelectionKey(this, channel, ops, attachment)
         synchronized(lock) {
-            keys.put(key)
+            keys.add(key)
             lock.notify()
         }
         key
@@ -81,7 +81,7 @@ public abstract class SelectableChannel {
     var selector: ?Selector = None
     public func register(selector: Selector, ops: Int64, attachment: Object): SelectionKey {
         let key = selector.register(this, ops, attachment)
-        keys.append(key)
+        keys.add(key)
         key
     }
     public func close(): Unit

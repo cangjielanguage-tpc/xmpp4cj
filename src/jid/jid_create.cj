@@ -668,9 +668,11 @@ public class JidCreate {
                 return entityJid()
             }
         }
-        let localpartString: String = XmppStringUtils.parseLocalpart(jidString).getOrThrow {
-            => XmppStringprepException("Does not contain a localpart", jidString)
-        }
+        let localpartString: String = XmppStringUtils
+            .parseLocalpart(jidString)
+            .getOrThrow {
+                => XmppStringprepException("Does not contain a localpart", jidString)
+            }
         var localpart: Localpart = try {
             if (unescaped) {
                 Localpart.fromUnescaped(localpartString)

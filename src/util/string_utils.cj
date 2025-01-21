@@ -264,9 +264,9 @@ public class StringUtils {
         for (randomCharNum in 1..numRandomChars) {
             let randomIndex: Int64 = random.nextInt64(alphabet.size)
             let randomChar: Byte = alphabet[randomIndex]
-            appendable.append(randomChar)
+            appendable.add(randomChar)
             if (randomCharNum % RANDOM_STRING_CHUNK_SIZE == 0 && randomCharNum < numRandomChars) {
-                appendable.append(b'-')
+                appendable.add(b'-')
             }
         }
     }
@@ -603,7 +603,7 @@ public class StringUtils {
     public static func toStrings(charSequences: Collection<String>): ArrayList<String> {
         let res: ArrayList<String> = ArrayList<String>(charSequences.size)
         for (cs in charSequences) {
-            res.append(cs)
+            res.add(cs)
         }
         return res
     }

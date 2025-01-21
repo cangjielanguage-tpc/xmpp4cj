@@ -37,7 +37,7 @@ public class SASLAuthentication {
      */
     public static func registerSASLMechanism(mechanism: SASLMechanism): Unit {
         synchronized(REGISTERED_MECHANISMS_LOCK) {
-            REGISTERED_MECHANISMS.append(mechanism)
+            REGISTERED_MECHANISMS.add(mechanism)
             REGISTERED_MECHANISMS.sort()
         }
     }
@@ -51,7 +51,7 @@ public class SASLAuthentication {
         let answer: Map<String, String> = LinkedHashMap()
         synchronized(REGISTERED_MECHANISMS_LOCK) {
             for (mechanism in REGISTERED_MECHANISMS) {
-                answer.put(anyClassId(mechanism), anyToString(mechanism)) // TODO
+                answer.add(anyClassId(mechanism), anyToString(mechanism)) // TODO
             }
         }
         return answer
@@ -86,7 +86,7 @@ public class SASLAuthentication {
             for (i in 0..REGISTERED_MECHANISMS.size) {
                 let mechanism = REGISTERED_MECHANISMS[i]
                 if (anyClassId(mechanism) == clazz) {
-                    REGISTERED_MECHANISMS.remove(i)
+                    REGISTERED_MECHANISMS.remove(at: i)
                     return true
                 }
             }
@@ -102,7 +102,7 @@ public class SASLAuthentication {
      */
     public static func blacklistSASLMechanism(mechanism: String): Bool {
         synchronized(BLACKLISTED_MECHANISMS_LOCK) {
-            return BLACKLISTED_MECHANISMS.put(mechanism)
+            return BLACKLISTED_MECHANISMS.add(mechanism)
         }
     }
 
@@ -318,12 +318,12 @@ public class SASLAuthentication {
                 continue
             }
             if (authzid.isSome() && !mechanism.authzidSupported()) {
-                skipReasons.append(
+                skipReasons.add(
                     "Skipping ${mechanism} because authzid is required by not supported by this SASL mechanism")
                 continue
             }
             if (mechanism.requiresPassword() && !passwordAvailable) {
-                skipReasons.append(
+                skipReasons.add(
                     "Skipping ${mechanism} because a password is required for it, but none was provided to the connection configuration"
                 )
                 continue

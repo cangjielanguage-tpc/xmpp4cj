@@ -16,7 +16,7 @@ public class StateDescriptorGraph {
     ): GraphVertex<StateDescriptor> {
         let stateDescriptor = stateDescriptorClass
         let graphVertexStateDescriptor = GraphVertex<StateDescriptor>(stateDescriptor)
-        let previous = graphVertexes.put(stateDescriptorClass, graphVertexStateDescriptor)
+        let previous = graphVertexes.add(stateDescriptorClass, graphVertexStateDescriptor)
         assert(previous.isNone())
         return graphVertexStateDescriptor
     }
@@ -38,7 +38,7 @@ public class StateDescriptorGraph {
         let successorStateDescriptors: Map<StateDescriptor, GraphVertex<StateDescriptor>> = HashMap(numSuccessors)
         for (successorClass in successorClasses) {
             let successorGraphNode = context.getOrConstruct(successorClass)
-            successorStateDescriptors.put(successorClass, successorGraphNode)
+            successorStateDescriptors.add(successorClass, successorGraphNode)
         }
 
         match (numSuccessors) {
@@ -92,7 +92,7 @@ public class StateDescriptorGraph {
             if (continueOuterLoop) {
                 continue
             }
-            sortedSuccessors.append(GraphVertex<StateDescriptor>(successorStateDescriptor))
+            sortedSuccessors.add(GraphVertex<StateDescriptor>(successorStateDescriptor))
         }
 
         for (successor in sortedSuccessors) {
@@ -137,7 +137,7 @@ public class StateDescriptorGraph {
             =>
             let state = stateDescriptor.constructState(connectionInternal)
             let stateVertex = GraphVertex<State>(state)
-            handledStateDescriptors.put(stateDescriptor, stateVertex)
+            handledStateDescriptors.add(stateDescriptor, stateVertex)
             for (successorStateDescriptorVertex in stateDescriptorVertex.getOutgoingEdges()) {
                 let successorStateVertex = convertToStateGraph(successorStateDescriptorVertex, connectionInternal,
                     handledStateDescriptors)
@@ -163,14 +163,14 @@ public class StateDescriptorGraph {
         map.get(clazz) ?? {
             =>
             let vertex = GraphVertex<StateDescriptor>(clazz)
-            map.put(clazz, vertex)
+            map.add(clazz, vertex)
             vertex
         }()
     }
 
     private static func topologicalSort<E>(vertexes: Collection<GraphVertex<E>>): ArrayList<GraphVertex<E>> {
         let res = ArrayList<GraphVertex<E>>()
-        dfs(vertexes, res.prepend, None)
+        dfs(vertexes, {v => res.add(v, at: 0)}, None)
         return res
     }
 
@@ -261,7 +261,7 @@ class HandleStateDescriptorGraphVertexContext {
     }
 
     public func recurseInto(stateDescriptorClass: ClassId): Bool {
-        let wasAdded = handledStateDescriptors.put(stateDescriptorClass)
+        let wasAdded = handledStateDescriptors.add(stateDescriptorClass)
         let alreadyHandled = !wasAdded
         return alreadyHandled
     }
@@ -295,7 +295,7 @@ public class GraphVertex<E> <: ToString & Equatable<GraphVertex<E>> {
         if (outgoingEdges.contains(vertex)) {
             throw IllegalArgumentException("This ${this} already has an outgoing edge to ${vertex}")
         }
-        outgoingEdges.append(vertex)
+        outgoingEdges.add(vertex)
     }
 
     public func getElement(): E {

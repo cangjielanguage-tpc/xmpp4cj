@@ -14,12 +14,12 @@ public open class XmppCompressionManager {
             for (i in 0..xmppCompressionFactories.size) {
                 let factory = xmppCompressionFactories[i]
                 if (factory.getCompressionMethod() == method) {
-                    xmppCompressionFactories.remove(i)
+                    xmppCompressionFactories.remove(at: i)
                     previousFactory = factory
                     break
                 }
             }
-            xmppCompressionFactories.append(xmppCompressionFactory)
+            xmppCompressionFactories.add(xmppCompressionFactory)
             xmppCompressionFactories.sort()
         }
         return previousFactory

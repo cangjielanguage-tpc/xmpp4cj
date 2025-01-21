@@ -123,7 +123,7 @@ public class ProviderManager {
     public static func getIQProviders(): ArrayList<IqProvider<IQ>> {
         let providers = ArrayList<IqProvider<IQ>>(iqProviders.size)
         for (value in iqProviders.values()) {
-            providers.append(value)
+            providers.add(value)
         }
         return providers
     }
@@ -223,7 +223,7 @@ public class ProviderManager {
     public static func getExtensionProviders(): ArrayList<ExtensionElementProvider<ExtensionElement>> {
         let providers = ArrayList<ExtensionElementProvider<ExtensionElement>>(extensionProviders.size)
         for (value in extensionProviders.values()) {
-            providers.append(value)
+            providers.add(value)
         }
         return providers
     }

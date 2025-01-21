@@ -18,9 +18,9 @@ public class XmppTcpTransportModuleDescriptor <: ModuleDescriptor {
 
     protected func getStateDescriptors(): Set<StateDescriptor> {
         var res: Set<StateDescriptor> = HashSet()
-        res.put(EstablishingTcpConnectionStateDescriptor())
+        res.add(EstablishingTcpConnectionStateDescriptor())
         if (startTls) {
-            res.put(EstablishTlsStateDescriptor())
+            res.add(EstablishTlsStateDescriptor())
         }
         if (directTls) {
             throw IllegalArgumentException("DirectTLS is not implemented yet")

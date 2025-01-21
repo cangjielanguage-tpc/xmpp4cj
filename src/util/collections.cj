@@ -49,15 +49,15 @@ class UnmodifiableMap<K, V> <: Map<K, V> where K <: Equatable<K> {
         innermap.contains(key)
     }
 
-    public override func containsAll(keys: Collection<K>): Bool {
-        innermap.containsAll(keys)
+    public override func contains(all!: Collection<K>): Bool {
+        innermap.contains(all: all)
     }
 
-    public override func put(_: K, _: V): ?V {
+    public override func add(_: K, _: V): ?V {
         throw UnsupportedException("UnsupportedOperation")
     }
 
-    public override func putAll(_: Collection<(K, V)>): Unit {
+    public override func add(all!: Collection<(K, V)>): Unit {
         throw UnsupportedException("UnsupportedOperation")
     }
 
@@ -65,7 +65,7 @@ class UnmodifiableMap<K, V> <: Map<K, V> where K <: Equatable<K> {
         throw UnsupportedException("UnsupportedOperation")
     }
 
-    public override func removeAll(_: Collection<K>): Unit {
+    public override func remove(all!: Collection<K>): Unit {
         throw UnsupportedException("UnsupportedOperation")
     }
 
@@ -74,10 +74,6 @@ class UnmodifiableMap<K, V> <: Map<K, V> where K <: Equatable<K> {
     }
 
     public override func clear(): Unit {
-        throw UnsupportedException("UnsupportedOperation")
-    }
-
-    public override func clone(): Map<K, V> {
         throw UnsupportedException("UnsupportedOperation")
     }
 
@@ -111,6 +107,10 @@ class UnmodifiableMap<K, V> <: Map<K, V> where K <: Equatable<K> {
     public override func iterator(): Iterator<(K, V)> {
         innermap.iterator()
     }
+
+    public override func entryView(k: K): MapEntryView<K, V> {
+        innermap.entryView(k)
+    }
 }
 
 class EmptyMap<K, V> <: Map<K, V> where K <: Equatable<K> {
@@ -124,15 +124,15 @@ class EmptyMap<K, V> <: Map<K, V> where K <: Equatable<K> {
         false
     }
 
-    public override func containsAll(_: Collection<K>): Bool {
+    public override func contains(all!: Collection<K>): Bool {
         false
     }
 
-    public override func put(_: K, _: V): ?V {
+    public override func add(_: K, _: V): ?V {
         throw UnsupportedException("UnsupportedOperation")
     }
 
-    public override func putAll(_: Collection<(K, V)>): Unit {
+    public override func add(all!: Collection<(K, V)>): Unit {
         throw UnsupportedException("UnsupportedOperation")
     }
 
@@ -140,7 +140,7 @@ class EmptyMap<K, V> <: Map<K, V> where K <: Equatable<K> {
         throw UnsupportedException("UnsupportedOperation")
     }
 
-    public override func removeAll(_: Collection<K>): Unit {
+    public override func remove(all!: Collection<K>): Unit {
         throw UnsupportedException("UnsupportedOperation")
     }
 
@@ -149,10 +149,6 @@ class EmptyMap<K, V> <: Map<K, V> where K <: Equatable<K> {
     }
 
     public override func clear(): Unit {}
-
-    public override func clone(): Map<K, V> {
-        throw UnsupportedException("UnsupportedOperation")
-    }
 
     public operator override func [](_: K): V {
         throw UnsupportedException("UnsupportedOperation")
@@ -183,5 +179,9 @@ class EmptyMap<K, V> <: Map<K, V> where K <: Equatable<K> {
 
     public override func iterator(): Iterator<(K, V)> {
         empty.iterator()
+    }
+
+    public override func entryView(k: K): MapEntryView<K, V> {
+        empty.entryView(k)
     }
 }

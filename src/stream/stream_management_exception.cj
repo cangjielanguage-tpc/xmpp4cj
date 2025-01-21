@@ -117,7 +117,7 @@ public class StreamManagementUnacknowledgedQueueFullException <: StreamManagemen
     ): StreamManagementUnacknowledgedQueueFullException {
         let unacknowledgesStanzasQueueSize = unacknowledgedStanzas.size
         let localUnacknowledgesStanzas = ArrayList<Stanza>(unacknowledgesStanzasQueueSize)
-        localUnacknowledgesStanzas.appendAll(unacknowledgedStanzas)
+        localUnacknowledgesStanzas.add(all: unacknowledgedStanzas)
         let droppedElements = elements.size - overflowElementNum - 1
 
         let message: String = "The queue size ${unacknowledgesStanzasQueueSize} is not able to fit another ${droppedElements} potential stanzas type top-level stream-elements."

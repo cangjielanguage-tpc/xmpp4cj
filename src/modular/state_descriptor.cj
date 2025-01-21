@@ -115,7 +115,7 @@ public abstract class StateDescriptor <: ToString & Hashable & Equatable<StateDe
     // }
 
     private static func addAndCheckNonExistent(set: HashSet<StateDescriptor>, e: StateDescriptor): Unit {
-        let newElement = set.put(e)
+        let newElement = set.add(e)
         if (!newElement) {
             throw IllegalArgumentException("Element already exists in set")
         }

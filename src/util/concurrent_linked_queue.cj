@@ -28,13 +28,13 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
      */
     public func append(t: T): Unit {
         synchronized(lock) {
-            list.append(t)
+            list.addLast(t)
         }
     }
 
     public func prepend(t: T): Unit {
         synchronized(lock) {
-            list.prepend(t)
+            list.addFirst(t)
         }
     }
 
@@ -114,7 +114,7 @@ public class ConcurrentLinkedQueue<T> <: Collection<T> {
      * @return 迭代器。
      */
     public func reverseIterator(): Iterator<T> {
-        ReverseIterator(list.lastNode())
+        ReverseIterator(list.lastNode)
     }
 }
 

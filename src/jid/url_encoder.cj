@@ -18,14 +18,14 @@ class URLEncoder {
         var out: ArrayList<Byte> = ArrayList<Byte>()
         for (c in arrByte) {
             if (c == b' ') {
-                out.append(b'+')
+                out.add(b'+')
             } else if ((c >= b'A' && c <= b'Z') || (c >= b'a' && c <= b'z') || (c >= b'0' && c <= b'9') || c == b'-' ||
                 c == b'_' || c == b'.' || c == b'*') {
-                out.append(c)
+                out.add(c)
             } else {
-                out.append(b'%')
-                out.append(dec2HexBytes(c)[0])
-                out.append(dec2HexBytes(c)[1])
+                out.add(b'%')
+                out.add(dec2HexBytes(c)[0])
+                out.add(dec2HexBytes(c)[1])
             }
         }
         unsafe { String.fromUtf8Unchecked(out.getRawArray()[..out.size]) }

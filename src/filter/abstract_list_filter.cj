@@ -50,7 +50,7 @@ public abstract class AbstractListFilter <: StanzaFilter {
      */
     public func addFilter(filter: StanzaFilter): Unit {
         Objects.requireNonNull(filter, "Parameter must not be null.")
-        filters.append(filter)
+        filters.add(filter)
     }
 
     /**

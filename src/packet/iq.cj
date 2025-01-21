@@ -238,7 +238,7 @@ public abstract class IQ <: Stanza & IqView {
         // Add the query section if there is one.
         let iqChildElement = getIQChildElementBuilder(
             IQChildElementXmlStringBuilder(getChildElementName(), getChildElementNamespace(), None,
-            xml.getXmlEnvironment())) ?? return;;
+                xml.getXmlEnvironment())) ?? return;;
         xml.append(iqChildElement)
         let extensionsXml = getExtensions()
         if (iqChildElement.isEmptyElement) {

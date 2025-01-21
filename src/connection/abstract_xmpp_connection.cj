@@ -900,7 +900,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     public override func addStanzaListener(stanzaListener: StanzaListener, stanzaFilter: ?StanzaFilter): Unit {
         let wrapper = AbstractXMPPConnectionListenerWrapper(stanzaListener, stanzaFilter)
         synchronized(recvListenersLock) {
-            recvListeners.put(stanzaListener, wrapper)
+            recvListeners.add(stanzaListener, wrapper)
         }
     }
 
@@ -913,7 +913,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     public override func addSyncStanzaListener(packetListener: StanzaListener, packetFilter: ?StanzaFilter): Unit {
         let wrapper = AbstractXMPPConnectionListenerWrapper(packetListener, packetFilter)
         synchronized(syncRecvListenersLock) {
-            syncRecvListeners.put(packetListener, wrapper)
+            syncRecvListeners.add(packetListener, wrapper)
         }
     }
 
@@ -926,7 +926,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     public override func addAsyncStanzaListener(packetListener: StanzaListener, packetFilter: ?StanzaFilter): Unit {
         let wrapper = AbstractXMPPConnectionListenerWrapper(packetListener, packetFilter)
         synchronized(asyncRecvListenersLock) {
-            asyncRecvListeners.put(packetListener, wrapper)
+            asyncRecvListeners.add(packetListener, wrapper)
         }
     }
 
@@ -939,7 +939,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     public override func addStanzaSendingListener(packetListener: StanzaListener, packetFilter: ?StanzaFilter): Unit {
         let wrapper = AbstractXMPPConnectionListenerWrapper(packetListener, packetFilter)
         synchronized(sendListenersLock) {
-            sendListeners.put(packetListener, wrapper)
+            sendListeners.add(packetListener, wrapper)
         }
     }
 
@@ -966,7 +966,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         synchronized(sendListenersLock) {
             for (listenerWrapper in sendListeners.values()) {
                 if (listenerWrapper.filterMatches(packet)) {
-                    listenersToNotify.append(listenerWrapper.getListener())
+                    listenersToNotify.addLast(listenerWrapper.getListener())
                 }
             }
         }
@@ -995,7 +995,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         Objects.requireNonNull(interceptor, "Interceptor must not be null")
         let interceptorWrapper = GenericInterceptorWrapper<MPB, MP>(interceptor._accept, filter)
         synchronized(interceptorsLock) {
-            interceptors.put(interceptor, interceptorWrapper)
+            interceptors.add(interceptor, interceptorWrapper)
         }
     }
 
@@ -1042,7 +1042,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
             for (interceptorWrapper in interceptors.values()) {
                 if (interceptorWrapper.filterMatches(tempmessageOrPresence)) {
                     let interceptor = interceptorWrapper.getInterceptor()
-                    interceptorsToInvoke.append(interceptor)
+                    interceptorsToInvoke.addLast(interceptor)
                 }
             }
         }
@@ -1287,12 +1287,12 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         for (listener in listenersToNotify) {
             asyncGoLimited(
                 {
-                => try {
-                    listener.processStanza(packet)
-                } catch (e: Exception) {
-                    LOGGER.error("Exception in async packet listener", ("exception", e))
-                }
-            })
+                    => try {
+                        listener.processStanza(packet)
+                    } catch (e: Exception) {
+                        LOGGER.error("Exception in async packet listener", ("exception", e))
+                    }
+                })
         }
 
         // 遍历所有收集器，并通知相应的收集器。
@@ -1306,16 +1306,16 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         for (stanzaListener in listenersToNotify) {
             asyncGoLimited(
                 {
-                => try {
-                    stanzaListener.processStanza(packet)
-                } catch (e: NotConnectedException) {
-                    LOGGER.warn("Got not connected exception, aborting", ("exception", e))
-                } catch (e: Exception) {
-                    LOGGER.error("Exception in packet listener", ("exception", e))
-                } finally {
-                    listenerCounter.dec()
-                }
-            })
+                    => try {
+                        stanzaListener.processStanza(packet)
+                    } catch (e: NotConnectedException) {
+                        LOGGER.warn("Got not connected exception, aborting", ("exception", e))
+                    } catch (e: Exception) {
+                        LOGGER.error("Exception in packet listener", ("exception", e))
+                    } finally {
+                        listenerCounter.dec()
+                    }
+                })
         }
         listenerCounter.waitUntilZero()
 
@@ -1355,7 +1355,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         synchronized(listenersLock) {
             for ((_, listenerWrapper) in listeners) {
                 if (listenerWrapper.filterMatches(stanza)) {
-                    listenersToNotify.append(listenerWrapper.getListener())
+                    listenersToNotify.addLast(listenerWrapper.getListener())
                 }
             }
         }
@@ -1510,7 +1510,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
 
     protected func addStreamFeature(feature: FullyQualifiedElement): Unit {
         let key = feature.getQName()
-        streamFeatures.put(key, feature)
+        streamFeatures.add(key, feature)
     }
 
     public override func sendIqRequestAsync(request: IQ): XmppFuture<IQ, Exception> {
@@ -1695,7 +1695,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
             runnable()
 
             synchronized(deferredAsyncRunnablesLock) {
-                let defferredRunnable: ?Runnable = deferredAsyncRunnables.popFirst()
+                let defferredRunnable: ?Runnable = deferredAsyncRunnables.removeFirst()
                 if (let Some(v) <- defferredRunnable) {
                     deferredAsyncRunnablesCount--
                     asyncGo(v)
@@ -1711,7 +1711,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
                 asyncGo(wrappedRunnable)
             } else {
                 deferredAsyncRunnablesCount++
-                deferredAsyncRunnables.append(wrappedRunnable)
+                deferredAsyncRunnables.addLast(wrappedRunnable)
             }
 
             let HIGH_WATERMARK = 100

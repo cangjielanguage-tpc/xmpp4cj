@@ -35,7 +35,7 @@ public abstract class AbstractErrorBuilder {
     public func setDescriptiveTexts(descriptiveTexts: ?Map<String, String>): This {
         if (let Some(v) <- descriptiveTexts) {
             if (let Some(w) <- this.descriptiveTexts) {
-                w.putAll(v)
+                w.add(all: v)
             } else {
                 this.descriptiveTexts = v
             }
@@ -55,7 +55,7 @@ public abstract class AbstractErrorBuilder {
         if (descriptiveTexts.isNone()) {
             descriptiveTexts = HashMap<String, String>()
         }
-        descriptiveTexts?.put("en", descriptiveEnText)
+        descriptiveTexts?.add("en", descriptiveEnText)
         return this
     }
 
@@ -94,7 +94,7 @@ public abstract class AbstractErrorBuilder {
      */
     public func setExtensions(extensions: Collection<ExtensionElement>): This {
         if (let Some(v) <- this.extensions) {
-            v.appendAll(extensions)
+            v.add(all: extensions)
         } else {
             this.extensions = ArrayList<ExtensionElement>(extensions)
         }
@@ -111,7 +111,7 @@ public abstract class AbstractErrorBuilder {
         if (extensions.isNone()) {
             extensions = ArrayList<ExtensionElement>()
         }
-        extensions?.append(extension)
+        extensions?.add(extension)
         return this
     }
 }

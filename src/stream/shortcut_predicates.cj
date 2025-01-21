@@ -12,11 +12,11 @@ public class ShortcutPredicates <: StanzaFilter {
     private let predicates: Set<StanzaFilter> = HashSet()
 
     public init(predicates: Collection<StanzaFilter>) {
-        this.predicates.putAll(predicates)
+        this.predicates.add(all: predicates)
     }
 
     public func addPredicate(predicate: StanzaFilter): Bool {
-        return predicates.put(predicate)
+        return predicates.add(predicate)
     }
 
     public func removePredicate(prediacte: StanzaFilter): Bool {

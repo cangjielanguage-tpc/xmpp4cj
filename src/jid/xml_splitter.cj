@@ -248,7 +248,7 @@ public open class XmlSplitter <: Resource {
             }
             case XmlSplitterState.IN_ATTRIBUTE_VALUE =>
                 if (c == attributeValueQuotes.c) {
-                    attributes.put(attributeName, getToken())
+                    attributes.add(attributeName, getToken())
                     state = XmlSplitterState.AFTER_START_NAME
                 } else {
                     tokenBuffer.append(c)
