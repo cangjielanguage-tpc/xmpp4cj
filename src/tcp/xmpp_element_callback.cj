@@ -33,7 +33,7 @@ class TcpmodXmppElementCallback <: XmppElementCallback & ToString {
                 .LOGGER
                 .log(
                     XmppTcpTransportModule.STREAM_OPEN_CLOSE_DEBUG_LOG_LEVEL,
-                    "Stream of ${this} opened. prefix=${prefix} attributes=${attributes|>map{kv=>"${kv[0]}=${kv[1]}"}|>collectString<String>(delimiter: " ")}"
+                    "Stream of ${this} opened. prefix=${prefix} attributes=${attributes |> map {kv => "${kv[0]}=${kv[1]}"} |> collectString<String>(delimiter: " ")}"
                 )
         }
 

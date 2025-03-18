@@ -430,7 +430,7 @@ public abstract class Stanza <: StanzaView & TopLevelStreamElement & ToString {
             sb.append("from=${froms},")
         }
         if (hasStanzaIdSet()) {
-            sb.append("id=${id??"null"},")
+            sb.append("id=${id ?? "null"},")
         }
     }
 

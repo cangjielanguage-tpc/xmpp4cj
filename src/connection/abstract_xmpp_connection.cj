@@ -77,7 +77,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
      * 另一种选择是同步哈希集，但这意味着每次使用<code>收集器</code>时都会有一个同步块。
      * </p>
      */
-    private let collectors: ConcurrentLinkedQueue<StanzaCollector> = ConcurrentLinkedQueue()
+    private let collectors: ConcurrentLinkedList<StanzaCollector> = ConcurrentLinkedList()
 
     private let recvListeners: Map<StanzaListener, AbstractXMPPConnectionListenerWrapper> = LinkedHashMap()
 
@@ -1612,8 +1612,8 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     public override func registerIQRequestHandler(iqRequestHandler: IQRequestHandler): ?IQRequestHandler {
         let key = iqRequestHandler.getQName()
         match (iqRequestHandler.getType()) {
-            case IQType.set => setIqRequestHandler.put(key, iqRequestHandler)
-            case IQType.get => getIqRequestHandler.put(key, iqRequestHandler)
+            case IQType.set => setIqRequestHandler.add(key, iqRequestHandler)
+            case IQType.get => getIqRequestHandler.add(key, iqRequestHandler)
             case _ => throw IllegalArgumentException("Only IQ type of 'get' and 'set' allowed")
         }
     }

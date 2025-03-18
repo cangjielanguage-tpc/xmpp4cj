@@ -40,7 +40,7 @@ public class StreamManagementCounterError <: StreamManagementException {
     public init(handledCount: Int, previousServerHandlerCount: Int, ackedStanzaCount: Int,
         ackedStanzas: ArrayList<Stanza>) {
         super(
-            "There was an error regarding the Stream Management counters. Server reported ${handledCount} handled stanzas, which means that the ${ackedStanzaCount} recently send stanzas by client are now acked by the server. But Xmpp had only ${ackedStanzas.size} to acknowledge. The stanza id of the last acked outstanding stanza is ${if (ackedStanzas.isEmpty()) {"<no acked stanzas>"} else {ackedStanzas[ackedStanzas.size - 1].getStanzaId()}}"
+            "There was an error regarding the Stream Management counters. Server reported ${handledCount} handled stanzas, which means that the ${ackedStanzaCount} recently send stanzas by client are now acked by the server. But Xmpp had only ${ackedStanzas.size} to acknowledge. The stanza id of the last acked outstanding stanza is ${if (ackedStanzas.isEmpty()) { "<no acked stanzas>" } else { ackedStanzas[ackedStanzas.size - 1].getStanzaId() }}"
         )
         this.handledCount = handledCount
         this.previousServerHandledCount = previousServerHandlerCount

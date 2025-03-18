@@ -48,7 +48,13 @@ public class RandomUtil {
     }
 }
 
-class SecureRandomWrapper <: Random {
+public interface Randomable {
+    func nextInt64(upper: Int): Int64
+    func nextInt64(): Int64
+    func nextUInt8s(bytes: Array<UInt8>): Array<UInt8>
+}
+
+class SecureRandomWrapper <: Randomable {
     let lock = ReentrantMutex()
 
     let random = SecureRandom()
@@ -76,7 +82,7 @@ class SecureRandomWrapper <: Random {
     }
 }
 
-class RandomWrapper <: Random {
+class RandomWrapper <: Randomable {
     let lock = ReentrantMutex()
 
     let random = Random()
@@ -85,5 +91,12 @@ class RandomWrapper <: Random {
         synchronized(lock) {
             return random.nextInt64(upper)
         }
+    }
+    public override func nextInt64(): Int64 {
+        random.nextInt64()
+    }
+    public override func nextUInt8s(bytes: Array<UInt8>): Array<UInt8> {
+        random.nextBytes(bytes)
+        bytes
     }
 }

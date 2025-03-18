@@ -57,9 +57,9 @@ public class CollectionBlockingQueue<E> <: Collection<E> {
             let old = queue
             let arr: ArrayList<E> = ArrayList<E>(old.capacity)
             queue = ArrayBlockingQueue<E>(old.capacity)
-            while (let Some(v) <- old.tryDequeue()) {
+            while (let Some(v) <- old.tryRemove()) {
                 arr.add(v)
-                queue.enqueue(v)
+                queue.add(v)
             }
             arr.iterator()
         }

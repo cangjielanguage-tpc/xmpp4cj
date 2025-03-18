@@ -49,7 +49,7 @@ public class XmppReactor {
     /** 
      * 存储反应线程的列表
      */
-    let reactorThreads = ConcurrentLinkedQueue<ReactorThread>()
+    let reactorThreads = ConcurrentLinkedList<ReactorThread>()
 
     let reactorThreadsLock = Monitor()
 
@@ -77,12 +77,12 @@ public class XmppReactor {
     /**
      * 存储待处理的选择键的队列。
      */
-    let pendingSelectionKeys: NonBlockingQueue<SelectionKey> = NonBlockingQueue()
+    let pendingSelectionKeys: ConcurrentLinkedQueue<SelectionKey> = ConcurrentLinkedQueue()
 
     /**
      * 存储待处理的设置兴趣操作的队列。
      */
-    let pendingSetInterestOps: NonBlockingQueue<XmppReactorSetInterestOps> = NonBlockingQueue()
+    let pendingSetInterestOps: ConcurrentLinkedQueue<XmppReactorSetInterestOps> = ConcurrentLinkedQueue()
 
     /**
      * 构造函数，初始化反应器名称并打开选择器。
@@ -124,7 +124,7 @@ public class XmppReactor {
      */
     public func setInterestOps(selectionKey: SelectionKey, interestOps: Int): Unit {
         let setInterestOps = XmppReactorSetInterestOps(selectionKey, interestOps)
-        pendingSetInterestOps.enqueue(setInterestOps)
+        pendingSetInterestOps.add(setInterestOps)
         selector.wakeup()
     }
 
@@ -299,7 +299,7 @@ class ReactorThread {
             // It may cause more synchronization but allows for more parallelism.
             // Hopefully that assumption is right.
             var myHandledPendingSetInterestOps = 0
-            while (let Some(setInterestOps) <- reactor.pendingSetInterestOps.dequeue()) {
+            while (let Some(setInterestOps) <- reactor.pendingSetInterestOps.remove()) {
                 setInterestOpsCancelledKeySafe(setInterestOps.selectionKey, setInterestOps.interestOps)
                 let flag = myHandledPendingSetInterestOps >= XmppReactor.PENDING_SET_INTEREST_OPS_MAX_BATCH_SIZE
                 myHandledPendingSetInterestOps++
@@ -374,7 +374,7 @@ class ReactorThread {
         }
         while (let Some(selectionKey) <- it.next()) {
             // Drain to pendingSelectionKeys.
-            reactor.pendingSelectionKeys.enqueue(selectionKey)
+            reactor.pendingSelectionKeys.add(selectionKey)
         }
 
         if (selectedKeysCount - myKeyCount > 0) {
@@ -397,7 +397,7 @@ class ReactorThread {
         let selectedKeys: ArrayList<SelectionKey> = ArrayList<SelectionKey>(myKeyCount)
         var i = 0
         while (i < myKeyCount) {
-            let selectionKey = reactor.pendingSelectionKeys.dequeue() ?? break
+            let selectionKey = reactor.pendingSelectionKeys.remove() ?? break
             selectedKeys.add(selectionKey)
             i++
         }

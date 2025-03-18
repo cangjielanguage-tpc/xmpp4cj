@@ -3,7 +3,7 @@
  */
 package xmpp4cj.connection
 
-import std.runtime
+import std.runtime.getProcessorCount
 
 /**
  * 表示Xmpp的配置。该配置用于：
@@ -249,7 +249,7 @@ public open class XmppConfiguration {
     }
 
     static init() {
-        let availableProcessors = runtime.ProcessorInfo.processorCount
+        let availableProcessors = getProcessorCount()
         if (availableProcessors < 8) {
             defaultConcurrencyLevelLimit = 8
         } else {

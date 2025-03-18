@@ -245,7 +245,7 @@ public class StringUtils {
         return randomString(RandomUtil.SECURE_RANDOM, UNAMBIGUOUS_NUMBERS_AND_LETTERS, REQUIRED_LENGTH)
     }
 
-    private static func randomString(random: Random, alphabet: Array<Byte>, numRandomChars: Int64): String {
+    private static func randomString(random: Randomable, alphabet: Array<Byte>, numRandomChars: Int64): String {
         // The buffer most hold the size of the requested number of random chars and the chunk separators ('-').
         let bufferSize: Int64 = numRandomChars + ((numRandomChars - 1) / RANDOM_STRING_CHUNK_SIZE)
         let charBuffer: ArrayList<Byte> = ArrayList<Byte>(bufferSize)
@@ -257,7 +257,7 @@ public class StringUtils {
 
     private static func randomString(
         appendable: ArrayList<Byte>,
-        random: Random,
+        random: Randomable,
         alphabet: Array<Byte>,
         numRandomChars: Int64
     ): Unit {
@@ -288,7 +288,7 @@ public class StringUtils {
      * @param random 随机数规则。
      * @return 随机字符串。
      */
-    public static func randomString(length: Int64, random: Random): String {
+    public static func randomString(length: Int64, random: Randomable): String {
         if (length == 0) {
             return ""
         }
@@ -546,7 +546,7 @@ public class StringUtils {
      * @return 处理后的文本。
      */
     public static func deleteXmlWhitespace(string: String): String {
-        return XML_WHITESPACE.matcher(string).replaceAll("")
+        return XML_WHITESPACE.replaceAll(string, "")
     }
 
     /**

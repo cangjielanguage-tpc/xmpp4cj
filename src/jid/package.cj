@@ -8,7 +8,7 @@ internal import std.collection.*
 internal import std.convert.Parsable
 internal import std.io.{ByteBuffer, IOException, OutputStream, StringReader}
 internal import std.regex.{Regex}
-internal import std.sort.stableSort
+internal import std.sort.sort
 internal import std.sync.{AtomicInt64, ReentrantMutex}
 internal import std.time.{DateTime, DateTimeFormat, TimeParseException, TimeZone}
 

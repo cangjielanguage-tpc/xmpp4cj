@@ -40,21 +40,21 @@ class XmlReader {
      *
      * @return XmlDeserializable对象。
      */
-    public func readObject<T>(): T where T <: XmlDeserializable<T> {
-        // stash status
-        let stashStatus = status
-        let stashReadAfterLastPeek = readAfterLastPeek
+    // public func readObject<T>(): T where T <: XmlDeserializable<T> {
+    //     // stash status
+    //     let stashStatus = status
+    //     let stashReadAfterLastPeek = readAfterLastPeek
 
-        // init status before read new Xml Object
-        status = Status.Init
-        readAfterLastPeek = false
-        let v = T.fromXml(this)
+    //     // init status before read new Xml Object
+    //     status = Status.Init
+    //     readAfterLastPeek = false
+    //     let v = T.fromXml(this)
 
-        // pop status
-        status = stashStatus
-        readAfterLastPeek = stashReadAfterLastPeek
-        return v
-    }
+    //     // pop status
+    //     status = stashStatus
+    //     readAfterLastPeek = stashReadAfterLastPeek
+    //     return v
+    // }
 
     /**
      * 获取XmlEvent。
