@@ -99,7 +99,7 @@ public class SimpleXmppStringprep <: XmppStringprep {
     static init() {
         LOCALPART_EXCLUDED_CHARACTERS = LOCALPART_FURTHER_EXCLUDED_CHARACTERS |> concat<Byte>(
             USERNAME_CASE_MAPPED_EXCLUDED_CHARACTERS) |> collectArray
-        stableSort(LOCALPART_EXCLUDED_CHARACTERS)
+        sort(LOCALPART_EXCLUDED_CHARACTERS)
     }
 
     public override func localprep(string: String): String {

@@ -10,7 +10,7 @@ public class C2sConnection <: AbstractXMPPConnection {
 
     var activeTransport: ?C2sTransport = None
 
-    let connectionStateMachineListeners: ConcurrentLinkedQueue<ConnectionStateMachineListener> = ConcurrentLinkedQueue()
+    let connectionStateMachineListeners: ConcurrentLinkedList<ConnectionStateMachineListener> = ConcurrentLinkedList()
 
     var featuresReceived: Bool = false
 
@@ -34,7 +34,7 @@ public class C2sConnection <: AbstractXMPPConnection {
      * This is one of those cases where the field is modified by one thread and read by another. We currently use
      * CopyOnWriteArrayList but should potentially use a VarHandle once Xmpp supports them.
      */
-    let inputOutputFilters: ConcurrentLinkedQueue<XmppInputOutputFilter> = ConcurrentLinkedQueue()
+    let inputOutputFilters: ConcurrentLinkedList<XmppInputOutputFilter> = ConcurrentLinkedList()
 
     var previousInputOutputFilters: ?ArrayList<XmppInputOutputFilter> = None
 

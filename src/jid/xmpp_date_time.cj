@@ -75,8 +75,7 @@ public class XmppDateTime {
      */
     public static func parseXEP0082Date(dateString: String): DateTime {
         for (coupling in couplings) {
-            let matcher = coupling.pattern.matcher(dateString)
-            if (matcher.find().isSome()) {
+            if (coupling.pattern.matches(dateString)) {
                 return coupling.formatter.parse(dateString)
             }
         }
@@ -91,8 +90,7 @@ public class XmppDateTime {
      * @throws ParseException 如果指定的字符串无法解析。
      */
     public static func parseDate(dateString: String): DateTime {
-        let matcher = xep0091Pattern.matcher(dateString)
-        if (matcher.find().isSome()) {
+        if (xep0091Pattern.matches(dateString)) {
             let length = dateString.split("T")[0].size
             if (length < 8) {
                 let date = handleDateWithMissingLeadingZeros(dateString, length)
@@ -103,7 +101,7 @@ public class XmppDateTime {
                 return xep0091Formatter.parse(dateString)
             }
         }
-        if (let Some(data) <- extraDurationReg.matcher(dateString).find()) {
+        if (let Some(data) <- extraDurationReg.find(dateString, group: true)) {
             var str = dateString
             var extraDuration = Duration.Zero
             for ((group, maxnum, timeUnit) in [(1, 23, Duration.hour), (2, 59, Duration.minute), (3, 59, Duration.second)]) {
@@ -209,11 +207,8 @@ public class XmppDateTime {
     private static let SECOND_FRACTION = Regex(#".*\.(\d+)"#)
 
     static func handleMilliseconds(dateString: String): String {
-        let matcher = SECOND_FRACTION.matcher(dateString)
-        if (matcher.allCount() == 0) {
-            return dateString
-        }
-        let pos = matcher.find()().matchPosition(1)
+        let matchData = SECOND_FRACTION.find(dateString, group: true) ?? return dateString
+        let pos = matchData.matchPosition(1)
         let millsize = pos.end - pos.start
         return if (millsize < 9) {
             let zeros = "0" * (9 - millsize)
@@ -241,7 +236,7 @@ public class XmppDateTime {
 
 class DateFormatType {
     let FORMAT_STRING: String
-    private let FORMATTER: DateTimeFormat
+    private let FORMATTER: String
     private let CONVERT_TIMEZONE: Bool
     private let HANDLE_MILLIS: Bool
     private let needDate: Bool // 需要日期补全
@@ -257,7 +252,7 @@ class DateFormatType {
         if (needZone) {
             format = format + "OOOO"
         }
-        FORMATTER = DateTimeFormat.of(format)
+        FORMATTER = format
 
         FORMAT_STRING = dateFormat
         CONVERT_TIMEZONE = dateFormat[dateFormat.size - 1] == b'Z'
@@ -265,7 +260,7 @@ class DateFormatType {
     }
 
     public func format(date: DateTime): String {
-        var res: String = date.toString(FORMATTER)
+        var res: String = date.format(FORMATTER)
         if (CONVERT_TIMEZONE) {
             res = XmppDateTime.convertRfc822TimezoneToXep82(res)
         }

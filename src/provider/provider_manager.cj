@@ -139,7 +139,7 @@ public class ProviderManager {
         validate(elementName, namespace)
         let key = removeIQProvider(elementName, namespace)
         let v = IqProviderWrapper(provider.getElementClass(), provider.parse)
-        iqProviders.put(key, v)
+        iqProviders.add(key, v)
     }
 
     /**
@@ -199,7 +199,7 @@ public class ProviderManager {
         validate(elementName, namespace)
         let key = removeExtensionProvider(elementName, namespace)
         let v = ExtensionElementProviderWrapper(provider.getElementClass(), provider.parse)
-        extensionProviders.put(key, v)
+        extensionProviders.add(key, v)
     }
 
     /**
@@ -254,7 +254,7 @@ public class ProviderManager {
     ): Unit where E <: ExtensionElement {
         validate(elementName, namespace)
         let key = getQName(elementName, namespace)
-        streamFeatureProviders.put(key, ExtensionElementProviderWrapper(provider.getElementClass(), provider.parse))
+        streamFeatureProviders.add(key, ExtensionElementProviderWrapper(provider.getElementClass(), provider.parse))
     }
 
     /**
@@ -299,7 +299,7 @@ public class ProviderManager {
         let nonzaClass = nonzaProvider.getElementClass()
         let key = XmppElementUtil.getQNameFor(nonzaClass)
         let wrapper = NonzaProviderWrapper(nonzaProvider.getElementClass(), nonzaProvider.parse)
-        nonzaProviders.put(key, wrapper)
+        nonzaProviders.add(key, wrapper)
     }
 
     /**

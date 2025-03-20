@@ -14,7 +14,7 @@
       [target.x86_64-unknown-windows-gnu.bin-dependencies.package-option]
 
 [package]
-  cjc-version = "0.58.3"
+  cjc-version = "0.59.6"
   compile-option = ""
   override-compile-option = "-O2"
   description = "xmpp client"
@@ -31,6 +31,6 @@
     incremental = true
     lto = ""
   [profile.customized-option]
-    debug = "-g -Woff all --error-count-limit all"
+    debug = "-g -Woff unused --error-count-limit all "
     release = "--fast-math -O2 -Woff all"
   [profile.test]

@@ -6,7 +6,7 @@ package xmpp4cj.util
 /**
  * 线程安全的LinkedList
  */
-public class ConcurrentLinkedQueue<T> <: Collection<T> {
+public class ConcurrentLinkedList<T> <: Collection<T> {
     private let lock: Monitor = Monitor()
     private let list = LinkedList<T>()
 

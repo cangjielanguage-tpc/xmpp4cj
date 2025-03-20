@@ -37,7 +37,7 @@ public class SSLEngineResult <: ToString {
         let sequenceNumber: Int
     ) {}
     public override func toString(): String {
-        "Status = ${status} HandshakeStatus = ${handshakeStatus}\nbytesConsumed = ${bytesConsumed} bytesProduced = ${bytesProduced}${if(sequenceNumber == -1){""}else{" sequenceNumber = ${sequenceNumber}"}}"
+        "Status = ${status} HandshakeStatus = ${handshakeStatus}\nbytesConsumed = ${bytesConsumed} bytesProduced = ${bytesProduced}${if (sequenceNumber == -1) { "" } else { " sequenceNumber = ${sequenceNumber}" }}"
     }
     public func getHandshakeStatus(): HandshakeStatus {
         handshakeStatus

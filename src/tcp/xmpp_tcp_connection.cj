@@ -131,20 +131,20 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
     /**
      * This listeners are invoked for every stanza that got acknowledged.
      * <p>
-     * We use a {@link ConcurrentLinkedQueue} here in order to allow the listeners to remove
+     * We use a {@link ConcurrentLinkedList} here in order to allow the listeners to remove
      * themselves after they have been invoked.
      * </p>
      */
-    let stanzaAcknowledgedListeners: ConcurrentLinkedQueue<StanzaListener> = ConcurrentLinkedQueue()
+    let stanzaAcknowledgedListeners: ConcurrentLinkedList<StanzaListener> = ConcurrentLinkedList()
 
     /**
      * These listeners are invoked for every stanza that got dropped.
      * <p>
-     * We use a {@link ConcurrentLinkedQueue} here in order to allow the listeners to remove
+     * We use a {@link ConcurrentLinkedList} here in order to allow the listeners to remove
      * themselves after they have been invoked.
      * </p>
      */
-    private let stanzaDroppedListeners: ConcurrentLinkedQueue<StanzaListener> = ConcurrentLinkedQueue()
+    private let stanzaDroppedListeners: ConcurrentLinkedList<StanzaListener> = ConcurrentLinkedList()
 
     /**
      * This listeners are invoked for a acknowledged stanza that has the given stanza ID. They will
@@ -895,7 +895,7 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
             secmin
         }
         schedule({=> stanzaIdAcknowledgedListeners.remove(id)}, removeAfterSeconds)
-        return stanzaIdAcknowledgedListeners.put(id, listener)
+        return stanzaIdAcknowledgedListeners.add(id, listener)
     }
 
     /**
@@ -1027,7 +1027,7 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
             })
         var i = 0
         while (i < ackedStanzasCount) {
-            let ackedStanza = (unacknowledgedStanzas?.tryDequeue()).flatten() ?? throw StreamManagementCounterError(
+            let ackedStanza = (unacknowledgedStanzas?.tryRemove()).flatten() ?? throw StreamManagementCounterError(
                 handledCount, serverHandledStanzasCount, ackedStanzasCount, ackedStanzas)
             ackedStanzas.add(ackedStanza)
             i++
@@ -1554,7 +1554,7 @@ public class XMPPTCPConnectionPacketWriter {
                 return
             }
             if (let Some(element) <- (element as Stanza)) {
-                unacknowledgedStanzas.enqueue(element)
+                unacknowledgedStanzas.add(element)
             }
         }
     }
@@ -1573,7 +1573,7 @@ public class XMPPTCPConnectionPacketWriter {
             try {
                 // It is important the we put the stanza in the unacknowledged stanza
                 // queue before we put it on the wire
-                conn.unacknowledgedStanzas?.enqueue(stanza.getOrThrow())
+                conn.unacknowledgedStanzas?.add(stanza.getOrThrow())
             } catch (e: Exception) {
                 throw Exception()
             }
@@ -1583,12 +1583,12 @@ public class XMPPTCPConnectionPacketWriter {
 
 extend<T> ArrayBlockingQueue<T> {
     func drainTo(list: ArrayList<T>): Unit {
-        while (let Some(v) <- this.tryDequeue()) {
+        while (let Some(v) <- this.tryRemove()) {
             list.add(v)
         }
     }
     func drainTo(list: LinkedList<T>): Unit {
-        while (let Some(v) <- this.tryDequeue()) {
+        while (let Some(v) <- this.tryRemove()) {
             list.addLast(v)
         }
     }

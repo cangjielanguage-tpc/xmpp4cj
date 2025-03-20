@@ -14,7 +14,7 @@ package xmpp4cj.connection
  * </p>
  */
 public class ConsoleDebugger <: AbstractDebugger {
-    private let dateFormatter = DateTimeFormat.of("HH:mm:ss")
+    private let dateFormatter = "HH:mm:ss"
 
     private let dateFormatterLock = Monitor()
 
@@ -35,7 +35,7 @@ public class ConsoleDebugger <: AbstractDebugger {
      */
     protected override func log(logMessage: String): Unit {
         let formatedDate: String = synchronized(dateFormatterLock) {
-            DateTime.now().toString(dateFormatter)
+            DateTime.now().format(dateFormatter)
         }
         println('${formatedDate} ${logMessage}')
     }

@@ -34,7 +34,7 @@ public class AsyncButOrdered<K> {
      * A map with the currently pending runnables for a given key. Note that this is a weak hash map so we do not have
      * to take care of removing the keys ourselfs from the map.
      */
-    private let pendingRunnables: SimpleHashMap<K, NonBlockingQueue<Runnable>> = SimpleHashMap()
+    private let pendingRunnables: SimpleHashMap<K, ConcurrentLinkedQueue<Runnable>> = SimpleHashMap()
     private let pendingRunnablesLock = Monitor()
 
     /**
@@ -71,18 +71,18 @@ public class AsyncButOrdered<K> {
      */
     public func performAsyncButOrdered(key: K, runnable: Runnable): Bool {
         // First check if a key queue already exists, create one if not.
-        let keyQueue: NonBlockingQueue<Runnable> = synchronized(pendingRunnablesLock) {
+        let keyQueue: ConcurrentLinkedQueue<Runnable> = synchronized(pendingRunnablesLock) {
             pendingRunnables.get(key) ??
                 {
                 =>
-                let keyQueue = NonBlockingQueue<Runnable>()
+                let keyQueue = ConcurrentLinkedQueue<Runnable>()
                 pendingRunnables.put(key, keyQueue)
                 keyQueue
             }()
         }
 
         // Then add the task to the queue.
-        keyQueue.enqueue(runnable)
+        keyQueue.add(runnable)
 
         // Finally check if there is already a handler working on that queue, create one if not.
         var newlyCreatedHandler: ?AsyncButOrderedHandler<K> = None
@@ -106,11 +106,11 @@ public class AsyncButOrdered<K> {
 
 // type AsyncButOrderedHandler = Runnable
 class AsyncButOrderedHandler<K> {
-    AsyncButOrderedHandler(let this_0: AsyncButOrdered<K>, let keyQueue: NonBlockingQueue<Runnable>, let key: K) {}
+    AsyncButOrderedHandler(let this_0: AsyncButOrdered<K>, let keyQueue: ConcurrentLinkedQueue<Runnable>, let key: K) {}
 
     public func run(): Unit {
         while (true) {
-            while (let Some(runnable) <- keyQueue.dequeue()) {
+            while (let Some(runnable) <- keyQueue.remove()) {
                 try {
                     runnable()
                 } catch (t: Exception) {

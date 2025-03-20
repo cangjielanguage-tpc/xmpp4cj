@@ -3,7 +3,7 @@
  */
 package xmpp4cj.connection
 
-import std.process.Process
+import std.env.getVariable
 
 /**
  * public type StartUp = (String, () -> Object)
@@ -72,7 +72,7 @@ public class XmppInitialization {
         // 此处写死 表示客户端版本
         XMPP_VERSION = "0.0.1"
 
-        let disabledClasses = Process.current.getEnv("xmpp.disabledClasses")
+        let disabledClasses = getVariable("xmpp.disabledClasses")
         if (let Some(v) <- disabledClasses) {
             let splitDisabledClasses = v.split(",")
             for (s in splitDisabledClasses) {
@@ -93,7 +93,7 @@ public class XmppInitialization {
         XmppCompressionManager.registerXmppCompressionFactory(ZlibXmppCompressionFactory.INSTANCE)
 
         try {
-            let debugEnabled = Process.current.getEnv("xmpp.debugEnabled")?.toAsciiLower() ?? ""
+            let debugEnabled = getVariable("xmpp.debugEnabled")?.toAsciiLower() ?? ""
             if (debugEnabled == "true") {
                 XmppConfiguration.DEBUG = true
             }

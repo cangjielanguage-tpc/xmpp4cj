@@ -59,13 +59,11 @@ class HTTPProxySocketConnection <: ProxySocketConnection {
         }
         let gotstr: Iterator<String> = got.toString().lines()
         let response: String = gotstr.next().getOrThrow()
-        let m: Matcher = RESPONSE_PATTERN.matcher(response)
-        if (m.findAll().isNone()) {
-            throw ProxyException(ProxyInfoProxyType.HTTP, "Unexpected proxy response from ${proxyAddress}:${response}")
-        }
-        let code: Int64 = Int64.parse(m.find(1).getOrThrow().matchStr())
-        if (code != 200) {
-            throw ProxyException(ProxyInfoProxyType.HTTP, "Error code in proxy response: ${code}");
+        let m: MatchData = RESPONSE_PATTERN.find(response, group: true) ?? throw ProxyException(ProxyInfoProxyType.HTTP,
+            "Unexpected proxy response from ${proxyAddress}:${response}")
+        let code = m.matchString(1)
+        if (code != "200") {
+            throw ProxyException(ProxyInfoProxyType.HTTP, "Error code in proxy response: ${code}")
         }
 
         return tcpSocket
