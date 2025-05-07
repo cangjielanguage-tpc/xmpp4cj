@@ -3,8 +3,8 @@
  */
 package xmpp4cj.util
 
-import crypto.digest.HMAC
-import crypto.digest.HashType
+import stdx.crypto.digest.HMAC
+import stdx.crypto.digest.HashType
 
 public class MAC {
     /**

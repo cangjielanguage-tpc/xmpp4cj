@@ -3,10 +3,10 @@
  */
 package xmpp4cj.connection
 
-// internal import crypto.digest.*
-internal import log.*
-internal import net.http.WebSocket
-internal import net.tls.*
+// internal import stdx.crypto.digest.*
+internal import stdx.log.*
+internal import stdx.net.http.WebSocket
+internal import stdx.net.tls.*
 internal import std.convert.*
 internal import std.collection.*
 internal import std.collection.concurrent.*
@@ -16,7 +16,7 @@ internal import std.random.*
 internal import std.sort.*
 internal import std.sync.*
 internal import std.time.*
-internal import encoding.base64.*
+internal import stdx.encoding.base64.*
 internal import xmpp4cj.compress.*
 internal import xmpp4cj.compression.*
 internal import xmpp4cj.feature.*

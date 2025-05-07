@@ -8,9 +8,9 @@
  */
 package xmpp4cj.feature
 
-internal import log.*
-internal import net.http.*
-internal import net.tls.*
+internal import stdx.log.*
+internal import stdx.net.http.*
+internal import stdx.net.tls.*
 internal import std.collection.*
 internal import std.io.*
 internal import std.net.*

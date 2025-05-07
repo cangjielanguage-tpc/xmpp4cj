@@ -6,8 +6,8 @@
  */
 package xmpp4cj.util
 
-internal import log.*
-internal import net.tls.*
+internal import stdx.log.*
+internal import stdx.net.tls.*
 internal import std.collection.*
 internal import std.collection.concurrent.*
 internal import std.io.*

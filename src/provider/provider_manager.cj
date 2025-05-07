@@ -198,7 +198,7 @@ public class ProviderManager {
         provider: ExtensionElementProvider<E>): Unit where E <: ExtensionElement {
         validate(elementName, namespace)
         let key = removeExtensionProvider(elementName, namespace)
-        let v = ExtensionElementProviderWrapper(provider.getElementClass(), provider.parse)
+        let v = ExtensionElementProviderWrapper(provider.getElementClass(), {p,d,e=>provider.parse(p,d,e)})
         extensionProviders.add(key, v)
     }
 
@@ -254,7 +254,7 @@ public class ProviderManager {
     ): Unit where E <: ExtensionElement {
         validate(elementName, namespace)
         let key = getQName(elementName, namespace)
-        streamFeatureProviders.add(key, ExtensionElementProviderWrapper(provider.getElementClass(), provider.parse))
+        streamFeatureProviders.add(key, ExtensionElementProviderWrapper(provider.getElementClass(), {p,d,e=>provider.parse(p,d,e)}))
     }
 
     /**
@@ -287,7 +287,8 @@ public class ProviderManager {
      * @return 匹配的 Nonza 提供程序，如果未找到则返回 null。
      */
     public static func getNonzaProvider(key: QName): ?NonzaProvider<Nonza> {
-        return nonzaProviders.get(key)
+        let p = nonzaProviders.get(key)
+        return p
     }
 
     /**
@@ -298,7 +299,7 @@ public class ProviderManager {
     public static func addNonzaProvider<N>(nonzaProvider: NonzaProvider<N>): Unit where N <: Nonza {
         let nonzaClass = nonzaProvider.getElementClass()
         let key = XmppElementUtil.getQNameFor(nonzaClass)
-        let wrapper = NonzaProviderWrapper(nonzaProvider.getElementClass(), nonzaProvider.parse)
+        let wrapper = NonzaProviderWrapper(nonzaProvider.getElementClass(), {p,d,e=>nonzaProvider.parse(p,d,e)})
         nonzaProviders.add(key, wrapper)
     }
 

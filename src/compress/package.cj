@@ -8,7 +8,7 @@
  */
 package xmpp4cj.compress
 
-internal import log.*
+internal import stdx.log.*
 internal import std.collection.ArrayList
 internal import xmpp4cj.packet.*
 internal import xmpp4cj.provider.*
