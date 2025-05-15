@@ -3,8 +3,8 @@
  */
 package xmpp4cj.connection
 
-import crypto.crypto.SecureRandom
-import crypto.digest.CryptoException
+import stdx.crypto.crypto.SecureRandom
+import stdx.crypto.digest.CryptoException
 
 /**
  * public abstract class ScramMechanism <: SASLMechanism

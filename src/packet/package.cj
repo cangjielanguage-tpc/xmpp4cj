@@ -6,11 +6,11 @@
  */
 package xmpp4cj.packet
 
-internal import crypto.crypto.*
-internal import encoding.hex.*
-internal import encoding.url.*
-internal import log.*
-internal import logger.*
+internal import stdx.crypto.crypto.*
+internal import stdx.encoding.hex.*
+internal import stdx.encoding.url.*
+internal import stdx.log.*
+internal import stdx.logger.*
 internal import std.collection.*
 internal import std.convert.*
 internal import std.io.*

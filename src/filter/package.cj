@@ -9,7 +9,7 @@ package xmpp4cj.filter
 
 internal import std.collection.*
 internal import std.io.*
-internal import log.{getGlobalLogger, Logger}
+internal import stdx.log.{getGlobalLogger, Logger}
 internal import xmpp4cj.packet.*
 internal import xmpp4cj.util.*
 internal import xmpp4cj.xml.*

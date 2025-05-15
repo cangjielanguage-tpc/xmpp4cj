@@ -6,7 +6,7 @@
  */
 package xmpp4cj.provider
 
-internal import log.*
+internal import stdx.log.*
 internal import std.collection.*
 internal import std.collection.concurrent.ConcurrentHashMap
 internal import std.convert.*

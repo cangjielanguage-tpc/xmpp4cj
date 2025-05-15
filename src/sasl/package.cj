@@ -9,7 +9,7 @@
 package xmpp4cj.sasl
 
 internal import std.collection.*
-internal import log.*
+internal import stdx.log.*
 internal import xmpp4cj.feature.*
 internal import xmpp4cj.jid.*
 internal import xmpp4cj.packet.*

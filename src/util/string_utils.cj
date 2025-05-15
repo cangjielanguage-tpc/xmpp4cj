@@ -3,7 +3,7 @@
  */
 package xmpp4cj.util
 
-import encoding.hex.toHexString
+import stdx.encoding.hex.toHexString
 
 /**
  * 一个用于字符串对象的工具方法集合。

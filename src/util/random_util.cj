@@ -3,7 +3,7 @@
  */
 package xmpp4cj.util
 
-import crypto.crypto.SecureRandom
+import stdx.crypto.crypto.SecureRandom
 
 /**
  * 随机数工具类

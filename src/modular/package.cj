@@ -10,8 +10,8 @@
  */
 package xmpp4cj.modular
 
-internal import log.*
-internal import net.tls.{TlsSession}
+internal import stdx.log.*
+internal import stdx.net.tls.{TlsSession}
 internal import std.collection.*
 internal import std.convert.*
 internal import std.sync.*

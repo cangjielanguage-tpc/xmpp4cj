@@ -3,9 +3,9 @@
 </div>
 
 <p align="center">
-<img alt="" src="https://img.shields.io/badge/release-v0.0.1-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/release-v1.0.0-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjc-v0.59.6-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjc-v0.60.5-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/cjcov-90.5%25-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/project-open-brightgreen" style="display: inline-block;" />
 </p>
@@ -42,23 +42,14 @@ xmpp4cj是一个开源、高度模块化、易于使用的 XMPP 客户端库
 
 ### 编译构建
 
-#### Linux 环境编译
+两种编译方式
 
-编译描述和具体shell命令
-
-```shell
-cjpm update
-cjpm build
-```
-
-#### Window 环境编译
-
-编译描述和具体cmd命令
-
-```shell
-cjpm update
-cjpm build
-```
+1. 使用脚本编译
+    1. 下载配置[编译脚本](https://gitcode.com/Cangjie-TPC/TPC-Test-Framework.git)
+    2. ciTest build
+2. 使用包管理器编译
+    1. 该三方库依赖stdx，请参考[stdx](https://gitcode.com/Cangjie/Cangjie-STDX#%E4%BD%BF%E7%94%A8%E6%8C%87%E5%AF%BC)文档配置`CANGJIE_STDX_PATH`路径
+    2. cjpm build
 
 ### 示例
 
@@ -340,7 +331,7 @@ func interceptor(): Unit {
 在下述版本验证通过：
 
 ``` bash
-Cangjie Compiler: 0.59.6 (cjnative)
+Cangjie Compiler: 0.60.5 (cjnative)
 ```
 
 ## 开源协议
