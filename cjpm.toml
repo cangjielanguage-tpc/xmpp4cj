@@ -18,7 +18,7 @@
       path-option = [ "${CANGJIE_STDX_PATH}/windows_x86_64_llvm/dynamic/stdx" ]
 
 [package]
-  cjc-version = "0.60.5"
+  cjc-version = "1.0.0"
   compile-option = ""
   override-compile-option = "-O2"
   description = "xmpp client"
@@ -27,7 +27,7 @@
   output-type = "dynamic"
   src-dir = ""
   target-dir = ""
-  version = "1.0.0"
+  version = "1.0.1"
   [package.package-configuration]
 
 [profile]
