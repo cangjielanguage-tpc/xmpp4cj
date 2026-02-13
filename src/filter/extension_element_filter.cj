@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.filter
+package cangjie_tpc::xmpp4cj.filter
 
 /**
  * 过滤器类，用于根据扩展元素类型过滤 STANZA。

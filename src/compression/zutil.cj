@@ -7,7 +7,7 @@
  *
  * Defines common constants/type/function for decompression/compression
  */
-package xmpp4cj.compression
+package cangjie_tpc::xmpp4cj.compression
 
 /* Return values of the deflate and inflate functions */
 let Z_OK: UInt32 = 0

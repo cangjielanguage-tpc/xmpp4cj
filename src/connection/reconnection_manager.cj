@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.connection
+package cangjie_tpc::xmpp4cj.connection
 
 /**
  * Handles the automatic reconnection process. Every time a connection is dropped without

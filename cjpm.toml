@@ -1,40 +1,48 @@
-[target]
-  [target.aarch64-linux-ohos]
-    compile-option = "-B \"${DEVECO_CANGJIE_HOME}/compiler/third_party/llvm/bin\" -B \"${DEVECO_CANGJIE_HOME}/musl/usr/lib/aarch64-linux-ohos\" -L \"${DEVECO_CANGJIE_HOME}/musl/usr/lib/aarch64-linux-ohos\" -L \"${DEVECO_CANGJIE_HOME}/build/linux_ohos_aarch64_llvm/openssl\" --sysroot \"${DEVECO_CANGJIE_HOME}/musl\""
-    [target.aarch64-linux-ohos.bin-dependencies]
-      path-option = [ "${AARCH64_LIBS}", "${AARCH64_MACRO_LIBS}", "${CANGJIE_STDX_PATH}/linux_ohos_aarch64_llvm/dynamic/stdx" ]
-  [target.x86_64-linux-ohos]
-    compile-option = "-B \"${DEVECO_CANGJIE_HOME}/compiler/third_party/llvm/bin\" -B \"${DEVECO_CANGJIE_HOME}/musl/usr/lib/x86_64-linux-ohos\" -L \"${DEVECO_CANGJIE_HOME}/musl/usr/lib/x86_64-linux-ohos\" -L \"${DEVECO_CANGJIE_HOME}/build/linux_ohos_x86_64_llvm/openssl\" --sysroot \"${DEVECO_CANGJIE_HOME}/musl\""
-    [target.x86_64-linux-ohos.bin-dependencies]
-      path-option = [ "${X86_64_OHOS_LIBS}", "${X86_64_OHOS_MACRO_LIBS}", "${CANGJIE_STDX_PATH}/linux_ohos_x86_64_llvm/dynamic/stdx" ]
-  [target.x86_64-unknown-windows-gnu]
-    [target.x86_64-unknown-windows-gnu.bin-dependencies]
-      path-option = [ "${X86_64_LIBS}", "${X86_64_MACRO_LIBS}", "${CANGJIE_STDX_PATH}/windows_x86_64_llvm/dynamic/stdx" ]
-  [target.x86_64-unknown-linux-gnu]
-    [target.x86_64-unknown-linux-gnu.bin-dependencies]
-      path-option = [ "${CANGJIE_STDX_PATH}/linux_x86_64_llvm/dynamic/stdx" ]
-  [target.x86_64-w64-mingw32]
-    [target.x86_64-w64-mingw32.bin-dependencies]
-      path-option = [ "${CANGJIE_STDX_PATH}/windows_x86_64_llvm/dynamic/stdx" ]
-
 [package]
-  cjc-version = "1.0.0"
+  cjc-version = "1.1.0"
   compile-option = ""
-  override-compile-option = "-O2"
   description = "xmpp client"
   link-option = ""
   name = "xmpp4cj"
   output-type = "dynamic"
   src-dir = ""
   target-dir = ""
-  version = "1.0.1"
-  [package.package-configuration]
+  version = "1.1.0"
+  organization = "cangjie_tpc"
+  repository = "https://gitcode.com/Cangjie-TPC/xmpp4cj"
+  homepage = "https://gitcode.com/Cangjie-TPC/xmpp4cj"
+  documentation = "https://gitcode.com/Cangjie-TPC/xmpp4cj/blob/develop/doc/feature_api.md"
+  tag = ["xmpp"]
+  category = ["Utility"]
+  license = ["Apache License 2.0"]
+  include = ["src","CHANGELOG.md"]
+  exclude = ["tmp","*.macrocall"]
 
 [profile]
   [profile.build]
     incremental = true
     lto = ""
   [profile.customized-option]
-    debug = "-g -Woff unused --error-count-limit all "
-    release = "--fast-math -O2 -Woff all"
+    debug = "-g -Woff all -Won apilevel-check"
+    release = "--fast-math -O2 -s -Woff all -Won apilevel-check"
   [profile.test]
+    [profile.test.build]
+      compile-option = "-Woff all"
+
+[target]
+  [target.aarch64-linux-ohos]
+    compile-option = "-B \"${DEVECO_CANGJIE_HOME}/compiler/third_party/llvm/bin\" -B \"${DEVECO_OH_NATIVE_HOME}/sysroot/usr/lib/aarch64-linux-ohos\" -L \"${DEVECO_OH_NATIVE_HOME}/sysroot/usr/lib/aarch64-linux-ohos\" -L \"${DEVECO_OH_NATIVE_HOME}/llvm/lib/clang/15.0.4/lib/aarch64-linux-ohos\" -L \"${DEVECO_OH_NATIVE_HOME}/llvm/lib/aarch64-linux-ohos\" -L \"${DEVECO_CANGJIE_HOME}/build/linux_ohos_aarch64_cjnative/openssl\" --sysroot \"${DEVECO_OH_NATIVE_HOME}/sysroot\""
+    [target.aarch64-linux-ohos.bin-dependencies]
+      path-option = [ "${AARCH64_LIBS}", "${AARCH64_MACRO_LIBS}", "${AARCH64_KIT_LIBS}", "${CANGJIE_STDX_PATH}/linux_ohos_aarch64_cjnative/dynamic/stdx" ]
+  [target.x86_64-linux-ohos]
+    compile-option = "-B \"${DEVECO_CANGJIE_HOME}/compiler/third_party/llvm/bin\" -B \"${DEVECO_OH_NATIVE_HOME}/sysroot/usr/lib/x86_64-linux-ohos\" -L \"${DEVECO_OH_NATIVE_HOME}/sysroot/usr/lib/x86_64-linux-ohos\" -L \"${DEVECO_OH_NATIVE_HOME}/llvm/lib/clang/15.0.4/lib/x86_64-linux-ohos\" -L \"${DEVECO_OH_NATIVE_HOME}/llvm/lib/x86_64-linux-ohos\" -L \"${DEVECO_CANGJIE_HOME}/build/linux_ohos_x86_64_cjnative/openssl\" --sysroot \"${DEVECO_OH_NATIVE_HOME}/sysroot\""
+    [target.x86_64-linux-ohos.bin-dependencies]
+      path-option = [ "${X86_64_OHOS_LIBS}", "${X86_64_OHOS_MACRO_LIBS}", "${X86_64_OHOS_KIT_LIBS}", "${CANGJIE_STDX_PATH}/linux_ohos_x86_64_cjnative/dynamic/stdx" ]
+  [target.x86_64-unknown-linux-gnu.bin-dependencies]
+    path-option = [ "${CANGJIE_STDX_PATH}/linux_x86_64_cjnative/dynamic/stdx" ]
+  [target.x86_64-w64-mingw32.bin-dependencies]
+    path-option = [ "${CANGJIE_STDX_PATH}/windows_x86_64_cjnative/dynamic/stdx" ]
+  [target.x86_64-unknown-windows-gnu.bin-dependencies]
+    path-option = [ "${X86_64_LIBS}", "${X86_64_MACRO_LIBS}", "${CANGJIE_STDX_PATH}/windows_x86_64_cjnative/dynamic/stdx" ]
+  [target.aarch64-apple-darwin.bin-dependencies]
+    path-option = [ "${CANGJIE_STDX_PATH}/darwin_aarch64_cjnative/dynamic/stdx" ]

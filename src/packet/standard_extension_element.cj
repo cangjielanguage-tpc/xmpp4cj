@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.packet
+package cangjie_tpc::xmpp4cj.packet
 
 /**
  * 一个 {@link ExtensionElement}，对使用 XMPP 时经常需要和使用的 XML 特性进行建模。

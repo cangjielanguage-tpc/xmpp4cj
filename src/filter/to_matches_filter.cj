@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.filter
+package cangjie_tpc::xmpp4cj.filter
 
 /**
  * ToMatchesFilter 是一个用于过滤与 "to" 字段匹配的地址的过滤器。

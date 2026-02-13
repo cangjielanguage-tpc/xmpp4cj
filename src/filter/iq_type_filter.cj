@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.filter
+package cangjie_tpc::xmpp4cj.filter
 
 /**
  * IQ 数据包类型的过滤器。仅当数据包是 IQ 包并且与构造函数中提供的类型匹配时返回 true。

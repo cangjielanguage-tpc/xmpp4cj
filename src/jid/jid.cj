@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.jid
+package cangjie_tpc::xmpp4cj.jid
 
 /**
  * XMPP 地址，也称为 JID（以前是 “Jabber Identifier” 的缩写），它在 XMPP 网络中作为全局唯一的地址。

@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.connection
+package cangjie_tpc::xmpp4cj.connection
 
 /**
  * XMPPConnection 接口提供了与 XMPP 服务器连接的接口，并实现了不同类型连接（例如

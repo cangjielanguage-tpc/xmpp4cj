@@ -4,7 +4,7 @@
 /**
  * Provides pluggable parsing of incoming IQ's and extensions elements.
  */
-package xmpp4cj.provider
+package cangjie_tpc::xmpp4cj.provider
 
 internal import stdx.log.*
 internal import std.collection.*
@@ -12,10 +12,10 @@ internal import std.collection.concurrent.ConcurrentHashMap
 internal import std.convert.*
 internal import std.io.*
 internal import std.unicode.*
-internal import xmpp4cj.jid.*
-internal import xmpp4cj.packet.*
-internal import xmpp4cj.util.*
-internal import xmpp4cj.xml.*
+internal import cangjie_tpc::xmpp4cj.jid.*
+internal import cangjie_tpc::xmpp4cj.packet.*
+internal import cangjie_tpc::xmpp4cj.util.*
+internal import cangjie_tpc::xmpp4cj.xml.*
 
 extend<K, V> ConcurrentHashMap<K, V> where K <: Hashable & Equatable<K> {
     /**

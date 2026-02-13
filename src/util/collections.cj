@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.util
+package cangjie_tpc::xmpp4cj.util
 
 /**
  * 定义一个公共类 Collections，提供常用的集合操作和常量

@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.packet
+package cangjie_tpc::xmpp4cj.packet
 
 /**
  * 将会发送到服务器以建立会话的 IQ 节。<p>

@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.util
+package cangjie_tpc::xmpp4cj.util
 
 /**
  * 定义一个公共接口 Predicate，表示一个接受类型为 T 的参数并返回布尔值的测试函数。

@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.provider
+package cangjie_tpc::xmpp4cj.provider
 
 /**
  * BodyElementProvider 类用于解析消息体元素的扩展。

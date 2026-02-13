@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.modular
+package cangjie_tpc::xmpp4cj.modular
 
 public class Bind2ModuleDescriptor <: ModuleDescriptor {
     static let INSTANCE = Bind2ModuleDescriptor()

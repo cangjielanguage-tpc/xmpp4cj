@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.util
+package cangjie_tpc::xmpp4cj.util
 
 /**
  * 定义一个 LinkedHashMap 类，它实现了 Map 接口，支持按插入顺序保持键值对。

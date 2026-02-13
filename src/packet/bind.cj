@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.packet
+package cangjie_tpc::xmpp4cj.packet
 
 /**
  * XMPP 用于绑定资源并获取服务器分配的 JID 的 IQ 节。有两种绑定资源的方法。一种是简单地发送一个空的 Bind 节，此时服务器将为这个连接分配一个新的资源。另一种选择是设置一个期望的资源，但服务器可能会返回发送的资源的修改版本。<p>

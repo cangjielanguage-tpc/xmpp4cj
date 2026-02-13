@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.packet
+package cangjie_tpc::xmpp4cj.packet
 
 /**
  * XEP-4§3.3中定义的表单字段类型。

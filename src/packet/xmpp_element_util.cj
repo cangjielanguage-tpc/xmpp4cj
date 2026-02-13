@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.packet
+package cangjie_tpc::xmpp4cj.packet
 
 /**
  * XmppElementUtil 类提供了一些用于处理 XMPP 元素的实用方法。

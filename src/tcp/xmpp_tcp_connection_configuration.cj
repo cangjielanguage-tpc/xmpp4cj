@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.tcp
+package cangjie_tpc::xmpp4cj.tcp
 
 /**
  * 默认连接超时时间。预初始化为30秒。如果更改此值，新的Builder实例将使用新值作为默认值。

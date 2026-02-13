@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.provider
+package cangjie_tpc::xmpp4cj.provider
 
 /**
  * 定义了在使用 {@link ProviderLoader} 时向 {@link ProviderManager} 注册一个 IQ 提供者所需的信息。

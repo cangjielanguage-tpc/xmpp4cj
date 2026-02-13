@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.feature
+package cangjie_tpc::xmpp4cj.feature
 
 /**
  * public abstract class AbstractIqRequestHandler <: IQRequestHandler

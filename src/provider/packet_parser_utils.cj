@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.provider
+package cangjie_tpc::xmpp4cj.provider
 
 /**
  * 有助于解析数据包的实用程序类。必须共享的任何解析数据包方法

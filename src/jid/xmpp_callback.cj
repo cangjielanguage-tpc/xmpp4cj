@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.jid
+package cangjie_tpc::xmpp4cj.jid
 
 /**
  * 回调接口，用于处理完成元素的回调

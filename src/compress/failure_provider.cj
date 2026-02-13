@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.compress
+package cangjie_tpc::xmpp4cj.compress
 
 /**
  * FailureProvider 类是一个解析器，用于解析 XMPP 协议中的失败（Failure）非自定义数据（Nonza）元素。

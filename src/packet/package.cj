@@ -4,7 +4,7 @@
 /**
  * XML stanzas and extension elements that are part of the XMPP protocol.
  */
-package xmpp4cj.packet
+package cangjie_tpc::xmpp4cj.packet
 
 internal import stdx.crypto.crypto.*
 internal import stdx.encoding.hex.*
@@ -18,9 +18,9 @@ internal import std.net.*
 internal import std.random.*
 internal import std.sync.*
 internal import std.time.*
-internal import xmpp4cj.jid.*
-internal import xmpp4cj.util.*
-internal import xmpp4cj.xml.*
+internal import cangjie_tpc::xmpp4cj.jid.*
+internal import cangjie_tpc::xmpp4cj.util.*
+internal import cangjie_tpc::xmpp4cj.xml.*
 
 func castOrThrow<T, R>(t: T): R {
     match (t) {

@@ -9,7 +9,7 @@
  * Provides streaming compression interfaces such as deflateInit, deflate, deflateEnd, deflateBound, and setDictionary.
  */
 
-package xmpp4cj.compression
+package cangjie_tpc::xmpp4cj.compression
 
 import std.math.*
 

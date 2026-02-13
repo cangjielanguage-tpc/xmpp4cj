@@ -1,10 +1,10 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.connection
+package cangjie_tpc::xmpp4cj.connection
 
 import stdx.crypto.crypto.SecureRandom
-import stdx.crypto.digest.CryptoException
+import stdx.crypto.common.CryptoException
 
 /**
  * public abstract class ScramMechanism <: SASLMechanism

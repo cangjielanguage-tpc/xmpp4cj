@@ -4,10 +4,11 @@
 /**
  * Utility classes.
  */
-package xmpp4cj.util
+package cangjie_tpc::xmpp4cj.util
 
 internal import stdx.log.*
 internal import stdx.net.tls.*
+internal import stdx.net.tls.common.*
 internal import std.collection.*
 internal import std.collection.concurrent.*
 internal import std.io.*

@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.filter
+package cangjie_tpc::xmpp4cj.filter
 
 /**
  * 实现多个 STANZA 过滤器的逻辑与操作。即，只有当数据包通过<b>所有</b>过滤器时，才会被接受。

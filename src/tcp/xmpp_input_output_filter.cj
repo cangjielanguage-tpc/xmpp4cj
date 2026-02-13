@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.tcp
+package cangjie_tpc::xmpp4cj.tcp
 
 class TlsState <: XmppInputOutputFilter {
     let tcpmod: XmppTcpTransportModule
@@ -11,7 +11,7 @@ class TlsState <: XmppInputOutputFilter {
     private let xmppTlsContext: XmppTlsContext
 
     let engine: SSLEngine
-    var tlsSession: ?TlsSession = None
+    var TlsSession: ?TlsSession = None
 
     var handshakeStatus: TlsHandshakeStatus = TlsHandshakeStatus.initial
 

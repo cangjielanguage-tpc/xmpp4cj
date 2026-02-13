@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.connection
+package cangjie_tpc::xmpp4cj.connection
 
 /**
  * <p>该类负责使用 SASL 验证用户，绑定资源到连接并与服务器建立会话。</p>

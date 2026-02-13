@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.proxy
+package cangjie_tpc::xmpp4cj.proxy
 
 /**
  * HTTP代理套接字连接，使用HTTP代理连接套接字。

@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.packet
+package cangjie_tpc::xmpp4cj.packet
 
 /**
  * 一个 Nonza，即如 RFC 6120 8 所定义的<b>不是节</b>的所有内容。节是 {@link Message}、{@link Presence} 和 {@link IQ}。其他所有内容都应该继承这个类而不是 {@link Stanza}。

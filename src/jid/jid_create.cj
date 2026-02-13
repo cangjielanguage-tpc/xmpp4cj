@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.jid
+package cangjie_tpc::xmpp4cj.jid
 
 /**
  * 创建 JID（XMPP 地址）的 API，从字符串和字符序列中创建。

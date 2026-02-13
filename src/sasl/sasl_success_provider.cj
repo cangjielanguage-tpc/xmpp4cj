@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.sasl
+package cangjie_tpc::xmpp4cj.sasl
 
 /**
  * 公共最终类 SaslSuccessProvider 继承自 NonzaProvider，专门处理 SASL 成功数据。

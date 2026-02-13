@@ -7,7 +7,7 @@
  *
  * Define Stream class
  */
-package xmpp4cj.compression
+package cangjie_tpc::xmpp4cj.compression
 
 /**
  * Streaming Compression/Decompression Base Class.

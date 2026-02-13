@@ -6,17 +6,18 @@
  * 没有循环依赖的XEP模块应尽量单独成包
  * 依赖关系: packet <- feature <- 其他功能模块
  */
-package xmpp4cj.feature
+package cangjie_tpc::xmpp4cj.feature
 
 internal import stdx.log.*
 internal import stdx.net.http.*
 internal import stdx.net.tls.*
+internal import stdx.net.tls.common.*
 internal import std.collection.*
 internal import std.io.*
 internal import std.net.*
 internal import std.sync.*
 internal import std.time.*
-internal import xmpp4cj.jid.*
-internal import xmpp4cj.packet.*
-internal import xmpp4cj.util.*
-internal import xmpp4cj.xml.*
+internal import cangjie_tpc::xmpp4cj.jid.*
+internal import cangjie_tpc::xmpp4cj.packet.*
+internal import cangjie_tpc::xmpp4cj.util.*
+internal import cangjie_tpc::xmpp4cj.xml.*

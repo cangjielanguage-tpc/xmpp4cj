@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.provider
+package cangjie_tpc::xmpp4cj.provider
 
 /**
  * {@link TlsFailureProvider} 是一个提供程序，用于处理 TLS 协议中的失败事件。

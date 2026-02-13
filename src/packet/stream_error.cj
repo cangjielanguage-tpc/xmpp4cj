@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.packet
+package cangjie_tpc::xmpp4cj.packet
 
 /**
  * 表示流错误数据包。流错误是不可恢复的错误，在将流错误发送给客户端后，服务器将关闭底层的 TCP 连接。

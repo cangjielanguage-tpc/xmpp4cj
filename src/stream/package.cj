@@ -7,18 +7,18 @@
  * Predicates for requesting Stream Management acknowledgements.
  * Providers for XEP-0198: Stream Management.
  */
-package xmpp4cj.stream
+package cangjie_tpc::xmpp4cj.stream
 
 internal import std.collection.*
 internal import std.collection.concurrent.*
 internal import std.sync.*
-internal import xmpp4cj.compression.*
-internal import xmpp4cj.feature.*
-internal import xmpp4cj.filter.*
-internal import xmpp4cj.modular.*
-internal import xmpp4cj.packet.*
-internal import xmpp4cj.provider.*
-internal import xmpp4cj.xml.*
-internal import xmpp4cj.util.*
+internal import cangjie_tpc::xmpp4cj.compression.*
+internal import cangjie_tpc::xmpp4cj.feature.*
+internal import cangjie_tpc::xmpp4cj.filter.*
+internal import cangjie_tpc::xmpp4cj.modular.*
+internal import cangjie_tpc::xmpp4cj.packet.*
+internal import cangjie_tpc::xmpp4cj.provider.*
+internal import cangjie_tpc::xmpp4cj.xml.*
+internal import cangjie_tpc::xmpp4cj.util.*
 
 type ClassTypeInfo = ClassId

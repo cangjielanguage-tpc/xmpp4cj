@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.filter
+package cangjie_tpc::xmpp4cj.filter
 
 /**
  * 用于过滤特定类型的 Stanzas 的过滤器。类型以 Class 对象的形式提供，

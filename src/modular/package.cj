@@ -8,20 +8,20 @@
  * Xmpp's internal API for client-to-server (c2s) connections.
  * Xmpp's Finite State Machine to handle the login logic.
  */
-package xmpp4cj.modular
+package cangjie_tpc::xmpp4cj.modular
 
 internal import stdx.log.*
-internal import stdx.net.tls.{TlsSession}
+internal import stdx.net.tls.common.*
 internal import std.collection.*
 internal import std.convert.*
 internal import std.sync.*
 internal import std.time.{DateTime}
-internal import xmpp4cj.connection.*
-internal import xmpp4cj.feature.*
-internal import xmpp4cj.filter.*
-internal import xmpp4cj.jid.*
-internal import xmpp4cj.packet.*
-internal import xmpp4cj.provider.*
-internal import xmpp4cj.util.*
-internal import xmpp4cj.xml.*
-internal import xmpp4cj.compress.*
+internal import cangjie_tpc::xmpp4cj.connection.*
+internal import cangjie_tpc::xmpp4cj.feature.*
+internal import cangjie_tpc::xmpp4cj.filter.*
+internal import cangjie_tpc::xmpp4cj.jid.*
+internal import cangjie_tpc::xmpp4cj.packet.*
+internal import cangjie_tpc::xmpp4cj.provider.*
+internal import cangjie_tpc::xmpp4cj.util.*
+internal import cangjie_tpc::xmpp4cj.xml.*
+internal import cangjie_tpc::xmpp4cj.compress.*

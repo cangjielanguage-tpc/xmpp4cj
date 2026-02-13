@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.jid
+package cangjie_tpc::xmpp4cj.jid
 
 /**
  * 一个描述 XMPP 所使用配置的上下文。

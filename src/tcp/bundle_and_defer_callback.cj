@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.tcp
+package cangjie_tpc::xmpp4cj.tcp
 
 /**
  * This callback is used to get the current value of the period in which Xmpp does bundle and defer

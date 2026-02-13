@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.tcp
+package cangjie_tpc::xmpp4cj.tcp
 
 /**
  * Creates a socket connection to an XMPP server. This is the default connection
@@ -260,7 +260,7 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
     protected override func loginInternal(username: ?String, password: ?String, resource: ?Resourcepart): Unit {
         synchronized(lock) {
             // Authenticate using SASL
-            let sslSession: ?TlsSession = (secureSocket?.session).flatten()
+            let sslSession: ?TlsSession = (secureSocket?.handshakeResult?.session).flatten()
 
             streamFeaturesAfterAuthenticationReceived = false
             authenticate(username, password, tcpConfig.getAuthzid(), sslSession)
@@ -539,7 +539,7 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
         // Proceed to do the handshake
         sslSocket.handshake()
 
-        xmppTlsContext.daneVerifier?.finish(sslSocket.session)
+        xmppTlsContext.daneVerifier?.finish(sslSocket.handshakeResult?.session ?? None)
 
         let verifierHostname: String
         let xmppServiceDomainDnsName = getConfiguration().getXmppServiceDomainAsDnsNameIfPossible()

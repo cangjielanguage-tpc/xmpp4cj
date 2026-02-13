@@ -6,14 +6,14 @@
  * XMPP流压缩用三角架和扩展元件（XEP-138）。
  * XMPP流压缩提供程序（XEP-138）。
  */
-package xmpp4cj.compress
+package cangjie_tpc::xmpp4cj.compress
 
 internal import stdx.log.*
 internal import std.collection.ArrayList
-internal import xmpp4cj.packet.*
-internal import xmpp4cj.provider.*
-internal import xmpp4cj.xml.*
-internal import xmpp4cj.util.*
+internal import cangjie_tpc::xmpp4cj.packet.*
+internal import cangjie_tpc::xmpp4cj.provider.*
+internal import cangjie_tpc::xmpp4cj.xml.*
+internal import cangjie_tpc::xmpp4cj.util.*
 
 /**
  * 解析服务器报告的压缩功能。

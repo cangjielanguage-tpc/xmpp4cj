@@ -3,9 +3,9 @@
 </div>
 
 <p align="center">
-<img alt="" src="https://img.shields.io/badge/release-v1.0.1-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/release-v1.1.0-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjc-v1.0.0-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjc-v1.1.0-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/cjcov-90.5%25-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/project-open-brightgreen" style="display: inline-block;" />
 </p>
@@ -56,12 +56,12 @@ xmpp4cj是一个开源、高度模块化、易于使用的 XMPP 客户端库
 #### 账号
 ```cj
 import std.sync.*
-import xmpp4cj.connection.*
-import xmpp4cj.feature.*
-import xmpp4cj.filter.*
-import xmpp4cj.jid.*
-import xmpp4cj.packet.*
-import xmpp4cj.tcp.*
+import cangjie_tpc::xmpp4cj.connection.*
+import cangjie_tpc::xmpp4cj.feature.*
+import cangjie_tpc::xmpp4cj.filter.*
+import cangjie_tpc::xmpp4cj.jid.*
+import cangjie_tpc::xmpp4cj.packet.*
+import cangjie_tpc::xmpp4cj.tcp.*
 
 @Test
 func account(): Unit {
@@ -119,12 +119,12 @@ class UnRegister <: Stanza {
 #### 消息
 ```cj
 import std.sync.*
-import xmpp4cj.connection.*
-import xmpp4cj.feature.*
-import xmpp4cj.filter.*
-import xmpp4cj.jid.*
-import xmpp4cj.packet.*
-import xmpp4cj.tcp.*
+import cangjie_tpc::xmpp4cj.connection.*
+import cangjie_tpc::xmpp4cj.feature.*
+import cangjie_tpc::xmpp4cj.filter.*
+import cangjie_tpc::xmpp4cj.jid.*
+import cangjie_tpc::xmpp4cj.packet.*
+import cangjie_tpc::xmpp4cj.tcp.*
 
 func getConn(): XMPPTCPConnection {
     let config = XMPPTCPConnectionConfiguration
@@ -170,12 +170,12 @@ func message(): Unit {
 #### 联系人
 ```cj
 import std.sync.*
-import xmpp4cj.connection.*
-import xmpp4cj.feature.*
-import xmpp4cj.filter.*
-import xmpp4cj.jid.*
-import xmpp4cj.packet.*
-import xmpp4cj.tcp.*
+import cangjie_tpc::xmpp4cj.connection.*
+import cangjie_tpc::xmpp4cj.feature.*
+import cangjie_tpc::xmpp4cj.filter.*
+import cangjie_tpc::xmpp4cj.jid.*
+import cangjie_tpc::xmpp4cj.packet.*
+import cangjie_tpc::xmpp4cj.tcp.*
 
 func getConn(): XMPPTCPConnection {
     // Debugger立即打印报文
@@ -251,12 +251,12 @@ class ElementRemoveFriend <: Stanza {
 #### 监听器
 ```cj
 import std.sync.*
-import xmpp4cj.connection.*
-import xmpp4cj.feature.*
-import xmpp4cj.filter.*
-import xmpp4cj.jid.*
-import xmpp4cj.packet.*
-import xmpp4cj.tcp.*
+import cangjie_tpc::xmpp4cj.connection.*
+import cangjie_tpc::xmpp4cj.feature.*
+import cangjie_tpc::xmpp4cj.filter.*
+import cangjie_tpc::xmpp4cj.jid.*
+import cangjie_tpc::xmpp4cj.packet.*
+import cangjie_tpc::xmpp4cj.tcp.*
 
 /*监听报文*/
 @Test
@@ -285,13 +285,13 @@ func listener(): Unit {
 #### 拦截器
 ```cj
 import std.sync.*
-import xmpp4cj.connection.*
-import xmpp4cj.feature.*
-import xmpp4cj.filter.*
-import xmpp4cj.jid.*
-import xmpp4cj.packet.*
-import xmpp4cj.tcp.*
-import xmpp4cj.util.*
+import cangjie_tpc::xmpp4cj.connection.*
+import cangjie_tpc::xmpp4cj.feature.*
+import cangjie_tpc::xmpp4cj.filter.*
+import cangjie_tpc::xmpp4cj.jid.*
+import cangjie_tpc::xmpp4cj.packet.*
+import cangjie_tpc::xmpp4cj.tcp.*
+import cangjie_tpc::xmpp4cj.util.*
 
 /*拦截器 拦截处理client发出的报文*/
 @Test
@@ -330,7 +330,7 @@ func interceptor(): Unit {
 
 ## 开源协议
 
-本项目基于 [Apache License 2.0](./LICENSE) ，请自由的享受和参与开源。
+本项目基于 [Apache License 2.0](https://gitcode.com/Cangjie-TPC/xmpp4cj/blob/develop/LICENSE) ，请自由的享受和参与开源。
 
 ## 参与贡献
 

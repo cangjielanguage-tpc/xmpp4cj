@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.connection
+package cangjie_tpc::xmpp4cj.connection
 
 /**
  * 接口，允许实现类监听连接关闭和重新连接事件。监听器与 XMPPConnection 对象注册。

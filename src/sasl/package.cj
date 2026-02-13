@@ -6,13 +6,13 @@
  * Stanzas, plain stream- and extension elements for SASL.
  * SASL mechanisms provided by Xmpp Core.
  */
-package xmpp4cj.sasl
+package cangjie_tpc::xmpp4cj.sasl
 
 internal import std.collection.*
 internal import stdx.log.*
-internal import xmpp4cj.feature.*
-internal import xmpp4cj.jid.*
-internal import xmpp4cj.packet.*
-internal import xmpp4cj.provider.*
-internal import xmpp4cj.util.*
-internal import xmpp4cj.xml.*
+internal import cangjie_tpc::xmpp4cj.feature.*
+internal import cangjie_tpc::xmpp4cj.jid.*
+internal import cangjie_tpc::xmpp4cj.packet.*
+internal import cangjie_tpc::xmpp4cj.provider.*
+internal import cangjie_tpc::xmpp4cj.util.*
+internal import cangjie_tpc::xmpp4cj.xml.*

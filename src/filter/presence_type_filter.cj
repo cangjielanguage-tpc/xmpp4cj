@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.filter
+package cangjie_tpc::xmpp4cj.filter
 
 /**
  * 用于过滤 Presence 类型的过滤器。只有当 Stanza 是 Presence Stanza 并且匹配构造函数提供的类型时，返回 true。

@@ -1,9 +1,9 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.xml
+package cangjie_tpc::xmpp4cj.xml
 
-import xmpp4cj.util.MultiMap
+import cangjie_tpc::xmpp4cj.util.MultiMap
 import std.collection.Set
 
 /**

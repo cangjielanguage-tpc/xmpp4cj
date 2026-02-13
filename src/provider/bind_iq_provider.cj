@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.provider
+package cangjie_tpc::xmpp4cj.provider
 
 /**
  * BindIQProvider 类用于解析 Bind IQ 请求和响应的 XML 数据。

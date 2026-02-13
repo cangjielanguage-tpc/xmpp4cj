@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.packet
+package cangjie_tpc::xmpp4cj.packet
 /**
  * 表示一个空的结果 IQ（信息查询）响应，通常用于表示无内容的成功响应。
  * <p>

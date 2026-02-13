@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.proxy
+package cangjie_tpc::xmpp4cj.proxy
 
 /**
  * 存储代理信息的类，例如代理类型、主机、端口、身份验证等。

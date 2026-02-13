@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.packet
+package cangjie_tpc::xmpp4cj.packet
 
 /**
  * {@code ParserUtils} 提供了一些实用工具方法，用于处理和解析 XML 数据，特别是在 XMPP 环境中。

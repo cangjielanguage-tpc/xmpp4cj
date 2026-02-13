@@ -9,7 +9,7 @@
  * Provides stream decompression interfaces such as inflateInit, inflate, inflateEnd,  and setDictionary.
  */
 
-package xmpp4cj.compression
+package cangjie_tpc::xmpp4cj.compression
 
 /* Some constants */
 let ENOUGH_LENS: UInt32 = 852

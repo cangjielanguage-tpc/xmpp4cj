@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.xml
+package cangjie_tpc::xmpp4cj.xml
 
 /**
  * 表示一个限定名称（QName）的类，实现了 toString、Hashable 和 Equatable 接口。

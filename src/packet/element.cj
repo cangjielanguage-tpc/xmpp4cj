@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.packet
+package cangjie_tpc::xmpp4cj.packet
 
 /**
  * 表示 XML 元素的接口。这与 {@link ExtensionElement} 类似，但不携带命名空间，通常作为节扩展的子元素包含在内。

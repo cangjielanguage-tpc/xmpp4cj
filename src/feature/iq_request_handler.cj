@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.feature
+package cangjie_tpc::xmpp4cj.feature
 
 /**
  * IQ 请求处理器负责处理传入的 IQ 请求。可以通过

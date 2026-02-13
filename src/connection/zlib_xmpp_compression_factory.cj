@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.connection
+package cangjie_tpc::xmpp4cj.connection
 
 /**
  * ZlibXMPP 压缩工厂类，用于创建 Zlib 压缩的 XMPP 输入输出过滤器。

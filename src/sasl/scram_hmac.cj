@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.sasl
+package cangjie_tpc::xmpp4cj.sasl
 
 /**
  * ScramHmac 类用于计算 HMAC 值，符合 RFC 5802 中定义的方法。

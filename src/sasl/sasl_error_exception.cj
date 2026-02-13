@@ -1,7 +1,7 @@
 /**
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
-package xmpp4cj.sasl
+package cangjie_tpc::xmpp4cj.sasl
 
 /**
  * 表示 SASL 错误的异常类，继承自 XMPPException。
