@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.modular
 
 /**
@@ -9,7 +6,7 @@ package xmpp4cj.modular
  */
 public class C2sXmppConfiguration <: XmppConfiguration {
     private static let KNOWN_MODULES: Set<ModuleDescriptor> = HashSet()
-    private static let KNOWN_MODULES_LOCK: Monitor = Monitor()
+    private static let KNOWN_MODULES_LOCK: Mutex = Mutex()
 
     public static func addModule(moduleDescriptor: ModuleDescriptor): Bool {
         synchronized(KNOWN_MODULES_LOCK) {

@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.connection
 
 /**
@@ -35,14 +32,14 @@ public class AsyncButOrdered<K> {
      * to take care of removing the keys ourselfs from the map.
      */
     private let pendingRunnables: SimpleHashMap<K, ConcurrentLinkedQueue<Runnable>> = SimpleHashMap()
-    private let pendingRunnablesLock = Monitor()
+    private let pendingRunnablesLock = Mutex()
 
     /**
      * A marker map if there is an active thread for the given key. Holds the responsible handler thread if one is
      * active, otherwise the key is non-existend in the map.
      */
     let threadActiveMap: SimpleHashMap<K, AsyncButOrderedHandler<K>> = SimpleHashMap<K, AsyncButOrderedHandler<K>>()
-    let threadActiveMapLock = Monitor()
+    let threadActiveMapLock = Mutex()
 
     private let executor: ?Executor
 

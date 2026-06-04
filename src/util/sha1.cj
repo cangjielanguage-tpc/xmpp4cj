@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.util
 
 import stdx.crypto.digest.SHA1
@@ -17,7 +14,7 @@ public class SHA1Util {
     /**
      * 锁
      */
-    private static let lock = Monitor()
+    private static let lock = Mutex()
 
     /**
      * 计算给定字节数组的 SHA1 哈希值

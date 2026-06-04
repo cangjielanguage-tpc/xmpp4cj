@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.util
 
 /**
@@ -24,7 +21,7 @@ public interface Delayed {
 public class DelayQueue<T> where T <: Delayed & Comparable<T> & Object {
     let list = LinkedList<T>()
 
-    let lock: Monitor = Monitor()
+    let lock: Mutex = Mutex()
 
     /**
      * 添加一个元素。

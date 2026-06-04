@@ -1,10 +1,8 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.tcp
 
 public class BundleAndDefer {
-    static let isStoppedLock: Monitor = Monitor()
+    static let isStoppedLock: Mutex = Mutex()
+    static let isStoppedLockCondition = condition(isStoppedLock)
 
     private let isStopped: AtomicBool
 
@@ -26,7 +24,7 @@ public class BundleAndDefer {
                 return
             }
             isStopped.store(true)
-            isStoppedLock.notify()
+            isStoppedLockCondition.notify()
         }
     }
 }

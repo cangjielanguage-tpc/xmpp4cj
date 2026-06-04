@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.connection
 
 /**
@@ -17,7 +14,8 @@ package xmpp4cj.connection
  * @see XMPPConnection#createStanzaCollector(StanzaFilter)
  */
 public class StanzaCollector <: Resource & ToString {
-    static let mtx: Monitor = Monitor()
+    static let mtx: Mutex = Mutex()
+    static let mtxCondition: Condition = condition(mtx)
 
     private let packetFilter: ?StanzaFilter
 
@@ -62,7 +60,7 @@ public class StanzaCollector <: Resource & ToString {
             }
             cancelled.store(true)
             connection.removeStanzaCollector(this)
-            mtx.notifyAll()
+            mtxCondition.notifyAll()
             if (let Some(v) <- collectorToReset) {
                 v.cancel()
             }
@@ -141,7 +139,7 @@ public class StanzaCollector <: Resource & ToString {
                 if (cancelled.load()) {
                     return None
                 }
-                mtx.wait()
+                mtxCondition.wait()
             }
             throw IllegalStateException()
         }
@@ -185,7 +183,7 @@ public class StanzaCollector <: Resource & ToString {
                 if (let Some(v) <- res) {
                     return v
                 }
-                mtx.wait(timeout: remainingWait)
+                mtxCondition.wait(timeout: remainingWait)
             }
             remainingWait = timeout - (DateTime.now() - waitStart)
         }
@@ -310,7 +308,7 @@ public class StanzaCollector <: Resource & ToString {
     func notifyConnectionError(exception: Exception): Unit {
         synchronized(mtx) {
             connectionException = exception
-            mtx.notifyAll()
+            mtxCondition.notifyAll()
         }
     }
 
@@ -340,7 +338,7 @@ public class StanzaCollector <: Resource & ToString {
                 assert(rolledOverStanza.isSome())
             }
             resultQueue.add(packet)
-            mtx.notifyAll()
+            mtxCondition.notifyAll()
         }
         if (let Some(v) <- collectorToReset) {
             v.waitStart = DateTime.now()

@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.tcp
 
 public class XmppTcpTransportModule <: C2sConnectionModule {
@@ -32,7 +29,7 @@ public class XmppTcpTransportModule <: C2sConnectionModule {
 
     private let incomingBuffer = ByteBuffer(2 * 4096)
 
-    let channelSelectedCallbackLock = ReentrantMutex()
+    let channelSelectedCallbackLock = Mutex()
 
     var totalBytesRead: Int64 = 0
     var totalBytesWritten: Int64 = 0

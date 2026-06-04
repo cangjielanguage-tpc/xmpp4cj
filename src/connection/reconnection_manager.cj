@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.connection
 
 /**
@@ -27,7 +24,7 @@ public class ReconnectionManager {
     static let LOGGER = getGlobalLogger("ReconnectionManager")
 
     private static let INSTANCES: SimpleHashMap<AbstractXMPPConnection, ReconnectionManager> = SimpleHashMap()
-    private static let staticLock = Monitor()
+    private static let staticLock = Mutex()
     static init() {
         XMPPConnectionRegistry.addConnectionCreationListener(
             ConnectionCreationListener {
@@ -37,7 +34,7 @@ public class ReconnectionManager {
             })
     }
 
-    private let lock = Monitor()
+    private let lock = Mutex()
 
     /**
      * Get a instance of ReconnectionManager for the given connection.

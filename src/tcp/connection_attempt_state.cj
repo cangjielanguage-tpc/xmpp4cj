@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.tcp
 
 public class ConnectionAttemptState {
@@ -21,7 +18,8 @@ public class ConnectionAttemptState {
     var connectionEndpoint: ?Rfc6120TcpRemoteConnectionEndpoint = None
     var inetAddressIterator: ?ListIterator<IPSocketAddress> = None
 
-    private let lock = Monitor()
+    private let lock = Mutex()
+    private let lockCondition = condition(lock)
 
     init(
         connectionInternal: C2sConnectionInternal,
@@ -47,7 +45,7 @@ public class ConnectionAttemptState {
                 if (now >= deadline) {
                     return FailureCausedByTimeout("Timeout waiting to establish connection")
                 }
-                lock.wait(timeout: deadline - now)
+                lockCondition.wait(timeout: deadline - now)
             }
         }
         if (connected) {
@@ -72,7 +70,7 @@ public class ConnectionAttemptState {
             let connectedToHostEvent = ConnectedToHostEvent(establishingTcpConnectionState, address, true)
             connectionInternal.invokeConnectionStateMachineListener(connectedToHostEvent)
             synchronized(lock) {
-                lock.notifyAll()
+                lockCondition.notifyAll()
             }
             return
         }
@@ -96,7 +94,7 @@ public class ConnectionAttemptState {
                 connectionException = EndpointConnectionException.comefrom(discoveredEndpoints.result.lookupFailures,
                     connectionExceptions)
                 synchronized(lock) {
-                    lock.notifyAll()
+                    lockCondition.notifyAll()
                 }
                 return
         }

@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.util
 
 /**
@@ -14,7 +11,7 @@ public open class ObservableWriter <: OutputStream & Resource {
     var wrappedOutput: ?OutputStream = None
 
     let listeners = ArrayList<WriterListener>()
-    let listenersLock = Monitor()
+    let listenersLock = Mutex()
 
     private let stringBuilder = StringBuilder(MAX_STRING_BUILDER_SIZE)
 

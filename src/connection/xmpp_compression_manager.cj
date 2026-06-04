@@ -1,11 +1,8 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.connection
 
 public open class XmppCompressionManager {
     private static let xmppCompressionFactories = ArrayList<XmppCompressionFactory>(4)
-    private static let xmppCompressionFactoriesLock = Monitor()
+    private static let xmppCompressionFactoriesLock = Mutex()
 
     public static func registerXmppCompressionFactory(xmppCompressionFactory: XmppCompressionFactory): ?XmppCompressionFactory {
         let method = xmppCompressionFactory.getCompressionMethod()
@@ -20,7 +17,7 @@ public open class XmppCompressionManager {
                 }
             }
             xmppCompressionFactories.add(xmppCompressionFactory)
-            xmppCompressionFactories.sort()
+            sort(xmppCompressionFactories)
         }
         return previousFactory
     }

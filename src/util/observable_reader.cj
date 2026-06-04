@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.util
 
 /**
@@ -12,7 +9,7 @@ public open class ObservableReader <: InputStream & Resource {
     var wrappedInput: ?InputStream = None
 
     let listeners = ArrayList<ReaderListener>()
-    let listenersLock = Monitor()
+    let listenersLock = Mutex()
 
     public init(wrappedReader: ObservableReader) {
         this.wrappedReader = wrappedReader

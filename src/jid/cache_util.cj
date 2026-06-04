@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.jid
 
 /**
@@ -181,7 +178,7 @@ class ExpireElement<V> {
  * @param <V> 此缓存缓存的值的类型。
  */
 public class LruCache<K, V> <: Cache<K, V> where K <: Hashable & Equatable<K> {
-    private let lock: ReentrantMutex = ReentrantMutex()
+    private let lock: Mutex = Mutex()
 
     /**
      * 所用数据结构的默认初始值。

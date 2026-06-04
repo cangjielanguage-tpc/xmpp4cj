@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.feature
 
 // TODO
@@ -47,7 +44,11 @@ public class XmppTlsContext {
         connectTimeout!: ?Duration = None,
         session!: ?TlsSession = None
     ): TlsSocket {
-        let tls = TlsSocket.client(tcpSocket, clientConfig: tlsCfg, session: session)
+        var clientSession: ?TlsClientSession = None
+        if (let Some(v: TlsClientSession) <- session) {
+            v
+        }
+        let tls = TlsSocket.client(tcpSocket, clientConfig: tlsCfg, session: clientSession)
         tls
     }
 

@@ -1,7 +1,4 @@
 /**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
-/**
  * Xmpp模块化设计 使用有限状态机描述模块的依赖关系
  * 合并了c2s/fsm
  * Xmpp's (new) API for client-to-server (c2s) connections.
@@ -11,7 +8,7 @@
 package xmpp4cj.modular
 
 internal import stdx.log.*
-internal import stdx.net.tls.{TlsSession}
+internal import stdx.net.tls.common.{TlsSession}
 internal import std.collection.*
 internal import std.convert.*
 internal import std.sync.*

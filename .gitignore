@@ -51,6 +51,4 @@ doc/api/html
 doc/Doxyfile
 test/*
 .devbrain
-
-
-
+log.txt

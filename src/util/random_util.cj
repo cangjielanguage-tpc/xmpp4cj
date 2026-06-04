@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.util
 
 import stdx.crypto.crypto.SecureRandom
@@ -55,7 +52,7 @@ public interface Randomable {
 }
 
 class SecureRandomWrapper <: Randomable {
-    let lock = ReentrantMutex()
+    let lock = Mutex()
 
     let random = SecureRandom()
 
@@ -83,7 +80,7 @@ class SecureRandomWrapper <: Randomable {
 }
 
 class RandomWrapper <: Randomable {
-    let lock = ReentrantMutex()
+    let lock = Mutex()
 
     let random = Random()
 
