@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.modular
 
 public class C2sConnection <: AbstractXMPPConnection {
@@ -394,7 +391,7 @@ public class C2sConnection <: AbstractXMPPConnection {
         return Stats(transportsStats, filterStats)
     }
 
-    let lock = Monitor()
+    let lock = Mutex()
 
     public override func getClass(): ClassId {
         "C2sConnection"

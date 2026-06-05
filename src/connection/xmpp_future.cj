@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.connection
 
 /**
@@ -22,7 +19,8 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
     /**
      * 锁
      */
-    protected let lock: Monitor = Monitor()
+    protected let lock: Mutex = Mutex()
+    protected let lockCondition: Condition = condition(lock)
 
     /** 
      * 标记当前任务是否被取消
@@ -72,7 +70,7 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
             }
             cancelled = true
             if (mayInterruptIfRunning) {
-                lock.notifyAll()
+                lockCondition.notifyAll()
             }
             return true
         }
@@ -270,9 +268,9 @@ public abstract class XmppFuture<V, E> <: CallbackRecipient<V, E> where E <: Exc
     protected open func futureWait(timeout: ?Duration): Unit {
         let dur = timeout ?? Duration.Zero
         if (dur > Duration.Zero) {
-            lock.wait(timeout: dur)
+            lockCondition.wait(timeout: dur)
         } else {
-            lock.wait()
+            lockCondition.wait()
         }
     }
 
@@ -330,7 +328,7 @@ public open class InternalXmppFuture<V, E> <: XmppFuture<V, E> where E <: Except
     public func setResult(result: V): Unit {
         synchronized(lock) {
             this.result = result
-            lock.notifyAll()
+            lockCondition.notifyAll()
             maybeInvokeCallbacks()
         }
     }
@@ -346,7 +344,7 @@ public open class InternalXmppFuture<V, E> <: XmppFuture<V, E> where E <: Except
     public func setException(exception: E): Unit {
         synchronized(lock) {
             this.exception = exception
-            lock.notifyAll()
+            lockCondition.notifyAll()
             maybeInvokeCallbacks()
         }
     }
@@ -372,7 +370,7 @@ public class SocketFuture <: InternalXmppFuture<TcpSocket, Exception> {
     /** 
      * 锁
      */
-    private let wasInterruptedLock = Monitor()
+    private let wasInterruptedLock = Mutex()
 
     /** 
      * 标记是否被中断
@@ -493,7 +491,7 @@ public abstract class InternalProcessStanzaXmppFuture<V, E> <: InternalXmppFutur
         synchronized(lock) {
             if (!isNonFatalException(exception)) {
                 this.exception = exception
-                lock.notifyAll()
+                lockCondition.notifyAll()
                 maybeInvokeCallbacks()
             }
         }

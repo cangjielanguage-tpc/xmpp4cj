@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.util
 
 /**
@@ -23,7 +20,7 @@ public class MultiMap<K, V> where K <: Hashable & Equatable<K> {
     /**
      * 锁。
      */
-    public let lock: Monitor = Monitor()
+    public let lock: Mutex = Mutex()
 
     /**
      * 构造一个初始容量为{@link#DEFAULT_MAP_SIZE}的新MultiMap。

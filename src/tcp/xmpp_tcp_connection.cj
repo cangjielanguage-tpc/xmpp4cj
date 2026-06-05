@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.tcp
 
 /**
@@ -21,6 +18,7 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
     private var disconnectedButResumeable = false
 
     private var secureSocket: ?TlsSocket = None
+    private var tlsSession: ?TlsSession = None
 
     /**
      * Protected access level because of unit test purposes
@@ -260,7 +258,7 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
     protected override func loginInternal(username: ?String, password: ?String, resource: ?Resourcepart): Unit {
         synchronized(lock) {
             // Authenticate using SASL
-            let sslSession: ?TlsSession = (secureSocket?.session).flatten()
+            let sslSession: ?TlsSession = this.tlsSession
 
             streamFeaturesAfterAuthenticationReceived = false
             authenticate(username, password, tcpConfig.getAuthzid(), sslSession)
@@ -537,9 +535,10 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
         initReaderAndWriter()
 
         // Proceed to do the handshake
-        sslSocket.handshake()
+        let handshakeResult = sslSocket.handshake()
+        this.tlsSession = handshakeResult.session
 
-        xmppTlsContext.daneVerifier?.finish(sslSocket.session)
+        xmppTlsContext.daneVerifier?.finish(handshakeResult.session)
 
         let verifierHostname: String
         let xmppServiceDomainDnsName = getConfiguration().getXmppServiceDomainAsDnsNameIfPossible()
@@ -1079,7 +1078,7 @@ public class XMPPTCPConnection <: AbstractXMPPConnection {
         this.bundleAndDeferCallback = bundleAndDeferCallback
     }
 
-    private let lock = Monitor()
+    private let lock = Mutex()
 
     public override func getClass(): ClassId {
         "XMPPTCPConnection"
@@ -1444,7 +1443,8 @@ public class XMPPTCPConnectionPacketWriter {
                     // nextStreamElement() will set it to true once the queue is empty again.
                     shouldBundleAndDefer = false
                     let bundlingAndDeferringStopped = AtomicBool(false)
-                    let bundlingAndDeferringStoppedLock = Monitor()
+                    let bundlingAndDeferringStoppedLock = Mutex()
+                    let bundlingAndDeferringStoppedLockCondition = condition(bundlingAndDeferringStoppedLock)
                     let bundleAndDeferMillis = localBundleAndDeferCallback().getBundleAndDeferMillis(
                         BundleAndDefer(bundlingAndDeferringStopped))
                     if (bundleAndDeferMillis > Duration.Zero) {
@@ -1452,7 +1452,7 @@ public class XMPPTCPConnectionPacketWriter {
                         let waitStart = DateTime.now()
                         synchronized(bundlingAndDeferringStoppedLock) {
                             while (!bundlingAndDeferringStopped.load() && remainingWait > Duration.Zero) {
-                                bundlingAndDeferringStoppedLock.wait(timeout: remainingWait)
+                                bundlingAndDeferringStoppedLockCondition.wait(timeout: remainingWait)
                                 remainingWait = bundleAndDeferMillis - (DateTime.now() - waitStart)
                             }
                         }

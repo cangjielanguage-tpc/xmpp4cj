@@ -1,13 +1,11 @@
 /**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
-/**
  * TCP-IP related classes for Xmpp.
  */
 package xmpp4cj.tcp
 
 internal import stdx.log.*
 internal import stdx.net.tls.*
+internal import stdx.net.tls.common.*
 internal import std.collection.*
 internal import std.collection.concurrent.*
 internal import std.io.*

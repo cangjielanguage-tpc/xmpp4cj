@@ -1,13 +1,11 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.connection
 
 /**
  * {@link SelectableChannel}对象的多路复用器。
  */
 public class Selector {
-    private let lock = Monitor()
+    private let lock = Mutex()
+    private let lockCondition = condition(lock)
     /**
      * 打开选择器。
      *
@@ -38,7 +36,7 @@ public class Selector {
                 } else {
                     Duration.Max
                 }
-                lock.wait(timeout: timeout0)
+                lockCondition.wait(timeout: timeout0)
             }
             for (key in this.keys) {
                 if (key.checkOps()) {
@@ -65,7 +63,7 @@ public class Selector {
         let key = SelectionKey(this, channel, ops, attachment)
         synchronized(lock) {
             keys.add(key)
-            lock.notify()
+            lockCondition.notify()
         }
         key
     }
@@ -139,7 +137,8 @@ public class SocketChannel <: SelectableChannel {
         }
     }
 
-    private let lock = Monitor()
+    private let lock = Mutex()
+    private let lockCondition = condition(lock)
     /* readBuffer相关资源受lock管辖 */
     private let readBuffer = Array<Byte>(512, repeat: 0)
     private var readBufferLen = 0
@@ -158,7 +157,7 @@ public class SocketChannel <: SelectableChannel {
                 try {
                     synchronized(lock) {
                         if (readBufferLen > 0) {
-                            lock.wait(timeout: Duration.second)
+                            lockCondition.wait(timeout: Duration.second)
                             continue
                         }
                         socket.readTimeout = Duration.millisecond

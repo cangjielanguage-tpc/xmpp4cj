@@ -1,12 +1,9 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.stream
 
 public class AfterXStanzas <: StanzaFilter {
     let count: Int
     var currentCount: Int
-    private let GeneratedLockObject = Monitor()
+    private let GeneratedLockObject = Mutex()
 
     public init(count: Int) {
         this.count = count

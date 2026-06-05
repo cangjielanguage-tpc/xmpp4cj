@@ -1,10 +1,6 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.connection
 
 import stdx.crypto.crypto.SecureRandom
-import stdx.crypto.digest.CryptoException
 
 /**
  * public abstract class ScramMechanism <: SASLMechanism
@@ -306,7 +302,7 @@ public abstract class ScramMechanism <: SASLMechanism {
     private func hmac(key: Array<UInt8>, str: Array<UInt8>): Array<UInt8> {
         try {
             return scramHmac.hmac(key, str)
-        } catch (e: CryptoException) {
+        } catch (e: Exception) {
             throw XmppSaslException("${getName()} Exception", e)
         }
     }

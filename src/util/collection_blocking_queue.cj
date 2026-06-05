@@ -1,13 +1,10 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.util
 
 /** 
  * 提供可迭代的BlockingQueue。
  */
 public class CollectionBlockingQueue<E> <: Collection<E> {
-    private let lock: Monitor = Monitor() // 所有方法都应该是synchronized
+    private let lock: Mutex = Mutex() // 所有方法都应该是synchronized
 
     private var queue: ArrayBlockingQueue<E>
 

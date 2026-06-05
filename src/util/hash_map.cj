@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.util
 
 /**
@@ -15,7 +12,7 @@ package xmpp4cj.util
  * - 由于不限定K, 所以无法继承Map
  */
 public class SimpleHashMap<K, V> <: Collection<(K, V)> {
-    public let lock: Monitor = Monitor()
+    public let lock: Mutex = Mutex()
 
     private let inner = HashMap<HashMapKey<K>, V>()
 

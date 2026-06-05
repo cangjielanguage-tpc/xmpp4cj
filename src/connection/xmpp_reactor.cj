@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.connection
 
 /**
@@ -21,7 +18,7 @@ public class XmppReactor {
 
     private static var INSTANCE: ?XmppReactor = None
 
-    private static var INSTANCE_LOCK = Monitor()
+    private static var INSTANCE_LOCK = Mutex()
 
     static func getInstance(): XmppReactor {
         synchronized(INSTANCE_LOCK) {
@@ -39,7 +36,7 @@ public class XmppReactor {
      */
     let selector: Selector
 
-    let selectorLock = Monitor()
+    let selectorLock = Mutex()
 
     /**
      * 反应器的名称
@@ -51,7 +48,7 @@ public class XmppReactor {
      */
     let reactorThreads = ConcurrentLinkedList<ReactorThread>()
 
-    let reactorThreadsLock = Monitor()
+    let reactorThreadsLock = Mutex()
 
     /** 
      * 延迟队列，用于调度的动作
@@ -61,7 +58,7 @@ public class XmppReactor {
     /** 
      * 注册锁，用于保护注册操作
      */
-    let registrationLock = Monitor()
+    let registrationLock = Mutex()
 
     /**
      * 保护动作处理的信号量。注意，它初始化为 -1，这意味着 * 一直会有一个线程使用 select()进行 I/O 操作。

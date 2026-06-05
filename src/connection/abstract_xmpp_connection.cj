@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.connection
 
 /**
@@ -62,7 +59,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         // Xmpp4cj.ensureInitialized()
     }
 
-    private let lock = Monitor()
+    private let lock = Mutex()
 
     /**
      * ConnectionListeners的集合，用于监听连接关闭和重新连接事件。
@@ -81,38 +78,38 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
 
     private let recvListeners: Map<StanzaListener, AbstractXMPPConnectionListenerWrapper> = LinkedHashMap()
 
-    private let recvListenersLock = Monitor()
+    private let recvListenersLock = Mutex()
 
     /**
      * 收到新节时将同步通知的PacketListeners列表。
      */
     let syncRecvListeners: Map<StanzaListener, AbstractXMPPConnectionListenerWrapper> = LinkedHashMap()
 
-    private let syncRecvListenersLock = Monitor()
+    private let syncRecvListenersLock = Mutex()
 
     /**
      * 收到新节时将异步通知的PacketListeners列表。
      */
     private let asyncRecvListeners: Map<StanzaListener, AbstractXMPPConnectionListenerWrapper> = LinkedHashMap()
 
-    private let asyncRecvListenersLock = Monitor()
+    private let asyncRecvListenersLock = Mutex()
 
     /**
      * 发送新节时将收到通知的PacketListeners列表。
      */
     private let sendListeners: Map<StanzaListener, AbstractXMPPConnectionListenerWrapper> = HashMap()
 
-    private let sendListenersLock = Monitor()
+    private let sendListenersLock = Mutex()
 
     private let messageInterceptors: Map<HashableConsumer<MessageBuilder>, GenericInterceptorWrapper<MessageBuilder,
         Message>> = HashMap()
 
-    private let messageInterceptorsLock = Monitor()
+    private let messageInterceptorsLock = Mutex()
 
     private let presenceInterceptors: Map<HashableConsumer<PresenceBuilder>, GenericInterceptorWrapper<PresenceBuilder,
         Presence>> = HashMap()
 
-    private let presenceInterceptorsLock = Monitor()
+    private let presenceInterceptorsLock = Mutex()
 
     private var incomingStreamXmlEnvironment: ?XmlEnvironment = None
 
@@ -120,7 +117,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
 
     let nonzaCallbacksMap = MultiMap<QName, NonzaCallback>()
 
-    protected let connectionLock = Monitor()
+    protected let connectionLock = Mutex()
 
     protected let streamFeatures: Map<QName, FullyQualifiedElement> = HashMap()
 
@@ -558,23 +555,24 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
      * 我们为{@link#notifyWaitingThreads（）}和{@link#waitFor（Supplier）}使用了一个额外的对象，因为连接的所有状态更改方法都是使用连接实例作为监视器同步的。
      * 如果我们现在也使用内部进程的连接实例来等待条件，那么{@link Object#wait（）}将在等待时离开监视器，这将允许对状态更改函数的另一个潜在调用继续进行。
      */
-    private let internalMonitor = Monitor()
+    private let internalMutex = Mutex()
+    private let internalMutexCondition = condition(internalMutex)
 
     protected func notifyWaitingThreads(): Unit {
-        synchronized(internalMonitor) {
-            internalMonitor.notifyAll()
+        synchronized(internalMutex) {
+            internalMutexCondition.notifyAll()
         }
     }
 
     protected func waitFor(condition: Supplier<Bool>): Bool {
         let deadline = DateTime.now() + getReplyTimeout()
-        synchronized(internalMonitor) {
+        synchronized(internalMutex) {
             while (!condition()) {
                 let now = DateTime.now()
                 if (now >= deadline) {
                     return false
                 }
-                internalMonitor.wait(timeout: deadline - now)
+                internalMutexCondition.wait(timeout: deadline - now)
             }
         }
         return true
@@ -659,7 +657,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
 
     private var xmppServiceDomain: ?DomainBareJid = None
 
-    protected func getConnectionLock(): Monitor {
+    protected func getConnectionLock(): Mutex {
         return connectionLock
     }
 
@@ -788,7 +786,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
         }
     }
 
-    private let notifyConnectionErrorMonitor = Monitor()
+    private let notifyConnectionErrorMutex = Mutex()
 
     /**
      * 发送连接出错的通知并关闭连接。
@@ -796,7 +794,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
      * @param exception 导致连接关闭事件的异常。
      */
     protected func notifyConnectionError(exception: Exception): Unit {
-        synchronized(notifyConnectionErrorMonitor) {
+        synchronized(notifyConnectionErrorMutex) {
             if (!isConnected()) {
                 LOGGER.info("Connection was already disconnected when attempting to handle ${exception}",
                     ("exception", exception))
@@ -988,7 +986,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
 
     private static func addInterceptor<MPB, MP>(
         interceptors: Map<HashableConsumer<MPB>, GenericInterceptorWrapper<MPB, MP>>,
-        interceptorsLock: Monitor,
+        interceptorsLock: Mutex,
         interceptor: HashableConsumer<MPB>,
         filter: ?Predicate<MP>
     ): Unit where MPB <: MessageOrPresenceBuilder, MP <: MessageOrPresence {
@@ -1001,7 +999,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
 
     private static func removeInterceptor<MPB, MP>(
         interceptors: Map<HashableConsumer<MPB>, GenericInterceptorWrapper<MPB, MP>>,
-        interceptorsLock: Monitor,
+        interceptorsLock: Mutex,
         interceptor: HashableConsumer<MPB>
     ): Unit where MPB <: MessageOrPresenceBuilder, MP <: MessageOrPresence {
         synchronized(interceptorsLock) {
@@ -1034,7 +1032,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     private static func fireMessageOrPresenceInterceptors<MPB, MP>(
         messageOrPresence: MP,
         interceptors: Map<HashableConsumer<MPB>, GenericInterceptorWrapper<MPB, MP>>,
-        interceptorsLock: Monitor
+        interceptorsLock: Mutex
     ): MP where MPB <: MessageOrPresenceBuilder, MP <: MessageOrPresence {
         var tempmessageOrPresence = messageOrPresence
         let interceptorsToInvoke = LinkedList<Consumer<MPB>>()
@@ -1350,7 +1348,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
     }
 
     private static func extractMatchingListeners(stanza: Stanza,
-        listeners: Map<StanzaListener, AbstractXMPPConnectionListenerWrapper>, listenersLock: Monitor,
+        listeners: Map<StanzaListener, AbstractXMPPConnectionListenerWrapper>, listenersLock: Mutex,
         listenersToNotify: LinkedList<StanzaListener>): Unit {
         synchronized(listenersLock) {
             for ((_, listenerWrapper) in listeners) {
@@ -1679,7 +1677,7 @@ public abstract class AbstractXMPPConnection <: XMPPConnection & ClassIdentify {
      */
     private let deferredAsyncRunnables: LinkedList<() -> Unit> = LinkedList()
 
-    private let deferredAsyncRunnablesLock = Monitor()
+    private let deferredAsyncRunnablesLock = Mutex()
 
     private var deferredAsyncRunnablesCount: Int = 0
 
@@ -1896,7 +1894,7 @@ class GenericInterceptorWrapper<MPB, MP> where MPB <: MessageOrPresenceBuilder, 
 }
 
 public class HashableConsumer<T> <: Hashable & Equatable<HashableConsumer<T>> {
-    let lock = Monitor()
+    let lock = Mutex()
 
     public HashableConsumer(let _accept: (T) -> Unit) {}
 

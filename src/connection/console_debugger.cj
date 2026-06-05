@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.connection
 
 /**
@@ -16,7 +13,7 @@ package xmpp4cj.connection
 public class ConsoleDebugger <: AbstractDebugger {
     private let dateFormatter = "HH:mm:ss"
 
-    private let dateFormatterLock = Monitor()
+    private let dateFormatterLock = Mutex()
 
     /**
      * 创建一个新的 ConsoleDebugger 实例。

@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.connection
 
 public open class NonzaCallback {
@@ -62,7 +59,8 @@ public open class NonzaCallback {
 class NonzaCallbackNonzaResponseCallback<SN, FN> <: NonzaCallback where SN <: Nonza, FN <: Nonza {
     var successNonza: ?SN = None
     var failedNonza: ?FN = None
-    let lock = Monitor()
+    let lock = Mutex()
+    let lockCondition = condition(lock)
 
     init(successNonzaClass: ClassId, failedNonzaClass: ClassId, builder: NonzaCallbackBuilder) {
         super(builder)
@@ -92,7 +90,7 @@ class NonzaCallbackNonzaResponseCallback<SN, FN> <: NonzaCallback where SN <: No
 
     public func notifyResponse(): Unit {
         synchronized(lock) {
-            lock.notifyAll()
+            lockCondition.notifyAll()
         }
     }
 
@@ -108,7 +106,7 @@ class NonzaCallbackNonzaResponseCallback<SN, FN> <: NonzaCallback where SN <: No
                 if (now >= deadline) {
                     break
                 }
-                lock.wait(timeout: deadline - now)
+                lockCondition.wait(timeout: deadline - now)
             }
         }
         if (!hasReceivedSuccessOrFailedNonza()) {

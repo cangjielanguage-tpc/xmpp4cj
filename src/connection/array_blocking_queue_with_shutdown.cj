@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.connection
 
 /**
@@ -20,11 +17,11 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
 
     var count: Int64 = 0
 
-    let lock: MultiConditionMonitor
+    let lock: Mutex
 
-    private let notEmpty: ConditionID
+    private let notEmpty: Condition
 
-    private let notFull: ConditionID
+    private let notFull: Condition
 
     private var _isShutdown = false
 
@@ -46,7 +43,9 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
         putIndex = inc(putIndex)
         count++
         if (signalNotEmpty) {
-            lock.notify(notEmpty)
+            synchronized(lock) {
+                notEmpty.notify()
+            }
         }
     }
 
@@ -55,7 +54,7 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
         items[takeIndex] = None
         takeIndex = inc(takeIndex)
         count--
-        lock.notify(notFull)
+        notFull.notify()
         return e
     }
 
@@ -78,7 +77,7 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
             }
         }
         count--
-        lock.notify(notFull)
+        notFull.notify()
     }
 
     private func checkNotShutdown(): Unit {
@@ -112,10 +111,10 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
             throw IllegalArgumentException()
         }
         items = Array<?E>(capacity, repeat: None)
-        lock = MultiConditionMonitor()
+        lock = Mutex()
         synchronized(lock) {
-            notEmpty = lock.newCondition()
-            notFull = lock.newCondition()
+            notEmpty = lock.condition()
+            notFull = lock.condition()
         }
     }
 
@@ -127,8 +126,8 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
         lock.lock()
         try {
             _isShutdown = true
-            lock.notifyAll(notEmpty)
-            lock.notifyAll(notFull)
+            notEmpty.notifyAll()
+            notFull.notifyAll()
         } finally {
             lock.unlock()
         }
@@ -221,7 +220,7 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
     private func putInternal(e: E, signalNotEmpty: Bool): Unit {
         // assert(lock.isHeldByCurrentThread()) // do not support
         while (isFull()) {
-            lock.wait(notFull)
+            notFull.wait()
             checkNotShutdown()
         }
         insert(e, signalNotEmpty)
@@ -277,7 +276,7 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
                 putInternal(element, false)
             }
         } finally {
-            lock.notifyAll(notEmpty)
+            notEmpty.notifyAll()
             lock.unlock()
         }
     }
@@ -315,12 +314,12 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
                 }
                 try {
                     let dt0 = DateTime.now()
-                    lock.wait(notFull, timeout: nanos)
+                    notFull.wait(timeout: nanos)
                     let dur = DateTime.now() - dt0
                     nanos -= dur
                     checkNotShutdown()
                 } catch (ie: Exception) {
-                    lock.notify(notFull)
+                    notFull.notify()
                     throw ie
                 }
             }
@@ -336,11 +335,11 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
             checkNotShutdown()
             try {
                 while (hasNoElements()) {
-                    lock.wait(notEmpty)
+                    notEmpty.wait()
                     checkNotShutdown()
                 }
             } catch (ie: Exception) {
-                lock.notify(notEmpty)
+                notEmpty.notify()
                 throw ie
             }
             let e = extract()
@@ -387,12 +386,12 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
                 }
                 try {
                     let dt0 = DateTime.now()
-                    lock.wait(notEmpty, timeout: nanos)
+                    notEmpty.wait(timeout: nanos)
                     let dur = DateTime.now() - dt0
                     nanos -= dur
                     checkNotShutdown()
                 } catch (ie: Exception) {
-                    lock.notify(notEmpty)
+                    notEmpty.notify()
                     throw ie
                 }
             }
@@ -426,7 +425,7 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
                 count = 0
                 putIndex = 0
                 takeIndex = 0
-                lock.notifyAll(notFull)
+                notFull.notifyAll()
             }
             return n
         } finally {
@@ -456,7 +455,7 @@ public class ArrayBlockingQueueWithShutdown<E> <: Collection<E> {
             if (n > 0) {
                 count -= n
                 takeIndex = i
-                lock.notifyAll(notFull)
+                notFull.notifyAll()
             }
             return n
         } finally {
@@ -648,7 +647,7 @@ class ArrayBlockingQueueWithShutdownIterator<E> <: Iterator<E> {
     }
 }
 
-extend MultiConditionMonitor {
+extend Mutex {
     /* 
      * 优先响应线程中断状态
      * 暂时不考虑自旋

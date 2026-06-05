@@ -1,6 +1,3 @@
-/**
- * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
- */
 package xmpp4cj.connection
 
 /**
@@ -19,11 +16,11 @@ public class SASLAuthentication {
 
     private static let REGISTERED_MECHANISMS = ArrayList<SASLMechanism>() // 已注册的 SASL 机制列表
 
-    private static let REGISTERED_MECHANISMS_LOCK = Monitor() // 锁
+    private static let REGISTERED_MECHANISMS_LOCK = Mutex() // 锁
 
     private static let BLACKLISTED_MECHANISMS: HashSet<String> = HashSet<String>() // 黑名单 SASL 机制集合
 
-    private static let BLACKLISTED_MECHANISMS_LOCK = Monitor() // 锁
+    private static let BLACKLISTED_MECHANISMS_LOCK = Mutex() // 锁
 
     static init() {
         // 暂时将 SCRAM-SHA-1-PLUS 机制列入黑名单
@@ -38,7 +35,7 @@ public class SASLAuthentication {
     public static func registerSASLMechanism(mechanism: SASLMechanism): Unit {
         synchronized(REGISTERED_MECHANISMS_LOCK) {
             REGISTERED_MECHANISMS.add(mechanism)
-            REGISTERED_MECHANISMS.sort()
+            sort(REGISTERED_MECHANISMS)
         }
     }
 
@@ -127,7 +124,8 @@ public class SASLAuthentication {
         return BLACKLISTED_MECHANISMS // TODO Collections.unmodifiableSet(BLACKLISTED_MECHANISMS)
     }
 
-    private let lock = Monitor() //锁
+    private let lock = Mutex() //锁
+    private let lockCondition = condition(lock)
 
     private let connection: AbstractXMPPConnection //当前连接的 XMPP 连接
 
@@ -185,7 +183,7 @@ public class SASLAuthentication {
                     break
                 }
                 // Wait until SASL negotiation finishes
-                lock.wait(timeout: deadline - now)
+                lockCondition.wait(timeout: deadline - now)
             }
         }
         mechanism.throwExceptionIfRequired()
@@ -236,7 +234,7 @@ public class SASLAuthentication {
         // Wake up the thread that is waiting in the #authenticate method
         synchronized(lock) {
             currentMechanism?.afterFinalSaslChallenge()
-            lock.notify()
+            lockCondition.notify()
         }
     }
 
@@ -262,7 +260,7 @@ public class SASLAuthentication {
     func authenticationFailed(exception: Exception): Unit {
         synchronized(lock) {
             currentMechanism?.setException(exception)
-            lock.notify()
+            lockCondition.notify()
         }
     }
 
