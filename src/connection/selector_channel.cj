@@ -19,7 +19,9 @@ public class Selector {
      * 通知其他阻塞的select操作立即返回
      */
     public func wakeup(): Unit {
-        // 忽略
+        synchronized(lock) {
+            lockCondition.notifyAll()
+        }
     }
 
     /**
@@ -39,11 +41,30 @@ public class Selector {
                 lockCondition.wait(timeout: timeout0)
             }
             for (key in this.keys) {
+                if (!key.isValid()) {
+                    // 与 java.nio 一致：已取消/失效的键不再参与选择。
+                    continue
+                }
                 if (key.checkOps()) {
                     publicKeys.add(key)
                 }
             }
             publicKeys.size
+        }
+    }
+
+    /**
+     * 反注册选择键，将其从选择器的键集中移除。
+     * 等价于 java.nio 中被取消的键在下次 select 前从键集移除的行为。
+     *
+     * @param key 要移除的选择键
+     */
+    protected func deregister(key: SelectionKey): Unit {
+        synchronized(lock) {
+            keys.remove(key)
+            publicKeys.remove(key)
+            // 唤醒可能阻塞在 select 上的线程，使其重新计算键集。
+            lockCondition.notifyAll()
         }
     }
 
@@ -126,6 +147,10 @@ public class SocketChannel <: SelectableChannel {
     }
     public func write(buf: Array<ByteBuffer>): Int {
         synchronized(lock) {
+            if (state != ST_CONNECTED) {
+                // 与 java.nio 一致：对已关闭的通道执行写操作抛出 ClosedChannelException。
+                throw ClosedChannelException()
+            }
             var len = 0
             for (v in buf) {
                 let arr = v.bytes()
@@ -182,6 +207,10 @@ public class SocketChannel <: SelectableChannel {
     } */
     public func read(buf: ByteBuffer): Int64 {
         synchronized(lock) {
+            if (state != ST_CONNECTED) {
+                // 与 java.nio 一致：对已关闭的通道执行读操作抛出 ClosedChannelException。
+                throw ClosedChannelException()
+            }
             var readlen = 0
             let socket = tcpSocket.getOrThrow()
             socket.readTimeout = Duration.millisecond
@@ -199,7 +228,23 @@ public class SocketChannel <: SelectableChannel {
         }
     }
     public func close(): Unit {
+        var needClose = false
+        synchronized(lock) {
+            if (state != ST_KILLED) {
+                state = ST_KILLED
+                needClose = true
+            }
+        }
+        if (!needClose) {
+            // 幂等：重复关闭直接返回
+            return
+        }
         tcpSocket?.close()
+        // 与 java.nio 一致：关闭通道会取消其注册的全部选择键。
+        for (key in keys.toArray()) {
+            key.cancel()
+        }
+        keys.clear()
     }
     public func socket(): TcpSocket {
         tcpSocket.getOrThrow()
@@ -212,9 +257,15 @@ public class SocketChannel <: SelectableChannel {
      */
     public override func checkOps(interestOps: Int): Int {
         if (state != ST_CONNECTED) {
+            return -1
+        }
+        // 与 java.nio 一致：仅在兴趣集范围内返回就绪操作位，兴趣集为空表示不关心任何事件。
+        let readyOps = SelectionKey.OP_CONNECT | SelectionKey.OP_WRITE | SelectionKey.OP_READ
+        let ops = interestOps & readyOps
+        if (ops == 0) {
             -1
         } else {
-            SelectionKey.OP_CONNECT | SelectionKey.OP_WRITE | SelectionKey.OP_READ
+            ops
         }
     }
 }
@@ -246,6 +297,18 @@ public class SelectionKey <: ToString & Equatable<SelectionKey> & Hashable {
     let hash = RandomUtil.nextSecureRandomInt()
     public override func hashCode(): Int {
         hash
+    }
+
+    /**
+     * 该选择键是否仍然有效。等价于 java.nio 的 {@code SelectionKey.isValid()}。
+     */
+    private var valid = true
+
+    /**
+     * @return 若键仍然有效则返回true
+     */
+    public func isValid(): Bool {
+        valid
     }
     /**
      * 检查兴趣集是否就绪
@@ -293,10 +356,16 @@ public class SelectionKey <: ToString & Equatable<SelectionKey> & Hashable {
     }
 
     /**
-     * 中断
+     * 取消此键。等价于 java.nio 的 {@code SelectionKey.cancel()}：
+     * 将键置为无效并从选择器的键集中反注册，但<b>不会</b>关闭通道
+     * （通道的关闭由调用方显式执行）。
      */
     public func cancel(): Unit {
-        _channel.close()
+        if (!valid) {
+            return
+        }
+        valid = false
+        _selector.deregister(this)
     }
 }
 
