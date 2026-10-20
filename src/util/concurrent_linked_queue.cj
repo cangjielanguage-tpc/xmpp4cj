@@ -97,12 +97,21 @@ public class ConcurrentLinkedList<T> <: Collection<T> {
     /**
      * 返回列表迭代器。
      *
+     * 返回基于快照的弱一致迭代器：迭代期间其它线程的增删不会被本次迭代观察到，
+     * 也不会因此抛出 ConcurrentModificationException（对齐 java.util.concurrent 的弱一致语义）。
+     * 注意：不能直接返回底层 {@code list.iterator()}，它是 fail-fast 迭代器，
+     * 在遍历过程中若列表被其它线程修改会抛 ConcurrentModificationException。
+     *
      * @return 迭代器。
      */
     public override func iterator(): Iterator<T> {
+        let snapshot = ArrayList<T>()
         synchronized(lock) {
-            list.iterator()
+            for (e in list) {
+                snapshot.add(e)
+            }
         }
+        snapshot.iterator()
     }
 
     /**

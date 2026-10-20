@@ -1,3 +1,7 @@
+## 1.0.3
+
+upgrade cjc 1.2.0
+
 ## 1.0.2
 
 upgrade cjc 1.1.3
