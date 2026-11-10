@@ -50,5 +50,6 @@ z_main.cj
 doc/api/html
 doc/Doxyfile
 test/*
+!test/LLT/
 .devbrain
 log.txt
